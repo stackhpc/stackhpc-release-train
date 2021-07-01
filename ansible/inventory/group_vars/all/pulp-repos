@@ -1,0 +1,67 @@
+---
+pulp_url: http://localhost:8080
+pulp_username: admin
+pulp_password: "{{ lookup('env', 'PULP_PASSWORD') }}"
+
+# NOTE(mgoddard): mirrorlist as URL did not work.
+pulp_repository_rpm_repos:
+  - name: CentOS Stream 8 - BaseOS
+    url: http://mirrors.vinters.com/centos/8-stream/BaseOS/x86_64/os/
+    policy: on_demand
+    state: present
+  - name: CentOS Stream 8 - AppStream
+    url: http://mirrors.vinters.com/centos/8-stream/AppStream/x86_64/os/
+    policy: on_demand
+    state: present
+  - name: CentOS Stream 8 - Extras
+    url: https://mirrors.vinters.com/centos/8-stream/extras/x86_64/os/
+    policy: on_demand
+    state: present
+  - name: Extra Packages for Enterprise Linux 8 - x86_64
+    url: https://download.fedoraproject.org/pub/epel/8/Everything/x86_64/
+    policy: on_demand
+    state: present
+  - name: Extra Packages for Enterprise Linux Modular 8 - x86_64
+    url: https://download.fedoraproject.org/pub/epel/8/Modular/x86_64/
+    policy: on_demand
+    state: present
+
+pulp_publication_rpm:
+  - repository: CentOS Stream 8 - BaseOS
+    state: present
+    version: 1
+  - repository: CentOS Stream 8 - AppStream
+    state: present
+    version: 1
+  - repository: CentOS Stream 8 - Extras
+    state: present
+    version: 1
+  - repository: Extra Packages for Enterprise Linux 8 - x86_64
+    state: present
+    version: 1
+  - repository: Extra Packages for Enterprise Linux Modular 8 - x86_64
+    state: present
+    version: 1
+
+# FIXME: These URL paths are a bit unwieldy.
+pulp_distribution_rpm:
+  - name: CentOS Stream 8 - BaseOS
+    publication: /pulp/api/v3/publications/rpm/rpm/3bbe072a-e63f-4268-8da9-c152a3e0d9f7/
+    base_path: centos/8-stream/BaseOS/x86_64/os
+    state: present
+  - name: CentOS Stream 8 - AppStream
+    publication: /pulp/api/v3/publications/rpm/rpm/9b59592c-e74b-4262-9d87-d4dbb7ccdfde/
+    base_path: centos/8-stream/AppStream/x86_64/os
+    state: present
+  - name: CentOS Stream 8 - Extras
+    publication: /pulp/api/v3/publications/rpm/rpm/bf02e3f3-d28b-4cdc-b12d-74b7c67dd085/
+    base_path: centos/8-stream/extras/x86_64/os
+    state: present
+  - name: Extra Packages for Enterprise Linux 8 - x86_64
+    publication: /pulp/api/v3/publications/rpm/rpm/081842b9-a365-477e-bd92-da567035eab8/
+    base_path: epel/8/Everything/x86_64
+    state: present
+  - name: Extra Packages for Enterprise Linux 8 Modular - x86_64
+    publication: /pulp/api/v3/publications/rpm/rpm/590a1ff6-86c7-44e3-bb3c-98a0d71aa99a/
+    base_path: epel/8/Modular/x86_64
+    state: present

@@ -1,0 +1,9 @@
+---
+- name: Publish Pulp repositories
+  hosts: localhost
+  gather_facts: False
+  tasks:
+    - import_role:
+        name: stackhpc.pulp.pulp_publication
+    - import_role:
+        name: stackhpc.pulp.pulp_distribution
