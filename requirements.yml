@@ -1,2 +1,4 @@
 collections:
-  - name: stackhpc.pulp
+  - name: https://github.com/stackhpc/ansible-collection-pulp
+    type: git
+    version: pulp_distribution_mark
