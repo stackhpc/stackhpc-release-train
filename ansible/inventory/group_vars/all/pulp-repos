@@ -25,14 +25,19 @@ pulp_repository_rpm_repos:
     url: https://download.fedoraproject.org/pub/epel/8/Modular/x86_64/
     policy: on_demand
     state: present
+  - name: Docker CE for CentOS 8
+    url: https://download.docker.com/linux/centos/8/x86_64/stable
+    policy: on_demand
+    state: present
+
 
 pulp_publication_rpm:
   - repository: CentOS Stream 8 - BaseOS
     state: present
-    version: 1
+    version: 2
   - repository: CentOS Stream 8 - AppStream
     state: present
-    version: 1
+    version: 2
   - repository: CentOS Stream 8 - Extras
     state: present
     version: 1
@@ -42,26 +47,38 @@ pulp_publication_rpm:
   - repository: Extra Packages for Enterprise Linux Modular 8 - x86_64
     state: present
     version: 1
+  - repository: Docker CE for CentOS 8
+    state: present
+    version: 1
 
-# FIXME: These URL paths are a bit unwieldy.
 pulp_distribution_rpm:
-  - name: CentOS Stream 8 - BaseOS
-    publication: /pulp/api/v3/publications/rpm/rpm/3bbe072a-e63f-4268-8da9-c152a3e0d9f7/
+  - name: centos-stream-8-baseos
+    repository: CentOS Stream 8 - BaseOS
+    version: 2
     base_path: centos/8-stream/BaseOS/x86_64/os
     state: present
-  - name: CentOS Stream 8 - AppStream
-    publication: /pulp/api/v3/publications/rpm/rpm/9b59592c-e74b-4262-9d87-d4dbb7ccdfde/
+  - name: centos-stream-8-appstream
+    repository: CentOS Stream 8 - AppStream
+    version: 2
     base_path: centos/8-stream/AppStream/x86_64/os
     state: present
-  - name: CentOS Stream 8 - Extras
-    publication: /pulp/api/v3/publications/rpm/rpm/bf02e3f3-d28b-4cdc-b12d-74b7c67dd085/
+  - name: centos-stream-8-extras
+    repository: CentOS Stream 8 - Extras
+    version: 1
     base_path: centos/8-stream/extras/x86_64/os
     state: present
-  - name: Extra Packages for Enterprise Linux 8 - x86_64
-    publication: /pulp/api/v3/publications/rpm/rpm/081842b9-a365-477e-bd92-da567035eab8/
+  - name: extra-packages-for-enterprise-linux-8-x86_64
+    repository: Extra Packages for Enterprise Linux 8 - x86_64
+    version: 1
     base_path: epel/8/Everything/x86_64
     state: present
-  - name: Extra Packages for Enterprise Linux 8 Modular - x86_64
-    publication: /pulp/api/v3/publications/rpm/rpm/590a1ff6-86c7-44e3-bb3c-98a0d71aa99a/
+  - name: extra-packages-for-enterprise-linux-modular-8-x86_64
+    repository: Extra Packages for Enterprise Linux Modular 8 - x86_64
+    version: 1
     base_path: epel/8/Modular/x86_64
+    state: present
+  - name: docker-ce-for-centos-8
+    repository: Docker CE for CentOS 8
+    version: 1
+    base_path: docker-ce/centos/8/x86_64/stable
     state: present
