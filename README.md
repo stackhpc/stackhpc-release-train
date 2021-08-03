@@ -27,7 +27,7 @@ echo "CONTENT_ORIGIN='http://$(hostname):8080'
 ANSIBLE_API_HOSTNAME='http://$(hostname):8080'
 ANSIBLE_CONTENT_HOSTNAME='http://$(hostname):8080/pulp/content'
 TOKEN_AUTH_DISABLED=True" >> settings/settings.py
-podman run --detach              --publish 8080:80              --name pulp              --volume "$(pwd)/settings":/etc/pulp              --volume "$(pwd)/pulp_storage":/var/lib/pulp              --volume "$(pwd)/pgsql":/var/lib/pgsql              --volume "$(pwd)/containers":/var/lib/containers              --device /dev/fuse              pulp/pulp:latest
+podman run --detach              --publish 8080:80              --name pulp              --volume "$(pwd)/settings":/etc/pulp              --volume "$(pwd)/pulp_storage":/var/lib/pulp              --volume "$(pwd)/pgsql":/var/lib/pgsql              --volume "$(pwd)/containers":/var/lib/containers              --shm-size=1024m              pulp/pulp:latest
 ```
 
 Then set an admin password:
