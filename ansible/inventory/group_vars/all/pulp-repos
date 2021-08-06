@@ -9,7 +9,8 @@ pulp_password: !vault |
           3636303034396636610a653239613562663165666134383966336536393039623461396165393536
           36613630623335633161656639343432343065356330326239306139373536383133
 
-# NOTE(mgoddard): mirrorlist as URL did not work.
+# TODO(mgoddard): Use policy=immediate to avoid packages being removed from
+# mirrors.
 pulp_repository_rpm_repos:
   - name: CentOS Stream 8 - BaseOS
     url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=BaseOS&infra=genclo
