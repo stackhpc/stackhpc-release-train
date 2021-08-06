@@ -43,7 +43,14 @@ pulp_publication_rpm: "{{ pulp_distribution_rpm }}"
 
 # This version is appended to the name of distributions, and used as the last
 # part of the path of the directory containing the distribution.
-pulp_distribution_version: "milestone-2"
+# FIXME: The following version is taken at the time when facts are gathered.
+#        Ideally it would relate to the time the repository version was
+#        created, since this would ensure they are ordered by the time of the
+#        sync, rather than the time of the distribution was created. This
+#        matters if we make a distribution for an earlier repository version,
+#        when later ones have already been distributed. Alternatively we could
+#        forget ordering and use a random string.
+pulp_distribution_version: "{{ ansible_date_time.iso8601_basic_short }}"
 
 pulp_distribution_rpm:
   - name: "centos-stream-8-baseos-{{ pulp_distribution_version }}"
