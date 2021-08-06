@@ -70,3 +70,8 @@ pulp_distribution_rpm:
     repository: Docker CE for CentOS 8
     base_path: "docker-ce/centos/8/x86_64/stable/{{ pulp_distribution_version }}"
     state: present
+
+# Whether to skip existing RPM distributions. If true, new distributions will
+# not be created for a publication if any distributions exist for the same
+# publication.
+pulp_distribution_rpm_skip_existing: true
