@@ -38,54 +38,35 @@ pulp_repository_rpm_repos:
     state: present
 
 
-pulp_publication_rpm:
-  - repository: CentOS Stream 8 - BaseOS
-    state: present
-    version: 2
-  - repository: CentOS Stream 8 - AppStream
-    state: present
-    version: 2
-  - repository: CentOS Stream 8 - Extras
-    state: present
-    version: 1
-  - repository: Extra Packages for Enterprise Linux 8 - x86_64
-    state: present
-    version: 1
-  - repository: Extra Packages for Enterprise Linux Modular 8 - x86_64
-    state: present
-    version: 1
-  - repository: Docker CE for CentOS 8
-    state: present
-    version: 1
+# Publication format is a subset of distribution.
+pulp_publication_rpm: "{{ pulp_distribution_rpm }}"
+
+# This version is appended to the name of distributions, and used as the last
+# part of the path of the directory containing the distribution.
+pulp_distribution_version: "milestone-2"
 
 pulp_distribution_rpm:
-  - name: centos-stream-8-baseos
+  - name: "centos-stream-8-baseos-{{ pulp_distribution_version }}"
     repository: CentOS Stream 8 - BaseOS
-    version: 2
-    base_path: centos/8-stream/BaseOS/x86_64/os
+    base_path: "centos/8-stream/BaseOS/x86_64/os/{{ pulp_distribution_version }}"
     state: present
-  - name: centos-stream-8-appstream
+  - name: "centos-stream-8-appstream-{{ pulp_distribution_version }}"
     repository: CentOS Stream 8 - AppStream
-    version: 2
-    base_path: centos/8-stream/AppStream/x86_64/os
+    base_path: "centos/8-stream/AppStream/x86_64/os/{{ pulp_distribution_version }}"
     state: present
-  - name: centos-stream-8-extras
+  - name: "centos-stream-8-extras-{{ pulp_distribution_version }}"
     repository: CentOS Stream 8 - Extras
-    version: 1
-    base_path: centos/8-stream/extras/x86_64/os
+    base_path: "centos/8-stream/extras/x86_64/os/{{ pulp_distribution_version }}"
     state: present
-  - name: extra-packages-for-enterprise-linux-8-x86_64
+  - name: "extra-packages-for-enterprise-linux-8-x86_64-{{ pulp_distribution_version }}"
     repository: Extra Packages for Enterprise Linux 8 - x86_64
-    version: 1
-    base_path: epel/8/Everything/x86_64
+    base_path: "epel/8/Everything/x86_64/{{ pulp_distribution_version }}"
     state: present
-  - name: extra-packages-for-enterprise-linux-modular-8-x86_64
+  - name: "extra-packages-for-enterprise-linux-modular-8-x86_64-{{ pulp_distribution_version }}"
     repository: Extra Packages for Enterprise Linux Modular 8 - x86_64
-    version: 1
-    base_path: epel/8/Modular/x86_64
+    base_path: "epel/8/Modular/x86_64/{{ pulp_distribution_version }}"
     state: present
-  - name: docker-ce-for-centos-8
+  - name: "docker-ce-for-centos-8-{{ pulp_distribution_version }}"
     repository: Docker CE for CentOS 8
-    version: 1
-    base_path: docker-ce/centos/8/x86_64/stable
+    base_path: "docker-ce/centos/8/x86_64/stable/{{ pulp_distribution_version }}"
     state: present
