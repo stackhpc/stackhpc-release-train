@@ -41,15 +41,15 @@ Install a client:
 ```
 sudo dnf -y install python3-pip
 pip3 install pulp-cli[pygments] --user
-pulp config create --username admin --base-url http://localhost:8080 --password <password>
+pulp config create --username admin --base-url http://<pulp server>:8080 --password <password>
 pulp status
 ```
 
 ## Usage
 
-Set the Pulp admin password:
+Set the Ansible Vault password:
 ```
-export PULP_PASSWORD=<password>
+export ANSIBLE_VAULT_PASSWORD_FILE=/path/to/vault/password
 ```
 
 Sync upstream repos.
