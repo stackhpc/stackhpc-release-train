@@ -9,32 +9,30 @@ pulp_password: !vault |
           3636303034396636610a653239613562663165666134383966336536393039623461396165393536
           36613630623335633161656639343432343065356330326239306139373536383133
 
-# TODO(mgoddard): Use policy=immediate to avoid packages being removed from
-# mirrors.
 pulp_repository_rpm_repos:
   - name: CentOS Stream 8 - BaseOS
     url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=BaseOS&infra=genclo
-    policy: on_demand
+    policy: immediate
     state: present
   - name: CentOS Stream 8 - AppStream
     url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=AppStream&infra=genclo
-    policy: on_demand
+    policy: immediate
     state: present
   - name: CentOS Stream 8 - Extras
     url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=extras&infra=genclo
-    policy: on_demand
+    policy: immediate
     state: present
   - name: Extra Packages for Enterprise Linux 8 - x86_64
     url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-8&arch=x86_64&infra=stock&content=centos
-    policy: on_demand
+    policy: immediate
     state: present
   - name: Extra Packages for Enterprise Linux Modular 8 - x86_64
     url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-modular-8&arch=x86_64&infra=stock&content=centos
-    policy: on_demand
+    policy: immediate
     state: present
   - name: Docker CE for CentOS 8
     url: https://download.docker.com/linux/centos/8/x86_64/stable
-    policy: on_demand
+    policy: immediate
     state: present
 
 
