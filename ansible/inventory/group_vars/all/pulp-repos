@@ -34,7 +34,64 @@ pulp_repository_rpm_repos:
     url: https://download.docker.com/linux/centos/8/x86_64/stable
     policy: immediate
     state: present
+  - name: CentOS Stream 8 - NFV OpenvSwitch
+    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=nfv-openvswitch-2
+    policy: immediate
+    state: present
+  - name: CentOS Stream 8 - Advanced Virtualization
+    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=virt-advancedvirt-common
+    policy: immediate
+    state: present
+  - name: CentOS Stream 8 - OpsTools - collectd
+    url: http://mirrorlist.centos.org/?arch=x86_64&release=8&repo=opstools-collectd-5
+    policy: immediate
+    state: present
+  - name: CentOS 8 - Ceph Nautilus
+    url: http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=storage-ceph-nautilus
+    policy: immediate
+    state: present
+# Note(piotrp): Assuming we'd need this in future
+  - name: CentOS 8 - Ceph Octopus
+    url: http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=storage-ceph-octopus
+    policy: immediate
+    state: absent
+# Note(piotrp): Assuming we'd need this in future
+  - name: CentOS 8 - Ceph Pacific
+    url: http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=storage-ceph-pacific
+    policy: immediate
+    state: absent
+# Note(piotrp): Assuming we'd need this in future
+  - name: CentOS Stream 8 - Ceph Pacific
+    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=storage-ceph-pacific
+    policy: immediate
+    state: absent
+# Note(piotrp): requires enabling of sha1 in Pulp and re-hashing all already downloaded content
+  - name: RabbitMQ - Server
+    url: https://packagecloud.io/rabbitmq/rabbitmq-server/el/8/x86_64
+    policy: immediate
+    state: absent
+# Note(piotrp): requires enabling of sha1 in Pulp and re-hashing all already downloaded content
+  - name: RabbitMQ - Erlang
+    url: https://packagecloud.io/rabbitmq/erlang/el/8/x86_64
+    policy: immediate
+    state: absent
+# Note(piotrp): With repository size of 39G - for now we'll want this on_demand
+  - name: ELK repository for 7.x packages
+    url: https://artifacts.elastic.co/packages/oss-7.x/yum
+    policy: on_demand
+    state: present
+# Note(piotrp): With repository size of 16G - for now we'll want this on_demand
+  - name: Grafana
+    url: https://packages.grafana.com/oss/rpm
+    policy: on_demand
+    state: present
+  - name: TreasureData
+    url: http://packages.treasuredata.com/4/redhat/8/x86_64
+    policy: immediate
+    state: present
 
+# TODO:
+# OpenStack Wallaby
 
 # Publication format is a subset of distribution.
 pulp_publication_rpm: "{{ pulp_distribution_rpm }}"
