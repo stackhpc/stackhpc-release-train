@@ -10,36 +10,36 @@ pulp_password: !vault |
           36613630623335633161656639343432343065356330326239306139373536383133
 
 pulp_repository_rpm_repos:
-  - name: CentOS Stream 8 - BaseOS
-    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=BaseOS&infra=genclo
-    policy: immediate
-    state: present
+# Base CentOS 8 Stream repos
   - name: CentOS Stream 8 - AppStream
     url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=AppStream&infra=genclo
+    policy: immediate
+    state: present
+  - name: CentOS Stream 8 - BaseOS
+    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=BaseOS&infra=genclo
     policy: immediate
     state: present
   - name: CentOS Stream 8 - Extras
     url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=extras&infra=genclo
     policy: immediate
     state: present
-  - name: Extra Packages for Enterprise Linux 8 - x86_64
-    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-8&arch=x86_64&infra=stock&content=centos
+
+# Additional CentOS 8 Stream repos
+  - name: CentOS Stream 8 - Advanced Virtualization
+    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=virt-advancedvirt-common
     policy: immediate
     state: present
-  - name: Extra Packages for Enterprise Linux Modular 8 - x86_64
-    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-modular-8&arch=x86_64&infra=stock&content=centos
+# Note(piotrp): Assuming we'd need this in the future
+  - name: CentOS Stream 8 - Ceph Pacific
+    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=storage-ceph-pacific
     policy: immediate
-    state: present
-  - name: Docker CE for CentOS 8
-    url: https://download.docker.com/linux/centos/8/x86_64/stable
-    policy: immediate
-    state: present
+    state: absent
   - name: CentOS Stream 8 - NFV OpenvSwitch
     url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=nfv-openvswitch-2
     policy: immediate
     state: present
-  - name: CentOS Stream 8 - Advanced Virtualization
-    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=virt-advancedvirt-common
+  - name: CentOS Stream 8 - OpenStack Wallaby
+    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=cloud-openstack-wallaby
     policy: immediate
     state: present
   - name: CentOS Stream 8 - OpsTools - collectd
@@ -50,31 +50,32 @@ pulp_repository_rpm_repos:
     url: http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=storage-ceph-nautilus
     policy: immediate
     state: present
-# Note(piotrp): Assuming we'd need this in future
+# Note(piotrp): Assuming we'd need this in the future
   - name: CentOS 8 - Ceph Octopus
     url: http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=storage-ceph-octopus
     policy: immediate
     state: absent
-# Note(piotrp): Assuming we'd need this in future
+# Note(piotrp): Assuming we'd need this in the future
   - name: CentOS 8 - Ceph Pacific
     url: http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=storage-ceph-pacific
     policy: immediate
     state: absent
-# Note(piotrp): Assuming we'd need this in future
-  - name: CentOS Stream 8 - Ceph Pacific
-    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=storage-ceph-pacific
+
+# EPEL
+  - name: Extra Packages for Enterprise Linux 8 - x86_64
+    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-8&arch=x86_64&infra=stock&content=centos
     policy: immediate
-    state: absent
-# Note(piotrp): requires enabling of sha1 in Pulp and re-hashing all already downloaded content
-  - name: RabbitMQ - Server
-    url: https://packagecloud.io/rabbitmq/rabbitmq-server/el/8/x86_64
+    state: present
+  - name: Extra Packages for Enterprise Linux Modular 8 - x86_64
+    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-modular-8&arch=x86_64&infra=stock&content=centos
     policy: immediate
-    state: absent
-# Note(piotrp): requires enabling of sha1 in Pulp and re-hashing all already downloaded content
-  - name: RabbitMQ - Erlang
-    url: https://packagecloud.io/rabbitmq/erlang/el/8/x86_64
+    state: present
+
+# Third-party repositories below
+  - name: Docker CE for CentOS 8
+    url: https://download.docker.com/linux/centos/8/x86_64/stable
     policy: immediate
-    state: absent
+    state: present
 # Note(piotrp): With repository size of 39G - for now we'll want this on_demand
   - name: ELK repository for 7.x packages
     url: https://artifacts.elastic.co/packages/oss-7.x/yum
@@ -85,13 +86,22 @@ pulp_repository_rpm_repos:
     url: https://packages.grafana.com/oss/rpm
     policy: on_demand
     state: present
+# Note(piotrp): requires enabling of sha1 in Pulp and re-hashing all already downloaded content
+# https://docs.pulpproject.org/pulpcore/configuration/settings.html#allowed-content-checksums
+  - name: RabbitMQ - Erlang
+    url: https://packagecloud.io/rabbitmq/erlang/el/8/x86_64
+    policy: immediate
+    state: absent
+# Note(piotrp): requires enabling of sha1 in Pulp and re-hashing all already downloaded content
+# https://docs.pulpproject.org/pulpcore/configuration/settings.html#allowed-content-checksums
+  - name: RabbitMQ - Server
+    url: https://packagecloud.io/rabbitmq/rabbitmq-server/el/8/x86_64
+    policy: immediate
+    state: absent
   - name: TreasureData
     url: http://packages.treasuredata.com/4/redhat/8/x86_64
     policy: immediate
     state: present
-
-# TODO:
-# OpenStack Wallaby
 
 # Publication format is a subset of distribution.
 pulp_publication_rpm: "{{ pulp_distribution_rpm }}"
