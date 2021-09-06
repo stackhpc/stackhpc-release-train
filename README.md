@@ -52,6 +52,8 @@ Set the Ansible Vault password:
 export ANSIBLE_VAULT_PASSWORD_FILE=/path/to/vault/password
 ```
 
+### Development
+
 Sync upstream repos on the development Pulp server.
 ```
 ansible-playbook -i ansible/inventory ansible/dev-pulp-repo-sync.yml
@@ -66,4 +68,27 @@ ansible-playbook -i ansible/inventory ansible/dev-pulp-repo-publish.yml
 List distributions on the development Pulp server.
 ```
 ansible-playbook -i ansible/inventory ansible/dev-pulp-distribution-list.yml
+```
+
+### Release
+
+Sync upstream repos on the release Pulp server.
+```
+ansible-playbook -i ansible/inventory ansible/release-pulp-repo-sync.yml
+```
+
+Publish repository versions & create distributions on the release Pulp server.
+```
+ansible-playbook -i ansible/inventory ansible/release-pulp-repo-publish.yml
+```
+
+List distributions on the release Pulp server.
+```
+ansible-playbook -i ansible/inventory ansible/release-pulp-distribution-list.yml
+```
+
+Update repository version configuration for release repos based on latest
+versions in the development Pulp server.
+```
+ansible-playbook -i ansible/inventory ansible/release-pulp-repo-version-update.yml
 ```
