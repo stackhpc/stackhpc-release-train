@@ -12,26 +12,6 @@ release_pulp_password: !vault |
 
 release_dev_pulp_content_url: "{{ dev_pulp_url }}/pulp/content"
 
-release_pulp_repo_centos_stream_8_baseos_version: "milestone-2"
-release_pulp_repo_centos_stream_8_appstream_version: "milestone-2"
-release_pulp_repo_centos_stream_8_extras_version: "milestone-2"
-release_pulp_repo_centos_stream_8_advanced_virtualization_version: "milestone-2"
-release_pulp_repo_centos_stream_8_ceph_pacific_version: "milestone-2"
-release_pulp_repo_centos_stream_8_openstack_wallby_version: "milestone-2"
-release_pulp_repo_centos_stream_8_powertoools_version: "milestone-2"
-release_pulp_repo_centos_8_ceph_nautilus_version: "milestone-2"
-release_pulp_repo_centos_8_ceph_octopus_version: "milestone-2"
-release_pulp_repo_centos_8_opstools_version: "milestone-2"
-release_pulp_repo_epel_version: "milestone-2"
-release_pulp_repo_epel_modular_version: "milestone-2"
-release_pulp_repo_docker_version: "milestone-2"
-release_pulp_repo_elk_7_x_version: "milestone-2"
-release_pulp_repo_grafana_version: "milestone-2"
-release_pulp_repo_rabbitmq_erlang_version: "milestone-2"
-release_pulp_repo_rabbitmq_server_version: "milestone-2"
-release_pulp_repo_treasuredata_4_version: "milestone-2"
-
-
 # TODO(mgoddard): Use policy=immediate to avoid packages being removed from
 # mirrors.
 release_pulp_repository_rpm_repos:
