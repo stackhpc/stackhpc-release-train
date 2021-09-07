@@ -86,18 +86,14 @@ pulp_repository_rpm_repos:
     url: https://packages.grafana.com/oss/rpm
     policy: on_demand
     state: present
-# Note(piotrp): requires enabling of sha1 in Pulp and re-hashing all already downloaded content
-# https://docs.pulpproject.org/pulpcore/configuration/settings.html#allowed-content-checksums
   - name: RabbitMQ - Erlang
     url: https://packagecloud.io/rabbitmq/erlang/el/8/x86_64
     policy: immediate
-    state: absent
-# Note(piotrp): requires enabling of sha1 in Pulp and re-hashing all already downloaded content
-# https://docs.pulpproject.org/pulpcore/configuration/settings.html#allowed-content-checksums
+    state: present
   - name: RabbitMQ - Server
     url: https://packagecloud.io/rabbitmq/rabbitmq-server/el/8/x86_64
     policy: immediate
-    state: absent
+    state: present
   - name: TreasureData
     url: http://packages.treasuredata.com/4/redhat/8/x86_64
     policy: immediate
@@ -141,6 +137,49 @@ pulp_distribution_rpm:
   - name: "docker-ce-for-centos-8-{{ pulp_distribution_version }}"
     repository: Docker CE for CentOS 8
     base_path: "docker-ce/centos/8/x86_64/stable/{{ pulp_distribution_version }}"
+    state: present
+  - name: "centos-stream-8-advancedvirt-{{ pulp_distribution_version }}"
+    repository: CentOS Stream 8 - Advanced Virtualization
+    base_path: "centos/8-stream/virt/x86_64/advancedvirt-common/{{ pulp_distribution_version }}"
+    state: present
+  - name: "centos-8-storage-ceph-nautilus-{{ pulp_distribution_version }}"
+    repository: CentOS 8 - Ceph Nautilus
+    base_path: "centos/8/storage/x86_64/ceph-nautilus/{{ pulp_distribution_version }}"
+    state: present
+# Note(piotrp): Assuming we'd need this in the future
+#  - name: "centos-8-storage-ceph-octopus-{{ pulp_distribution_version }}"
+#    repository: CentOS 8 - Ceph Octopus
+#    base_path: "centos/8/storage/x86_64/ceph-octopus/{{ pulp_distribution_version }}"
+#    state: present
+# Note(piotrp): Assuming we'd need this in the future
+#  - name: "centos-8-storage-ceph-pacific-{{ pulp_distribution_version }}"
+#    repository: CentOS 8 - Ceph Pacific
+#    base_path: "centos/8/storage/x86_64/ceph-pacific/{{ pulp_distribution_version }}"
+#    state: present
+# Note(piotrp): Assuming we'd need this in the future
+#  - name: "centos-stream-8-storage-ceph-pacific-{{ pulp_distribution_version }}"
+#    repository: CentOS Stream 8 - Ceph Pacific
+#    base_path: "centos/8-stream/storage/x86_64/ceph-pacific/{{ pulp_distribution_version }}"
+#    state: present
+  - name: "elasticsearch-kibana-logstash-7.x-{{ pulp_distribution_version }}"
+    repository: ELK repository for 7.x packages
+    base_path: "elasticsearch/oss-7.x/{{ pulp_distribution_version }}"
+    state: present
+  - name: "grafana-{{ pulp_distribution_version }}"
+    repository: Grafana
+    base_path: "grafana/oss/rpm/{{ pulp_distribution_version }}"
+    state: present
+  - name: "rabbitmq-erlang-{{ pulp_distribution_version }}"
+    repository: RabbitMQ - Erlang
+    base_path: "rabbitmq/erlang/el/8/x86_64/{{ pulp_distribution_version }}"
+    state: present
+  - name: "rabbitmq-server-{{ pulp_distribution_version }}"
+    repository: RabbitMQ - Server
+    base_path: "rabbitmq/rabbitmq-server/el/8/x86_64/{{ pulp_distribution_version }}"
+    state: present
+  - name: "treasuredata-{{ pulp_distribution_version }}"
+    repository: TreasureData
+    base_path: "treasuredata/4/redhat/8/x86_64/{{ pulp_distribution_version }}"
     state: present
 
 # Whether to skip existing RPM distributions. If true, new distributions will
