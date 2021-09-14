@@ -26,7 +26,10 @@ mkdir settings pulp_storage pgsql containers
 echo "CONTENT_ORIGIN='http://$(hostname):8080'
 ANSIBLE_API_HOSTNAME='http://$(hostname):8080'
 ANSIBLE_CONTENT_HOSTNAME='http://$(hostname):8080/pulp/content'
-TOKEN_AUTH_DISABLED=True" >> settings/settings.py
+TOKEN_AUTH_DISABLED=True
+# RabbitMQ repositories on packagecloud.io only provide sha1 hashes, which are
+# not allowed by Pulp by default.
+ALLOWED_CONTENT_CHECKSUMS = ['sha1', 'sha224', 'sha256', 'sha384', 'sha512']" >> settings/settings.py
 podman run --detach              --publish 8080:80              --name pulp              --volume "$(pwd)/settings":/etc/pulp              --volume "$(pwd)/pulp_storage":/var/lib/pulp              --volume "$(pwd)/pgsql":/var/lib/pgsql              --volume "$(pwd)/containers":/var/lib/containers              --shm-size=1024m              pulp/pulp:latest
 ```
 
