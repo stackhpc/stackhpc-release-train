@@ -1,0 +1,19 @@
+---
+- name: Publish dev Pulp repositories
+  hosts: localhost
+  gather_facts: True
+  vars:
+    pulp_url: "{{ dev_pulp_url }}"
+    pulp_username: "{{ dev_pulp_username }}"
+    pulp_password: "{{ dev_pulp_password }}"
+  tasks:
+    - import_role:
+        name: stackhpc.pulp.pulp_publication
+      vars:
+        pulp_publication_rpm: "{{ dev_pulp_publication_rpm }}"
+
+    - import_role:
+        name: stackhpc.pulp.pulp_distribution
+      vars:
+        pulp_distribution_rpm: "{{ dev_pulp_distribution_rpm }}"
+        pulp_distribution_rpm_skip_existing: "{{ dev_pulp_distribution_rpm_skip_existing }}"

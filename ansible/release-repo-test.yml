@@ -1,0 +1,59 @@
+---
+# This playbook tests the latests release repositories.
+# * configure DNF to use the latest release repositories
+# * update all packages
+# * distro sync
+# * install a package from each repository
+
+- name: Test release repositories
+  hosts: localhost
+  gather_facts: true
+  tasks:
+    - name: Install release repositories
+      become: true
+      yum_repository:
+        name: "{{ item.name }}"
+        description: "{{ item.repository }}"
+        baseurl: "{{ release_pulp_url ~ '/pulp/content/' ~ item.base_path }}"
+      loop: "{{ release_pulp_distribution_rpm }}"
+      when:
+        - ansible_facts.os_family == 'RedHat'
+        # FIXME: clashes with docker
+        - "'docker' not in item.name"
+
+    - name: Run package update
+      become: true
+      package:
+        name: "*"
+        state: latest
+
+    - name: Run DNF distro-sync
+      become: true
+      command:
+        cmd: dnf distro-sync
+        warn: false
+      when: ansible_facts.os_family == 'RedHat'
+
+    - name: Install packages
+      become: true
+      package:
+        name: "{{ item.packages }}"
+      loop:
+        - repo: CentOS Stream 8 - BaseOS
+          packages:
+            - dos2unix
+        - repo: CentOS Stream 8 - AppStream
+          packages:
+            - bind
+        - repo: CentOS Stream 8 - Extras
+          packages:
+            - centos-release-advanced-virtualization
+        - repo: Extra Packages for Enterprise Linux 8 - x86_64
+          packages:
+            - smem
+        - repo: Extra Packages for Enterprise Linux Modular 8 - x86_64
+          packages:
+            - swig
+        # FIXME: clashes with docker
+        - repo: Docker CE for CentOS 8
+          packages: []

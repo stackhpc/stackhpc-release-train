@@ -26,7 +26,10 @@ mkdir settings pulp_storage pgsql containers
 echo "CONTENT_ORIGIN='http://$(hostname):8080'
 ANSIBLE_API_HOSTNAME='http://$(hostname):8080'
 ANSIBLE_CONTENT_HOSTNAME='http://$(hostname):8080/pulp/content'
-TOKEN_AUTH_DISABLED=True" >> settings/settings.py
+TOKEN_AUTH_DISABLED=True
+# RabbitMQ repositories on packagecloud.io only provide sha1 hashes, which are
+# not allowed by Pulp by default.
+ALLOWED_CONTENT_CHECKSUMS = ['sha1', 'sha224', 'sha256', 'sha384', 'sha512']" >> settings/settings.py
 podman run --detach              --publish 8080:80              --name pulp              --volume "$(pwd)/settings":/etc/pulp              --volume "$(pwd)/pulp_storage":/var/lib/pulp              --volume "$(pwd)/pgsql":/var/lib/pgsql              --volume "$(pwd)/containers":/var/lib/containers              --shm-size=1024m              pulp/pulp:latest
 ```
 
@@ -52,12 +55,43 @@ Set the Ansible Vault password:
 export ANSIBLE_VAULT_PASSWORD_FILE=/path/to/vault/password
 ```
 
-Sync upstream repos.
+### Development
+
+Sync upstream repos on the development Pulp server.
 ```
-ansible-playbook -i ansible/inventory ansible/pulp-repo-sync.yml
+ansible-playbook -i ansible/inventory ansible/dev-pulp-repo-sync.yml
 ```
 
-Publish repository versions & create distributions.
+Publish repository versions & create distributions on the development Pulp
+server.
 ```
-ansible-playbook -i ansible/inventory ansible/pulp-repo-publish.yml
+ansible-playbook -i ansible/inventory ansible/dev-pulp-repo-publish.yml
+```
+
+List distributions on the development Pulp server.
+```
+ansible-playbook -i ansible/inventory ansible/dev-pulp-distribution-list.yml
+```
+
+### Release
+
+Sync upstream repos on the release Pulp server.
+```
+ansible-playbook -i ansible/inventory ansible/release-pulp-repo-sync.yml
+```
+
+Publish repository versions & create distributions on the release Pulp server.
+```
+ansible-playbook -i ansible/inventory ansible/release-pulp-repo-publish.yml
+```
+
+List distributions on the release Pulp server.
+```
+ansible-playbook -i ansible/inventory ansible/release-pulp-distribution-list.yml
+```
+
+Update repository version configuration for release repos based on latest
+versions in the development Pulp server.
+```
+ansible-playbook -i ansible/inventory ansible/release-pulp-repo-version-update.yml
 ```

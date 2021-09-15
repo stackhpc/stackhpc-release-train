@@ -1,0 +1,43 @@
+---
+- name: Display Pulp distributions, publications & repositories
+  hosts: localhost
+  gather_facts: True
+  vars:
+    pulp_url: "{{ dev_pulp_url }}"
+    pulp_username: "{{ dev_pulp_username }}"
+    pulp_password: "{{ dev_pulp_password }}"
+  tasks:
+    - name: Query repositories
+      pulp.squeezer.rpm_repository:
+        pulp_url: "{{ pulp_url }}"
+        username: "{{ pulp_username }}"
+        password: "{{ pulp_password }}"
+      register: pulp_repos_list
+    
+    - name: Query publications
+      pulp.squeezer.rpm_publication:
+        pulp_url: "{{ pulp_url }}"
+        username: "{{ pulp_username }}"
+        password: "{{ pulp_password }}"
+      register: pulp_pubs_list
+    
+    - name: Query distributions
+      pulp.squeezer.rpm_distribution:
+        pulp_url: "{{ pulp_url }}"
+        username: "{{ pulp_username }}"
+        password: "{{ pulp_password }}"
+      register: pulp_dists_list
+    
+    - name: Display distributions
+      vars:
+        pub: "{{ pulp_pubs_list.publications | selectattr('pulp_href', 'equalto', item.publication) | first }}"
+        repo: "{{ pulp_repos_list.repositories | selectattr('pulp_href', 'equalto', pub.repository) | first }}"
+        info:
+          repo: "{{ repo }}"
+          pub: "{{ pub }}"
+          dist: "{{ item }}"
+      debug:
+        var: info
+      loop: "{{ pulp_dists_list.distributions }}"
+      loop_control:
+        label: "{{ item.name }}"
