@@ -1,0 +1,163 @@
+---
+client_pulp_url: http://localhost:8080
+client_pulp_username: admin
+client_pulp_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          39373335316438356464323865383538373939653466613032343939396533396138343836316262
+          3137323634323230323234386538656563316635626132660a633363626561326338333234386334
+          65613336333235626162346138323530393238623036333766653263663661373464383664313264
+          3232666434633963650a623130626662613166353063633866656231333264336630373236303533
+          38316462336439383634356138346362366536393134383636356464363835343563643766316233
+          3230333939313631666363626262623831336130326438366466
+
+client_release_pulp_content_url: "{{ release_pulp_url }}/pulp/content"
+
+# Content comes in from release repositories, via pinned repo versions.
+
+# TODO(mgoddard): Use policy=immediate to avoid packages being removed from
+# mirrors.
+client_pulp_repository_rpm_repos:
+  # Base CentOS 8 Stream repositories
+  - name: CentOS Stream 8 - AppStream
+    url: "{{ client_release_pulp_content_url }}/centos/8-stream/AppStream/x86_64/os/{{ client_pulp_repo_centos_stream_8_appstream_version }}"
+    policy: on_demand
+    state: present
+  - name: CentOS Stream 8 - BaseOS
+    url: "{{ client_release_pulp_content_url }}/centos/8-stream/BaseOS/x86_64/os/{{ client_pulp_repo_centos_stream_8_baseos_version }}"
+    policy: on_demand
+    state: present
+  - name: CentOS Stream 8 - Extras
+    url: "{{ client_release_pulp_content_url }}/centos/8-stream/extras/x86_64/os/{{ client_pulp_repo_centos_stream_8_extras_version }}"
+    policy: on_demand
+    state: present
+
+  # EPEL repositories
+  - name: Extra Packages for Enterprise Linux 8 - x86_64
+    url: "{{ client_release_pulp_content_url }}/epel/8/Everything/x86_64/{{ client_pulp_repo_epel_version }}"
+    policy: on_demand
+    state: present
+  - name: Extra Packages for Enterprise Linux Modular 8 - x86_64
+    url: "{{ client_release_pulp_content_url }}/epel/8/Modular/x86_64/{{ client_pulp_repo_epel_modular_version }}"
+    policy: on_demand
+    state: present
+
+  # Third-party repositories
+  - name: Docker CE for CentOS 8
+    url: "{{ client_release_pulp_content_url }}/docker-ce/centos/8/x86_64/stable/{{ client_pulp_repo_docker_version }}"
+    policy: on_demand
+    state: present
+
+
+# Publication format is a subset of distribution.
+client_pulp_publication_rpm_development: "{{ client_pulp_distribution_rpm_development }}"
+
+# Content is made available at well-known distribution names for development,
+# staging and production.
+
+# Development tracks the release repositories.
+client_pulp_distribution_rpm_development:
+  # Base CentOS 8 Stream repositories
+  - name: "centos-stream-8-appstream-development"
+    repository: CentOS Stream 8 - AppStream
+    base_path: "centos/8-stream/AppStream/x86_64/os/development"
+    state: present
+  - name: "centos-stream-8-baseos-development"
+    repository: CentOS Stream 8 - BaseOS
+    base_path: "centos/8-stream/BaseOS/x86_64/os/development"
+    state: present
+  - name: "centos-stream-8-extras-development"
+    repository: CentOS Stream 8 - Extras
+    base_path: "centos/8-stream/extras/x86_64/os/development"
+    state: present
+
+  # EPEL repositories
+  - name: "extra-packages-for-enterprise-linux-8-x86_64-development"
+    repository: Extra Packages for Enterprise Linux 8 - x86_64
+    base_path: "epel/8/Everything/x86_64/development"
+    state: present
+  - name: "extra-packages-for-enterprise-linux-modular-8-x86_64-development"
+    repository: Extra Packages for Enterprise Linux Modular 8 - x86_64
+    base_path: "epel/8/Modular/x86_64/development"
+    state: present
+
+  # Third-party repositories
+  - name: "docker-ce-for-centos-8-development"
+    repository: Docker CE for CentOS 8
+    base_path: "docker-ce/centos/8/x86_64/stable/development"
+    state: present
+
+# Development gets promoted to staging.
+client_pulp_distribution_rpm_staging:
+  # Base CentOS 8 Stream repositories
+  - name: "centos-stream-8-baseos-staging"
+    repository: CentOS Stream 8 - BaseOS
+    base_path: "centos/8-stream/BaseOS/x86_64/os/staging"
+    distribution: "centos-stream-8-baseos-development"
+    state: present
+  - name: "centos-stream-8-appstream-staging"
+    repository: CentOS Stream 8 - AppStream
+    base_path: "centos/8-stream/AppStream/x86_64/os/staging"
+    distribution: "centos-stream-8-appstream-development"
+    state: present
+  - name: "centos-stream-8-extras-staging"
+    repository: CentOS Stream 8 - Extras
+    base_path: "centos/8-stream/extras/x86_64/os/staging"
+    distribution: "centos-stream-8-extras-development"
+    state: present
+
+  # EPEL repositories
+  - name: "extra-packages-for-enterprise-linux-8-x86_64-staging"
+    repository: Extra Packages for Enterprise Linux 8 - x86_64
+    base_path: "epel/8/Everything/x86_64/staging"
+    distribution: "extra-packages-for-enterprise-linux-8-x86_64-development"
+    state: present
+  - name: "extra-packages-for-enterprise-linux-modular-8-x86_64-staging"
+    repository: Extra Packages for Enterprise Linux Modular 8 - x86_64
+    base_path: "epel/8/Modular/x86_64/staging"
+    distribution: "extra-packages-for-enterprise-linux-modular-8-x86_64-development"
+    state: present
+
+  # Third-party repositories
+  - name: "docker-ce-for-centos-8-staging"
+    repository: Docker CE for CentOS 8
+    base_path: "docker-ce/centos/8/x86_64/stable/staging"
+    distribution: "docker-ce-for-centos-8-development"
+    state: present
+
+# Staging gets promoted to production.
+client_pulp_distribution_rpm_production:
+  # Base CentOS 8 Stream repositories
+  - name: "centos-stream-8-baseos-production"
+    repository: CentOS Stream 8 - BaseOS
+    base_path: "centos/8-stream/BaseOS/x86_64/os/production"
+    distribution: "centos-stream-8-baseos-staging"
+    state: present
+  - name: "centos-stream-8-appstream-production"
+    repository: CentOS Stream 8 - AppStream
+    base_path: "centos/8-stream/AppStream/x86_64/os/production"
+    distribution: "centos-stream-8-appstream-staging"
+    state: present
+  - name: "centos-stream-8-extras-production"
+    repository: CentOS Stream 8 - Extras
+    base_path: "centos/8-stream/extras/x86_64/os/production"
+    distribution: "centos-stream-8-extras-staging"
+    state: present
+
+  # EPEL repositories
+  - name: "extra-packages-for-enterprise-linux-8-x86_64-production"
+    repository: Extra Packages for Enterprise Linux 8 - x86_64
+    base_path: "epel/8/Everything/x86_64/production"
+    distribution: "extra-packages-for-enterprise-linux-8-x86_64-staging"
+    state: present
+  - name: "extra-packages-for-enterprise-linux-modular-8-x86_64-production"
+    repository: Extra Packages for Enterprise Linux Modular 8 - x86_64
+    base_path: "epel/8/Modular/x86_64/production"
+    distribution: "extra-packages-for-enterprise-linux-modular-8-x86_64-staging"
+    state: present
+
+  # Third-party repositories
+  - name: "docker-ce-for-centos-8-production"
+    repository: Docker CE for CentOS 8
+    base_path: "docker-ce/centos/8/x86_64/stable/production"
+    distribution: "docker-ce-for-centos-8-staging"
+    state: present

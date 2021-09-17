@@ -1,0 +1,13 @@
+---
+- name: Promote development client Pulp repositories to staging
+  hosts: localhost
+  gather_facts: True
+  vars:
+    pulp_url: "{{ client_pulp_url }}"
+    pulp_username: "{{ client_pulp_username }}"
+    pulp_password: "{{ client_pulp_password }}"
+  tasks:
+    - import_role:
+        name: stackhpc.pulp.pulp_distribution
+      vars:
+        pulp_distribution_rpm: "{{ client_pulp_distribution_rpm_staging }}"
