@@ -1,0 +1,112 @@
+---
+# URL of the release Pulp service's container image registry.
+client_release_pulp_registry_url: "{{ release_pulp_url }}"
+
+# List of all image names.
+client_pulp_images:
+  - base
+  - cron
+  - designate-api
+  - designate-backend-bind9
+  - designate-base
+  - designate-central
+  - designate-mdns
+  - designate-producer
+  - designate-sink
+  - designate-worker
+  - elasticsearch
+  - elasticsearch-curator
+  - fluentd
+  - glance-api
+  - glance-base
+  - grafana
+  - haproxy
+  - heat-api
+  - heat-api-cfn
+  - heat-base
+  - heat-engine
+  - horizon
+  - ironic-api
+  - ironic-base
+  - ironic-conductor
+  - ironic-pxe
+  - keepalived
+  - keystone
+  - keystone-base
+  - keystone-fernet
+  - keystone-ssh
+  - kolla-toolbox
+  - magnum-api
+  - magnum-base
+  - magnum-conductor
+  - mariadb-base
+  - mariadb-clustercheck
+  - mariadb-server
+  - memcached
+  - neutron-dhcp-agent
+  - neutron-l3-agent
+  - neutron-metadata-agent
+  - neutron-openvswitch-agent
+  - neutron-server
+  - nova-api
+  - nova-compute
+  - nova-conductor
+  - nova-libvirt
+  - nova-novncproxy
+  - nova-scheduler
+  - nova-ssh
+  - octavia-api
+  - octavia-base
+  - octavia-driver-agent
+  - octavia-health-manager
+  - octavia-housekeeping
+  - octavia-worker
+  - openstack-base
+  - openvswitch-base
+  - openvswitch-db-server
+  - openvswitch-netcontrold
+  - openvswitch-vswitchd
+  - ovn-base
+  - ovn-controller
+  - ovn-nb-db-server
+  - ovn-northd
+  - ovn-sb-db-server
+  - placement-api
+  - placement-base
+  - prometheus-alertmanager
+  - prometheus-base
+  - prometheus-blackbox-exporter
+  - prometheus-cadvisor
+  - prometheus-elasticsearch-exporter
+  - prometheus-haproxy-exporter
+  - prometheus-libvirt-exporter
+  - prometheus-memcached-exporter
+  - prometheus-mtail
+  - prometheus-mysqld-exporter
+  - prometheus-node-exporter
+  - prometheus-openstack-exporter
+  - prometheus-v2-server
+  - rabbitmq
+  - redis
+  - redis-base
+  - redis-sentinel
+
+# List of container image repositories.
+client_pulp_repository_container_repos: >-
+  {%- set repos = [] -%}
+  {%- for image in client_pulp_images -%}
+  {%- set image_repo = "kolla/centos-source-" ~ image -%}
+  {%- set repo = {"name": image_repo, "url": client_release_pulp_registry_url, "policy": "on_demand", "state": "present"} -%}
+  {%- set _ = repos.append(repo) -%}
+  {%- endfor -%}
+  {{ repos }}
+
+# List of container image distributions.
+client_pulp_distribution_container: >-
+  {%- set distributions = [] -%}
+  {%- for image in client_pulp_images -%}
+  {%- set image_repo = "kolla/centos-source-" ~ image -%}
+  {%- set distribution = {"name": image_repo, "repository": image_repo, "base_path": image_repo, "state": "present"} -%}
+  {%- set _ = distributions.append(distribution) -%}
+  {%- endfor -%}
+  {{ distributions }}

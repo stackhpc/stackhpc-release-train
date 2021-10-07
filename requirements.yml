@@ -1,4 +1,8 @@
 collections:
   - name: https://github.com/stackhpc/ansible-collection-pulp
     type: git
-    version: pulp_distribution_mark
+    version: containers
+  # FIXME: Use a version once container support is released.
+  - name: https://github.com/pulp/squeezer
+    type: git
+    version: develop

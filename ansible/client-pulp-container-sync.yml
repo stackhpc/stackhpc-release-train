@@ -1,0 +1,12 @@
+---
+- name: Sync client Pulp container repositories
+  hosts: localhost
+  gather_facts: False
+  tasks:
+    - import_role:
+        name: stackhpc.pulp.pulp_repository
+      vars:
+        pulp_url: "{{ client_pulp_url }}"
+        pulp_username: "{{ client_pulp_username }}"
+        pulp_password: "{{ client_pulp_password }}"
+        pulp_repository_container_repos: "{{ client_pulp_repository_container_repos }}"
