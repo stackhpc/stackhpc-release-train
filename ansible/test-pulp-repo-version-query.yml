@@ -1,7 +1,8 @@
 ---
 # This playbook queries the dev Pulp server for the latest distribution of each
 # repository. The version is extracted from the base_path, and used to set the
-# 'test_pulp_repository_rpm_repo_versions' fact which contains repository
+# 'test_pulp_repository_deb_repo_versions' and
+# 'test_pulp_repository_rpm_repo_versions' facts which contain repository
 # versions to sync to the test Pulp server.
 
 - name: Update test repo versions
@@ -12,29 +13,86 @@
     pulp_username: "{{ dev_pulp_username }}"
     pulp_password: "{{ dev_pulp_password }}"
   tasks:
-    - name: Query repositories
+    - name: Query Deb repositories
+      pulp.squeezer.deb_repository:
+        pulp_url: "{{ pulp_url }}"
+        username: "{{ pulp_username }}"
+        password: "{{ pulp_password }}"
+      register: pulp_deb_repos_list
+
+    - name: Query Deb publications
+      pulp.squeezer.deb_publication:
+        pulp_url: "{{ pulp_url }}"
+        username: "{{ pulp_username }}"
+        password: "{{ pulp_password }}"
+      register: pulp_deb_pubs_list
+
+    - name: Query Deb verbatim publications
+      pulp.squeezer.deb_publication:
+        pulp_url: "{{ pulp_url }}"
+        username: "{{ pulp_username }}"
+        password: "{{ pulp_password }}"
+        mode: verbatim
+      register: pulp_deb_verbatim_pubs_list
+
+    - name: Query Deb distributions
+      pulp.squeezer.deb_distribution:
+        pulp_url: "{{ pulp_url }}"
+        username: "{{ pulp_username }}"
+        password: "{{ pulp_password }}"
+      register: pulp_deb_dists_list
+
+    - name: Query RPM repositories
       pulp.squeezer.rpm_repository:
         pulp_url: "{{ pulp_url }}"
         username: "{{ pulp_username }}"
         password: "{{ pulp_password }}"
-      register: pulp_repos_list
+      register: pulp_rpm_repos_list
 
-    - name: Query publications
+    - name: Query RPM publications
       pulp.squeezer.rpm_publication:
         pulp_url: "{{ pulp_url }}"
         username: "{{ pulp_username }}"
         password: "{{ pulp_password }}"
-      register: pulp_pubs_list
+      register: pulp_rpm_pubs_list
 
-    - name: Query distributions
+    - name: Query RPM distributions
       pulp.squeezer.rpm_distribution:
         pulp_url: "{{ pulp_url }}"
         username: "{{ pulp_username }}"
         password: "{{ pulp_password }}"
-      register: pulp_dists_list
+      register: pulp_rpm_dists_list
 
     - block:
-        - name: Display latest distributions
+        - name: Display latest Deb distributions
+          vars:
+            info:
+              repo: "{{ repo }}"
+              pub: "{{ pub }}"
+              dist: "{{ dist }}"
+          debug:
+            var: info
+          loop: "{{ dev_pulp_distribution_deb }}"
+          loop_control:
+            label: "{{ item.repository }}"
+
+        - name: Set a fact about latest Deb versions
+          set_fact:
+            test_pulp_repository_deb_repo_versions: "{{ test_pulp_repository_deb_repo_versions | default({}) | combine({item.short_name: dist.base_path | basename}) }}"
+          loop: "{{ dev_pulp_distribution_deb }}"
+          loop_control:
+            label: "{{ item.repository }}"
+
+        - name: Display latest versions fact
+          debug:
+            var: test_pulp_repository_deb_repo_versions
+      vars:
+        repo: "{{ pulp_deb_repos_list.repositories | selectattr('name', 'equalto', item.repository) | first }}"
+        pub: "{{ (pulp_deb_pubs_list.publications + pulp_deb_verbatim_pubs_list.publications) | selectattr('repository', 'equalto', repo.pulp_href) | stackhpc.pulp.sort_publications | first }}"
+        dist: "{{ pulp_deb_dists_list.distributions | selectattr('publication', 'equalto', pub.pulp_href) | first }}"
+
+    - block:
+        - name: Display latest RPM distributions
           vars:
             info:
               repo: "{{ repo }}"
@@ -46,7 +104,7 @@
           loop_control:
             label: "{{ item.repository }}"
 
-        - name: Set a fact about latest versions
+        - name: Set a fact about latest RPM versions
           set_fact:
             test_pulp_repository_rpm_repo_versions: "{{ test_pulp_repository_rpm_repo_versions | default({}) | combine({item.short_name: dist.base_path | basename}) }}"
           loop: "{{ dev_pulp_distribution_rpm }}"
@@ -57,6 +115,6 @@
           debug:
             var: test_pulp_repository_rpm_repo_versions
       vars:
-        repo: "{{ pulp_repos_list.repositories | selectattr('name', 'equalto', item.repository) | first }}"
-        pub: "{{ pulp_pubs_list.publications | selectattr('repository', 'equalto', repo.pulp_href) | stackhpc.pulp.sort_publications | first }}"
-        dist: "{{ pulp_dists_list.distributions | selectattr('publication', 'equalto', pub.pulp_href) | first }}"
+        repo: "{{ pulp_rpm_repos_list.repositories | selectattr('name', 'equalto', item.repository) | first }}"
+        pub: "{{ pulp_rpm_pubs_list.publications | selectattr('repository', 'equalto', repo.pulp_href) | stackhpc.pulp.sort_publications | first }}"
+        dist: "{{ pulp_rpm_dists_list.distributions | selectattr('publication', 'equalto', pub.pulp_href) | first }}"

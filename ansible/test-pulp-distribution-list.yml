@@ -7,37 +7,80 @@
     pulp_username: "{{ test_pulp_username }}"
     pulp_password: "{{ test_pulp_password }}"
   tasks:
-    - name: Query repositories
-      pulp.squeezer.rpm_repository:
+    - name: Query Deb repositories
+      pulp.squeezer.deb_repository:
         pulp_url: "{{ pulp_url }}"
         username: "{{ pulp_username }}"
         password: "{{ pulp_password }}"
-      register: pulp_repos_list
+      register: pulp_deb_repos_list
 
-    - name: Query publications
-      pulp.squeezer.rpm_publication:
+    - name: Query Deb publications
+      pulp.squeezer.deb_publication:
         pulp_url: "{{ pulp_url }}"
         username: "{{ pulp_username }}"
         password: "{{ pulp_password }}"
-      register: pulp_pubs_list
+      register: pulp_deb_pubs_list
 
-    - name: Query distributions
-      pulp.squeezer.rpm_distribution:
+    - name: Query Deb verbatim publications
+      pulp.squeezer.deb_publication:
         pulp_url: "{{ pulp_url }}"
         username: "{{ pulp_username }}"
         password: "{{ pulp_password }}"
-      register: pulp_dists_list
+        mode: verbatim
+      register: pulp_deb_verbatim_pubs_list
 
-    - name: Display distributions
+    - name: Query Deb distributions
+      pulp.squeezer.deb_distribution:
+        pulp_url: "{{ pulp_url }}"
+        username: "{{ pulp_username }}"
+        password: "{{ pulp_password }}"
+      register: pulp_deb_dists_list
+
+    - name: Display Deb distributions
       vars:
-        pub: "{{ pulp_pubs_list.publications | selectattr('pulp_href', 'equalto', item.publication) | first }}"
-        repo: "{{ pulp_repos_list.repositories | selectattr('pulp_href', 'equalto', pub.repository) | first }}"
+        pub: "{{ (pulp_deb_pubs_list.publications + pulp_deb_verbatim_pubs_list.publications) | selectattr('pulp_href', 'equalto', item.publication) | first }}"
+        repo: "{{ pulp_deb_repos_list.repositories | selectattr('pulp_href', 'equalto', pub.repository) | first }}"
         info:
           repo: "{{ repo }}"
           pub: "{{ pub }}"
           dist: "{{ item }}"
       debug:
         var: info
-      loop: "{{ pulp_dists_list.distributions }}"
+      loop: "{{ pulp_deb_dists_list.distributions }}"
+      loop_control:
+        label: "{{ item.name }}"
+
+    - name: Query RPM repositories
+      pulp.squeezer.rpm_repository:
+        pulp_url: "{{ pulp_url }}"
+        username: "{{ pulp_username }}"
+        password: "{{ pulp_password }}"
+      register: pulp_rpm_repos_list
+
+    - name: Query RPM publications
+      pulp.squeezer.rpm_publication:
+        pulp_url: "{{ pulp_url }}"
+        username: "{{ pulp_username }}"
+        password: "{{ pulp_password }}"
+      register: pulp_rpm_pubs_list
+
+    - name: Query RPM distributions
+      pulp.squeezer.rpm_distribution:
+        pulp_url: "{{ pulp_url }}"
+        username: "{{ pulp_username }}"
+        password: "{{ pulp_password }}"
+      register: pulp_rpm_dists_list
+
+    - name: Display RPM distributions
+      vars:
+        pub: "{{ pulp_rpm_pubs_list.publications | selectattr('pulp_href', 'equalto', item.publication) | first }}"
+        repo: "{{ pulp_rpm_repos_list.repositories | selectattr('pulp_href', 'equalto', pub.repository) | first }}"
+        info:
+          repo: "{{ repo }}"
+          pub: "{{ pub }}"
+          dist: "{{ item }}"
+      debug:
+        var: info
+      loop: "{{ pulp_rpm_dists_list.distributions }}"
       loop_control:
         label: "{{ item.name }}"

@@ -7,25 +7,36 @@
     pulp_username: "{{ test_pulp_username }}"
     pulp_password: "{{ test_pulp_password }}"
   tasks:
-    - name: Assert that versions variable is populated
+    - name: Assert that Deb versions variable is populated
       assert:
         that:
           - missing_repos | length == 0
         msg: >-
-          Some expected repositories not present in sync versions: {{ missing_repos | join(',') }}
+          Some expected Deb repositories not present in sync versions: {{ missing_repos | join(',') }}
+      vars:
+        missing_repos: "{{ test_pulp_repository_deb_repos | map(attribute='short_name') | list | difference(test_pulp_repository_deb_repo_versions) | list }}"
+
+    - name: Assert that RPM versions variable is populated
+      assert:
+        that:
+          - missing_repos | length == 0
+        msg: >-
+          Some expected RPM repositories not present in sync versions: {{ missing_repos | join(',') }}
       vars:
         missing_repos: "{{ test_pulp_repository_rpm_repos | map(attribute='short_name') | list | difference(test_pulp_repository_rpm_repo_versions) | list }}"
-
 
     - import_role:
         name: stackhpc.pulp.pulp_publication
       vars:
+        pulp_publication_deb: "{{ test_pulp_publication_deb }}"
         pulp_publication_rpm: "{{ test_pulp_publication_rpm }}"
 
     - import_role:
         name: stackhpc.pulp.pulp_distribution
       vars:
+        pulp_distribution_deb: "{{ test_pulp_distribution_deb }}"
         pulp_distribution_rpm: "{{ test_pulp_distribution_rpm }}"
         # Avoid creating new a distribution for a publication that already has
         # a distribution.
+        pulp_distribution_deb_skip_existing: true
         pulp_distribution_rpm_skip_existing: true
