@@ -4,66 +4,80 @@ dev_pulp_repository_rpm_repos:
   - name: CentOS Stream 8 - AppStream
     url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=AppStream&infra=genclo
     policy: immediate
+    sync_policy: mirror_complete
     state: present
   - name: CentOS Stream 8 - BaseOS
     url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=BaseOS&infra=genclo
     policy: immediate
+    sync_policy: mirror_complete
     state: present
   - name: CentOS Stream 8 - Extras
     url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=extras&infra=genclo
     policy: immediate
+    sync_policy: mirror_complete
     state: present
 
   # Additional CentOS 8 Stream repositories
   - name: CentOS Stream 8 - Advanced Virtualization
     url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=virt-advancedvirt-common
     policy: immediate
+    sync_policy: mirror_complete
     state: present
   # Note(piotrp): Assuming we'd need this in the future
   - name: CentOS Stream 8 - Ceph Pacific
     url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=storage-ceph-pacific
     policy: immediate
+    sync_policy: mirror_complete
     state: absent
   - name: CentOS Stream 8 - NFV OpenvSwitch
     url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=nfv-openvswitch-2
     policy: immediate
+    sync_policy: mirror_complete
     state: present
   - name: CentOS Stream 8 - OpenStack Wallaby
     url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=cloud-openstack-wallaby
     policy: immediate
+    sync_policy: mirror_complete
     state: present
   - name: CentOS Stream 8 - PowerTools
     url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=PowerTools&infra=genclo
     policy: immediate
+    sync_policy: mirror_complete
     state: present
   - name: CentOS 8 - Ceph Nautilus
     url: http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=storage-ceph-nautilus
     policy: immediate
+    sync_policy: mirror_complete
     state: present
   # Note(piotrp): Assuming we'd need this in the future
   - name: CentOS 8 - Ceph Octopus
     url: http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=storage-ceph-octopus
     policy: immediate
+    sync_policy: mirror_complete
     state: absent
   - name: CentOS 8 - OpsTools - collectd
     url: http://mirrorlist.centos.org/?arch=x86_64&release=8&repo=opstools-collectd-5
     policy: immediate
+    sync_policy: mirror_complete
     state: present
 
   # EPEL repositories
   - name: Extra Packages for Enterprise Linux 8 - x86_64
     url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-8&arch=x86_64&infra=stock&content=centos
     policy: immediate
+    sync_policy: mirror_complete
     state: present
   - name: Extra Packages for Enterprise Linux Modular 8 - x86_64
     url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-modular-8&arch=x86_64&infra=stock&content=centos
     policy: immediate
+    sync_policy: mirror_complete
     state: present
 
   # Third-party repositories
   - name: Docker CE for CentOS 8
     url: https://download.docker.com/linux/centos/8/x86_64/stable
     policy: immediate
+    sync_policy: mirror_complete
     state: present
   # Note(piotrp): With repository size of 39G - for now we'll want this on_demand
   - name: ELK repository for 7.x packages
@@ -78,14 +92,17 @@ dev_pulp_repository_rpm_repos:
   - name: RabbitMQ - Erlang
     url: https://packagecloud.io/rabbitmq/erlang/el/8/x86_64
     policy: immediate
+    sync_policy: mirror_complete
     state: present
   - name: RabbitMQ - Server
     url: https://packagecloud.io/rabbitmq/rabbitmq-server/el/8/x86_64
     policy: immediate
+    sync_policy: mirror_complete
     state: present
   - name: TreasureData 4
     url: http://packages.treasuredata.com/4/redhat/8/x86_64
     policy: immediate
+    sync_policy: mirror_complete
     state: present
 
 # Publication format is a subset of distribution.

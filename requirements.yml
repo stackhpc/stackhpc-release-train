@@ -1,8 +1,8 @@
 collections:
   - name: https://github.com/stackhpc/ansible-collection-pulp
     type: git
-    version: containers
+    version: release-train
   # FIXME: Use a version once container support is released.
-  - name: https://github.com/pulp/squeezer
+  - name: https://github.com/stackhpc/squeezer
     type: git
-    version: develop
+    version: rpm-sync-policy
