@@ -64,5 +64,5 @@
             dest: "inventory/group_vars/all/client-pulp-repo-versions"
       vars:
         repo: "{{ pulp_repos_list.repositories | selectattr('name', 'equalto', item.repository) | first }}"
-        pub: "{{ pulp_pubs_list.publications | selectattr('repository', 'equalto', repo.pulp_href) | sort(attribute='repository_version', reverse=True) | first }}"
+        pub: "{{ pulp_pubs_list.publications | selectattr('repository', 'equalto', repo.pulp_href) | stackhpc.pulp.sort_publications | first }}"
         dist: "{{ pulp_dists_list.distributions | selectattr('publication', 'equalto', pub.pulp_href) | first }}"
