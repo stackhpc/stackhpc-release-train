@@ -1,0 +1,12 @@
+---
+- name: Ensure Pulp content guards exist
+  hosts: localhost
+  gather_facts: False
+  tasks:
+    - import_role:
+        name: stackhpc.pulp.pulp_content_guard
+      vars:
+        pulp_url: "{{ dev_pulp_url }}"
+        pulp_username: "{{ dev_pulp_username }}"
+        pulp_password: "{{ dev_pulp_password }}"
+        pulp_content_guard_x509_cert_guards: "{{ dev_pulp_content_guard_x509_cert_guards }}"
