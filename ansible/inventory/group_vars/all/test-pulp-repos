@@ -1,6 +1,11 @@
 ---
 test_dev_pulp_content_url: "{{ dev_pulp_url }}/pulp/content"
 
+# Client certificates used to access ark.stackhpc.com repositories.
+# They are trusted by the 'development' cert guard's CA.
+test_client_cert: "{{ lookup('file', '../certs/ark.stackhpc.com/client-cert.pem') | trim }}"
+test_client_key: "{{ lookup('file', '../certs/ark.stackhpc.com/client-key.pem') | trim }}"
+
 # TODO(mgoddard): Use policy=immediate to avoid packages being removed from
 # mirrors.
 test_pulp_repository_rpm_repos:
@@ -8,88 +13,126 @@ test_pulp_repository_rpm_repos:
   - name: CentOS Stream 8 - AppStream (ark)
     url: "{{ test_dev_pulp_content_url }}/centos/8-stream/AppStream/x86_64/os/{{ test_pulp_repo_centos_stream_8_appstream_version }}"
     policy: on_demand
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     state: present
   - name: CentOS Stream 8 - BaseOS (ark)
     url: "{{ test_dev_pulp_content_url }}/centos/8-stream/BaseOS/x86_64/os/{{ test_pulp_repo_centos_stream_8_baseos_version }}"
     policy: on_demand
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     state: present
   - name: CentOS Stream 8 - Extras (ark)
     url: "{{ test_dev_pulp_content_url }}/centos/8-stream/extras/x86_64/os/{{ test_pulp_repo_centos_stream_8_extras_version }}"
     policy: on_demand
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     state: present
 
   # Additional CentOS 8 Stream repositories
   - name: CentOS Stream 8 - Advanced Virtualization (ark)
     url: "{{ test_dev_pulp_content_url }}/centos/8-stream/virt/x86_64/advancedvirt-common/{{ test_pulp_repo_centos_stream_8_advanced_virtualization_version }}"
     policy: on_demand
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     state: present
   # Note(piotrp): Assuming we'd need this in the future
   # - name: CentOS Stream 8 - Ceph Pacific (ark)
   #   url: "{{ test_dev_pulp_content_url }}/centos/8-stream/storage/x86_64/ceph-pacific/{{ test_pulp_repo_centos_stream_8_storage_ceph_pacific_version }}"
   #   policy: on_demand
+  #   client_cert: "{{ test_client_cert }}"
+  #   client_key: "{{ test_client_key }}"
   #   state: present
   - name: CentOS Stream 8 - NFV OpenvSwitch (ark)
     url: "{{ test_dev_pulp_content_url }}/centos/8-stream/nfv/x86_64/openvswitch-2/{{ test_pulp_repo_centos_stream_8_nfv_openvswitch_version }}"
     policy: on_demand
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     state: present
   - name: CentOS Stream 8 - OpenStack Wallaby (ark)
     url: "{{ test_dev_pulp_content_url }}/centos/8-stream/cloud/x86_64/openstack-wallaby/{{ test_pulp_repo_centos_stream_8_openstack_wallaby_version }}"
     policy: on_demand
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     state: present
   - name: CentOS Stream 8 - PowerTools (ark)
     url: "{{ test_dev_pulp_content_url }}/centos/8-stream/PowerTools/x86_64/os/{{ test_pulp_repo_centos_stream_8_powertools_version }}"
     policy: on_demand
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     state: present
   - name: CentOS 8 - Ceph Nautilus (ark)
     url: "{{ test_dev_pulp_content_url }}/centos/8/storage/x86_64/ceph-nautilus/{{ test_pulp_repo_centos_8_storage_ceph_nautilus_version }}"
     policy: on_demand
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     state: present
   # Note(piotrp): Assuming we'd need this in the future
   # - name: CentOS 8 - Ceph Octopus (ark)
   #   url: "{{ test_dev_pulp_content_url }}/centos/8/storage/x86_64/ceph-octopus/{{ test_pulp_repo_centos_8_storage_ceph_octopus_version }}"
   #   policy: on_demand
+  #   client_cert: "{{ test_client_cert }}"
+  #   client_key: "{{ test_client_key }}"
   #   state: present
   - name: CentOS 8 - OpsTools - collectd (ark)
     url: "{{ test_dev_pulp_content_url }}/centos/8/opstools/x86_64/collectd-5/{{ test_pulp_repo_centos_8_opstools_version }}"
     policy: on_demand
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     state: present
 
   # EPEL repositories
   - name: Extra Packages for Enterprise Linux 8 - x86_64 (ark)
     url: "{{ test_dev_pulp_content_url }}/epel/8/Everything/x86_64/{{ test_pulp_repo_epel_version }}"
     policy: on_demand
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     state: present
   - name: Extra Packages for Enterprise Linux Modular 8 - x86_64 (ark)
     url: "{{ test_dev_pulp_content_url }}/epel/8/Modular/x86_64/{{ test_pulp_repo_epel_modular_version }}"
     policy: on_demand
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     state: present
 
   # Third-party repositories
   - name: Docker CE for CentOS 8 (ark)
     url: "{{ test_dev_pulp_content_url }}/docker-ce/centos/8/x86_64/stable/{{ test_pulp_repo_docker_version }}"
     policy: on_demand
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     state: present
   # Note(piotrp): With repository size of 39G - for now we'll want this on_demand
   - name: ELK repository for 7.x packages (ark)
     url: "{{ test_dev_pulp_content_url }}/elasticsearch/oss-7.x/{{ test_pulp_repo_elasticsearch_logstash_kibana_7_x_version }}"
     policy: on_demand
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     state: present
   # Note(piotrp): With repository size of 16G - for now we'll want this on_demand
   - name: Grafana (ark)
     url: "{{ test_dev_pulp_content_url }}/grafana/oss/rpm/{{ test_pulp_repo_grafana_version }}"
     policy: on_demand
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     state: present
   - name: RabbitMQ - Erlang (ark)
     url: "{{ test_dev_pulp_content_url }}/rabbitmq/erlang/el/8/x86_64/{{ test_pulp_repo_rabbitmq_erlang_version }}"
     policy: on_demand
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     state: present
   - name: RabbitMQ - Server (ark)
     url: "{{ test_dev_pulp_content_url }}/rabbitmq/rabbitmq-server/el/8/x86_64/{{ test_pulp_repo_rabbitmq_server_version }}"
     policy: on_demand
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     state: present
   - name: TreasureData 4 (ark)
     url: "{{ test_dev_pulp_content_url }}/treasuredata/4/redhat/8/x86_64/{{ test_pulp_repo_treasuredata_4_version }}"
     policy: on_demand
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     state: present
 
 
