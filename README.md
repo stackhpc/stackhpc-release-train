@@ -73,25 +73,25 @@ List distributions on the development Pulp server.
 ansible-playbook -i ansible/inventory ansible/dev-pulp-distribution-list.yml
 ```
 
-### Release
+### Test
 
-Sync upstream repos on the release Pulp server.
+Sync upstream repos on the test Pulp server.
 ```
-ansible-playbook -i ansible/inventory ansible/release-pulp-repo-sync.yml
-```
-
-Publish repository versions & create distributions on the release Pulp server.
-```
-ansible-playbook -i ansible/inventory ansible/release-pulp-repo-publish.yml
+ansible-playbook -i ansible/inventory ansible/test-pulp-repo-sync.yml
 ```
 
-List distributions on the release Pulp server.
+Publish repository versions & create distributions on the test Pulp server.
 ```
-ansible-playbook -i ansible/inventory ansible/release-pulp-distribution-list.yml
+ansible-playbook -i ansible/inventory ansible/test-pulp-repo-publish.yml
 ```
 
-Update repository version configuration for release repos based on latest
+List distributions on the test Pulp server.
+```
+ansible-playbook -i ansible/inventory ansible/test-pulp-distribution-list.yml
+```
+
+Update repository version configuration for test repos based on latest
 versions in the development Pulp server.
 ```
-ansible-playbook -i ansible/inventory ansible/release-pulp-repo-version-update.yml
+ansible-playbook -i ansible/inventory ansible/test-pulp-repo-version-update.yml
 ```

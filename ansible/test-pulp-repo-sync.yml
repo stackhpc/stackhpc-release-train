@@ -1,12 +1,12 @@
 ---
-- name: Sync release Pulp repositories
+- name: Sync test Pulp repositories
   hosts: localhost
   gather_facts: False
   tasks:
     - import_role:
         name: stackhpc.pulp.pulp_repository
       vars:
-        pulp_url: "{{ release_pulp_url }}"
-        pulp_username: "{{ release_pulp_username }}"
-        pulp_password: "{{ release_pulp_password }}"
-        pulp_repository_rpm_repos: "{{ release_pulp_repository_rpm_repos }}"
+        pulp_url: "{{ test_pulp_url }}"
+        pulp_username: "{{ test_pulp_username }}"
+        pulp_password: "{{ test_pulp_password }}"
+        pulp_repository_rpm_repos: "{{ test_pulp_repository_rpm_repos }}"

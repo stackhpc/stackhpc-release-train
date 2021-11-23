@@ -1,7 +1,7 @@
 ---
-release_pulp_url: http://localhost:8080
-release_pulp_username: admin
-release_pulp_password: !vault |
+test_pulp_url: http://localhost:8080
+test_pulp_username: admin
+test_pulp_password: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           38383062393261386361303261633632383562306239356639343261653932313838336666343939
           6430313661333936653466386234386162343864653630390a636332386461623364643563323139
