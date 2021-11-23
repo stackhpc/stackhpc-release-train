@@ -2,97 +2,6 @@
 # URL of the release Pulp service's container image registry.
 dev_release_pulp_registry_url: "{{ dev_pulp_url }}"
 
-# List of all image names.
-dev_pulp_images:
-  - base
-  - bifrost-base
-  - bifrost-deploy
-  - cron
-  - designate-api
-  - designate-backend-bind9
-  - designate-base
-  - designate-central
-  - designate-mdns
-  - designate-producer
-  - designate-sink
-  - designate-worker
-  - elasticsearch
-  - elasticsearch-curator
-  - fluentd
-  - glance-api
-  - glance-base
-  - grafana
-  - haproxy
-  - heat-api
-  - heat-api-cfn
-  - heat-base
-  - heat-engine
-  - horizon
-  - ironic-api
-  - ironic-base
-  - ironic-conductor
-  - ironic-pxe
-  - keepalived
-  - keystone
-  - keystone-base
-  - keystone-fernet
-  - keystone-ssh
-  - kolla-toolbox
-  - magnum-api
-  - magnum-base
-  - magnum-conductor
-  - mariadb-base
-  - mariadb-clustercheck
-  - mariadb-server
-  - memcached
-  - neutron-dhcp-agent
-  - neutron-l3-agent
-  - neutron-metadata-agent
-  - neutron-openvswitch-agent
-  - neutron-server
-  - nova-api
-  - nova-compute
-  - nova-conductor
-  - nova-libvirt
-  - nova-novncproxy
-  - nova-scheduler
-  - nova-ssh
-  - octavia-api
-  - octavia-base
-  - octavia-driver-agent
-  - octavia-health-manager
-  - octavia-housekeeping
-  - octavia-worker
-  - openstack-base
-  - openvswitch-base
-  - openvswitch-db-server
-  - openvswitch-netcontrold
-  - openvswitch-vswitchd
-  - ovn-base
-  - ovn-controller
-  - ovn-nb-db-server
-  - ovn-northd
-  - ovn-sb-db-server
-  - placement-api
-  - placement-base
-  - prometheus-alertmanager
-  - prometheus-base
-  - prometheus-blackbox-exporter
-  - prometheus-cadvisor
-  - prometheus-elasticsearch-exporter
-  - prometheus-haproxy-exporter
-  #- prometheus-libvirt-exporter
-  - prometheus-memcached-exporter
-  - prometheus-mtail
-  - prometheus-mysqld-exporter
-  - prometheus-node-exporter
-  - prometheus-openstack-exporter
-  - prometheus-v2-server
-  - rabbitmq
-  - redis
-  - redis-base
-  - redis-sentinel
-
 # Name of a tag to promote to a release.
 dev_pulp_repository_container_promotion_tag: wallaby-20211122T135752
 
@@ -102,14 +11,14 @@ dev_pulp_repository_container_repo_release_common:
   include_tags:
     - "{{ dev_pulp_repository_container_promotion_tag }}"
   policy: on_demand
-  #remote_username: "{{ dev_pulp_username }}"
-  #remote_password: "{{ dev_pulp_password }}"
+  remote_username: "{{ dev_pulp_username }}"
+  remote_password: "{{ dev_pulp_password }}"
   state: present
 
 # List of release container image repositories.
 dev_pulp_repository_container_repos_release: >-
   {%- set repos = [] -%}
-  {%- for image in dev_pulp_images -%}
+  {%- for image in kolla_container_images -%}
   {%- set image_repo = "stackhpc/centos-source-" ~ image -%}
   {%- set upstream_repo = "stackhpc-dev/centos-source-" ~ image -%}
   {%- set repo = {"name": image_repo, "upstream_name": upstream_repo} -%}
@@ -118,7 +27,6 @@ dev_pulp_repository_container_repos_release: >-
   {{ repos }}
 
 # Common parameters for development image distributions.
-# TODO: content_guard
 dev_pulp_distribution_container_development_common:
   private: true
   state: present
@@ -126,7 +34,7 @@ dev_pulp_distribution_container_development_common:
 # List of development container image distributions.
 dev_pulp_distribution_container_development: >-
   {%- set distributions = [] -%}
-  {%- for image in dev_pulp_images -%}
+  {%- for image in kolla_container_images -%}
   {%- set image_repo = "stackhpc-dev/centos-source-" ~ image -%}
   {%- set distribution = {"name": image_repo, "base_path": image_repo} -%}
   {%- set _ = distributions.append(dev_pulp_distribution_container_development_common | combine(distribution)) -%}
@@ -134,7 +42,6 @@ dev_pulp_distribution_container_development: >-
   {{ distributions }}
 
 # Common parameters for release image distributions.
-# TODO: content_guard
 dev_pulp_distribution_container_release_common:
   private: true
   state: present
@@ -142,7 +49,7 @@ dev_pulp_distribution_container_release_common:
 # List of release container image distributions.
 dev_pulp_distribution_container_release: >-
   {%- set distributions = [] -%}
-  {%- for image in dev_pulp_images -%}
+  {%- for image in kolla_container_images -%}
   {%- set image_repo = "stackhpc/centos-source-" ~ image -%}
   {%- set distribution = {"name": image_repo, "repository": image_repo, "base_path": image_repo} -%}
   {%- set _ = distributions.append(dev_pulp_distribution_container_release_common | combine(distribution)) -%}

@@ -1,0 +1,38 @@
+---
+# URL of the dev Pulp service's container image registry.
+test_dev_pulp_registry_url: "{{ dev_pulp_url }}"
+test_dev_pulp_registry_username: "{{ dev_pulp_username }}"
+test_dev_pulp_registry_password: "{{ dev_pulp_password }}"
+
+# Common parameters for image repositories.
+# TODO: include_tags to only sync particular tags?
+test_pulp_repository_container_repo_common:
+  url: "{{ test_dev_pulp_registry_url }}"
+  policy: on_demand
+  remote_username: "{{ test_dev_pulp_registry_username }}"
+  remote_password: "{{ test_dev_pulp_registry_password }}"
+  state: present
+
+# List of container image repositories.
+test_pulp_repository_container_repos: >-
+  {%- set repos = [] -%}
+  {%- for image in kolla_container_images -%}
+  {%- set image_repo = "stackhpc-dev/centos-source-" ~ image -%}
+  {%- set repo = {"name": image_repo} -%}
+  {%- set _ = repos.append(test_pulp_repository_container_repo_common | combine(repo)) -%}
+  {%- endfor -%}
+  {{ repos }}
+
+# Common parameters for image distributions.
+test_pulp_distribution_container_common:
+  state: present
+
+# List of container image distributions.
+test_pulp_distribution_container: >-
+  {%- set distributions = [] -%}
+  {%- for image in kolla_container_images -%}
+  {%- set image_repo = "stackhpc-dev/centos-source-" ~ image -%}
+  {%- set distribution = {"name": image_repo, "repository": image_repo, "base_path": image_repo} -%}
+  {%- set _ = distributions.append(test_pulp_distribution_container_common | combine(distribution)) -%}
+  {%- endfor -%}
+  {{ distributions }}
