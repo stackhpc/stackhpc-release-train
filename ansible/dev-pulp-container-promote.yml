@@ -14,7 +14,7 @@
         pulp_url: "{{ dev_pulp_url }}"
         pulp_username: "{{ dev_pulp_username }}"
         pulp_password: "{{ dev_pulp_password }}"
-        pulp_repository_container_repos: "{{ dev_pulp_repository_container_repos }}"
+        pulp_repository_container_repos: "{{ dev_pulp_repository_container_repos_release }}"
 
     - import_role:
         name: stackhpc.pulp.pulp_distribution
@@ -22,4 +22,4 @@
         pulp_url: "{{ dev_pulp_url }}"
         pulp_username: "{{ dev_pulp_username }}"
         pulp_password: "{{ dev_pulp_password }}"
-        pulp_distribution_container: "{{ dev_pulp_distribution_container }}"
+        pulp_distribution_container: "{{ dev_pulp_distribution_container_release }}"
