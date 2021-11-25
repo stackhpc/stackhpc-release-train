@@ -65,6 +65,8 @@ dev_pulp_repository_rpm_repos:
   - name: Extra Packages for Enterprise Linux 8 - x86_64
     url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-8&arch=x86_64&infra=stock&content=centos
     policy: immediate
+    # mirror_complete fails with:
+    # "This repository uses features which are incompatible with 'mirror' sync. Please sync without mirroring enabled"
     sync_policy: mirror_content_only
     state: present
   - name: Extra Packages for Enterprise Linux Modular 8 - x86_64
@@ -92,11 +94,15 @@ dev_pulp_repository_rpm_repos:
   - name: RabbitMQ - Erlang
     url: https://packagecloud.io/rabbitmq/erlang/el/8/x86_64
     policy: immediate
+    # mirror_complete fails with:
+    # "This repository uses features which are incompatible with 'mirror' sync. Please sync without mirroring enabled"
     sync_policy: mirror_content_only
     state: present
   - name: RabbitMQ - Server
     url: https://packagecloud.io/rabbitmq/rabbitmq-server/el/8/x86_64
     policy: immediate
+    # mirror_complete fails with:
+    # "This repository uses features which are incompatible with 'mirror' sync. Please sync without mirroring enabled"
     sync_policy: mirror_content_only
     state: present
   - name: TreasureData 4
