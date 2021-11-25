@@ -1,0 +1,208 @@
+---
+test_dev_pulp_content_url: "{{ dev_pulp_url }}/pulp/content"
+
+# TODO(mgoddard): Use policy=immediate to avoid packages being removed from
+# mirrors.
+test_pulp_repository_rpm_repos:
+  # Base CentOS 8 Stream repositories
+  - name: CentOS Stream 8 - AppStream
+    url: "{{ test_dev_pulp_content_url }}/centos/8-stream/AppStream/x86_64/os/{{ test_pulp_repo_centos_stream_8_appstream_version }}"
+    policy: on_demand
+    state: present
+  - name: CentOS Stream 8 - BaseOS
+    url: "{{ test_dev_pulp_content_url }}/centos/8-stream/BaseOS/x86_64/os/{{ test_pulp_repo_centos_stream_8_baseos_version }}"
+    policy: on_demand
+    state: present
+  - name: CentOS Stream 8 - Extras
+    url: "{{ test_dev_pulp_content_url }}/centos/8-stream/extras/x86_64/os/{{ test_pulp_repo_centos_stream_8_extras_version }}"
+    policy: on_demand
+    state: present
+
+  # Additional CentOS 8 Stream repositories
+  - name: CentOS Stream 8 - Advanced Virtualization
+    url: "{{ test_dev_pulp_content_url }}/centos/8-stream/virt/x86_64/advancedvirt-common/{{ test_pulp_repo_centos_stream_8_advanced_virtualization_version }}"
+    policy: on_demand
+    state: present
+  # Note(piotrp): Assuming we'd need this in the future
+  # - name: CentOS Stream 8 - Ceph Pacific
+  #   url: "{{ test_dev_pulp_content_url }}/centos/8-stream/storage/x86_64/ceph-pacific/{{ test_pulp_repo_centos_stream_8_storage_ceph_pacific_version }}"
+  #   policy: on_demand
+  #   state: present
+  - name: CentOS Stream 8 - NFV OpenvSwitch
+    url: "{{ test_dev_pulp_content_url }}/centos/8-stream/nfv/x86_64/openvswitch-2/{{ test_pulp_repo_centos_stream_8_nfv_openvswitch_version }}"
+    policy: on_demand
+    state: present
+  - name: CentOS Stream 8 - OpenStack Wallaby
+    url: "{{ test_dev_pulp_content_url }}/centos/8-stream/cloud/x86_64/openstack-wallaby/{{ test_pulp_repo_centos_stream_8_openstack_wallaby_version }}"
+    policy: on_demand
+    state: present
+  - name: CentOS Stream 8 - PowerTools
+    url: "{{ test_dev_pulp_content_url }}/centos/8-stream/PowerTools/x86_64/os/{{ test_pulp_repo_centos_stream_8_powertools_version }}"
+    policy: on_demand
+    state: present
+  - name: CentOS 8 - Ceph Nautilus
+    url: "{{ test_dev_pulp_content_url }}/centos/8/storage/x86_64/ceph-nautilus/{{ test_pulp_repo_centos_8_storage_ceph_nautilus_version }}"
+    policy: on_demand
+    state: present
+  # Note(piotrp): Assuming we'd need this in the future
+  # - name: CentOS 8 - Ceph Octopus
+  #   url: "{{ test_dev_pulp_content_url }}/centos/8/storage/x86_64/ceph-octopus/{{ test_pulp_repo_centos_8_storage_ceph_octopus_version }}"
+  #   policy: on_demand
+  #   state: present
+  - name: CentOS 8 - OpsTools - collectd
+    url: "{{ test_dev_pulp_content_url }}/centos/8/opstools/x86_64/collectd-5/{{ test_pulp_repo_centos_8_opstools_version }}"
+    policy: on_demand
+    state: present
+
+  # EPEL repositories
+  - name: Extra Packages for Enterprise Linux 8 - x86_64
+    url: "{{ test_dev_pulp_content_url }}/epel/8/Everything/x86_64/{{ test_pulp_repo_epel_version }}"
+    policy: on_demand
+    state: present
+  - name: Extra Packages for Enterprise Linux Modular 8 - x86_64
+    url: "{{ test_dev_pulp_content_url }}/epel/8/Modular/x86_64/{{ test_pulp_repo_epel_modular_version }}"
+    policy: on_demand
+    state: present
+
+  # Third-party repositories
+  - name: Docker CE for CentOS 8
+    url: "{{ test_dev_pulp_content_url }}/docker-ce/centos/8/x86_64/stable/{{ test_pulp_repo_docker_version }}"
+    policy: on_demand
+    state: present
+  # Note(piotrp): With repository size of 39G - for now we'll want this on_demand
+  - name: ELK repository for 7.x packages
+    url: "{{ test_dev_pulp_content_url }}/elasticsearch/oss-7.x/{{ test_pulp_repo_elasticsearch_logstash_kibana_7_x_version }}"
+    policy: on_demand
+    state: present
+  # Note(piotrp): With repository size of 16G - for now we'll want this on_demand
+  - name: Grafana
+    url: "{{ test_dev_pulp_content_url }}/grafana/oss/rpm/{{ test_pulp_repo_grafana_version }}"
+    policy: on_demand
+    state: present
+  - name: RabbitMQ - Erlang
+    url: "{{ test_dev_pulp_content_url }}/rabbitmq/erlang/el/8/x86_64/{{ test_pulp_repo_rabbitmq_erlang_version }}"
+    policy: on_demand
+    state: present
+  - name: RabbitMQ - Server
+    url: "{{ test_dev_pulp_content_url }}/rabbitmq/rabbitmq-server/el/8/x86_64/{{ test_pulp_repo_rabbitmq_server_version }}"
+    policy: on_demand
+    state: present
+  - name: TreasureData 4
+    url: "{{ test_dev_pulp_content_url }}/treasuredata/4/redhat/8/x86_64/{{ test_pulp_repo_treasuredata_4_version }}"
+    policy: on_demand
+    state: present
+
+
+# Publication format is a subset of distribution.
+test_pulp_publication_rpm: "{{ test_pulp_distribution_rpm }}"
+
+test_pulp_distribution_rpm:
+  # Base CentOS 8 Stream repositories
+  - name: "centos-stream-8-appstream-{{ test_pulp_repo_centos_stream_8_appstream_version }}"
+    repository: CentOS Stream 8 - AppStream
+    base_path: "centos/8-stream/AppStream/x86_64/os/{{ test_pulp_repo_centos_stream_8_appstream_version }}"
+    state: present
+    short_name: centos_stream_8_appstream
+  - name: "centos-stream-8-baseos-{{ test_pulp_repo_centos_stream_8_baseos_version }}"
+    repository: CentOS Stream 8 - BaseOS
+    base_path: "centos/8-stream/BaseOS/x86_64/os/{{ test_pulp_repo_centos_stream_8_baseos_version }}"
+    state: present
+    short_name: centos_stream_8_baseos
+  - name: "centos-stream-8-extras-{{ test_pulp_repo_centos_stream_8_extras_version }}"
+    repository: CentOS Stream 8 - Extras
+    base_path: "centos/8-stream/extras/x86_64/os/{{ test_pulp_repo_centos_stream_8_extras_version }}"
+    state: present
+    short_name: centos_stream_8_extras
+
+  # Additional CentOS 8 Stream repositories
+  - name: "centos-stream-8-advancedvirt-{{ test_pulp_repo_centos_stream_8_advanced_virtualization_version }}"
+    repository: CentOS Stream 8 - Advanced Virtualization
+    base_path: "centos/8-stream/virt/x86_64/advancedvirt-common/{{ test_pulp_repo_centos_stream_8_advanced_virtualization_version }}"
+    state: present
+    short_name: centos_stream_8_advanced_virtualization
+  # Note(piotrp): Assuming we'd need this in the future
+  # - name: "centos-stream-8-storage-ceph-pacific-{{ test_pulp_repo_centos_stream_8_storage_ceph_pacific_version }}"
+  #   repository: CentOS Stream 8 - Ceph Pacific
+  #   base_path: "centos/8-stream/storage/x86_64/ceph-pacific/{{ test_pulp_repo_centos_stream_8_storage_ceph_pacific_version }}"
+  #   state: present
+  #   short_name: centos_stream_8_storage_ceph_pacific
+  - name: "centos-stream-8-nfv-openvswitch-{{ test_pulp_repo_centos_stream_8_nfv_openvswitch_version }}"
+    repository: CentOS Stream 8 - NFV OpenvSwitch
+    base_path: "centos/8-stream/nfv/x86_64/openvswitch-2/{{ test_pulp_repo_centos_stream_8_nfv_openvswitch_version }}"
+    state: present
+    short_name: centos_stream_8_nfv_openvswitch
+  - name: "centos-stream-8-openstack-wallaby-{{ test_pulp_repo_centos_stream_8_openstack_wallaby_version }}"
+    repository: CentOS Stream 8 - OpenStack Wallaby
+    base_path: "centos/8-stream/cloud/x86_64/openstack-wallaby/{{ test_pulp_repo_centos_stream_8_openstack_wallaby_version }}"
+    state: present
+    short_name: centos_stream_8_openstack_wallaby
+  - name: "centos-stream-8-powertools-{{ test_pulp_repo_centos_stream_8_powertools_version }}"
+    repository: CentOS Stream 8 - PowerTools
+    base_path: "centos/8-stream/PowerTools/x86_64/os/{{ test_pulp_repo_centos_stream_8_powertools_version }}"
+    state: present
+    short_name: centos_stream_8_powertools
+  - name: "centos-8-opstools-{{ test_pulp_repo_centos_8_opstools_version }}"
+    repository: CentOS 8 - OpsTools - collectd
+    base_path: "centos/8/opstools/x86_64/collectd-5/{{ test_pulp_repo_centos_8_opstools_version }}"
+    state: present
+    short_name: centos_8_opstools
+  - name: "centos-8-storage-ceph-nautilus-{{ test_pulp_repo_centos_8_storage_ceph_nautilus_version }}"
+    repository: CentOS 8 - Ceph Nautilus
+    base_path: "centos/8/storage/x86_64/ceph-nautilus/{{ test_pulp_repo_centos_8_storage_ceph_nautilus_version }}"
+    state: present
+    short_name: centos_8_storage_ceph_nautilus
+  # Note(piotrp): Assuming we'd need this in the future
+  # - name: "centos-8-storage-ceph-octopus-{{ test_pulp_repo_centos_8_storage_ceph_octopus_version }}"
+  #   repository: CentOS 8 - Ceph Octopus
+  #   base_path: "centos/8/storage/x86_64/ceph-octopus/{{ test_pulp_repo_centos_8_storage_ceph_octopus_version }}"
+  #   state: present
+  #   short_name: centos_8_storage_ceph_octopus
+
+  # EPEL repositories
+  - name: "extra-packages-for-enterprise-linux-8-x86_64-{{ test_pulp_repo_epel_version }}"
+    repository: Extra Packages for Enterprise Linux 8 - x86_64
+    base_path: "epel/8/Everything/x86_64/{{ test_pulp_repo_epel_version }}"
+    state: present
+    short_name: epel
+  - name: "extra-packages-for-enterprise-linux-modular-8-x86_64-{{ test_pulp_repo_epel_modular_version }}"
+    repository: Extra Packages for Enterprise Linux Modular 8 - x86_64
+    base_path: "epel/8/Modular/x86_64/{{ test_pulp_repo_epel_modular_version }}"
+    state: present
+    short_name: epel_modular
+
+  # Third-party repositories
+  - name: "docker-ce-for-centos-8-{{ test_pulp_repo_docker_version }}"
+    repository: Docker CE for CentOS 8
+    base_path: "docker-ce/centos/8/x86_64/stable/{{ test_pulp_repo_docker_version }}"
+    state: present
+    short_name: docker
+  - name: "elasticsearch-logstash-kibana-7.x-{{ test_pulp_repo_elasticsearch_logstash_kibana_7_x_version }}"
+    repository: ELK repository for 7.x packages
+    base_path: "elasticsearch/oss-7.x/{{ test_pulp_repo_elasticsearch_logstash_kibana_7_x_version }}"
+    state: present
+    short_name: elasticsearch_logstash_kibana_7_x
+  - name: "grafana-{{ test_pulp_repo_grafana_version }}"
+    repository: Grafana
+    base_path: "grafana/oss/rpm/{{ test_pulp_repo_grafana_version }}"
+    state: present
+    short_name: grafana
+  - name: "rabbitmq-erlang-{{ test_pulp_repo_rabbitmq_erlang_version }}"
+    repository: RabbitMQ - Erlang
+    base_path: "rabbitmq/erlang/el/8/x86_64/{{ test_pulp_repo_rabbitmq_erlang_version }}"
+    state: present
+    short_name: rabbitmq_erlang
+  - name: "rabbitmq-server-{{ test_pulp_repo_rabbitmq_server_version }}"
+    repository: RabbitMQ - Server
+    base_path: "rabbitmq/rabbitmq-server/el/8/x86_64/{{ test_pulp_repo_rabbitmq_server_version }}"
+    state: present
+    short_name: rabbitmq_server
+  - name: "treasuredata-4-{{ test_pulp_repo_treasuredata_4_version }}"
+    repository: TreasureData 4
+    base_path: "treasuredata/4/redhat/8/x86_64/{{ test_pulp_repo_treasuredata_4_version }}"
+    state: present
+    short_name: treasuredata_4
+
+# Whether to skip existing RPM distributions. If true, new distributions will
+# not be created for a publication if any distributions exist for the same
+# publication.
+test_pulp_distribution_rpm_skip_existing: true

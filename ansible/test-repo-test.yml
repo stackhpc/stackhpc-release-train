@@ -1,21 +1,21 @@
 ---
-# This playbook tests the latests release repositories.
-# * configure DNF to use the latest release repositories
+# This playbook tests the latests test repositories.
+# * configure DNF to use the latest test repositories
 # * update all packages
 # * distro sync
 # * install a package from each repository
 
-- name: Test release repositories
+- name: Test test repositories
   hosts: localhost
   gather_facts: true
   tasks:
-    - name: Install release repositories
+    - name: Install test repositories
       become: true
       yum_repository:
         name: "{{ item.name }}"
         description: "{{ item.repository }}"
-        baseurl: "{{ release_pulp_url ~ '/pulp/content/' ~ item.base_path }}"
-      loop: "{{ release_pulp_distribution_rpm }}"
+        baseurl: "{{ test_pulp_url ~ '/pulp/content/' ~ item.base_path }}"
+      loop: "{{ test_pulp_distribution_rpm }}"
       when:
         - ansible_facts.os_family == 'RedHat'
         # FIXME: clashes with docker
