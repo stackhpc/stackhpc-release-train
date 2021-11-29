@@ -1,95 +1,157 @@
 ---
 test_dev_pulp_content_url: "{{ dev_pulp_url }}/pulp/content"
 
+# Client certificates used to access ark.stackhpc.com repositories.
+# They are trusted by the 'development' cert guard's CA.
+test_client_cert: "{{ lookup('file', '../certs/ark.stackhpc.com/client-cert.pem') | trim }}"
+test_client_key: "{{ lookup('file', '../certs/ark.stackhpc.com/client-key.pem') | trim }}"
+
 # TODO(mgoddard): Use policy=immediate to avoid packages being removed from
 # mirrors.
 test_pulp_repository_rpm_repos:
   # Base CentOS 8 Stream repositories
-  - name: CentOS Stream 8 - AppStream
+  - name: CentOS Stream 8 - AppStream (ark)
     url: "{{ test_dev_pulp_content_url }}/centos/8-stream/AppStream/x86_64/os/{{ test_pulp_repo_centos_stream_8_appstream_version }}"
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     policy: on_demand
+    sync_policy: mirror_complete
     state: present
-  - name: CentOS Stream 8 - BaseOS
+  - name: CentOS Stream 8 - BaseOS (ark)
     url: "{{ test_dev_pulp_content_url }}/centos/8-stream/BaseOS/x86_64/os/{{ test_pulp_repo_centos_stream_8_baseos_version }}"
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     policy: on_demand
+    sync_policy: mirror_complete
     state: present
-  - name: CentOS Stream 8 - Extras
+  - name: CentOS Stream 8 - Extras (ark)
     url: "{{ test_dev_pulp_content_url }}/centos/8-stream/extras/x86_64/os/{{ test_pulp_repo_centos_stream_8_extras_version }}"
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     policy: on_demand
+    sync_policy: mirror_complete
     state: present
 
   # Additional CentOS 8 Stream repositories
-  - name: CentOS Stream 8 - Advanced Virtualization
+  - name: CentOS Stream 8 - Advanced Virtualization (ark)
     url: "{{ test_dev_pulp_content_url }}/centos/8-stream/virt/x86_64/advancedvirt-common/{{ test_pulp_repo_centos_stream_8_advanced_virtualization_version }}"
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     policy: on_demand
+    sync_policy: mirror_complete
     state: present
   # Note(piotrp): Assuming we'd need this in the future
-  # - name: CentOS Stream 8 - Ceph Pacific
+  # - name: CentOS Stream 8 - Ceph Pacific (ark)
   #   url: "{{ test_dev_pulp_content_url }}/centos/8-stream/storage/x86_64/ceph-pacific/{{ test_pulp_repo_centos_stream_8_storage_ceph_pacific_version }}"
+  #   client_cert: "{{ test_client_cert }}"
+  #   client_key: "{{ test_client_key }}"
   #   policy: on_demand
+  #   sync_policy: mirror_complete
   #   state: present
-  - name: CentOS Stream 8 - NFV OpenvSwitch
+  - name: CentOS Stream 8 - NFV OpenvSwitch (ark)
     url: "{{ test_dev_pulp_content_url }}/centos/8-stream/nfv/x86_64/openvswitch-2/{{ test_pulp_repo_centos_stream_8_nfv_openvswitch_version }}"
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     policy: on_demand
+    sync_policy: mirror_complete
     state: present
-  - name: CentOS Stream 8 - OpenStack Wallaby
+  - name: CentOS Stream 8 - OpenStack Wallaby (ark)
     url: "{{ test_dev_pulp_content_url }}/centos/8-stream/cloud/x86_64/openstack-wallaby/{{ test_pulp_repo_centos_stream_8_openstack_wallaby_version }}"
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     policy: on_demand
+    sync_policy: mirror_complete
     state: present
-  - name: CentOS Stream 8 - PowerTools
+  - name: CentOS Stream 8 - PowerTools (ark)
     url: "{{ test_dev_pulp_content_url }}/centos/8-stream/PowerTools/x86_64/os/{{ test_pulp_repo_centos_stream_8_powertools_version }}"
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     policy: on_demand
+    sync_policy: mirror_complete
     state: present
-  - name: CentOS 8 - Ceph Nautilus
+  - name: CentOS 8 - Ceph Nautilus (ark)
     url: "{{ test_dev_pulp_content_url }}/centos/8/storage/x86_64/ceph-nautilus/{{ test_pulp_repo_centos_8_storage_ceph_nautilus_version }}"
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     policy: on_demand
+    sync_policy: mirror_complete
     state: present
   # Note(piotrp): Assuming we'd need this in the future
-  # - name: CentOS 8 - Ceph Octopus
+  # - name: CentOS 8 - Ceph Octopus (ark)
   #   url: "{{ test_dev_pulp_content_url }}/centos/8/storage/x86_64/ceph-octopus/{{ test_pulp_repo_centos_8_storage_ceph_octopus_version }}"
+  #   client_cert: "{{ test_client_cert }}"
+  #   client_key: "{{ test_client_key }}"
   #   policy: on_demand
+  #   sync_policy: mirror_complete
   #   state: present
-  - name: CentOS 8 - OpsTools - collectd
+  - name: CentOS 8 - OpsTools - collectd (ark)
     url: "{{ test_dev_pulp_content_url }}/centos/8/opstools/x86_64/collectd-5/{{ test_pulp_repo_centos_8_opstools_version }}"
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     policy: on_demand
+    sync_policy: mirror_complete
     state: present
 
   # EPEL repositories
-  - name: Extra Packages for Enterprise Linux 8 - x86_64
+  - name: Extra Packages for Enterprise Linux 8 - x86_64 (ark)
     url: "{{ test_dev_pulp_content_url }}/epel/8/Everything/x86_64/{{ test_pulp_repo_epel_version }}"
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     policy: on_demand
+    sync_policy: mirror_complete
     state: present
-  - name: Extra Packages for Enterprise Linux Modular 8 - x86_64
+  - name: Extra Packages for Enterprise Linux Modular 8 - x86_64 (ark)
     url: "{{ test_dev_pulp_content_url }}/epel/8/Modular/x86_64/{{ test_pulp_repo_epel_modular_version }}"
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     policy: on_demand
+    sync_policy: mirror_complete
     state: present
 
   # Third-party repositories
-  - name: Docker CE for CentOS 8
+  - name: Docker CE for CentOS 8 (ark)
     url: "{{ test_dev_pulp_content_url }}/docker-ce/centos/8/x86_64/stable/{{ test_pulp_repo_docker_version }}"
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     policy: on_demand
+    sync_policy: mirror_complete
     state: present
   # Note(piotrp): With repository size of 39G - for now we'll want this on_demand
-  - name: ELK repository for 7.x packages
+  - name: ELK repository for 7.x packages (ark)
     url: "{{ test_dev_pulp_content_url }}/elasticsearch/oss-7.x/{{ test_pulp_repo_elasticsearch_logstash_kibana_7_x_version }}"
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     policy: on_demand
+    sync_policy: mirror_complete
     state: present
   # Note(piotrp): With repository size of 16G - for now we'll want this on_demand
-  - name: Grafana
+  - name: Grafana (ark)
     url: "{{ test_dev_pulp_content_url }}/grafana/oss/rpm/{{ test_pulp_repo_grafana_version }}"
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     policy: on_demand
+    sync_policy: mirror_complete
     state: present
-  - name: RabbitMQ - Erlang
+  - name: RabbitMQ - Erlang (ark)
     url: "{{ test_dev_pulp_content_url }}/rabbitmq/erlang/el/8/x86_64/{{ test_pulp_repo_rabbitmq_erlang_version }}"
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     policy: on_demand
+    sync_policy: mirror_complete
     state: present
-  - name: RabbitMQ - Server
+  - name: RabbitMQ - Server (ark)
     url: "{{ test_dev_pulp_content_url }}/rabbitmq/rabbitmq-server/el/8/x86_64/{{ test_pulp_repo_rabbitmq_server_version }}"
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     policy: on_demand
+    sync_policy: mirror_complete
     state: present
-  - name: TreasureData 4
+  - name: TreasureData 4 (ark)
     url: "{{ test_dev_pulp_content_url }}/treasuredata/4/redhat/8/x86_64/{{ test_pulp_repo_treasuredata_4_version }}"
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
     policy: on_demand
+    sync_policy: mirror_complete
     state: present
 
 
@@ -98,106 +160,106 @@ test_pulp_publication_rpm: "{{ test_pulp_distribution_rpm }}"
 
 test_pulp_distribution_rpm:
   # Base CentOS 8 Stream repositories
-  - name: "centos-stream-8-appstream-{{ test_pulp_repo_centos_stream_8_appstream_version }}"
-    repository: CentOS Stream 8 - AppStream
+  - name: "centos-stream-8-appstream-{{ test_pulp_repo_centos_stream_8_appstream_version }}-ark"
+    repository: CentOS Stream 8 - AppStream (ark)
     base_path: "centos/8-stream/AppStream/x86_64/os/{{ test_pulp_repo_centos_stream_8_appstream_version }}"
     state: present
     short_name: centos_stream_8_appstream
-  - name: "centos-stream-8-baseos-{{ test_pulp_repo_centos_stream_8_baseos_version }}"
-    repository: CentOS Stream 8 - BaseOS
+  - name: "centos-stream-8-baseos-{{ test_pulp_repo_centos_stream_8_baseos_version }}-ark"
+    repository: CentOS Stream 8 - BaseOS (ark)
     base_path: "centos/8-stream/BaseOS/x86_64/os/{{ test_pulp_repo_centos_stream_8_baseos_version }}"
     state: present
     short_name: centos_stream_8_baseos
-  - name: "centos-stream-8-extras-{{ test_pulp_repo_centos_stream_8_extras_version }}"
-    repository: CentOS Stream 8 - Extras
+  - name: "centos-stream-8-extras-{{ test_pulp_repo_centos_stream_8_extras_version }}-ark"
+    repository: CentOS Stream 8 - Extras (ark)
     base_path: "centos/8-stream/extras/x86_64/os/{{ test_pulp_repo_centos_stream_8_extras_version }}"
     state: present
     short_name: centos_stream_8_extras
 
   # Additional CentOS 8 Stream repositories
-  - name: "centos-stream-8-advancedvirt-{{ test_pulp_repo_centos_stream_8_advanced_virtualization_version }}"
-    repository: CentOS Stream 8 - Advanced Virtualization
+  - name: "centos-stream-8-advancedvirt-{{ test_pulp_repo_centos_stream_8_advanced_virtualization_version }}-ark"
+    repository: CentOS Stream 8 - Advanced Virtualization (ark)
     base_path: "centos/8-stream/virt/x86_64/advancedvirt-common/{{ test_pulp_repo_centos_stream_8_advanced_virtualization_version }}"
     state: present
     short_name: centos_stream_8_advanced_virtualization
   # Note(piotrp): Assuming we'd need this in the future
-  # - name: "centos-stream-8-storage-ceph-pacific-{{ test_pulp_repo_centos_stream_8_storage_ceph_pacific_version }}"
-  #   repository: CentOS Stream 8 - Ceph Pacific
+  # - name: "centos-stream-8-storage-ceph-pacific-{{ test_pulp_repo_centos_stream_8_storage_ceph_pacific_version }}-ark"
+  #   repository: CentOS Stream 8 - Ceph Pacific (ark)
   #   base_path: "centos/8-stream/storage/x86_64/ceph-pacific/{{ test_pulp_repo_centos_stream_8_storage_ceph_pacific_version }}"
   #   state: present
   #   short_name: centos_stream_8_storage_ceph_pacific
-  - name: "centos-stream-8-nfv-openvswitch-{{ test_pulp_repo_centos_stream_8_nfv_openvswitch_version }}"
-    repository: CentOS Stream 8 - NFV OpenvSwitch
+  - name: "centos-stream-8-nfv-openvswitch-{{ test_pulp_repo_centos_stream_8_nfv_openvswitch_version }}-ark"
+    repository: CentOS Stream 8 - NFV OpenvSwitch (ark)
     base_path: "centos/8-stream/nfv/x86_64/openvswitch-2/{{ test_pulp_repo_centos_stream_8_nfv_openvswitch_version }}"
     state: present
     short_name: centos_stream_8_nfv_openvswitch
-  - name: "centos-stream-8-openstack-wallaby-{{ test_pulp_repo_centos_stream_8_openstack_wallaby_version }}"
-    repository: CentOS Stream 8 - OpenStack Wallaby
+  - name: "centos-stream-8-openstack-wallaby-{{ test_pulp_repo_centos_stream_8_openstack_wallaby_version }}-ark"
+    repository: CentOS Stream 8 - OpenStack Wallaby (ark)
     base_path: "centos/8-stream/cloud/x86_64/openstack-wallaby/{{ test_pulp_repo_centos_stream_8_openstack_wallaby_version }}"
     state: present
     short_name: centos_stream_8_openstack_wallaby
-  - name: "centos-stream-8-powertools-{{ test_pulp_repo_centos_stream_8_powertools_version }}"
-    repository: CentOS Stream 8 - PowerTools
+  - name: "centos-stream-8-powertools-{{ test_pulp_repo_centos_stream_8_powertools_version }}-ark"
+    repository: CentOS Stream 8 - PowerTools (ark)
     base_path: "centos/8-stream/PowerTools/x86_64/os/{{ test_pulp_repo_centos_stream_8_powertools_version }}"
     state: present
     short_name: centos_stream_8_powertools
-  - name: "centos-8-opstools-{{ test_pulp_repo_centos_8_opstools_version }}"
-    repository: CentOS 8 - OpsTools - collectd
+  - name: "centos-8-opstools-{{ test_pulp_repo_centos_8_opstools_version }}-ark"
+    repository: CentOS 8 - OpsTools - collectd (ark)
     base_path: "centos/8/opstools/x86_64/collectd-5/{{ test_pulp_repo_centos_8_opstools_version }}"
     state: present
     short_name: centos_8_opstools
-  - name: "centos-8-storage-ceph-nautilus-{{ test_pulp_repo_centos_8_storage_ceph_nautilus_version }}"
-    repository: CentOS 8 - Ceph Nautilus
+  - name: "centos-8-storage-ceph-nautilus-{{ test_pulp_repo_centos_8_storage_ceph_nautilus_version }}-ark"
+    repository: CentOS 8 - Ceph Nautilus (ark)
     base_path: "centos/8/storage/x86_64/ceph-nautilus/{{ test_pulp_repo_centos_8_storage_ceph_nautilus_version }}"
     state: present
     short_name: centos_8_storage_ceph_nautilus
   # Note(piotrp): Assuming we'd need this in the future
-  # - name: "centos-8-storage-ceph-octopus-{{ test_pulp_repo_centos_8_storage_ceph_octopus_version }}"
-  #   repository: CentOS 8 - Ceph Octopus
+  # - name: "centos-8-storage-ceph-octopus-{{ test_pulp_repo_centos_8_storage_ceph_octopus_version }}-ark"
+  #   repository: CentOS 8 - Ceph Octopus (ark)
   #   base_path: "centos/8/storage/x86_64/ceph-octopus/{{ test_pulp_repo_centos_8_storage_ceph_octopus_version }}"
   #   state: present
   #   short_name: centos_8_storage_ceph_octopus
 
   # EPEL repositories
-  - name: "extra-packages-for-enterprise-linux-8-x86_64-{{ test_pulp_repo_epel_version }}"
-    repository: Extra Packages for Enterprise Linux 8 - x86_64
+  - name: "extra-packages-for-enterprise-linux-8-x86_64-{{ test_pulp_repo_epel_version }}-ark"
+    repository: Extra Packages for Enterprise Linux 8 - x86_64 (ark)
     base_path: "epel/8/Everything/x86_64/{{ test_pulp_repo_epel_version }}"
     state: present
     short_name: epel
-  - name: "extra-packages-for-enterprise-linux-modular-8-x86_64-{{ test_pulp_repo_epel_modular_version }}"
-    repository: Extra Packages for Enterprise Linux Modular 8 - x86_64
+  - name: "extra-packages-for-enterprise-linux-modular-8-x86_64-{{ test_pulp_repo_epel_modular_version }}-ark"
+    repository: Extra Packages for Enterprise Linux Modular 8 - x86_64 (ark)
     base_path: "epel/8/Modular/x86_64/{{ test_pulp_repo_epel_modular_version }}"
     state: present
     short_name: epel_modular
 
   # Third-party repositories
-  - name: "docker-ce-for-centos-8-{{ test_pulp_repo_docker_version }}"
-    repository: Docker CE for CentOS 8
+  - name: "docker-ce-for-centos-8-{{ test_pulp_repo_docker_version }}-ark"
+    repository: Docker CE for CentOS 8 (ark)
     base_path: "docker-ce/centos/8/x86_64/stable/{{ test_pulp_repo_docker_version }}"
     state: present
     short_name: docker
-  - name: "elasticsearch-logstash-kibana-7.x-{{ test_pulp_repo_elasticsearch_logstash_kibana_7_x_version }}"
-    repository: ELK repository for 7.x packages
+  - name: "elasticsearch-logstash-kibana-7.x-{{ test_pulp_repo_elasticsearch_logstash_kibana_7_x_version }}-ark"
+    repository: ELK repository for 7.x packages (ark)
     base_path: "elasticsearch/oss-7.x/{{ test_pulp_repo_elasticsearch_logstash_kibana_7_x_version }}"
     state: present
     short_name: elasticsearch_logstash_kibana_7_x
-  - name: "grafana-{{ test_pulp_repo_grafana_version }}"
-    repository: Grafana
+  - name: "grafana-{{ test_pulp_repo_grafana_version }}-ark"
+    repository: Grafana (ark)
     base_path: "grafana/oss/rpm/{{ test_pulp_repo_grafana_version }}"
     state: present
     short_name: grafana
-  - name: "rabbitmq-erlang-{{ test_pulp_repo_rabbitmq_erlang_version }}"
-    repository: RabbitMQ - Erlang
+  - name: "rabbitmq-erlang-{{ test_pulp_repo_rabbitmq_erlang_version }}-ark"
+    repository: RabbitMQ - Erlang (ark)
     base_path: "rabbitmq/erlang/el/8/x86_64/{{ test_pulp_repo_rabbitmq_erlang_version }}"
     state: present
     short_name: rabbitmq_erlang
-  - name: "rabbitmq-server-{{ test_pulp_repo_rabbitmq_server_version }}"
-    repository: RabbitMQ - Server
+  - name: "rabbitmq-server-{{ test_pulp_repo_rabbitmq_server_version }}-ark"
+    repository: RabbitMQ - Server (ark)
     base_path: "rabbitmq/rabbitmq-server/el/8/x86_64/{{ test_pulp_repo_rabbitmq_server_version }}"
     state: present
     short_name: rabbitmq_server
-  - name: "treasuredata-4-{{ test_pulp_repo_treasuredata_4_version }}"
-    repository: TreasureData 4
+  - name: "treasuredata-4-{{ test_pulp_repo_treasuredata_4_version }}-ark"
+    repository: TreasureData 4 (ark)
     base_path: "treasuredata/4/redhat/8/x86_64/{{ test_pulp_repo_treasuredata_4_version }}"
     state: present
     short_name: treasuredata_4

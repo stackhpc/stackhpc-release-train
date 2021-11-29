@@ -9,6 +9,19 @@
   hosts: localhost
   gather_facts: true
   tasks:
+    - name: Install keys for test repositories
+      become: true
+      rpm_key:
+        key: "{{ item }}"
+      loop:
+        - https://www.centos.org/keys/RPM-GPG-KEY-CentOS-SIG-Cloud
+        - https://www.centos.org/keys/RPM-GPG-KEY-CentOS-SIG-NFV
+        - https://www.centos.org/keys/RPM-GPG-KEY-CentOS-SIG-OpsTools
+        - https://www.centos.org/keys/RPM-GPG-KEY-CentOS-SIG-Storage
+        - https://www.centos.org/keys/RPM-GPG-KEY-CentOS-SIG-Virtualization
+      when:
+        - ansible_facts.os_family == 'RedHat'
+
     - name: Install test repositories
       become: true
       yum_repository:
