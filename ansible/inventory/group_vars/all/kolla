@@ -1,6 +1,10 @@
 ---
 # List of names of supported Kolla container images.
 kolla_container_images:
+  - barbican-api
+  - barbican-base
+  - barbican-keystone-listener
+  - barbican-worker
   - base
   - bifrost-base
   - bifrost-deploy
@@ -52,6 +56,11 @@ kolla_container_images:
   - magnum-api
   - magnum-base
   - magnum-conductor
+  - manila-api
+  - manila-base
+  - manila-data
+  - manila-scheduler
+  - manila-share
   - mariadb-base
   - mariadb-clustercheck
   - mariadb-server
