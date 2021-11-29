@@ -1,0 +1,17 @@
+---
+# Repositories in the stackhpc-dev namespace are container push repositories,
+# and are therefore automatically published following a push. This playbook
+# configures the associated distributions, in particular setting the private
+# flag and applying a content guard.
+
+- name: Configure development Pulp container distributions
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - import_role:
+        name: stackhpc.pulp.pulp_distribution
+      vars:
+        pulp_url: "{{ dev_pulp_url }}"
+        pulp_username: "{{ dev_pulp_username }}"
+        pulp_password: "{{ dev_pulp_password }}"
+        pulp_distribution_container: "{{ dev_pulp_distribution_container_development }}"
