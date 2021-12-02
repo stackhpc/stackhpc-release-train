@@ -1,0 +1,30 @@
+---
+name: Ansible Lint
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  ansible-lint:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install Ansible collections
+      run: |
+        ansible-galaxy collection install -r requirements.yml
+
+    - name: Install ansible-lint
+      run: |
+        pip install ansible-core==2.12.* ansible-lint==5.3.*
+
+    - name: Lint Ansible playbooks
+      run: |
+        ansible-lint -v --force-color ansible/*.yml
+      env:
+        ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
