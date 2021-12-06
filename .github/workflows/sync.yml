@@ -1,0 +1,56 @@
+---
+name: Sync repositories
+on:
+  workflow_dispatch:
+  schedule:
+    # Daily at 02:17
+    - cron: '17 2 * * *'
+
+env:
+  ANSIBLE_FORCE_COLOR: True
+  ANSIBLE_VAULT_PASSWORD_FILE: ${{ github.workspace }}/vault-pass
+jobs:
+  repo-sync:
+    runs-on: [self-hosted, stackhpc-release-train]
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Preparing Vault password file
+      run: |
+        echo "$ANSIBLE_VAULT_PASSWORD" > "$ANSIBLE_VAULT_PASSWORD_FILE"
+      env:
+        ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+
+    - name: Installing dependencies
+      run: |
+        sudo apt update &&
+        sudo apt install -y python3-venv &&
+        python3 -m venv venv &&
+        source venv/bin/activate &&
+        pip install -U pip && 
+        pip install -r requirements.txt &&
+        ansible-galaxy collection install -r requirements.yml -p ansible/collections
+
+    - name: Sync and publish package repositories in Ark
+      run: |
+        source venv/bin/activate &&
+        ansible-playbook -i ansible/inventory \
+        ansible/dev-pulp-repo-sync.yml \
+        ansible/dev-pulp-repo-publish.yml
+
+    # We are updating the versions here, to ensure we can sync them to test.
+    # The new versions aren't be committed to this repository at this point.
+    - name: Update test repository versions
+      run: |
+        source venv/bin/activate &&
+        ansible-playbook -i ansible/inventory \
+        ansible/test-pulp-repo-version-update.yml
+
+    # This needs to be a separate step to ensure that we use the new versions
+    # in group_vars.
+    - name: Sync and publish package repositories in test
+      run: |
+        source venv/bin/activate &&
+        ansible-playbook -i ansible/inventory \
+        ansible/test-pulp-repo-sync.yml \
+        ansible/test-pulp-repo-publish.yml
