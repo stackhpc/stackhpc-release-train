@@ -38,7 +38,7 @@
       become: true
       package:
         name: "*"
-        state: latest
+        state: latest  # noqa package-latest
 
     - name: Run DNF distro-sync
       become: true
