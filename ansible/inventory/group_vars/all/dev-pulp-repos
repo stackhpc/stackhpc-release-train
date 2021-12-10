@@ -23,12 +23,11 @@ dev_pulp_repository_rpm_repos:
     policy: immediate
     sync_policy: mirror_complete
     state: present
-  # Note(piotrp): Assuming we'd need this in the future
   - name: CentOS Stream 8 - Ceph Pacific
     url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=storage-ceph-pacific
     policy: immediate
     sync_policy: mirror_complete
-    state: absent
+    state: present
   - name: CentOS Stream 8 - NFV OpenvSwitch
     url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=nfv-openvswitch-2
     policy: immediate
@@ -137,6 +136,7 @@ dev_pulp_repo_centos_stream_8_extras_version: "{{ test_pulp_repo_centos_stream_8
 dev_pulp_repo_centos_stream_8_nfv_openvswitch_version: "{{ test_pulp_repo_centos_stream_8_nfv_openvswitch_version if dev_pulp_distribution_promote | bool else dev_pulp_distribution_version }}"
 dev_pulp_repo_centos_stream_8_openstack_wallaby_version: "{{ test_pulp_repo_centos_stream_8_openstack_wallaby_version if dev_pulp_distribution_promote | bool else dev_pulp_distribution_version }}"
 dev_pulp_repo_centos_stream_8_powertools_version: "{{ test_pulp_repo_centos_stream_8_powertools_version if dev_pulp_distribution_promote | bool else dev_pulp_distribution_version }}"
+dev_pulp_repo_centos_stream_8_storage_ceph_pacific_version: "{{ test_pulp_repo_centos_stream_8_storage_ceph_pacific_version if dev_pulp_distribution_promote | bool else dev_pulp_distribution_version }}"
 dev_pulp_repo_docker_version: "{{ test_pulp_repo_docker_version if dev_pulp_distribution_promote | bool else dev_pulp_distribution_version }}"
 dev_pulp_repo_elasticsearch_logstash_kibana_7_x_version: "{{ test_pulp_repo_elasticsearch_logstash_kibana_7_x_version if dev_pulp_distribution_promote | bool else dev_pulp_distribution_version }}"
 dev_pulp_repo_epel_modular_version: "{{ test_pulp_repo_epel_modular_version if dev_pulp_distribution_promote | bool else dev_pulp_distribution_version }}"
@@ -177,13 +177,12 @@ dev_pulp_distribution_rpm:
     content_guard: "{{ dev_pulp_distribution_content_guard }}"
     state: present
     short_name: centos_stream_8_advanced_virtualization
-  # Note(piotrp): Assuming we'd need this in the future
-  # - name: "centos-stream-8-storage-ceph-pacific-{{ dev_pulp_repo_centos_8_storage_ceph_pacific_version }}"
-  #   repository: CentOS Stream 8 - Ceph Pacific
-  #   base_path: "centos/8-stream/storage/x86_64/ceph-pacific/{{ dev_pulp_repo_centos_8_storage_ceph_pacific_version }}"
-  #   content_guard: "{{ dev_pulp_distribution_content_guard }}"
-  #   state: present
-  #   short_name: centos_stream_8_storage_ceph_pacific
+  - name: "centos-stream-8-storage-ceph-pacific-{{ dev_pulp_repo_centos_stream_8_storage_ceph_pacific_version }}"
+    repository: CentOS Stream 8 - Ceph Pacific
+    base_path: "centos/8-stream/storage/x86_64/ceph-pacific/{{ dev_pulp_repo_centos_stream_8_storage_ceph_pacific_version }}"
+    content_guard: "{{ dev_pulp_distribution_content_guard }}"
+    state: present
+    short_name: centos_stream_8_storage_ceph_pacific
   - name: "centos-stream-8-nfv-openvswitch-{{ dev_pulp_repo_centos_stream_8_nfv_openvswitch_version }}"
     repository: CentOS Stream 8 - NFV OpenvSwitch
     base_path: "centos/8-stream/nfv/x86_64/openvswitch-2/{{ dev_pulp_repo_centos_stream_8_nfv_openvswitch_version }}"
