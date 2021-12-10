@@ -3,7 +3,7 @@
 dev_release_pulp_registry_url: "{{ dev_pulp_url }}"
 
 # Name of a tag to promote to a release.
-dev_pulp_repository_container_promotion_tag: wallaby-20211207T102718
+dev_pulp_repository_container_promotion_tag: wallaby-20211210T140839
 
 # Common parameters for release image repositories.
 dev_pulp_repository_container_repo_release_common:
