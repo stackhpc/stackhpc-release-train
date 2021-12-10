@@ -40,14 +40,13 @@ test_pulp_repository_rpm_repos:
     policy: on_demand
     sync_policy: mirror_complete
     state: present
-  # Note(piotrp): Assuming we'd need this in the future
-  # - name: CentOS Stream 8 - Ceph Pacific (ark)
-  #   url: "{{ test_dev_pulp_content_url }}/centos/8-stream/storage/x86_64/ceph-pacific/{{ test_pulp_repo_centos_stream_8_storage_ceph_pacific_version }}"
-  #   client_cert: "{{ test_client_cert }}"
-  #   client_key: "{{ test_client_key }}"
-  #   policy: on_demand
-  #   sync_policy: mirror_complete
-  #   state: present
+  - name: CentOS Stream 8 - Ceph Pacific (ark)
+    url: "{{ test_dev_pulp_content_url }}/centos/8-stream/storage/x86_64/ceph-pacific/{{ test_pulp_repo_centos_stream_8_storage_ceph_pacific_version }}"
+    client_cert: "{{ test_client_cert }}"
+    client_key: "{{ test_client_key }}"
+    policy: on_demand
+    sync_policy: mirror_complete
+    state: present
   - name: CentOS Stream 8 - NFV OpenvSwitch (ark)
     url: "{{ test_dev_pulp_content_url }}/centos/8-stream/nfv/x86_64/openvswitch-2/{{ test_pulp_repo_centos_stream_8_nfv_openvswitch_version }}"
     client_cert: "{{ test_client_cert }}"
@@ -182,12 +181,11 @@ test_pulp_distribution_rpm:
     base_path: "centos/8-stream/virt/x86_64/advancedvirt-common/{{ test_pulp_repo_centos_stream_8_advanced_virtualization_version }}"
     state: present
     short_name: centos_stream_8_advanced_virtualization
-  # Note(piotrp): Assuming we'd need this in the future
-  # - name: "centos-stream-8-storage-ceph-pacific-{{ test_pulp_repo_centos_stream_8_storage_ceph_pacific_version }}-ark"
-  #   repository: CentOS Stream 8 - Ceph Pacific (ark)
-  #   base_path: "centos/8-stream/storage/x86_64/ceph-pacific/{{ test_pulp_repo_centos_stream_8_storage_ceph_pacific_version }}"
-  #   state: present
-  #   short_name: centos_stream_8_storage_ceph_pacific
+  - name: "centos-stream-8-storage-ceph-pacific-{{ test_pulp_repo_centos_stream_8_storage_ceph_pacific_version }}-ark"
+    repository: CentOS Stream 8 - Ceph Pacific (ark)
+    base_path: "centos/8-stream/storage/x86_64/ceph-pacific/{{ test_pulp_repo_centos_stream_8_storage_ceph_pacific_version }}"
+    state: present
+    short_name: centos_stream_8_storage_ceph_pacific
   - name: "centos-stream-8-nfv-openvswitch-{{ test_pulp_repo_centos_stream_8_nfv_openvswitch_version }}-ark"
     repository: CentOS Stream 8 - NFV OpenvSwitch (ark)
     base_path: "centos/8-stream/nfv/x86_64/openvswitch-2/{{ test_pulp_repo_centos_stream_8_nfv_openvswitch_version }}"
