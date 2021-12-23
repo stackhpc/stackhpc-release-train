@@ -2,6 +2,27 @@
 
 StackHPC release automation
 
+## Background
+
+This codebase includes playbooks for managing content in Pulp servers for the
+StackHPC release train.
+
+There are two Pulp servers involved:
+
+* https://ark.stackhpc.com is a public-facing service hosted on Leafcloud. This
+  provides content to StackHPC clients. It will be referred to as `ark` here.
+* http://pulp-server.internal.sms-cloud is an internal service running on SMS
+  lab.  This is used to provide a local content mirror for testing. It will be
+  referred to as `test` here.
+
+In general, new content is first synced or pushed to `ark`, then synced to
+`test`. By default, new content is not accessible to clients on `ark`. Content
+must be promoted in order to become accessible to clients.
+
+Access to package repositories is controlled via x509 cert guards, while access
+to container images is controlled via token authentication which uses Django
+users in the backend.
+
 ## Installation
 
 ```
@@ -14,32 +35,11 @@ ansible-galaxy collection install -r requirements.yml -p ansible/collections
 
 ## Prerequisites
 
-A Pulp server should be running.
+These playbooks may interact with the public Pulp server, ark.stackhpc.com, as
+well as a private one running on SMS lab, pulp-server.internal.sms-cloud.
 
-The following procedure can be used to spin up a [Pulp in
-one](https://pulpproject.org/pulp-in-one-container/) container.
-
-```
-sudo dnf -y install git vim tmux
-sudo dnf -y install podman
-mkdir settings pulp_storage pgsql containers
-echo "CONTENT_ORIGIN='http://$(hostname):8080'
-ANSIBLE_API_HOSTNAME='http://$(hostname):8080'
-ANSIBLE_CONTENT_HOSTNAME='http://$(hostname):8080/pulp/content'
-TOKEN_AUTH_DISABLED=True
-# RabbitMQ repositories on packagecloud.io only provide sha1 hashes, which are
-# not allowed by Pulp by default.
-ALLOWED_CONTENT_CHECKSUMS = ['sha1', 'sha224', 'sha256', 'sha384', 'sha512']" >> settings/settings.py
-podman run --detach              --publish 8080:80              --name pulp              --volume "$(pwd)/settings":/etc/pulp              --volume "$(pwd)/pulp_storage":/var/lib/pulp              --volume "$(pwd)/pgsql":/var/lib/pgsql              --volume "$(pwd)/containers":/var/lib/containers              --shm-size=1024m              pulp/pulp:latest
-```
-
-Then set an admin password:
-
-```
-podman exec -it pulp bash -c 'pulpcore-manager reset-admin-password'
-```
-
-Install a client:
+You may wish to install a Pulp CLI for interactive use, although this is not
+required to run the playbooks:
 
 ```
 sudo dnf -y install python3-pip
@@ -51,47 +51,44 @@ pulp status
 ## Usage
 
 Set the Ansible Vault password:
+
 ```
 export ANSIBLE_VAULT_PASSWORD_FILE=/path/to/vault/password
 ```
 
-### Development
+Playbooks may then be run as follows:
 
-Sync upstream repos on the development Pulp server.
 ```
-ansible-playbook -i ansible/inventory ansible/dev-pulp-repo-sync.yml
-```
-
-Publish repository versions & create distributions on the development Pulp
-server.
-```
-ansible-playbook -i ansible/inventory ansible/dev-pulp-repo-publish.yml
+ansible-playbook -i ansible/inventory ansible/<playbook>
 ```
 
-List distributions on the development Pulp server.
-```
-ansible-playbook -i ansible/inventory ansible/dev-pulp-distribution-list.yml
-```
+## Workflows
 
-### Release
+### Package repositories
 
-Sync upstream repos on the release Pulp server.
-```
-ansible-playbook -i ansible/inventory ansible/release-pulp-repo-sync.yml
-```
+The following workflow shows how updates to package repositories flow between
+the Pulp services.
 
-Publish repository versions & create distributions on the release Pulp server.
-```
-ansible-playbook -i ansible/inventory ansible/release-pulp-repo-publish.yml
-```
+* `dev-pulp-repo-sync.yml`: Synchronise `ark` with upstream package repositories.
+* `dev-pulp-repo-publish.yml`: Create development distributions on `ark` for any new package repository snapshots.
+* `test-pulp-repo-version-update.yml`: Query `ark` for the latest distribution versions and update the version variables (`ansible/inventory/group_vars/all/test-pulp-repo-versions`). These changes should be committed to this repository.
+* `test-pulp-repo-sync.yml`: Synchronise `test` with `ark`'s package repositories using `ark` version variables.
+* `test-pulp-repo-publish.yml`: Create distributions on `test` for any new package repository snapshots.
+* `test-repo-test.yml`: Test installing and using package repositories on `test`.
+* `dev-pulp-repo-promote.yml`: Promote the set of `ark` distributions defined in version variables to releases.
 
-List distributions on the release Pulp server.
-```
-ansible-playbook -i ansible/inventory ansible/release-pulp-distribution-list.yml
-```
+### Container images
 
-Update repository version configuration for release repos based on latest
-versions in the development Pulp server.
-```
-ansible-playbook -i ansible/inventory ansible/release-pulp-repo-version-update.yml
-```
+The following workflow shows how updates to container image repositories flow
+between the Pulp services. Container images are first built via `kolla-build`,
+then pushed to `ark` under the `stackhpc-dev` namespace.
+
+* `dev-pulp-container-publish.yml`: Configure access control for development container distributions on `ark`.
+* `test-pulp-container-sync.yml`: Synchronise `test` with container images from `stackhpc-dev` namespace on `ark`.
+* `test-pulp-container-publish.yml`: Create distributions on `test` Pulp server for any new container images.
+* `dev-pulp-container-promote.yml`: Promote a set of container images from `stackhpc-dev` to `stackhpc` namespace. The tag to be promoted is defined via `dev_pulp_repository_container_promotion_tag` in `ansible/inventory/group_vars/all/dev-pulp-containers`.
+
+### Other playbooks
+
+* `dev-pulp-distribution-list.yml`: List available distributions in `ark`.
+* `test-pulp-distribution-list.yml`: List available distributions in `test`.

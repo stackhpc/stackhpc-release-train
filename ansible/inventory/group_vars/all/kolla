@@ -1,10 +1,21 @@
 ---
-# URL of the release Pulp service's container image registry.
-client_release_pulp_registry_url: "{{ release_pulp_url }}"
-
-# List of all image names.
-client_pulp_images:
+# List of names of supported Kolla container images.
+kolla_container_images:
+  - barbican-api
+  - barbican-base
+  - barbican-keystone-listener
+  - barbican-worker
   - base
+  - bifrost-base
+  - bifrost-deploy
+  - cinder-api
+  - cinder-backup
+  - cinder-base
+  - cinder-scheduler
+  - cinder-volume
+  - cloudkitty-api
+  - cloudkitty-base
+  - cloudkitty-processor
   - cron
   - designate-api
   - designate-backend-bind9
@@ -14,6 +25,7 @@ client_pulp_images:
   - designate-producer
   - designate-sink
   - designate-worker
+  - dnsmasq
   - elasticsearch
   - elasticsearch-curator
   - fluentd
@@ -26,34 +38,48 @@ client_pulp_images:
   - heat-base
   - heat-engine
   - horizon
+  - influxdb
   - ironic-api
   - ironic-base
   - ironic-conductor
+  - ironic-inspector
+  - ironic-neutron-agent
   - ironic-pxe
+  - iscsid
   - keepalived
   - keystone
   - keystone-base
   - keystone-fernet
   - keystone-ssh
+  - kibana
   - kolla-toolbox
   - magnum-api
   - magnum-base
   - magnum-conductor
+  - manila-api
+  - manila-base
+  - manila-data
+  - manila-scheduler
+  - manila-share
   - mariadb-base
   - mariadb-clustercheck
   - mariadb-server
   - memcached
+  - neutron-base
   - neutron-dhcp-agent
   - neutron-l3-agent
   - neutron-metadata-agent
   - neutron-openvswitch-agent
   - neutron-server
   - nova-api
+  - nova-base
   - nova-compute
+  - nova-compute-ironic
   - nova-conductor
   - nova-libvirt
   - nova-novncproxy
   - nova-scheduler
+  - nova-serialproxy
   - nova-ssh
   - octavia-api
   - octavia-base
@@ -79,34 +105,15 @@ client_pulp_images:
   - prometheus-cadvisor
   - prometheus-elasticsearch-exporter
   - prometheus-haproxy-exporter
-  - prometheus-libvirt-exporter
+  #- prometheus-libvirt-exporter
   - prometheus-memcached-exporter
   - prometheus-mtail
   - prometheus-mysqld-exporter
   - prometheus-node-exporter
   - prometheus-openstack-exporter
+  - prometheus-server
   - prometheus-v2-server
   - rabbitmq
   - redis
   - redis-base
   - redis-sentinel
-
-# List of container image repositories.
-client_pulp_repository_container_repos: >-
-  {%- set repos = [] -%}
-  {%- for image in client_pulp_images -%}
-  {%- set image_repo = "kolla/centos-source-" ~ image -%}
-  {%- set repo = {"name": image_repo, "url": client_release_pulp_registry_url, "policy": "on_demand", "state": "present"} -%}
-  {%- set _ = repos.append(repo) -%}
-  {%- endfor -%}
-  {{ repos }}
-
-# List of container image distributions.
-client_pulp_distribution_container: >-
-  {%- set distributions = [] -%}
-  {%- for image in client_pulp_images -%}
-  {%- set image_repo = "kolla/centos-source-" ~ image -%}
-  {%- set distribution = {"name": image_repo, "repository": image_repo, "base_path": image_repo, "state": "present"} -%}
-  {%- set _ = distributions.append(distribution) -%}
-  {%- endfor -%}
-  {{ distributions }}

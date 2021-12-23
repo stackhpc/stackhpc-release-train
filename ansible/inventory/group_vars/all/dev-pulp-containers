@@ -1,0 +1,57 @@
+---
+# URL of the release Pulp service's container image registry.
+dev_release_pulp_registry_url: "{{ dev_pulp_url }}"
+
+# Name of a tag to promote to a release.
+dev_pulp_repository_container_promotion_tag: wallaby-20211210T140839
+
+# Common parameters for release image repositories.
+dev_pulp_repository_container_repo_release_common:
+  url: "{{ dev_release_pulp_registry_url }}"
+  include_tags:
+    - "{{ dev_pulp_repository_container_promotion_tag }}"
+  policy: on_demand
+  remote_username: "{{ dev_pulp_username }}"
+  remote_password: "{{ dev_pulp_password }}"
+  state: present
+
+# List of release container image repositories.
+dev_pulp_repository_container_repos_release: >-
+  {%- set repos = [] -%}
+  {%- for image in kolla_container_images -%}
+  {%- set image_repo = "stackhpc/centos-source-" ~ image -%}
+  {%- set upstream_repo = "stackhpc-dev/centos-source-" ~ image -%}
+  {%- set repo = {"name": image_repo, "upstream_name": upstream_repo} -%}
+  {%- set _ = repos.append(dev_pulp_repository_container_repo_release_common | combine(repo)) -%}
+  {%- endfor -%}
+  {{ repos }}
+
+# Common parameters for development image distributions.
+dev_pulp_distribution_container_development_common:
+  private: true
+  state: present
+
+# List of development container image distributions.
+dev_pulp_distribution_container_development: >-
+  {%- set distributions = [] -%}
+  {%- for image in kolla_container_images -%}
+  {%- set image_repo = "stackhpc-dev/centos-source-" ~ image -%}
+  {%- set distribution = {"name": image_repo, "base_path": image_repo} -%}
+  {%- set _ = distributions.append(dev_pulp_distribution_container_development_common | combine(distribution)) -%}
+  {%- endfor -%}
+  {{ distributions }}
+
+# Common parameters for release image distributions.
+dev_pulp_distribution_container_release_common:
+  private: true
+  state: present
+
+# List of release container image distributions.
+dev_pulp_distribution_container_release: >-
+  {%- set distributions = [] -%}
+  {%- for image in kolla_container_images -%}
+  {%- set image_repo = "stackhpc/centos-source-" ~ image -%}
+  {%- set distribution = {"name": image_repo, "repository": image_repo, "base_path": image_repo} -%}
+  {%- set _ = distributions.append(dev_pulp_distribution_container_release_common | combine(distribution)) -%}
+  {%- endfor -%}
+  {{ distributions }}

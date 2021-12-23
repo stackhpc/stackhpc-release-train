@@ -1,0 +1,19 @@
+---
+- name: Publish test Pulp repositories
+  hosts: localhost
+  gather_facts: True
+  vars:
+    pulp_url: "{{ test_pulp_url }}"
+    pulp_username: "{{ test_pulp_username }}"
+    pulp_password: "{{ test_pulp_password }}"
+  tasks:
+    - import_role:
+        name: stackhpc.pulp.pulp_publication
+      vars:
+        pulp_publication_rpm: "{{ test_pulp_publication_rpm }}"
+
+    - import_role:
+        name: stackhpc.pulp.pulp_distribution
+      vars:
+        pulp_distribution_rpm: "{{ test_pulp_distribution_rpm }}"
+        pulp_distribution_rpm_skip_existing: "{{ test_pulp_distribution_rpm_skip_existing }}"

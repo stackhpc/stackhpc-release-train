@@ -1,0 +1,20 @@
+---
+# Promote a set of development repositories to releases.
+#
+# The distribution versions promoted are those defined in
+# ansible/inventory/group_vars/all/test-pulp-repo-versions.
+# The content guard for those distributions will be updated from 'development'
+# to 'release'.
+
+- name: Promote dev Pulp distributions
+  hosts: localhost
+  gather_facts: true
+  tasks:
+    - import_role:
+        name: stackhpc.pulp.pulp_distribution
+      vars:
+        pulp_url: "{{ dev_pulp_url }}"
+        pulp_username: "{{ dev_pulp_username }}"
+        pulp_password: "{{ dev_pulp_password }}"
+        pulp_distribution_rpm: "{{ dev_pulp_distribution_rpm }}"
+        dev_pulp_distribution_promote: true

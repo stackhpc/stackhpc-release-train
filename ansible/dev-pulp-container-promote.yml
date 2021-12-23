@@ -1,0 +1,25 @@
+---
+# This playbook promotes images in the development namespace (stackhpc-dev) to
+# the release namespace (stackhpc). This makes them available to clients.
+# Images with a tag defined by dev_pulp_repository_container_promotion_tag are
+# promoted.
+
+- name: Promote dev Pulp containers
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - import_role:
+        name: stackhpc.pulp.pulp_repository
+      vars:
+        pulp_url: "{{ dev_pulp_url }}"
+        pulp_username: "{{ dev_pulp_username }}"
+        pulp_password: "{{ dev_pulp_password }}"
+        pulp_repository_container_repos: "{{ dev_pulp_repository_container_repos_release }}"
+
+    - import_role:
+        name: stackhpc.pulp.pulp_distribution
+      vars:
+        pulp_url: "{{ dev_pulp_url }}"
+        pulp_username: "{{ dev_pulp_username }}"
+        pulp_password: "{{ dev_pulp_password }}"
+        pulp_distribution_container: "{{ dev_pulp_distribution_container_release }}"
