@@ -43,6 +43,25 @@ dev_pulp_repository_rpm_repos:
     policy: immediate
     sync_policy: mirror_complete
     state: present
+
+  # Base CentOS 8 Linux repositories
+  - name: CentOS Linux 8 - AppStream
+    url: http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=AppStream&infra=genclo
+    policy: immediate
+    sync_policy: mirror_complete
+    state: present
+  - name: CentOS Linux 8 - BaseOS
+    url: http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=BaseOS&infra=genclo
+    policy: immediate
+    sync_policy: mirror_complete
+    state: present
+  - name: CentOS Linux 8 - Extras
+    url: http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=extras&infra=genclo
+    policy: immediate
+    sync_policy: mirror_complete
+    state: present
+
+  # Additional CentOS 8 Linux repositories (used by Stream builds)
   - name: CentOS 8 - Ceph Nautilus
     url: http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=storage-ceph-nautilus
     policy: immediate
@@ -56,6 +75,33 @@ dev_pulp_repository_rpm_repos:
     state: absent
   - name: CentOS 8 - OpsTools - collectd
     url: http://mirrorlist.centos.org/?arch=x86_64&release=8&repo=opstools-collectd-5
+    policy: immediate
+    sync_policy: mirror_complete
+    state: present
+
+  # Additional CentOS 8 Linux repositories (not used by Stream builds)
+  - name: CentOS-8 - Advanced Virtualization
+    url: http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=virt-advanced-virtualization
+    policy: immediate
+    sync_policy: mirror_complete
+    state: present
+  - name: CentOS-8 - NFV OpenvSwitch
+    url: http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=nfv-openvswitch-2
+    policy: immediate
+    sync_policy: mirror_complete
+    state: present
+  - name: CentOS-8 - OpenStack Ussuri
+    url: http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=cloud-openstack-ussuri
+    policy: immediate
+    sync_policy: mirror_complete
+    state: present
+  - name: CentOS-8 - OpenStack Victoria
+    url: http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=cloud-openstack-victoria
+    policy: immediate
+    sync_policy: mirror_complete
+    state: present
+  - name: CentOS Linux 8 - PowerTools
+    url: http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=PowerTools&infra=genclo
     policy: immediate
     sync_policy: mirror_complete
     state: present
