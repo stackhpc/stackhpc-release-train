@@ -77,6 +77,7 @@ the Pulp services.
 * `test-pulp-repo-publish.yml`: Create distributions on `test` for any new package repository snapshots.
 * `test-repo-test.yml`: Test installing and using package repositories on `test`.
 * `dev-pulp-repo-promote.yml`: Promote the set of `ark` distributions defined in version variables to releases.
+* `dev-pulp-content-guards.yml`: Create certguard content-guards using CA certificates stored in Hashicorp Vault (https://vault.stackhpc.com)
 
 ### Container images
 

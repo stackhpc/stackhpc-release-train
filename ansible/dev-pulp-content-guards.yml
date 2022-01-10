@@ -1,0 +1,82 @@
+---
+- name: Retrieve contentguard CA certificates from Hashicorp Vault
+  hosts: localhost
+  gather_facts: true
+  tasks:
+    - name: Get contentguard CA certificates from Vault
+      hashivault_pki_cert_get:
+        mount_point: "{{ contentguard_mount_prefix }}/{{ item.name }}"
+        # ca_chain is special case of serial, it returns
+        # the CA cert chain for a pki mountpoint and saves
+        # iterating through all of the serials to find
+        # the CN that you want.
+        serial: ca_chain
+      register: ca_cert_chain
+      loop: "{{ dev_pulp_content_guard_x509_cert_guards }}"
+      loop_control:
+        label: "{{ item.name }}"
+      environment: "{{ vault_environment }}"
+
+    - name: Get contentguard CA certificate information
+      community.crypto.x509_certificate_info:
+        content: "{{ certificate.data.certificate }}"
+        valid_at:
+          one_year: "+52w"
+      loop: "{{ ca_cert_chain.results }}"
+      register: certificate_contents
+      loop_control:
+        loop_var: certificate
+        label: "{{ certificate.item.name }}"
+      when: certificate.data.certificate is defined
+
+    - name: Set a fact with contentguard certificate expiry
+      set_fact:
+        contentguard_certificates: >-
+          {{ certificate_contents |
+             json_query(
+                 'results[*].{
+                 name: certificate.item.name,
+                 ca_certificate: certificate.data.certificate,
+                 vault_mount_point: certificate.invocation.module_args.mount_point,
+                 valid_at_one_year: valid_at.one_year
+                 }'
+             )
+           }}
+
+    - name: Add contentguard certificate strings to dev_pulp_content_guard_x509_cert_guards
+      set_fact:
+        configured_contentguards: >-
+          {{ configured_contentguards | default([]) +
+             [
+               item | combine(contentguard_certificates | selectattr('name', 'equalto', item.name))
+             ]
+          }}
+      loop: "{{ dev_pulp_content_guard_x509_cert_guards }}"
+      loop_control:
+        label: "{{ item.name }}"
+
+    - name: Fail when an enabled contentguard doesn't have a valid certificate
+      fail:
+        msg: >- 
+          Cannot obtain a contentguard CA certificate for {{ item.name }}
+          from {{ vault_environment.VAULT_ADDR }}. 
+          Either it does not exist or it is valid for fewer than 52w.
+      loop: "{{ configured_contentguards }}"
+      loop_control:
+        label: "{{ item.name }}"
+      when:
+        - item.state == "present"
+        # item.ca_certificate is null (from jmespath) if the certificate doesnt exist
+        # and the cert string itself if it does.
+        # item.valid_at_one_year is null (from jmespath) if the certificate doesnt
+        # exist, false if it is valid for <52w, true if it exists and is valid >52w.
+        - item.ca_certificate is not string or item.valid_at_one_year is not true
+
+    - name: Run stackhpc.pulp.pulp_content_guard role
+      import_role:
+        name: stackhpc.pulp.pulp_content_guard
+      vars:
+        pulp_url: "{{ dev_pulp_url }}"
+        pulp_username: "{{ dev_pulp_username }}"
+        pulp_password: "{{ dev_pulp_password }}"
+        pulp_content_guard_x509_cert_guards: "{{ configured_contentguards }}"
