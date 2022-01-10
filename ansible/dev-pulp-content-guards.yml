@@ -22,7 +22,6 @@
         content: "{{ certificate.data.certificate }}"
         valid_at:
           one_year: "+52w"
-      delegate_to: localhost
       loop: "{{ ca_cert_chain.results }}"
       register: certificate_contents
       loop_control:
