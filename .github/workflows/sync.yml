@@ -36,6 +36,7 @@ jobs:
         source venv/bin/activate &&
         ansible-playbook -i ansible/inventory \
         ansible/dev-pulp-repo-sync.yml \
+        ansible/dev-pulp-repo-publication-cleanup.yml \
         ansible/dev-pulp-repo-publish.yml
 
     # We are updating the versions here, to ensure we can sync them to test.
