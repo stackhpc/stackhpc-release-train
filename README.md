@@ -70,6 +70,7 @@ The following workflow shows how updates to package repositories flow between
 the Pulp services.
 
 * `dev-pulp-repo-sync.yml`: Synchronise `ark` with upstream package repositories.
+* `dev-pulp-repo-publication-cleanup.yml`: Work around an issue with Pulp syncing where multiple publications may exist for a single repository version, breaking the Ansible Squeezer `rpm_publication` module.
 * `dev-pulp-repo-publish.yml`: Create development distributions on `ark` for any new package repository snapshots.
 * `test-pulp-repo-version-update.yml`: Query `ark` for the latest distribution versions and update the version variables (`ansible/inventory/group_vars/all/test-pulp-repo-versions`). These changes should be committed to this repository.
 * `test-pulp-repo-sync.yml`: Synchronise `test` with `ark`'s package repositories using `ark` version variables.
