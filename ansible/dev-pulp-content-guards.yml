@@ -2,7 +2,6 @@
 - name: Retrieve contentguard CA certificates from Hashicorp Vault
   hosts: localhost
   gather_facts: true
-  environment: "{{ vault_environment }}"
   tasks:
     - name: Get contentguard CA certificates from Vault
       hashivault_pki_cert_get:
@@ -16,6 +15,7 @@
       loop: "{{ dev_pulp_content_guard_x509_cert_guards }}"
       loop_control:
         label: "{{ item.name }}"
+      environment: "{{ vault_environment }}"
 
     - name: Get contentguard CA certificate information
       community.crypto.x509_certificate_info:
