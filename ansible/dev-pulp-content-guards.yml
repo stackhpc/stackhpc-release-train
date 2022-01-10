@@ -28,7 +28,7 @@
         loop_var: certificate
         label: "{{ certificate.item.name }}"
       when: certificate.data.certificate is defined
- 
+
     - name: Set a fact with contentguard certificate expiry
       set_fact:
         contentguard_certificates: >-
@@ -58,15 +58,19 @@
     - name: Fail when an enabled contentguard doesn't have a valid certificate
       fail:
         msg: >- 
-          Cannot obtain a contentguard CA certificate for {{ item.name }} 
+          Cannot obtain a contentguard CA certificate for {{ item.name }}
           from {{ vault_environment.VAULT_ADDR }}. 
           Either it does not exist or it is valid for fewer than 52w.
       loop: "{{ configured_contentguards }}"
       loop_control:
         label: "{{ item.name }}"
       when:
-        - item.state == "present" and item.ca_certificate is not true
-        - item.state == "present" and item.valid_at_one_year is not true
+        - item.state == "present"
+        # item.ca_certificate is null (from jmespath) if the certificate doesnt exist
+        # and the cert string itself if it does.
+        # item.valid_at_one_year is null (from jmespath) if the certificate doesnt
+        # exist, false if it is valid for <52w, true if it exists and is valid >52w.
+        - item.ca_certificate is not string or item.valid_at_one_year is not true
 
     - name: Run stackhpc.pulp.pulp_content_guard role
       import_role:
