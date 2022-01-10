@@ -87,7 +87,7 @@ then pushed to `ark` under the `stackhpc-dev` namespace.
 * `dev-pulp-container-publish.yml`: Configure access control for development container distributions on `ark`.
 * `test-pulp-container-sync.yml`: Synchronise `test` with container images from `stackhpc-dev` namespace on `ark`.
 * `test-pulp-container-publish.yml`: Create distributions on `test` Pulp server for any new container images.
-* `dev-pulp-container-promote.yml`: Promote a set of container images from `stackhpc-dev` to `stackhpc` namespace. The tag to be promoted is defined via `dev_pulp_repository_container_promotion_tag` in `ansible/inventory/group_vars/all/dev-pulp-containers`.
+* `dev-pulp-container-promote.yml`: Promote a set of container images from `stackhpc-dev` to `stackhpc` namespace. The tag to be promoted is defined via `dev_pulp_repository_container_promotion_tag` which should be specified as an extra variable (`-e`).
 
 ### Other playbooks
 
