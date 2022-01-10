@@ -71,6 +71,7 @@ kolla_container_images:
   - neutron-metadata-agent
   - neutron-openvswitch-agent
   - neutron-server
+  - neutron-sriov-agent
   - nova-api
   - nova-base
   - nova-compute
