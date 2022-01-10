@@ -8,6 +8,13 @@
   hosts: localhost
   gather_facts: false
   tasks:
+    - name: Fail if container image to promote is not defined
+      fail:
+        msg: >
+          The container image to promote must be specified via
+          'dev_pulp_repository_container_promotion_tag'
+      when: dev_pulp_repository_container_promotion_tag is not defined
+
     - import_role:
         name: stackhpc.pulp.pulp_repository
       vars:
