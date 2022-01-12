@@ -11,6 +11,8 @@ The following diagram shows the major components of the release train.
 
 ![Release train components](../img/components.png)
 
+This diagram was created using [Google Drawings](https://docs.google.com/drawings/d/1gVssWRoFJPapv7K819zfceSobW4PABFJO4PT7IufGSQ/edit).
+
 ## Pulps
 
 [Pulp](https://pulpproject.org) is a content server that manages repositories of software packages and facilitates their distribution to content consumers.
