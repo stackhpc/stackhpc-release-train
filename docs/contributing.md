@@ -11,6 +11,6 @@ To build and serve the documentation locally at <http://127.0.0.1:8000/stackhpc-
 python3 -m venv mkdocs-venv
 source mkdocs-venv/bin/activate
 pip install -U pip
-pip install mkdocs
+pip install -r docs-requirements.txt
 mkdocs serve
 ```
