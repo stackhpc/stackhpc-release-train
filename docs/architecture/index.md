@@ -168,6 +168,8 @@ In order to consume the release train, clients should migrate to [StackHPC Kayob
 This repository provides configuration and playbooks to:
 
 * deploy a local Pulp service as a container on the seed
+* package repository versions to use
+* container image tags to use
 * sync all necessary content from Ark into the local Pulp service
 * use the local Pulp repository mirrors on control plane hosts
 * use the local Pulp container registry on control plane hosts
