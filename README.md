@@ -2,26 +2,7 @@
 
 StackHPC release automation
 
-## Background
-
-This codebase includes playbooks for managing content in Pulp servers for the
-StackHPC release train.
-
-There are two Pulp servers involved:
-
-* https://ark.stackhpc.com is a public-facing service hosted on Leafcloud. This
-  provides content to StackHPC clients. It will be referred to as `ark` here.
-* http://pulp-server.internal.sms-cloud is an internal service running on SMS
-  lab.  This is used to provide a local content mirror for testing. It will be
-  referred to as `test` here.
-
-In general, new content is first synced or pushed to `ark`, then synced to
-`test`. By default, new content is not accessible to clients on `ark`. Content
-must be promoted in order to become accessible to clients.
-
-Access to package repositories is controlled via x509 cert guards, while access
-to container images is controlled via token authentication which uses Django
-users in the backend.
+Release train documentation is available at https://stackhpc.github.io/stackhpc-release-train/.
 
 ## Installation
 

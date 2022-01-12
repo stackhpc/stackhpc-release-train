@@ -1,0 +1,12 @@
+site_name: StackHPC Release Train
+site_url: https://stackhpc.github.io/stackhpc-release-train/
+nav:
+  - Home: index.md
+  - Overview: overview.md
+  - Architecture: architecture/index.md
+  - Usage: usage/index.md
+  - Operations:
+      Operations: operations/index.md
+      Ark: operations/ark.md
+      Test Pulp: operations/test-pulp.md
+      Vault: operations/vault.md
