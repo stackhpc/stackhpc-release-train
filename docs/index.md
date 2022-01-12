@@ -9,3 +9,4 @@ This site provides documentation for the StackHPC release train, covering this a
 1. [Architecture](architecture/index.md)
 1. [Usage](usage/index.md)
 1. [Operations](operations/index.md)
+1. [Contributing](contributing.md)
