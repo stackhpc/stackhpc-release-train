@@ -178,3 +178,16 @@ This repository provides configuration and playbooks to:
 This configuration is in active development and is expected to evolve over the coming releases.
 
 Further documentation of this configuration is out of scope here, but is available in the [readme](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/wallaby/README.rst).
+
+## Continuous Integration (CI) and automation
+
+The intention is to have as much as possible of the release train automated and run via CI.
+Typically, workflows may go through the following stages as they evolve:
+
+1. automated via Ansible, manually executed
+1. executed by Github Actions workflows, manually triggered by [workflow dispatch](https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#workflow_dispatch) or [schedule](https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#schedule)
+1. executed by Github Actions workflows, automatically triggered by an event e.g. pull request or another workflow
+
+This sequence discourages putting too much automation into the Github Actions workflows, ensuring it is possible to run them manually.
+
+The release train Ansible playbooks make heavy use of the [stackhpc.pulp](https://github.com/stackhpc/ansible-collection-pulp) collection, which in turn uses modules from the [pulp.squeezer](https://github.com/pulp/squeezer/) collection.
