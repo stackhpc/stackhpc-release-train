@@ -33,7 +33,7 @@ Clients merge this configuration into their own, and apply site and environment-
 
 ## Hosting and accessing content
 
-The release train artifacts are hosted via [Pulp](https://pulpproject.org/) at https://ark.stackhpc.com.
+The release train artifacts are hosted via [Pulp](https://pulpproject.org/) at <https://ark.stackhpc.com>.
 Access to the API and artifacts is controlled via client certificates and passwords.
 Clients deploy a local Pulp service which syncs with Ark.
 

@@ -61,16 +61,16 @@ A [Hashicorp Vault](https://vault.stackhpc.com/) service acts as a Certificate A
 Two cert guards are in use - `development` and `release`.
 The `development` cert guard is assigned to unreleased content, while the `release` cert guard is assigned to released content.
 Clients are provided with a client certificate which they use when syncing package repositories in their local Pulp service with Ark.
-Clients' client certificates are authorised to access the `release` cert guard.
+Clients' client certificates are authorised to access content protected by the `release` cert guard.
 Build and test processes are provided with client certificate that is authorised to access the `development` and `release` cert guard.
 The latter is made possible via the CA chain.
 
 ### Containers
 
-Access to container images is controlled via token authentication, which uses Django users in the backend.
+Access to container images is controlled by token authentication, which uses Django users in the backend.
 Two container namespaces are in use - `stackhpc-dev` and `stackhpc`.
-The `stackhpc-dev` namespace is used for to unreleased content, while the `stackhpc` namespace is used for released content.
-Clients are provided with a set of credentials which they use when syncing container image repositories in their local Pulp service with Ark.
+The `stackhpc-dev` namespace is used for unreleased content, while the `stackhpc` namespace is used for released content.
+Clients are provided with a set of credentials, which they use when syncing container image repositories in their local Pulp service with Ark.
 Clients' credentials are authorised to pull from the `stackhpc` namespace.
 Build and test processes are provided with credentials that are authorised to push to the `stackhpc-dev` namespace.
 
@@ -86,9 +86,9 @@ The [Sync repositories](https://github.com/stackhpc/stackhpc-release-train/actio
 Synced content is immediately published and distributed, such that it is available to build & test processes.
 After a successful sync in Ark, the content is synced to the test Pulp service.
 
-Mirrored content typically uses a `policy` of `immediate`, meaning that all content is downloaded from the upstream source during the sync.
+Mirrored content typically uses a [policy](https://docs.pulpproject.org/pulpcore/workflows/on-demand-downloading.html) of `immediate`, meaning that all content is downloaded from the upstream source during the sync.
 This avoids issues seen with the `on_demand` policy where content that is removed from the upstream source becomes inaccessible if it has not been previously requested by a client.
-For RPM content, we also use a `sync_policy` of `mirror_complete`, which removes content from the snapshots in line with upstream repositories (in contrast with the default `additive` `sync_policy`, which does not).
+For RPM content, we also use a [sync_policy](https://docs.pulpproject.org/pulp_rpm/workflows/create_sync_publish.html#sync-repository-foo-using-remote-bar) of `mirror_complete`, which removes content from the snapshots in line with upstream repositories (in contrast with the default `additive` `sync_policy`, which does not).
 There are a couple of repositories for which `mirror_complete` does not work, so we use `mirror_content_only` instead.
 
 ### Versioning
@@ -97,7 +97,7 @@ Package repositories are versioned based on the date/time stamp at the beginning
 This version string is used as the final component of the path at which the corresponding distribution is hosted.
 For example, a CentOS Stream 8 BaseOS snapshot may be hosted at https://ark.stackhpc.com/pulp/content/centos/8-stream/BaseOS/x86_64/os/20220105T044843/.
 
-The rationale behind using a date/time stamp is that there is no sane way to version a large collection of content such as a repository, in a way in which the version reflects changes in the content (e.g. SemVer).
+The rationale behind using a date/time stamp is that there is no sane way to version a large collection of content, such as a repository, in a way in which the version reflects changes in the content (e.g. SemVer).
 While the timestamp used is fairly arbitrary, it does at least provide a reasonable guarantee of ordering, and is easily automated.
 
 ## Building
@@ -158,7 +158,7 @@ Content is synced from Ark to the local Pulp service, and control plane hosts ac
 This avoids excessive Internet bandwidth usage, both for the client and Ark.
 
 Content in the client Pulp service is synced using the `on_demand` policy.
-This avoids unnecessarily large storage requirements on the seed, and speed up syncing.
+This avoids unnecessarily large storage requirements on the seed, and speeds up syncing.
 There should be no risk of content becoming permantently unavailable, so long as Ark continues to host sufficiently old versions.
 This approach does have a downside of requiring Ark to be available to provide any content which has not previously been downloaded.
 
