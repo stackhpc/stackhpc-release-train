@@ -17,15 +17,12 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.superfences
 nav:
-  - Home: index.md
-  - Overview: overview.md
+  - Overview: index.md
   - Architecture: architecture/index.md
   - Usage:
-      Usage: usage/index.md
       Content management: usage/content.md
       Access control: usage/access.md
   - Operations:
-      Operations: operations/index.md
       Ark: operations/ark.md
       Test Pulp: operations/test-pulp.md
       Vault: operations/vault.md

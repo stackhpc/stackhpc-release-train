@@ -1,7 +1,7 @@
 # Architecture
 
 This page covers architecture of the StackHPC release train.
-It assumes familiarity with the [overview](../overview.md).
+It assumes familiarity with the [overview](../index.md).
 
 See the original [release train design document](https://docs.google.com/document/d/1cESuaJg1Zfnj8ZohH8ObeEfF8ay14wWe1YFGer3k10Q/edit) for design & requirements.
 
