@@ -116,6 +116,7 @@ All content in Ark that is required by the build and test processes is synced to
 ### Kolla container images
 
 Kolla container images are built via Kayobe, using a `builder` environment in [StackHPC Kayobe config](https://github.com/stackhpc/stackhpc-kayobe-config).
+The configuration uses the package repositories in Ark when building containers.
 Currently this is run manually, but will eventually run as a CI job.
 The `stackhpc-dev` namespace in Ark contains [container push repositories](https://docs.pulpproject.org/pulp_container/workflows/push.html), which are pushed to using Kayobe.
 Currently this is rather slow due to a [Pulp bug](https://github.com/pulp/pulp_container/issues/494).
