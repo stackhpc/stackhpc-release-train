@@ -9,11 +9,21 @@ theme:
   features:
     - navigation.instant
     - navigation.sections
+markdown_extensions:
+  # From mkdocs-material: allow !!! note.
+  - admonition
+  - toc:
+      permalink: True
+  - pymdownx.details
+  - pymdownx.superfences
 nav:
   - Home: index.md
   - Overview: overview.md
   - Architecture: architecture/index.md
-  - Usage: usage/index.md
+  - Usage:
+      Usage: usage/index.md
+      Content management: usage/content.md
+      Access control: usage/access.md
   - Operations:
       Operations: operations/index.md
       Ark: operations/ark.md
