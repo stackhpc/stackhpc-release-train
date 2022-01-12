@@ -1,5 +1,5 @@
 ---
-name: docs-build
+name: Build documentation
 on:
   pull_request:
 jobs:
