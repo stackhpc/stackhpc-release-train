@@ -82,7 +82,7 @@ Some of these may be mirrored/synced into Ark, including:
 * OS distribution package repositories, e.g. CentOS Stream 8 BaseOS
 * Third party package repositories, e.g. Grafana
 
-The [Sync repositories](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/sync.yml) Github Actions workflow runs nightly and on demand, ensuring that we have regular versioned snapshots of these repositories.
+The [Sync package repositories](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/package-sync.yml) Github Actions workflow runs nightly and on demand, ensuring that we have regular versioned snapshots of these repositories.
 Synced content is immediately published and distributed, such that it is available to build & test processes.
 After a successful sync in Ark, the content is synced to the test Pulp service.
 
