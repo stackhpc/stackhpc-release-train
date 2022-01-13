@@ -76,11 +76,6 @@ dev_pulp_distribution_rpm_promote: >-
   {%- endfor -%}
   {{ dev_dists }}
 
-# Whether to skip existing RPM distributions. If true, new distributions will
-# not be created for a publication if any distributions exist for the same
-# publication.
-dev_pulp_distribution_rpm_skip_existing: true
-
 dev_pulp_content_guard_x509_cert_guards:
   - name: release
     description: "Content-guard for released distributions"

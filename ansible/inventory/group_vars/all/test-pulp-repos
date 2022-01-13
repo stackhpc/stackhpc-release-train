@@ -54,8 +54,3 @@ test_pulp_distribution_rpm: >-
   {%- endif -%}
   {%- endfor -%}
   {{ test_dists }}
-
-# Whether to skip existing RPM distributions. If true, new distributions will
-# not be created for a publication if any distributions exist for the same
-# publication.
-test_pulp_distribution_rpm_skip_existing: true

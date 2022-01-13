@@ -16,4 +16,6 @@
         name: stackhpc.pulp.pulp_distribution
       vars:
         pulp_distribution_rpm: "{{ dev_pulp_distribution_rpm }}"
-        pulp_distribution_rpm_skip_existing: "{{ dev_pulp_distribution_rpm_skip_existing }}"
+        # Avoid creating new a distribution for a publication that already has
+        # a distribution.
+        pulp_distribution_rpm_skip_existing: true
