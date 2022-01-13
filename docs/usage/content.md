@@ -75,13 +75,25 @@ The [Promote package repositories](https://github.com/stackhpc/stackhpc-release-
 It should be run when package repositories need to be released.
 It runs the following playbook:
 
-* `dev-pulp-repo-promote.yml`: Promote the set of `ark` distributions defined in version variables to releases.
+* `dev-pulp-repo-promote.yml`: Promote the set of `ark` distributions defined in the version map variable `dev_pulp_distribution_rpm_promote_versions` to releases.
 
 Use Github Actions to run this workflow, or to run it manually:
 
 ```
 ansible-playbook -i ansible/inventory \
-ansible/dev-pulp-repo-promote.yml
+ansible/dev-pulp-repo-promote.yml \
+-e @dev_pulp_distribution_rpm_promote_versions.yml
+```
+
+Here, `dev_pulp_distribution_rpm_promote_versions.yml` is an extra variables file containing the repository version map variable `dev_pulp_distribution_rpm_promote_versions`.
+It maps package repository short names (in [ansible/inventory/group_vars/all/package-repos](https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/package-repos)) to the version of that repository to promote.
+For example:
+
+```
+dev_pulp_distribution_rpm_promote_versions:
+  centos_stream_8_appstream: 20211122T102435
+  centos_stream_8_baseos: 20220101T143229
+  ...
 ```
 
 ## Updating package repository versions in Kayobe configuration
