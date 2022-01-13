@@ -3,6 +3,15 @@
   hosts: localhost
   gather_facts: False
   tasks:
+    - name: Assert that versions variable is populated
+      assert:
+        that:
+          - missing_repos | length == 0
+        msg: >-
+          Some expected repositories not present in sync versions: {{ missing_repos | join(',') }}
+      vars:
+        missing_repos: "{{ test_pulp_repository_rpm_repos | map(attribute='short_name') | list | difference(test_pulp_repository_rpm_repo_versions) | list }}"
+
     - import_role:
         name: stackhpc.pulp.pulp_repository
       vars:

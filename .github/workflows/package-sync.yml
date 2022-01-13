@@ -39,19 +39,10 @@ jobs:
         ansible/dev-pulp-repo-publication-cleanup.yml \
         ansible/dev-pulp-repo-publish.yml
 
-    # We are updating the versions here, to ensure we can sync them to test.
-    # The new versions aren't be committed to this repository at this point.
-    - name: Update test repository versions
-      run: |
-        source venv/bin/activate &&
-        ansible-playbook -i ansible/inventory \
-        ansible/test-pulp-repo-version-update.yml
-
-    # This needs to be a separate step to ensure that we use the new versions
-    # in group_vars.
     - name: Sync and publish package repositories in test
       run: |
         source venv/bin/activate &&
         ansible-playbook -i ansible/inventory \
+        ansible/test-pulp-repo-version-query.yml \
         ansible/test-pulp-repo-sync.yml \
         ansible/test-pulp-repo-publish.yml

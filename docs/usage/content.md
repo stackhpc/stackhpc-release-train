@@ -17,8 +17,8 @@ It syncs package repositories in Ark with their upstream sources, then creates p
 
 Next, it syncs new content in Ark to the test Pulp service:
 
-* `test-pulp-repo-version-update.yml`: Query `ark` for the latest distribution versions and update the version variables (`ansible/inventory/group_vars/all/test-pulp-repo-versions`). These changes should be committed to this repository.
-* `test-pulp-repo-sync.yml`: Synchronise `test` with `ark`'s package repositories using `ark` version variables.
+* `test-pulp-repo-version-query.yml`: Query `ark` for the latest distribution versions and set the version map variable `test_pulp_repository_rpm_repo_versions`.
+* `test-pulp-repo-sync.yml`: Synchronise `test` with `ark`'s package repositories using the version map variable `test_pulp_repository_rpm_repo_versions`.
 * `test-pulp-repo-publish.yml`: Create distributions on `test` for any new package repository snapshots.
 
 It may be necessary to run this workflow on demand if the nightly workflow fails, or if an upstream package has been updated since the last run, or if the repository configuration has been updated.
@@ -28,20 +28,42 @@ Use Github Actions to run this workflow, or to run it manually:
 ansible-playbook -i ansible/inventory \
 ansible/dev-pulp-repo-sync.yml \
 ansible/dev-pulp-repo-publication-cleanup.yml \
-ansible/dev-pulp-repo-publish.yml \
-ansible/test-pulp-repo-version-update.yml
+ansible/dev-pulp-repo-publish.yml
 
 ansible-playbook -i ansible/inventory \
+ansible/test-pulp-repo-version-query.yml \
 ansible/test-pulp-repo-sync.yml \
 ansible/test-pulp-repo-publish.yml
 ```
 
+If a set of versions other than the latest need to be synced from Ark to test, then it is possible to specify `test_pulp_repository_rpm_repo_versions` via an extra variables file. In this case, it is not necessary to run `test-pulp-repo-version-query.yml`.
+For example:
+
+```
+ansible-playbook -i ansible/inventory \
+ansible/test-pulp-repo-sync.yml \
+ansible/test-pulp-repo-publish.yml
+-e @test_pulp_repository_rpm_repo_versions.yml
+```
+
+Here, `test_pulp_repository_rpm_repo_versions.yml` contains the repository version map variable `test_pulp_repository_rpm_repo_versions`.
+It maps package repository short names (in [ansible/inventory/group_vars/all/package-repos](https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/package-repos)) to the version of that repository to sync and publish.
+For example:
+
+```
+test_pulp_repository_rpm_repo_versions:
+  centos_stream_8_appstream: 20211122T102435
+  centos_stream_8_baseos: 20220101T143229
+  ...
+```
+
 Configuration for package repositories is in:
 
+* [ansible/inventory/group_vars/all/package-repos](https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/package-repos).
 * [ansible/inventory/group_vars/all/dev-pulp-repos](https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/dev-pulp-repos).
 * [ansible/inventory/group_vars/all/test-pulp-repos](https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/test-pulp-repos).
 
-New package repositories and distributions should be added to both files.
+New package repositories should be added to `rpm_package_repos` in `ansible/inventory/group_vars/all/package-repos`.
 
 ## Promoting package repositories
 

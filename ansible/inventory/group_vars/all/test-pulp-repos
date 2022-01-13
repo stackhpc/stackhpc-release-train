@@ -16,11 +16,19 @@ test_pulp_repository_rpm_repo_common:
   sync_policy: mirror_complete
   state: present
 
+# Dict mapping repository short names to versions.
+# This variable may be set to the latest available versions in dev by running
+# the test-pulp-repo-version-query.yml playbook.
+# Alternatively, a set of specific versions may be specified via an extra
+# variables file.
+test_pulp_repository_rpm_repo_versions: {}
+
 test_pulp_repository_rpm_repos: >-
   {%- set test_repos = [] -%}
   {%- for repo in rpm_package_repos -%}
   {%- if repo.publish | default(true) -%}
-  {%- set test_repo = {"name": repo.name ~ " (ark)", "url": test_dev_pulp_content_url ~ repo.base_path ~ repo.version} -%}
+  {%- set version = test_pulp_repository_rpm_repo_versions.get(repo.short_name, omit) -%}
+  {%- set test_repo = {"name": repo.name ~ " (ark)", "url": test_dev_pulp_content_url ~ repo.base_path ~ version, "short_name": repo.short_name} -%}
   {%- set _ = test_repos.append(test_pulp_repository_rpm_repo_common | combine(test_repo)) -%}
   {%- endif -%}
   {%- endfor -%}
@@ -37,9 +45,10 @@ test_pulp_distribution_rpm: >-
   {%- set test_dists = [] -%}
   {%- for repo in rpm_package_repos -%}
   {%- if repo.publish | default(true) -%}
-  {%- set name = repo.distribution_name ~ repo.version ~ "-ark" -%}
+  {%- set version = test_pulp_repository_rpm_repo_versions.get(repo.short_name, omit) -%}
+  {%- set name = repo.distribution_name ~ version ~ "-ark" -%}
   {%- set repo_name = repo.name ~ " (ark)" -%}
-  {%- set base_path = repo.base_path ~ repo.version -%}
+  {%- set base_path = repo.base_path ~ version -%}
   {%- set test_dist = {"name": name, "repository": repo_name, "base_path": base_path, "short_name": repo.short_name} -%}
   {%- set _ = test_dists.append(test_pulp_distribution_rpm_common | combine(test_dist)) -%}
   {%- endif -%}
