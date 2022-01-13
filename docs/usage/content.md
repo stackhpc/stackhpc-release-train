@@ -73,11 +73,23 @@ New package repositories should be added to `rpm_package_repos` in `ansible/inve
 
 The [Promote package repositories](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/package-promote.yml) workflow runs on demand.
 It should be run when package repositories need to be released.
-It runs the following playbook:
+It runs the following playbooks:
 
+* `dev-pulp-repo-version-query-kayobe.yml`: Query the Pulp repository versions defined in a Kayobe configuration repository and sets the version map variable `dev_pulp_distribution_rpm_promote_versions` based upon those versions. A path to a Kayobe configuration repository must be specified via `kayobe_config_repo_path`.
 * `dev-pulp-repo-promote.yml`: Promote the set of `ark` distributions defined in the version map variable `dev_pulp_distribution_rpm_promote_versions` to releases.
 
 Use Github Actions to run this workflow, or to run it manually:
+
+```
+ansible-playbook -i ansible/inventory \
+ansible/dev-pulp-repo-version-query-kayobe.yml \
+ansible/dev-pulp-repo-promote.yml \
+-e kayobe_config_repo_path=../stackhpc-kayobe-config/
+```
+
+In this example, the Pulp repository versions defined in the `etc/kayobe/pulp-repo-versions.yml` file in `../stackhpc-kayobe-config` repository (relative to the current working directory) will be promoted to releases.
+
+Alternatively, the set of versions to promote may be specified as an extra variables file:
 
 ```
 ansible-playbook -i ansible/inventory \
@@ -85,7 +97,7 @@ ansible/dev-pulp-repo-promote.yml \
 -e @dev_pulp_distribution_rpm_promote_versions.yml
 ```
 
-Here, `dev_pulp_distribution_rpm_promote_versions.yml` is an extra variables file containing the repository version map variable `dev_pulp_distribution_rpm_promote_versions`.
+Here, `dev_pulp_distribution_rpm_promote_versions.yml` contains the repository version map variable `dev_pulp_distribution_rpm_promote_versions`.
 It maps package repository short names (in [ansible/inventory/group_vars/all/package-repos](https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/package-repos)) to the version of that repository to promote.
 For example:
 

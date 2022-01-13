@@ -1,0 +1,63 @@
+---
+# This playbook queries the Pulp repository versions defined in a Kayobe
+# configuration repository (in etc/kayobe/pulp-repo-versions.yml). It then sets
+# the 'dev_pulp_distribution_rpm_promote_versions' version map variable based
+# upon those versions, which defines the set of repository versions that will
+# be promoted when the dev-pulp-repo-promote.yml playbook is run.
+
+- name: Query dev Pulp repo versions from Kayobe config
+  hosts: localhost
+  gather_facts: true
+  vars:
+    kayobe_config_repo_path: ""
+    kayobe_pulp_repo_versions_path: "{{ (kayobe_config_repo_path ~ '/etc/kayobe/pulp-repo-versions.yml') | realpath }}"
+  tasks:
+    - name: Fail if Kayobe config repo path is not specified
+      fail:
+        msg: >
+          Kayobe config git repository path must be specified via 'kayobe_config_repo_path'.
+      when: not kayobe_config_repo_path
+
+    - name: Fail if Kayobe config repo path is not a directory
+      fail:
+        msg: >
+          Kayobe config git repository path {{ kayobe_config_repo_path }} is not a directory.
+      when: kayobe_config_repo_path is not directory
+
+    - name: Fail if Kayobe Pulp repository versions file not found
+      fail:
+        msg: >
+          Can't find Kayobe Pulp repository versions file {{ kayobe_pulp_repo_versions_path }}.
+      when: kayobe_pulp_repo_versions_path is not file
+
+    - name: Set a fact containing Kayobe Pulp repository versions
+      set_fact:
+        kayobe_pulp_repo_versions: "{{ lookup('file', kayobe_pulp_repo_versions_path) | from_yaml }}"
+
+    - name: Display Kayobe Pulp repository versions
+      debug:
+        var: kayobe_pulp_repo_versions
+
+    - name: Set a fact about versions to promote
+      set_fact:
+        dev_pulp_distribution_rpm_promote_versions: >-
+          {{ dev_pulp_distribution_rpm_promote_versions |
+             default({}) |
+             combine({item.short_name: kayobe_pulp_repo_versions['stackhpc_pulp_repo_' ~ item.short_name ~ '_version']}) }}
+      loop: "{{ dev_pulp_distribution_rpm_promote }}"
+      loop_control:
+        label: "{{ item.short_name }}"
+      when: "'stackhpc_pulp_repo_' ~ item.short_name ~ '_version' in kayobe_pulp_repo_versions"
+
+    - name: Display promotion versions fact
+      debug:
+        var: dev_pulp_distribution_rpm_promote_versions
+
+    - name: Assert that versions variable is populated
+      assert:
+        that:
+          - missing_repos | length == 0
+        msg: >-
+          Some expected repositories not present in Kayobe Pulp repository versions: {{ missing_repos | join(',') }}
+      vars:
+        missing_repos: "{{ dev_pulp_distribution_rpm_promote | map(attribute='short_name') | list | difference(dev_pulp_distribution_rpm_promote_versions) | list }}"
