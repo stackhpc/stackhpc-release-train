@@ -1,12 +1,30 @@
 site_name: StackHPC Release Train
 site_url: https://stackhpc.github.io/stackhpc-release-train/
+repo_url: https://github.com/stackhpc/stackhpc-release-train/
+theme:
+  name: material
+  palette:
+    scheme: default
+    primary: red
+  features:
+    - navigation.instant
+    - navigation.sections
+markdown_extensions:
+  # From mkdocs-material: allow !!! note.
+  - admonition
+  - toc:
+      permalink: True
+  - pymdownx.details
+  - pymdownx.superfences
 nav:
-  - Home: index.md
-  - Overview: overview.md
+  - Overview: index.md
   - Architecture: architecture/index.md
-  - Usage: usage/index.md
+  - Usage:
+      Content management: usage/content.md
+      Access control: usage/access.md
   - Operations:
-      Operations: operations/index.md
       Ark: operations/ark.md
       Test Pulp: operations/test-pulp.md
       Vault: operations/vault.md
+      Github: operations/github.md
+  - Contributing: contributing.md

@@ -43,35 +43,4 @@ Playbooks may then be run as follows:
 ansible-playbook -i ansible/inventory ansible/<playbook>
 ```
 
-## Workflows
-
-### Package repositories
-
-The following workflow shows how updates to package repositories flow between
-the Pulp services.
-
-* `dev-pulp-repo-sync.yml`: Synchronise `ark` with upstream package repositories.
-* `dev-pulp-repo-publication-cleanup.yml`: Work around an issue with Pulp syncing where multiple publications may exist for a single repository version, breaking the Ansible Squeezer `rpm_publication` module.
-* `dev-pulp-repo-publish.yml`: Create development distributions on `ark` for any new package repository snapshots.
-* `test-pulp-repo-version-update.yml`: Query `ark` for the latest distribution versions and update the version variables (`ansible/inventory/group_vars/all/test-pulp-repo-versions`). These changes should be committed to this repository.
-* `test-pulp-repo-sync.yml`: Synchronise `test` with `ark`'s package repositories using `ark` version variables.
-* `test-pulp-repo-publish.yml`: Create distributions on `test` for any new package repository snapshots.
-* `test-repo-test.yml`: Test installing and using package repositories on `test`.
-* `dev-pulp-repo-promote.yml`: Promote the set of `ark` distributions defined in version variables to releases.
-* `dev-pulp-content-guards.yml`: Create certguard content-guards using CA certificates stored in Hashicorp Vault (https://vault.stackhpc.com)
-
-### Container images
-
-The following workflow shows how updates to container image repositories flow
-between the Pulp services. Container images are first built via `kolla-build`,
-then pushed to `ark` under the `stackhpc-dev` namespace.
-
-* `dev-pulp-container-publish.yml`: Configure access control for development container distributions on `ark`.
-* `test-pulp-container-sync.yml`: Synchronise `test` with container images from `stackhpc-dev` namespace on `ark`.
-* `test-pulp-container-publish.yml`: Create distributions on `test` Pulp server for any new container images.
-* `dev-pulp-container-promote.yml`: Promote a set of container images from `stackhpc-dev` to `stackhpc` namespace. The tag to be promoted is defined via `dev_pulp_repository_container_promotion_tag` which should be specified as an extra variable (`-e`).
-
-### Other playbooks
-
-* `dev-pulp-distribution-list.yml`: List available distributions in `ark`.
-* `test-pulp-distribution-list.yml`: List available distributions in `test`.
+Information on the different playbooks is available in the [release train documentation](https://stackhpc.github.io/stackhpc-release-train/usage/).

@@ -1,5 +1,5 @@
 ---
-name: Sync repositories
+name: Sync package repositories
 on:
   workflow_dispatch:
   schedule:

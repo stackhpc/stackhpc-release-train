@@ -1,7 +1,7 @@
 # Architecture
 
 This page covers architecture of the StackHPC release train.
-It assumes familiarity with the [overview](../overview.md).
+It assumes familiarity with the [overview](../index.md).
 
 See the original [release train design document](https://docs.google.com/document/d/1cESuaJg1Zfnj8ZohH8ObeEfF8ay14wWe1YFGer3k10Q/edit) for design & requirements.
 
@@ -10,6 +10,8 @@ See the original [release train design document](https://docs.google.com/documen
 The following diagram shows the major components of the release train.
 
 ![Release train components](../img/components.png)
+
+This diagram was created using [Google Drawings](https://docs.google.com/drawings/d/1gVssWRoFJPapv7K819zfceSobW4PABFJO4PT7IufGSQ/edit).
 
 ## Pulps
 
@@ -82,7 +84,7 @@ Some of these may be mirrored/synced into Ark, including:
 * OS distribution package repositories, e.g. CentOS Stream 8 BaseOS
 * Third party package repositories, e.g. Grafana
 
-The [Sync repositories](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/sync.yml) Github Actions workflow runs nightly and on demand, ensuring that we have regular versioned snapshots of these repositories.
+The [Sync package repositories](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/package-sync.yml) Github Actions workflow runs nightly and on demand, ensuring that we have regular versioned snapshots of these repositories.
 Synced content is immediately published and distributed, such that it is available to build & test processes.
 After a successful sync in Ark, the content is synced to the test Pulp service.
 
@@ -116,6 +118,7 @@ All content in Ark that is required by the build and test processes is synced to
 ### Kolla container images
 
 Kolla container images are built via Kayobe, using a `builder` environment in [StackHPC Kayobe config](https://github.com/stackhpc/stackhpc-kayobe-config).
+The configuration uses the package repositories in Ark when building containers.
 Currently this is run manually, but will eventually run as a CI job.
 The `stackhpc-dev` namespace in Ark contains [container push repositories](https://docs.pulpproject.org/pulp_container/workflows/push.html), which are pushed to using Kayobe.
 Currently this is rather slow due to a [Pulp bug](https://github.com/pulp/pulp_container/issues/494).
@@ -168,6 +171,8 @@ In order to consume the release train, clients should migrate to [StackHPC Kayob
 This repository provides configuration and playbooks to:
 
 * deploy a local Pulp service as a container on the seed
+* package repository versions to use
+* container image tags to use
 * sync all necessary content from Ark into the local Pulp service
 * use the local Pulp repository mirrors on control plane hosts
 * use the local Pulp container registry on control plane hosts
@@ -175,3 +180,16 @@ This repository provides configuration and playbooks to:
 This configuration is in active development and is expected to evolve over the coming releases.
 
 Further documentation of this configuration is out of scope here, but is available in the [readme](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/wallaby/README.rst).
+
+## Continuous Integration (CI) and automation
+
+The intention is to have as much as possible of the release train automated and run via CI.
+Typically, workflows may go through the following stages as they evolve:
+
+1. automated via Ansible, manually executed
+1. executed by Github Actions workflows, manually triggered by [workflow dispatch](https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#workflow_dispatch) or [schedule](https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#schedule)
+1. executed by Github Actions workflows, automatically triggered by an event e.g. pull request or another workflow
+
+This sequence discourages putting too much automation into the Github Actions workflows, ensuring it is possible to run them manually.
+
+The release train Ansible playbooks make heavy use of the [stackhpc.pulp](https://github.com/stackhpc/ansible-collection-pulp) collection, which in turn uses modules from the [pulp.squeezer](https://github.com/pulp/squeezer/) collection.
