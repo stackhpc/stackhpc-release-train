@@ -12,6 +12,7 @@ env:
   ANSIBLE_VAULT_PASSWORD_FILE: ${{ github.workspace }}/vault-pass
 jobs:
   container-promote:
+    name: Promote container repositories
     runs-on: [self-hosted, stackhpc-release-train]
     steps:
     - uses: actions/checkout@master

@@ -10,7 +10,8 @@ env:
   ANSIBLE_FORCE_COLOR: True
   ANSIBLE_VAULT_PASSWORD_FILE: ${{ github.workspace }}/vault-pass
 jobs:
-  repo-sync:
+  package-sync:
+    name: Sync package repositories
     runs-on: [self-hosted, stackhpc-release-train]
     steps:
     - uses: actions/checkout@master
