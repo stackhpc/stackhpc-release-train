@@ -16,6 +16,10 @@ jobs:
     steps:
     - uses: actions/checkout@master
 
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
     - name: Preparing Vault password file
       run: |
         echo "$ANSIBLE_VAULT_PASSWORD" > "$ANSIBLE_VAULT_PASSWORD_FILE"
@@ -24,17 +28,11 @@ jobs:
 
     - name: Installing dependencies
       run: |
-        sudo apt update &&
-        sudo apt install -y python3-venv &&
-        python3 -m venv venv &&
-        source venv/bin/activate &&
-        pip install -U pip && 
-        pip install -r requirements.txt &&
+        pip3 install -r requirements.txt &&
         ansible-galaxy collection install -r requirements.yml -p ansible/collections
 
     - name: Sync and publish package repositories in Ark
       run: |
-        source venv/bin/activate &&
         ansible-playbook -i ansible/inventory \
         ansible/dev-pulp-repo-sync.yml \
         ansible/dev-pulp-repo-publication-cleanup.yml \
@@ -42,7 +40,6 @@ jobs:
 
     - name: Sync and publish package repositories in test
       run: |
-        source venv/bin/activate &&
         ansible-playbook -i ansible/inventory \
         ansible/test-pulp-repo-version-query.yml \
         ansible/test-pulp-repo-sync.yml \

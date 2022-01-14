@@ -16,18 +16,22 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
     - name: Install Ansible collections
       run: |
         ansible-galaxy collection install -r requirements.yml
 
     - name: Install pip dependencies
       run: |
-        pip install -r requirements.txt
+        pip3 install -r requirements.txt
 
     # FIXME: rich pinned due to https://github.com/ansible-community/ansible-lint/issues/1795.
     - name: Install ansible-lint
       run: |
-        pip install ansible-core==2.12.* 'rich<11' ansible-lint==5.3.*
+        pip3 install ansible-core==2.12.* 'rich<11' ansible-lint==5.3.*
 
     - name: Lint Ansible playbooks
       run: |
