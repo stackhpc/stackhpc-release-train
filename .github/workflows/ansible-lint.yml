@@ -9,6 +9,7 @@ on:
 
 jobs:
   ansible-lint:
+    name: Ansible Lint
 
     runs-on: ubuntu-latest
 

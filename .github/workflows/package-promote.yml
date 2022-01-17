@@ -12,7 +12,8 @@ env:
   ANSIBLE_FORCE_COLOR: True
   ANSIBLE_VAULT_PASSWORD_FILE: ${{ github.workspace }}/vault-pass
 jobs:
-  repo-promote:
+  package-promote:
+    name: Promote package repositories
     runs-on: [self-hosted, stackhpc-release-train]
     steps:
     - uses: actions/checkout@master
