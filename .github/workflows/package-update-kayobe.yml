@@ -3,6 +3,11 @@ name: Update Kayobe package repository versions
 on:
   workflow_dispatch:
     inputs:
+      filter:
+        description: Space-separated list of regular expressions matching short_name of repositories to update
+        type: string
+        required: false
+        default: ""
       kayobe_config_branch:
         required: false
         description: Branch of StackHPC Kayobe configuration to use
@@ -47,7 +52,11 @@ jobs:
           ansible-playbook -i ansible/inventory \
           ansible/test-pulp-repo-version-query.yml \
           ansible/test-kayobe-repo-version-generate.yml \
+          -e deb_package_repo_filter="'$FILTER'" \
+          -e rpm_package_repo_filter="'$FILTER'" \
           -e kayobe_config_repo_path=./stackhpc-kayobe-config/
+        env:
+          FILTER: ${{ github.event.inputs.filter }}
 
       - name: Check for version changes
         id: git-diff

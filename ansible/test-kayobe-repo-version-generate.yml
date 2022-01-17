@@ -17,15 +17,6 @@
     kayobe_pulp_repo_versions_path: "{{ (kayobe_config_repo_path ~ '/etc/kayobe/pulp-repo-versions.yml') | realpath }}"
     kayobe_pulp_repo_versions_dest: "{{ kayobe_pulp_repo_versions_path }}"
   tasks:
-    - name: Assert that versions variable is populated
-      assert:
-        that:
-          - missing_repos | length == 0
-        msg: >-
-          Some expected repositories not present in Kayobe Pulp repo versions: {{ missing_repos | join(',') }}
-      vars:
-        missing_repos: "{{ kayobe_pulp_repo_versions.keys() | list | difference(test_pulp_repository_rpm_repo_versions) | difference(test_pulp_repository_deb_repo_versions) | list }}"
-
     - name: Set a fact about updated Kayobe Pulp repository versions
       vars:
         kayobe_var_name: "{{ 'stackhpc_pulp_repo_' ~ item.key ~ '_version' }}"

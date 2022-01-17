@@ -23,7 +23,7 @@ dev_pulp_repository_deb_repo_common:
 
 dev_pulp_repository_deb_repos: >-
   {%- set dev_repos = [] -%}
-  {%- for repo in deb_package_repos -%}
+  {%- for repo in deb_package_repos_filtered -%}
   {%- set dev_repo = {"name": repo.name} -%}
   {%- if repo.sync | default(true) -%}
   {%- set dev_repo = dev_repo | combine({"url": repo.url}) -%}
@@ -57,7 +57,7 @@ dev_pulp_distribution_deb_common:
 
 dev_pulp_distribution_deb: >-
   {%- set dev_dists = [] -%}
-  {%- for repo in deb_package_repos -%}
+  {%- for repo in deb_package_repos_filtered -%}
   {%- if repo.publish | default(true) -%}
   {%- set version = dev_pulp_distribution_version -%}
   {%- set name = repo.distribution_name ~ version -%}
@@ -83,7 +83,7 @@ dev_pulp_distribution_deb_promote_common:
 
 dev_pulp_distribution_deb_promote: >-
   {%- set dev_dists = [] -%}
-  {%- for repo in deb_package_repos -%}
+  {%- for repo in deb_package_repos_filtered -%}
   {%- if repo.publish | default(true) -%}
   {%- set version = dev_pulp_distribution_deb_promote_versions.get(repo.short_name, omit) -%}
   {%- set name = repo.distribution_name ~ version -%}
@@ -107,7 +107,7 @@ dev_pulp_repository_rpm_repo_common:
 
 dev_pulp_repository_rpm_repos: >-
   {%- set dev_repos = [] -%}
-  {%- for repo in rpm_package_repos -%}
+  {%- for repo in rpm_package_repos_filtered -%}
   {%- set dev_repo = {"name": repo.name} -%}
   {%- if repo.sync | default(true) -%}
   {%- set dev_repo = dev_repo | combine({"url": repo.url}) -%}
@@ -132,7 +132,7 @@ dev_pulp_distribution_rpm_common:
 
 dev_pulp_distribution_rpm: >-
   {%- set dev_dists = [] -%}
-  {%- for repo in rpm_package_repos -%}
+  {%- for repo in rpm_package_repos_filtered -%}
   {%- if repo.publish | default(true) -%}
   {%- set version = dev_pulp_distribution_version -%}
   {%- set name = repo.distribution_name ~ version -%}
@@ -155,7 +155,7 @@ dev_pulp_distribution_rpm_promote_common:
 
 dev_pulp_distribution_rpm_promote: >-
   {%- set dev_dists = [] -%}
-  {%- for repo in rpm_package_repos -%}
+  {%- for repo in rpm_package_repos_filtered -%}
   {%- if repo.publish | default(true) -%}
   {%- set version = dev_pulp_distribution_rpm_promote_versions.get(repo.short_name, omit) -%}
   {%- set name = repo.distribution_name ~ version -%}

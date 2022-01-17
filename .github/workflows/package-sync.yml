@@ -13,6 +13,11 @@ on:
         description: Sync package repositories in Test Pulp
         default: true
         type: boolean
+      filter:
+        description: Space-separated list of regular expressions matching short_name of repositories to sync
+        type: string
+        required: false
+        default: ""
   schedule:
     # Daily at 02:17
     - cron: '17 2 * * *'
@@ -50,7 +55,11 @@ jobs:
         ansible-playbook -i ansible/inventory \
         ansible/dev-pulp-repo-sync.yml \
         ansible/dev-pulp-repo-publication-cleanup.yml \
-        ansible/dev-pulp-repo-publish.yml
+        ansible/dev-pulp-repo-publish.yml \
+        -e deb_package_repo_filter="'$FILTER'" \
+        -e rpm_package_repo_filter="'$FILTER'"
+      env:
+        FILTER: ${{ github.event.inputs.filter }}
 
   package-sync-test:
     name: Sync package repositories in test
@@ -82,4 +91,8 @@ jobs:
         ansible-playbook -i ansible/inventory \
         ansible/test-pulp-repo-version-query.yml \
         ansible/test-pulp-repo-sync.yml \
-        ansible/test-pulp-repo-publish.yml
+        ansible/test-pulp-repo-publish.yml \
+        -e deb_package_repo_filter="'$FILTER'" \
+        -e rpm_package_repo_filter="'$FILTER'"
+      env:
+        FILTER: ${{ github.event.inputs.filter }}

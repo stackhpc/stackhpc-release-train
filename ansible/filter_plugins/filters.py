@@ -15,6 +15,20 @@
 import re
 
 
+def select_repos(repos, filter_string):
+    """Select repositories that match a filter string.
+
+    The filter string is a whitespace-separated list of regular expressions
+    matching repository short names.
+    """
+    if not filter_string:
+        return repos
+    regexes = filter_string.split()
+    patterns = re.compile(r"|".join(regexes).join('()'))
+    return [repo for repo in repos
+            if "short_name" in repo and re.search(patterns, repo["short_name"])]
+
+
 def select_images(images, filter_string):
     """Select images that match a filter string.
 
@@ -32,5 +46,6 @@ class FilterModule(object):
 
     def filters(self):
         return {
+            "select_repos": select_repos,
             "select_images": select_images,
         }
