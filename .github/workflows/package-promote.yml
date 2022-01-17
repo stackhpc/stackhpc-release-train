@@ -2,6 +2,11 @@
 name: Promote package repositories
 on:
   workflow_dispatch:
+    inputs:
+      kayobe_config_branch:
+        required: false
+        description: Branch of StackHPC Kayobe configuration to use
+        default: stackhpc/wallaby
 
 env:
   ANSIBLE_FORCE_COLOR: True
@@ -18,6 +23,13 @@ jobs:
       env:
         ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
 
+    - name: Clone StackHPC Kayobe configuration repository
+      uses: actions/checkout@master
+      with:
+        repository: stackhpc/stackhpc-kayobe-config
+        ref: refs/heads/${{ github.event.inputs.kayobe_config_branch }}
+        path: stackhpc-kayobe-config
+
     - name: Installing dependencies
       run: |
         sudo apt update &&
@@ -28,12 +40,10 @@ jobs:
         pip install -r requirements.txt &&
         ansible-galaxy collection install -r requirements.yml -p ansible/collections
 
-    - name: Show which package repository versions will be promoted
-      run: |
-        cat ansible/inventory/group_vars/all/test-pulp-repo-versions
-
     - name: Promote package repositories in Ark to release
       run: |
         source venv/bin/activate &&
         ansible-playbook -i ansible/inventory \
-        ansible/dev-pulp-repo-promote.yml
+        ansible/dev-pulp-repo-version-query-kayobe.yml \
+        ansible/dev-pulp-repo-promote.yml \
+        -e kayobe_config_repo_path=./stackhpc-kayobe-config/

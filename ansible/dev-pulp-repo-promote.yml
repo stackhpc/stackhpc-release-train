@@ -2,7 +2,8 @@
 # Promote a set of development repositories to releases.
 #
 # The distribution versions promoted are those defined in
-# ansible/inventory/group_vars/all/test-pulp-repo-versions.
+# the 'dev_pulp_distribution_rpm_promote_versions version map variable. This
+# should be specified via an extra variables file.
 # The content guard for those distributions will be updated from 'development'
 # to 'release'.
 
@@ -10,11 +11,24 @@
   hosts: localhost
   gather_facts: true
   tasks:
-    - import_role:
-        name: stackhpc.pulp.pulp_distribution
+    - name: Assert that versions variable is populated
+      assert:
+        that:
+          - missing_repos | length == 0
+        msg: >-
+          Some expected repositories not present in distribution promotion versions: {{ missing_repos | join(',') }}
       vars:
+        missing_repos: "{{ dev_pulp_distribution_rpm_promote | map(attribute='short_name') | list | difference(dev_pulp_distribution_rpm_promote_versions) | list }}"
+
+    # We want to update existing distributions here, so omit the 'publication'
+    # parameter.
+    - name: Ensure RPM distributions are promoted
+      pulp.squeezer.rpm_distribution:
         pulp_url: "{{ dev_pulp_url }}"
-        pulp_username: "{{ dev_pulp_username }}"
-        pulp_password: "{{ dev_pulp_password }}"
-        pulp_distribution_rpm: "{{ dev_pulp_distribution_rpm }}"
-        dev_pulp_distribution_promote: true
+        username: "{{ dev_pulp_username }}"
+        password: "{{ dev_pulp_password }}"
+        name: "{{ item.name }}"
+        base_path: "{{ item.base_path }}"
+        content_guard: "{{ item.content_guard }}"
+        state: "{{ item.state }}"
+      loop: "{{ dev_pulp_distribution_rpm_promote }}"

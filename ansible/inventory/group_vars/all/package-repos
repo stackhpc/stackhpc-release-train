@@ -8,7 +8,6 @@
 # base_path: Base path prefix for distributions.
 # short_name: Name used internally for variable names.
 # distribution_name: Name prefix for distributions. Version will be appended.
-# version: Version to sync/promote.
 # publish: Whether to publish and distribute the repository. Optional, default is true.
 rpm_package_repos:
   # Base CentOS 8 Stream repositories
@@ -17,19 +16,16 @@ rpm_package_repos:
     base_path: centos/8-stream/AppStream/x86_64/os/
     short_name: centos_stream_8_appstream
     distribution_name: centos-stream-8-appstream-
-    version: "{{ test_pulp_repo_centos_stream_8_appstream_version }}"
   - name: CentOS Stream 8 - BaseOS
     url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=BaseOS&infra=genclo
     base_path: centos/8-stream/BaseOS/x86_64/os/
     short_name: centos_stream_8_baseos
     distribution_name: centos-stream-8-baseos-
-    version: "{{ test_pulp_repo_centos_stream_8_baseos_version }}"
   - name: CentOS Stream 8 - Extras
     url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=extras&infra=genclo
     base_path: centos/8-stream/extras/x86_64/os/
     short_name: centos_stream_8_extras
     distribution_name: centos-stream-8-extras-
-    version: "{{ test_pulp_repo_centos_stream_8_extras_version }}"
 
   # Additional CentOS 8 Stream repositories
   - name: CentOS Stream 8 - Advanced Virtualization
@@ -37,31 +33,26 @@ rpm_package_repos:
     base_path: centos/8-stream/virt/x86_64/advancedvirt-common/
     short_name: centos_stream_8_advanced_virtualization
     distribution_name: centos-stream-8-advancedvirt-
-    version: "{{ test_pulp_repo_centos_stream_8_advanced_virtualization_version }}"
   - name: CentOS Stream 8 - Ceph Pacific
     url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=storage-ceph-pacific
     base_path: centos/8-stream/storage/x86_64/ceph-pacific/
     short_name: centos_stream_8_storage_ceph_pacific
     distribution_name: centos-stream-8-storage-ceph-pacific-
-    version: "{{ test_pulp_repo_centos_stream_8_storage_ceph_pacific_version }}"
   - name: CentOS Stream 8 - NFV OpenvSwitch
     url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=nfv-openvswitch-2
     base_path: centos/8-stream/nfv/x86_64/openvswitch-2/
     short_name: centos_stream_8_nfv_openvswitch
     distribution_name: centos-stream-8-nfv-openvswitch-
-    version: "{{ test_pulp_repo_centos_stream_8_nfv_openvswitch_version }}"
   - name: CentOS Stream 8 - OpenStack Wallaby
     url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=cloud-openstack-wallaby
     base_path: centos/8-stream/cloud/x86_64/openstack-wallaby/
     short_name: centos_stream_8_openstack_wallaby
     distribution_name: centos-stream-8-openstack-wallaby-
-    version: "{{ test_pulp_repo_centos_stream_8_openstack_wallaby_version }}"
   - name: CentOS Stream 8 - PowerTools
     url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=PowerTools&infra=genclo
     base_path: centos/8-stream/PowerTools/x86_64/os/
     short_name: centos_stream_8_powertools
     distribution_name: centos-stream-8-powertools-
-    version: "{{ test_pulp_repo_centos_stream_8_powertools_version }}"
 
   # Base CentOS 8 Linux repositories
   - name: CentOS Linux 8 - AppStream
@@ -80,7 +71,6 @@ rpm_package_repos:
     base_path: centos/8/storage/x86_64/ceph-nautilus/
     short_name: centos_8_storage_ceph_nautilus
     distribution_name: centos-8-storage-ceph-nautilus-
-    version: "{{ test_pulp_repo_centos_8_storage_ceph_nautilus_version }}"
   - name: CentOS 8 - Ceph Octopus
     url: http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=storage-ceph-octopus
     distribution_name: centos-8-storage-ceph-octopus-
@@ -90,7 +80,6 @@ rpm_package_repos:
     base_path: centos/8/opstools/x86_64/collectd-5/
     short_name: centos_8_opstools
     distribution_name: centos-8-opstools-
-    version: "{{ test_pulp_repo_centos_8_opstools_version }}"
 
   # Additional CentOS 8 Linux repositories (not used by Stream builds)
   - name: CentOS-8 - Advanced Virtualization
@@ -118,13 +107,11 @@ rpm_package_repos:
     base_path: epel/8/Everything/x86_64/
     short_name: epel
     distribution_name: extra-packages-for-enterprise-linux-8-x86_64-
-    version: "{{ test_pulp_repo_epel_version }}"
   - name: Extra Packages for Enterprise Linux Modular 8 - x86_64
     url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-modular-8&arch=x86_64&infra=stock&content=centos
     base_path: epel/8/Modular/x86_64/
     short_name: epel_modular
     distribution_name: extra-packages-for-enterprise-linux-modular-8-x86_64-
-    version: "{{ test_pulp_repo_epel_modular_version }}"
 
   # Third-party repositories
   - name: Docker CE for CentOS 8
@@ -132,7 +119,6 @@ rpm_package_repos:
     base_path: docker-ce/centos/8/x86_64/stable/
     short_name: docker
     distribution_name: docker-ce-for-centos-8-
-    version: "{{ test_pulp_repo_docker_version }}"
   # Note(piotrp): With repository size of 39G - for now we'll want this on_demand
   - name: ELK repository for 7.x packages
     url: https://artifacts.elastic.co/packages/oss-7.x/yum
@@ -140,7 +126,6 @@ rpm_package_repos:
     base_path: elasticsearch/oss-7.x/
     short_name: elasticsearch_logstash_kibana_7_x
     distribution_name: elasticsearch-logstash-kibana-7.x-
-    version: "{{ test_pulp_repo_elasticsearch_logstash_kibana_7_x_version }}"
   # Note(piotrp): With repository size of 16G - for now we'll want this on_demand
   - name: Grafana
     url: https://packages.grafana.com/oss/rpm
@@ -148,7 +133,6 @@ rpm_package_repos:
     base_path: grafana/oss/rpm/
     short_name: grafana
     distribution_name: grafana-
-    version: "{{ test_pulp_repo_grafana_version }}"
   - name: RabbitMQ - Erlang
     url: https://packagecloud.io/rabbitmq/erlang/el/8/x86_64
     # mirror_complete fails with:
@@ -157,7 +141,6 @@ rpm_package_repos:
     base_path: rabbitmq/erlang/el/8/x86_64/
     short_name: rabbitmq_erlang
     distribution_name: rabbitmq-erlang-
-    version: "{{ test_pulp_repo_rabbitmq_erlang_version }}"
   - name: RabbitMQ - Server
     url: https://packagecloud.io/rabbitmq/rabbitmq-server/el/8/x86_64
     # mirror_complete fails with:
@@ -166,10 +149,8 @@ rpm_package_repos:
     base_path: rabbitmq/rabbitmq-server/el/8/x86_64/
     short_name: rabbitmq_server
     distribution_name: rabbitmq-server-
-    version: "{{ test_pulp_repo_rabbitmq_server_version }}"
   - name: TreasureData 4
     url: http://packages.treasuredata.com/4/redhat/8/x86_64
     base_path: treasuredata/4/redhat/8/x86_64/
     short_name: treasuredata_4
     distribution_name: treasuredata-4-
-    version: "{{ test_pulp_repo_treasuredata_4_version }}"

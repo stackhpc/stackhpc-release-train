@@ -7,6 +7,16 @@
     pulp_username: "{{ test_pulp_username }}"
     pulp_password: "{{ test_pulp_password }}"
   tasks:
+    - name: Assert that versions variable is populated
+      assert:
+        that:
+          - missing_repos | length == 0
+        msg: >-
+          Some expected repositories not present in sync versions: {{ missing_repos | join(',') }}
+      vars:
+        missing_repos: "{{ test_pulp_repository_rpm_repos | map(attribute='short_name') | list | difference(test_pulp_repository_rpm_repo_versions) | list }}"
+
+
     - import_role:
         name: stackhpc.pulp.pulp_publication
       vars:
@@ -16,4 +26,6 @@
         name: stackhpc.pulp.pulp_distribution
       vars:
         pulp_distribution_rpm: "{{ test_pulp_distribution_rpm }}"
-        pulp_distribution_rpm_skip_existing: "{{ test_pulp_distribution_rpm_skip_existing }}"
+        # Avoid creating new a distribution for a publication that already has
+        # a distribution.
+        pulp_distribution_rpm_skip_existing: true

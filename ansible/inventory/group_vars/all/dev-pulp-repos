@@ -35,22 +35,16 @@ dev_pulp_publication_rpm: "{{ dev_pulp_distribution_rpm }}"
 #        forget ordering and use a random string.
 dev_pulp_distribution_version: "{{ ansible_date_time.iso8601_basic_short }}"
 
-# Whether to promote development distributions to release.
-dev_pulp_distribution_promote: false
-
-# Content guard used to protect distributions.
-dev_pulp_distribution_content_guard: "{{ 'release' if dev_pulp_distribution_promote | bool else 'development' }}"
-
 # Common parameters for RPM package distributions.
 dev_pulp_distribution_rpm_common:
-  content_guard: "{{ dev_pulp_distribution_content_guard }}"
+  content_guard: development
   state: present
 
 dev_pulp_distribution_rpm: >-
   {%- set dev_dists = [] -%}
   {%- for repo in rpm_package_repos -%}
   {%- if repo.publish | default(true) -%}
-  {%- set version = (repo.version if dev_pulp_distribution_promote | bool else dev_pulp_distribution_version) -%}
+  {%- set version = dev_pulp_distribution_version -%}
   {%- set name = repo.distribution_name ~ version -%}
   {%- set base_path = repo.base_path ~ version -%}
   {%- set dev_dist = {"name": name, "repository": repo.name, "base_path": base_path, "short_name": repo.short_name} -%}
@@ -59,10 +53,28 @@ dev_pulp_distribution_rpm: >-
   {%- endfor -%}
   {{ dev_dists }}
 
-# Whether to skip existing RPM distributions. If true, new distributions will
-# not be created for a publication if any distributions exist for the same
-# publication.
-dev_pulp_distribution_rpm_skip_existing: true
+# Dict mapping repository short names to versions.
+# This variable may be set to a set of specific versions via an extra variables
+# file.
+dev_pulp_distribution_rpm_promote_versions: {}
+
+# Common parameters for promoted RPM package distributions.
+dev_pulp_distribution_rpm_promote_common:
+  content_guard: release
+  state: present
+
+dev_pulp_distribution_rpm_promote: >-
+  {%- set dev_dists = [] -%}
+  {%- for repo in rpm_package_repos -%}
+  {%- if repo.publish | default(true) -%}
+  {%- set version = dev_pulp_distribution_rpm_promote_versions.get(repo.short_name, omit) -%}
+  {%- set name = repo.distribution_name ~ version -%}
+  {%- set base_path = repo.base_path ~ version -%}
+  {%- set dev_dist = {"name": name, "base_path": base_path, "short_name": repo.short_name} -%}
+  {%- set _ = dev_dists.append(dev_pulp_distribution_rpm_promote_common | combine(dev_dist)) -%}
+  {%- endif -%}
+  {%- endfor -%}
+  {{ dev_dists }}
 
 dev_pulp_content_guard_x509_cert_guards:
   - name: release
