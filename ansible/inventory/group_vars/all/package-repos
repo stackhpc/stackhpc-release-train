@@ -185,3 +185,9 @@ rpm_package_repos:
     base_path: rocky/8.5/PowerTools/x86_64/os/
     short_name: rocky_8_5_powertools
     distribution_name: rocky-8.5-powertools-
+
+# Default filter string for RPM package repositories.
+rpm_package_repo_filter: ""
+
+# List of package repositories after applying filter.
+rpm_package_repos_filtered: "{{ rpm_package_repos | select_repos(rpm_package_repo_filter) }}"

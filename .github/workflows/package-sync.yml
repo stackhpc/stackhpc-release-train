@@ -2,6 +2,12 @@
 name: Sync package repositories
 on:
   workflow_dispatch:
+    inputs:
+      filter:
+        description: Filter string to select repositories to sync (comma separated short names)
+        type: string
+        required: false
+        default: ""
   schedule:
     # Daily at 02:17
     - cron: '17 2 * * *'
@@ -38,7 +44,10 @@ jobs:
         ansible-playbook -i ansible/inventory \
         ansible/dev-pulp-repo-sync.yml \
         ansible/dev-pulp-repo-publication-cleanup.yml \
-        ansible/dev-pulp-repo-publish.yml
+        ansible/dev-pulp-repo-publish.yml \
+        -e rpm_package_repo_filter="'$FILTER'"
+      env:
+        FILTER: ${{ github.event.inputs.filter }}
 
     - name: Sync and publish package repositories in test
       run: |
@@ -46,4 +55,7 @@ jobs:
         ansible-playbook -i ansible/inventory \
         ansible/test-pulp-repo-version-query.yml \
         ansible/test-pulp-repo-sync.yml \
-        ansible/test-pulp-repo-publish.yml
+        ansible/test-pulp-repo-publish.yml \
+        -e rpm_package_repo_filter="'$FILTER'"
+      env:
+        FILTER: ${{ github.event.inputs.filter }}
