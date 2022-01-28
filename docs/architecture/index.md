@@ -59,7 +59,7 @@ Build and test processes also need access to content.
 ### Package repositories
 
 Access to package repositories is controlled via [Pulp x509 cert guards](https://docs.pulpproject.org/pulp_certguard/).
-A [Hashicorp Vault](https://vault.stackhpc.com/) service acts as a Certificate Authority (CA) for the cert guards.
+A [HashiCorp Vault](https://vault.stackhpc.com/) service acts as a Certificate Authority (CA) for the cert guards.
 Two cert guards are in use - `development` and `release`.
 The `development` cert guard is assigned to unreleased content, while the `release` cert guard is assigned to released content.
 Clients are provided with a client certificate which they use when syncing package repositories in their local Pulp service with Ark.
@@ -84,7 +84,7 @@ Some of these may be mirrored/synced into Ark, including:
 * OS distribution package repositories, e.g. CentOS Stream 8 BaseOS
 * Third party package repositories, e.g. Grafana
 
-The [Sync package repositories](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/package-sync.yml) Github Actions workflow runs nightly and on demand, ensuring that we have regular versioned snapshots of these repositories.
+The [Sync package repositories](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/package-sync.yml) GitHub Actions workflow runs nightly and on demand, ensuring that we have regular versioned snapshots of these repositories.
 Synced content is immediately published and distributed, such that it is available to build & test processes.
 After a successful sync in Ark, the content is synced to the test Pulp service.
 
@@ -108,7 +108,7 @@ Build processes may take as input the synced repository mirrors and other extern
 
 * Python Package Index (PyPI)
 * StackHPC source code repositories
-* Other source code repositories e.g. Github, OpenDev
+* Other source code repositories e.g. GitHub, OpenDev
 
 The outputs of these build processes are pushed to Ark.
 
@@ -123,7 +123,7 @@ Currently this is run manually, but will eventually run as a CI job.
 The `stackhpc-dev` namespace in Ark contains [container push repositories](https://docs.pulpproject.org/pulp_container/workflows/push.html), which are pushed to using Kayobe.
 Currently this is rather slow due to a [Pulp bug](https://github.com/pulp/pulp_container/issues/494).
 
-The [Sync container repositories](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/container-sync.yml) Github Actions workflow runs demand, syncing container repositories in test Pulp service with those in Ark.
+The [Sync container repositories](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/container-sync.yml) GitHub Actions workflow runs demand, syncing container repositories in test Pulp service with those in Ark.
 It also configures container image distributions to be private, since they are public by default.
 
 Kolla container images are versioned based on the OpenStack release name and the date/time stamp at the beginning of the build workflow, e.g. `wallaby-20211122T102435`.
@@ -162,7 +162,7 @@ This avoids excessive Internet bandwidth usage, both for the client and Ark.
 
 Content in the client Pulp service is synced using the `on_demand` policy.
 This avoids unnecessarily large storage requirements on the seed, and speeds up syncing.
-There should be no risk of content becoming permantently unavailable, so long as Ark continues to host sufficiently old versions.
+There should be no risk of content becoming permanently unavailable, so long as Ark continues to host sufficiently old versions.
 This approach does have a downside of requiring Ark to be available to provide any content which has not previously been downloaded.
 
 ## Client configuration
@@ -187,9 +187,9 @@ The intention is to have as much as possible of the release train automated and 
 Typically, workflows may go through the following stages as they evolve:
 
 1. automated via Ansible, manually executed
-1. executed by Github Actions workflows, manually triggered by [workflow dispatch](https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#workflow_dispatch) or [schedule](https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#schedule)
-1. executed by Github Actions workflows, automatically triggered by an event e.g. pull request or another workflow
+1. executed by GitHub Actions workflows, manually triggered by [workflow dispatch](https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#workflow_dispatch) or [schedule](https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#schedule)
+1. executed by GitHub Actions workflows, automatically triggered by an event e.g. pull request or another workflow
 
-This sequence discourages putting too much automation into the Github Actions workflows, ensuring it is possible to run them manually.
+This sequence discourages putting too much automation into the GitHub Actions workflows, ensuring it is possible to run them manually.
 
 The release train Ansible playbooks make heavy use of the [stackhpc.pulp](https://github.com/stackhpc/ansible-collection-pulp) collection, which in turn uses modules from the [pulp.squeezer](https://github.com/pulp/squeezer/) collection.
