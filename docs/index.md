@@ -1,6 +1,6 @@
 # StackHPC Release Train
 
-The StackHPC release train is a mechanism to provide tested, reprodicible software releases for our supported clients.
+The StackHPC release train is a mechanism to provide tested, reproducible software releases for our supported clients.
 This site provides documentation for the StackHPC release train, covering this and other related repositories, as well as the services that comprise the live system.
 
 ## Background
@@ -27,7 +27,7 @@ This includes:
 Initially, only CentOS Stream 8 is supported as a host and container OS.
 Ubuntu support will follow.
 
-In future, the scope may expand to cover other software, such as Kubeternetes.
+In future, the scope may expand to cover other software, such as Kubernetes.
 
 ## Configuration
 
@@ -43,5 +43,5 @@ Clients deploy a local Pulp service which syncs with Ark.
 ## Automation & Continuous Integration (CI)
 
 Automation and CI are key aspects of the release train.
-The additional control provided by the release train comes at a cost in maintainence and complexity, which must be offset via automation and CI.
-In general, Ansible is used for automation, and Github Actions provide CI.
+The additional control provided by the release train comes at a cost in maintenance and complexity, which must be offset via automation and CI.
+In general, Ansible is used for automation, and GitHub Actions provide CI.

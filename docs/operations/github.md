@@ -1,3 +1,3 @@
-# Operations - Github
+# Operations - GitHub
 
-TODO: cover repository management, Github Actions runners, etc.
+TODO: cover repository management, GitHub Actions runners, etc.

@@ -2,7 +2,7 @@
 
 Content is primarily managed using the Ansible playbooks and configuration in the [stackhpc-release-train](https://github.com/stackhpc/stackhpc-release-train) repository.
 The [readme](https://github.com/stackhpc/stackhpc-release-train/blob/main/README.md) provides information on how to install dependencies and run playbooks.
-The playbooks are designed to be run manually or via a Github Actions CI job.
+The playbooks are designed to be run manually or via a GitHub Actions CI job.
 This page covers the different workflows available for content management.
 It may be necessary to combine multiple of these to achieve a desired outcome.
 
@@ -22,7 +22,7 @@ Next, it syncs new content in Ark to the test Pulp service:
 * `test-pulp-repo-publish.yml`: Create distributions on `test` for any new package repository snapshots.
 
 It may be necessary to run this workflow on demand if the nightly workflow fails, or if an upstream package has been updated since the last run, or if the repository configuration has been updated.
-Use Github Actions to run this workflow, or to run it manually:
+Use GitHub Actions to run this workflow, or to run it manually:
 
 ```
 ansible-playbook -i ansible/inventory \
@@ -78,7 +78,7 @@ It runs the following playbooks:
 * `dev-pulp-repo-version-query-kayobe.yml`: Query the Pulp repository versions defined in a Kayobe configuration repository and sets the version map variable `dev_pulp_distribution_rpm_promote_versions` based upon those versions. A path to a Kayobe configuration repository must be specified via `kayobe_config_repo_path`.
 * `dev-pulp-repo-promote.yml`: Promote the set of `ark` distributions defined in the version map variable `dev_pulp_distribution_rpm_promote_versions` to releases.
 
-Use Github Actions to run this workflow, or to run it manually:
+Use GitHub Actions to run this workflow, or to run it manually:
 
 ```
 ansible-playbook -i ansible/inventory \
@@ -142,7 +142,7 @@ It runs the following playbooks:
 * `test-pulp-container-sync.yml`: Synchronise `test` with container images from `stackhpc-dev` namespace on `ark`.
 * `test-pulp-container-publish.yml`: Create distributions on `test` Pulp server for any new container images.
 
-Use Github Actions to run this workflow, or to run it manually:
+Use GitHub Actions to run this workflow, or to run it manually:
 
 ```
 ansible-playbook -i ansible/inventory \
@@ -171,7 +171,7 @@ It runs the following playbook:
 
 * `dev-pulp-container-promote.yml`: Promote a set of container images from `stackhpc-dev` to `stackhpc` namespace. The tag to be promoted is defined via `dev_pulp_repository_container_promotion_tag` which should be specified as an extra variable (`-e`).
 
-Use Github Actions to run this workflow, or to run it manually:
+Use GitHub Actions to run this workflow, or to run it manually:
 
 ```
 ansible-playbook -i ansible/inventory \
