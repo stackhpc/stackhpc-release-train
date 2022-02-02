@@ -10,7 +10,10 @@ dev_pulp_repository_rpm_repo_common:
 dev_pulp_repository_rpm_repos: >-
   {%- set dev_repos = [] -%}
   {%- for repo in rpm_package_repos -%}
-  {%- set dev_repo = {"name": repo.name, "url": repo.url} -%}
+  {%- set dev_repo = {"name": repo.name} -%}
+  {%- if repo.sync | default(true) -%}
+  {%- set dev_repo = dev_repo | combine({"url": repo.url}) -%}
+  {%- endif -%}
   {%- if "policy" in repo -%}
   {%- set dev_repo = dev_repo | combine({"policy": repo.policy}) -%}
   {%- endif -%}

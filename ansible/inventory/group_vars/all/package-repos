@@ -8,6 +8,7 @@
 # base_path: Base path prefix for distributions.
 # short_name: Name used internally for variable names.
 # distribution_name: Name prefix for distributions. Version will be appended.
+# sync: Whether to sync the repository with a remote. Optional, default is true.
 # publish: Whether to publish and distribute the repository. Optional, default is true.
 rpm_package_repos:
   # Base CentOS 8 Stream repositories
