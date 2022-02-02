@@ -57,46 +57,46 @@ rpm_package_repos:
 
   # Base CentOS 8 Linux repositories
   - name: CentOS Linux 8 - AppStream
-    url: http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=AppStream&infra=genclo
+    sync: false
     publish: false
   - name: CentOS Linux 8 - BaseOS
-    url: http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=BaseOS&infra=genclo
+    sync: false
     publish: false
   - name: CentOS Linux 8 - Extras
-    url: http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=extras&infra=genclo
+    sync: false
     publish: false
 
   # Additional CentOS 8 Linux repositories (used by Stream builds)
   - name: CentOS 8 - Ceph Nautilus
-    url: http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=storage-ceph-nautilus
     base_path: centos/8/storage/x86_64/ceph-nautilus/
     short_name: centos_8_storage_ceph_nautilus
     distribution_name: centos-8-storage-ceph-nautilus-
+    sync: false
   - name: CentOS 8 - Ceph Octopus
-    url: http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=storage-ceph-octopus
     distribution_name: centos-8-storage-ceph-octopus-
+    sync: false
     publish: false
   - name: CentOS 8 - OpsTools - collectd
-    url: http://mirrorlist.centos.org/?arch=x86_64&release=8&repo=opstools-collectd-5
     base_path: centos/8/opstools/x86_64/collectd-5/
     short_name: centos_8_opstools
     distribution_name: centos-8-opstools-
+    sync: false
 
   # Additional CentOS 8 Linux repositories (not used by Stream builds)
   - name: CentOS-8 - Advanced Virtualization
-    url: http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=virt-advanced-virtualization
+    sync: false
     publish: false
   - name: CentOS-8 - NFV OpenvSwitch
-    url: http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=nfv-openvswitch-2
+    sync: false
     publish: false
   - name: CentOS-8 - OpenStack Ussuri
-    url: http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=cloud-openstack-ussuri
+    sync: false
     publish: false
   - name: CentOS-8 - OpenStack Victoria
-    url: http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=cloud-openstack-victoria
+    sync: false
     publish: false
   - name: CentOS Linux 8 - PowerTools
-    url: http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=PowerTools&infra=genclo
+    sync: false
     publish: false
 
   # EPEL repositories
