@@ -3,6 +3,7 @@
   hosts: localhost
   gather_facts: true
   vars:
+    synced_rpm_package_repos: "{{ rpm_package_repos | selectattr('sync', 'defined') | selectattr('sync') | list + rpm_package_repos | rejectattr('sync', 'defined') | list }}"
     published_rpm_package_repos: "{{ rpm_package_repos | selectattr('publish', 'defined') | selectattr('publish') | list + rpm_package_repos | rejectattr('publish', 'defined') | list }}"
     num_rpm_package_repos: "{{ rpm_package_repos | length }}"
     num_published_rpm_package_repos: "{{ published_rpm_package_repos | length }}"
@@ -22,10 +23,10 @@
         that:
           - rpm_package_repos | map(attribute='name') | unique | list | length == num_rpm_package_repos | int
 
-    - name: Assert that RPM package repositories have URLs
+    - name: Assert that synced RPM package repositories have URLs
       assert:
         that:
-          - rpm_package_repos | rejectattr('url', 'defined') | list | length == 0
+          - synced_rpm_package_repos | rejectattr('url', 'defined') | list | length == 0
 
     - name: Assert that published RPM package repositories have short names
       assert:
