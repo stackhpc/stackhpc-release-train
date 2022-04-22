@@ -114,10 +114,27 @@ dev_pulp_distribution_rpm_promote_versions:
 
     This procedure is expected to change.
 
+The [Update Kayobe package repository versions](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/package-update-kayobe.yml) workflow runs on demand.
+It should be run when package repository versions in Kayobe need to be updated.
+It runs the following playbooks:
+
+* `test-pulp-repo-version-query.yml`: Query `ark` for the latest distribution versions and set the version map variable `test_pulp_repository_rpm_repo_versions`.
+* `test-kayobe-repo-version-generate.yml`: Query stackhpc-kayobe-config for the current repository versions, then update them to the previously queried versions in `ark`.
+
+It then stores the new versions YAML file as an artifact, which may be downloaded and manually applied to stackhpc-kayobe-config.
+In future the workflow will be extended to create a PR.
+
+Use GitHub Actions to run this workflow, or to run it manually:
+
+```
+ansible/test-pulp-repo-version-query.yml \
+ansible/test-kayobe-repo-version-generate.yml \
+-e kayobe_config_repo_path=./stackhpc-kayobe-config/
+```
+
 Package repository versions are stored in StackHPC Kayobe configuration in [etc/kayobe/pulp-repo-versions.yml](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/wallaby/etc/kayobe/pulp-repo-versions.yml).
-The following playbook in the stackhpc-release-train repository may be used to update these versions to the latest available in Ark.
-Note that these versions are not necessarily released.
-The generated file may amended as necessary (in case not all updates are required), then copied to the StackHPC Kayobe configuration.
+Note that the updated versions are not necessarily released.
+The generated file may be amended as necessary (in case not all updates are required), then copied to the StackHPC Kayobe configuration.
 
 ## Building container images
 
