@@ -56,8 +56,6 @@
     - name: Assert that versions variable is populated
       assert:
         that:
-          - missing_repos | length == 0
+          - dev_pulp_distribution_rpm_promote_versions | length > 0
         msg: >-
-          Some expected repositories not present in Kayobe Pulp repository versions: {{ missing_repos | join(',') }}
-      vars:
-        missing_repos: "{{ dev_pulp_distribution_rpm_promote | map(attribute='short_name') | list | difference(dev_pulp_distribution_rpm_promote_versions) | list }}"
+          Distribution promotion version variable 'dev_pulp_distribution_rpm_promote_versions' is empty
