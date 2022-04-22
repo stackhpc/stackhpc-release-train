@@ -1,0 +1,20 @@
+---
+name: Update Kayobe package repository versions
+on:
+  workflow_dispatch:
+    inputs:
+      kayobe_config_branch:
+        required: false
+        description: Branch of StackHPC Kayobe configuration to use
+        default: stackhpc/wallaby
+
+env:
+  ANSIBLE_FORCE_COLOR: True
+  ANSIBLE_VAULT_PASSWORD_FILE: ${{ github.workspace }}/vault-pass
+jobs:
+  package-update-kayobe:
+    name: Update Kayobe package repository versions
+    runs-on: [self-hosted, stackhpc-release-train]
+    steps:
+      - uses: actions/checkout@master
+      # TODO
