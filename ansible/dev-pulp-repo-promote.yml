@@ -14,11 +14,9 @@
     - name: Assert that versions variable is populated
       assert:
         that:
-          - missing_repos | length == 0
+          - dev_pulp_distribution_rpm_promote_versions | length > 0
         msg: >-
-          Some expected repositories not present in distribution promotion versions: {{ missing_repos | join(',') }}
-      vars:
-        missing_repos: "{{ dev_pulp_distribution_rpm_promote | map(attribute='short_name') | list | difference(dev_pulp_distribution_rpm_promote_versions) | list }}"
+          Distribution promotion version variable 'dev_pulp_distribution_rpm_promote_versions' is empty
 
     # We want to update existing distributions here, so omit the 'publication'
     # parameter.
@@ -31,4 +29,4 @@
         base_path: "{{ item.base_path }}"
         content_guard: "{{ item.content_guard }}"
         state: "{{ item.state }}"
-      loop: "{{ dev_pulp_distribution_rpm_promote }}"
+      loop: "{{ dev_pulp_distribution_rpm_promote | selectattr('short_name', 'in', dev_pulp_distribution_rpm_promote_versions.keys()) | list }}"
