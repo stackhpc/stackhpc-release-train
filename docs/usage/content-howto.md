@@ -7,7 +7,7 @@ That is the aim of this page.
 
 Update one or more package repositories to a new version, then build new Kolla container images from those repositories.
 
-* [Sync package repositories](content-workflows.md#syncing-package-repositories) (optional)
+* [Sync package repositories](content-workflows.md#syncing-package-repositories) (optional: runs nightly as a scheduled GitHub Action)
 * [Update Kayobe repository versions](content-workflows.md#updating-package-repository-versions-in-kayobe-configuration)
 * [Build & push Kolla container images](content-workflows.md#building-container-images)
 * [Sync container images](content-workflows.md#syncing-container-images)
