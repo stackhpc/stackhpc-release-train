@@ -142,11 +142,12 @@ The generated file may be amended as necessary (in case not all updates are requ
 
     This procedure is expected to change.
 
-Instructions for building Kolla container images are provided in the [StackHPC kayobe config prototype readme](https://github.com/stackhpc/stackhpc-kayobe-config-prototype/blob/stackhpc/wallaby/README.rst#building-images).
-Currently this is performed manually.
+The [Build Kolla container images](https://github.com/stackhpc/stackhpc-kayobe-config/actions/workflows/container-image-build.yml) workflow in the [stackhpc-kayobe-config](https://github.com/stackhpc/stackhpc-kayobe-config) repository runs on demand.
+It should be run when new Kolla container images are required.
 All images may be built, or a specific set of images.
-Once built, the container image tag is written to `~/kolla_tag` on the build host.
-The images should be pushed to Ark by adding a `--push` argument to the Kayobe build commands.
+The images will be pushed to Ark, and the container image tag shown in the output of the `Display the container image tag` step.
+
+Instructions for building Kolla container images manually are provided in the [StackHPC kayobe config README](https://github.com/stackhpc/stackhpc-kayobe-config/blob/bf1396b8564b79344e4b6cfb934eab865ff1ad09/README.rst#L226).
 
 ## Updating container image tags in Kayobe configuration
 
