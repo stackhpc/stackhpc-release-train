@@ -20,7 +20,8 @@ nav:
   - Overview: index.md
   - Architecture: architecture/index.md
   - Usage:
-      Content management: usage/content.md
+      Content management HOWTO: usage/content-howto.md
+      Content management workflows: usage/content-workflows.md
       Access control: usage/access.md
   - Operations:
       Ark: operations/ark.md

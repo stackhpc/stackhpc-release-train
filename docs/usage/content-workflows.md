@@ -1,4 +1,4 @@
-# Usage - content management
+# Usage - content management workflows
 
 Content is primarily managed using the Ansible playbooks and configuration in the [stackhpc-release-train](https://github.com/stackhpc/stackhpc-release-train) repository.
 The [readme](https://github.com/stackhpc/stackhpc-release-train/blob/main/README.md) provides information on how to install dependencies and run playbooks.
@@ -147,7 +147,15 @@ Currently this is performed manually.
 All images may be built, or a specific set of images.
 Once built, the container image tag is written to `~/kolla_tag` on the build host.
 The images should be pushed to Ark by adding a `--push` argument to the Kayobe build commands.
-Once tested, the image tag may be updated for all images in [etc/kayobe/kolla.yml](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/wallaby/etc/kayobe/kolla.yml), or for specific images in [etc/kayobe/kolla/globals.yml](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/wallaby/etc/kayobe/kolla/globals.yml).
+
+## Updating container image tags in Kayobe configuration
+
+!!! note
+
+    This procedure is expected to change.
+
+The image tag used deploy containers may be updated for all images in [etc/kayobe/kolla.yml](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/wallaby/etc/kayobe/kolla.yml), or for specific images in [etc/kayobe/kolla/globals.yml](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/wallaby/etc/kayobe/kolla/globals.yml).
+Currently this is a manual process.
 
 ## Syncing container images
 
