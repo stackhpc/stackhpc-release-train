@@ -1,0 +1,10 @@
+---
+# Dictionary acting as a `manifest` of openstack and ansible repositories
+# containing a list of workflows and community files required by a given 
+# repository.
+repositories:
+  kolla:
+    workflows: '{{openstack_workflows}}'
+  ansible-collection-pulp:
+    repository_type: 'ansible'
+    workflows: '{{ansible_workflows.collection}}'
