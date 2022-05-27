@@ -27,4 +27,4 @@ jobs:
         with:
           persist-credentials: 'false'
       - name: Run ansible playbook 📖
-        run: ansible-playbook main.yml
+        run: ansible-playbook ansible/synchronise-repository.yml
