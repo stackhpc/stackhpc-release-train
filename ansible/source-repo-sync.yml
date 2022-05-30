@@ -2,4 +2,4 @@
 - name: Synchronise Repositories Playbook
   hosts: localhost
   roles:
-    - role: synchronise-repositories
+    - role: source-repo-sync

@@ -1,6 +1,7 @@
 ---
-owner: stackhpc
-staging_path: ~/.staging
+# Dictionary acting as a `manifest` of openstack and ansible repositories
+# containing a list of workflows and community files required by a given 
+# repository.
 default_releases:
   - xena
   - wallaby
@@ -16,4 +17,6 @@ ansible_workflows:
     - publish_collection
   role:
     - publish_role
-repositories: {}
+repositories:
+  kolla:
+    workflows: '{{openstack_workflows}}'

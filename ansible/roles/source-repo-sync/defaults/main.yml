@@ -1,0 +1,11 @@
+---
+owner: jackhodgkiss
+staging_path: ~/.repo-staging
+default_releases: []
+openstack_workflows:
+  default_branch_only: []
+  elsewhere: []
+ansible_workflows:
+  collection: []
+  role: []
+repositories: {}

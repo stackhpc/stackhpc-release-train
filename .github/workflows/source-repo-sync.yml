@@ -1,22 +1,23 @@
 ---
-name: Synchronise Repositories
+name: Synchronise Source Repositories
 'on':
   push:
     branches: [main]
     paths:
-      - 'main.yml'
-      - 'ansible.cfg'
-      - 'inventory'
-      - 'roles/**'
-      - '.github/workflows/**'
+      - 'ansible/roles/source-repo-sync/**'
+      - 'ansible/inventory/group_vars/source-repo-sync.yml'
+      - 'ansible/source-repo-sync.yml'
+      - '.github/workflows/source-repo-sync.yml'
+  workflow_dispatch:
 permissions:
   contents: write
   pull-requests: write
 env:
   GITHUB_TOKEN: ${{secrets.repository_configuration_token}}
 jobs:
-  run-playbook:
+  source-repo-sync:
     runs-on: ubuntu-latest
+    name: Synchronise source repositories
     steps:
       - name: Configure git 🔧
         run: |
@@ -27,4 +28,4 @@ jobs:
         with:
           persist-credentials: 'false'
       - name: Run ansible playbook 📖
-        run: ansible-playbook ansible/synchronise-repository.yml
+        run: ansible-playbook ansible/source-repo-sync.yml -i ansible/inventory
