@@ -36,8 +36,8 @@
         name: '{{ item.key }}',
         repository_type: 'ansible',
         workflows: { default_branch_only: '{{ item.value.workflows }}' },
-        copy_workflows: '{{ item.value.copy_workflows  | default(true)}}',
-        copy_codeowners: '{{ item.value.copy_codeowners  | default(true)}}',
+        copy_workflows: '{{ item.value.copy_workflows | default(true) }}',
+        copy_codeowners: '{{ item.value.copy_codeowners | default(true) }}',
       }
   with_dict: '{{ repositories }}'
   when: item.value.repository_type | default('openstack') == 'ansible'

@@ -20,3 +20,6 @@ ansible_workflows:
 repositories:
   kolla:
     workflows: '{{openstack_workflows}}'
+  ansible-collection-pulp:
+    repository_type: 'ansible'
+    workflows: '{{ansible_workflows.collection}}'
