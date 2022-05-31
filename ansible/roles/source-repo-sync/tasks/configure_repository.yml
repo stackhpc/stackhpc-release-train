@@ -1,7 +1,7 @@
 ---
 - name: Print repository manifest
   ansible.builtin.debug:
-    msg: '{{ repository_manifest }}'
+    var: repository_manifest
 
 - name: Clone repository # noqa git-latest
   ansible.builtin.git:
