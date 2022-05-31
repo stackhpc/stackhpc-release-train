@@ -54,6 +54,14 @@
     chdir: '{{ staging_path }}/{{ repository_manifest.name }}'
   when: workflow_copy.changed | bool
 
+- name: Ensure required labels exists on remote
+  ansible.builtin.include_tasks: 'tasks/add_label.yml'
+  with_items:
+    - stackhpc-ci
+    - workflows
+  loop_control:
+    loop_var: label_name
+
 - name: Open pull request # noqa command-instead-of-shell no-handler
   ansible.builtin.shell:
     cmd: 'gh pr create --fill --base {{ workflow_manifest.prefix  |  default("") }}{{ workflow_manifest.branch }} --label stackhpc-ci --label workflows'
