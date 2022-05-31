@@ -56,7 +56,7 @@
 
 - name: Open pull request # noqa command-instead-of-shell no-handler
   ansible.builtin.shell:
-    cmd: 'gh pr create --fill --base {{ workflow_manifest.prefix  |  default("") }}{{ workflow_manifest.branch }} --label stackhpc --label workflows'
+    cmd: 'gh pr create --fill --base {{ workflow_manifest.prefix  |  default("") }}{{ workflow_manifest.branch }} --label stackhpci --label workflows'
     chdir: '{{ staging_path }}/{{ repository_manifest.name }}'
   when: workflow_copy.changed
 
