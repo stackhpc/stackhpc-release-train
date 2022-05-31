@@ -34,7 +34,7 @@
         prefix: 'stackhpc/',
         workflows: '{{ repository_manifest.workflows.elsewhere }}',
       }
-  when: repository_manifest.copy_workflows and repository_manifest.repository_type == 'openstack'
+  when: repository_manifest.copy_workflows and repository_manifest.releases is defined
   with_items: '{{ repository_manifest.releases }}'
   loop_control:
     loop_var: branch_name
@@ -58,7 +58,7 @@
         prefix: 'stackhpc/',
         copy_codeowners: '{{ repository_manifest.copy_codeowners }}',
       }
-  when: repository_manifest.copy_codeowners and repository_manifest.repository_type == 'openstack'
+  when: repository_manifest.copy_codeowners and repository_manifest.releases is defined
   with_items: '{{ repository_manifest.releases }}'
   loop_control:
     loop_var: branch_name
