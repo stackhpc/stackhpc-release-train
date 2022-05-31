@@ -47,7 +47,7 @@ The additional control provided by the release train comes at a cost in maintena
 
 ### Github Actions
 
-* **Upstream Sync**: a number of repositories that are used by StackHPC are folks and therefore need to be synchronised with upstream to remain up-to-date. Therefore, this workflow will, once a week, make a pull request against any of the active openstack releases branches that are ahead of our downstream branch.  
+* **Upstream Sync**: a number of repositories that are used by StackHPC are folks and therefore need to be synchronised with upstream to remain up-to-date. Therefore, this workflow will once a week make a pull request against any of the active openstack releases branches that are ahead of our downstream branch.  
 * **Tox**: in order to ensure that commits to the repositories are correct and follow style guidelines we can utilise tox which can automate the unit testing and linting of the codebase. This workflow will run anytime a push is made or a pull request to one of the active release branches.
 * **Tag & Release**: various software and packages depend on the repositories therefore it is important that tags are made and releases are published.
 
