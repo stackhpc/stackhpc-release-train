@@ -17,9 +17,9 @@ ansible_workflows:
     - publish_collection
   role:
     - publish_role
-repositories:
+source_repositories:
   kolla:
-    workflows: '{{openstack_workflows}}'
+    workflows: '{{ openstack_workflows }}'
   ansible-collection-pulp:
     repository_type: 'ansible'
-    workflows: '{{ansible_workflows.collection}}'
+    workflows: '{{ ansible_workflows.collection }}'

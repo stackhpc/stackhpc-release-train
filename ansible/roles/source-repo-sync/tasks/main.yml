@@ -24,7 +24,7 @@
         copy_workflows: '{{ item.value.copy_workflows | default(true) }}',
         copy_codeowners: '{{ item.value.copy_codeowners | default(true) }}',
       }
-  with_dict: '{{ repositories }}'
+  with_dict: '{{ source_repositories }}'
   when: item.value.repository_type | default('openstack') == 'openstack'
 
 - name: Configure ansible repositories
@@ -37,7 +37,7 @@
         copy_workflows: '{{ item.value.copy_workflows | default(true) }}',
         copy_codeowners: '{{ item.value.copy_codeowners | default(true) }}',
       }
-  with_dict: '{{ repositories }}'
+  with_dict: '{{ source_repositories }}'
   when: item.value.repository_type | default('openstack') == 'ansible'
 
 - name: Delete staging area directory
