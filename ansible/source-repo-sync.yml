@@ -1,0 +1,5 @@
+---
+- name: Synchronise Repositories Playbook
+  hosts: localhost
+  roles:
+    - role: source-repo-sync

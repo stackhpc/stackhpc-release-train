@@ -1,0 +1,25 @@
+---
+# Dictionary acting as a `manifest` of openstack and ansible repositories
+# containing a list of workflows and community files required by a given 
+# repository.
+default_releases:
+  - xena
+  - wallaby
+  - victoria
+openstack_workflows:
+  default_branch_only:
+    - upstream-sync
+  elsewhere:
+    - tox
+    - tag-and-release
+ansible_workflows:
+  collection:
+    - publish_collection
+  role:
+    - publish_role
+source_repositories:
+  kolla:
+    workflows: '{{ openstack_workflows }}'
+  ansible-collection-pulp:
+    repository_type: 'ansible'
+    workflows: '{{ ansible_workflows.collection }}'

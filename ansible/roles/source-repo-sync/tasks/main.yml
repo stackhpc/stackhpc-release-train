@@ -1,0 +1,46 @@
+---
+- name: Create staging area directory
+  ansible.builtin.file:
+    path: '{{ staging_path }}'
+    state: directory
+    mode: 0755
+
+- name: Configure openstack repositories
+  include_tasks: tasks/configure_repository.yml
+  vars:
+    repository_manifest:
+      {
+        name: '{{ item.key }}',
+        releases:
+          '{{ default_releases | difference(item.value.ignored_releases | default([])) |
+          union(item.value.additional_releases | default([])) }}',
+        workflows:
+          { default_branch_only: '{{ openstack_workflows.default_branch_only  |
+              difference(item.value.workflows.ignored_workflows.default_branch_only | default([])) |
+              union(item.value.workflows.additional_workflows.default_branch_only | default([])) }}',
+            elsewhere: '{{ openstack_workflows.elsewhere |
+              difference(item.value.workflows.ignored_workflows.elsewhere | default([])) |
+              union(item.value.workflows.additional_workflows.elsewhere | default([])) }}' },
+        copy_workflows: '{{ item.value.copy_workflows | default(true) }}',
+        copy_codeowners: '{{ item.value.copy_codeowners | default(true) }}',
+      }
+  with_dict: '{{ source_repositories }}'
+  when: item.value.repository_type | default('openstack') == 'openstack'
+
+- name: Configure ansible repositories
+  include_tasks: tasks/configure_repository.yml
+  vars:
+    repository_manifest:
+      {
+        name: '{{ item.key }}',
+        workflows: { default_branch_only: '{{ item.value.workflows }}' },
+        copy_workflows: '{{ item.value.copy_workflows | default(true) }}',
+        copy_codeowners: '{{ item.value.copy_codeowners | default(true) }}',
+      }
+  with_dict: '{{ source_repositories }}'
+  when: item.value.repository_type | default('openstack') == 'ansible'
+
+- name: Delete staging area directory
+  ansible.builtin.file:
+    path: '{{ staging_path }}'
+    state: absent

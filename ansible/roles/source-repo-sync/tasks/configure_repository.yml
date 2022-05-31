@@ -1,0 +1,64 @@
+---
+- name: Print repository manifest
+  ansible.builtin.debug:
+    var: repository_manifest
+
+- name: Clone repository # noqa git-latest
+  ansible.builtin.git:
+    repo: 'https://{{ owner }}:$GITHUB_TOKEN@github.com/{{ owner }}/{{ repository_manifest.name }}.git'
+    dest: '{{ staging_path }}/{{ repository_manifest.name }}'
+
+- name: Get default branch name # noqa command-instead-of-module
+  ansible.builtin.command:
+    cmd: git rev-parse --abbrev-ref HEAD
+    chdir: '{{ staging_path }}/{{ repository_manifest.name }}'
+  register: default_branch_name
+  changed_when: false
+
+- name: Add workflows to default branch
+  include_tasks: tasks/add_workflows.yml
+  vars:
+    workflow_manifest:
+      {
+        branch: '{{ default_branch_name.stdout }}',
+        workflows: '{{ repository_manifest.workflows.default_branch_only }}',
+      }
+  when: repository_manifest.copy_workflows | bool
+
+- name: Add workflows to supported releases
+  include_tasks: tasks/add_workflows.yml
+  vars:
+    workflow_manifest:
+      {
+        branch: '{{ branch_name }}',
+        prefix: 'stackhpc/',
+        workflows: '{{ repository_manifest.workflows.elsewhere }}',
+      }
+  when: repository_manifest.copy_workflows and repository_manifest.releases is defined
+  with_items: '{{ repository_manifest.releases }}'
+  loop_control:
+    loop_var: branch_name
+
+- name: Add community files to default branch
+  include_tasks: tasks/add_community_files.yml
+  vars:
+    community_manifest:
+      {
+        branch: '{{ default_branch_name.stdout }}',
+        copy_codeowners: '{{ repository_manifest.copy_codeowners }}',
+      }
+  when: repository_manifest.copy_codeowners | bool
+
+- name: Add community files to supported releases
+  include_tasks: tasks/add_community_files.yml
+  vars:
+    community_manifest:
+      {
+        branch: '{{ branch_name }}',
+        prefix: 'stackhpc/',
+        copy_codeowners: '{{ repository_manifest.copy_codeowners }}',
+      }
+  when: repository_manifest.copy_codeowners and repository_manifest.releases is defined
+  with_items: '{{ repository_manifest.releases }}'
+  loop_control:
+    loop_var: branch_name
