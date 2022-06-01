@@ -13,7 +13,7 @@ env:
 jobs:
   container-promote:
     name: Promote container repositories
-    runs-on: [self-hosted, stackhpc-release-train]
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
 

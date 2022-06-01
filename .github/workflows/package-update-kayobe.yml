@@ -14,7 +14,7 @@ env:
 jobs:
   package-update-kayobe:
     name: Update Kayobe package repository versions
-    runs-on: [self-hosted, stackhpc-release-train]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
