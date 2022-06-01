@@ -42,10 +42,9 @@ Clients deploy a local Pulp service which syncs with Ark.
 
 ## Automation & Continuous Integration (CI)
 
-Automation and CI are key aspects of the release train.
-The additional control provided by the release train comes at a cost in maintenance and complexity, which must be offset via automation and CI. Leveraging technologies such as; [Ansible](https://www.ansible.com/) and [Terraform](https://www.terraform.io/) in addition to services such as [Github Actions](https://github.com/features/actions) allows us to achieve the goals of the StackHPC release train. There are numerous applications of these aforementioned technologies and services across various repositories within the StackHPC organisation, they are as follows;
+Automation and CI are key aspects of the release train. The additional control provided by the release train comes at a cost in maintenance and complexity, which must be offset via automation and CI. Leveraging technologies such as; [Ansible](https://www.ansible.com/) and [Terraform](https://www.terraform.io/) in addition to services such as [Github Workflows](https://github.com/features/actions) allows us to achieve the goals of the StackHPC release train. There are numerous applications of these aforementioned technologies and services across various repositories within the StackHPC organisation, they are as follows;
 
-### Github Actions
+### Github Workflows
 
 * **Upstream Sync**: a number of repositories that are used by StackHPC are folks and therefore need to be synchronised with upstream to remain up-to-date. Therefore, this workflow will once a week make a pull request against any of the active openstack releases branches that are ahead of our downstream branch.  
 * **Tox**: in order to ensure that commits to the repositories are correct and follow style guidelines we can utilise tox which can automate the unit testing and linting of the codebase. This workflow will run anytime a push is made or a pull request to one of the active release branches.
@@ -57,4 +56,4 @@ The additional control provided by the release train comes at a cost in maintena
 
 ### Terraform
 
-* **Repository Configuration**: it is important that the repositories that StackHPC are responsible are configured appropiately such as branch protection rules, github action settings and repository facilities such as issues or a wiki being enabled/disabled. To ensure that rules can be applied effortlessly across the StackHPC repositories are using Terraform and the [Github provider](https://registry.terraform.io/providers/integrations/github/latest/docs).
+* **Repository Configuration**: it is important that the repositories StackHPC maintain, are configured appropriately, such as branch protection rules, github action settings and repository facilities such as issues or a wiki being enabled/disabled. To ensure that rules can be applied effortlessly across the StackHPC repositories are using Terraform and the [Github provider](https://registry.terraform.io/providers/integrations/github/latest/docs).
