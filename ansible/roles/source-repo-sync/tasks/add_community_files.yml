@@ -20,7 +20,7 @@
 
 - name: Create working branch # noqa command-instead-of-module
   ansible.builtin.shell:
-    cmd: |
+    cmd: >
       git checkout -b {{ community_manifest.branch }}-community-files \
         origin/{{ community_manifest.prefix | default("") }}{{ community_manifest.branch }}
     chdir: '{{ staging_path }}/{{ repository_manifest.name }}'
