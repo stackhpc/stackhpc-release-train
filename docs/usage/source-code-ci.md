@@ -1,6 +1,8 @@
 # Usage - source code continuous integration
 
-Source code continuous integration (CI) is handled by Github Workflows. There are currently three workflows in use, whose objective is to perform tedious tasks or to ensure that the code is correct and style guidelines are being followed. A brief overview of these workflows was given in the [Overview Section](../index.md#github-actions) whereas this section will provide additional insight into how these workflows function and how you can modify these workflows.
+Source code continuous integration (CI) is handled by Github Workflows.
+There are currently three workflows in use, whose objective is to perform tedious tasks or to ensure that the code is correct and style guidelines are being followed.
+A brief overview of these workflows was given in the [Overview Section](../index.md#github-actions) whereas this section will provide additional insight into how these workflows function and how you can modify these workflows.
 
 ## Github Workflows
 
@@ -14,7 +16,10 @@ This section is simply intended to document the behaviour of these workflows act
 
 ### Tox
 
-OpenStack use [Tox](https://wiki.openstack.org/wiki/Testing) to manage the unit tests and style checks for the various projects they maintain. Therefore, when a `pull request` is opened the tox workflow will automatically perform a series of unit tests and linting in order ensure correctness and style guidelines are being met.  The workflow will run in both python3.6 and python3.8 environments. This can be controlled within the strategy matrix of the workflow. 
+OpenStack use [Tox](https://wiki.openstack.org/wiki/Testing) to manage the unit tests and style checks for the various projects they maintain.
+Therefore, when a `pull request` is opened the tox workflow will automatically perform a series of unit tests and linting in order ensure correctness and style guidelines are being met.
+The workflow will run in both python3.6 and python3.8 environments.
+This can be controlled within the strategy matrix of the workflow. 
 
 ```yaml
 strategy:
@@ -30,15 +35,23 @@ strategy:
 
 ### Tag & Release
 
-Software that depends on the source code repositories that the Release Train manages, typically will use a tag to identify the particular release to download and use. Therefore, to automate the process this workflow will generate a new tag for the latest commit to `stackhpc/**` which in turn will publish a new release under the given repository's Releases page.
+Software that depends on the source code repositories that the Release Train manages, typically will use a tag to identify the particular release to download and use.
+Therefore, to automate the process this workflow will generate a new tag for the latest commit to `stackhpc/**` which in turn will publish a new release under the given repository's Releases page.
 
 !!! Warning
     
-    The tag format currently used by this workflow is `stackhpc/a.b.c.d` which is **NOT** [SemVer](https://semver.org/) compliant any cannot be used in certain circumstances such as within [Helm Charts](https://helm.sh/docs/chart_best_practices/conventions/#version-numbers). However, for the needs of the Release Train this is adequate.
+    The tag format currently used by this workflow is `stackhpc/a.b.c.d` which is **NOT** [SemVer](https://semver.org/) compliant any cannot be used in certain circumstances such as within [Helm Charts](https://helm.sh/docs/chart_best_practices/conventions/#version-numbers).
+    However, for the needs of the Release Train this is adequate.
 
 ### Upstream Sync
 
-Since many of our repositories are forked from OpenStack we need to ensure that we remain in sync with upstream in order to prevent situations where we deviate many any future attempt more difficult than it should be. Therefore, this workflow will periodically check if our `stackhpc/**` are behind their OpenStack counterparts. If so the workflow will copy the OpenStack branch into the repository and then make a `pull request` off of this copy ready to merge pending review by the relevant codeowner. Since the workflow uses the [Github REST API](https://docs.github.com/en/rest) it will still be able to open a PR even if it would result in a merge conflict allowing the relevant codeowner to make the necessary changes to resolve such a conflict. The workflow can be triggered manually within the `Actions` tab of a repository in addition to being scheduled to automatically. Currently is scheduled to run once a week on **Monday at 09:15AM BST**. This can be changed in the [workflow template within the .github repository](https://github.com/stackhpc/.github/blob/main/workflow-templates/upstream-sync.yml).
+Since many of our repositories are forked from OpenStack we need to ensure that we remain in sync with upstream in order to prevent situations where we deviate many any future attempt more difficult than it should be.
+Therefore, this workflow will periodically check if our `stackhpc/**` are behind their OpenStack counterparts.
+If so the workflow will copy the OpenStack branch into the repository and then make a `pull request` off of this copy ready to merge pending review by the relevant codeowner. 
+Since the workflow uses the [Github REST API](https://docs.github.com/en/rest) it will still be able to open a PR even if it would result in a merge conflict allowing the relevant codeowner to make the necessary changes to resolve such a conflict.
+The workflow can be triggered manually within the `Actions` tab of a repository in addition to being scheduled to automatically.
+Currently is scheduled to run once a week on **Monday at 09:15AM BST**.
+This can be changed in the [workflow template within the .github repository](https://github.com/stackhpc/.github/blob/main/workflow-templates/upstream-sync.yml).
 
 ```yaml
 'on':
@@ -49,7 +62,9 @@ Since many of our repositories are forked from OpenStack we need to ensure that 
 
 ## Synchronise Repositories Playbook
 
-Whilst the workflows can be imported manually this is **NOT** the intended approach, rather we will use an Ansible Playbook responsible for identifying repositories that are out of sync or missing the required files and perform pull requests to bring them inline. The playbook and role called `source-repo-sync` is located within [this repository](https://github.com/stackhpc/stackhpc-release-train/tree/main/ansible/roles/source-repo-sync) and will run inside of a Github Workflow, whenever a change is made to the configuration or variables. The motivation behind this is to have single-source of truth and free up developer time as creating dozens of branches and pull requests can be quite monotonous.
+Whilst the workflows can be imported manually this is **NOT** the intended approach, rather we will use an Ansible Playbook responsible for identifying repositories that are out of sync or missing the required files and perform pull requests to bring them inline.
+The playbook and role called `source-repo-sync` is located within [this repository](https://github.com/stackhpc/stackhpc-release-train/tree/main/ansible/roles/source-repo-sync) and will run inside of a Github Workflow, whenever a change is made to the configuration or variables.
+The motivation behind this is to have single-source of truth and free up developer time as creating dozens of branches and pull requests can be quite monotonous.
 
 ### Making modifications to the playbook
 
@@ -92,7 +107,8 @@ Whilst the workflows can be imported manually this is **NOT** the intended appro
         workflows: '{{ ansible_workflows.collection }}'
     ```
 
-In this subsection we shall explore how to make various modifications to the playbook. Please review the `Source Repositories Vars` for a description of the variables found within [source-repositories](https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/source-repositories) vars file.
+In this subsection we shall explore how to make various modifications to the playbook. 
+Please review the `Source Repositories Vars` for a description of the variables found within [source-repositories](https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/source-repositories) vars file.
 
 !!! note
 
@@ -100,7 +116,9 @@ In this subsection we shall explore how to make various modifications to the pla
 
 #### Changing the release series
 
-To change the release series for all OpenStack repositories this can be achived by editing the `default_releases` variable. For example if you wanted to remove victoria and add support for yoga. Once this change has been merged into the `main` branch it shall perform a series of pull requests updating the workflows across all listed repositories.
+To change the release series for all OpenStack repositories this can be achived by editing the `default_releases` variable.
+For example if you wanted to remove victoria and add support for yoga.
+Once this change has been merged into the `main` branch it shall perform a series of pull requests updating the workflows across all listed repositories.
 
 !!! note "ansible/inventory/group_vars/all/source-repositories"
 
@@ -126,7 +144,7 @@ It is more involved to add additional workflows for distribution across the repo
 
 1. Add the workflow as Jinja template in the folder `ansible/roles/source-repo-sync/templates` such as `deploy.jinja`
 
-2. Update `ansible/inventory/group_vars/all/source-repositories` either by changing the default OpenStack or Ansible dict, which would propagate to all repositories of that type or updating only the repositories `workflows` dict directly. Use the name of the .jinja template. See below.
+2. Update `ansible/inventory/group_vars/all/source-repositories` either by changing the default OpenStack or Ansible dict, which would propagate to all repositories of that type or updating only the repositories `workflows` dict directly. Use the name of the jinja template. See below.
 
 !!! info "ansible/inventory/group_vars/all/source-repositories"
 
@@ -154,7 +172,8 @@ It is more involved to add additional workflows for distribution across the repo
 
 #### Remove or omit workflows
 
-To remove a workflow from being deployed or updated across all repositories simply remove it from either `openstack_workflows` or `ansible_workflows` dict. If you would like to remove a workflow from a specific repository either because it is not necessary or you would prefer to manage that workflow within the repository itself then you can use `ignore_workflows` dict within the target repository.
+To remove a workflow from being deployed or updated across all repositories simply remove it from either `openstack_workflows` or `ansible_workflows` dict.
+If you would like to remove a workflow from a specific repository either because it is not necessary or you would prefer to manage that workflow within the repository itself then you can use `ignore_workflows` dict within the target repository.
 
 Note however, this will not create a `pull request` to remove it from the repositories if it has already been deployed.
 
@@ -183,7 +202,9 @@ Note however, this will not create a `pull request` to remove it from the reposi
 
 #### Managing CODEOWNERS
 
-The playbook is also capable of managing the `CODEOWNERS` file for any repository listed within `source_repositories`. The `CODEOWNERS` file for a given repository can be found under `roles/source-repo-sync/files/codeowners` and shares the same name as the target repository. See [github documentation on CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners)
+The playbook is also capable of managing the `CODEOWNERS` file for any repository listed within `source_repositories`.
+The `CODEOWNERS` file for a given repository can be found under `roles/source-repo-sync/files/codeowners` and shares the same name as the target repository.
+See [github documentation on CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners)
 
 !!! warning
     The playbook assumes that all repositories will have `CODEOWNERS` file if this is not the case you must declare `copy_codeowners` as `false` within `source_repositories` for all repositories that this is the case.

@@ -42,17 +42,25 @@ Clients deploy a local Pulp service which syncs with Ark.
 
 ## Automation & Continuous Integration (CI)
 
-Automation and CI are key aspects of the release train. The additional control provided by the release train comes at a cost in maintenance and complexity, which must be offset via automation and CI. Leveraging technologies such as; [Ansible](https://www.ansible.com/) and [Terraform](https://www.terraform.io/) in addition to services such as [Github Workflows](https://github.com/features/actions) allows us to achieve the goals of the StackHPC release train. There are numerous applications of these aforementioned technologies and services across various repositories within the StackHPC organisation, they are as follows;
+Automation and CI are key aspects of the release train.
+The additional control provided by the release train comes at a cost in maintenance and complexity, which must be offset via automation and CI.
+Leveraging technologies such as; [Ansible](https://www.ansible.com/) and [Terraform](https://www.terraform.io/) in addition to services such as [Github Workflows](https://github.com/features/actions) allows us to achieve the goals of the StackHPC release train.
+There are numerous applications of these aforementioned technologies and services across various repositories within the StackHPC organisation, they are as follows;
 
 ### Github Workflows
 
-* **Upstream Sync**: a number of repositories that are used by StackHPC are folks and therefore need to be synchronised with upstream to remain up-to-date. Therefore, this workflow will once a week make a pull request against any of the active openstack releases branches that are ahead of our downstream branch.  
-* **Tox**: in order to ensure that commits to the repositories are correct and follow style guidelines we can utilise tox which can automate the unit testing and linting of the codebase. This workflow will run anytime a push is made or a pull request to one of the active release branches.
+* **Upstream Sync**: a number of repositories that are used by StackHPC are folks and therefore need to be synchronised with upstream to remain up-to-date.
+Therefore, this workflow will once a week make a pull request against any of the active openstack releases branches that are ahead of our downstream branch.  
+* **Tox**: in order to ensure that commits to the repositories are correct and follow style guidelines we can utilise tox which can automate the unit testing and linting of the codebase. 
+This workflow will run anytime a push is made or a pull request to one of the active release branches.
 * **Tag & Release**: various software and packages depend on the repositories therefore it is important that tags are made and releases are published.
 
 ### Ansible
 
-* **Repository Synchronisation**: as the workflows need to be located within each repository and branch that we wish to run them on. Therefore, the deployment and future updates are achieve through automation via Ansible. This allows for changes and new workflows to be automatically propagated out across the StackHPC organisation. This also manages the deployment of community files such as `CODEOWNERS` which can be used to automatically assign the relevant individuals to a newly opened pull request.
+* **Repository Synchronisation**: as the workflows need to be located within each repository and branch that we wish to run them on.
+Therefore, the deployment and future updates are achieve through automation via Ansible.
+This allows for changes and new workflows to be automatically propagated out across the StackHPC organisation.
+This also manages the deployment of community files such as `CODEOWNERS` which can be used to automatically assign the relevant individuals to a newly opened pull request.
 
 ### Terraform
 
