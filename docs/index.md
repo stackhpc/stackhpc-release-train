@@ -61,7 +61,3 @@ This workflow will run anytime a push is made or a pull request to one of the ac
 Therefore, the deployment and future updates are achieve through automation via Ansible.
 This allows for changes and new workflows to be automatically propagated out across the StackHPC organisation.
 This also manages the deployment of community files such as `CODEOWNERS` which can be used to automatically assign the relevant individuals to a newly opened pull request.
-
-### Terraform
-
-* **Repository Configuration**: it is important that the repositories StackHPC maintain, are configured appropriately, such as branch protection rules, github action settings and repository facilities such as issues or a wiki being enabled/disabled. To ensure that rules can be applied effortlessly across the StackHPC repositories are using Terraform and the [Github provider](https://registry.terraform.io/providers/integrations/github/latest/docs).
