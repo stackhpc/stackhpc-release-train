@@ -10,9 +10,7 @@ This section is simply intended to document the behaviour of these workflows act
 
 !!! info "Reusable Workflow Location"
 
-    The following workflows are setup as [reusable workflows](https://docs.github.com/en/actions/using-workflows/reusing-workflows) and can be found within the [StackHPC/.github](https://github.com/stackhpc/.github/tree/main/.github/workflows) repository.
-
-
+    The following workflows are setup as [reusable workflows](https://docs.github.com/en/actions/using-workflows/reusing-workflows) and can be found within the [StackHPC/.github](https://github.com/stackhpc/.github/tree/main/.github/workflows) repository. The advantage of this approach means that changes to a given workflow can be made in one place rather than each repository individualy.
 
 ### Tox
 
@@ -20,6 +18,7 @@ OpenStack use [Tox](https://wiki.openstack.org/wiki/Testing) to manage the unit 
 Therefore, when a `pull request` is opened the tox workflow will automatically perform a series of unit tests and linting in order ensure correctness and style guidelines are being met.
 The workflow will run in both python3.6 and python3.8 environments.
 This can be controlled within the strategy matrix of the workflow. 
+The Python versions should correspond to those used in the supported OS distributions for a particular release.
 
 ```yaml
 strategy:
@@ -40,18 +39,18 @@ Therefore, to automate the process this workflow will generate a new tag for the
 
 !!! Warning
     
-    The tag format currently used by this workflow is `stackhpc/a.b.c.d` which is **NOT** [SemVer](https://semver.org/) compliant any cannot be used in certain circumstances such as within [Helm Charts](https://helm.sh/docs/chart_best_practices/conventions/#version-numbers).
+    The tag format currently used by this workflow is `stackhpc/a.b.c.d` which is **NOT** [SemVer](https://semver.org/) compliant and cannot be used in certain circumstances such as within [Helm Charts](https://helm.sh/docs/chart_best_practices/conventions/#version-numbers).
     However, for the needs of the Release Train this is adequate.
 
 ### Upstream Sync
 
-Since many of our repositories are forked from OpenStack we need to ensure that we remain in sync with upstream in order to prevent situations where we deviate many any future attempt more difficult than it should be.
+Since many of our repositories are forked from OpenStack we need to ensure that we remain in sync with upstream in order to prevent situations where we deviate which could make any future attempts more difficult than it should be.
 Therefore, this workflow will periodically check if our `stackhpc/**` are behind their OpenStack counterparts.
 If so the workflow will copy the OpenStack branch into the repository and then make a `pull request` off of this copy ready to merge pending review by the relevant codeowner. 
 Since the workflow uses the [Github REST API](https://docs.github.com/en/rest) it will still be able to open a PR even if it would result in a merge conflict allowing the relevant codeowner to make the necessary changes to resolve such a conflict.
 The workflow can be triggered manually within the `Actions` tab of a repository in addition to being scheduled to automatically.
 Currently is scheduled to run once a week on **Monday at 09:15AM BST**.
-This can be changed in the [workflow template within the .github repository](https://github.com/stackhpc/.github/blob/main/workflow-templates/upstream-sync.yml).
+This can be changed in the [workflow template within the .github repository](https://github.com/stackhpc/.github/blob/main/workflow-templates/upstream-sync.yml). As the workflow scheduled it must be located within the `default branch` such as `main` or `master` for Github to register it.
 
 ```yaml
 'on':
@@ -59,6 +58,15 @@ This can be changed in the [workflow template within the .github repository](htt
     - cron: '15 8 * * 1'
   workflow_dispatch:
 ```
+
+### Publish Collection/Role
+
+These two workflow automate the publication of a Ansible Collection or Role to Ansible Galaxy. They can triggered either manually or whenever a new tag is pushed in the form `v[0-9]+.[0-9]+.[0-9]+` for a collection or `v?[0-9]+.[0-9]+.[0-9]+` for a role.
+
+
+!!! info "Ansible Galaxy API Requirements"
+
+    Since the `Publish Collection` and `Publish Role` workflow interacts with Ansible Galaxy then the repository where this workflow is used must have an Ansible Galaxy API key stored as a secret called `GALAXY_API_KEY`.
 
 ## Synchronise Repositories Playbook
 
@@ -68,7 +76,7 @@ The motivation behind this is to have single-source of truth and free up develop
 
 ### Making modifications to the playbook
 
-??? info "Source Repositories Vars"
+!!! info "Source Repositories Vars"
 
     * **default_releases**: list of OpenStack release series currently supported by StackHPC and used within the workflows
     * **openstack_workflows**: dictionary of OpenStack specific workflows as mentioned above
@@ -142,9 +150,11 @@ Once this change has been merged into the `main` branch it shall perform a serie
 
 It is more involved to add additional workflows for distribution across the repositories. 
 
-1. Add the workflow as Jinja template in the folder `ansible/roles/source-repo-sync/templates` such as `deploy.jinja`
+1. Add the workflow to the `.github` repository as one that is reusable.
 
-2. Update `ansible/inventory/group_vars/all/source-repositories` either by changing the default OpenStack or Ansible dict, which would propagate to all repositories of that type or updating only the repositories `workflows` dict directly. Use the name of the jinja template. See below.
+2. Add the workflow caller as Jinja template in the folder `ansible/roles/source-repo-sync/templates` such as `deploy.jinja`
+
+3. Update `ansible/inventory/group_vars/all/source-repositories` either by changing the default OpenStack or Ansible dict, which would propagate to all repositories of that type or updating only the repositories `workflows` dict directly. Use the name of the jinja template. See below.
 
 !!! info "ansible/inventory/group_vars/all/source-repositories"
 
