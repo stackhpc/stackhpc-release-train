@@ -20,6 +20,7 @@ The current scope of the release train covers OpenStack control plane deployment
 This includes:
 
 * Host Operating System (OS) repositories, e.g. CentOS Stream 8 BaseOS
+* Source code repositories
 * Kolla container images
 * Ironic Python Agent (IPA) deployment images
 * VM & bare metal disk images
