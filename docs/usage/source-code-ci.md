@@ -63,11 +63,6 @@ This can be changed in the [workflow template within the .github repository](htt
 
 These two workflow automate the publication of a Ansible Collection or Role to Ansible Galaxy. They can triggered either manually or whenever a new tag is pushed in the form `v[0-9]+.[0-9]+.[0-9]+` for a collection or `v?[0-9]+.[0-9]+.[0-9]+` for a role.
 
-
-!!! info "Ansible Galaxy API Requirements"
-
-    Since the `Publish Collection` and `Publish Role` workflow interacts with Ansible Galaxy then the repository where this workflow is used must have an Ansible Galaxy API key stored as a secret called `GALAXY_API_KEY`.
-
 ## Synchronise Repositories Playbook
 
 Whilst the workflows can be imported manually this is **NOT** the intended approach, rather we will use an Ansible Playbook responsible for identifying repositories that are out of sync or missing the required files and perform pull requests to bring them inline.
