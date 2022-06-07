@@ -147,8 +147,8 @@ rpm_package_repos:
   - name: MariaDB 10.5
     url: https://downloads.mariadb.com/MariaDB/mariadb-10.5/yum/centos8-amd64
     base_path: mariadb-10.5/yum/centos8-amd64/
-    short_name: mariadb_10_5_centos8_amd64
-    distribution_name: mariadb-10.5-centos8-amd64
+    short_name: mariadb_10_5_centos8
+    distribution_name: mariadb-10.5-centos8
   - name: RabbitMQ - Erlang
     url: https://packagecloud.io/rabbitmq/erlang/el/8/x86_64
     # mirror_complete fails with:
