@@ -34,6 +34,11 @@ rpm_package_repos:
     base_path: centos/8-stream/virt/x86_64/advancedvirt-common/
     short_name: centos_stream_8_advanced_virtualization
     distribution_name: centos-stream-8-advancedvirt-
+  - name: CentOS Stream 8 - Ceph Nautilus
+    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=storage-ceph-nautilus
+    base_path: centos/8-stream/storage/x86_64/ceph-nautilus/
+    short_name: centos_stream_8_storage_ceph_nautilus
+    distribution_name: centos-stream-8-storage-ceph-nautilus-
   - name: CentOS Stream 8 - Ceph Pacific
     url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=storage-ceph-pacific
     base_path: centos/8-stream/storage/x86_64/ceph-pacific/
