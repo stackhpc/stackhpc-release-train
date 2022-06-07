@@ -19,7 +19,29 @@ ansible_workflows:
     - publish_role
 source_repositories:
   kolla:
-    workflows: '{{ openstack_workflows }}'
+# kayobe:
+# kolla-ansible:
+# bifrost:
+# barbican:
+# horizon:
+# cloudkitty:
+  magnum:
+  stackhpc-inspector-plugins:
+    ignored_releases: '{{ default_releases }}'
+    workflows:
+      ignored_workflows:
+        default_branch_only:
+          - upstream-sync
+        elsewhere:
+          - tox
+          - tag-and-release
+      additional_workflows:
+        default_branch_only:
+          - tox
+          - tag-and-release
+  # ansible-role-os-networks:
+  #   repository_type: 'ansible'
+  #   workflows: '{{ ansible_workflows.role }}'
   ansible-collection-pulp:
     repository_type: 'ansible'
     workflows: '{{ ansible_workflows.collection }}'
