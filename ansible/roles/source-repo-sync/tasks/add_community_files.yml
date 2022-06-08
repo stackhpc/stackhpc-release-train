@@ -34,10 +34,11 @@
 
 - name: Copy community files
   ansible.builtin.copy:
-    src: 'files/codeowners/{{ repository_manifest.name }}'
+    content: '{{ repository_manifest.codeowners }}'
     dest: '{{ staging_path }}/{{ repository_manifest.name }}/.github/CODEOWNERS'
     mode: 0755
   register: community_copy
+  when: repository_manifest.codeowners | default('') | length > 0
 
 - name: Commit changes # noqa command-instead-of-module no-handler
   ansible.builtin.shell:

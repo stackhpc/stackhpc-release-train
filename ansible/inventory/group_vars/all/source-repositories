@@ -17,9 +17,15 @@ ansible_workflows:
     - publish_collection
   role:
     - publish_role
+kayobe_codeowners: |
+  * @stackhpc/kayobe
+ansible_codeowners: |
+  * @stackhpc/ansible
 source_repositories:
   kolla:
     workflows: '{{ openstack_workflows }}'
+    codeowners: '{{ kayobe_codeowners }}'
   ansible-collection-pulp:
     repository_type: 'ansible'
     workflows: '{{ ansible_workflows.collection }}'
+    codeowners: '{{ ansible_codeowners }}'

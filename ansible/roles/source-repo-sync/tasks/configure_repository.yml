@@ -45,7 +45,6 @@
     community_manifest:
       {
         branch: '{{ default_branch_name.stdout }}',
-        copy_codeowners: '{{ repository_manifest.copy_codeowners }}',
       }
   when: repository_manifest.copy_codeowners | bool
 
