@@ -1,5 +1,5 @@
 ---
-owner: stackhpc
+owner: jackhodgkiss
 staging_path: ~/.repo-staging
 default_releases: []
 openstack_workflows:
