@@ -42,7 +42,7 @@
       ansible.builtin.file:
         path: '{{ staging_path }}/{{ repository_manifest.name }}/.github/'
         state: directory
-        mode: 0644
+        mode: 0755
 
     - name: Copy community files
       ansible.builtin.copy:

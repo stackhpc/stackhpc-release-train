@@ -42,13 +42,13 @@
       ansible.builtin.file:
         path: '{{ staging_path }}/{{ repository_manifest.name }}/.github/workflows'
         state: directory
-        mode: 0644
+        mode: 0755
 
     - name: Copy workflow into repository
       ansible.builtin.template:
         src: 'templates/{{ workflow }}.jinja'
         dest: '{{ staging_path }}/{{ repository_manifest.name }}/.github/workflows/{{ workflow }}.yml'
-        mode: 0644
+        mode: 0755
       with_items: '{{ workflow_manifest.workflows }}'
       loop_control:
         loop_var: workflow
