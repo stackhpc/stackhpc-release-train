@@ -28,7 +28,7 @@ source_repositories:
     community_files:
       - codeowners:
           content: '{{ community_files.codeowners.kayobe_codeowners }}'
-          dest: 'CODEOWNERS'
+          dest: '.github/CODEOWNERS'
   kayobe:
   kolla-ansible:
   bifrost:

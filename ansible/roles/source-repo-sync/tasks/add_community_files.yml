@@ -47,7 +47,7 @@
     - name: Copy community files
       ansible.builtin.copy:
         content: '{{ community_file.value.content }}'
-        dest: '{{ staging_path }}/{{ repository_manifest.name }}/.github/{{ community_file.value.dest }}'
+        dest: '{{ staging_path }}/{{ repository_manifest.name }}/{{ community_file.value.dest }}'
         mode: 0644
       register: community_copy
       with_dict: '{{ repository_manifest.community_files }}'
