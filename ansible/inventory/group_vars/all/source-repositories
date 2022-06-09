@@ -32,8 +32,13 @@ source_repositories:
   kayobe:
   kolla-ansible:
   bifrost:
+    ignored_releases:
+      - victoria
   barbican:
-  horizon:
+    ignored_releases:
+      - victoria
+      - xena
+# horizon:
   cloudkitty:
   magnum:
   stackhpc-inspector-plugins:
@@ -49,13 +54,6 @@ source_repositories:
         default_branch_only:
           - tox
           - tag-and-release
-  ansible-role-os-networks:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
-    community_files:
-      - codeowners:
-          content: '{{ community_files.codeowners.ansible_codeowners }}'
-          dest: 'CODEOWNERS'
   ansible-role-os-projects:
     repository_type: 'ansible'
     workflows: '{{ ansible_workflows.role }}'
@@ -77,19 +75,10 @@ source_repositories:
   ansible-role-luks:
     repository_type: 'ansible'
     workflows: '{{ ansible_workflows.role }}'
-  ansible-role-interfaces:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
-  ansible-chrony:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
   ansible-role-os-volumes:
     repository_type: 'ansible'
     workflows: '{{ ansible_workflows.role }}'
   ansible-role-grubcmdline:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
-  ansible-role-linux-kernel:
     repository_type: 'ansible'
     workflows: '{{ ansible_workflows.role }}'
   ansible-role-os-flavors:
@@ -99,9 +88,6 @@ source_repositories:
     repository_type: 'ansible'
     workflows: '{{ ansible_workflows.role }}'
   ansible-role-sriov:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
-  ansible-role-ntp:
     repository_type: 'ansible'
     workflows: '{{ ansible_workflows.role }}'
   ansible-role-os-openstackclient:
@@ -131,12 +117,6 @@ source_repositories:
   ansible-role-os-container-clusters:
     repository_type: 'ansible'
     workflows: '{{ ansible_workflows.role }}'
-  rke-ansible:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
-  ansible.ha-cluster-pacemaker:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
   ansible-role-cluster-infra:
     repository_type: 'ansible'
     workflows: '{{ ansible_workflows.role }}'
@@ -158,16 +138,10 @@ source_repositories:
   ansible-role-dell-powerconnect-switch:
     repository_type: 'ansible'
     workflows: '{{ ansible_workflows.role }}'
-  ansible-k8s-inception:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
   drac-facts:
     repository_type: 'ansible'
     workflows: '{{ ansible_workflows.role }}'
   ansible-role-gluster-cluster:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
-  efi-lockdown:
     repository_type: 'ansible'
     workflows: '{{ ansible_workflows.role }}'
   ansible-role-mellanox-switch:
@@ -176,27 +150,18 @@ source_repositories:
   ansible-role-os-config:
     repository_type: 'ansible'
     workflows: '{{ ansible_workflows.role }}'
-  ansible-users:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
   ansible-role-mlnx-neo:
     repository_type: 'ansible'
     workflows: '{{ ansible_workflows.role }}'
+  ansible-collection-cephadm:
+    repository_type: 'ansible'
+    workflows: '{{ ansible_workflows.collection }}'
   ansible-collection-pulp:
     repository_type: 'ansible'
     workflows: '{{ ansible_workflows.collection }}'
   ansible-collection-hashicorp:
     repository_type: 'ansible'
     workflows: '{{ ansible_workflows.collection }}'
-  ansible-collection-kolla:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.collection }}'
   ansible-collection-openstack-ops:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.collection }}'
-  ansible-collections-openstack:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.collection }}'
-  rally-openstack:
     repository_type: 'ansible'
     workflows: '{{ ansible_workflows.collection }}'
