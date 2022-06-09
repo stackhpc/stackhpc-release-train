@@ -17,8 +17,24 @@ ansible_workflows:
     - publish_collection
   role:
     - publish_role
+community_files:
+  codeowners:
+    kayobe_codeowners: |
+      * @stackhpc/kayobe
+    ansible_codeowners: |
+      * @stackhpc/ansible
+  security:
+    default: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel.
 source_repositories:
   kolla:
+    community_files:
+      - codeowners:
+          content: '{{ community_files.codeowners.kayobe_codeowners }}'
+          dest: 'CODEOWNERS'
+      - security:
+          content: '{{ community_files.security.default }}'
+          dest: 'SECURITY.md'
   kayobe:
   kolla-ansible:
   bifrost:
