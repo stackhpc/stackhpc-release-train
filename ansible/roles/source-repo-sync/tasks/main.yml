@@ -32,7 +32,7 @@
   with_dict: '{{ source_repositories }}'
   when: item.value.repository_type | default('openstack') == 'openstack'
 
-- name: Configure ansible repositories
+- name: Configure branchless repositories
   include_tasks: tasks/configure_repository.yml
   vars:
     repository_manifest:
@@ -43,7 +43,7 @@
         community_files: '{{ item.value.community_files | default({}) }}'
       }
   with_dict: '{{ source_repositories }}'
-  when: item.value.repository_type | default('openstack') == 'ansible'
+  when: item.value.repository_type | default('openstack') != 'openstack'
 
 - name: Delete staging area directory
   ansible.builtin.file:

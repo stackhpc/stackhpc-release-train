@@ -3,13 +3,6 @@
   ansible.builtin.debug:
     var: repository_manifest
 
-- name: Print community files
-  ansible.builtin.debug:
-    msg: '{{ community_file.value.content }} => {{ community_file.value.dest }}'
-  with_dict: '{{ repository_manifest.community_files }}'
-  loop_control:
-    loop_var: community_file
-
 - name: Clone repository # noqa git-latest
   ansible.builtin.git:
     repo: 'https://{{ owner }}:$GITHUB_TOKEN@github.com/{{ owner }}/{{ repository_manifest.name }}.git'

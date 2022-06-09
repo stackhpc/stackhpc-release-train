@@ -38,22 +38,11 @@ source_repositories:
     ignored_releases:
       - victoria
       - xena
-# horizon:
   cloudkitty:
   magnum:
   stackhpc-inspector-plugins:
-    ignored_releases: '{{ default_releases }}'
-    workflows:
-      ignored_workflows:
-        default_branch_only:
-          - upstream-sync
-        elsewhere:
-          - tox
-          - tag-and-release
-      additional_workflows:
-        default_branch_only:
-          - tox
-          - tag-and-release
+    repository_type: 'branchless'
+    workflows: '{{ openstack_workflows.elsewhere }}'
   ansible-role-os-projects:
     repository_type: 'ansible'
     workflows: '{{ ansible_workflows.role }}'
