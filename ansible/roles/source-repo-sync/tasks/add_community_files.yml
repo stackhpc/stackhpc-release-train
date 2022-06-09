@@ -56,7 +56,9 @@
 
     - name: Commit changes # noqa command-instead-of-module no-handler
       ansible.builtin.shell:
-        cmd: "git add . && git commit -m 'feat: automatic update of community files'"
+        cmd: |
+          git add . && git commit -m \
+          'feat: automatic update of workflows {{ community_manifest.prefix | default("") }}{{ community_manifest.branch }}'
         chdir: '{{ staging_path }}/{{ repository_manifest.name }}'
       when: community_copy.changed | bool
 
