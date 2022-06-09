@@ -188,9 +188,9 @@ source_repositories:
   # ansible-role-mlnx-neo:
   #   repository_type: 'ansible'
   #   workflows: '{{ ansible_workflows.role }}'
-  # ansible-collection-pulp:
-  #   repository_type: 'ansible'
-  #   workflows: '{{ ansible_workflows.collection }}'
+  ansible-collection-pulp:
+    repository_type: 'ansible'
+    workflows: '{{ ansible_workflows.collection }}'
   # ansible-collection-hashicorp:
   #   repository_type: 'ansible'
   #   workflows: '{{ ansible_workflows.collection }}'

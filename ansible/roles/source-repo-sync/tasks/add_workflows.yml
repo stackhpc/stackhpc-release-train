@@ -59,6 +59,13 @@
         path: '{{ staging_path }}/{{ repository_manifest.name }}/.travis.yml'
         state: absent
       register: travis_rm
+
+    - name: Remove publish workflow
+      ansible.builtin.file:
+        path: '{{ staging_path }}/{{ repository_manifest.name }}/.github/workflows/publish.yml'
+        state: absent
+      register: publish_rm
+
     - block:
         - name: Commit changes # noqa command-instead-of-module no-handler
           ansible.builtin.shell:
@@ -91,5 +98,5 @@
         - name: Pause playbook to prevent exceeding API rate limit # noqa no-handler
           ansible.builtin.pause:
             seconds: 10
-      when: workflow_copy.changed | bool or travis_rm.changed | bool
+      when: workflow_copy.changed | bool or travis_rm.changed or publish_rm.changed | bool
   when: release_series_exists.rc == 0
