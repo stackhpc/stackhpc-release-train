@@ -3,7 +3,7 @@ name: Tag & Release
 'on':
   push:
     branches:
-      - {{workflow_manifest.branch}}
+      - stackhpc/{{workflow_manifest.branch}}
 permissions:
   contents: write
 jobs:

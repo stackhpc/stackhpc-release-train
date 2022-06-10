@@ -48,7 +48,7 @@
       ansible.builtin.template:
         src: 'templates/{{ workflow }}.jinja'
         dest: '{{ staging_path }}/{{ repository_manifest.name }}/.github/workflows/{{ workflow }}.yml'
-        mode: 0755
+        mode: 0644
       with_items: '{{ workflow_manifest.workflows }}'
       loop_control:
         loop_var: workflow
