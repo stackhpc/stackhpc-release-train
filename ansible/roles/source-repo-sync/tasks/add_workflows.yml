@@ -1,74 +1,102 @@
 ---
-- name: Check if working branch already exists on the remote
+- name: Check if release series exists on the remote
   ansible.builtin.shell:
     cmd: |
       gh api \
       -H "Accept: application/vnd.github.v3+json" \
-      /repos/{{ owner }}/{{ repository_manifest.name }}/git/ref/heads/{{ workflow_manifest.branch }}-workflows
+      /repos/{{ owner }}/{{ repository_manifest.name }}/git/ref/heads/{{ workflow_manifest.prefix | default("") }}{{ workflow_manifest.branch }}
   changed_when: false
   failed_when: false
-  register: branch_exists
+  register: release_series_exists
 
-- name: Delete working branch from the remote
-  ansible.builtin.shell:
-    cmd: |
-      gh api \
-      --method DELETE \
-      -H "Accept: application/vnd.github.v3+json" \
-      /repos/{{ owner }}/{{ repository_manifest.name }}/git/refs/heads/{{ workflow_manifest.branch }}-workflows
-  when: branch_exists.rc == 0
+- name: Proceed with adding workflows
+  block:
+    - name: Check if working branch already exists on the remote
+      ansible.builtin.shell:
+        cmd: |
+          gh api \
+          -H "Accept: application/vnd.github.v3+json" \
+          /repos/{{ owner }}/{{ repository_manifest.name }}/git/ref/heads/{{ workflow_manifest.branch }}-workflows
+      changed_when: false
+      failed_when: false
+      register: working_branch_exists
 
-- name: Create working branch # noqa command-instead-of-module
-  ansible.builtin.shell:
-    cmd: >
-      git checkout -b {{ workflow_manifest.branch }}-workflows \
-        origin/{{ workflow_manifest.prefix | default("") }}{{ workflow_manifest.branch }}
-    chdir: '{{ staging_path }}/{{ repository_manifest.name }}'
-  changed_when: true
+    - name: Delete working branch from the remote
+      ansible.builtin.shell:
+        cmd: |
+          gh api \
+          --method DELETE \
+          -H "Accept: application/vnd.github.v3+json" \
+          /repos/{{ owner }}/{{ repository_manifest.name }}/git/refs/heads/{{ workflow_manifest.branch }}-workflows
+      when: working_branch_exists.rc == 0
 
-- name: Create .github/workflows directory
-  ansible.builtin.file:
-    path: '{{ staging_path }}/{{ repository_manifest.name }}/.github/workflows'
-    state: directory
-    mode: 0755
+    - name: Create working branch # noqa command-instead-of-module
+      ansible.builtin.shell:
+        cmd: >
+          git checkout -b {{ workflow_manifest.branch }}-workflows \
+            origin/{{ workflow_manifest.prefix | default("") }}{{ workflow_manifest.branch }}
+        chdir: '{{ staging_path }}/{{ repository_manifest.name }}'
+      changed_when: true
 
-- name: Copy workflow into repository
-  ansible.builtin.template:
-    src: 'templates/{{ workflow }}.jinja'
-    dest: '{{ staging_path }}/{{ repository_manifest.name }}/.github/workflows/{{ workflow }}.yml'
-    mode: 0755
-  with_items: '{{ workflow_manifest.workflows }}'
-  loop_control:
-    loop_var: workflow
-  register: workflow_copy
+    - name: Create .github/workflows directory
+      ansible.builtin.file:
+        path: '{{ staging_path }}/{{ repository_manifest.name }}/.github/workflows'
+        state: directory
+        mode: 0755
 
-- name: Commit changes # noqa command-instead-of-module no-handler
-  ansible.builtin.shell:
-    cmd: "git add . && git commit -m 'feat: automatic update of workflows'"
-    chdir: '{{ staging_path }}/{{ repository_manifest.name }}'
-  when: workflow_copy.changed | bool
+    - name: Copy workflow into repository
+      ansible.builtin.template:
+        src: 'templates/{{ workflow }}.jinja'
+        dest: '{{ staging_path }}/{{ repository_manifest.name }}/.github/workflows/{{ workflow }}.yml'
+        mode: 0755
+      with_items: '{{ workflow_manifest.workflows }}'
+      loop_control:
+        loop_var: workflow
+      register: workflow_copy
 
-- name: Push branch to remote # noqa command-instead-of-module command-instead-of-shell no-handler
-  ansible.builtin.shell:
-    cmd: 'git push -u origin {{ workflow_manifest.branch }}-workflows'
-    chdir: '{{ staging_path }}/{{ repository_manifest.name }}'
-  when: workflow_copy.changed | bool
+    - name: Remove TravisCI file
+      ansible.builtin.file:
+        path: '{{ staging_path }}/{{ repository_manifest.name }}/.travis.yml'
+        state: absent
+      register: travis_rm
 
-- name: Ensure required labels exists on remote
-  ansible.builtin.include_tasks: 'tasks/add_label.yml'
-  with_items:
-    - stackhpc-ci
-    - workflows
-  loop_control:
-    loop_var: label_name
+    - name: Remove publish workflow
+      ansible.builtin.file:
+        path: '{{ staging_path }}/{{ repository_manifest.name }}/.github/workflows/publish.yml'
+        state: absent
+      register: publish_rm
 
-- name: Open pull request # noqa command-instead-of-shell no-handler
-  ansible.builtin.shell:
-    cmd: 'gh pr create --fill --base {{ workflow_manifest.prefix  |  default("") }}{{ workflow_manifest.branch }} --label stackhpc-ci --label workflows'
-    chdir: '{{ staging_path }}/{{ repository_manifest.name }}'
-  when: workflow_copy.changed | bool
+    - block:
+        - name: Commit changes # noqa command-instead-of-module no-handler
+          ansible.builtin.shell:
+            cmd: |
+              git add . && git commit -m \
+              'feat: automatic update of workflows {{ workflow_manifest.prefix | default("") }}{{ workflow_manifest.branch }}'
+            chdir: '{{ staging_path }}/{{ repository_manifest.name }}'
+          changed_when: true
 
-- name: Pause playbook to prevent exceeding API rate limit # noqa no-handler
-  ansible.builtin.pause:
-    seconds: 10
-  when: workflow_copy.changed | bool
+        - name: Push branch to remote # noqa command-instead-of-module command-instead-of-shell no-handler
+          ansible.builtin.shell:
+            cmd: 'git push -u origin {{ workflow_manifest.branch }}-workflows'
+            chdir: '{{ staging_path }}/{{ repository_manifest.name }}'
+          changed_when: true
+
+        - name: Ensure required labels exists on remote
+          ansible.builtin.include_tasks: 'tasks/add_label.yml'
+          with_items:
+            - stackhpc-ci
+            - workflows
+          loop_control:
+            loop_var: label_name
+
+        - name: Open pull request # noqa command-instead-of-shell no-handler
+          ansible.builtin.shell:
+            cmd: 'gh pr create --fill --base {{ workflow_manifest.prefix | default("") }}{{ workflow_manifest.branch }} --label stackhpc-ci --label workflows'
+            chdir: '{{ staging_path }}/{{ repository_manifest.name }}'
+          changed_when: true
+
+        - name: Pause playbook to prevent exceeding API rate limit # noqa no-handler
+          ansible.builtin.pause:
+            seconds: 10
+      when: workflow_copy.changed | bool or travis_rm.changed or publish_rm.changed | bool
+  when: release_series_exists.rc == 0

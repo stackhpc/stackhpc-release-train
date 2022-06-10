@@ -45,9 +45,9 @@
     community_manifest:
       {
         branch: '{{ default_branch_name.stdout }}',
-        copy_codeowners: '{{ repository_manifest.copy_codeowners }}',
+        community_files: '{{ repository_manifest.community_files }}',
       }
-  when: repository_manifest.copy_codeowners | bool
+  when: repository_manifest.community_files is defined
 
 - name: Add community files to supported releases
   include_tasks: tasks/add_community_files.yml
@@ -56,9 +56,9 @@
       {
         branch: '{{ branch_name }}',
         prefix: 'stackhpc/',
-        copy_codeowners: '{{ repository_manifest.copy_codeowners }}',
+        community_files: '{{ repository_manifest.community_files }}',
       }
-  when: repository_manifest.copy_codeowners and repository_manifest.releases is defined
+  when: repository_manifest.community_files is defined and repository_manifest.releases is defined
   with_items: '{{ repository_manifest.releases }}'
   loop_control:
     loop_var: branch_name

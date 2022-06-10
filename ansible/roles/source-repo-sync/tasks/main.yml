@@ -1,4 +1,9 @@
 ---
+- name: Delete staging area directory
+  ansible.builtin.file:
+    path: '{{ staging_path }}'
+    state: absent
+
 - name: Create staging area directory
   ansible.builtin.file:
     path: '{{ staging_path }}'
@@ -22,12 +27,12 @@
               difference(item.value.workflows.ignored_workflows.elsewhere | default([])) |
               union(item.value.workflows.additional_workflows.elsewhere | default([])) }}' },
         copy_workflows: '{{ item.value.copy_workflows | default(true) }}',
-        copy_codeowners: '{{ item.value.copy_codeowners | default(true) }}',
+        community_files: '{{ item.value.community_files | default({}) }}'
       }
   with_dict: '{{ source_repositories }}'
   when: item.value.repository_type | default('openstack') == 'openstack'
 
-- name: Configure ansible repositories
+- name: Configure branchless repositories
   include_tasks: tasks/configure_repository.yml
   vars:
     repository_manifest:
@@ -35,10 +40,10 @@
         name: '{{ item.key }}',
         workflows: { default_branch_only: '{{ item.value.workflows }}' },
         copy_workflows: '{{ item.value.copy_workflows | default(true) }}',
-        copy_codeowners: '{{ item.value.copy_codeowners | default(true) }}',
+        community_files: '{{ item.value.community_files | default({}) }}'
       }
   with_dict: '{{ source_repositories }}'
-  when: item.value.repository_type | default('openstack') == 'ansible'
+  when: item.value.repository_type | default('openstack') != 'openstack'
 
 - name: Delete staging area directory
   ansible.builtin.file:
