@@ -40,6 +40,8 @@ source_repositories:
       - xena
   cloudkitty:
   magnum:
+    ignored_releases:
+      - victoria
   stackhpc-inspector-plugins:
     repository_type: 'branchless'
     workflows: '{{ openstack_workflows.elsewhere }}'
