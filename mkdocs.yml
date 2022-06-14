@@ -16,6 +16,7 @@ markdown_extensions:
       permalink: True
   - pymdownx.details
   - pymdownx.superfences
+  - tables
 nav:
   - Overview: index.md
   - Architecture: architecture/index.md

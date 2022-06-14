@@ -2,11 +2,21 @@
 
 Source code continuous integration (CI) is handled by Github Workflows.
 There are currently three workflows in use, whose objective is to perform tedious tasks or to ensure that the code is correct and style guidelines are being followed.
-A brief overview of these workflows was given in the [Overview Section](../index.md#github-actions) whereas this section will provide additional insight into how these workflows function and how you can modify these workflows.
+A brief overview of these workflows was given in the [Overview Section](../index.md#github-actions) whereas this section will provide additional insight into how these workflows function and how you can modify these workflows. 
+Also included are community files used by Github to improve developer experience within the respositories.
 
 ## Github Workflows
 
 This section is simply intended to document the behaviour of these workflows actual modification should be handled via the Synchronise Repositories Playbook which is documented below in [Synchronise Repositories Playbook Section](#synchronise-repositories-playbook).
+The table below contains the different workflows with a description of each and the project type they would are used within.
+
+| Workflow               | Description                                                                                 | Project Type         |
+| :--------------------: | ------------------------------------------------------------------------------------------- | :------------------: |
+| **Upstream Sync**      | Keep our downstream fork up-to-date with the upstream counterpart                           | OpenStack            |
+| **Tag & Release**      | Generate an new tag and accompanying release whenever a commit is pushed to select branches | OpenStack            |
+| **Tox**                | Perform linting and unit testing                                                            | OpenStack            |
+| **Publish Role**       | Publish the Ansible Role on Ansible Galaxy                                                  | Ansible (Role)       |
+| **Publish Collection** | Publish the Ansible Collection on Ansible Galaxy                                            | Ansible (Collection) |
 
 !!! info "Reusable Workflow Location"
 
@@ -16,7 +26,7 @@ This section is simply intended to document the behaviour of these workflows act
 
 OpenStack use [Tox](https://wiki.openstack.org/wiki/Testing) to manage the unit tests and style checks for the various projects they maintain.
 Therefore, when a `pull request` is opened the tox workflow will automatically perform a series of unit tests and linting in order ensure correctness and style guidelines are being met.
-The workflow will run in both python3.6 and python3.8 environments.
+The workflow will run in both python 3.6 and python 3.8 environments.
 This can be controlled within the strategy matrix of the workflow. 
 The Python versions should correspond to those used in the supported OS distributions for a particular release.
 
