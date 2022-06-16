@@ -1,0 +1,35 @@
+---
+name: Setup
+description: Setup Release Train & dependencies
+inputs:
+  vault-password:
+    description: Ansible Vault password
+    required: true
+    type: string
+  vault-password-file:
+    description: Path to a file to write the Ansible Vault password
+    required: true
+    type: string
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@v3
+      with:
+        python-version: 3.x
+        # Cache Python dependencies
+        cache: pip
+
+    - name: Preparing Vault password file
+      run: |
+        echo "${{ inputs.vault-password }}" > "${{ inputs.vault-password-file }}"
+      shell: bash
+
+    - name: Install Python dependencies
+      run: |
+        pip install -r requirements.txt
+      shell: bash
+
+    - name: Install Ansible collection dependencies
+      run: |
+        ansible-galaxy collection install -r requirements.yml -p ansible/collections
+      shell: bash
