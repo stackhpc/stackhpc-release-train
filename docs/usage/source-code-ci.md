@@ -87,12 +87,14 @@ The motivation behind this is to have single-source of truth and free up develop
     * **openstack_workflows**: dictionary of OpenStack specific workflows as mentioned above
         * default_branch_only: list of workflows that will only exist on the `default branch` **(master/main)**
         * elsewhere: list of workflows that will be placed on other branches such as `stackhpc/xena` see `default_releases`
-    * **ansible_workflows**: dictionary contain either the type of Ansible `collection` or `role`
+    * **ansible_workflows**: dictionary that contains either the type of Ansible `collection` or `role`
         * collection: list of workflows specific to Ansible collections
         * role: list of workflows specific to Ansible roles
+    * **community_files**: dictionary of templates for various community files. 
+      Each community file can have multiple templates are can be written as multiline strings.
     * **source_repositories**: dictionary of repositories targeted by the Ansible playbook
         * repository_name: points to repository, must match the name of the repository exactly.
-            * repository_type: used to distinguish if the repository is OpenStack or Ansible related, defaults to OpenStack if not provided
+            * repository_type: used to distinguish if the repository is OpenStack, Ansible or branchless, defaults to OpenStack if not provided
             * workflows: can either use `openstack_workflows`, `ansible_workflows` or provide a custom set of workflows, see ** below! **
 
     ```yaml
@@ -112,10 +114,29 @@ The motivation behind this is to have single-source of truth and free up develop
         - publish_collection
       role:
         - publish_role
+    community_files:
+      codeowners:
+        kayobe_codeowners: |
+          * @stackhpc/kayobe
+        ansible_codeowners: |
+          * @stackhpc/ansible
     source_repositories:
       kolla:
-        workflows: '{{ openstack_workflows }}'
-      ansible-collection-pulp:
+        community_files:
+          - codeowners:
+              content: '{{ community_files.codeowners.kayobe_codeowners }}'
+              dest: '.github/CODEOWNERS'
+      barbican:
+        ignored_releases:
+          - victoria
+          - xena
+      stackhpc-inspector-plugins:
+        repository_type: 'branchless'
+        workflows: '{{ openstack_workflows.elsewhere }}'
+      ansible-role-os-networks:
+        repository_type: 'ansible'
+        workflows: '{{ ansible_workflows.role }}'
+      ansible-collection-cephadm:
         repository_type: 'ansible'
         workflows: '{{ ansible_workflows.collection }}'
     ```
@@ -215,14 +236,21 @@ Note however, this will not create a `pull request` to remove it from the reposi
               - tox
     ```
 
-#### Managing CODEOWNERS
+#### Managing Community Files
 
-The playbook is also capable of managing the `CODEOWNERS` file for any repository listed within `source_repositories`.
-The `CODEOWNERS` file for a given repository can be found under `roles/source-repo-sync/files/codeowners` and shares the same name as the target repository.
-See [github documentation on CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners)
+Github provides support for many [community files](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file) that can be used throughout the release train repositories.
+Currently we support `CODEOWNERS` files which will automatically assign a team or team member to a pull request that relates to code that they own.
+All community files are stored in the `community_files` dictionary whereby the key is the name of file and then the value is a list of `templates` stored as multiline strings. 
+To add a new community file or template simply expand the dictionary where appropriate and ensure that the relevant repositories are updated within the `source_repositories` dictionary.
 
-!!! warning
-    The playbook assumes that all repositories will have `CODEOWNERS` file if this is not the case you must declare `copy_codeowners` as `false` within `source_repositories` for all repositories that this is the case.
+```yaml
+source_repositories:
+  kolla:
+    community_files:
+      - codeowners:
+          content: '{{ community_files.codeowners.kayobe_codeowners }}'
+          dest: '.github/CODEOWNERS'
+```
 
 ### Additional Notes
 
