@@ -193,3 +193,22 @@ Typically, workflows may go through the following stages as they evolve:
 This sequence discourages putting too much automation into the GitHub Actions workflows, ensuring it is possible to run them manually.
 
 The release train Ansible playbooks make heavy use of the [stackhpc.pulp](https://github.com/stackhpc/ansible-collection-pulp) collection, which in turn uses modules from the [pulp.squeezer](https://github.com/pulp/squeezer/) collection.
+
+## Source Code Repositories
+
+To maintain the various source code repositories used within the Release Train there exists a number of automated processes. A mixture of Github workflows and Ansible playbooks are used to achieve this
+
+### Github Workflows
+
+* **Upstream Sync**: a number of repositories that are used by StackHPC are forks and therefore need to be synchronised with upstream to remain up-to-date.
+Therefore, this workflow will once a week make a pull request against any of the active openstack releases branches that are ahead of our downstream branch.  
+* **Tox**: in order to ensure that commits to the repositories are correct and follow style guidelines we can utilise tox which can automate the unit testing and linting of the codebase. 
+This workflow will run anytime a push is made or a pull request to one of the active release branches.
+* **Tag & Release**: various software and packages depend on the repositories therefore it is important that tags are made and releases are published.
+
+### Ansible
+
+* **Repository Synchronisation**: as the workflows need to be located within each repository and branch that we wish to run them on.
+Therefore, the deployment and future updates are achieve through automation via Ansible.
+This allows for changes and new workflows to be automatically propagated out across the StackHPC organisation.
+This also manages the deployment of community files such as `CODEOWNERS` which can be used to automatically assign the relevant individuals to a newly opened pull request.

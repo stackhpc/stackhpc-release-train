@@ -20,6 +20,7 @@ The current scope of the release train covers OpenStack control plane deployment
 This includes:
 
 * Host Operating System (OS) repositories, e.g. CentOS Stream 8 BaseOS
+* Source code repositories
 * Kolla container images
 * Ironic Python Agent (IPA) deployment images
 * VM & bare metal disk images
@@ -44,4 +45,5 @@ Clients deploy a local Pulp service which syncs with Ark.
 
 Automation and CI are key aspects of the release train.
 The additional control provided by the release train comes at a cost in maintenance and complexity, which must be offset via automation and CI.
-In general, Ansible is used for automation, and GitHub Actions provide CI.
+Leveraging technologies such as; [Ansible](https://www.ansible.com/) and [Terraform](https://www.terraform.io/) in addition to services such as [Github Workflows](https://github.com/features/actions) allows us to achieve the goals of the StackHPC release train.
+There are numerous applications of these aforementioned technologies and services across various repositories within the StackHPC organisation, they are as follows;
