@@ -39,6 +39,7 @@ source_repositories:
       - victoria
       - xena
   cloudkitty:
+  cloudkitty-dashboard:
   magnum:
   stackhpc-inspector-plugins:
     repository_type: 'branchless'
