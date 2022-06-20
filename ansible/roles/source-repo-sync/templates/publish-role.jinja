@@ -7,4 +7,5 @@ name: Publish Ansible Role
   workflow_dispatch:
 jobs:
   publish_role:
-    uses: stackhpc/.github/.github/workflows/publish_role.yml@main
+    uses: stackhpc/.github/.github/workflows/publish-role.yml@main
+    secrets: inherit
