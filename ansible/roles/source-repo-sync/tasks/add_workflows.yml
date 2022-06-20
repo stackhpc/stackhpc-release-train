@@ -62,9 +62,14 @@
 
     - name: Remove publish workflow
       ansible.builtin.file:
-        path: '{{ staging_path }}/{{ repository_manifest.name }}/.github/workflows/publish.yml'
+        path: '{{ staging_path }}/{{ repository_manifest.name }}/.github/workflows/{{ unwanted_workflow }}.yml'
         state: absent
       register: publish_rm
+      with_items:
+        - publish_role
+        - publish_collection
+      loop_control:
+        loop_var: unwanted_workflow
 
     - block:
         - name: Commit changes # noqa command-instead-of-module no-handler
