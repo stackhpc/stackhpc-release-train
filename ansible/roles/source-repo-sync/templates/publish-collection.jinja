@@ -8,4 +8,5 @@ name: Publish Ansible Collection
 jobs:
   publish_collection:
     uses: stackhpc/.github/.github/workflows/publish-collection.yml@main
-    secrets: inherit
+    secrets:
+      GALAXY_API_KEY: ${{ secrets.GALAXY_API_KEY }}
