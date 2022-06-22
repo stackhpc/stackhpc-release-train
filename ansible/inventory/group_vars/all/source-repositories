@@ -41,6 +41,7 @@ source_repositories:
       - xena
   cloudkitty:
   cloudkitty-dashboard:
+  ironic-python-agent:
   magnum:
   stackhpc-inspector-plugins:
     repository_type: 'branchless'
