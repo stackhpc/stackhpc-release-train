@@ -9,4 +9,4 @@ jobs:
   publish_collection:
     uses: stackhpc/.github/.github/workflows/publish-collection.yml@main
     secrets:
-      GALAXY_API_KEY: ${{ secrets.GALAXY_API_KEY }}
+      GALAXY_API_KEY: {{ '${{ secrets.GALAXY_API_KEY }}' }}
