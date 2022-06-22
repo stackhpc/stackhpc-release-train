@@ -14,9 +14,9 @@ openstack_workflows:
     - tag-and-release
 ansible_workflows:
   collection:
-    - publish_collection
+    - publish-collection
   role:
-    - publish_role
+    - publish-role
 community_files:
   codeowners:
     kayobe_codeowners: |
