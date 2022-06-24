@@ -45,6 +45,7 @@ source_repositories:
   magnum:
     ignored_releases:
       - victoria
+  networking-generic-switch:
   stackhpc-inspector-plugins:
     repository_type: 'branchless'
     workflows: '{{ openstack_workflows.elsewhere }}'
