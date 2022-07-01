@@ -49,6 +49,9 @@ source_repositories:
   stackhpc-inspector-plugins:
     repository_type: 'branchless'
     workflows: '{{ openstack_workflows.elsewhere }}'
+  ansible-role-os-host-aggregates:
+    repository_type: 'ansible'
+    workflows: '{{ ansible_workflows.role }}'
   ansible-role-os-networks:
     repository_type: 'ansible'
     workflows: '{{ ansible_workflows.role }}'
