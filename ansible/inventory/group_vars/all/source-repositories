@@ -21,8 +21,16 @@ community_files:
   codeowners:
     kayobe_codeowners: |
       * @stackhpc/kayobe
-    ansible_codeowners: |
-      * @stackhpc/ansible
+    openstack_codeowners: |
+      * @stackhpc/openstack
+    azimuth_codeowners: |
+      * @stackhpc/azimuth
+    batch_codeowners: |
+      * @stackhpc/batch
+    release_train_codeowners: |
+      * @stackhpc/release-train
+    sms_lab_codeowners: |
+      * @stackhpc/sms-lab
 source_repositories:
   kolla:
     community_files:
@@ -30,6 +38,10 @@ source_repositories:
           content: '{{ community_files.codeowners.kayobe_codeowners }}'
           dest: '.github/CODEOWNERS'
   kayobe:
+    community_files:
+      - codeowners:
+          content: '{{ community_files.codeowners.kayobe_codeowners }}'
+          dest: '.github/CODEOWNERS'
   kolla-ansible:
   bifrost:
     ignored_releases:
