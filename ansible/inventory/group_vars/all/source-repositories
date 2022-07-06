@@ -19,14 +19,14 @@ ansible_workflows:
     - publish-role
 community_files:
   codeowners:
-    kayobe_codeowners: |
-      * @stackhpc/kayobe
-    openstack_codeowners: |
-      * @stackhpc/openstack
     azimuth_codeowners: |
       * @stackhpc/azimuth
     batch_codeowners: |
       * @stackhpc/batch
+    kayobe_codeowners: |
+      * @stackhpc/kayobe
+    openstack_codeowners: |
+      * @stackhpc/openstack
     release_train_codeowners: |
       * @stackhpc/release-train
     sms_lab_codeowners: |
