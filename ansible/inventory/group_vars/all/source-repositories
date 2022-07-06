@@ -19,6 +19,8 @@ ansible_workflows:
     - publish-role
 community_files:
   codeowners:
+    ansible: |
+      * @stackhpc/ansible
     azimuth: |
       * @stackhpc/azimuth
     batch: |
