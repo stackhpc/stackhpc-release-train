@@ -23,6 +23,9 @@ deb_package_repos:
   # Base Ubuntu Focal 20.04 repositories
   - name: Ubuntu focal
     url: http://nova.clouds.archive.ubuntu.com/ubuntu/
+    # Ubuntu Focal repositories can't be synced with immediate policy using the
+    # existing 120G root disk on Ark.
+    policy: on_demand
     architectures: amd64
     components: main restricted universe multiverse
     distributions: focal focal-updates focal-backports
@@ -33,6 +36,9 @@ deb_package_repos:
     distribution_name: ubuntu-focal-
   - name: Ubuntu focal security
     url: http://security.ubuntu.com/ubuntu
+    # Ubuntu Focal repositories can't be synced with immediate policy using the
+    # existing 120G root disk on Ark.
+    policy: on_demand
     architectures: amd64
     components: main restricted universe multiverse
     distributions: focal-security
