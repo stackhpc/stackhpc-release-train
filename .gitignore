@@ -134,3 +134,6 @@ ansible/collections/
 *~
 .*.swp
 .*sw?
+
+# Terraform
+.terraform
