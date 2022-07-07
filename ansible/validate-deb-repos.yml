@@ -1,0 +1,84 @@
+---
+- name: Validate package repository configuration
+  hosts: localhost
+  gather_facts: true
+  vars:
+    synced_deb_package_repos: "{{ deb_package_repos | selectattr('sync', 'defined') | selectattr('sync') | list + deb_package_repos | rejectattr('sync', 'defined') | list }}"
+    published_deb_package_repos: "{{ deb_package_repos | selectattr('publish', 'defined') | selectattr('publish') | list + deb_package_repos | rejectattr('publish', 'defined') | list }}"
+    num_deb_package_repos: "{{ deb_package_repos | length }}"
+    num_published_deb_package_repos: "{{ published_deb_package_repos | length }}"
+  tasks:
+    - name: Assert that Deb package repository list is defined
+      assert:
+        that:
+          - deb_package_repos is defined
+
+    - name: Assert that Deb package repositories have names
+      assert:
+        that:
+          - deb_package_repos | rejectattr('name', 'defined') | list | length == 0
+
+    - name: Assert that Deb package repository names are unique
+      assert:
+        that:
+          - deb_package_repos | map(attribute='name') | unique | list | length == num_deb_package_repos | int
+
+    - name: Assert that synced Deb package repositories have URLs
+      assert:
+        that:
+          - synced_deb_package_repos | rejectattr('url', 'defined') | list | length == 0
+
+    - name: Assert that published Deb package repositories have short names
+      assert:
+        that:
+          - published_deb_package_repos | rejectattr('short_name', 'defined') | list | length == 0
+
+    - name: Assert that published Deb package repository short names are unique
+      assert:
+        that:
+          - published_deb_package_repos | map(attribute='short_name') | unique | list | length == num_published_deb_package_repos | int
+
+    - name: Assert that published Deb package repositories have base paths
+      assert:
+        that:
+          - published_deb_package_repos | rejectattr('base_path', 'defined') | list | length == 0
+
+    - name: Assert that published Deb package repository base_paths are unique
+      assert:
+        that:
+          - published_deb_package_repos | map(attribute='base_path') | list | length == num_published_deb_package_repos | int
+
+    - name: Assert that dev package repository list is defined
+      assert:
+        that:
+          - dev_pulp_repository_deb_repos is defined
+
+    - name: Assert that dev package publication list is defined
+      assert:
+        that:
+          - dev_pulp_publication_deb is defined
+
+    - name: Assert that dev package distribution list is defined
+      assert:
+        that:
+          - dev_pulp_distribution_deb is defined
+
+    - name: Assert that dev package distribution promote list is defined
+      assert:
+        that:
+          - dev_pulp_distribution_deb_promote is defined
+
+    - name: Assert that test package repository list is defined
+      assert:
+        that:
+          - test_pulp_repository_deb_repos is defined
+
+    - name: Assert that test package publication list is defined
+      assert:
+        that:
+          - test_pulp_publication_deb is defined
+
+    - name: Assert that test package distribution list is defined
+      assert:
+        that:
+          - test_pulp_distribution_deb is defined
