@@ -97,7 +97,7 @@ source_repositories:
     workflows: '{{ openstack_workflows.elsewhere }}'
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
+          content: '{{ community_files.codeowners.openstack }}'
           dest: '.github/CODEOWNERS'
   ansible-role-os-host-aggregates:
     repository_type: 'ansible'
@@ -132,7 +132,7 @@ source_repositories:
     workflows: '{{ ansible_workflows.role }}'
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
+          content: '{{ community_files.codeowners.batch }}'
           dest: '.github/CODEOWNERS'
   ansible-role-libvirt-vm:
     repository_type: 'ansible'
