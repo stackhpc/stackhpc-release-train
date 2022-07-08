@@ -4,7 +4,7 @@
 #  sensitive = true
 #}
 
-variable "github_app_pem_file" {
+variable "GITHUB_APP_PEM_FILE" {
   type        = string
   description = "GitHub application pem file required for authentication"
   sensitive   = true
