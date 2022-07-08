@@ -6,6 +6,7 @@ name: Terraform GitHub
   pull_request:
 env:
   TF_VAR_GITHUB_TOKEN: ${{ secrets.repository_configuration_token }}
+  TF_GITHUB_APP_PEM_FILE: ${{ secrets.TF_GITHUB_APP_PEM_FILE }}
 jobs:
   terraform:
     name: Terraform
