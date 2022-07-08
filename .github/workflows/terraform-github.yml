@@ -3,11 +3,11 @@ name: Terraform GitHub
   push:
     branches: [main]
     paths:
-      - 'terraform/github'
+      - 'terraform/github/**'
   pull_request:
     branches: [main]
     paths:
-      - 'terraform/github'
+      - 'terraform/github/**'
 env:
   TF_VAR_GITHUB_APP_PEM_FILE: ${{ secrets.TF_VAR_GITHUB_APP_PEM_FILE }}
 jobs:
