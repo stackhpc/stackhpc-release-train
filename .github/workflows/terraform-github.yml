@@ -99,7 +99,7 @@ jobs:
               })
             }
       - name: Terraform Plan Status
-        if: steps.plan.outcome == 'failure'
+        if: steps.plan.outcome == 'failure' || steps.fmt.outcome == 'failure'
         run: exit 1
 
       - name: Terraform Apply
