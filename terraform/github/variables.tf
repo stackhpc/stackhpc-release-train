@@ -1,7 +1,7 @@
-variable "GITHUB_TOKEN" {
-  type        = string
-  description = "GitHub token required for authentication"
-}
+#variable "GITHUB_TOKEN" {
+#  type        = string
+#  description = "GitHub token required for authentication"
+#}
 
 variable "owner" {
   default = "stackhpc"

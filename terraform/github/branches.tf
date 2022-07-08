@@ -7,6 +7,12 @@ resource "github_branch_protection" "ansible_branch_protection" {
   allows_deletions                = false
   allows_force_pushes             = false
 
+  required_pull_request_reviews = [
+    dismiss_stale_reviews = true
+    require_code_owner_reviews = true
+    required_approving_review_count = 1
+  ]
+
   push_restrictions = [
     resource.github_team.organisation_teams["Developers"].node_id
   ]
@@ -65,7 +71,7 @@ resource "github_branch_protection" "kayobe_branch_protection" {
   for_each      = toset(var.repositories["Kayobe"])
   repository_id = each.key
 
-  pattern                         = data.github_repository.repositories[each.key].default_branch
+  pattern                         = "stackhpc/**"
   require_conversation_resolution = true
   allows_deletions                = false
   allows_force_pushes             = false

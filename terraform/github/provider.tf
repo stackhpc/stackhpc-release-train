@@ -15,6 +15,10 @@ terraform {
 }
 
 provider "github" {
-  token = var.GITHUB_TOKEN
   owner = var.owner
+  app_auth {
+    id = 218102
+    installation_id = 27194723
+    pem_file = var.github_app_pem_file
+  }
 }

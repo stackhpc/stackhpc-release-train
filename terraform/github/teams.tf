@@ -42,7 +42,7 @@ resource "github_team_repository" "developers_repositories" {
   for_each   = toset(flatten(values(var.repositories)))
   team_id    = resource.github_team.organisation_teams["Developers"].id
   repository = each.value
-  permission = "maintain"
+  permission = "push"
   lifecycle {
     prevent_destroy = true
   }

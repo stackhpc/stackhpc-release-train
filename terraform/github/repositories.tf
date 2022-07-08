@@ -32,7 +32,7 @@ resource "github_repository" "repositories" {
   }
 }
 
-resource "github_issue_label" "stackhpc_label" {
+resource "github_issue_label" "stackhpc_ci_label" {
   for_each    = toset(flatten(values(var.repositories)))
   repository  = each.value
   name        = "stackhpc-ci"
