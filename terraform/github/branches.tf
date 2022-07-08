@@ -13,6 +13,11 @@ resource "github_branch_protection" "ansible_branch_protection" {
     required_approving_review_count = 1
   }
 
+  # Only permit members of the `Developers` team to push to the protected branch. Members 
+  # would still need to get the required approval from reviewers and pass any checks before 
+  # being able to merge. Also this should prevent outsiders from pushing to the protected branch, 
+  # however, whilst they can open a pull request they shoud not be able to merge that would be 
+  # upto the reviewers or codeowners. 
   push_restrictions = [
     resource.github_team.organisation_teams["Developers"].node_id
   ]
@@ -31,13 +36,16 @@ resource "github_branch_protection" "azimuth_branch_protection" {
   allows_deletions                = false
   allows_force_pushes             = false
 
+  required_pull_request_reviews {
+    dismiss_stale_reviews           = true
+    require_code_owner_reviews      = true
+    required_approving_review_count = 1
+  }
+
   push_restrictions = [
     resource.github_team.organisation_teams["Developers"].node_id
   ]
 
-  required_pull_request_reviews {
-    require_code_owner_reviews = true
-  }
   lifecycle {
     prevent_destroy = true
   }
