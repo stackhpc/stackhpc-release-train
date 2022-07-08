@@ -48,6 +48,11 @@
         that:
           - published_deb_package_repos | map(attribute='base_path') | list | length == num_published_deb_package_repos | int
 
+    - name: Assert that published Deb package repository base_paths have a trailing slash
+      assert:
+        that:
+          - published_deb_package_repos | map(attribute='base_path') | list | map('last') | unique == ['/']
+
     - name: Assert that dev package repository list is defined
       assert:
         that:
