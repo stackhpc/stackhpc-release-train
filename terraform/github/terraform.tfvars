@@ -11,5 +11,5 @@ repositories = {
   "ReleaseTrain" = [
     ".github"
   ],
-  "SMSLab"       = [],
+  "SMSLab" = [],
 }

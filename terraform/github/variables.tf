@@ -5,9 +5,9 @@
 #}
 
 variable "github_app_pem_file" {
- type        = string
- description = "GitHub application pem file required for authentication"
- sensitive = true
+  type        = string
+  description = "GitHub application pem file required for authentication"
+  sensitive   = true
 }
 
 variable "owner" {
