@@ -1,7 +1,14 @@
 #variable "GITHUB_TOKEN" {
 #  type        = string
 #  description = "GitHub token required for authentication"
+#  sensitive = true
 #}
+
+variable "github_app_pem_file" {
+ type        = string
+ description = "GitHub application pem file required for authentication"
+ sensitive = true
+}
 
 variable "owner" {
   default = "stackhpc"
