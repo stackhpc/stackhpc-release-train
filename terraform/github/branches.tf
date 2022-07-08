@@ -17,9 +17,6 @@ resource "github_branch_protection" "ansible_branch_protection" {
     resource.github_team.organisation_teams["Developers"].node_id
   ]
 
-  required_pull_request_reviews {
-    require_code_owner_reviews = true
-  }
   lifecycle {
     prevent_destroy = true
   }
@@ -55,13 +52,16 @@ resource "github_branch_protection" "batch_branch_protection" {
   allows_deletions                = false
   allows_force_pushes             = false
 
+  required_pull_request_reviews {
+    dismiss_stale_reviews           = true
+    require_code_owner_reviews      = true
+    required_approving_review_count = 1
+  }
+
   push_restrictions = [
     resource.github_team.organisation_teams["Developers"].node_id
   ]
 
-  required_pull_request_reviews {
-    require_code_owner_reviews = true
-  }
   lifecycle {
     prevent_destroy = true
   }
@@ -76,13 +76,16 @@ resource "github_branch_protection" "kayobe_branch_protection" {
   allows_deletions                = false
   allows_force_pushes             = false
 
+  required_pull_request_reviews {
+    dismiss_stale_reviews           = true
+    require_code_owner_reviews      = true
+    required_approving_review_count = 1
+  }
+
   push_restrictions = [
     resource.github_team.organisation_teams["Developers"].node_id
   ]
 
-  required_pull_request_reviews {
-    require_code_owner_reviews = true
-  }
   lifecycle {
     prevent_destroy = true
   }
@@ -101,6 +104,12 @@ resource "github_branch_protection" "openstack_branch_protection" {
     resource.github_team.organisation_teams["Developers"].node_id
   ]
 
+  required_pull_request_reviews {
+    dismiss_stale_reviews           = true
+    require_code_owner_reviews      = true
+    required_approving_review_count = 1
+  }
+
   required_status_checks {
     contexts = [
       "tox / Tox pep8 with Python 3.8",
@@ -110,9 +119,6 @@ resource "github_branch_protection" "openstack_branch_protection" {
     strict = true
   }
 
-  required_pull_request_reviews {
-    require_code_owner_reviews = true
-  }
   lifecycle {
     prevent_destroy = true
   }
@@ -127,13 +133,16 @@ resource "github_branch_protection" "release_train_branch_protection" {
   allows_deletions                = false
   allows_force_pushes             = false
 
+  required_pull_request_reviews {
+    dismiss_stale_reviews           = true
+    require_code_owner_reviews      = true
+    required_approving_review_count = 1
+  }
+
   push_restrictions = [
     resource.github_team.organisation_teams["Developers"].node_id
   ]
 
-  required_pull_request_reviews {
-    require_code_owner_reviews = true
-  }
   lifecycle {
     prevent_destroy = true
   }
@@ -148,13 +157,16 @@ resource "github_branch_protection" "sms_lab_branch_protection" {
   allows_deletions                = false
   allows_force_pushes             = false
 
+  required_pull_request_reviews {
+    dismiss_stale_reviews           = true
+    require_code_owner_reviews      = true
+    required_approving_review_count = 1
+  }
+
   push_restrictions = [
     resource.github_team.organisation_teams["Developers"].node_id
   ]
 
-  required_pull_request_reviews {
-    require_code_owner_reviews = true
-  }
   lifecycle {
     prevent_destroy = true
   }
