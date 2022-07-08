@@ -7,11 +7,11 @@ resource "github_branch_protection" "ansible_branch_protection" {
   allows_deletions                = false
   allows_force_pushes             = false
 
-  required_pull_request_reviews = [
+  required_pull_request_reviews {
     dismiss_stale_reviews = true
     require_code_owner_reviews = true
     required_approving_review_count = 1
-  ]
+  }
 
   push_restrictions = [
     resource.github_team.organisation_teams["Developers"].node_id
