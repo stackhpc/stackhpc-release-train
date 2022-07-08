@@ -1,11 +1,15 @@
-#variable "GITHUB_TOKEN" {
-#  type        = string
-#  description = "GitHub token required for authentication"
-#  sensitive = true
-#}
+variable "GITHUB_TOKEN" {
+  type        = string
+  default     = null
+  nullable    = true
+  description = "GitHub token required for authentication"
+  sensitive   = true
+}
 
 variable "GITHUB_APP_PEM_FILE" {
   type        = string
+  default     = null
+  nullable    = true
   description = "GitHub application pem file required for authentication"
   sensitive   = true
 }

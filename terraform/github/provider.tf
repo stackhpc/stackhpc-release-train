@@ -22,3 +22,9 @@ provider "github" {
     pem_file        = var.GITHUB_APP_PEM_FILE
   }
 }
+
+# Use this provider block if you would prefer to use a GitHub token
+# provider "github" {
+#   owner = var.owner
+#   token = var.GITHUB_TOKEN
+# }
