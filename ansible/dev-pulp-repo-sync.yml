@@ -9,4 +9,5 @@
         pulp_url: "{{ dev_pulp_url }}"
         pulp_username: "{{ dev_pulp_username }}"
         pulp_password: "{{ dev_pulp_password }}"
+        pulp_repository_deb_repos: "{{ dev_pulp_repository_deb_repos }}"
         pulp_repository_rpm_repos: "{{ dev_pulp_repository_rpm_repos }}"
