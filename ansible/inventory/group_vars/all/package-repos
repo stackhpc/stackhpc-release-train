@@ -48,6 +48,18 @@ deb_package_repos:
     short_name: ubuntu_focal_security
     distribution_name: ubuntu-focal-security-
 
+  # Ubuntu Cloud Archive (UCA)
+  - name: Ubuntu Cloud Archive
+    url: http://ubuntu-cloud.archive.canonical.com/ubuntu
+    architectures: amd64
+    components: main
+    distributions: focal-updates/wallaby
+    mirror: true
+    mode: verbatim
+    base_path: ubuntu-cloud-archive/
+    short_name: ubuntu_cloud_archive
+    distribution_name: ubuntu-cloud-archive-
+
   # Third-party repositories
   - name: Docker CE for Ubuntu
     url: https://download.docker.com/linux/ubuntu
