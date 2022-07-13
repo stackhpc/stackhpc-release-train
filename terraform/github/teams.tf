@@ -85,27 +85,22 @@ resource "github_team_repository" "sms_lab_repositories" {
   }
 }
 
-resource "github_team_members" "team_membership" {
-  for_each = {
-    for team in resource.github_team.organisation_teams : team.name => team
-  }
-
-  team_id = each.value.id
-
-  dynamic "members" {
-    for_each = var.teams[each.value.name].users["maintainers"]
-    content {
-      username = members.value
-      role     = "maintainer"
-    }
-  }
-  dynamic "members" {
-    for_each = var.teams[each.value.name].users["members"]
-    content {
-      username = members.value
-      role     = "member"
-    }
-  }
+resource "github_team_membership" "team_membership" {
+  for_each = { for element in flatten([
+    for team in resource.github_team.organisation_teams : [
+      for role in keys(var.teams[team.name].users) : [
+        for user in var.teams[team.name].users[role] : {
+          name     = "${user}@${team.id}",
+          team_id  = team.id,
+          username = user,
+          role     = trim(role, "s")
+        }
+      ]
+    ]
+  ]) : element.name => element }
+  team_id = each.value.team_id
+  username = each.value.username
+  role = each.value.role
   lifecycle {
     prevent_destroy = true
   }

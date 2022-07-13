@@ -5,26 +5,26 @@ terraform {
       version = "4.26.1"
     }
   }
-  cloud {
-    organization = "stackhpc"
+  # cloud {
+  #   organization = "stackhpc"
 
-    workspaces {
-      name = "github"
-    }
-  }
+  #   workspaces {
+  #     name = "github"
+  #   }
+  # }
 }
 
-provider "github" {
-  owner = var.owner
-  app_auth {
-    id              = 218102
-    installation_id = 27194723
-    pem_file        = var.GITHUB_APP_PEM_FILE
-  }
-}
-
-# Use this provider block if you would prefer to use a GitHub token
 # provider "github" {
 #   owner = var.owner
-#   token = var.GITHUB_TOKEN
+#   app_auth {
+#     id              = 218102
+#     installation_id = 27194723
+#     pem_file        = var.GITHUB_APP_PEM_FILE
+#   }
 # }
+
+# Use this provider block if you would prefer to use a GitHub token
+provider "github" {
+  owner = var.owner
+  token = var.GITHUB_TOKEN
+}
