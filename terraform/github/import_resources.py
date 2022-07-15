@@ -83,8 +83,8 @@ class QueryResponse(Enum):
 @unique
 class TeamID(Enum):
     ANSIBLE = 6329007
-    AZIMUTH = 6328998
-    BATCH = 6328999
+    AZIMUTH = 6328999
+    BATCH = 6328998
     DEVELOPERS = 6329004
     KAYOBE = 6329000
     OPENSTACK = 6329005
