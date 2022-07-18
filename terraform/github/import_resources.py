@@ -82,14 +82,14 @@ class QueryResponse(Enum):
 
 @unique
 class TeamID(Enum):
-    ANSIBLE = 6329007
-    AZIMUTH = 6328999
-    BATCH = 6328998
-    DEVELOPERS = 6329004
-    KAYOBE = 6329000
-    OPENSTACK = 6329005
-    RELEASETRAIN = 6328997
-    SMSLAB = 6329001
+    ANSIBLE = 6352031
+    AZIMUTH = 6352033
+    BATCH = 6352034
+    DEVELOPERS = 6352035
+    KAYOBE = 6352037
+    OPENSTACK = 6352038
+    RELEASETRAIN = 6352039
+    SMSLAB = 6352040
 
     def __str__(self) -> str:
         result: str = self.name.capitalize()
@@ -161,12 +161,30 @@ def main() -> None:
             "MrJHBauer",
             "jackhodgkiss"
         ],
-        TeamID.AZIMUTH: [],
-        TeamID.BATCH: [],
-        TeamID.KAYOBE: [],
-        TeamID.OPENSTACK: ["jackhodgkiss"],
-        TeamID.RELEASETRAIN: [],
-        TeamID.SMSLAB: []
+        TeamID.AZIMUTH: [
+            "MrJHBauer",
+            "jackhodgkiss"
+        ],
+        TeamID.BATCH: [
+            "MrJHBauer",
+            "jackhodgkiss"
+        ],
+        TeamID.KAYOBE: [
+            "MrJHBauer",
+            "jackhodgkiss"
+        ],
+        TeamID.OPENSTACK: [
+            "MrJHBauer",
+            "jackhodgkiss"
+        ],
+        TeamID.RELEASETRAIN: [
+            "MrJHBauer",
+            "jackhodgkiss"
+        ],
+        TeamID.SMSLAB: [
+            "MrJHBauer",
+            "jackhodgkiss"
+        ]
     }
     issue_labels: list[str] = [
         "stackhpc_ci",
@@ -176,8 +194,14 @@ def main() -> None:
     for team_id, users in team_roster.items():
         team_membership_resource = TeamMembership(team_id.value, users)
         team_membership_resource.refresh_resource()
+    for _, users in team_roster.items():
+        team_membership_resource = TeamMembership(team_id.DEVELOPERS.value, users)
+        team_membership_resource.refresh_resource()
     for team_id, team_repositories in repositories.items():
         team_repository_resource = TeamRepository(team_id.name.lower(), team_id.value, team_repositories)
+        team_repository_resource.refresh_resource()
+    for _, team_repositories in repositories.items():
+        team_repository_resource = TeamRepository(TeamID.DEVELOPERS.name.lower(), TeamID.DEVELOPERS.value, team_repositories)
         team_repository_resource.refresh_resource()
     organisation_team_resource = OrganisationTeam({str(team.value): str(team) for team in TeamID})
     organisation_team_resource.refresh_resource()
