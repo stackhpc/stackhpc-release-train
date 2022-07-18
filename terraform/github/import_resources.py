@@ -145,6 +145,12 @@ def get_default_branches() -> dict[str, str]:
     return reduce(lambda left, right: left | right, json.loads(jq_combine.stdout.decode()), {})
 
 
+def populate_repository_data() -> None:
+    cmd = ["terraform", "apply", "-auto-approve", "-target=data.github_repository.repositories"]
+    output = subprocess.run(cmd, capture_output=True)
+    print(output.stdout.decode())
+
+
 def read_vars(path: str = "terraform.tfvars.json") -> dict[str, Any]:
     complete_path = Path(__file__).parent.joinpath(path)
     return json.load(open(complete_path, "r"))
@@ -152,16 +158,27 @@ def read_vars(path: str = "terraform.tfvars.json") -> dict[str, Any]:
 
 def main() -> None:
     terraform_vars = read_vars()
+    populate_repository_data()
+    default_branches = get_default_branches()
     team_roster = {TeamID[team[0].upper()]:
         [*itertools.chain.from_iterable(team[1]["users"].values())]
         for team in terraform_vars["teams"].items()}
+    repositories = {TeamID[team[0].upper()]: team[1]
+        for team in terraform_vars["repositories"].items()}
+    for team_id, team_repositories in repositories.items():
+        if team_id == TeamID.KAYOBE or team_id == TeamID.OPENSTACK:
+            branch_protection_resource = BranchProtection(team_id.name.lower(), {f"{name}:stackhpc/**": name  for name in team_repositories})
+            branch_protection_resource.refresh_resource()
+        else:
+            branch_protection_resource = BranchProtection(team_id.name.lower(), {f"{name}:{default_branches[name]}": name  for name in team_repositories})
+            branch_protection_resource.refresh_resource()
+    
     for team_id, users in team_roster.items():
         team_membership_resource = TeamMembership(team_id.value, users)
         team_membership_resource.refresh_resource()
     for _, users in team_roster.items():
         team_membership_resource = TeamMembership(team_id.DEVELOPERS.value, users)
         team_membership_resource.refresh_resource()
-    repositories = {TeamID[team[0].upper()]: team[1] for team in terraform_vars["repositories"].items()}
     for team_id, team_repositories in repositories.items():
         team_repository_resource = TeamRepository(team_id.name.lower(), team_id.value, team_repositories)
         team_repository_resource.refresh_resource()
@@ -180,14 +197,6 @@ def main() -> None:
         issue_label_resource.refresh_resource()
     repository_resource = Repository([*itertools.chain.from_iterable(repositories.values())])
     repository_resource.refresh_resource()
-    default_branches = get_default_branches()
-    for team_id, team_repositories in repositories.items():
-        if team_id == TeamID.KAYOBE or team_id == TeamID.OPENSTACK:
-            branch_protection_resource = BranchProtection(team_id.name.lower(), {f"{name}:stackhpc/**": name  for name in team_repositories})
-            branch_protection_resource.refresh_resource()
-        else:
-            branch_protection_resource = BranchProtection(team_id.name.lower(), {f"{name}:{default_branches[name]}": name  for name in team_repositories})
-            branch_protection_resource.refresh_resource()
 
 
 if __name__ == "__main__":
