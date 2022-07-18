@@ -2,9 +2,11 @@
 from dataclasses import dataclass
 from enum import Enum, unique
 from functools import reduce
+import itertools
 import json
-import operator
+from pathlib import Path
 import subprocess
+from typing import Any
 
 index_key = str
 ident = str
@@ -142,61 +144,24 @@ def get_default_branches() -> dict[str, str]:
     jq_combine = subprocess.run(commands[2], input=jq_extract.stdout, capture_output=True)
     return reduce(lambda left, right: left | right, json.loads(jq_combine.stdout.decode()), {})
 
+
+def read_vars(path: str = "terraform.tfvars.json") -> dict[str, Any]:
+    complete_path = Path(__file__).parent.joinpath(path)
+    return json.load(open(complete_path, "r"))
+
+
 def main() -> None:
-    repositories: dict[TeamID, list[str]] = {
-        TeamID.ANSIBLE: [
-            "kolla-ansible"
-        ],
-        TeamID.AZIMUTH: [],
-        TeamID.BATCH: [],
-        TeamID.KAYOBE: [],
-        TeamID.OPENSTACK: [
-            "cloudkitty"
-        ],
-        TeamID.RELEASETRAIN: [],
-        TeamID.SMSLAB: []
-    }
-    team_roster: dict[TeamID, list[str]] = {
-        TeamID.ANSIBLE: [
-            "MrJHBauer",
-            "jackhodgkiss"
-        ],
-        TeamID.AZIMUTH: [
-            "MrJHBauer",
-            "jackhodgkiss"
-        ],
-        TeamID.BATCH: [
-            "MrJHBauer",
-            "jackhodgkiss"
-        ],
-        TeamID.KAYOBE: [
-            "MrJHBauer",
-            "jackhodgkiss"
-        ],
-        TeamID.OPENSTACK: [
-            "MrJHBauer",
-            "jackhodgkiss"
-        ],
-        TeamID.RELEASETRAIN: [
-            "MrJHBauer",
-            "jackhodgkiss"
-        ],
-        TeamID.SMSLAB: [
-            "MrJHBauer",
-            "jackhodgkiss"
-        ]
-    }
-    issue_labels: list[str] = [
-        "stackhpc_ci",
-        "workflows",
-        "community_files"
-    ]
+    terraform_vars = read_vars()
+    team_roster = {TeamID[team[0].upper()]:
+        [*itertools.chain.from_iterable(team[1]["users"].values())]
+        for team in terraform_vars["teams"].items()}
     for team_id, users in team_roster.items():
         team_membership_resource = TeamMembership(team_id.value, users)
         team_membership_resource.refresh_resource()
     for _, users in team_roster.items():
         team_membership_resource = TeamMembership(team_id.DEVELOPERS.value, users)
         team_membership_resource.refresh_resource()
+    repositories = {TeamID[team[0].upper()]: team[1] for team in terraform_vars["repositories"].items()}
     for team_id, team_repositories in repositories.items():
         team_repository_resource = TeamRepository(team_id.name.lower(), team_id.value, team_repositories)
         team_repository_resource.refresh_resource()
@@ -205,10 +170,15 @@ def main() -> None:
         team_repository_resource.refresh_resource()
     organisation_team_resource = OrganisationTeam({str(team.value): str(team) for team in TeamID})
     organisation_team_resource.refresh_resource()
+    issue_labels: list[str] = [
+        "stackhpc_ci",
+        "workflows",
+        "community_files"
+    ]
     for issue_label in issue_labels:
         issue_label_resource = IssueLabel(issue_label, [repository for teams in repositories.values() for repository in teams])
         issue_label_resource.refresh_resource()
-    repository_resource = Repository([repository for teams in repositories.values() for repository in teams])
+    repository_resource = Repository([*itertools.chain.from_iterable(repositories.values())])
     repository_resource.refresh_resource()
     default_branches = get_default_branches()
     for team_id, team_repositories in repositories.items():
