@@ -114,3 +114,11 @@ variable "teams" {
     },
   }
 }
+
+variable labels {
+  default = [
+    "stackhpc_ci",
+    "workflows",
+    "community_files"
+  ]
+}

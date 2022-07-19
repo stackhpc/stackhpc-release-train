@@ -165,6 +165,7 @@ def main() -> None:
         for team in terraform_vars["teams"].items()}
     repositories = {TeamID[team[0].upper()]: team[1]
         for team in terraform_vars["repositories"].items()}
+    issue_labels = terraform_vars["labels"]
     for team_id, team_repositories in repositories.items():
         if team_id == TeamID.KAYOBE or team_id == TeamID.OPENSTACK:
             branch_protection_resource = BranchProtection(team_id.name.lower(), {f"{name}:stackhpc/**": name  for name in team_repositories})
@@ -172,7 +173,6 @@ def main() -> None:
         else:
             branch_protection_resource = BranchProtection(team_id.name.lower(), {f"{name}:{default_branches[name]}": name  for name in team_repositories})
             branch_protection_resource.refresh_resource()
-    
     for team_id, users in team_roster.items():
         team_membership_resource = TeamMembership(team_id.value, users)
         team_membership_resource.refresh_resource()
@@ -187,11 +187,6 @@ def main() -> None:
         team_repository_resource.refresh_resource()
     organisation_team_resource = OrganisationTeam({str(team.value): str(team) for team in TeamID})
     organisation_team_resource.refresh_resource()
-    issue_labels: list[str] = [
-        "stackhpc_ci",
-        "workflows",
-        "community_files"
-    ]
     for issue_label in issue_labels:
         issue_label_resource = IssueLabel(issue_label, [repository for teams in repositories.values() for repository in teams])
         issue_label_resource.refresh_resource()
