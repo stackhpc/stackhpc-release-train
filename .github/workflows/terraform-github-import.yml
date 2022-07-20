@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       dry_run:
-        description: "If specified the import script shall perform a dry run where it shall only print the commands that would otherwise be executed."
+        description: "Dry Run"
         required: true
         type: boolean
         default: true
@@ -14,6 +14,9 @@ jobs:
   terraform-github-import:
     name: Terraform GitHub Import
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: './terraform/github/'
     steps:
       - name: GitHub Checkout 🛎
         uses: actions/checkout@v3
