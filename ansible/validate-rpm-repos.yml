@@ -48,6 +48,11 @@
         that:
           - published_rpm_package_repos | map(attribute='base_path') | list | length == num_published_rpm_package_repos | int
 
+    - name: Assert that published RPM package repository base_paths have a trailing slash
+      assert:
+        that:
+          - published_rpm_package_repos | map(attribute='base_path') | list | map('last') | unique == ['/']
+
     - name: Assert that dev package repository list is defined
       assert:
         that:

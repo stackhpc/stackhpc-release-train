@@ -1,5 +1,81 @@
 ---
-# List of package repositories.
+###############################################################################
+# Deb
+
+# List of Deb package repositories.
+# Each item is a dict with the following items:
+# name: Repository name.
+# url: URL of upstream package mirror.
+# policy: Policy for upstream remote. Optional.
+# architectures: Architectures to sync.
+# components: Components to sync.
+# distributions: Distributions to sync.
+# mirror: If True, synchronization will remove all content that is not present
+#         in the remote repository. If False, sync will be additive only.
+#         Optional, default is true.
+# mode: Publication mode.
+# base_path: Base path prefix for distributions.
+# short_name: Name used internally for variable names.
+# distribution_name: Name prefix for distributions. Version will be appended.
+# sync: Whether to sync the repository with a remote. Optional, default is true.
+# publish: Whether to publish and distribute the repository. Optional, default is true.
+deb_package_repos:
+  # Base Ubuntu Focal 20.04 repositories
+  - name: Ubuntu focal
+    url: http://nova.clouds.archive.ubuntu.com/ubuntu/
+    # Ubuntu Focal repositories can't be synced with immediate policy using the
+    # existing 120G root disk on Ark.
+    policy: on_demand
+    architectures: amd64
+    components: main restricted universe multiverse
+    distributions: focal focal-updates focal-backports
+    mirror: true
+    mode: verbatim
+    base_path: ubuntu/focal/
+    short_name: ubuntu_focal
+    distribution_name: ubuntu-focal-
+  - name: Ubuntu focal security
+    url: http://security.ubuntu.com/ubuntu
+    # Ubuntu Focal repositories can't be synced with immediate policy using the
+    # existing 120G root disk on Ark.
+    policy: on_demand
+    architectures: amd64
+    components: main restricted universe multiverse
+    distributions: focal-security
+    mirror: true
+    mode: verbatim
+    base_path: ubuntu/focal-security/
+    short_name: ubuntu_focal_security
+    distribution_name: ubuntu-focal-security-
+
+  # Ubuntu Cloud Archive (UCA)
+  - name: Ubuntu Cloud Archive
+    url: http://ubuntu-cloud.archive.canonical.com/ubuntu
+    architectures: amd64
+    components: main
+    distributions: focal-updates/wallaby
+    mirror: true
+    mode: verbatim
+    base_path: ubuntu-cloud-archive/
+    short_name: ubuntu_cloud_archive
+    distribution_name: ubuntu-cloud-archive-
+
+  # Third-party repositories
+  - name: Docker CE for Ubuntu
+    url: https://download.docker.com/linux/ubuntu
+    architectures: amd64
+    distributions: focal
+    components: stable
+    mirror: true
+    mode: verbatim
+    base_path: docker-ce/ubuntu/
+    short_name: docker_ce_ubuntu
+    distribution_name: docker-ce-for-ubuntu-
+
+###############################################################################
+# RPM
+
+# List of RPM package repositories.
 # Each item is a dict with the following items:
 # name: Repository name.
 # url: URL of upstream package mirror.

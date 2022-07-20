@@ -2,7 +2,8 @@
 # This playbook queries the Pulp repository versions defined in a Kayobe
 # configuration repository (in etc/kayobe/pulp-repo-versions.yml). It then
 # updates those versions based on the latest versions in dev Pulp (via the
-# test_pulp_repository_rpm_repo_versions variable, which is populated in
+# test_pulp_repository_deb_repo_versions and
+# test_pulp_repository_rpm_repo_versions variables, which are populated in
 # test-pulp-repo-version-query.yml).
 
 # Query existing Kayobe config repo versions.
@@ -23,12 +24,12 @@
         msg: >-
           Some expected repositories not present in Kayobe Pulp repo versions: {{ missing_repos | join(',') }}
       vars:
-        missing_repos: "{{ kayobe_pulp_repo_versions.keys() | list | difference(test_pulp_repository_rpm_repo_versions) | list }}"
+        missing_repos: "{{ kayobe_pulp_repo_versions.keys() | list | difference(test_pulp_repository_rpm_repo_versions) | difference(test_pulp_repository_deb_repo_versions) | list }}"
 
     - name: Set a fact about updated Kayobe Pulp repository versions
       vars:
         kayobe_var_name: "{{ 'stackhpc_pulp_repo_' ~ item.key ~ '_version' }}"
-        version: "{{ test_pulp_repository_rpm_repo_versions.get(item.key, item.value) }}"
+        version: "{{ test_pulp_repository_rpm_repo_versions.get(item.key, test_pulp_repository_deb_repo_versions.get(item.key, item.value)) }}"
       set_fact:
         updated_kayobe_pulp_repo_versions: "{{ updated_kayobe_pulp_repo_versions | default({}) | combine({kayobe_var_name: version}) }}"
       loop: "{{ query('dict', kayobe_pulp_repo_versions) }}"

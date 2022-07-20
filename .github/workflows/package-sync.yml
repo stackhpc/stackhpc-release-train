@@ -2,6 +2,17 @@
 name: Sync package repositories
 on:
   workflow_dispatch:
+    inputs:
+      sync_ark:
+        required: false
+        description: Sync package repositories in Ark
+        default: true
+        type: boolean
+      sync_test:
+        required: false
+        description: Sync package repositories in Test Pulp
+        default: true
+        type: boolean
   schedule:
     # Daily at 02:17
     - cron: '17 2 * * *'
@@ -39,6 +50,7 @@ jobs:
         ansible/dev-pulp-repo-sync.yml \
         ansible/dev-pulp-repo-publication-cleanup.yml \
         ansible/dev-pulp-repo-publish.yml
+      if: github.event.inputs.sync_ark == 'true'
 
     - name: Sync and publish package repositories in test
       run: |
@@ -47,3 +59,4 @@ jobs:
         ansible/test-pulp-repo-version-query.yml \
         ansible/test-pulp-repo-sync.yml \
         ansible/test-pulp-repo-publish.yml
+      if: github.event.inputs.sync_test == 'true'
