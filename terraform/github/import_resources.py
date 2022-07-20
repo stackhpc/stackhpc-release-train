@@ -31,9 +31,9 @@ class TeamMembership(Resource):
     # API: gh api \
     # -H "Accept: application/vnd.github+json" \
     # /orgs/stackhpc/teams -q '.[] | {id, name}'
-    def __init__(self, team_id: str, roster: list[str], is_dry_run: bool):
+    def __init__(self, team_name: str, team_id: str, roster: list[str], is_dry_run: bool):
         Resource.__init__(self, "github_team_membership.team_membership",
-            {f'{team_id}:{entry}': f'{team_id}:{entry}' for entry in roster}, is_dry_run)
+            {f'{team_id}:{entry}': f'{team_name}:{entry}' for entry in roster}, is_dry_run)
 
 
 class TeamRepository(Resource):
@@ -86,14 +86,14 @@ class QueryResponse(Enum):
 
 @unique
 class TeamID(Enum):
-    ANSIBLE = 6352031
-    AZIMUTH = 6352033
-    BATCH = 6352034
-    DEVELOPERS = 6352035
-    KAYOBE = 6352037
+    ANSIBLE = 2454000
+    AZIMUTH = 0
+    BATCH = 1
+    DEVELOPERS = 6309608
+    KAYOBE = 2
     OPENSTACK = 6352038
-    RELEASETRAIN = 6352039
-    SMSLAB = 6352040
+    RELEASETRAIN = 3
+    SMSLAB = 4
 
     def __str__(self) -> str:
         result: str = self.name.capitalize()
@@ -120,11 +120,9 @@ def unpack_query(statefile_response: subprocess.CompletedProcess[str]) -> QueryR
             print(f"\033[1m\033[92mResource Found:\033[0;0m \033[1m{statefile_response.stdout.decode()}\033[0;0m")
         else:
             result = QueryResponse.RESOURCE_MISSING
-            print(statefile_response.stderr.decode())
     elif statefile_response.returncode == 1:
         if "The current state contains no resource" in statefile_response.stderr.decode():
             result = QueryResponse.RESOURCE_UNKNOWN
-        print(statefile_response.stderr.decode())
     return result
 
 
@@ -171,7 +169,7 @@ def main() -> None:
     parsed_args = parse_args()
     is_dry_run = parsed_args.dry_run
     terraform_vars = read_vars()
-    populate_repository_data()
+    # populate_repository_data()
     default_branches = get_default_branches()
     team_roster = {TeamID[team[0].upper()]:
         [*itertools.chain.from_iterable(team[1]["users"].values())]
@@ -187,10 +185,10 @@ def main() -> None:
             branch_protection_resource = BranchProtection(team_id.name.lower(), {f"{name}:{default_branches[name]}": name  for name in team_repositories}, is_dry_run)
             branch_protection_resource.refresh_resource()
     for team_id, users in team_roster.items():
-        team_membership_resource = TeamMembership(team_id.value, users, is_dry_run)
+        team_membership_resource = TeamMembership(str(team_id), team_id.value, users, is_dry_run)
         team_membership_resource.refresh_resource()
     for _, users in team_roster.items():
-        team_membership_resource = TeamMembership(team_id.DEVELOPERS.value, users, is_dry_run)
+        team_membership_resource = TeamMembership(str(team_id), team_id.DEVELOPERS.value, users, is_dry_run)
         team_membership_resource.refresh_resource()
     for team_id, team_repositories in repositories.items():
         team_repository_resource = TeamRepository(team_id.name.lower(), team_id.value, team_repositories, is_dry_run)

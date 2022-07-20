@@ -90,7 +90,7 @@ resource "github_team_membership" "team_membership" {
     for team in resource.github_team.organisation_teams : [
       for role in keys(var.teams[team.name].users) : [
         for user in var.teams[team.name].users[role] : {
-          name     = "${team.id}:${user}",
+          name     = "${team.name}:${user}",
           team_id  = team.id,
           username = user,
           role     = trim(role, "s")
