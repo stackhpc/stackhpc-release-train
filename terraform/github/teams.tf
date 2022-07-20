@@ -98,9 +98,9 @@ resource "github_team_membership" "team_membership" {
       ]
     ]
   ]) : element.name => element }
-  team_id = each.value.team_id
+  team_id  = each.value.team_id
   username = each.value.username
-  role = each.value.role
+  role     = each.value.role
   lifecycle {
     prevent_destroy = true
   }

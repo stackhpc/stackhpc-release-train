@@ -115,7 +115,7 @@ variable "teams" {
   }
 }
 
-variable labels {
+variable "labels" {
   default = [
     "stackhpc_ci",
     "workflows",
