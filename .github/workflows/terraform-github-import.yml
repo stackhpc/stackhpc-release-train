@@ -35,4 +35,4 @@ jobs:
         id: init
         run: terraform init
       - name: Run import_resources [--dry-run]
-        run: ${{ GITHUB_WORKSPACE }}/'terraform/github/import_resources.py --dry-run'
+        run: ${{ env.GITHUB_WORKSPACE }}/'terraform/github/import_resources.py --dry-run'
