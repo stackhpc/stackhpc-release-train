@@ -1,0 +1,35 @@
+---
+name: Terraform GitHub Import
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "If specified the import script shall perform a dry run where it shall only print the commands that would otherwise be executed."
+        required: true
+        type: boolean
+        default: true
+env:
+  TF_VAR_GITHUB_APP_PEM_FILE: ${{ secrets.TF_VAR_GITHUB_APP_PEM_FILE }}
+jobs:
+  terraform-github-import:
+    name: Terraform GitHub Import
+    runs-on: ubuntu-latest
+    steps:
+      - name: GitHub Checkout 🛎
+        uses: actions/checkout@v3
+      - name: Setup Python 🐍
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.10
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+      - name: Terraform fmt
+        id: fmt
+        run: terraform fmt -check
+      - name: Terraform Init
+        id: init
+        run: terraform init
+      - name: Run import_resources [--dry-run]
+        run: 'terraform/github/import_resources.py --dry-run'
