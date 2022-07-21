@@ -102,7 +102,7 @@ resource "github_branch_protection" "kayobe_branch_protection" {
     ]
     strict = true
   }
-  
+
   lifecycle {
     prevent_destroy = true
   }

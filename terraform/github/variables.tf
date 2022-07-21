@@ -37,7 +37,7 @@ variable "teams" {
       privacy     = "closed"
       users = {
         maintainers = [],
-        members = [],
+        members     = [],
       }
     },
     "Azimuth" = {
@@ -45,7 +45,7 @@ variable "teams" {
       privacy     = "closed"
       users = {
         maintainers = [],
-        members = [],
+        members     = [],
       }
     },
     "Batch" = {
@@ -53,7 +53,7 @@ variable "teams" {
       privacy     = "closed"
       users = {
         maintainers = [],
-        members = [],
+        members     = [],
       }
     },
     "Developers" = {
@@ -61,7 +61,7 @@ variable "teams" {
       privacy     = "closed"
       users = {
         maintainers = [],
-        members = [],
+        members     = [],
       }
     },
     "Kayobe" = {
@@ -69,7 +69,7 @@ variable "teams" {
       privacy     = "closed"
       users = {
         maintainers = [],
-        members = [],
+        members     = [],
       }
     },
     "OpenStack" = {
@@ -77,7 +77,7 @@ variable "teams" {
       privacy     = "closed"
       users = {
         maintainers = [],
-        members = [],
+        members     = [],
       }
     },
     "ReleaseTrain" = {
@@ -85,7 +85,7 @@ variable "teams" {
       privacy     = "closed"
       users = {
         maintainers = [],
-        members = [],
+        members     = [],
       }
     },
     "SMSLab" = {
@@ -93,7 +93,7 @@ variable "teams" {
       privacy     = "closed"
       users = {
         maintainers = [],
-        members = [],
+        members     = [],
       }
     },
   }
