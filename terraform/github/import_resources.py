@@ -136,15 +136,9 @@ def import_missing_resource(resource_address: str, resource_id: str, index_key: 
         print(f"import_missing_resource(resource_address: {resource_address}, resource_id: {resource_id}, index_key: {index_key}", "=>\n\t\033[1m\033[31m", *cmd, "\033[0;0m", end="\n\n")
 
 def get_default_branches() -> dict[str, str]:
-    commands = [
-        ["terraform", "show", "-json"],
-        ['jq', '-r', '.values[].resources[] | select(.mode == \"data\") | .values | {(.name): .default_branch}'],
-        ['jq', '-s']
-    ]
-    terraform_show = subprocess.run(commands[0], capture_output=True)
-    jq_extract = subprocess.run(commands[1], input=terraform_show.stdout, capture_output=True)
-    jq_combine = subprocess.run(commands[2], input=jq_extract.stdout, capture_output=True)
-    return reduce(lambda left, right: left | right, json.loads(jq_combine.stdout.decode()), {})
+    cmd = "gh repo view stackhpc/kolla --json name,defaultBranchRef -q '. | {(.name): .defaultBranchRef.name}'"
+    output = subprocess.run(cmd, capture_output=True)
+    return output
 
 
 def populate_repository_data() -> None:
@@ -171,38 +165,39 @@ def main() -> None:
     terraform_vars = read_vars()
     populate_repository_data()
     default_branches = get_default_branches()
-    team_roster = {TeamID[team[0].upper()]:
-        [*itertools.chain.from_iterable(team[1]["users"].values())]
-        for team in terraform_vars["teams"].items()}
-    repositories = {TeamID[team[0].upper()]: team[1]
-        for team in terraform_vars["repositories"].items()}
-    issue_labels = terraform_vars["labels"]
-    for team_id, team_repositories in repositories.items():
-        if team_id == TeamID.KAYOBE or team_id == TeamID.OPENSTACK:
-            branch_protection_resource = BranchProtection(team_id.name.lower(), {f"{name}:stackhpc/**": name  for name in team_repositories}, is_dry_run)
-            branch_protection_resource.refresh_resource()
-        else:
-            branch_protection_resource = BranchProtection(team_id.name.lower(), {f"{name}:{default_branches[name]}": name  for name in team_repositories}, is_dry_run)
-            branch_protection_resource.refresh_resource()
-    for team_id, users in team_roster.items():
-        team_membership_resource = TeamMembership(str(team_id), team_id.value, users, is_dry_run)
-        team_membership_resource.refresh_resource()
-    for _, users in team_roster.items():
-        team_membership_resource = TeamMembership(str(team_id.DEVELOPERS), team_id.DEVELOPERS.value, users, is_dry_run)
-        team_membership_resource.refresh_resource()
-    for team_id, team_repositories in repositories.items():
-        team_repository_resource = TeamRepository(team_id.name.lower(), team_id.value, team_repositories, is_dry_run)
-        team_repository_resource.refresh_resource()
-    for _, team_repositories in repositories.items():
-        team_repository_resource = TeamRepository(TeamID.DEVELOPERS.name.lower(), TeamID.DEVELOPERS.value, team_repositories, is_dry_run)
-        team_repository_resource.refresh_resource()
-    organisation_team_resource = OrganisationTeam({str(team.value): str(team) for team in TeamID}, is_dry_run)
-    organisation_team_resource.refresh_resource()
-    for issue_label in issue_labels:
-        issue_label_resource = IssueLabel(issue_label, [repository for teams in repositories.values() for repository in teams], is_dry_run)
-        issue_label_resource.refresh_resource()
-    repository_resource = Repository([*itertools.chain.from_iterable(repositories.values())], is_dry_run)
-    repository_resource.refresh_resource()
+    print(default_branches)
+    # team_roster = {TeamID[team[0].upper()]:
+    #     [*itertools.chain.from_iterable(team[1]["users"].values())]
+    #     for team in terraform_vars["teams"].items()}
+    # repositories = {TeamID[team[0].upper()]: team[1]
+    #     for team in terraform_vars["repositories"].items()}
+    # issue_labels = terraform_vars["labels"]
+    # for team_id, team_repositories in repositories.items():
+    #     if team_id == TeamID.KAYOBE or team_id == TeamID.OPENSTACK:
+    #         branch_protection_resource = BranchProtection(team_id.name.lower(), {f"{name}:stackhpc/**": name  for name in team_repositories}, is_dry_run)
+    #         branch_protection_resource.refresh_resource()
+    #     else:
+    #         branch_protection_resource = BranchProtection(team_id.name.lower(), {f"{name}:{default_branches[name]}": name  for name in team_repositories}, is_dry_run)
+    #         branch_protection_resource.refresh_resource()
+    # for team_id, users in team_roster.items():
+    #     team_membership_resource = TeamMembership(str(team_id), team_id.value, users, is_dry_run)
+    #     team_membership_resource.refresh_resource()
+    # for _, users in team_roster.items():
+    #     team_membership_resource = TeamMembership(str(team_id.DEVELOPERS), team_id.DEVELOPERS.value, users, is_dry_run)
+    #     team_membership_resource.refresh_resource()
+    # for team_id, team_repositories in repositories.items():
+    #     team_repository_resource = TeamRepository(team_id.name.lower(), team_id.value, team_repositories, is_dry_run)
+    #     team_repository_resource.refresh_resource()
+    # for _, team_repositories in repositories.items():
+    #     team_repository_resource = TeamRepository(TeamID.DEVELOPERS.name.lower(), TeamID.DEVELOPERS.value, team_repositories, is_dry_run)
+    #     team_repository_resource.refresh_resource()
+    # organisation_team_resource = OrganisationTeam({str(team.value): str(team) for team in TeamID}, is_dry_run)
+    # organisation_team_resource.refresh_resource()
+    # for issue_label in issue_labels:
+    #     issue_label_resource = IssueLabel(issue_label, [repository for teams in repositories.values() for repository in teams], is_dry_run)
+    #     issue_label_resource.refresh_resource()
+    # repository_resource = Repository([*itertools.chain.from_iterable(repositories.values())], is_dry_run)
+    # repository_resource.refresh_resource()
 
 
 if __name__ == "__main__":
