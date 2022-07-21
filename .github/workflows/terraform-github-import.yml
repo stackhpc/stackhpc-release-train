@@ -36,9 +36,10 @@ jobs:
         run: terraform init
       - name: Run import_resources [--dry-run]
         id: dry-run
+        if: ${{inputs.dry_run == true}}
         run: ./import_resources.py
-      - name: Output Status
+      - name: Output Summary
         if: ${{inputs.dry_run == true}}
         run: |
           echo '### Terraform Import Dry Run' >> $GITHUB_STEP_SUMMARY
-          echo '${{ steps.dry-run.outcome }}' >> $GITHUB_STEP_SUMMARY
+          echo '${{ steps.dry-run.outputs.stdout }}' >> $GITHUB_STEP_SUMMARY
