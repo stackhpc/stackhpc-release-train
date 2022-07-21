@@ -169,7 +169,7 @@ def main() -> None:
     parsed_args = parse_args()
     is_dry_run = parsed_args.dry_run
     terraform_vars = read_vars()
-    # populate_repository_data()
+    populate_repository_data()
     default_branches = get_default_branches()
     team_roster = {TeamID[team[0].upper()]:
         [*itertools.chain.from_iterable(team[1]["users"].values())]
