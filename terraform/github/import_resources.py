@@ -171,6 +171,7 @@ def main() -> None:
     terraform_vars = read_vars()
     populate_repository_data()
     default_branches = get_default_branches()
+    print(default_branches)
     team_roster = {TeamID[team[0].upper()]:
         [*itertools.chain.from_iterable(team[1]["users"].values())]
         for team in terraform_vars["teams"].items()}
