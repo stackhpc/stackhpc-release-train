@@ -188,7 +188,7 @@ def main() -> None:
         team_membership_resource = TeamMembership(str(team_id), team_id.value, users, is_dry_run)
         team_membership_resource.refresh_resource()
     for _, users in team_roster.items():
-        team_membership_resource = TeamMembership(str(team_id), team_id.DEVELOPERS.value, users, is_dry_run)
+        team_membership_resource = TeamMembership(str(team_id.DEVELOPERS), team_id.DEVELOPERS.value, users, is_dry_run)
         team_membership_resource.refresh_resource()
     for team_id, team_repositories in repositories.items():
         team_repository_resource = TeamRepository(team_id.name.lower(), team_id.value, team_repositories, is_dry_run)
