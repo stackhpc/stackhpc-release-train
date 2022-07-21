@@ -63,6 +63,9 @@ resource "github_team_repository" "openstack_repositories" {
   team_id    = resource.github_team.organisation_teams["OpenStack"].id
   repository = each.value
   permission = "push"
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "github_team_repository" "release_train_repositories" {

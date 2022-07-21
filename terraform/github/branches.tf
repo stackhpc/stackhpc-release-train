@@ -94,6 +94,15 @@ resource "github_branch_protection" "kayobe_branch_protection" {
     resource.github_team.organisation_teams["Developers"].node_id
   ]
 
+  required_status_checks {
+    contexts = [
+      "tox / Tox pep8 with Python 3.8",
+      "tox / Tox py36 with Python 3.6",
+      "tox / Tox py38 with Python 3.8",
+    ]
+    strict = true
+  }
+  
   lifecycle {
     prevent_destroy = true
   }

@@ -37,9 +37,7 @@ variable "teams" {
       privacy     = "closed"
       users = {
         maintainers = [],
-        members = [
-          "stackhpc-ci"
-        ],
+        members = [],
       }
     },
     "Azimuth" = {
@@ -47,9 +45,7 @@ variable "teams" {
       privacy     = "closed"
       users = {
         maintainers = [],
-        members = [
-          "stackhpc-ci"
-        ],
+        members = [],
       }
     },
     "Batch" = {
@@ -57,9 +53,7 @@ variable "teams" {
       privacy     = "closed"
       users = {
         maintainers = [],
-        members = [
-          "stackhpc-ci"
-        ],
+        members = [],
       }
     },
     "Developers" = {
@@ -67,9 +61,7 @@ variable "teams" {
       privacy     = "closed"
       users = {
         maintainers = [],
-        members = [
-          "stackhpc-ci"
-        ],
+        members = [],
       }
     },
     "Kayobe" = {
@@ -77,9 +69,7 @@ variable "teams" {
       privacy     = "closed"
       users = {
         maintainers = [],
-        members = [
-          "stackhpc-ci"
-        ],
+        members = [],
       }
     },
     "OpenStack" = {
@@ -87,9 +77,7 @@ variable "teams" {
       privacy     = "closed"
       users = {
         maintainers = [],
-        members = [
-          "stackhpc-ci"
-        ],
+        members = [],
       }
     },
     "ReleaseTrain" = {
@@ -97,9 +85,7 @@ variable "teams" {
       privacy     = "closed"
       users = {
         maintainers = [],
-        members = [
-          "stackhpc-ci"
-        ],
+        members = [],
       }
     },
     "SMSLab" = {
@@ -107,18 +93,12 @@ variable "teams" {
       privacy     = "closed"
       users = {
         maintainers = [],
-        members = [
-          "stackhpc-ci"
-        ],
+        members = [],
       }
     },
   }
 }
 
 variable "labels" {
-  default = [
-    "stackhpc_ci",
-    "workflows",
-    "community_files"
-  ]
+  default = []
 }

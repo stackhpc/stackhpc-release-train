@@ -1,8 +1,15 @@
 #!/usr/bin/env python3
+
+"""
+Import existing GitHub resources from the `stackhpc` organisation
+so that they maybe managed by Terraform. It shall only import resources 
+that are defined within the `terraform.tfvars.json` file nd are currently 
+available on GitHub. 
+"""
+
 import argparse
 from dataclasses import dataclass
 from enum import Enum, unique
-from functools import reduce
 import itertools
 import json
 from pathlib import Path
@@ -135,9 +142,9 @@ def import_missing_resource(resource_address: str, resource_id: str, index_key: 
     else:
         print(f"import_missing_resource(resource_address: {resource_address}, resource_id: {resource_id}, index_key: {index_key}", "=>\n\t\033[1m\033[31m", *cmd, "\033[0;0m", end="\n\n")
 
-def get_default_branches() -> dict[str, str]:
+def get_default_branches(repositories: list[str]) -> dict[str, str]:
     default_branches = {}
-    for name in ["kolla", ".github", "kolla-ansible"]:
+    for name in repositories:
         cmd = ["gh", "repo", "view", f"stackhpc/{name}", "--json", "defaultBranchRef", "-q", ". | .defaultBranchRef.name"]
         default_branches[name] = subprocess.run(cmd, capture_output=True).stdout.decode().strip()
     return default_branches
@@ -166,12 +173,12 @@ def main() -> None:
     is_dry_run = parsed_args.dry_run
     terraform_vars = read_vars()
     populate_repository_data()
-    default_branches = get_default_branches()
     team_roster = {TeamID[team[0].upper()]:
         [*itertools.chain.from_iterable(team[1]["users"].values())]
         for team in terraform_vars["teams"].items()}
     repositories = {TeamID[team[0].upper()]: team[1]
         for team in terraform_vars["repositories"].items()}
+    default_branches = get_default_branches([*itertools.chain.from_iterable(repositories.values())])
     issue_labels = terraform_vars["labels"]
     for team_id, team_repositories in repositories.items():
         if team_id == TeamID.KAYOBE or team_id == TeamID.OPENSTACK:
@@ -183,14 +190,8 @@ def main() -> None:
     for team_id, users in team_roster.items():
         team_membership_resource = TeamMembership(str(team_id), team_id.value, users, is_dry_run)
         team_membership_resource.refresh_resource()
-    for _, users in team_roster.items():
-        team_membership_resource = TeamMembership(str(team_id.DEVELOPERS), team_id.DEVELOPERS.value, users, is_dry_run)
-        team_membership_resource.refresh_resource()
     for team_id, team_repositories in repositories.items():
         team_repository_resource = TeamRepository(team_id.name.lower(), team_id.value, team_repositories, is_dry_run)
-        team_repository_resource.refresh_resource()
-    for _, team_repositories in repositories.items():
-        team_repository_resource = TeamRepository(TeamID.DEVELOPERS.name.lower(), TeamID.DEVELOPERS.value, team_repositories, is_dry_run)
         team_repository_resource.refresh_resource()
     organisation_team_resource = OrganisationTeam({str(team.value): str(team) for team in TeamID}, is_dry_run)
     organisation_team_resource.refresh_resource()
