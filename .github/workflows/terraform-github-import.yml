@@ -13,7 +13,7 @@ env:
 jobs:
   terraform-github-import:
     name: Terraform GitHub Import
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     defaults:
       run:
         working-directory: './terraform/github/'

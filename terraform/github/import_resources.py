@@ -142,8 +142,6 @@ def get_default_branches() -> dict[str, str]:
         ['jq', '-s']
     ]
     terraform_show = subprocess.run(commands[0], capture_output=True)
-    print(terraform_show.stdout.decode())
-    print(terraform_show.stderr.decode())
     jq_extract = subprocess.run(commands[1], input=terraform_show.stdout, capture_output=True)
     jq_combine = subprocess.run(commands[2], input=jq_extract.stdout, capture_output=True)
     return reduce(lambda left, right: left | right, json.loads(jq_combine.stdout.decode()), {})
@@ -173,7 +171,6 @@ def main() -> None:
     terraform_vars = read_vars()
     populate_repository_data()
     default_branches = get_default_branches()
-    print(default_branches)
     team_roster = {TeamID[team[0].upper()]:
         [*itertools.chain.from_iterable(team[1]["users"].values())]
         for team in terraform_vars["teams"].items()}
