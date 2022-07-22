@@ -3,6 +3,8 @@ resource "github_repository" "repositories" {
   name                   = each.value
   delete_branch_on_merge = true
   allow_merge_commit     = true
+  allow_squash_merge     = true
+  allow_rebase_merge     = true
   lifecycle {
     ignore_changes = [
       description,
@@ -13,8 +15,6 @@ resource "github_repository" "repositories" {
       has_projects,
       has_wiki,
       is_template,
-      allow_squash_merge,
-      allow_rebase_merge,
       has_downloads,
       auto_init,
       gitignore_template,
