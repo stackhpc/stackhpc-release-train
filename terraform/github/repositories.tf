@@ -1,7 +1,8 @@
 resource "github_repository" "repositories" {
   for_each               = toset(flatten(values(var.repositories)))
   name                   = each.value
-  delete_branch_on_merge = true
+  delete_branch_on_merge = true,
+  allow_merge_commit = true,
   lifecycle {
     ignore_changes = [
       description,
@@ -12,7 +13,6 @@ resource "github_repository" "repositories" {
       has_projects,
       has_wiki,
       is_template,
-      allow_merge_commit,
       allow_squash_merge,
       allow_rebase_merge,
       has_downloads,
