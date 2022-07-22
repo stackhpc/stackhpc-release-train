@@ -141,7 +141,7 @@ resource "github_branch_protection" "openstack_branch_protection" {
   }
 }
 
-resource "github_branch_protection" "release_train_branch_protection" {
+resource "github_branch_protection" "releasetrain_branch_protection" {
   for_each      = toset(var.repositories["ReleaseTrain"])
   repository_id = data.github_repository.repositories[each.key].node_id
 
@@ -165,7 +165,7 @@ resource "github_branch_protection" "release_train_branch_protection" {
   }
 }
 
-resource "github_branch_protection" "sms_lab_branch_protection" {
+resource "github_branch_protection" "smslab_branch_protection" {
   for_each      = toset(var.repositories["SMSLab"])
   repository_id = data.github_repository.repositories[each.key].node_id
 
