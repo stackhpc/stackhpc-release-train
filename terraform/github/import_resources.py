@@ -35,27 +35,18 @@ class Resource:
 
 
 class TeamMembership(Resource):
-    # API: gh api \
-    # -H "Accept: application/vnd.github+json" \
-    # /orgs/stackhpc/teams -q '.[] | {id, name}'
     def __init__(self, team_name: str, team_id: str, roster: list[str], is_dry_run: bool):
         Resource.__init__(self, "github_team_membership.team_membership",
             {f'{team_id}:{entry}': f'{team_name}:{entry}' for entry in roster}, is_dry_run)
 
 
 class TeamRepository(Resource):
-    # API: gh api \
-    # -H "Accept: application/vnd.github+json" \
-    # /orgs/stackhpc/teams -q '.[] | {id, name}'
     def __init__(self, team_name: str, team_ident: str, repositories: list[str], is_dry_run: bool):
         Resource.__init__(self, f"github_team_repository.{team_name}_repositories",
             {f"{team_ident}:{repository}": repository for repository in repositories}, is_dry_run)
 
 
 class OrganisationTeam(Resource):
-    # API: gh api \
-    # -H "Accept: application/vnd.github+json" \
-    # /orgs/stackhpc/teams -q '.[] | {id, name}'
     def __init__(self, teams: components, is_dry_run: bool):
         Resource.__init__(self, "github_team.organisation_teams", teams, is_dry_run)
 
@@ -93,6 +84,9 @@ class QueryResponse(Enum):
 
 @unique
 class TeamID(Enum):
+    # API: gh api \
+    # -H "Accept: application/vnd.github+json" \
+    # /orgs/stackhpc/teams -q '.[] | {id, name}'
     ANSIBLE = 2454000
     AZIMUTH = 0
     BATCH = 1
@@ -192,6 +186,9 @@ def main() -> None:
         team_membership_resource.refresh_resource()
     for team_id, team_repositories in repositories.items():
         team_repository_resource = TeamRepository(team_id.name.lower(), team_id.value, team_repositories, is_dry_run)
+        team_repository_resource.refresh_resource()
+    for _, team_repositories in repositories.items():
+        team_repository_resource = TeamRepository(TeamID.DEVELOPERS.name.lower(), TeamID.DEVELOPERS.value, team_repositories, is_dry_run)
         team_repository_resource.refresh_resource()
     organisation_team_resource = OrganisationTeam({str(team.value): str(team) for team in TeamID}, is_dry_run)
     organisation_team_resource.refresh_resource()
