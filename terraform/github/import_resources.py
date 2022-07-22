@@ -88,13 +88,13 @@ class TeamID(Enum):
     # -H "Accept: application/vnd.github+json" \
     # /orgs/stackhpc/teams -q '.[] | {id, name}'
     ANSIBLE = 2454000
-    AZIMUTH = 0
-    BATCH = 1
+    AZIMUTH = 6372898
+    BATCH = 6372897
     DEVELOPERS = 6309608
-    KAYOBE = 2
-    OPENSTACK = 6352038
-    RELEASETRAIN = 3
-    SMSLAB = 4
+    KAYOBE = 6156230
+    OPENSTACK = 6372899
+    RELEASETRAIN = 6372895
+    SMSLAB = 6372896
 
     def __str__(self) -> str:
         result: str = self.name.capitalize()
