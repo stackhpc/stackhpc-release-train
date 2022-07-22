@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       dry_run:
-        description: "If specified the import script shall perform a dry run where it shall only print the commands that would otherwise be executed."
+        description: "Dry Run"
         required: true
         type: boolean
         default: true
@@ -14,13 +14,16 @@ jobs:
   terraform-github-import:
     name: Terraform GitHub Import
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: './terraform/github/'
     steps:
       - name: GitHub Checkout 🛎
         uses: actions/checkout@v3
       - name: Setup Python 🐍
         uses: actions/setup-python@v4
         with:
-          python-version: 3.10
+          python-version: '3.10.4'
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
@@ -32,4 +35,9 @@ jobs:
         id: init
         run: terraform init
       - name: Run import_resources [--dry-run]
-        run: 'terraform/github/import_resources.py --dry-run'
+        id: dry-run
+        if: ${{inputs.dry_run == true}}
+        run: ./import_resources.py -n
+      - name: Run import_resources [--no-dry-run]
+        if: ${{inputs.dry_run == false}}
+        run: ./import_resources.py
