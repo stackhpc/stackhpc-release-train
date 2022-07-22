@@ -68,7 +68,7 @@ resource "github_team_repository" "openstack_repositories" {
   }
 }
 
-resource "github_team_repository" "release_train_repositories" {
+resource "github_team_repository" "releasetrain_repositories" {
   for_each   = toset(var.repositories["ReleaseTrain"])
   team_id    = resource.github_team.organisation_teams["ReleaseTrain"].id
   repository = each.value
@@ -78,7 +78,7 @@ resource "github_team_repository" "release_train_repositories" {
   }
 }
 
-resource "github_team_repository" "sms_lab_repositories" {
+resource "github_team_repository" "smslab_repositories" {
   for_each   = toset(var.repositories["SMSLab"])
   team_id    = resource.github_team.organisation_teams["SMSLab"].id
   repository = each.value
