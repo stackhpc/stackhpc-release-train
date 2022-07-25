@@ -66,4 +66,4 @@ Playbooks may then be run as follows:
 ansible-playbook -i ansible/inventory ansible/<playbook>
 ```
 
-Information on the different playbooks is available in the [release train documentation](https://stackhpc.github.io/stackhpc-release-train/usage/).
+Information on the different playbooks is available in the [release train documentation](https://stackhpc.github.io/stackhpc-release-train/usage/content-workflows).
