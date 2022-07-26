@@ -152,6 +152,7 @@ def get_default_branches() -> dict[str, str]:
     tfstate_file = open(complete_path, "w", encoding="utf-8")
     subprocess.run(cmd, stdout=tfstate_file, encoding="utf-8")
     tfstate_str = "".join(open(complete_path, "r", encoding="utf-8").readlines())
+    print(tfstate_str[0:100])
     tfstate_json = json.loads(tfstate_str)
     for repository in tfstate_json["resources"][0]["instances"]:
         branches[repository["index_key"]] = repository["attributes"]["default_branch"]
