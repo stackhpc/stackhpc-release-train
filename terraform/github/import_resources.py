@@ -144,14 +144,16 @@ def import_missing_resource(resource_address: str, resource_id: str, index_key: 
               "=>\n\t\033[1m\033[31m", *cmd, "\033[0;0m", end="\n\n")
 
 
-def get_default_branches(repositories: list[str]) -> dict[str, str]:
-    default_branches = {}
-    for name in repositories:
-        cmd = ["gh", "repo", "view", f"stackhpc/{name}", "--json",
-               "defaultBranchRef", "-q", ". | .defaultBranchRef.name"]
-        default_branches[name] = subprocess.run(
-            cmd, capture_output=True).stdout.decode().strip()
-    return default_branches
+def get_default_branches() -> dict[str, str]:
+    branches = {}
+    cmd = ["terraform", "state", "pull"]
+    output = subprocess.run(cmd, capture_output=True)
+    print(output.stdout.decode())
+    print(output.stderr.decode())
+    tfstate_file = json.loads(output.stdout.decode())
+    for repository in tfstate_file["resources"][0]["instances"]:
+        branches[repository["index_key"]] = repository["attributes"]["default_branch"]
+    return branches
 
 
 def populate_repository_data() -> None:
@@ -184,8 +186,7 @@ def main() -> None:
                    for team in terraform_vars["teams"].items()}
     repositories = {TeamID[team[0].upper()]: team[1]
                     for team in terraform_vars["repositories"].items()}
-    default_branches = get_default_branches(
-        [*itertools.chain.from_iterable(repositories.values())])
+    default_branches = get_default_branches()
     issue_labels = terraform_vars["labels"]
     for team_id, team_repositories in repositories.items():
         if team_id == TeamID.KAYOBE or team_id == TeamID.OPENSTACK:
