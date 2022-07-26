@@ -149,12 +149,10 @@ def get_default_branches() -> dict[str, str]:
     branches = {}
     cmd = ["terraform", "state", "pull"]
     complete_path = Path(__file__).parent.joinpath("terraform.state.pull")
-    tfstate_file = open(complete_path, "w")
-    subprocess.run(cmd, stdout=tfstate_file)
-    with open(complete_path, "r") as file:
-        for line in file:
-            print(line)
-    # tfstate_json = json.load(open(complete_path, "r"))
+    tfstate_file = open(complete_path, "w", encoding="utf-8")
+    subprocess.run(cmd, stdout=tfstate_file, encoding="utf-8")
+    tfstate_json = json.load(open(complete_path, "r", encoding="utf-8"))
+    print(tfstate_json)
     # for repository in tfstate_json["resources"][0]["instances"]:
     #     branches[repository["index_key"]] = repository["attributes"]["default_branch"]
     return branches
