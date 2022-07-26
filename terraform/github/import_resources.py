@@ -148,17 +148,10 @@ def import_missing_resource(resource_address: str, resource_id: str, index_key: 
 def get_default_branches() -> dict[str, str]:
     branches = {}
     cmd = ["terraform", "state", "pull"]
-    complete_path = Path(__file__).parent.joinpath("terraform.state.pull")
-    tfstate_file = open(complete_path, "w", encoding="utf-8")
-    subprocess.run(cmd, stdout=tfstate_file, encoding="utf-8")
-    tfstate_str = "".join([line.strip("\n") for line in open(complete_path, "r", encoding="utf-8").readlines()])
-    # with open(complete_path, "r", encoding="utf-8") as file:
-    #     for line in file.readlines()[:10]:
-    #         print(line.strip("\n"))
-    tfstate_json = json.loads(tfstate_str)
-    print(json.dumps(tfstate_json, indent=4))
-    # for repository in tfstate_json["resources"][0]["instances"]:
-    #     branches[repository["index_key"]] = repository["attributes"]["default_branch"]
+    output = subprocess.run(cmd, capture_output=True)
+    tfstate = json.loads("".join(output.stdout.decode().splitlines()[1::]))
+    for repository in tfstate["resources"][0]["instances"]:
+        branches[repository["index_key"]] = repository["attributes"]["default_branch"]
     return branches
 
 
