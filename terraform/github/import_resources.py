@@ -158,8 +158,7 @@ def get_default_branches() -> dict[str, str]:
 
 
 def populate_repository_data() -> None:
-    cmd = ["terraform", "apply", "-auto-approve",
-           "-target=data.github_repository.repositories"]
+    cmd = ["terraform", "apply", "-refresh-only", "-auto-approve"]
     output = subprocess.run(cmd, capture_output=True)
     print(output.stdout.decode())
 
