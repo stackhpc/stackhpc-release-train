@@ -2,8 +2,8 @@
 
 """
 Import existing GitHub resources from the `stackhpc` organisation
-so that they maybe managed by Terraform. It shall only import resources 
-that are defined within the `terraform.tfvars.json` file nd are currently 
+so that they maybe managed by Terraform. It shall only import resources
+that are defined within the `terraform.tfvars.json` file nd are currently
 available on GitHub.
 """
 
@@ -115,7 +115,7 @@ class TeamID(Enum):
 def query_statefile(resource_address: str, resource_id: str = None) -> subprocess.CompletedProcess[str]:
     cmd = ["terraform", "state", "list", f"-id={resource_id}", resource_address] if resource_id \
         else ["terraform", "state", "list", resource_address]
-    return subprocess.run(cmd, capture_output=True)
+    return subprocess.run(cmd, capture_output=True, check=True)
 
 
 def unpack_query(statefile_response: subprocess.CompletedProcess[str]) -> QueryResponse:
@@ -137,7 +137,7 @@ def import_missing_resource(resource_address: str, resource_id: str, index_key: 
     complete_resource_address = f"{resource_address}[\"{index_key}\"]" if index_key else resource_address
     cmd = ["terraform", "import", complete_resource_address, resource_id]
     if not is_dry_run:
-        output = subprocess.run(cmd, capture_output=True)
+        output = subprocess.run(cmd, capture_output=True, check=True)
         print(output.stdout.decode())
     else:
         print(f"import_missing_resource(resource_address: {resource_address}, resource_id: {resource_id}, index_key: {index_key}",
@@ -149,7 +149,7 @@ def get_default_branches() -> dict[str, str]:
     cmd = ["terraform", "state", "pull"]
     complete_path = Path(__file__).parent.joinpath("terraform.state.pull")
     tfstate_file = open(complete_path, "w", encoding="utf-8")
-    subprocess.run(cmd, stdout=tfstate_file, encoding="utf-8")
+    subprocess.run(cmd, stdout=tfstate_file, encoding="utf-8", check=True)
     tfstate_json = json.load(open(complete_path, "r", encoding="utf-8"))
     for repository in tfstate_json["resources"][0]["instances"]:
         branches[repository["index_key"]] = repository["attributes"]["default_branch"]
@@ -158,13 +158,13 @@ def get_default_branches() -> dict[str, str]:
 
 def populate_repository_data() -> None:
     cmd = ["terraform", "apply", "-refresh-only", "-auto-approve"]
-    output = subprocess.run(cmd, capture_output=True)
+    output = subprocess.run(cmd, capture_output=True, check=True)
     print(output.stdout.decode())
 
 
 def read_vars(path: str = "terraform.tfvars.json") -> dict[str, Any]:
     complete_path = Path(__file__).parent.joinpath(path)
-    return json.load(open(complete_path, "r"))
+    return json.load(open(complete_path, "r", encoding="utf-8"))
 
 
 def parse_args():
