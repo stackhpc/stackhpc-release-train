@@ -187,8 +187,6 @@ def parse_args():
                         help="Do not perform any actions that would result in permanent change \
                         to the statefile. Intended to be used to determine if running would make \
                         the intended changes")
-    parser.add_argument("-v", "--verbose", action=argparse.BooleanOptionalAction, default=False,
-                        help="Provide additional information about the progress of the script")
     return parser.parse_args()
 
 
