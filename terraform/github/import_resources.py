@@ -31,7 +31,7 @@ class Resource:
         for ident, index_key in self.components.items():
             query = query_statefile(self.resource_address, ident)
             query_response = unpack_query(query)
-            if query_response == QueryResponse.RESOURCE_MISSING or query_response == QueryResponse.RESOURCE_UNKNOWN:
+            if query_response == QueryResponse.INSTANCE_MISSING or query_response == QueryResponse.RESOURCE_UNKNOWN:
                 import_missing_resource(
                     self.resource_address, ident, index_key, self.is_dry_run)
 
@@ -63,7 +63,7 @@ class BranchProtection(Resource):
         for ident, index_key in self.components.items():
             query = query_statefile(self.resource_address)
             query_response = unpack_query(query)
-            if query_response == QueryResponse.RESOURCE_MISSING or query_response == QueryResponse.RESOURCE_UNKNOWN:
+            if query_response == QueryResponse.INSTANCE_MISSING or query_response == QueryResponse.RESOURCE_UNKNOWN:
                 import_missing_resource(
                     self.resource_address, ident, index_key, self.is_dry_run)
 
@@ -82,7 +82,7 @@ class Repository(Resource):
 
 class QueryResponse(Enum):
     RESOURCE_FOUND = 0,
-    RESOURCE_MISSING = 1,
+    INSTANCE_MISSING = 1,
     RESOURCE_UNKNOWN = 2,
     UNDEFINED = 4
 
@@ -125,27 +125,36 @@ def unpack_query(statefile_response: subprocess.CompletedProcess[str]) -> QueryR
     except subprocess.CalledProcessError as error:
         if "The current state contains no resource" in error.stderr.decode():
             result = QueryResponse.RESOURCE_UNKNOWN
-        print(error.stderr.decode())
+        print(error.stderr.decode().splitlines()[1])
     else:
         if statefile_response.returncode == 0:
             if statefile_response.stdout:
                 result = QueryResponse.RESOURCE_FOUND
                 print(f"Resource Found: {statefile_response.stdout.decode()}")
             else:
-                result = QueryResponse.RESOURCE_MISSING
-                print(statefile_response.stderr.decode())
+                result = QueryResponse.INSTANCE_MISSING
+                print("Warning: Instance missing")
     return result
 
 
 def import_missing_resource(resource_address: str, resource_id: str, index_key: str = None, is_dry_run: bool = False) -> None:
     complete_resource_address = f"{resource_address}[\"{index_key}\"]" if index_key else resource_address
     cmd = ["terraform", "import", complete_resource_address, resource_id]
+    print("\trun =>", *cmd)
     if not is_dry_run:
         output = subprocess.run(cmd, capture_output=True, check=False)
-        print(output.stdout.decode())
-    else:
-        print(f"import_missing_resource(resource_address: {resource_address}, resource_id: {resource_id}, index_key: {index_key}",
-              "=>\n\t\033[1m\033[31m", *cmd, "\033[0;0m", end="\n\n")
+        try:
+            output.check_returncode()
+        except subprocess.CalledProcessError as error:
+            if "Could not find" in error.stderr.decode():
+                print(error.stderr.decode().splitlines()[1], end="\n\n")
+            else:
+                print(error.stderr.decode())
+        else:
+            if "Import successful!" in output.stdout.decode():
+                print("Import Successful!", end="\n\n")
+            else:
+                print(error.stderr.decode())
 
 
 def get_default_branches() -> dict[str, str]:
@@ -164,6 +173,7 @@ def populate_repository_data() -> None:
     cmd = ["terraform", "apply", "-refresh-only", "-auto-approve"]
     output = subprocess.run(cmd, capture_output=True, check=False)
     print(output.stdout.decode())
+    pass
 
 
 def read_vars(path: str = "terraform.tfvars.json") -> dict[str, Any]:
