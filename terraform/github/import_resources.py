@@ -120,16 +120,20 @@ def query_statefile(resource_address: str, resource_id: str = None) -> subproces
 
 def unpack_query(statefile_response: subprocess.CompletedProcess[str]) -> QueryResponse:
     result: QueryResponse = QueryResponse.UNDEFINED
-    if statefile_response.returncode == 0:
-        if statefile_response.stdout:
-            result = QueryResponse.RESOURCE_FOUND
-            print(
-                f"\033[1m\033[92mResource Found:\033[0;0m \033[1m{statefile_response.stdout.decode()}\033[0;0m")
-        else:
-            result = QueryResponse.RESOURCE_MISSING
-    elif statefile_response.returncode == 1:
-        if "The current state contains no resource" in statefile_response.stderr.decode():
+    try:
+        statefile_response.check_returncode()
+    except subprocess.CalledProcessError as error:
+        if "The current state contains no resource" in error.stderr.decode():
             result = QueryResponse.RESOURCE_UNKNOWN
+        print(error.stderr.decode())
+    else:
+        if statefile_response.returncode == 0:
+            if statefile_response.stdout:
+                result = QueryResponse.RESOURCE_FOUND
+                print(f"Resource Found: {statefile_response.stdout.decode()}")
+            else:
+                result = QueryResponse.RESOURCE_MISSING
+                print(statefile_response.stderr.decode())
     return result
 
 
