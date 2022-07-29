@@ -173,6 +173,7 @@ def populate_repository_data() -> None:
     cmd = ["terraform", "apply", "-refresh-only", "-auto-approve"]
     output = subprocess.run(cmd, capture_output=True, check=False)
     print(output.stdout.decode())
+    pass
 
 
 def read_vars(path: str = "terraform.tfvars.json") -> dict[str, Any]:
@@ -191,7 +192,6 @@ def parse_args():
 
 def main() -> None:
     parsed_args = parse_args()
-    print(f"Is Dry Run: {parsed_args.dry_run}")
     terraform_vars = read_vars()
     populate_repository_data()
     team_roster = {TeamID[team[0].upper()]:
