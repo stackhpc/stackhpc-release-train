@@ -147,14 +147,15 @@ def import_missing_resource(resource_address: str, resource_id: str, index_key: 
             output.check_returncode()
         except subprocess.CalledProcessError as error:
             if "Could not find" in error.stderr.decode():
-                print(error.stderr.decode().splitlines()[1], end="\n\n")
+                print(error.stderr.decode().splitlines()[1])
             else:
                 print(error.stderr.decode())
         else:
             if "Import successful!" in output.stdout.decode():
-                print("Import Successful!", end="\n\n")
+                print("Import Successful!")
             else:
                 print(error.stderr.decode())
+    print("\n", end="")
 
 
 def get_default_branches() -> dict[str, str]:
