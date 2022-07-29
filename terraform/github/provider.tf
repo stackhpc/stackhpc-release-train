@@ -9,7 +9,7 @@ terraform {
     organization = "stackhpc"
 
     workspaces {
-      name = "github"
+      name = "github-testing"
     }
   }
 }
