@@ -170,10 +170,16 @@ def get_default_branches() -> dict[str, str]:
 
 
 def populate_repository_data() -> None:
-    cmd = ["terraform", "apply", "-refresh-only", "-auto-approve"]
+    cmd = ["terraform", "apply", "-refresh-only",
+        "-target=data.github_repository.repositories", "-auto-approve"]
+    print("Initialising repository data =>", *cmd)
     output = subprocess.run(cmd, capture_output=True, check=False)
-    print(output.stdout.decode())
-    pass
+    try:
+        output.check_returncode()
+    except subprocess.CalledProcessError:
+        print(output.stderr.decode())
+    else:
+        print(output.stdout.decode())
 
 
 def read_vars(path: str = "terraform.tfvars.json") -> dict[str, Any]:
