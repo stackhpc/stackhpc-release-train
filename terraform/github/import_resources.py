@@ -29,8 +29,8 @@ class Resource:
 
     def refresh_resource(self) -> None:
         for ident, index_key in self.components.items():
-            query = query_statefile(self.resource_address, ident)
-            query_response = unpack_query(query)
+            query = query_statefile(self.resource_address)
+            query_response = unpack_query(query, index_key)
             if query_response == QueryResponse.INSTANCE_MISSING or query_response == QueryResponse.RESOURCE_UNKNOWN:
                 import_missing_resource(
                     self.resource_address, ident, index_key, self.is_dry_run)
@@ -61,8 +61,8 @@ class BranchProtection(Resource):
 
     def refresh_resource(self) -> None:
         for ident, index_key in self.components.items():
-            query = query_statefile(self.resource_address, index_key)
-            query_response = unpack_query(query)
+            query = query_statefile(self.resource_address)
+            query_response = unpack_query(query, index_key)
             if query_response == QueryResponse.INSTANCE_MISSING or query_response == QueryResponse.RESOURCE_UNKNOWN:
                 import_missing_resource(
                     self.resource_address, ident, index_key, self.is_dry_run)
@@ -112,12 +112,12 @@ class TeamID(Enum):
         return result
 
 
-def query_statefile(resource_address: str, resource_id: str) -> subprocess.CompletedProcess[str]:
-    cmd = ["terraform", "state", "list", f"-id={resource_id}", resource_address]
+def query_statefile(resource_address: str) -> subprocess.CompletedProcess[str]:
+    cmd = ["terraform", "state", "list", resource_address]
     return subprocess.run(cmd, capture_output=True, check=False)
 
 
-def unpack_query(statefile_response: subprocess.CompletedProcess[str]) -> QueryResponse:
+def unpack_query(statefile_response: subprocess.CompletedProcess[str], key: str) -> QueryResponse:
     result: QueryResponse = QueryResponse.UNDEFINED
     try:
         statefile_response.check_returncode()
@@ -127,9 +127,10 @@ def unpack_query(statefile_response: subprocess.CompletedProcess[str]) -> QueryR
         print(error.stderr.decode().splitlines()[1])
     else:
         if statefile_response.returncode == 0:
-            if statefile_response.stdout:
+            expected_entry = f"{statefile_response.args[-1]}[\"{key}\"]"
+            if expected_entry in statefile_response.stdout.decode():
                 result = QueryResponse.RESOURCE_FOUND
-                print(f"Resource Found: {statefile_response.stdout.decode()}")
+                print(f"Resource Found: {expected_entry}")
             else:
                 result = QueryResponse.INSTANCE_MISSING
                 print("Warning: Instance missing")
