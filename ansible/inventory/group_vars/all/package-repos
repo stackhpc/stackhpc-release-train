@@ -263,16 +263,19 @@ rpm_package_repos:
     base_path: rocky/8.5/AppStream/x86_64/os/
     short_name: rocky_8_5_appstream
     distribution_name: rocky-8.5-appstream-
+    sync: false
   - name: Rocky Linux 8.5 - BaseOS
     url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-BaseOS-8.5&arch=x86_64
     base_path: rocky/8.5/BaseOS/x86_64/os/
     short_name: rocky_8_5_baseos
     distribution_name: rocky-8.5-baseos-
+    sync: false
   - name: Rocky Linux 8.5 - Extras
     url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-extras-8.5&arch=x86_64
     base_path: rocky/8.5/extras/x86_64/os/
     short_name: rocky_8_5_extras
     distribution_name: rocky-8.5-extras-
+    sync: false
 
   # Additional Rocky Linux 8.5 repositories
   # No advanced virt, Ceph or OpenStack
@@ -281,11 +284,13 @@ rpm_package_repos:
     base_path: rocky/8.5/nfv/x86_64/os/
     short_name: rocky_8_5_nfv
     distribution_name: rocky-8.5-nfv-
+    sync: false
   - name: Rocky Linux 8.5 - PowerTools
     url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-PowerTools-8.5&arch=x86_64
     base_path: rocky/8.5/PowerTools/x86_64/os/
     short_name: rocky_8_5_powertools
     distribution_name: rocky-8.5-powertools-
+    sync: false
 
   # Base Rocky Linux 8.6 repositories
   - name: Rocky Linux 8.6 - AppStream
