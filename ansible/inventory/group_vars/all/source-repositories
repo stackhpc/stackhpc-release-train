@@ -55,7 +55,7 @@ source_repositories:
       - xena
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.openstack }}'
+          content: '{{ community_files.codeowners.kayobe }}'
           dest: '.github/CODEOWNERS'
   barbican:
     ignored_releases:
