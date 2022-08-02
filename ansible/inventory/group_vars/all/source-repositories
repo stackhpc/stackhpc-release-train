@@ -46,6 +46,10 @@ source_repositories:
     ignored_releases:
       - victoria
   networking-generic-switch:
+  sahara-dashboard:
+    ignored_releases:
+      - victoria
+      - xena
   stackhpc-inspector-plugins:
     repository_type: 'branchless'
     workflows: '{{ openstack_workflows.elsewhere }}'
