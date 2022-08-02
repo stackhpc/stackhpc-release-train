@@ -50,7 +50,7 @@ jobs:
         ansible/dev-pulp-repo-sync.yml \
         ansible/dev-pulp-repo-publication-cleanup.yml \
         ansible/dev-pulp-repo-publish.yml
-      if: github.event.inputs.sync_ark == 'true'
+      if: inputs.sync_ark || github.event_name == 'schedule'
 
     - name: Sync and publish package repositories in test
       run: |
@@ -59,4 +59,4 @@ jobs:
         ansible/test-pulp-repo-version-query.yml \
         ansible/test-pulp-repo-sync.yml \
         ansible/test-pulp-repo-publish.yml
-      if: github.event.inputs.sync_test == 'true'
+      if: inputs.sync_test || github.event_name == 'schedule'
