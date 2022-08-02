@@ -1,4 +1,102 @@
 ---
+# This version is appended to the name of distributions, and used as the last
+# part of the path of the directory containing the distribution.
+# FIXME: The following version is taken at the time when facts are gathered.
+#        Ideally it would relate to the time the repository version was
+#        created, since this would ensure they are ordered by the time of the
+#        sync, rather than the time of the distribution was created. This
+#        matters if we make a distribution for an earlier repository version,
+#        when later ones have already been distributed. Alternatively we could
+#        forget ordering and use a random string.
+dev_pulp_distribution_version: "{{ ansible_date_time.iso8601_basic_short }}"
+
+###############################################################################
+# Deb
+
+# Common parameters for Deb package repositories.
+dev_pulp_repository_deb_repo_common:
+  # Remove content that has been removed from the upstream mirror.
+  mirror: true
+  # Download all content from upstream mirror immediately, in case it gets removed.
+  policy: immediate
+  state: present
+
+dev_pulp_repository_deb_repos: >-
+  {%- set dev_repos = [] -%}
+  {%- for repo in deb_package_repos -%}
+  {%- set dev_repo = {"name": repo.name} -%}
+  {%- if repo.sync | default(true) -%}
+  {%- set dev_repo = dev_repo | combine({"url": repo.url}) -%}
+  {%- endif -%}
+  {%- if "policy" in repo -%}
+  {%- set dev_repo = dev_repo | combine({"policy": repo.policy}) -%}
+  {%- endif -%}
+  {%- if "mirror" in repo -%}
+  {%- set dev_repo = dev_repo | combine({"mirror": repo.mirror}) -%}
+  {%- endif -%}
+  {%- if "distributions" in repo -%}
+  {%- set dev_repo = dev_repo | combine({"distributions": repo.distributions}) -%}
+  {%- endif -%}
+  {%- if "components" in repo -%}
+  {%- set dev_repo = dev_repo | combine({"components": repo.components}) -%}
+  {%- endif -%}
+  {%- if "architectures" in repo -%}
+  {%- set dev_repo = dev_repo | combine({"architectures": repo.architectures}) -%}
+  {%- endif -%}
+  {%- set _ = dev_repos.append(dev_pulp_repository_deb_repo_common | combine(dev_repo)) -%}
+  {%- endfor -%}
+  {{ dev_repos }}
+
+# Publication format is a subset of distribution.
+dev_pulp_publication_deb: "{{ dev_pulp_distribution_deb }}"
+
+# Common parameters for Deb package distributions.
+dev_pulp_distribution_deb_common:
+  content_guard: development
+  state: present
+
+dev_pulp_distribution_deb: >-
+  {%- set dev_dists = [] -%}
+  {%- for repo in deb_package_repos -%}
+  {%- if repo.publish | default(true) -%}
+  {%- set version = dev_pulp_distribution_version -%}
+  {%- set name = repo.distribution_name ~ version -%}
+  {%- set base_path = repo.base_path ~ version -%}
+  {%- set dev_dist = {"name": name, "repository": repo.name, "base_path": base_path, "short_name": repo.short_name} -%}
+  {%- if "mode" in repo -%}
+  {%- set dev_dist = dev_dist | combine({"mode": repo.mode}) -%}
+  {%- endif -%}
+  {%- set _ = dev_dists.append(dev_pulp_distribution_deb_common | combine(dev_dist)) -%}
+  {%- endif -%}
+  {%- endfor -%}
+  {{ dev_dists }}
+
+# Dict mapping repository short names to versions.
+# This variable may be set to a set of specific versions via an extra variables
+# file.
+dev_pulp_distribution_deb_promote_versions: {}
+
+# Common parameters for promoted Deb package distributions.
+dev_pulp_distribution_deb_promote_common:
+  content_guard: release
+  state: present
+
+dev_pulp_distribution_deb_promote: >-
+  {%- set dev_dists = [] -%}
+  {%- for repo in deb_package_repos -%}
+  {%- if repo.publish | default(true) -%}
+  {%- set version = dev_pulp_distribution_deb_promote_versions.get(repo.short_name, omit) -%}
+  {%- set name = repo.distribution_name ~ version -%}
+  {%- set base_path = repo.base_path ~ version -%}
+  {%- set dev_dist = {"name": name, "base_path": base_path, "short_name": repo.short_name} -%}
+  {%- set _ = dev_dists.append(dev_pulp_distribution_deb_promote_common | combine(dev_dist)) -%}
+  {%- endif -%}
+  {%- endfor -%}
+  {{ dev_dists }}
+
+###############################################################################
+# RPM
+
 # Common parameters for RPM package repositories.
 dev_pulp_repository_rpm_repo_common:
   # Download all content from upstream mirror immediately, in case it gets removed.
@@ -26,17 +124,6 @@ dev_pulp_repository_rpm_repos: >-
 
 # Publication format is a subset of distribution.
 dev_pulp_publication_rpm: "{{ dev_pulp_distribution_rpm }}"
-
-# This version is appended to the name of distributions, and used as the last
-# part of the path of the directory containing the distribution.
-# FIXME: The following version is taken at the time when facts are gathered.
-#        Ideally it would relate to the time the repository version was
-#        created, since this would ensure they are ordered by the time of the
-#        sync, rather than the time of the distribution was created. This
-#        matters if we make a distribution for an earlier repository version,
-#        when later ones have already been distributed. Alternatively we could
-#        forget ordering and use a random string.
-dev_pulp_distribution_version: "{{ ansible_date_time.iso8601_basic_short }}"
 
 # Common parameters for RPM package distributions.
 dev_pulp_distribution_rpm_common:
@@ -78,6 +165,9 @@ dev_pulp_distribution_rpm_promote: >-
   {%- endif -%}
   {%- endfor -%}
   {{ dev_dists }}
+
+###############################################################################
+# x509 cert guards
 
 dev_pulp_content_guard_x509_cert_guards:
   - name: release

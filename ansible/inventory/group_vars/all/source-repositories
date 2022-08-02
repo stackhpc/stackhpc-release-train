@@ -92,6 +92,14 @@ source_repositories:
       - codeowners:
           content: '{{ community_files.codeowners.openstack }}'
           dest: '.github/CODEOWNERS'
+  sahara-dashboard:
+    ignored_releases:
+      - victoria
+      - xena
+    community_files:
+      - codeowners:
+          content: '{{ community_files.codeowners.openstack }}'
+          dest: '.github/CODEOWNERS'
   stackhpc-inspector-plugins:
     repository_type: 'branchless'
     workflows: '{{ openstack_workflows.elsewhere }}'

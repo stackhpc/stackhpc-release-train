@@ -10,12 +10,15 @@
     - import_role:
         name: stackhpc.pulp.pulp_publication
       vars:
+        pulp_publication_deb: "{{ dev_pulp_publication_deb }}"
         pulp_publication_rpm: "{{ dev_pulp_publication_rpm }}"
 
     - import_role:
         name: stackhpc.pulp.pulp_distribution
       vars:
+        pulp_distribution_deb: "{{ dev_pulp_distribution_deb }}"
         pulp_distribution_rpm: "{{ dev_pulp_distribution_rpm }}"
         # Avoid creating new a distribution for a publication that already has
         # a distribution.
+        pulp_distribution_deb_skip_existing: true
         pulp_distribution_rpm_skip_existing: true
