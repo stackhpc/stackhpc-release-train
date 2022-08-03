@@ -38,6 +38,22 @@ deb_package_repos:
     base_path: ubuntu/focal/
     short_name: ubuntu_focal
     distribution_name: ubuntu-focal-
+  # https://wiki.ubuntu.com/SecurityTeam/FAQ suggests that security.ubuntu.com
+  # is preferable for security updates, so use this in preference to the
+  # focal-security dist in the main Ubuntu focal repository where possible.
+  - name: Ubuntu focal security
+    url: http://security.ubuntu.com/ubuntu
+    # Ubuntu Focal repositories can't be synced with immediate policy using the
+    # existing 120G root disk on Ark.
+    policy: on_demand
+    architectures: amd64
+    components: main restricted universe multiverse
+    distributions: focal-security
+    mirror: true
+    mode: verbatim
+    base_path: ubuntu/focal-security/
+    short_name: ubuntu_focal_security
+    distribution_name: ubuntu-focal-security-
 
   # Ubuntu Cloud Archive (UCA)
   - name: Ubuntu Cloud Archive
