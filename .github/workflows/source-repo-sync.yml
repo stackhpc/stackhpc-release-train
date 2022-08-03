@@ -28,4 +28,5 @@ jobs:
       - name: Run ansible playbook 📖
         run: ansible-playbook ansible/source-repo-sync.yml -i ansible/inventory
         env:
+          ANSIBLE_FORCE_COLOR: True
           GITHUB_TOKEN: ${{secrets.repository_configuration_token}}
