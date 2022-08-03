@@ -28,25 +28,16 @@ deb_package_repos:
     policy: on_demand
     architectures: amd64
     components: main restricted universe multiverse
-    distributions: focal focal-updates focal-backports
+    # NOTE: Include focal-security here to include all dists under one mirror
+    # path. This allows us to include security updates when using
+    # DIB_DISTRIBUTION_MIRROR with the Diskimage builder ubuntu-minimal
+    # element.
+    distributions: focal focal-updates focal-backports focal-security
     mirror: true
     mode: verbatim
     base_path: ubuntu/focal/
     short_name: ubuntu_focal
     distribution_name: ubuntu-focal-
-  - name: Ubuntu focal security
-    url: http://security.ubuntu.com/ubuntu
-    # Ubuntu Focal repositories can't be synced with immediate policy using the
-    # existing 120G root disk on Ark.
-    policy: on_demand
-    architectures: amd64
-    components: main restricted universe multiverse
-    distributions: focal-security
-    mirror: true
-    mode: verbatim
-    base_path: ubuntu/focal-security/
-    short_name: ubuntu_focal_security
-    distribution_name: ubuntu-focal-security-
 
   # Ubuntu Cloud Archive (UCA)
   - name: Ubuntu Cloud Archive
