@@ -126,14 +126,13 @@ def unpack_query(statefile_response: subprocess.CompletedProcess[str], key: str)
             result = QueryResponse.RESOURCE_UNKNOWN
         print(error.stderr.decode().splitlines()[1])
     else:
-        if statefile_response.returncode == 0:
-            expected_entry = f"{statefile_response.args[-1]}[\"{key}\"]"
-            if expected_entry in statefile_response.stdout.decode():
-                result = QueryResponse.RESOURCE_FOUND
-                print(f"Resource Found: {expected_entry}")
-            else:
-                result = QueryResponse.INSTANCE_MISSING
-                print("Warning: Instance missing")
+        expected_entry = f"{statefile_response.args[-1]}[\"{key}\"]"
+        if expected_entry in statefile_response.stdout.decode():
+            result = QueryResponse.RESOURCE_FOUND
+            print(f"Resource Found: {expected_entry}")
+        else:
+            result = QueryResponse.INSTANCE_MISSING
+            print("Warning: Instance missing")
     return result
 
 
