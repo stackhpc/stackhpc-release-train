@@ -162,25 +162,21 @@ def get_default_branches() -> dict[str, str]:
     cmd = ["terraform", "state", "pull"]
     print("Fetching latest remote state file =>", *cmd)
     output = subprocess.run(cmd, capture_output=True, check=False)
-    try:
-        output.check_returncode()
-    except subprocess.CalledProcessError as exception:
-        raise exception
+    output.check_returncode()
+    state_file = json.loads(output.stdout.decode())
+    repositories_instances = {}
+    resources = state_file["resources"]
+    for resource in resources:
+        if resource["mode"] == "data" and resource["type"] == "github_repository" and resource["name"] == "repositories":
+            repositories_instances = resource["instances"]
+            break
     else:
-        state_file = json.loads(output.stdout.decode())
-        repositories_instances = {}
-        resources = state_file["resources"]
-        for resource in resources:
-            if resource["mode"] == "data" and resource["type"] == "github_repository" and resource["name"] == "name":
-                repositories_instances = resource["instances"]
-                break
-        else:
-            raise KeyError("Dictionary containing the various repositories and default \
-                branches cannot be found within the statefile. Please check `provider.tf` \
-                and run `terraform init` before trying again")
-        for repository in repositories_instances:
-            branches[repository["index_key"]
-                     ] = repository["attributes"]["default_branch"]
+        raise KeyError("Dictionary containing the various repositories and default \
+            branches cannot be found within the statefile. Please check `provider.tf` \
+            and run `terraform init` before trying again")
+    for repository in repositories_instances:
+        branches[repository["index_key"]
+                 ] = repository["attributes"]["default_branch"]
     return branches
 
 
@@ -189,12 +185,8 @@ def populate_repository_data() -> None:
            "-target=data.github_repository.repositories", "-auto-approve"]
     print("Initialising repository data =>", *cmd)
     output = subprocess.run(cmd, capture_output=True, check=False)
-    try:
-        output.check_returncode()
-    except subprocess.CalledProcessError as exception:
-        raise(exception)
-    else:
-        print(output.stdout.decode())
+    output.check_returncode()
+    print(output.stdout.decode())
 
 
 def read_vars(path: str = "terraform.tfvars.json") -> dict[str, Any]:
