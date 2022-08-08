@@ -16,10 +16,12 @@ test_pulp_repository_container_repo_common:
 # List of container image repositories.
 test_pulp_repository_container_repos: >-
   {%- set repos = [] -%}
+  {%- for base_distro in kolla_base_distros -%}
   {%- for image in kolla_container_images -%}
-  {%- set image_repo = "stackhpc-dev/centos-source-" ~ image -%}
+  {%- set image_repo = "stackhpc-dev/" ~ base_distro ~ "-source-" ~ image -%}
   {%- set repo = {"name": image_repo} -%}
   {%- set _ = repos.append(test_pulp_repository_container_repo_common | combine(repo)) -%}
+  {%- endfor -%}
   {%- endfor -%}
   {{ repos }}
 
@@ -30,9 +32,11 @@ test_pulp_distribution_container_common:
 # List of container image distributions.
 test_pulp_distribution_container: >-
   {%- set distributions = [] -%}
+  {%- for base_distro in kolla_base_distros -%}
   {%- for image in kolla_container_images -%}
-  {%- set image_repo = "stackhpc-dev/centos-source-" ~ image -%}
+  {%- set image_repo = "stackhpc-dev/" ~ base_distro ~ "-source-" ~ image -%}
   {%- set distribution = {"name": image_repo, "repository": image_repo, "base_path": image_repo} -%}
   {%- set _ = distributions.append(test_pulp_distribution_container_common | combine(distribution)) -%}
+  {%- endfor -%}
   {%- endfor -%}
   {{ distributions }}

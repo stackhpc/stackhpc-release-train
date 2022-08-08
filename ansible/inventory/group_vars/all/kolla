@@ -120,3 +120,8 @@ kolla_container_images:
   - redis
   - redis-base
   - redis-sentinel
+
+# List of supported base container OS distributions.
+kolla_base_distros:
+  - centos
+  - ubuntu
