@@ -397,11 +397,15 @@ source_repositories:
           dest: '.github/CODEOWNERS'
   # ReleaseTrain team
   stackhpc-release-train:
+    repository_type: 'ansible'
+    workflows: []
     community_files:
       - codeowners:
           content: '{{ community_files.codeowners.release_train }}'
           dest: '.github/CODEOWNERS'
   stackhpc-release-train-clients:
+    repository_type: 'ansible'
+    workflows: []
     community_files:
       - codeowners:
           content: '{{ community_files.codeowners.release_train }}'
