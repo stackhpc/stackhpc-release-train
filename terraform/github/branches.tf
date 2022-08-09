@@ -22,6 +22,11 @@ resource "github_branch_protection" "ansible_branch_protection" {
     resource.github_team.organisation_teams["Developers"].node_id
   ]
 
+  required_status_checks {
+    contexts = lookup(var.required_status_checks, each.key, [])
+    strict   = true
+  }
+
   lifecycle {
     prevent_destroy = true
   }
@@ -46,6 +51,11 @@ resource "github_branch_protection" "azimuth_branch_protection" {
     resource.github_team.organisation_teams["Developers"].node_id
   ]
 
+  required_status_checks {
+    contexts = lookup(var.required_status_checks, each.key, [])
+    strict   = true
+  }
+
   lifecycle {
     prevent_destroy = true
   }
@@ -69,6 +79,11 @@ resource "github_branch_protection" "batch_branch_protection" {
   push_restrictions = [
     resource.github_team.organisation_teams["Developers"].node_id
   ]
+
+  required_status_checks {
+    contexts = lookup(var.required_status_checks, each.key, [])
+    strict   = true
+  }
 
   lifecycle {
     prevent_destroy = true
@@ -95,11 +110,11 @@ resource "github_branch_protection" "kayobe_branch_protection" {
   ]
 
   required_status_checks {
-    contexts = [
+    contexts = lookup(var.required_status_checks, each.key, [
       "tox / Tox pep8 with Python 3.8",
       "tox / Tox py36 with Python 3.6",
       "tox / Tox py38 with Python 3.8",
-    ]
+    ])
     strict = true
   }
 
@@ -128,11 +143,11 @@ resource "github_branch_protection" "openstack_branch_protection" {
   }
 
   required_status_checks {
-    contexts = [
+    contexts = lookup(var.required_status_checks, each.key, [
       "tox / Tox pep8 with Python 3.8",
       "tox / Tox py36 with Python 3.6",
       "tox / Tox py38 with Python 3.8",
-    ]
+    ])
     strict = true
   }
 
@@ -160,6 +175,11 @@ resource "github_branch_protection" "releasetrain_branch_protection" {
     resource.github_team.organisation_teams["Developers"].node_id
   ]
 
+  required_status_checks {
+    contexts = lookup(var.required_status_checks, each.key, [])
+    strict   = true
+  }
+
   lifecycle {
     prevent_destroy = true
   }
@@ -183,6 +203,11 @@ resource "github_branch_protection" "smslab_branch_protection" {
   push_restrictions = [
     resource.github_team.organisation_teams["Developers"].node_id
   ]
+
+  required_status_checks {
+    contexts = lookup(var.required_status_checks, each.key, [])
+    strict   = true
+  }
 
   lifecycle {
     prevent_destroy = true
