@@ -30,9 +30,9 @@ community_files:
     openstack: |
       * @stackhpc/openstack
     release_train: |
-      * @stackhpc/release-train
+      * @stackhpc/releasetrain
     sms_lab: |
-      * @stackhpc/sms-lab
+      * @stackhpc/smslab
 source_repositories:
   # Kayobe team
   kolla:
