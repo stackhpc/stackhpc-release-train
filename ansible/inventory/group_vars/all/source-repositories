@@ -51,6 +51,12 @@ source_repositories:
           content: '{{ community_files.codeowners.kayobe }}'
           dest: '.github/CODEOWNERS'
   stackhpc-kayobe-config:
+    workflows:
+      ignored_workflows:
+        default_branch_only:
+          - upstream-sync
+        elsewhere:
+          - tox
     community_files:
       - codeowners:
           content: '{{ community_files.codeowners.kayobe }}'
