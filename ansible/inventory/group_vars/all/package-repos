@@ -60,7 +60,7 @@ deb_package_repos:
     url: http://ubuntu-cloud.archive.canonical.com/ubuntu
     architectures: amd64
     components: main
-    distributions: focal-updates/wallaby
+    distributions: focal-updates/wallaby focal-updates/xena
     mirror: true
     mode: verbatim
     base_path: ubuntu-cloud-archive/
