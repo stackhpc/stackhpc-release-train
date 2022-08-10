@@ -57,6 +57,8 @@ source_repositories:
           - upstream-sync
         elsewhere:
           - tox
+    workflow_args:
+      upstream: 'https://github.com/openstack/kayobe-config'
     community_files:
       - codeowners:
           content: '{{ community_files.codeowners.kayobe }}'

@@ -22,6 +22,7 @@
       {
         branch: '{{ default_branch_name.stdout }}',
         workflows: '{{ repository_manifest.workflows.default_branch_only }}',
+        workflow_args: '{{ repository_manifest.workflow_args }}',
       }
   when:
     - repository_manifest.copy_workflows | bool
@@ -36,6 +37,7 @@
         branch: '{{ branch_name }}',
         prefix: 'stackhpc/',
         workflows: '{{ repository_manifest.workflows.elsewhere }}',
+        workflow_args: '{{ repository_manifest.workflow_args }}',
       }
   when: repository_manifest.copy_workflows and repository_manifest.releases is defined
   with_items: '{{ repository_manifest.releases }}'
