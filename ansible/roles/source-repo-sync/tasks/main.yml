@@ -26,6 +26,7 @@
             elsewhere: '{{ openstack_workflows.elsewhere |
               difference(item.value.workflows.ignored_workflows.elsewhere | default([])) |
               union(item.value.workflows.additional_workflows.elsewhere | default([])) }}' },
+        workflow_args: '{{ item.value.workflow_args | default({}) }}',
         copy_workflows: '{{ item.value.copy_workflows | default(true) }}',
         community_files: '{{ item.value.community_files | default({}) }}'
       }
@@ -39,6 +40,7 @@
       {
         name: '{{ item.key }}',
         workflows: { default_branch_only: '{{ item.value.workflows }}' },
+        workflow_args: '{{ item.value.workflow_args | default({}) }}',
         copy_workflows: '{{ item.value.copy_workflows | default(true) }}',
         community_files: '{{ item.value.community_files | default({}) }}'
       }

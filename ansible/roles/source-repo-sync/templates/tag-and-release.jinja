@@ -9,3 +9,7 @@ permissions:
 jobs:
   tag-and-release:
     uses: stackhpc/.github/.github/workflows/tag-and-release.yml@main
+{% if workflow_manifest.workflow_args.upstream is defined %}
+    with:
+      upstream: {{workflow_manifest.workflow_args.upstream}}
+{% endif %}
