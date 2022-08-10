@@ -27,3 +27,35 @@ Update one or more Kolla container images, without updating package repositories
 * Test
 * Review & merge Kayobe configuration changes
 * [Promote container images](content-workflows.md#promoting-container-images)
+
+## Add a new Kolla container image
+
+The list of services supported by StackHPC Kayobe configuration is defined via
+the feature flags in the
+[ci-builder](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/wallaby/etc/kayobe/environments/ci-builder/stackhpc-ci.yml)
+environment. To add a new service, add the relevant feature flag (see
+`etc/kayobe/kolla.yml` for supported flags). For example:
+
+```yaml
+kolla_enable_foo: true
+```
+
+Create a PR for the change.
+
+Next, the new images must be added to the `kolla_container_images` list in
+[stackhpc-release-train](
+https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/kolla).
+For example:
+
+```yaml
+kolla_container_images:
+  8<
+  - foo-api
+  - foo-manager
+  8<
+```
+
+Create a PR for the change.
+
+Once the two PRs have been approved and merged, follow the [steps
+above](#update-kolla-container-images) to build and consume the new images.

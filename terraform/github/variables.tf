@@ -102,3 +102,10 @@ variable "teams" {
 variable "labels" {
   default = []
 }
+
+# Map from repository name to a list of required status checks.
+# This can be used to override the default required status checks.
+# TODO: refactor this into the repositories list.
+variable "required_status_checks" {
+  default = {}
+}

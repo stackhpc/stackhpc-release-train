@@ -19,11 +19,13 @@ dev_pulp_repository_container_repo_release_common:
 # List of release container image repositories.
 dev_pulp_repository_container_repos_release: >-
   {%- set repos = [] -%}
+  {%- for base_distro in kolla_base_distros -%}
   {%- for image in kolla_container_images -%}
-  {%- set image_repo = "stackhpc/centos-source-" ~ image -%}
-  {%- set upstream_repo = "stackhpc-dev/centos-source-" ~ image -%}
+  {%- set image_repo = "stackhpc/" ~ base_distro ~ "-source-" ~ image -%}
+  {%- set upstream_repo = "stackhpc-dev/" ~ base_distro ~ "-source-" ~ image -%}
   {%- set repo = {"name": image_repo, "upstream_name": upstream_repo} -%}
   {%- set _ = repos.append(dev_pulp_repository_container_repo_release_common | combine(repo)) -%}
+  {%- endfor -%}
   {%- endfor -%}
   {{ repos }}
 
@@ -35,10 +37,12 @@ dev_pulp_distribution_container_development_common:
 # List of development container image distributions.
 dev_pulp_distribution_container_development: >-
   {%- set distributions = [] -%}
+  {%- for base_distro in kolla_base_distros -%}
   {%- for image in kolla_container_images -%}
-  {%- set image_repo = "stackhpc-dev/centos-source-" ~ image -%}
+  {%- set image_repo = "stackhpc-dev/" ~ base_distro ~ "-source-" ~ image -%}
   {%- set distribution = {"name": image_repo, "base_path": image_repo} -%}
   {%- set _ = distributions.append(dev_pulp_distribution_container_development_common | combine(distribution)) -%}
+  {%- endfor -%}
   {%- endfor -%}
   {{ distributions }}
 
@@ -50,9 +54,11 @@ dev_pulp_distribution_container_release_common:
 # List of release container image distributions.
 dev_pulp_distribution_container_release: >-
   {%- set distributions = [] -%}
+  {%- for base_distro in kolla_base_distros -%}
   {%- for image in kolla_container_images -%}
-  {%- set image_repo = "stackhpc/centos-source-" ~ image -%}
+  {%- set image_repo = "stackhpc/" ~ base_distro ~ "-source-" ~ image -%}
   {%- set distribution = {"name": image_repo, "repository": image_repo, "base_path": image_repo} -%}
   {%- set _ = distributions.append(dev_pulp_distribution_container_release_common | combine(distribution)) -%}
+  {%- endfor -%}
   {%- endfor -%}
   {{ distributions }}

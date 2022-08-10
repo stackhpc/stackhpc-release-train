@@ -7,6 +7,8 @@
   ansible.builtin.git:
     repo: 'https://{{ owner }}:$GITHUB_TOKEN@github.com/{{ owner }}/{{ repository_manifest.name }}.git'
     dest: '{{ staging_path }}/{{ repository_manifest.name }}'
+    # Don't clone submodules.
+    recursive: no
 
 - name: Get default branch name # noqa command-instead-of-module
   ansible.builtin.command:
@@ -23,7 +25,10 @@
         branch: '{{ default_branch_name.stdout }}',
         workflows: '{{ repository_manifest.workflows.default_branch_only }}',
       }
-  when: repository_manifest.copy_workflows | bool
+  when:
+    - repository_manifest.copy_workflows | bool
+    - not default_branch_name.stdout.startswith('stackhpc/') or
+      default_branch_name.stdout[9:] not in repository_manifest.releases | default([])
 
 - name: Add workflows to supported releases
   include_tasks: tasks/add_workflows.yml
@@ -47,7 +52,10 @@
         branch: '{{ default_branch_name.stdout }}',
         community_files: '{{ repository_manifest.community_files }}',
       }
-  when: repository_manifest.community_files is defined
+  when:
+    - repository_manifest.community_files is defined
+    - not default_branch_name.stdout.startswith('stackhpc/') or
+      default_branch_name.stdout[9:] not in repository_manifest.releases | default([])
 
 - name: Add community files to supported releases
   include_tasks: tasks/add_community_files.yml
