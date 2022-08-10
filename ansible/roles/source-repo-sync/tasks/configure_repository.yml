@@ -7,6 +7,8 @@
   ansible.builtin.git:
     repo: 'https://{{ owner }}:$GITHUB_TOKEN@github.com/{{ owner }}/{{ repository_manifest.name }}.git'
     dest: '{{ staging_path }}/{{ repository_manifest.name }}'
+    # Don't clone submodules.
+    recursive: no
 
 - name: Get default branch name # noqa command-instead-of-module
   ansible.builtin.command:
