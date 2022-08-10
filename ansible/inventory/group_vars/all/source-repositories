@@ -30,9 +30,9 @@ community_files:
     openstack: |
       * @stackhpc/openstack
     release_train: |
-      * @stackhpc/release-train
+      * @stackhpc/releasetrain
     sms_lab: |
-      * @stackhpc/sms-lab
+      * @stackhpc/smslab
 source_repositories:
   # Kayobe team
   kolla:
@@ -51,6 +51,12 @@ source_repositories:
           content: '{{ community_files.codeowners.kayobe }}'
           dest: '.github/CODEOWNERS'
   stackhpc-kayobe-config:
+    workflows:
+      ignored_workflows:
+        default_branch_only:
+          - upstream-sync
+        elsewhere:
+          - tox
     community_files:
       - codeowners:
           content: '{{ community_files.codeowners.kayobe }}'
@@ -391,11 +397,15 @@ source_repositories:
           dest: '.github/CODEOWNERS'
   # ReleaseTrain team
   stackhpc-release-train:
+    repository_type: 'ansible'
+    workflows: []
     community_files:
       - codeowners:
           content: '{{ community_files.codeowners.release_train }}'
           dest: '.github/CODEOWNERS'
   stackhpc-release-train-clients:
+    repository_type: 'ansible'
+    workflows: []
     community_files:
       - codeowners:
           content: '{{ community_files.codeowners.release_train }}'
