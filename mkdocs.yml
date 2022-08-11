@@ -25,6 +25,7 @@ nav:
       Content management workflows: usage/content-workflows.md
       Access control: usage/access.md
       Source code CI: usage/source-code-ci.md
+      GitHub Organisation Management: usage/github-organisation-management.md
   - Operations:
       Ark: operations/ark.md
       Test Pulp: operations/test-pulp.md
