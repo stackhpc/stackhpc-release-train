@@ -71,8 +71,9 @@ New package repositories should be added to `rpm_package_repos` in `ansible/inve
 
     This should only be performed when package repositories are ready for release.
 
-The [Promote package repositories](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/package-promote.yml) workflow runs on demand.
-It should be run when package repositories need to be released.
+The [Promote package repositories](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/package-promote.yml) workflow is triggered automatically when a change is merged to stackhpc-kayobe-config.
+It may also be run on demand.
+
 It runs the following playbooks:
 
 * `dev-pulp-repo-version-query-kayobe.yml`: Query the Pulp repository versions defined in a Kayobe configuration repository and sets the version map variable `dev_pulp_distribution_rpm_promote_versions` based upon those versions. A path to a Kayobe configuration repository must be specified via `kayobe_config_repo_path`.
@@ -145,23 +146,28 @@ The generated file may be amended as necessary (in case not all updates are requ
 The [Build Kolla container images](https://github.com/stackhpc/stackhpc-kayobe-config/actions/workflows/stackhpc-container-image-build.yml) workflow in the [stackhpc-kayobe-config](https://github.com/stackhpc/stackhpc-kayobe-config) repository runs on demand.
 It should be run when new Kolla container images are required.
 All images may be built, or a specific set of images.
-The images will be pushed to Ark, and the container image tag shown in the output of the `Display the container image tag` step.
+All successfully built images will be pushed to Ark, in the `stackhpc-dev` namespace.
+An `Overcloud container images` artifact will be visible on the summary page of a completed successful workflow run.
+This artifact contains a list of the built images.
+After a successful container image build workflow, another workflow is triggered to [sync the images](#syncing-container-images) to the test Pulp.
+
+In the following example, the user specified a regular expression of `^skydive`, matching all of the Skydive images, and the `base` image that they depend on.
+
+```
+REPOSITORY                                                     TAG                       IMAGE ID       CREATED         SIZE
+ark.stackhpc.com/stackhpc-dev/centos-source-skydive-agent      wallaby-20220811T091848   32f2b9299194   6 minutes ago   1.29GB
+ark.stackhpc.com/stackhpc-dev/centos-source-skydive-analyzer   wallaby-20220811T091848   35e4c1cda1a8   7 minutes ago   1.14GB
+ark.stackhpc.com/stackhpc-dev/centos-source-skydive-base       wallaby-20220811T091848   3bd5f3e50aa3   7 minutes ago   1.14GB
+ark.stackhpc.com/stackhpc-dev/centos-source-base               wallaby-20220811T091848   bd02fa0ec1d6   7 minutes ago   991MB
+```
+
+In this example, the base and Skydive images have been tagged `wallaby-20220811T091848`.
 
 Instructions for building Kolla container images manually are provided in the [StackHPC kayobe config README](https://github.com/stackhpc/stackhpc-kayobe-config/blob/bf1396b8564b79344e4b6cfb934eab865ff1ad09/README.rst#L226).
 
-## Updating container image tags in Kayobe configuration
-
-!!! note
-
-    This procedure is expected to change.
-
-The image tag used deploy containers may be updated for all images in [etc/kayobe/kolla.yml](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/wallaby/etc/kayobe/kolla.yml), or for specific images in [etc/kayobe/kolla/globals.yml](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/wallaby/etc/kayobe/kolla/globals.yml).
-Currently this is a manual process.
-
 ## Syncing container images
 
-The [Sync container repositories](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/container-sync.yml) workflow runs on demand.
-It should be run when new container images have been pushed to Ark.
+The [Sync container repositories](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/container-sync.yml) workflow runs after a successful [container image build](#building-container-images) workflow run, or on demand.
 It runs the following playbooks:
 
 * `dev-pulp-container-publish.yml`: Configure access control for development container distributions on `ark`.
@@ -185,6 +191,39 @@ Configuration for container images is in:
 
 New images should be added to `kolla_container_images` in `ansible/inventory/group_vars/all/kolla`.
 
+## Updating container image tags in Kayobe configuration
+
+!!! note
+
+    This procedure is expected to change.
+
+The image tag used deploy containers may be updated for all images in [etc/kayobe/kolla.yml](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/wallaby/etc/kayobe/kolla.yml), or for specific images in [etc/kayobe/kolla/globals.yml](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/wallaby/etc/kayobe/kolla/globals.yml).
+Currently this is a manual process.
+
+Use the new tag from the [container image build](#building-container-images).
+
+For example, to update the default tag for all images (used where no service-specific tag has been set), update `etc/kayobe/kolla.yml`:
+
+```yaml
+# Kolla OpenStack release version. This should be a Docker image tag.
+# Default is {{ openstack_release }}.
+kolla_openstack_release: wallaby-20220811T091848
+```
+
+Some or all per-service tags in `etc/kayobe/kolla/globals.yml` may need to be removed in order to use the new default tag.
+
+Alternatively, to update the tag for all containers in a service, update `etc/kayobe/kolla/globals.yml`:
+
+```yaml
+skydive_tag: wallaby-20220811T091848
+```
+
+Alternatively, to update the tag for a specific container, update `etc/kayobe/kolla/globals.yml`:
+
+```yaml
+skydive_analyzer_tag: wallaby-20220811T091848
+```
+
 ## Promoting container images
 
 !!! note
@@ -192,7 +231,7 @@ New images should be added to `kolla_container_images` in `ansible/inventory/gro
     This should only be performed when container images are ready for release.
 
 The [Promote container repositories](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/container-promote.yml) workflow runs on demand.
-It should be run when container images need to be released.
+It should be run when container images need to be released, typically after a change to [update container image tags](#updating-container-image-tags-in-kayobe-configuration) has been approved.
 It runs the following playbook:
 
 * `dev-pulp-container-promote.yml`: Promote a set of container images from `stackhpc-dev` to `stackhpc` namespace. The tag to be promoted is defined via `dev_pulp_repository_container_promotion_tag` which should be specified as an extra variable (`-e`).

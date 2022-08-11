@@ -10,11 +10,9 @@ Update one or more package repositories to a new version, then build new Kolla c
 * [Sync package repositories](content-workflows.md#syncing-package-repositories) (optional: runs nightly as a scheduled GitHub Action)
 * [Update Kayobe repository versions](content-workflows.md#updating-package-repository-versions-in-kayobe-configuration)
 * [Build & push Kolla container images](content-workflows.md#building-container-images)
-* [Sync container images](content-workflows.md#syncing-container-images)
 * [Update Kayobe container image tags](content-workflows.md#updating-container-image-tags-in-kayobe-configuration)
 * Test
 * Review & merge Kayobe configuration changes
-* [Promote package repositories](content-workflows.md#promoting-package-repositories)
 * [Promote container images](content-workflows.md#promoting-container-images)
 
 ## Update Kolla container images
@@ -22,7 +20,6 @@ Update one or more package repositories to a new version, then build new Kolla c
 Update one or more Kolla container images, without updating package repositories.
 
 * [Build & push Kolla container images](content-workflows.md#building-container-images)
-* [Sync container images](content-workflows.md#syncing-container-images)
 * [Update Kayobe container image tags](content-workflows.md#updating-container-image-tags-in-kayobe-configuration)
 * Test
 * Review & merge Kayobe configuration changes
