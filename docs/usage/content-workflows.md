@@ -142,7 +142,7 @@ The generated file may be amended as necessary (in case not all updates are requ
 
     This procedure is expected to change.
 
-The [Build Kolla container images](https://github.com/stackhpc/stackhpc-kayobe-config/actions/workflows/container-image-build.yml) workflow in the [stackhpc-kayobe-config](https://github.com/stackhpc/stackhpc-kayobe-config) repository runs on demand.
+The [Build Kolla container images](https://github.com/stackhpc/stackhpc-kayobe-config/actions/workflows/stackhpc-container-image-build.yml) workflow in the [stackhpc-kayobe-config](https://github.com/stackhpc/stackhpc-kayobe-config) repository runs on demand.
 It should be run when new Kolla container images are required.
 All images may be built, or a specific set of images.
 The images will be pushed to Ark, and the container image tag shown in the output of the `Display the container image tag` step.
