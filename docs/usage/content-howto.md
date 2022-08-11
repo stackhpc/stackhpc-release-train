@@ -10,11 +10,9 @@ Update one or more package repositories to a new version, then build new Kolla c
 * [Sync package repositories](content-workflows.md#syncing-package-repositories) (optional: runs nightly as a scheduled GitHub Action)
 * [Update Kayobe repository versions](content-workflows.md#updating-package-repository-versions-in-kayobe-configuration)
 * [Build & push Kolla container images](content-workflows.md#building-container-images)
-* [Sync container images](content-workflows.md#syncing-container-images)
 * [Update Kayobe container image tags](content-workflows.md#updating-container-image-tags-in-kayobe-configuration)
 * Test
 * Review & merge Kayobe configuration changes
-* [Promote package repositories](content-workflows.md#promoting-package-repositories)
 * [Promote container images](content-workflows.md#promoting-container-images)
 
 ## Update Kolla container images
@@ -22,13 +20,14 @@ Update one or more package repositories to a new version, then build new Kolla c
 Update one or more Kolla container images, without updating package repositories.
 
 * [Build & push Kolla container images](content-workflows.md#building-container-images)
-* [Sync container images](content-workflows.md#syncing-container-images)
 * [Update Kayobe container image tags](content-workflows.md#updating-container-image-tags-in-kayobe-configuration)
 * Test
 * Review & merge Kayobe configuration changes
 * [Promote container images](content-workflows.md#promoting-container-images)
 
 ## Add a new Kolla container image
+
+### Set up builds for the image
 
 The list of services supported by StackHPC Kayobe configuration is defined via
 the feature flags in the
@@ -41,6 +40,8 @@ kolla_enable_foo: true
 ```
 
 Create a PR for the change.
+
+### Set up Test Pulp syncing for the image
 
 Next, the new images must be added to the `kolla_container_images` list in
 [stackhpc-release-train](
@@ -57,5 +58,23 @@ kolla_container_images:
 
 Create a PR for the change.
 
+### Build and consume the image
+
 Once the two PRs have been approved and merged, follow the [steps
 above](#update-kolla-container-images) to build and consume the new images.
+
+### Set up client Pulp syncing for the image
+
+Finally, the new images must be added to the `stackhpc_pulp_images` list in [etc/kayobe/pulp.yml](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/wallaby/etc/kayobe/pulp.yml).
+This updates the list of images that are synced from Ark to clients' local Pulp service.
+This step should be performed last, once the images have been pushed to Ark and promoted, otherwise client container syncs would fail.
+
+```yaml
+stackhpc_pulp_images:
+  8<
+  - foo-api
+  - foo-manager
+  8<
+```
+
+Create a PR for the change.
