@@ -47,7 +47,7 @@ The workflow for altering the configuration is as follows;
 Whilst Terraform is capable of creating resources it is expected that a lot of the resources already exist and therefore need to be imported before Terraform can apply the configuration rules.
 To import a resource we have made available a convenient GitHub Workflow called `Terrform GitHub Import` which will identify what resources are referenced within the `configuration` and are missing from the `statefile`.
 
-To use the workflow you will navigate to `Terraform GitHub Import` under the`Actions` tab for [stackhpc-release-train](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/terraform-github-import.yml).
+To use the workflow you will navigate to [`Terraform GitHub Import`](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/terraform-github-import.yml) under the`Actions` tab for stackhpc-release-train.
 Once there you can manually dispatch a workflow where you must specify the branch for which the workflow will run from this should be the branch that has an open PR for.
 Also you can specify if the import should perform a dry run to provide reassurance before making actually changes to the statefile.
 You must run the workflow again with `Dry Run` unticked.
