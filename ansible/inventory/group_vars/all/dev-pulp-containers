@@ -20,7 +20,7 @@ dev_pulp_repository_container_repo_release_common:
 dev_pulp_repository_container_repos_release: >-
   {%- set repos = [] -%}
   {%- for base_distro in kolla_base_distros -%}
-  {%- for image in kolla_container_images -%}
+  {%- for image in kolla_container_images_filtered -%}
   {%- set image_repo = "stackhpc/" ~ base_distro ~ "-source-" ~ image -%}
   {%- set upstream_repo = "stackhpc-dev/" ~ base_distro ~ "-source-" ~ image -%}
   {%- set repo = {"name": image_repo, "upstream_name": upstream_repo} -%}
@@ -38,7 +38,7 @@ dev_pulp_distribution_container_development_common:
 dev_pulp_distribution_container_development: >-
   {%- set distributions = [] -%}
   {%- for base_distro in kolla_base_distros -%}
-  {%- for image in kolla_container_images -%}
+  {%- for image in kolla_container_images_filtered -%}
   {%- set image_repo = "stackhpc-dev/" ~ base_distro ~ "-source-" ~ image -%}
   {%- set distribution = {"name": image_repo, "base_path": image_repo} -%}
   {%- set _ = distributions.append(dev_pulp_distribution_container_development_common | combine(distribution)) -%}
@@ -55,7 +55,7 @@ dev_pulp_distribution_container_release_common:
 dev_pulp_distribution_container_release: >-
   {%- set distributions = [] -%}
   {%- for base_distro in kolla_base_distros -%}
-  {%- for image in kolla_container_images -%}
+  {%- for image in kolla_container_images_filtered -%}
   {%- set image_repo = "stackhpc/" ~ base_distro ~ "-source-" ~ image -%}
   {%- set distribution = {"name": image_repo, "repository": image_repo, "base_path": image_repo} -%}
   {%- set _ = distributions.append(dev_pulp_distribution_container_release_common | combine(distribution)) -%}
