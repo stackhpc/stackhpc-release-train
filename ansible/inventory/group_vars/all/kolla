@@ -127,4 +127,3 @@ kolla_container_images:
 # List of supported base container OS distributions.
 kolla_base_distros:
   - centos
-  - ubuntu
