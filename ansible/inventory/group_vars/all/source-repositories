@@ -1,8 +1,9 @@
 ---
 # Dictionary acting as a `manifest` of openstack and ansible repositories
-# containing a list of workflows and community files required by a given 
+# containing a list of workflows and community files required by a given
 # repository.
 default_releases:
+  - yoga
   - xena
   - wallaby
   - victoria
@@ -38,18 +39,18 @@ source_repositories:
   kolla:
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.kayobe }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.kayobe }}"
+          dest: ".github/CODEOWNERS"
   kayobe:
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.kayobe }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.kayobe }}"
+          dest: ".github/CODEOWNERS"
   kolla-ansible:
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.kayobe }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.kayobe }}"
+          dest: ".github/CODEOWNERS"
   stackhpc-kayobe-config:
     workflows:
       ignored_workflows:
@@ -58,357 +59,360 @@ source_repositories:
         elsewhere:
           - tox
     workflow_args:
-      upstream: 'https://github.com/openstack/kayobe-config'
+      upstream: "https://github.com/openstack/kayobe-config"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.kayobe }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.kayobe }}"
+          dest: ".github/CODEOWNERS"
   bifrost:
     ignored_releases:
       - victoria
       - xena
+      - yoga
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.kayobe }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.kayobe }}"
+          dest: ".github/CODEOWNERS"
   # OpenStack team
   barbican:
     ignored_releases:
       - victoria
       - xena
+      - yoga
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.openstack }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
   cloudkitty:
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.openstack }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
   cloudkitty-dashboard:
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.openstack }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
   ironic-python-agent:
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.openstack }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
   magnum:
     ignored_releases:
       - victoria
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.openstack }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
   networking-generic-switch:
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.openstack }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
   sahara-dashboard:
     ignored_releases:
       - victoria
       - xena
+      - yoga
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.openstack }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
   stackhpc-inspector-plugins:
-    repository_type: 'branchless'
-    workflows: '{{ openstack_workflows.elsewhere }}'
+    repository_type: "branchless"
+    workflows: "{{ openstack_workflows.elsewhere }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.openstack }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
   # Ansible team
   ansible-role-os-host-aggregates:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-role-os-networks:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-role-os-projects:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-role-libvirt-host:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-role-libvirt-vm:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-role-os-images:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   drac:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-role-luks:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-role-os-volumes:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-role-grubcmdline:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-role-os-flavors:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-role-os-openstacksdk:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-role-sriov:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-role-os-openstackclient:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-timezone:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-role-os-shade:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-role-grafana-conf:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-role-systemd-networkd:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   monasca-default-alarms:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   stackhpc.ssm:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-role-monasca-rsyslog:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-role-os-container-clusters:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-role-cluster-infra:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-role-os-ironic-state:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-role-openvpn:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   stackhpc.ipmi-exporter:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-role-mlnx-ufm:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-role-rundeck:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-role-dell-powerconnect-switch:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   drac-facts:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-role-gluster-cluster:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-role-mellanox-switch:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-role-os-config:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-role-mlnx-neo:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-collection-cephadm:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.collection }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.collection }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-collection-pulp:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.collection }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.collection }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-collection-hashicorp:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.collection }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.collection }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-collection-openstack-ops:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.collection }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.collection }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.ansible }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   # Batch team
   ansible-role-openhpc:
-    repository_type: 'ansible'
-    workflows: '{{ ansible_workflows.role }}'
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.batch }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.batch }}"
+          dest: ".github/CODEOWNERS"
   # ReleaseTrain team
   stackhpc-release-train:
-    repository_type: 'ansible'
+    repository_type: "ansible"
     workflows: []
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.release_train }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.release_train }}"
+          dest: ".github/CODEOWNERS"
   stackhpc-release-train-clients:
-    repository_type: 'ansible'
+    repository_type: "ansible"
     workflows: []
     community_files:
       - codeowners:
-          content: '{{ community_files.codeowners.release_train }}'
-          dest: '.github/CODEOWNERS'
+          content: "{{ community_files.codeowners.release_train }}"
+          dest: ".github/CODEOWNERS"
