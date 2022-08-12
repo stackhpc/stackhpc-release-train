@@ -1,0 +1,58 @@
+---
+- name: Validate Kolla container image configuration
+  hosts: localhost
+  gather_facts: true
+  vars:
+    num_kolla_container_images: "{{ kolla_container_images | length }}"
+  tasks:
+    - name: Assert that Kolla container image list is defined
+      assert:
+        that:
+          - kolla_container_images is defined
+
+    - name: Assert that Kolla container images are strings
+      assert:
+        that:
+          - kolla_container_images | reject('string') | list | length == 0
+
+    - name: Assert that Kolla container image names are unique
+      assert:
+        that:
+          - kolla_container_images | unique | list | length == num_kolla_container_images | int
+
+    - name: Assert that Kolla container image list can be filtered to single
+      assert:
+        that:
+          - kolla_container_images_filtered | length == 1
+          - kolla_container_images_filtered[0] == 'horizon'
+      vars:
+        kolla_container_image_filter: horizon
+
+    - name: Assert that Kolla container image list can be filtered to multiple
+      assert:
+        that:
+          - kolla_container_images_filtered | length == 2
+          - kolla_container_images_filtered[0] == 'horizon'
+          - kolla_container_images_filtered[1] == 'nova-api'
+      vars:
+        kolla_container_image_filter: horizon nova-api
+
+    - name: Assert that Kolla container image list can be filtered to single regexes
+      assert:
+        that:
+          - kolla_container_images_filtered | length == 2
+          - kolla_container_images_filtered[0] == 'glance-api'
+          - kolla_container_images_filtered[1] == 'glance-base'
+      vars:
+        kolla_container_image_filter: "ance-"
+
+    - name: Assert that Kolla container image list can be filtered to multiple regexes
+      assert:
+        that:
+          - kolla_container_images_filtered | length == 4
+          - kolla_container_images_filtered[0] == 'keystone'
+          - kolla_container_images_filtered[1] == 'keystone-base'
+          - kolla_container_images_filtered[2] == 'keystone-fernet'
+          - kolla_container_images_filtered[3] == 'keystone-ssh'
+      vars:
+        kolla_container_image_filter: "ance$ ^keystone"

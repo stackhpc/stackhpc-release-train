@@ -3,6 +3,11 @@ name: Promote container repositories
 on:
   workflow_dispatch:
     inputs:
+      filter:
+        description: Space-separated list of regular expressions matching images to promote
+        type: string
+        required: false
+        default: ""
       tag:
         description: Container image tag to promote
         required: true
@@ -38,4 +43,8 @@ jobs:
         source venv/bin/activate &&
         ansible-playbook -i ansible/inventory \
         ansible/dev-pulp-container-promote.yml \
-        -e dev_pulp_repository_container_promotion_tag=${{ github.event.inputs.tag }}
+        -e dev_pulp_repository_container_promotion_tag="$TAG" \
+        -e kolla_container_image_filter="'$FILTER'"
+      env:
+        FILTER: ${{ github.event.inputs.filter }}
+        TAG: ${{ github.event.inputs.tag }}

@@ -127,3 +127,9 @@ kolla_container_images:
 # List of supported base container OS distributions.
 kolla_base_distros:
   - centos
+
+# Default filter string for container image repositories.
+kolla_container_image_filter: ""
+
+# List of names of supported Kolla container images after applying filter.
+kolla_container_images_filtered: "{{ kolla_container_images | select_images(kolla_container_image_filter) }}"

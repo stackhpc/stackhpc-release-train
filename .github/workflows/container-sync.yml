@@ -2,6 +2,12 @@
 name: Sync container repositories
 on:
   workflow_dispatch:
+    inputs:
+      filter:
+        description: Space-separated list of regular expressions matching images to sync
+        type: string
+        required: false
+        default: ""
 
 env:
   ANSIBLE_FORCE_COLOR: True
@@ -33,16 +39,25 @@ jobs:
       run: |
         source venv/bin/activate &&
         ansible-playbook -i ansible/inventory \
-        ansible/dev-pulp-container-publish.yml
+        ansible/dev-pulp-container-publish.yml \
+        -e kolla_container_image_filter="'$FILTER'"
+      env:
+        FILTER: ${{ github.event.inputs.filter }}
 
     - name: Sync images in test with stackhpc-dev namespace in Ark
       run: |
         source venv/bin/activate &&
         ansible-playbook -i ansible/inventory \
-        ansible/test-pulp-container-sync.yml
+        ansible/test-pulp-container-sync.yml \
+        -e kolla_container_image_filter="'$FILTER'"
+      env:
+        FILTER: ${{ github.event.inputs.filter }}
 
     - name: Publish images in test
       run: |
         source venv/bin/activate &&
         ansible-playbook -i ansible/inventory \
-        ansible/test-pulp-container-publish.yml
+        ansible/test-pulp-container-publish.yml \
+        -e kolla_container_image_filter="'$FILTER'"
+      env:
+        FILTER: ${{ github.event.inputs.filter }}

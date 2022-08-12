@@ -17,7 +17,7 @@ test_pulp_repository_container_repo_common:
 test_pulp_repository_container_repos: >-
   {%- set repos = [] -%}
   {%- for base_distro in kolla_base_distros -%}
-  {%- for image in kolla_container_images -%}
+  {%- for image in kolla_container_images_filtered -%}
   {%- set image_repo = "stackhpc-dev/" ~ base_distro ~ "-source-" ~ image -%}
   {%- set repo = {"name": image_repo} -%}
   {%- set _ = repos.append(test_pulp_repository_container_repo_common | combine(repo)) -%}
@@ -33,7 +33,7 @@ test_pulp_distribution_container_common:
 test_pulp_distribution_container: >-
   {%- set distributions = [] -%}
   {%- for base_distro in kolla_base_distros -%}
-  {%- for image in kolla_container_images -%}
+  {%- for image in kolla_container_images_filtered -%}
   {%- set image_repo = "stackhpc-dev/" ~ base_distro ~ "-source-" ~ image -%}
   {%- set distribution = {"name": image_repo, "repository": image_repo, "base_path": image_repo} -%}
   {%- set _ = distributions.append(test_pulp_distribution_container_common | combine(distribution)) -%}
