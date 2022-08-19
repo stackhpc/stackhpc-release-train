@@ -21,9 +21,10 @@ env:
   ANSIBLE_FORCE_COLOR: True
   ANSIBLE_VAULT_PASSWORD_FILE: ${{ github.workspace }}/vault-pass
 jobs:
-  package-sync:
-    name: Sync package repositories
-    runs-on: [self-hosted, stackhpc-release-train]
+  package-sync-ark:
+    name: Sync package repositories in Ark
+    runs-on: ubuntu-latest
+    if: inputs.sync_ark || github.event_name == 'schedule'
     steps:
     - uses: actions/checkout@master
 
@@ -50,7 +51,30 @@ jobs:
         ansible/dev-pulp-repo-sync.yml \
         ansible/dev-pulp-repo-publication-cleanup.yml \
         ansible/dev-pulp-repo-publish.yml
-      if: inputs.sync_ark || github.event_name == 'schedule'
+
+  package-sync-test:
+    name: Sync package repositories in test
+    runs-on: [self-hosted, stackhpc-release-train]
+    needs: package-sync-ark
+    if: inputs.sync_test || github.event_name == 'schedule'
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Preparing Vault password file
+      run: |
+        echo "$ANSIBLE_VAULT_PASSWORD" > "$ANSIBLE_VAULT_PASSWORD_FILE"
+      env:
+        ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+
+    - name: Installing dependencies
+      run: |
+        sudo apt update &&
+        sudo apt install -y python3-venv &&
+        python3 -m venv venv &&
+        source venv/bin/activate &&
+        pip install -U pip && 
+        pip install -r requirements.txt &&
+        ansible-galaxy collection install -r requirements.yml -p ansible/collections
 
     - name: Sync and publish package repositories in test
       run: |
@@ -59,4 +83,3 @@ jobs:
         ansible/test-pulp-repo-version-query.yml \
         ansible/test-pulp-repo-sync.yml \
         ansible/test-pulp-repo-publish.yml
-      if: inputs.sync_test || github.event_name == 'schedule'
