@@ -53,6 +53,23 @@
         that:
           - published_rpm_package_repos | map(attribute='base_path') | list | map('last') | unique == ['/']
 
+    - name: Assert that RPM package repository list can be filtered to single
+      assert:
+        that:
+          - rpm_package_repos_filtered | length == 1
+          - rpm_package_repos_filtered[0].short_name == 'centos_stream_8_baseos'
+      vars:
+        rpm_package_repo_filter: centos_stream_8_baseos
+
+    - name: Assert that RPM package repository list can be filtered to multiple
+      assert:
+        that:
+          - rpm_package_repos_filtered | length == 2
+          - rpm_package_repos_filtered[0].short_name == 'centos_stream_8_baseos'
+          - rpm_package_repos_filtered[1].short_name == 'docker'
+      vars:
+        rpm_package_repo_filter: docker centos_stream_8_baseos
+
     - name: Assert that dev package repository list is defined
       assert:
         that:

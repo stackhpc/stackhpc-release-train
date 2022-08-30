@@ -79,6 +79,12 @@ deb_package_repos:
     short_name: docker_ce_ubuntu
     distribution_name: docker-ce-for-ubuntu-
 
+# Default filter string for Deb package repositories.
+deb_package_repo_filter: ""
+
+# List of package repositories after applying filter.
+deb_package_repos_filtered: "{{ deb_package_repos | select_repos(deb_package_repo_filter) }}"
+
 ###############################################################################
 # RPM
 
@@ -345,3 +351,9 @@ rpm_package_repos:
     base_path: mlnx_ofed/5.6-1.0.3.3/rhel8.6/x86_64/
     short_name: mlnx_ofed_5_6_1_0_3_3_rhel8_6
     distribution_name: mlnx_ofed-5.6-1.0.3.3-rhel8.6-
+
+# Default filter string for RPM package repositories.
+rpm_package_repo_filter: ""
+
+# List of package repositories after applying filter.
+rpm_package_repos_filtered: "{{ rpm_package_repos | select_repos(rpm_package_repo_filter) }}"
