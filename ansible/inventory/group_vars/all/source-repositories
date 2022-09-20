@@ -169,6 +169,13 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.ansible }}"
           dest: ".github/CODEOWNERS"
+  ansible-role-vxlan:
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   drac:
     repository_type: "ansible"
     workflows: "{{ ansible_workflows.role }}"
@@ -389,6 +396,13 @@ source_repositories:
   ansible-collection-openstack-ops:
     repository_type: "ansible"
     workflows: "{{ ansible_workflows.collection }}"
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
+  openstack-config:
+    repository_type: "ansible"
+    workflows: []
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.ansible }}"
