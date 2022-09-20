@@ -6,6 +6,7 @@ resource "github_branch_protection" "ansible_branch_protection" {
   require_conversation_resolution = true
   allows_deletions                = false
   allows_force_pushes             = false
+  enforce_admins                  = true
 
   required_pull_request_reviews {
     dismiss_stale_reviews           = true
