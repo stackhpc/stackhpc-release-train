@@ -72,7 +72,7 @@ resource "github_team_repository" "releasetrain_repositories" {
   for_each   = toset(var.repositories["ReleaseTrain"])
   team_id    = resource.github_team.organisation_teams["ReleaseTrain"].id
   repository = each.value
-  permission = "push"
+  permission = "admin"
   lifecycle {
     prevent_destroy = true
   }
