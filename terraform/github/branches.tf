@@ -24,7 +24,7 @@ resource "github_branch_protection" "ansible_branch_protection" {
 
   required_status_checks {
     contexts = lookup(var.required_status_checks, each.key, [])
-    strict   = true
+    strict   = false
   }
 
   lifecycle {
@@ -53,7 +53,7 @@ resource "github_branch_protection" "azimuth_branch_protection" {
 
   required_status_checks {
     contexts = lookup(var.required_status_checks, each.key, [])
-    strict   = true
+    strict   = false
   }
 
   lifecycle {
@@ -82,7 +82,7 @@ resource "github_branch_protection" "batch_branch_protection" {
 
   required_status_checks {
     contexts = lookup(var.required_status_checks, each.key, [])
-    strict   = true
+    strict   = false
   }
 
   lifecycle {
@@ -115,7 +115,7 @@ resource "github_branch_protection" "kayobe_branch_protection" {
       "tox / Tox py36 with Python 3.6",
       "tox / Tox py38 with Python 3.8",
     ])
-    strict = true
+    strict = false
   }
 
   lifecycle {
@@ -148,7 +148,7 @@ resource "github_branch_protection" "openstack_branch_protection" {
       "tox / Tox py36 with Python 3.6",
       "tox / Tox py38 with Python 3.8",
     ])
-    strict = true
+    strict = false
   }
 
   lifecycle {
@@ -177,7 +177,7 @@ resource "github_branch_protection" "releasetrain_branch_protection" {
 
   required_status_checks {
     contexts = lookup(var.required_status_checks, each.key, [])
-    strict   = true
+    strict   = false
   }
 
   lifecycle {
@@ -206,7 +206,7 @@ resource "github_branch_protection" "smslab_branch_protection" {
 
   required_status_checks {
     contexts = lookup(var.required_status_checks, each.key, [])
-    strict   = true
+    strict   = false
   }
 
   lifecycle {
