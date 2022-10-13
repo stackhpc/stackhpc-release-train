@@ -52,7 +52,7 @@ resource "github_team_repository" "kayobe_repositories" {
   for_each   = toset(var.repositories["Kayobe"])
   team_id    = resource.github_team.organisation_teams["Kayobe"].id
   repository = each.value
-  permission = "push"
+  permission = "admin"
   lifecycle {
     prevent_destroy = true
   }
@@ -82,7 +82,7 @@ resource "github_team_repository" "smslab_repositories" {
   for_each   = toset(var.repositories["SMSLab"])
   team_id    = resource.github_team.organisation_teams["SMSLab"].id
   repository = each.value
-  permission = "push"
+  permission = "admin"
   lifecycle {
     prevent_destroy = true
   }
