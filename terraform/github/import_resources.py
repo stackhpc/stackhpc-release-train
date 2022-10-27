@@ -92,6 +92,7 @@ class TeamID(Enum):
     # API: gh api \
     # -H "Accept: application/vnd.github+json" \
     # /orgs/stackhpc/teams -q '.[] | {id, name}'
+    ADMINS = 6873229
     ANSIBLE = 2454000
     AZIMUTH = 6372898
     BATCH = 6372897
