@@ -38,6 +38,11 @@ deb_package_repos:
     base_path: ubuntu/focal/
     short_name: ubuntu_focal
     distribution_name: ubuntu-focal-
+    # NOTE: Not syncing or publishing Ubuntu repositories since the on_demand
+    # sync gets broken when packages are updated upstream. Need to switch to
+    # immediate sync if we decide to use these repos.
+    sync: false
+    publish: false
   # https://wiki.ubuntu.com/SecurityTeam/FAQ suggests that security.ubuntu.com
   # is preferable for security updates, so use this in preference to the
   # focal-security dist in the main Ubuntu focal repository where possible.
@@ -54,6 +59,11 @@ deb_package_repos:
     base_path: ubuntu/focal-security/
     short_name: ubuntu_focal_security
     distribution_name: ubuntu-focal-security-
+    # NOTE: Not syncing or publishing Ubuntu repositories since the on_demand
+    # sync gets broken when packages are updated upstream. Need to switch to
+    # immediate sync if we decide to use these repos.
+    sync: false
+    publish: false
 
   # Ubuntu Cloud Archive (UCA)
   - name: Ubuntu Cloud Archive
@@ -66,6 +76,11 @@ deb_package_repos:
     base_path: ubuntu-cloud-archive/
     short_name: ubuntu_cloud_archive
     distribution_name: ubuntu-cloud-archive-
+    # NOTE: Not syncing or publishing Ubuntu repositories since the on_demand
+    # sync gets broken when packages are updated upstream. Need to switch to
+    # immediate sync if we decide to use these repos.
+    sync: false
+    publish: false
 
   # Third-party repositories
   - name: Docker CE for Ubuntu
@@ -78,6 +93,11 @@ deb_package_repos:
     base_path: docker-ce/ubuntu/
     short_name: docker_ce_ubuntu
     distribution_name: docker-ce-for-ubuntu-
+    # NOTE: Not syncing or publishing Ubuntu repositories since the on_demand
+    # sync gets broken when packages are updated upstream. Need to switch to
+    # immediate sync if we decide to use these repos.
+    sync: false
+    publish: false
 
 # Default filter string for Deb package repositories.
 deb_package_repo_filter: ""

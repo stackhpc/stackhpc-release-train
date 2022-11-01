@@ -52,6 +52,7 @@
       assert:
         that:
           - published_rpm_package_repos | map(attribute='base_path') | list | map('last') | unique == ['/']
+      when: num_published_rpm_package_repos | int > 0
 
     - name: Assert that RPM package repository list can be filtered to single
       assert:
