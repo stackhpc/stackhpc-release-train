@@ -51,6 +51,13 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.kayobe }}"
           dest: ".github/CODEOWNERS"
+  openstack-admin-guide:
+    repository_type: "docs"
+    workflows: []
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.kayobe }}"
+          dest: ".github/CODEOWNERS"
   stackhpc-kayobe-config:
     workflows:
       ignored_workflows:
