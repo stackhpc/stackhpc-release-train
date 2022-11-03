@@ -38,9 +38,6 @@ resource "github_issue_label" "stackhpc_ci_label" {
   name        = "stackhpc-ci"
   color       = "E6E2C0"
   description = "Automated action performed by stackhpc-ci"
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "github_issue_label" "workflows_label" {
@@ -49,9 +46,6 @@ resource "github_issue_label" "workflows_label" {
   name        = "workflows"
   color       = "638475"
   description = "Workflow files have been modified"
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "github_issue_label" "community_files_label" {
@@ -60,9 +54,6 @@ resource "github_issue_label" "community_files_label" {
   name        = "community-files"
   color       = "3F84E5"
   description = "Community files have been modified"
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 data "github_repository" "repositories" {

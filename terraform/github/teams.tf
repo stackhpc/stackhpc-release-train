@@ -13,9 +13,6 @@ resource "github_team_repository" "ansible_repositories" {
   team_id    = resource.github_team.organisation_teams["Ansible"].id
   repository = each.value
   permission = "push"
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "github_team_repository" "azimuth_repositories" {
@@ -23,9 +20,6 @@ resource "github_team_repository" "azimuth_repositories" {
   team_id    = resource.github_team.organisation_teams["Azimuth"].id
   repository = each.value
   permission = "push"
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "github_team_repository" "batch_repositories" {
@@ -33,9 +27,6 @@ resource "github_team_repository" "batch_repositories" {
   team_id    = resource.github_team.organisation_teams["Batch"].id
   repository = each.value
   permission = "push"
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "github_team_repository" "developers_repositories" {
@@ -43,9 +34,6 @@ resource "github_team_repository" "developers_repositories" {
   team_id    = resource.github_team.organisation_teams["Developers"].id
   repository = each.value
   permission = "push"
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "github_team_repository" "kayobe_repositories" {
@@ -53,9 +41,6 @@ resource "github_team_repository" "kayobe_repositories" {
   team_id    = resource.github_team.organisation_teams["Kayobe"].id
   repository = each.value
   permission = "push"
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "github_team_repository" "openstack_repositories" {
@@ -63,9 +48,6 @@ resource "github_team_repository" "openstack_repositories" {
   team_id    = resource.github_team.organisation_teams["OpenStack"].id
   repository = each.value
   permission = "push"
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "github_team_repository" "releasetrain_repositories" {
@@ -73,9 +55,6 @@ resource "github_team_repository" "releasetrain_repositories" {
   team_id    = resource.github_team.organisation_teams["ReleaseTrain"].id
   repository = each.value
   permission = "admin"
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "github_team_repository" "smslab_repositories" {
@@ -83,9 +62,6 @@ resource "github_team_repository" "smslab_repositories" {
   team_id    = resource.github_team.organisation_teams["SMSLab"].id
   repository = each.value
   permission = "push"
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "github_team_membership" "team_membership" {
@@ -104,7 +80,4 @@ resource "github_team_membership" "team_membership" {
   team_id  = each.value.team_id
   username = each.value.username
   role     = each.value.role
-  lifecycle {
-    prevent_destroy = true
-  }
 }
