@@ -188,6 +188,11 @@ rpm_package_repos:
     base_path: centos/8-stream/PowerTools/x86_64/os/
     short_name: centos_stream_8_powertools
     distribution_name: centos-stream-8-powertools-
+  - name: CentOS Stream 8 - HighAvailability
+    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=HighAvailability&infra=genclo
+    base_path: centos/8-stream/HighAvailability/x86_64/os/
+    short_name: centos_stream_8_highavailability
+    distribution_name: centos-stream-8-highavailability-
 
   # Base CentOS 8 Linux repositories
   - name: CentOS Linux 8 - AppStream
@@ -364,6 +369,11 @@ rpm_package_repos:
     base_path: rocky/8.6/PowerTools/x86_64/os/
     short_name: rocky_8_6_powertools
     distribution_name: rocky-8.6-powertools-
+  - name: Rocky Linux 8.6 - HighAvailability
+    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-8.6&arch=x86_64
+    base_path: rocky/8.6/HighAvailability/x86_64/os/
+    short_name: rocky_8_6_highavailability
+    distribution_name: rocky-8.6-highavailability-
 
   # MLNX OFED 5.6-1.0.3.3 RHEL 8.6 repository
   - name: Mellanox Technologies mlnx_ofed 5.6-1.0.3.3
