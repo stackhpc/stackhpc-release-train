@@ -148,6 +148,30 @@ Please review the `Source Repositories Vars` for a description of the variables 
 
     Modifications can be made either by clone the stackhpc-release-train repository locally or using the [Github Dev Editor](https://github.dev/github/dev) by pressing `.` key within the repository.
 
+#### Add new repository
+
+To add new repositories to be handled by this playbook you can edit [source-repositories](https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/source-repositories).
+Identify the `source_repositories` dictionary and insert your new repository.
+For example the below code snippet will add neutron to the `source repo sync` all default workflows and community files.
+Also all release series will be ignored except `yoga`.
+
+```yaml
+source_repositories:
+  neutron:
+    ignored_releases:
+      - xena
+      - wallaby
+      - victoria
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
+```
+
+!!! note
+
+    Please refer to [Making modifications to the playbook](#making-modifications-to-the-playbook) for description of changes that can be made.
+
 #### Changing the release series
 
 To change the release series for all OpenStack repositories this can be achived by editing the `default_releases` variable.
