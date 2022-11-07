@@ -152,15 +152,12 @@ Please review the `Source Repositories Vars` for a description of the variables 
 
 To add new repositories to be handled by this playbook you can edit [source-repositories](https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/source-repositories).
 Identify the `source_repositories` dictionary and insert your new repository.
-For example the below code snippet will add neutron to the `source repo sync` playbook and will only add the upstream sync workflow and community files.
-Also all releases will be ignored except `yoga`.
+For example the below code snippet will add neutron to the `source repo sync` all default workflows and community files.
+Also all release series will be ignored except `yoga`.
 
 ```yaml
 source_repositories:
   neutron:
-    workflows:
-      default_branch_only:
-        - upstream-sync
     ignored_releases:
       - xena
       - wallaby
