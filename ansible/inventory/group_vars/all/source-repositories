@@ -122,6 +122,10 @@ source_repositories:
       - victoria
       - wallaby
       - xena
+    workflows:
+      ignored_workflows:
+        elsewhere:
+          - tox  
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
