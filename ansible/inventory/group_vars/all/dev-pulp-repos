@@ -52,7 +52,7 @@ dev_pulp_publication_deb: "{{ dev_pulp_distribution_deb }}"
 
 # Common parameters for Deb package distributions.
 dev_pulp_distribution_deb_common:
-  content_guard: development
+  content_guard: development-rbac
   state: present
 
 dev_pulp_distribution_deb: >-
@@ -78,7 +78,7 @@ dev_pulp_distribution_deb_promote_versions: {}
 
 # Common parameters for promoted Deb package distributions.
 dev_pulp_distribution_deb_promote_common:
-  content_guard: release
+  content_guard: release-rbac
   state: present
 
 dev_pulp_distribution_deb_promote: >-
@@ -127,7 +127,7 @@ dev_pulp_publication_rpm: "{{ dev_pulp_distribution_rpm }}"
 
 # Common parameters for RPM package distributions.
 dev_pulp_distribution_rpm_common:
-  content_guard: development
+  content_guard: development-rbac
   state: present
 
 dev_pulp_distribution_rpm: >-
@@ -150,7 +150,7 @@ dev_pulp_distribution_rpm_promote_versions: {}
 
 # Common parameters for promoted RPM package distributions.
 dev_pulp_distribution_rpm_promote_common:
-  content_guard: release
+  content_guard: release-rbac
   state: present
 
 dev_pulp_distribution_rpm_promote: >-
@@ -175,4 +175,15 @@ dev_pulp_content_guard_x509_cert_guards:
     state: present
   - name: development
     description: "Content-guard for development distributions"
+    state: present
+
+###############################################################################
+# RBAC content guards
+
+dev_pulp_content_guard_rbac:
+  - name: release-rbac
+    description: "RBAC content-guard for released distributions"
+    state: present
+  - name: development-rbac
+    description: "RBAC content-guard for development distributions"
     state: present

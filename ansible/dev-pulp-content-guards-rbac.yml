@@ -1,0 +1,55 @@
+---
+- name: Ensure dev and release content guards exist
+  hosts: localhost
+  gather_facts: true
+  tasks:
+    - name: Set fact - content guard attributes
+      set_fact:
+        dev_content_guard_attributes:
+          roles:
+            - role: core.rbaccontentguard_owner
+              groups:
+                - stackhpc_dev
+        release_content_guard_attributes:
+          roles:
+            - role: core.rbaccontentguard_owner
+              groups:
+                - stackhpc_dev
+            - role: core.rbaccontentguard_downloader
+              groups:
+                - stackhpc
+
+    - name: Configure dev RBAC content guard
+      set_fact:
+        configured_contentguards_rbac: >-
+          {{ configured_contentguards_rbac | default([]) +
+             [
+               item | combine(dev_content_guard_attributes)
+             ]
+          }}
+      loop: "{{ dev_pulp_content_guard_rbac }}"
+      loop_control:
+        label: "{{ item.name }}"
+      when: item.name == "development-rbac"
+
+    - name: Configure release RBAC content guard
+      set_fact:
+        configured_contentguards_rbac: >-
+          {{ configured_contentguards_rbac | default([]) +
+             [
+               item | combine(release_content_guard_attributes)
+             ]
+          }}
+      loop: "{{ release_pulp_content_guard_rbac }}"
+      loop_control:
+        label: "{{ item.name }}"
+      when: item.name == "release-rbac"
+
+    - name: Run stackhpc.pulp.pulp_content_guard role
+      import_role:
+        name: stackhpc.pulp.pulp_content_guard
+      vars:
+        pulp_url: "{{ dev_pulp_url }}"
+        pulp_username: "{{ dev_pulp_username }}"
+        pulp_password: "{{ dev_pulp_password }}"
+        pulp_content_guard_rbac: "{{ configured_contentguards_rbac }}"
