@@ -7,17 +7,15 @@
       set_fact:
         dev_content_guard_attributes:
           roles:
-            - role: core.rbaccontentguard_owner
+            - role: core.rbaccontentguard_downloader
               groups:
-                - stackhpc_dev
+                - stackhpc-dev
         release_content_guard_attributes:
           roles:
-            - role: core.rbaccontentguard_owner
-              groups:
-                - stackhpc_dev
             - role: core.rbaccontentguard_downloader
               groups:
                 - stackhpc
+                - stackhpc-dev
 
     - name: Configure dev RBAC content guard
       set_fact:
@@ -40,7 +38,7 @@
                item | combine(release_content_guard_attributes)
              ]
           }}
-      loop: "{{ release_pulp_content_guard_rbac }}"
+      loop: "{{ dev_pulp_content_guard_rbac }}"
       loop_control:
         label: "{{ item.name }}"
       when: item.name == "release-rbac"
