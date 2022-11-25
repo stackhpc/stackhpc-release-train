@@ -1,9 +1,9 @@
 collections:
-  - name: stackhpc.pulp
-    version: 0.4.0
-  # Pinned to git commit until new galaxy release
+  - name: https://github.com/stackhpc/ansible-collection-pulp
+    version: api-update
+    type: git
   - name: https://github.com/stackhpc/squeezer
     type: git
-    version: daf09b8b90419595307a4b896d17d532b35a25c5
+    version: rbac-utils
   - name: community.crypto
     version: 2.0.2
