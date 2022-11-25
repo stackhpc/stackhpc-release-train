@@ -2,8 +2,8 @@ collections:
   - name: stackhpc.pulp
     version: 0.4.0
   # Pinned to git commit until new galaxy release
-  - name: https://github.com/pulp/squeezer
+  - name: https://github.com/stackhpc/squeezer
     type: git
-    version: d8c9f75d637abd1669ed8395e9dc86d3e0641d62
+    version: daf09b8b90419595307a4b896d17d532b35a25c5
   - name: community.crypto
     version: 2.0.2
