@@ -193,6 +193,16 @@ rpm_package_repos:
     base_path: centos/8-stream/HighAvailability/x86_64/os/
     short_name: centos_stream_8_highavailability
     distribution_name: centos-stream-8-highavailability-
+  - name: CentOS Stream 8 - Kmods Main
+    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=kmods-packages-main&infra=genclo
+    base_path: centos/8-stream/kmods/x86_64/packages-main/
+    short_name: centos_stream_8_kmods_main
+    distribution_name: centos-stream-8-kmods-main-
+  - name: CentOS Stream 8 - Kmods Rebuild
+    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=kmods-packages-rebuild&infra=genclo
+    base_path: centos/8-stream/kmods/x86_64/packages-rebuild/
+    short_name: centos_stream_8_kmods_rebuild
+    distribution_name: centos-stream-8-kmods-rebuild-
 
   # Base CentOS 8 Linux repositories
   - name: CentOS Linux 8 - AppStream
