@@ -74,7 +74,6 @@ source_repositories:
   bifrost:
     ignored_releases:
       - victoria
-      - xena
       - yoga
     community_files:
       - codeowners:
@@ -125,11 +124,11 @@ source_repositories:
     workflows:
       ignored_workflows:
         elsewhere:
-          - tox  
+          - tox
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
-          dest: ".github/CODEOWNERS" 
+          dest: ".github/CODEOWNERS"
   sahara-dashboard:
     ignored_releases:
       - victoria
