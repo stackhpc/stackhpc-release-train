@@ -58,14 +58,12 @@ Build and test processes also need access to content.
 
 ### Package repositories
 
-Access to package repositories is controlled via [Pulp x509 cert guards](https://docs.pulpproject.org/pulp_certguard/).
-A [HashiCorp Vault](https://vault.stackhpc.com/) service acts as a Certificate Authority (CA) for the cert guards.
-Two cert guards are in use - `development` and `release`.
-The `development` cert guard is assigned to unreleased content, while the `release` cert guard is assigned to released content.
-Clients are provided with a client certificate which they use when syncing package repositories in their local Pulp service with Ark.
-Clients' client certificates are authorised to access content protected by the `release` cert guard.
-Build and test processes are provided with client certificate that is authorised to access the `development` and `release` cert guard.
-The latter is made possible via the CA chain.
+Access to package repositories is controlled via Pulp RBAC content guards.
+Two content guards are in use - `development` and `release`.
+The `development` content guard is assigned to unreleased content, while the `release` content guard is assigned to released content.
+Clients are provided with a username and password which they use when syncing package repositories in their local Pulp service with Ark.
+Clients' credentials are authorised to access content protected by the `release` content guard.
+Build and test processes are provided with a user account that is authorised to access the `development` and `release` content guard.
 
 ### Containers
 
@@ -148,7 +146,7 @@ Promotion describes the process whereby release candidate content is made into a
 
 For package repositories, promotion does not affect how content is accessed, only who may access it.
 Promotion involves changing the content guard for the distribution to be released from `development` to `release`.
-This makes the content accessible to clients using their x.509 client certificates.
+This makes the content accessible to clients using their client credentials.
 
 The `stackhpc` container namespace contains regular container repositories, which cannot be pushed to via `docker push`.
 Instead, we use the Pulp API to sync specific tags from `stackhpc-dev` to `stackhpc`.
