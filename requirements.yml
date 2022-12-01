@@ -1,9 +1,7 @@
 collections:
-  - name: https://github.com/stackhpc/ansible-collection-pulp
-    version: api-update
-    type: git
-  - name: https://github.com/stackhpc/squeezer
-    type: git
-    version: rbac-utils
+  - name: stackhpc.pulp
+    version: 0.4.1
   - name: community.crypto
     version: 2.0.2
+  - name: pulp.squeezer
+    version: 0.0.13
