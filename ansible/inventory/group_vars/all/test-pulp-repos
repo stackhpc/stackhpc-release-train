@@ -1,18 +1,13 @@
 ---
 test_dev_pulp_content_url: "{{ dev_pulp_url }}/pulp/content/"
 
-# Client certificates used to access ark.stackhpc.com repositories.
-# They are trusted by the 'development' cert guard's CA.
-test_client_cert: "{{ lookup('file', '../certs/ark.stackhpc.com/client-cert.pem') | trim }}"
-test_client_key: "{{ lookup('file', '../certs/ark.stackhpc.com/client-key.pem') | trim }}"
-
 ###############################################################################
 # Deb
 
 # Common parameters for Deb package repositories.
 test_pulp_repository_deb_repo_common:
-  client_cert: "{{ test_client_cert }}"
-  client_key: "{{ test_client_key }}"
+  remote_username: "{{ test_dev_pulp_registry_username }}"
+  remote_password: "{{ test_dev_pulp_registry_password }}"
   # Remove content that has been removed from the upstream mirror.
   mirror: true
   # Download content on demand from Ark.
@@ -75,8 +70,8 @@ test_pulp_distribution_deb: >-
 
 # Common parameters for RPM package repositories.
 test_pulp_repository_rpm_repo_common:
-  client_cert: "{{ test_client_cert }}"
-  client_key: "{{ test_client_key }}"
+  remote_username: "{{ test_dev_pulp_registry_username }}"
+  remote_password: "{{ test_dev_pulp_registry_password }}"
   # Download content on demand from Ark.
   policy: on_demand
   # Remove content that has been removed from the upstream mirror.
