@@ -170,7 +170,7 @@ dev_pulp_distribution_rpm_promote: >-
 # x509 cert guards
 
 dev_pulp_content_guard_x509_cert_guards:
-  - name: release-x509
+  - name: release
     description: "Content-guard for released distributions"
     state: present
   - name: development-x509
@@ -181,14 +181,14 @@ dev_pulp_content_guard_x509_cert_guards:
 # RBAC content guards
 
 dev_pulp_content_guards_rbac:
-  - name: release
-    description: "RBAC content-guard for released distributions"
-    roles:
-      - role: core.rbaccontentguard_downloader
-        groups:
-          - stackhpc
-          - stackhpc-dev
-    state: present
+  # - name: release
+  #   description: "RBAC content-guard for released distributions"
+  #   roles:
+  #     - role: core.rbaccontentguard_downloader
+  #       groups:
+  #         - stackhpc
+  #         - stackhpc-dev
+  #   state: present
   - name: development
     description: "RBAC content-guard for development distributions"
     roles:
