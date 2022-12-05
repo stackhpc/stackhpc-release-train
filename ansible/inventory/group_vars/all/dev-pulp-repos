@@ -173,6 +173,26 @@ dev_pulp_content_guard_x509_cert_guards:
   - name: release
     description: "Content-guard for released distributions"
     state: present
-  - name: development
+  - name: development-x509
     description: "Content-guard for development distributions"
+    state: present
+
+###############################################################################
+# RBAC content guards
+
+dev_pulp_content_guards_rbac:
+  # - name: release
+  #   description: "RBAC content-guard for released distributions"
+  #   roles:
+  #     - role: core.rbaccontentguard_downloader
+  #       groups:
+  #         - stackhpc
+  #         - stackhpc-dev
+  #   state: present
+  - name: development
+    description: "RBAC content-guard for development distributions"
+    roles:
+      - role: core.rbaccontentguard_downloader
+        groups:
+          - stackhpc-dev
     state: present
