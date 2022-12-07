@@ -10,9 +10,9 @@ This page covers the different workflows available for access control.
 This workflow must currently be run manually.
 It involves the following playbook in the [stackhpc-release-train](https://github.com/stackhpc/stackhpc-release-train) repository:
 
-* `dev-pulp-content-guards.yml`: Create certguard content-guards using CA certificates stored in HashiCorp Vault (https://vault.stackhpc.com)
+* `dev-pulp-content-guards.yml`: Create RBAC content-guards.
 
-This should only need to be run when the CA chain for the content guards changes, which should be very rare.
+It should almost never need to be run.
 
 To run it manually:
 
