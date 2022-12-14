@@ -8,6 +8,16 @@ resource "github_team" "organisation_teams" {
   }
 }
 
+resource "github_team_repository" "admin_repositories" {
+  for_each   = toset(flatten(values(var.repositories)))
+  team_id    = resource.github_team.organisation_teams["Admins"].id
+  repository = each.value
+  permission = "admin"
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
 resource "github_team_repository" "ansible_repositories" {
   for_each   = toset(var.repositories["Ansible"])
   team_id    = resource.github_team.organisation_teams["Ansible"].id

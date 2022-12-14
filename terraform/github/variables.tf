@@ -32,6 +32,14 @@ variable "repositories" {
 
 variable "teams" {
   default = {
+    "Admins" = {
+      description = "Team with administrator privileges",
+      privacy     = "closed"
+      users = {
+        maintainers = [],
+        members     = [],
+      }
+    },
     "Ansible" = {
       description = "Team responsible for Ansible development"
       privacy     = "closed"
