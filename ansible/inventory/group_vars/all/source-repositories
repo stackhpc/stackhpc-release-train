@@ -89,12 +89,26 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
+  cinder:
+    ignored_releases:
+      - victoria
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
   cloudkitty:
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
   cloudkitty-dashboard:
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
+  glance:
+    ignored_releases:
+      - victoria
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
@@ -125,6 +139,13 @@ source_repositories:
       ignored_workflows:
         elsewhere:
           - tox
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
+  nova:
+    ignored_releases:
+      - victoria
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
