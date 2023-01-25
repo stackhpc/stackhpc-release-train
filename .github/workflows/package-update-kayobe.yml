@@ -63,7 +63,7 @@ jobs:
         run: |
           cd stackhpc-kayobe-config/ &&
           if ! git diff-index --quiet HEAD; then
-            echo "::set-output name=changed::true" &&
+            echo "changed=true" >> $GITHUB_OUTPUT &&
             git diff --color
           fi
 
