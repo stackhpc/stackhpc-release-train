@@ -21,7 +21,7 @@ jobs:
     name: Promote package repositories
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v3
 
     - name: Preparing Vault password file
       run: |
@@ -30,7 +30,7 @@ jobs:
         ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
 
     - name: Clone StackHPC Kayobe configuration repository
-      uses: actions/checkout@master
+      uses: actions/checkout@v3
       with:
         repository: stackhpc/stackhpc-kayobe-config
         ref: refs/heads/${{ github.event.inputs.kayobe_config_branch }}
