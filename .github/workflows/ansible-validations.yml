@@ -15,7 +15,7 @@ jobs:
     name: Ansible Validations
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v3
 
       - name: Preparing Vault password file
         run: |

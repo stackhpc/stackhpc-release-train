@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     if: inputs.sync_ark || github.event_name == 'schedule'
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v3
 
     - name: Preparing Vault password file
       run: |
@@ -67,7 +67,7 @@ jobs:
     needs: package-sync-ark
     if: inputs.sync_test || github.event_name == 'schedule'
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v3
 
     - name: Preparing Vault password file
       run: |
