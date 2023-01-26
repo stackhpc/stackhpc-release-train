@@ -15,6 +15,9 @@
           'dev_pulp_repository_container_promotion_tag'
       when: dev_pulp_repository_container_promotion_tag is not defined
 
+    - debug:
+        msg: "Promoting tag {{ dev_pulp_repository_container_promotion_tag }}"
+
     - import_role:
         name: stackhpc.pulp.pulp_repository
       vars:
