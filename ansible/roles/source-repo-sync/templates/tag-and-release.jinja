@@ -5,6 +5,7 @@ name: Tag & Release
     branches:
       - stackhpc/{{workflow_manifest.branch}}
 permissions:
+  actions: read
   contents: write
 jobs:
   tag-and-release:
