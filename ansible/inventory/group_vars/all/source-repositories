@@ -463,6 +463,13 @@ source_repositories:
           content: "{{ community_files.codeowners.batch }}"
           dest: ".github/CODEOWNERS"
   # ReleaseTrain team
+  .github:
+    repository_type: "single-branch"
+    workflows: []
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.release_train }}"
+          dest: ".github/CODEOWNERS"
   stackhpc-release-train:
     repository_type: "ansible"
     workflows: []
