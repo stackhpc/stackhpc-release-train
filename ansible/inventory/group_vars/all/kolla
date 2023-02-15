@@ -6,6 +6,9 @@ kolla_container_images:
   - barbican-keystone-listener
   - barbican-worker
   - base
+  - blazar-api
+  - blazar-base
+  - blazar-manager
   - bifrost-base
   - bifrost-deploy
   - cinder-api
@@ -110,7 +113,7 @@ kolla_container_images:
   - prometheus-jiralert
   - prometheus-libvirt-exporter
   - prometheus-memcached-exporter
-  - prometheus-msteams 
+  - prometheus-msteams
   - prometheus-mtail
   - prometheus-mysqld-exporter
   - prometheus-node-exporter
