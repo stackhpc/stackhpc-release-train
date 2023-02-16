@@ -1,0 +1,29 @@
+---
+- name: Query repositories
+  pulp.squeezer.rpm_repository:
+    pulp_url: "{{ pulp_url }}"
+    username: "{{ pulp_username }}"
+    password: "{{ pulp_password }}"
+  register: pulp_repos_list
+
+- name: Query publications
+  pulp.squeezer.rpm_publication:
+    pulp_url: "{{ pulp_url }}"
+    username: "{{ pulp_username }}"
+    password: "{{ pulp_password }}"
+  register: pulp_pubs_list
+
+- name: Query distributions
+  pulp.squeezer.rpm_distribution:
+    pulp_url: "{{ pulp_url }}"
+    username: "{{ pulp_username }}"
+    password: "{{ pulp_password }}"
+  register: pulp_dists_list
+
+- name: Destroy duplicate publications
+  include_tasks: destroy-pubs.yml
+  loop: "{{ pulp_rpm_publication_cleanup_repos }}"
+  when: pubs | length > 1
+  vars:
+    repo: "{{ pulp_repos_list.repositories | selectattr('name', 'equalto', item) | first }}"
+    pubs: "{{ pulp_pubs_list.publications | selectattr('repository_version', 'equalto', repo.latest_version_href) }}"

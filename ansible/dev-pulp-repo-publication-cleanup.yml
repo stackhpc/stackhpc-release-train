@@ -16,63 +16,7 @@
     pulp_username: "{{ dev_pulp_username }}"
     pulp_password: "{{ dev_pulp_password }}"
   tasks:
-    - name: Query repositories
-      pulp.squeezer.rpm_repository:
-        pulp_url: "{{ pulp_url }}"
-        username: "{{ pulp_username }}"
-        password: "{{ pulp_password }}"
-      register: pulp_repos_list
-
-    - name: Query publications
-      pulp.squeezer.rpm_publication:
-        pulp_url: "{{ pulp_url }}"
-        username: "{{ pulp_username }}"
-        password: "{{ pulp_password }}"
-      register: pulp_pubs_list
-
-    - name: Query distributions
-      pulp.squeezer.rpm_distribution:
-        pulp_url: "{{ pulp_url }}"
-        username: "{{ pulp_username }}"
-        password: "{{ pulp_password }}"
-      register: pulp_dists_list
-
-    - block:
-        - name: Show duplicate publications
-          debug:
-            msg: "{{ pubs | sort(attribute='pulp_created') }}"
-          loop: "{{ dev_pulp_distribution_rpm }}"
-          loop_control:
-            label: "{{ item.repository }}"
-          when: pubs | length > 1
-
-        - name: Fail if duplicate publications have distributions
-          assert:
-            that: dists | length == 0
-          loop: "{{ dev_pulp_distribution_rpm }}"
-          loop_control:
-            label: "{{ item.repository }}"
-          when: pubs | length > 1
-          vars:
-            duplicate_pub: "{{ pubs | sort(attribute='pulp_created') | last }}"
-            dists: "{{ pulp_dists_list.distributions | selectattr('publication', 'equalto', duplicate_pub.pulp_href) }}"
-
-        # Use URI module since pulp.squeezer.rpm_publication fails if there are
-        # multiple matching publications.
-        - name: Destroy duplicate publications
-          uri:
-            url: "{{ pulp_url }}{{ duplicate_pub.pulp_href }}"
-            user: "{{ pulp_username }}"
-            password: "{{ pulp_password }}"
-            method: DELETE
-            status_code: 204
-            force_basic_auth: true
-          loop: "{{ dev_pulp_distribution_rpm }}"
-          loop_control:
-            label: "{{ item.repository }}"
-          when: pubs | length > 1
-          vars:
-            duplicate_pub: "{{ pubs | sort(attribute='pulp_created') | last }}"
+    - import_role:
+        name: pulp-rpm-publication-cleanup
       vars:
-        repo: "{{ pulp_repos_list.repositories | selectattr('name', 'equalto', item.repository) | first }}"
-        pubs: "{{ pulp_pubs_list.publications | selectattr('repository_version', 'equalto', repo.latest_version_href) }}"
+        pulp_rpm_publication_cleanup_repos: "{{ dev_pulp_distribution_rpm | map(attribute='repository') | list }}"

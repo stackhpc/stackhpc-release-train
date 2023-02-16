@@ -1,0 +1,30 @@
+---
+- name: Show duplicate publications
+  debug:
+    msg: "{{ pubs | sort(attribute='pulp_created') }}"
+
+- name: Fail if duplicate publications have distributions
+  assert:
+    that: dists | length == 0
+  loop: "{{ duplicate_pubs }}"
+  loop_control:
+    loop_var: duplicate_pub
+  vars:
+    duplicate_pubs: "{{ (pubs | sort(attribute='pulp_created'))[1:] }}"
+    dists: "{{ pulp_dists_list.distributions | selectattr('publication', 'equalto', duplicate_pub.pulp_href) }}"
+
+# Use URI module since pulp.squeezer.rpm_publication fails if there are
+# multiple matching publications.
+- name: Destroy duplicate publications
+  uri:
+    url: "{{ pulp_url }}{{ duplicate_pub.pulp_href }}"
+    user: "{{ pulp_username }}"
+    password: "{{ pulp_password }}"
+    method: DELETE
+    status_code: 204
+    force_basic_auth: true
+  loop: "{{ duplicate_pubs }}"
+  loop_control:
+    loop_var: duplicate_pub
+  vars:
+    duplicate_pubs: "{{ (pubs | sort(attribute='pulp_created'))[1:] }}"
