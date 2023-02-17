@@ -455,6 +455,27 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.batch }}"
           dest: ".github/CODEOWNERS"
+  caas-slurm-appliance:
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.batch }}"
+          dest: ".github/CODEOWNERS"
+  slurm_slurm_appliance:
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.batch }}"
+          dest: ".github/CODEOWNERS"
+  slurm_image_builder:
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.batch }}"
+          dest: ".github/CODEOWNERS"
   # ReleaseTrain team
   stackhpc-release-train:
     repository_type: "ansible"
