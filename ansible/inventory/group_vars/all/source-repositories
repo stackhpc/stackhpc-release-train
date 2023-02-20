@@ -37,16 +37,22 @@ community_files:
 source_repositories:
   # Kayobe team
   kolla:
+    ignored_releases:
+      - victoria
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.kayobe }}"
           dest: ".github/CODEOWNERS"
   kayobe:
+    ignored_releases:
+      - victoria
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.kayobe }}"
           dest: ".github/CODEOWNERS"
   kolla-ansible:
+    ignored_releases:
+      - victoria
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.kayobe }}"
