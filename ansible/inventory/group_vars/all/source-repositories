@@ -461,9 +461,30 @@ source_repositories:
           content: "{{ community_files.codeowners.ansible }}"
           dest: ".github/CODEOWNERS"
   # Batch team
+  ansible-role-cluster-nfs:
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.batch }}"
+          dest: ".github/CODEOWNERS"
   ansible-role-openhpc:
     repository_type: "ansible"
     workflows: "{{ ansible_workflows.role }}"
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.batch }}"
+          dest: ".github/CODEOWNERS"
+  caas-slurm-appliance:
+    repository_type: "ansible"
+    workflows:
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.batch }}"
+          dest: ".github/CODEOWNERS"
+  ansible-slurm-appliance:
+    repository_type: "ansible"
+    workflows:
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.batch }}"
