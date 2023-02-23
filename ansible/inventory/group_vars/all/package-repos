@@ -489,6 +489,7 @@ rpm_package_repos:
     sync_policy: mirror_content_only
     base_path: epel/9/Everything/x86_64/
     short_name: epel9
+    distribution_name: extra-packages-for-enterprise-linux-9-x86_64-
 
   # MLNX OFED 5.8-1.0.1.1 RHEL 9.1 repository
   - name: Mellanox Technologies mlnx_ofed 5.8-1.0.1.1
