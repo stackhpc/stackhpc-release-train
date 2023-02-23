@@ -488,7 +488,7 @@ rpm_package_repos:
     url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-9&arch=x86_64&infra=stock&content=centos
     sync_policy: mirror_content_only
     base_path: epel/9/Everything/x86_64/
-    short_name: epel
+    short_name: epel9
 
   # MLNX OFED 5.8-1.0.1.1 RHEL 9.1 repository
   - name: Mellanox Technologies mlnx_ofed 5.8-1.0.1.1
