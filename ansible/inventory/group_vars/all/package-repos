@@ -469,7 +469,7 @@ rpm_package_repos:
     distribution_name: rocky-9-nfv-
   - name: Rocky Linux 9.1 - CRB
     url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-CRB-9.1&arch=x86_64
-    base_path: rocky/9.1/crb/x86_64/os/
+    base_path: rocky/9.1/CRB/x86_64/os/
     short_name: rocky_9_1_crb
     distribution_name: rocky-9.1-crb-
   - name: Rocky Linux 9.1 - HighAvailability
@@ -488,15 +488,21 @@ rpm_package_repos:
     url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-9&arch=x86_64&infra=stock&content=centos
     sync_policy: mirror_content_only
     base_path: epel/9/Everything/x86_64/
-    short_name: epel9
+    short_name: epel_9
     distribution_name: extra-packages-for-enterprise-linux-9-x86_64-
 
-  # MLNX OFED 5.8-1.0.1.1 RHEL 9.1 repository
-  - name: Mellanox Technologies mlnx_ofed 5.8-1.0.1.1
-    url: https://linux.mellanox.com/public/repo/mlnx_ofed/5.8-1.0.1.1/rhel9.1/x86_64/
-    base_path: mlnx_ofed/5.8-1.0.1.1/rhel9.1/x86_64/
-    short_name: mlnx_ofed_5_6_1_0_3_3_rhel9_1
-    distribution_name: mlnx_ofed-5.8-1.0.1.1-rhel9.1-
+  # MLNX OFED 5.9-0.5.6.0 RHEL 9.1 repository
+  - name: Mellanox Technologies mlnx_ofed 5.9-0.5.6.0
+    url: https://linux.mellanox.com/public/repo/mlnx_ofed/5.9-0.5.6.0/rhel9.1/x86_64/
+    base_path: mlnx_ofed/5.9-0.5.6.0/rhel9.1/x86_64/
+    short_name: mlnx_ofed_5_9_0_5_6_0_rhel9_1
+    distribution_name: mlnx_ofed-5.9-0.5.6.0-rhel9.1-
+
+  - name: Docker CE for CentOS 9
+    url: https://download.docker.com/linux/centos/8/x86_64/stable
+    base_path: docker-ce/centos/9/x86_64/stable/
+    short_name: docker
+    distribution_name: docker-ce-for-centos-9-
 
 # Default filter string for RPM package repositories.
 rpm_package_repo_filter: ""
