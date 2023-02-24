@@ -462,11 +462,11 @@ rpm_package_repos:
 
   # Additional Rocky Linux 9.1 repositories
   # No advanced virt, Ceph or OpenStack
-  - name: Rocky Linux - NFV 9
+  - name: Rocky Linux - Centos Stream 9 - NFV OpenvSwitch
     url: https://mirror.stream.centos.org/SIGs/9-stream/nfv/x86_64/openvswitch-2/
-    base_path: rocky/9/nfv/x86_64/os/
-    short_name: rocky_9_nfv
-    distribution_name: rocky-9-nfv-
+    base_path: centos/9-stream/nfv/x86_64/os/
+    short_name: centos_stream_9_nfv
+    distribution_name: centos-stream-9-nfv-
   - name: Rocky Linux 9.1 - CRB
     url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-CRB-9.1&arch=x86_64
     base_path: rocky/9.1/CRB/x86_64/os/
@@ -479,9 +479,9 @@ rpm_package_repos:
     distribution_name: rocky-9.1-highavailability-
   - name: Rocky Linux 9 opstools
     url: https://mirror.stream.centos.org/SIGs/9-stream/opstools/x86_64/collectd-5/
-    base_path: rocky/9/opstools/x86_64/os/
-    short_name: rocky_9_opstools
-    distribution_name: rocky-9-opstools-
+    base_path: centos/9-stream/opstools/x86_64/os/
+    short_name: centos_stream_9_opstools
+    distribution_name: centos-stream-9-opstools-
   
   # EPEL 9 repository
   - name: Extra Packages for Enterprise Linux 9 - x86_64
@@ -501,7 +501,7 @@ rpm_package_repos:
   - name: Docker CE for CentOS 9
     url: https://download.docker.com/linux/centos/8/x86_64/stable
     base_path: docker-ce/centos/9/x86_64/stable/
-    short_name: docker
+    short_name: docker_9
     distribution_name: docker-ce-for-centos-9-
 
 # Default filter string for RPM package repositories.
