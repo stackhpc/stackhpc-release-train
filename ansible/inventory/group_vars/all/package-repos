@@ -530,8 +530,8 @@ rpm_package_repos:
   - name: InfluxDB 10.6 - Redhat
     url: https://repos.influxdata.com/rhel/9/x86_64/stable/
     base_path: influxdb/rhel/9/x86_64/stable/
-    short_name: influxdb_redhat
-    distribution_name: influxdb-redhat-
+    short_name: influxdb_rhel_9
+    distribution_name: influxdb-rhel-9-
   # MLNX OFED 5.9-0.5.6.0 RHEL 9.1 repository
   - name: Mellanox Technologies mlnx_ofed 5.9-0.5.6.0
     url: https://linux.mellanox.com/public/repo/mlnx_ofed/5.9-0.5.6.0/rhel9.1/x86_64/
