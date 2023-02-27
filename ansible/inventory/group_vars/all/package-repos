@@ -317,7 +317,7 @@ rpm_package_repos:
     short_name: rabbitmq_server
     distribution_name: rabbitmq-server-
   - name: TreasureData 4
-    url: https://td-agent-package-browser.herokuapp.com/4/redhat/8/x86_64
+    url: http://packages.treasuredata.com/4/redhat/8/x86_64
     base_path: treasuredata/4/redhat/8/x86_64/
     short_name: treasuredata_4
     distribution_name: treasuredata-4-
@@ -514,7 +514,7 @@ rpm_package_repos:
     distribution_name: docker-ce-for-centos-9-
   # TreasureData 4 for RHEL 9
   - name: TreasureData 4 - RHEL 9
-    url: https://td-agent-package-browser.herokuapp.com/4/redhat/9/x86_64
+    url: http://packages.treasuredata.com/4/redhat/9/x86_64
     base_path: treasuredata/4/redhat/9/x86_64/
     short_name: rhel_9_treasuredata_4
     distribution_name: rhel_9_treasuredata-4-  
