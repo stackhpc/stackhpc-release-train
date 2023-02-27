@@ -484,9 +484,9 @@ rpm_package_repos:
   # NFV OpenvSwitch for CentOS Stream 9
   - name: CentOS Stream 9 - NFV OpenvSwitch
     url: https://mirror.stream.centos.org/SIGs/9-stream/nfv/x86_64/openvswitch-2/
-    base_path: centos/9-stream/nfv/x86_64/os/
-    short_name: centos_stream_9_nfv
-    distribution_name: centos-stream-9-nfv-
+    base_path: centos/9-stream/nfv/x86_64/openvswitch-2/
+    short_name: centos_stream_9_nfv_openvswitch
+    distribution_name: centos-stream-9-nfv-openvswitch-
   # Opstools for CentOS Stream 9
   - name: CentOS Stream 9 - opstools
     url: https://mirror.stream.centos.org/SIGs/9-stream/opstools/x86_64/collectd-5/
