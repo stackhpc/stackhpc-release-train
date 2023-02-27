@@ -521,7 +521,7 @@ rpm_package_repos:
   # MariaDB 10.6 for RHEL 9
   - name: MariaDB 10.6 - RHEL 9
     url: https://dlm.mariadb.com/repo/mariadb-server/10.6/yum/rhel/9/x86_64
-    base_path: mariadb-10.6/yum/rhel/9/x86_64
+    base_path: mariadb-10.6/yum/rhel/9/x86_64/
     short_name: mariadb_10_6_rhel_9
     distribution_name: mariadb-10.6-rhel_9-
   # InfluxDB for RHEL 9
