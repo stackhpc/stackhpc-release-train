@@ -512,6 +512,8 @@ rpm_package_repos:
     base_path: docker-ce/centos/9/x86_64/stable/
     short_name: docker_9
     distribution_name: docker-ce-for-centos-9-
+
+  # Additional RHEL 9 repositories
   # TreasureData 4 for RHEL 9
   - name: TreasureData 4 - RHEL 9
     url: http://packages.treasuredata.com/4/redhat/9/x86_64
