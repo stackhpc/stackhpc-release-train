@@ -521,9 +521,9 @@ rpm_package_repos:
     short_name: mariadb_10_6_rhel_9
     distribution_name: mariadb-10.6-rhel_9-
 
-  # InfluxDB for Redhat distros, version 8/9 agnostic
+  # InfluxDB for RHEL 9
   - name: InfluxDB 10.6 - Redhat
-    url: https://repos.influxdata.com/stable/x86_64/main/
+    url: https://repos.influxdata.com/rhel/9/x86_64/stable/
     base_path: influxdb/redhat/
     short_name: influxdb_redhat
     distribution_name: influxdb-redhat-
