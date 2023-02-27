@@ -482,7 +482,7 @@ rpm_package_repos:
 
   # Additional CentOS Stream 9 repositories
   # NFV OpenvSwitch for CentOS Stream 9
-  - name: Centos Stream 9 - NFV OpenvSwitch
+  - name: CentOS Stream 9 - NFV OpenvSwitch
     url: https://mirror.stream.centos.org/SIGs/9-stream/nfv/x86_64/openvswitch-2/
     base_path: centos/9-stream/nfv/x86_64/os/
     short_name: centos_stream_9_nfv
