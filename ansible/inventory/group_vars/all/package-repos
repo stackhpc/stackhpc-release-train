@@ -284,15 +284,16 @@ rpm_package_repos:
     short_name: grafana
     distribution_name: grafana-
   - name: MariaDB 10.5
-    url: https://dlm.mariadb.com/repo/mariadb-server/10.5/yum/rhel/8/x86_64
+    url: https://dlm.mariadb.com/browse/mariadb_server/101/1639/yum/centos8-amd64/
     base_path: mariadb-10.5/yum/centos8-amd64/
     short_name: mariadb_10_5_centos8
     distribution_name: mariadb-10.5-centos8
   - name: MariaDB 10.6
-    url: https://dlm.mariadb.com/repo/mariadb-server/10.6/yum/rhel/8/x86_64
+    url: https://dlm.mariadb.com/browse/mariadb_server/163/1640/yum/centos8-amd64/
     base_path: mariadb-10.6/yum/centos8-amd64/
     short_name: mariadb_10_6_centos8
     distribution_name: mariadb-10.6-centos8
+  # RabbitMQ - Erlang for Redhat family, version 8/9 agnostic
   - name: RabbitMQ - Erlang
     url: https://packagecloud.io/rabbitmq/erlang/el/8/x86_64
     # mirror_complete fails with:
@@ -301,6 +302,7 @@ rpm_package_repos:
     base_path: rabbitmq/erlang/el/8/x86_64/
     short_name: rabbitmq_erlang
     distribution_name: rabbitmq-erlang-
+  # RabbitMQ or Redhat family, version 8/9 agnostic
   - name: RabbitMQ - Server
     url: https://packagecloud.io/rabbitmq/rabbitmq-server/el/8/x86_64
     # mirror_complete fails with:
@@ -310,7 +312,7 @@ rpm_package_repos:
     short_name: rabbitmq_server
     distribution_name: rabbitmq-server-
   - name: TreasureData 4
-    url: http://packages.treasuredata.com/4/redhat/8/x86_64
+    url: https://td-agent-package-browser.herokuapp.com/4/redhat/8/x86_64
     base_path: treasuredata/4/redhat/8/x86_64/
     short_name: treasuredata_4
     distribution_name: treasuredata-4-
@@ -462,7 +464,7 @@ rpm_package_repos:
 
   # Additional Rocky Linux 9.1 repositories
   # No advanced virt, Ceph or OpenStack
-  - name: Rocky Linux - Centos Stream 9 - NFV OpenvSwitch
+  - name: Centos Stream 9 - NFV OpenvSwitch
     url: https://mirror.stream.centos.org/SIGs/9-stream/nfv/x86_64/openvswitch-2/
     base_path: centos/9-stream/nfv/x86_64/os/
     short_name: centos_stream_9_nfv
@@ -472,11 +474,11 @@ rpm_package_repos:
     base_path: rocky/9.1/CRB/x86_64/os/
     short_name: rocky_9_1_crb
     distribution_name: rocky-9.1-crb-
-  - name: Rocky Linux 9.1 - HighAvailability
+  - name: Rocky Linux 9.1 - HA
     url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-9.1&arch=x86_64
-    base_path: rocky/9.1/HighAvailability/x86_64/os/
-    short_name: rocky_9_1_highavailability
-    distribution_name: rocky-9.1-highavailability-
+    base_path: rocky/9.1/HA/x86_64/os/
+    short_name: rocky_9_1_ha
+    distribution_name: rocky-9.1-ha-
   - name: Rocky Linux 9 opstools
     url: https://mirror.stream.centos.org/SIGs/9-stream/opstools/x86_64/collectd-5/
     base_path: centos/9-stream/opstools/x86_64/os/
@@ -484,7 +486,7 @@ rpm_package_repos:
     distribution_name: centos-stream-9-opstools-
   
   # EPEL 9 repository
-  - name: Extra Packages for Enterprise Linux 9 - x86_64
+  - name: Extra Packages for Enterprise Linux 9
     url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-9&arch=x86_64&infra=stock&content=centos
     sync_policy: mirror_content_only
     base_path: epel/9/Everything/x86_64/
@@ -498,11 +500,33 @@ rpm_package_repos:
     short_name: mlnx_ofed_5_9_0_5_6_0_rhel9_1
     distribution_name: mlnx_ofed-5.9-0.5.6.0-rhel9.1-
 
-  - name: Docker CE for CentOS 9
+  # Docker CE for CentOS Stream 9
+  - name: Docker CE - CentOS Stream 9
     url: https://download.docker.com/linux/centos/8/x86_64/stable
     base_path: docker-ce/centos/9/x86_64/stable/
     short_name: docker_9
     distribution_name: docker-ce-for-centos-9-
+
+  # TreasureData 4 for RHEL 9
+  - name: TreasureData 4 - RHEL 9
+    url: https://td-agent-package-browser.herokuapp.com/4/redhat/9/x86_64
+    base_path: treasuredata/4/redhat/9/x86_64/
+    short_name: rhel_9_treasuredata_4
+    distribution_name: rhel_9_treasuredata-4-
+  
+  # MariaDB 10.6 for RHEL 9 amd64
+  - name: MariaDB 10.6 - RHEL 9
+    url: https://dlm.mariadb.com/browse/mariadb_server/163/1640/yum/rhel9-amd64/
+    base_path: mariadb-10.6/yum/rhel_9-amd64/
+    short_name: mariadb_10_6_rhel_9
+    distribution_name: mariadb-10.6-rhel_9-
+
+  # InfluxDB for Redhat distros, version 8/9 agnostic
+  - name: InfluxDB 10.6 - Redhat
+    url: https://repos.influxdata.com/stable/x86_64/main/
+    base_path: influxdb/redhat/
+    short_name: influxdb_redhat
+    distribution_name: influxdb-redhat-
 
 # Default filter string for RPM package repositories.
 rpm_package_repo_filter: ""
