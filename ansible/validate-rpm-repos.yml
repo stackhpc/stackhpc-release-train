@@ -65,9 +65,10 @@
     - name: Assert that RPM package repository list can be filtered to multiple
       assert:
         that:
-          - rpm_package_repos_filtered | length == 2
+          - rpm_package_repos_filtered | length == 3
           - rpm_package_repos_filtered[0].short_name == 'centos_stream_8_baseos'
           - rpm_package_repos_filtered[1].short_name == 'docker'
+          - rpm_package_repos_filtered[2].short_name == 'docker_9'
       vars:
         rpm_package_repo_filter: docker centos_stream_8_baseos
 
