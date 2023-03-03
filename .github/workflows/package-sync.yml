@@ -68,6 +68,10 @@ jobs:
     if: inputs.sync_test || github.event_name == 'schedule'
     steps:
     - uses: actions/checkout@v3
+    
+    - run: |
+        ping -c 1 pulp-server.internal.sms-cloud
+        exit -1
 
     - name: Preparing Vault password file
       run: |
