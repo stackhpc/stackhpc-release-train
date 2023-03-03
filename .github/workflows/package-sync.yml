@@ -33,6 +33,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: test
+      run: |
+        ping -c 1 pulp-server.internal.sms-cloud
+        exit -1
+
     - name: Preparing Vault password file
       run: |
         echo "$ANSIBLE_VAULT_PASSWORD" > "$ANSIBLE_VAULT_PASSWORD_FILE"
