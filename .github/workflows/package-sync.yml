@@ -29,7 +29,6 @@ jobs:
   package-sync-test:
     name: Sync package repositories in test
     runs-on: [self-hosted, stackhpc-release-train]
-    needs: package-sync-ark
     if: inputs.sync_test || github.event_name == 'schedule'
     steps:
     - uses: actions/checkout@v3
