@@ -11,6 +11,7 @@ kolla_container_images:
   - blazar-manager
   - bifrost-base
   - bifrost-deploy
+  - caso
   - cinder-api
   - cinder-backup
   - cinder-base
