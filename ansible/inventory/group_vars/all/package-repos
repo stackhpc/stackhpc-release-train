@@ -515,6 +515,12 @@ rpm_package_repos:
     base_path: docker-ce/centos/9/x86_64/stable/
     short_name: docker_9
     distribution_name: docker-ce-for-centos-9-
+  # Openstack Yoga for CentOS Stream 9
+  - name: CentOS Stream 9 - OpenStack Yoga
+    url:  https://mirror.stream.centos.org/SIGs/9-stream/cloud/x86_64/openstack-yoga/
+    base_path: centos/9-stream/cloud/x86_64/openstack-yoga/
+    short_name: centos_stream_9_openstack_yoga
+    distribution_name: centos-stream-9-openstack-yoga-
 
   # Additional RHEL 9 repositories
   # TreasureData 4 for RHEL 9
