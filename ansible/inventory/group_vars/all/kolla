@@ -130,10 +130,16 @@ kolla_container_images:
   - skydive-base
 
 # List of supported base container OS distributions.
-kolla_base_distros:
+default_kolla_base_distros:
   - centos
   - ubuntu
   - rocky
+
+# Default filter string for base distributions. 
+kolla_base_distros_override: ""
+
+# List of base container OS distributions to use.
+kolla_base_distros: "{{ default_kolla_base_distros if kolla_base_distros_override == '' else (kolla_base_distros_override | split(' ')) }}"
 
 # Default filter string for container image repositories.
 kolla_container_image_filter: ""
