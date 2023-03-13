@@ -8,6 +8,11 @@ on:
         type: string
         required: false
         default: ""
+      distros:
+        description: Space-separated list of base distributions to promote
+        type: string
+        required: false
+        default: ""
       tag:
         description: Container image tag to promote
         required: true
@@ -44,7 +49,9 @@ jobs:
         ansible-playbook -i ansible/inventory \
         ansible/dev-pulp-container-promote.yml \
         -e dev_pulp_repository_container_promotion_tag="$TAG" \
-        -e kolla_container_image_filter="'$FILTER'"
+        -e kolla_container_image_filter="'$FILTER'" \
+        -e kolla_base_distros_override="'$DISTROS'"
       env:
-        FILTER: ${{ github.event.inputs.filter }}
         TAG: ${{ github.event.inputs.tag }}
+        FILTER: ${{ github.event.inputs.filter }}
+        DISTROS: ${{ github.event.inputs.distros }}

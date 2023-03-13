@@ -8,6 +8,11 @@ on:
         type: string
         required: false
         default: ""
+      distros:
+        description: Space-separated list of base distributions to sync for
+        type: string
+        required: false
+        default: ""
 
 env:
   ANSIBLE_FORCE_COLOR: True
@@ -40,24 +45,30 @@ jobs:
         source venv/bin/activate &&
         ansible-playbook -i ansible/inventory \
         ansible/dev-pulp-container-publish.yml \
-        -e kolla_container_image_filter="'$FILTER'"
+        -e kolla_container_image_filter="'$FILTER'" \
+        -e kolla_base_distros_override="'$DISTROS'"
       env:
         FILTER: ${{ github.event.inputs.filter }}
+        DISTROS: ${{ github.event.inputs.distros }}
 
     - name: Sync images in test with stackhpc-dev namespace in Ark
       run: |
         source venv/bin/activate &&
         ansible-playbook -i ansible/inventory \
         ansible/test-pulp-container-sync.yml \
-        -e kolla_container_image_filter="'$FILTER'"
+        -e kolla_container_image_filter="'$FILTER'" \
+        -e kolla_base_distros_override="'$DISTROS'"
       env:
         FILTER: ${{ github.event.inputs.filter }}
+        DISTROS: ${{ github.event.inputs.distros }}
 
     - name: Publish images in test
       run: |
         source venv/bin/activate &&
         ansible-playbook -i ansible/inventory \
         ansible/test-pulp-container-publish.yml \
-        -e kolla_container_image_filter="'$FILTER'"
+        -e kolla_container_image_filter="'$FILTER'" \
+        -e kolla_base_distros_override="'$DISTROS'"
       env:
         FILTER: ${{ github.event.inputs.filter }}
+        DISTROS: ${{ github.event.inputs.distros }}
