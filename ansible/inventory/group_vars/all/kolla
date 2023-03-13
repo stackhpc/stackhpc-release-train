@@ -129,6 +129,17 @@ kolla_container_images:
   - skydive-analyzer
   - skydive-base
 
+kolla_unbuildable_images:
+  ubuntu: []
+  centos: []
+  rocky:
+    - caso
+    - elasticsearch
+    - elasticsearch-curator
+    - iscsid
+    - kibana
+    - prometheus-server
+
 # List of supported base container OS distributions.
 default_kolla_base_distros:
   - centos
