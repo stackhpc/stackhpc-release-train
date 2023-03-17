@@ -23,9 +23,7 @@ deb_package_repos:
   # Base Ubuntu Focal 20.04 repositories
   - name: Ubuntu focal
     url: http://nova.clouds.archive.ubuntu.com/ubuntu/
-    # Ubuntu Focal repositories can't be synced with immediate policy using the
-    # existing 120G root disk on Ark.
-    policy: on_demand
+    policy: immediate
     architectures: amd64
     components: main restricted universe multiverse
     # NOTE: Include focal-security here to include all dists under one mirror
@@ -38,19 +36,13 @@ deb_package_repos:
     base_path: ubuntu/focal/
     short_name: ubuntu_focal
     distribution_name: ubuntu-focal-
-    # NOTE: Not syncing or publishing Ubuntu repositories since the on_demand
-    # sync gets broken when packages are updated upstream. Need to switch to
-    # immediate sync if we decide to use these repos.
-    sync: false
-    publish: false
+
   # https://wiki.ubuntu.com/SecurityTeam/FAQ suggests that security.ubuntu.com
   # is preferable for security updates, so use this in preference to the
   # focal-security dist in the main Ubuntu focal repository where possible.
   - name: Ubuntu focal security
     url: http://security.ubuntu.com/ubuntu
-    # Ubuntu Focal repositories can't be synced with immediate policy using the
-    # existing 120G root disk on Ark.
-    policy: on_demand
+    policy: immediate
     architectures: amd64
     components: main restricted universe multiverse
     distributions: focal-security
@@ -59,15 +51,11 @@ deb_package_repos:
     base_path: ubuntu/focal-security/
     short_name: ubuntu_focal_security
     distribution_name: ubuntu-focal-security-
-    # NOTE: Not syncing or publishing Ubuntu repositories since the on_demand
-    # sync gets broken when packages are updated upstream. Need to switch to
-    # immediate sync if we decide to use these repos.
-    sync: false
-    publish: false
 
   # Ubuntu Cloud Archive (UCA)
   - name: Ubuntu Cloud Archive
     url: http://ubuntu-cloud.archive.canonical.com/ubuntu
+    policy: immediate
     architectures: amd64
     components: main
     distributions: focal-updates/wallaby focal-updates/xena
@@ -76,15 +64,11 @@ deb_package_repos:
     base_path: ubuntu-cloud-archive/
     short_name: ubuntu_cloud_archive
     distribution_name: ubuntu-cloud-archive-
-    # NOTE: Not syncing or publishing Ubuntu repositories since the on_demand
-    # sync gets broken when packages are updated upstream. Need to switch to
-    # immediate sync if we decide to use these repos.
-    sync: false
-    publish: false
 
   # Third-party repositories
   - name: Docker CE for Ubuntu
     url: https://download.docker.com/linux/ubuntu
+    policy: immediate
     architectures: amd64
     distributions: focal
     components: stable
@@ -93,11 +77,6 @@ deb_package_repos:
     base_path: docker-ce/ubuntu/
     short_name: docker_ce_ubuntu
     distribution_name: docker-ce-for-ubuntu-
-    # NOTE: Not syncing or publishing Ubuntu repositories since the on_demand
-    # sync gets broken when packages are updated upstream. Need to switch to
-    # immediate sync if we decide to use these repos.
-    sync: false
-    publish: false
 
 # Default filter string for Deb package repositories.
 deb_package_repo_filter: ""
