@@ -513,7 +513,7 @@ rpm_package_repos:
   - name: Docker CE - CentOS Stream 9
     url: https://download.docker.com/linux/centos/9/x86_64/stable
     base_path: docker-ce/centos/9/x86_64/stable/
-    short_name: docker_9
+    short_name: centos_stream_9_docker
     distribution_name: docker-ce-for-centos-9-
   # Openstack Yoga for CentOS Stream 9
   - name: CentOS Stream 9 - OpenStack Yoga
@@ -533,13 +533,13 @@ rpm_package_repos:
   - name: MariaDB 10.6 - RHEL 9
     url: https://dlm.mariadb.com/repo/mariadb-server/10.6/yum/rhel/9/x86_64
     base_path: mariadb-10.6/yum/rhel/9/x86_64/
-    short_name: mariadb_10_6_rhel_9
+    short_name: rhel_9_mariadb_10_6
     distribution_name: mariadb-10.6-rhel-9-
   # InfluxDB for RHEL 9
   - name: InfluxDB - RHEL 9
     url: https://repos.influxdata.com/rhel/9/x86_64/stable/
     base_path: influxdb/rhel/9/x86_64/stable/
-    short_name: influxdb_rhel_9
+    short_name: rhel_9_influxdb
     distribution_name: influxdb-rhel-9-
   # MLNX OFED 5.9-0.5.6.0 RHEL 9.1 repository
   - name: Mellanox Technologies mlnx_ofed 5.9-0.5.6.0
