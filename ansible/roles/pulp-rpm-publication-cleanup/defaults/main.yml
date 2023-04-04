@@ -1,0 +1,7 @@
+---
+pulp_url: https://localhost:8080
+pulp_username: admin
+pulp_password:
+
+# List of names of repositories to clean up publications in.
+pulp_rpm_publication_cleanup_repos: []
