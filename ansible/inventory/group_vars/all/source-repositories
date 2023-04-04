@@ -484,14 +484,14 @@ source_repositories:
           dest: ".github/CODEOWNERS"
   caas-slurm-appliance:
     repository_type: "ansible"
-    workflows:
+    workflows: []
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.batch }}"
           dest: ".github/CODEOWNERS"
   ansible-slurm-appliance:
     repository_type: "ansible"
-    workflows:
+    workflows: []
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.batch }}"
