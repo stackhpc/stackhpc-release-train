@@ -1,0 +1,4 @@
+---
+- name: Include content.yml
+  include_tasks: content.yml
+  loop: "{{ pulp_container_content }}"

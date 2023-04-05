@@ -1,0 +1,6 @@
+---
+pulp_url: https://localhost:8080
+pulp_username: admin
+pulp_password:
+
+pulp_container_content: []
