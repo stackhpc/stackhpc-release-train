@@ -58,7 +58,7 @@ deb_package_repos:
     policy: immediate
     architectures: amd64
     components: main
-    distributions: focal-updates/wallaby focal-updates/xena focal-updates/yoga
+    distributions: focal-updates/yoga
     mirror: true
     mode: verbatim
     base_path: ubuntu-cloud-archive/
