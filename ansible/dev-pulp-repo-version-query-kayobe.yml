@@ -11,7 +11,7 @@
   hosts: localhost
   gather_facts: true
   tasks:
-    - name: Set a fact about versions to promote
+    - name: Set a fact about rpm versions to promote
       set_fact:
         dev_pulp_distribution_rpm_promote_versions: >-
           {{ dev_pulp_distribution_rpm_promote_versions |
@@ -22,13 +22,32 @@
         label: "{{ item.short_name }}"
       when: item.short_name in kayobe_pulp_repo_versions
 
-    - name: Display promotion versions fact
+    - name: Set a fact about deb versions to promote
+      set_fact:
+        dev_pulp_distribution_deb_promote_versions: >-
+          {{ dev_pulp_distribution_deb_promote_versions |
+             default({}) |
+             combine({item.short_name: kayobe_pulp_repo_versions[item.short_name]}) }}
+      loop: "{{ dev_pulp_distribution_deb_promote }}"
+      loop_control:
+        label: "{{ item.short_name }}"
+      when: item.short_name in kayobe_pulp_repo_versions
+
+    - name: Display rpm promotion versions facts
       debug:
         var: dev_pulp_distribution_rpm_promote_versions
+
+    - name: Display deb promotion versions facts
+      debug:
+        var: dev_pulp_distribution_deb_promote_versions
 
     - name: Assert that versions variable is populated
       assert:
         that:
-          - dev_pulp_distribution_rpm_promote_versions | length > 0
+          - >-
+            dev_pulp_distribution_deb_promote_versions | length > 0 or
+            dev_pulp_distribution_rpm_promote_versions | length > 0
         msg: >-
-          Distribution promotion version variable 'dev_pulp_distribution_rpm_promote_versions' is empty
+          Distribution promotion version variables
+          'dev_pulp_distribution_deb_promote_versions' and
+          'dev_pulp_distribution_rpm_promote_versions' are empty
