@@ -8,12 +8,6 @@ dev_release_pulp_registry_url: "{{ dev_pulp_url }}"
 
 # Common parameters for release image repositories.
 dev_pulp_repository_container_repo_release_common:
-  url: "{{ dev_release_pulp_registry_url }}"
-  include_tags:
-    - "{{ dev_pulp_repository_container_promotion_tag.strip() | mandatory }}"
-  policy: on_demand
-  remote_username: "{{ dev_pulp_username }}"
-  remote_password: "{{ dev_pulp_password }}"
   state: present
 
 # List of release container image repositories.
@@ -23,8 +17,7 @@ dev_pulp_repository_container_repos_release: >-
   {%- for image in kolla_container_images_filtered -%}
   {%- if image not in kolla_unbuildable_images[base_distro]-%}
   {%- set image_repo = "stackhpc/" ~ base_distro ~ "-source-" ~ image -%}
-  {%- set upstream_repo = "stackhpc-dev/" ~ base_distro ~ "-source-" ~ image -%}
-  {%- set repo = {"name": image_repo, "upstream_name": upstream_repo} -%}
+  {%- set repo = {"name": image_repo} -%}
   {%- set _ = repos.append(dev_pulp_repository_container_repo_release_common | combine(repo)) -%}
   {%- endif -%}
   {%- endfor -%}
