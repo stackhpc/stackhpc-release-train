@@ -237,17 +237,42 @@ Alternatively, to update the tag for a specific container, update `etc/kayobe/ko
 skydive_analyzer_tag: wallaby-20220811T091848
 ```
 
-## Promoting container images
+## Promoting container images (Zed release onwards)
 
 !!! note
 
     This should only be performed when container images are ready for release.
 
-The [Promote container repositories](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/container-promote-old.yml) workflow runs on demand.
+The [Promote container repositories](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/container-promote.yml) workflow is triggered automatically when a change is merged to stackhpc-kayobe-config.
+It may also be run on demand.
+
+It runs the following playbooks:
+
+* `dev-pulp-container-tag-query-kayobe.yml`: Query the Pulp container image tags defined in a Kayobe configuration repository and set the tag map variable `dev_pulp_repository_container_promotion_tags` based upon those tags. A path to a Kayobe configuration repository must be specified via `kayobe_config_repo_path`.
+* `dev-pulp-container-promote.yml`: Promote a set of container images from `stackhpc-dev` to `stackhpc` namespace. The tags to be promoted are defined via `dev_pulp_repository_container_promotion_tags`.
+
+Use GitHub Actions to run this workflow, or to run it manually:
+
+```
+ansible-playbook -i ansible/inventory \
+ansible/dev-pulp-container-tag-query-kayobe.yml \
+ansible/dev-pulp-container-promote.yml \
+-e kayobe_config_repo_path=../stackhpc-kayobe-config/
+```
+
+In this example, the Pulp container image tags defined in the `etc/kayobe/kolla-image-tags.yml` file in `../stackhpc-kayobe-config` repository (relative to the current working directory) will be promoted to releases.
+
+## Promoting container images (Yoga release and earlier)
+
+!!! note
+
+    This should only be performed when container images are ready for release.
+
+The [Promote container repositories (old)](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/container-promote-old.yml) workflow runs on demand.
 It should be run when container images need to be released, typically after a change to [update container image tags](#updating-container-image-tags-in-kayobe-configuration) has been approved.
 It runs the following playbook:
 
-* `dev-pulp-container-promote.yml`: Promote a set of container images from `stackhpc-dev` to `stackhpc` namespace. The tag to be promoted is defined via `dev_pulp_repository_container_promotion_tag` which should be specified as an extra variable (`-e`).
+* `dev-pulp-container-promote-old.yml`: Promote a set of container images from `stackhpc-dev` to `stackhpc` namespace. The tag to be promoted is defined via `dev_pulp_repository_container_promotion_tag` which should be specified as an extra variable (`-e`).
 
 Use GitHub Actions to run this workflow, or to run it manually:
 

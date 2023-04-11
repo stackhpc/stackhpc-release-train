@@ -1,0 +1,50 @@
+---
+# This playbook promotes images in the development namespace (stackhpc-dev) to
+# the release namespace (stackhpc). This makes them available to clients.
+# Images with a tag defined by dev_pulp_repository_container_promotion_tags are
+# promoted. dev_pulp_repository_container_promotion_tags is a dict with the
+# following format:
+#
+# dev_pulp_repository_container_promotion_tags:
+#   <image name>:
+#     - <image tag 1>
+#     - <image tag 2>
+
+- name: Promote dev Pulp containers
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Fail if container images to promote are not defined
+      fail:
+        msg: >
+          The container images to promote must be specified via
+          'dev_pulp_repository_container_promotion_tags'
+      when: dev_pulp_repository_container_promotion_tags is not defined
+
+    - name: Display which tags are being promoted
+      debug:
+        var: "dev_pulp_repository_container_promotion_tags"
+
+    # Copy tags from stackhpc-dev to stackhpc repositories.
+    - import_role:
+        name: stackhpc.pulp.pulp_container_content
+      vars:
+        pulp_url: "{{ dev_pulp_url }}"
+        pulp_username: "{{ dev_pulp_username }}"
+        pulp_password: "{{ dev_pulp_password }}"
+        pulp_container_content: >-
+          {%- set contents = [] -%}
+          {%- for image, tags in dev_pulp_repository_container_promotion_tags.items() -%}
+          {%- set src_image_repo = "stackhpc-dev/" ~ image -%}
+          {%- set dest_image_repo = "stackhpc/" ~ image -%}
+          {%- set content = {
+            "allow_missing": False,
+            "src_repo": src_image_repo,
+            "src_is_push": true,
+            "repository": dest_image_repo,
+            "tags": tags,
+          } -%}
+          {%- set _ = contents.append(content) -%}
+          {%- endfor -%}
+          {{ contents }}
+        pulp_container_content_wait: false
