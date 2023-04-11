@@ -12,6 +12,11 @@ on:
         required: false
         description: Branch of StackHPC Kayobe configuration to use
         default: stackhpc/wallaby
+      check-mode:
+        description: Check mode
+        type: boolean
+        required: false
+        default: false
 
 env:
   ANSIBLE_FORCE_COLOR: True
@@ -39,11 +44,18 @@ jobs:
 
     - name: Promote package repositories in Ark to release
       run: |
+        args=""
+        if [[ $CHECK_MODE = true ]]; then
+          args="$args --check --diff"
+        fi
+        source venv/bin/activate &&
         ansible-playbook -i ansible/inventory \
         ansible/dev-pulp-repo-version-query-kayobe.yml \
         ansible/dev-pulp-repo-promote.yml \
         -e deb_package_repo_filter="'$FILTER'" \
         -e rpm_package_repo_filter="'$FILTER'" \
-        -e kayobe_config_repo_path=./stackhpc-kayobe-config/
+        -e kayobe_config_repo_path=./stackhpc-kayobe-config/ \
+        $args
       env:
         FILTER: ${{ github.event.inputs.filter }}
+        CHECK_MODE: ${{ inputs.check-mode }}
