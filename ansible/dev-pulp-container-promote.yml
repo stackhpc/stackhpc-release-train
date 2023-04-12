@@ -44,3 +44,4 @@
           {%- endfor -%}
           {%- endfor -%}
           {{ contents }}
+        pulp_container_content_wait: false

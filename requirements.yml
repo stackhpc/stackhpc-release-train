@@ -1,6 +1,6 @@
 collections:
   - name: stackhpc.pulp
-    version: 0.5.0
+    version: 0.5.1
   - name: community.crypto
     version: 2.0.2
   - name: pulp.squeezer
