@@ -105,6 +105,9 @@ source_repositories:
   cinder:
     ignored_releases:
       - victoria
+      - wallaby
+      - xena
+      - yoga
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
@@ -122,6 +125,9 @@ source_repositories:
   glance:
     ignored_releases:
       - victoria
+      - wallaby
+      - xena
+      - yoga
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
@@ -159,6 +165,8 @@ source_repositories:
   nova:
     ignored_releases:
       - victoria
+      - xena
+      - yoga
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
