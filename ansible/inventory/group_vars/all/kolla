@@ -98,6 +98,8 @@ kolla_container_images:
   - openvswitch-db-server
   - openvswitch-netcontrold
   - openvswitch-vswitchd
+  - opensearch
+  - opensearch-dashboards
   - ovn-base
   - ovn-controller
   - ovn-nb-db-server
