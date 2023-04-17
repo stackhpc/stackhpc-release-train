@@ -21,13 +21,14 @@ jobs:
     name: Update Kayobe package repository versions
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - name: Preparing Vault password file
-        run: |
-          echo "$ANSIBLE_VAULT_PASSWORD" > "$ANSIBLE_VAULT_PASSWORD_FILE"
-        env:
-          ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+      - name: Setup Release Train & dependencies
+        uses: ./.github/actions/setup
+        with:
+          vault-password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+          vault-password-file: ${{ env.ANSIBLE_VAULT_PASSWORD_FILE }}
 
       - name: Clone StackHPC Kayobe configuration repository
         uses: actions/checkout@v3
@@ -36,19 +37,8 @@ jobs:
           ref: refs/heads/${{ github.event.inputs.kayobe_config_branch }}
           path: stackhpc-kayobe-config
 
-      - name: Installing dependencies
-        run: |
-          sudo apt update &&
-          sudo apt install -y python3-venv &&
-          python3 -m venv venv &&
-          source venv/bin/activate &&
-          pip install -U pip &&
-          pip install -r requirements.txt &&
-          ansible-galaxy collection install -r requirements.yml -p ansible/collections
-
       - name: Generate Kayobe Pulp repository versions
         run: |
-          source venv/bin/activate &&
           ansible-playbook -i ansible/inventory \
           ansible/test-pulp-repo-version-query.yml \
           ansible/test-kayobe-repo-version-generate.yml \

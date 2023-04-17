@@ -31,27 +31,17 @@ jobs:
     runs-on: ubuntu-latest
     if: inputs.sync_ark || github.event_name == 'schedule'
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v3
 
-    - name: Preparing Vault password file
-      run: |
-        echo "$ANSIBLE_VAULT_PASSWORD" > "$ANSIBLE_VAULT_PASSWORD_FILE"
-      env:
-        ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
-
-    - name: Installing dependencies
-      run: |
-        sudo apt update &&
-        sudo apt install -y python3-venv &&
-        python3 -m venv venv &&
-        source venv/bin/activate &&
-        pip install -U pip && 
-        pip install -r requirements.txt &&
-        ansible-galaxy collection install -r requirements.yml -p ansible/collections
+    - name: Setup Release Train & dependencies
+      uses: ./.github/actions/setup
+      with:
+        vault-password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+        vault-password-file: ${{ env.ANSIBLE_VAULT_PASSWORD_FILE }}
 
     - name: Sync and publish package repositories in Ark
       run: |
-        source venv/bin/activate &&
         ansible-playbook -i ansible/inventory \
         ansible/dev-pulp-repo-sync.yml \
         ansible/dev-pulp-repo-publication-cleanup.yml \
@@ -67,27 +57,17 @@ jobs:
     needs: package-sync-ark
     if: inputs.sync_test || github.event_name == 'schedule'
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v3
 
-    - name: Preparing Vault password file
-      run: |
-        echo "$ANSIBLE_VAULT_PASSWORD" > "$ANSIBLE_VAULT_PASSWORD_FILE"
-      env:
-        ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
-
-    - name: Installing dependencies
-      run: |
-        sudo apt update &&
-        sudo apt install -y python3-venv &&
-        python3 -m venv venv &&
-        source venv/bin/activate &&
-        pip install -U pip && 
-        pip install -r requirements.txt &&
-        ansible-galaxy collection install -r requirements.yml -p ansible/collections
+    - name: Setup Release Train & dependencies
+      uses: ./.github/actions/setup
+      with:
+        vault-password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+        vault-password-file: ${{ env.ANSIBLE_VAULT_PASSWORD_FILE }}
 
     - name: Sync and publish package repositories in test
       run: |
-        source venv/bin/activate &&
         ansible-playbook -i ansible/inventory \
         ansible/test-pulp-repo-version-query.yml \
         ansible/test-pulp-repo-sync.yml \
