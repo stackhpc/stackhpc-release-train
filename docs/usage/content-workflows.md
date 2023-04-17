@@ -165,22 +165,19 @@ In this example, the base and Skydive images have been tagged `wallaby-20220811T
 
 Instructions for building Kolla container images manually are provided in the [StackHPC kayobe config README](https://github.com/stackhpc/stackhpc-kayobe-config/blob/bf1396b8564b79344e4b6cfb934eab865ff1ad09/README.rst#L226).
 
-## Syncing container images
+## Publishing container images
 
-The [Sync container repositories](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/container-sync.yml) workflow runs after a successful [container image build](#building-container-images) workflow run, or on demand.
+The [Publish container repositories](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/container-publish.yml) workflow runs after a push to the `main` branch of the `stackhpc-release-train` repository, when relevant files have changed.
+
 It runs the following playbooks:
 
-* `dev-pulp-container-publish.yml`: Configure access control for development container distributions on `ark`.
-* `test-pulp-container-sync.yml`: Synchronise `test` with container images from `stackhpc-dev` namespace on `ark`.
-* `test-pulp-container-publish.yml`: Create distributions on `test` Pulp server for any new container images.
+* `dev-pulp-container-publish.yml`: Configure access control for development and release container repositories and distributions on `ark`.
 
 Use GitHub Actions to run this workflow, or to run it manually:
 
 ```
 ansible-playbook -i ansible/inventory \
-ansible/dev-pulp-container-publish.yml \
-ansible/test-pulp-container-sync.yml \
-ansible/test-pulp-container-publish.yml
+ansible/dev-pulp-container-publish.yml
 ```
 
 Configuration for container images is in:
@@ -190,6 +187,22 @@ Configuration for container images is in:
 * [ansible/inventory/group_vars/all/test-pulp-containers](https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/test-pulp-containers).
 
 New images should be added to `kolla_container_images` in `ansible/inventory/group_vars/all/kolla`.
+
+## Syncing container images
+
+The [Sync container repositories](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/container-sync.yml) workflow runs after a successful [container image build](#building-container-images) workflow run, or on demand.
+It runs the following playbooks:
+
+* `test-pulp-container-sync.yml`: Synchronise `test` with container images from `stackhpc-dev` namespace on `ark`.
+* `test-pulp-container-publish.yml`: Create distributions on `test` Pulp server for any new container images.
+
+Use GitHub Actions to run this workflow, or to run it manually:
+
+```
+ansible-playbook -i ansible/inventory \
+ansible/test-pulp-container-sync.yml \
+ansible/test-pulp-container-publish.yml
+```
 
 ## Updating container image tags in Kayobe configuration
 
