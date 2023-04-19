@@ -461,6 +461,13 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.ansible }}"
           dest: ".github/CODEOWNERS"
+  ansible-collection-linux:
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.collection }}"
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-collection-openstack-ops:
     repository_type: "ansible"
     workflows: "{{ ansible_workflows.collection }}"
