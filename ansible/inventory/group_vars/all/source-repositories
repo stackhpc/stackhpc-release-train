@@ -132,6 +132,15 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
+  horizon:
+    ignored_releases:
+      - victoria
+      - wallaby
+      - xena
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
   ironic-python-agent:
     community_files:
       - codeowners:
