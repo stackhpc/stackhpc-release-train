@@ -122,6 +122,15 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
+  designate-dashboard:
+    ignored_releases:
+      - victoria
+      - wallaby
+      - xena
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
   glance:
     ignored_releases:
       - victoria
@@ -141,20 +150,7 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
-  magnum-ui:
-    ignored_releases:
-      - victoria
-      - wallaby
-      - xena
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.openstack }}"
-          dest: ".github/CODEOWNERS"
-  designate-dashboard:
-    ignored_releases:
-      - victoria
-      - wallaby
-      - xena
+  ironic-python-agent:
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
@@ -168,23 +164,18 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
-  octavia-dashboard:
+  magnum:
+    ignored_releases:
+      - victoria
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
+  magnum-ui:
     ignored_releases:
       - victoria
       - wallaby
       - xena
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.openstack }}"
-          dest: ".github/CODEOWNERS"
-  ironic-python-agent:
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.openstack }}"
-          dest: ".github/CODEOWNERS"
-  magnum:
-    ignored_releases:
-      - victoria
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
@@ -212,6 +203,15 @@ source_repositories:
       - victoria
       - xena
       - yoga
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
+  octavia-dashboard:
+    ignored_releases:
+      - victoria
+      - wallaby
+      - xena
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
