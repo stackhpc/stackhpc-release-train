@@ -141,6 +141,42 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
+  magnum-ui:
+    ignored_releases:
+      - victoria
+      - wallaby
+      - xena
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
+  designate-dashboard:
+    ignored_releases:
+      - victoria
+      - wallaby
+      - xena
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
+  ironic-ui:
+    ignored_releases:
+      - victoria
+      - wallaby
+      - xena
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
+  octavia-dashboard:
+    ignored_releases:
+      - victoria
+      - wallaby
+      - xena
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
   ironic-python-agent:
     community_files:
       - codeowners:
