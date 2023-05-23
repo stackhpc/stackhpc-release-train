@@ -38,16 +38,24 @@ jobs:
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan -no-color
+        run: |
+          terraform plan -out=plan.tmp
+          terraform show -no-color plan.tmp >${GITHUB_WORKSPACE}/plan.out
         continue-on-error: true
+
+      - name: Install fs module
+        run: npm install fs
 
       - uses: actions/github-script@v6
         if: github.event_name == 'pull_request'
-        env:
-          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
         with:
           github-token: ${{ secrets.repository_configuration_token }}
           script: |
+            const { readFile } = require("fs/promises")
+            const data = await readFile('plan.out')
+
+            const plan = "terraform\n" + data.length > 65000 ? `${data.substring(0, 65000)}...` : data
+
             // 1. Retrieve existing bot comments for the PR
             const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
