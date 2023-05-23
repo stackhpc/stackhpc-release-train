@@ -213,3 +213,4 @@ resource "github_branch_protection" "smslab_branch_protection" {
     prevent_destroy = true
   }
 }
+
