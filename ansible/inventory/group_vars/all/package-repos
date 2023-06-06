@@ -383,16 +383,19 @@ rpm_package_repos:
     base_path: rocky/8.7/AppStream/x86_64/os/
     short_name: rocky_8_7_appstream
     distribution_name: rocky-8.7-appstream-
+    sync: false
   - name: Rocky Linux 8.7 - BaseOS
     url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-BaseOS-8.7&arch=x86_64
     base_path: rocky/8.7/BaseOS/x86_64/os/
     short_name: rocky_8_7_baseos
     distribution_name: rocky-8.7-baseos-
+    sync: false
   - name: Rocky Linux 8.7 - Extras
     url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-extras-8.7&arch=x86_64
     base_path: rocky/8.7/extras/x86_64/os/
     short_name: rocky_8_7_extras
     distribution_name: rocky-8.7-extras-
+    sync: false
 
   # Additional Rocky Linux 8.7 repositories
   # No advanced virt, Ceph or OpenStack
@@ -401,16 +404,54 @@ rpm_package_repos:
     base_path: rocky/8.7/nfv/x86_64/os/
     short_name: rocky_8_7_nfv
     distribution_name: rocky-8.7-nfv-
+    sync: false
   - name: Rocky Linux 8.7 - PowerTools
     url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-PowerTools-8.7&arch=x86_64
     base_path: rocky/8.7/PowerTools/x86_64/os/
     short_name: rocky_8_7_powertools
     distribution_name: rocky-8.7-powertools-
+    sync: false
   - name: Rocky Linux 8.7 - HighAvailability
     url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-8.7&arch=x86_64
     base_path: rocky/8.7/HighAvailability/x86_64/os/
     short_name: rocky_8_7_highavailability
     distribution_name: rocky-8.7-highavailability-
+    sync: false
+
+  # Base Rocky Linux 8.8 repositories
+  - name: Rocky Linux 8.8 - AppStream
+    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-AppStream-8.8&arch=x86_64
+    base_path: rocky/8.8/AppStream/x86_64/os/
+    short_name: rocky_8_8_appstream
+    distribution_name: rocky-8.8-appstream-
+  - name: Rocky Linux 8.8 - BaseOS
+    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-BaseOS-8.8&arch=x86_64
+    base_path: rocky/8.8/BaseOS/x86_64/os/
+    short_name: rocky_8_8_baseos
+    distribution_name: rocky-8.8-baseos-
+  - name: Rocky Linux 8.8 - Extras
+    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-extras-8.8&arch=x86_64
+    base_path: rocky/8.8/extras/x86_64/os/
+    short_name: rocky_8_8_extras
+    distribution_name: rocky-8.8-extras-
+
+  # Additional Rocky Linux 8.8 repositories
+  # No advanced virt, Ceph or OpenStack
+  - name: Rocky Linux NFV 8.8
+    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-NFV-8.8&arch=x86_64
+    base_path: rocky/8.8/nfv/x86_64/os/
+    short_name: rocky_8_8_nfv
+    distribution_name: rocky-8.8-nfv-
+  - name: Rocky Linux 8.8 - PowerTools
+    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-PowerTools-8.8&arch=x86_64
+    base_path: rocky/8.8/PowerTools/x86_64/os/
+    short_name: rocky_8_8_powertools
+    distribution_name: rocky-8.8-powertools-
+  - name: Rocky Linux 8.8 - HighAvailability
+    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-8.8&arch=x86_64
+    base_path: rocky/8.8/HighAvailability/x86_64/os/
+    short_name: rocky_8_8_highavailability
+    distribution_name: rocky-8.8-highavailability-
 
   # MLNX OFED 5.6-1.0.3.3 RHEL 8.6 repository
   - name: Mellanox Technologies mlnx_ofed 5.6-1.0.3.3
