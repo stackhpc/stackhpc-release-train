@@ -21,10 +21,10 @@ variable "owner" {
 variable "repositories" {
   default = {
     "Ansible"      = [],
-    "Azimuth"      = [],
     "Batch"        = [],
     "Kayobe"       = [],
     "OpenStack"    = [],
+    "Platform"     = [],
     "ReleaseTrain" = [],
     "SMSLab"       = [],
   }
@@ -42,14 +42,6 @@ variable "teams" {
     },
     "Ansible" = {
       description = "Team responsible for Ansible development"
-      privacy     = "closed"
-      users = {
-        maintainers = [],
-        members     = [],
-      }
-    },
-    "Azimuth" = {
-      description = "Team responsible for Azimuth development"
       privacy     = "closed"
       users = {
         maintainers = [],
@@ -82,6 +74,14 @@ variable "teams" {
     },
     "OpenStack" = {
       description = "Team responsible for OpenStack development"
+      privacy     = "closed"
+      users = {
+        maintainers = [],
+        members     = [],
+      }
+    },
+    "Platform" = {
+      description = "Team responsible for Platform development"
       privacy     = "closed"
       users = {
         maintainers = [],

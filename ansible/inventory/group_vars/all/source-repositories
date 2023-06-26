@@ -22,14 +22,14 @@ community_files:
   codeowners:
     ansible: |
       * @stackhpc/ansible
-    azimuth: |
-      * @stackhpc/azimuth
     batch: |
       * @stackhpc/batch
     kayobe: |
       * @stackhpc/kayobe
     openstack: |
       * @stackhpc/openstack
+    platform: |
+      * @stackhpc/platform
     release_train: |
       * @stackhpc/releasetrain
     sms_lab: |

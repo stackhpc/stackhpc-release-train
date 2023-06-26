@@ -25,13 +25,6 @@ resource "github_team_repository" "ansible_repositories" {
   permission = "push"
 }
 
-resource "github_team_repository" "azimuth_repositories" {
-  for_each   = toset(var.repositories["Azimuth"])
-  team_id    = resource.github_team.organisation_teams["Azimuth"].id
-  repository = each.value
-  permission = "push"
-}
-
 resource "github_team_repository" "batch_repositories" {
   for_each   = toset(var.repositories["Batch"])
   team_id    = resource.github_team.organisation_teams["Batch"].id
@@ -56,6 +49,13 @@ resource "github_team_repository" "kayobe_repositories" {
 resource "github_team_repository" "openstack_repositories" {
   for_each   = toset(var.repositories["OpenStack"])
   team_id    = resource.github_team.organisation_teams["OpenStack"].id
+  repository = each.value
+  permission = "push"
+}
+
+resource "github_team_repository" "platform_repositories" {
+  for_each   = toset(var.repositories["Platform"])
+  team_id    = resource.github_team.organisation_teams["Platform"].id
   repository = each.value
   permission = "push"
 }
