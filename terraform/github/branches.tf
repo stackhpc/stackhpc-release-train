@@ -32,35 +32,6 @@ resource "github_branch_protection" "ansible_branch_protection" {
   }
 }
 
-resource "github_branch_protection" "azimuth_branch_protection" {
-  for_each      = toset(var.repositories["Azimuth"])
-  repository_id = data.github_repository.repositories[each.key].node_id
-
-  pattern                         = data.github_repository.repositories[each.key].default_branch
-  require_conversation_resolution = true
-  allows_deletions                = false
-  allows_force_pushes             = false
-
-  required_pull_request_reviews {
-    dismiss_stale_reviews           = true
-    require_code_owner_reviews      = true
-    required_approving_review_count = 1
-  }
-
-  push_restrictions = [
-    resource.github_team.organisation_teams["Developers"].node_id
-  ]
-
-  required_status_checks {
-    contexts = lookup(var.required_status_checks, each.key, [])
-    strict   = false
-  }
-
-  lifecycle {
-    prevent_destroy = true
-  }
-}
-
 resource "github_branch_protection" "batch_branch_protection" {
   for_each      = toset(var.repositories["Batch"])
   repository_id = data.github_repository.repositories[each.key].node_id
@@ -149,6 +120,35 @@ resource "github_branch_protection" "openstack_branch_protection" {
       "tox / Tox py38 with Python 3.8",
     ])
     strict = false
+  }
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
+resource "github_branch_protection" "platform_branch_protection" {
+  for_each      = toset(var.repositories["Platform"])
+  repository_id = data.github_repository.repositories[each.key].node_id
+
+  pattern                         = data.github_repository.repositories[each.key].default_branch
+  require_conversation_resolution = true
+  allows_deletions                = false
+  allows_force_pushes             = false
+
+  required_pull_request_reviews {
+    dismiss_stale_reviews           = true
+    require_code_owner_reviews      = true
+    required_approving_review_count = 1
+  }
+
+  push_restrictions = [
+    resource.github_team.organisation_teams["Developers"].node_id
+  ]
+
+  required_status_checks {
+    contexts = lookup(var.required_status_checks, each.key, [])
+    strict   = false
   }
 
   lifecycle {

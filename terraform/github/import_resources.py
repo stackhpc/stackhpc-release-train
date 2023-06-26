@@ -94,11 +94,11 @@ class TeamID(Enum):
     # /orgs/stackhpc/teams -q '.[] | {id, name}'
     ADMINS = 6873229
     ANSIBLE = 2454000
-    AZIMUTH = 6372898
     BATCH = 6372897
     DEVELOPERS = 6309608
     KAYOBE = 6156230
     OPENSTACK = 6372899
+    PLATFORM = 8139842
     RELEASETRAIN = 6372895
     SMSLAB = 6372896
 
