@@ -19,8 +19,8 @@ on:
         required: false
         default: ""
   schedule:
-    # Daily at 02:17
-    - cron: '17 2 * * *'
+    # Daily at 2:17 and 23:17 for Ubuntu and non-Ubuntu packages respectively
+    - cron: '17 2,23 * * *'
 
 env:
   ANSIBLE_FORCE_COLOR: True
@@ -31,6 +31,14 @@ jobs:
     runs-on: ubuntu-latest
     if: inputs.sync_ark || github.event_name == 'schedule'
     steps:
+
+    - name: Get automation filter
+      id: filter
+      run: echo "automation_filter=CRON_FILTER" >> "$GITHUB_OUTPUT"
+      env:
+        # if running at 2:17, filter for ubuntu packages, otherwise filter against
+        CRON_FILTER: ${{ github.event.schedule == '17 2 * * *' && 'ubuntu' || '^((?!ubuntu).)*$' }}
+
     - name: Checkout
       uses: actions/checkout@v3
 
@@ -49,7 +57,8 @@ jobs:
         -e deb_package_repo_filter="'$FILTER'" \
         -e rpm_package_repo_filter="'$FILTER'"
       env:
-        FILTER: ${{ github.event.inputs.filter }}
+        # If scheduled, use automation filter, else use input filter
+        FILTER: ${{ github.event_name == 'schedule' && steps.filter.outputs.automation_filter || github.event.inputs.filter }}
 
   package-sync-test:
     name: Sync package repositories in test
