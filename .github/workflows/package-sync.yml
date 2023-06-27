@@ -34,7 +34,7 @@ jobs:
 
     - name: Get automation filter
       id: filter
-      run: echo "automation_filter=CRON_FILTER" >> "$GITHUB_OUTPUT"
+      run: echo "automation_filter=$CRON_FILTER" >> "$GITHUB_OUTPUT"
       env:
         # if running at 2:17, filter for ubuntu packages, otherwise filter against
         CRON_FILTER: ${{ github.event.schedule == '17 2 * * *' && 'ubuntu' || '^((?!ubuntu).)*$' }}
