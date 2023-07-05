@@ -20,7 +20,8 @@ on:
         default: ""
   schedule:
     # Daily at 2:17 and 23:17 for Ubuntu and non-Ubuntu packages respectively
-    - cron: '17 2,23 * * *'
+    - cron: '17 2 * * *'
+    - cron: '17 23 * * *'
 
 env:
   ANSIBLE_FORCE_COLOR: True
