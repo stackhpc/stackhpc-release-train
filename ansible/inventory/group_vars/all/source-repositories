@@ -3,6 +3,7 @@
 # containing a list of workflows and community files required by a given
 # repository.
 default_releases:
+  - zed
   - yoga
   - xena
   - wallaby
@@ -88,6 +89,7 @@ source_repositories:
     ignored_releases:
       - victoria
       - yoga
+      - zed
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.kayobe }}"
@@ -98,6 +100,7 @@ source_repositories:
       - victoria
       - xena
       - yoga
+      - zed
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
@@ -108,6 +111,7 @@ source_repositories:
       - wallaby
       - xena
       - yoga
+      - zed
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
@@ -141,6 +145,7 @@ source_repositories:
       - wallaby
       - xena
       - yoga
+      - zed
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
@@ -219,6 +224,7 @@ source_repositories:
       - victoria
       - xena
       - yoga
+      - zed
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
@@ -241,6 +247,7 @@ source_repositories:
       - victoria
       - xena
       - yoga
+      - zed
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
