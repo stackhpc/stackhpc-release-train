@@ -26,21 +26,12 @@ The table below contains the different workflows with a description of each and 
 
 OpenStack use [Tox](https://wiki.openstack.org/wiki/Testing) to manage the unit tests and style checks for the various projects they maintain.
 Therefore, when a `pull request` is opened the tox workflow will automatically perform a series of unit tests and linting in order ensure correctness and style guidelines are being met.
-The workflow will run in both python 3.6 and python 3.8 environments.
-This can be controlled within the strategy matrix of the workflow. 
+The python environment will depend on the branch pre-Zed, python 3.6 and python 3.8 will be tested. From Zed onward, python 3.8 and python 3.10 will be tested.
+This can be controlled within the strategy matrix of the workflow.
 The Python versions should correspond to those used in the supported OS distributions for a particular release.
+The source for the workflow can be found [here](https://github.com/stackhpc/.github/blob/main/.github/workflows/tox.yml).
+It is managed centrally and imported into all downstream branches.
 
-```yaml
-strategy:
-  matrix:
-    include:
-      - environment: py36
-        python-version: 3.6
-      - environment: py38
-        python-version: 3.8
-      - environment: pep8
-        python-version: 3.8
-```
 
 ### Tag & Release
 
