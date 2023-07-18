@@ -90,7 +90,7 @@ resource "github_branch_protection" "kayobe_branch_protection" {
   }
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }
 
@@ -123,7 +123,7 @@ resource "github_branch_protection" "openstack_branch_protection" {
   }
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }
 
