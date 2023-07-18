@@ -61,11 +61,11 @@ resource "github_branch_protection" "batch_branch_protection" {
   }
 }
 
-resource "github_branch_protection" "kayobe_branch_protection" {
+resource "github_branch_protection" "kayobe_branch_protection_py_3-6" {
   for_each      = toset(var.repositories["Kayobe"])
   repository_id = data.github_repository.repositories[each.key].node_id
 
-  pattern                         = "stackhpc/**"
+  pattern                         = "stackhpc/(victoria|wallaby|xena|yoga)"
   require_conversation_resolution = true
   allows_deletions                = false
   allows_force_pushes             = false
@@ -94,11 +94,44 @@ resource "github_branch_protection" "kayobe_branch_protection" {
   }
 }
 
-resource "github_branch_protection" "openstack_branch_protection" {
+resource "github_branch_protection" "kayobe_branch_protection_py_3-10" {
+  for_each      = toset(var.repositories["Kayobe"])
+  repository_id = data.github_repository.repositories[each.key].node_id
+
+  pattern                         = "stackhpc/zed"
+  require_conversation_resolution = true
+  allows_deletions                = false
+  allows_force_pushes             = false
+
+  required_pull_request_reviews {
+    dismiss_stale_reviews           = true
+    require_code_owner_reviews      = true
+    required_approving_review_count = 1
+  }
+
+  push_restrictions = [
+    resource.github_team.organisation_teams["Developers"].node_id
+  ]
+
+  required_status_checks {
+    contexts = lookup(var.required_status_checks, each.key, [
+      "tox / Tox pep8 with Python 3.10",
+      "tox / Tox py310 with Python 3.10",
+      "tox / Tox py38 with Python 3.8",
+    ])
+    strict = false
+  }
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
+resource "github_branch_protection" "openstack_branch_protection_py_3-6" {
   for_each      = toset(var.repositories["OpenStack"])
   repository_id = data.github_repository.repositories[each.key].node_id
 
-  pattern                         = "stackhpc/**"
+  pattern                         = "stackhpc/(victoria|wallaby|xena|yoga)"
   require_conversation_resolution = true
   allows_deletions                = false
   allows_force_pushes             = false
@@ -117,6 +150,38 @@ resource "github_branch_protection" "openstack_branch_protection" {
     contexts = lookup(var.required_status_checks, each.key, [
       "tox / Tox pep8 with Python 3.8",
       "tox / Tox py36 with Python 3.6",
+      "tox / Tox py38 with Python 3.8",
+    ])
+    strict = false
+  }
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
+resource "github_branch_protection" "openstack_branch_protection_py_3-10" {
+  for_each      = toset(var.repositories["OpenStack"])
+  repository_id = data.github_repository.repositories[each.key].node_id
+
+  pattern                         = "stackhpc/zed"
+  require_conversation_resolution = true
+  allows_deletions                = false
+  allows_force_pushes             = false
+
+  push_restrictions = [
+    resource.github_team.organisation_teams["Developers"].node_id
+  ]
+
+  required_pull_request_reviews {
+    dismiss_stale_reviews           = true
+    require_code_owner_reviews      = true
+    required_approving_review_count = 1
+  }
+
+  required_status_checks {
+    contexts = lookup(var.required_status_checks, each.key, [
+      "tox / Tox pep8 with Python 3.10",
+      "tox / Tox py310 with Python 3.10",
       "tox / Tox py38 with Python 3.8",
     ])
     strict = false
