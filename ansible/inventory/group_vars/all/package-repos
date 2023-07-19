@@ -65,12 +65,44 @@ deb_package_repos:
     short_name: ubuntu_cloud_archive
     distribution_name: ubuntu-cloud-archive-
 
+  # Base Ubuntu Jammy 22.04 repositories
+  - name: Ubuntu jammy
+    url: http://nova.clouds.archive.ubuntu.com/ubuntu/
+    policy: immediate
+    architectures: amd64
+    components: main restricted universe multiverse
+    # NOTE: Include jammy-security here to include all dists under one mirror
+    # path. This allows us to include security updates when using
+    # DIB_DISTRIBUTION_MIRROR with the Diskimage builder ubuntu-minimal
+    # element.
+    distributions: jammy jammy-updates jammy-backports jammy-security
+    mirror: true
+    mode: verbatim
+    base_path: ubuntu/jammy/
+    short_name: ubuntu_jammy
+    distribution_name: ubuntu-jammy-
+
+  # https://wiki.ubuntu.com/SecurityTeam/FAQ suggests that security.ubuntu.com
+  # is preferable for security updates, so use this in preference to the
+  # jammy-security dist in the main Ubuntu jammy repository where possible.
+  - name: Ubuntu jammy security
+    url: http://security.ubuntu.com/ubuntu
+    policy: immediate
+    architectures: amd64
+    components: main restricted universe multiverse
+    distributions: jammy-security
+    mirror: true
+    mode: verbatim
+    base_path: ubuntu/jammy-security/
+    short_name: ubuntu_jammy_security
+    distribution_name: ubuntu-jammy-security-
+
   # Third-party repositories
   - name: Docker CE for Ubuntu
     url: https://download.docker.com/linux/ubuntu
     policy: immediate
     architectures: amd64
-    distributions: focal
+    distributions: focal jammy
     components: stable
     mirror: true
     mode: verbatim
