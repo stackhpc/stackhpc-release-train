@@ -86,8 +86,8 @@ resource "github_branch_protection" "kayobe_branch_protection_py_3-6" {
   required_status_checks {
     contexts = lookup(var.required_status_checks, each.key, [
       "tox / Tox pep8 with Python 3.8",
-      "tox / Tox py36 with Python 3.6",
-      "tox / Tox py38 with Python 3.8",
+      "tox / Tox py3 with Python 3.6",
+      "tox / Tox py3 with Python 3.8",
     ])
     strict = false
   }
@@ -119,8 +119,8 @@ resource "github_branch_protection" "kayobe_branch_protection_py_3-10" {
   required_status_checks {
     contexts = lookup(var.required_status_checks, each.key, [
       "tox / Tox pep8 with Python 3.10",
-      "tox / Tox py310 with Python 3.10",
-      "tox / Tox py38 with Python 3.8",
+      "tox / Tox py3 with Python 3.10",
+      "tox / Tox py3 with Python 3.8",
     ])
     strict = false
   }
@@ -155,8 +155,8 @@ resource "github_branch_protection" "openstack_branch_protection_py_3-6" {
   required_status_checks {
     contexts = lookup(var.required_status_checks, each.key, [
       "tox / Tox pep8 with Python 3.8",
-      "tox / Tox py36 with Python 3.6",
-      "tox / Tox py38 with Python 3.8",
+      "tox / Tox py3 with Python 3.6",
+      "tox / Tox py3 with Python 3.8",
     ])
     strict = false
   }
@@ -187,8 +187,8 @@ resource "github_branch_protection" "openstack_branch_protection_py_3-10" {
   required_status_checks {
     contexts = lookup(var.required_status_checks, each.key, [
       "tox / Tox pep8 with Python 3.10",
-      "tox / Tox py310 with Python 3.10",
-      "tox / Tox py38 with Python 3.8",
+      "tox / Tox py3 with Python 3.10",
+      "tox / Tox py3 with Python 3.8",
     ])
     strict = false
   }
