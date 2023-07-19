@@ -65,7 +65,10 @@ resource "github_branch_protection" "kayobe_branch_protection_py_3-6" {
   for_each      = toset(var.repositories["Kayobe"])
   repository_id = data.github_repository.repositories[each.key].node_id
 
-  pattern                         = "stackhpc/(victoria|wallaby|xena|yoga)"
+  # NOTE(Alex-Welsh): The pattern here is not ideal but it is difficult to
+  # achieve more precision with the matching tools that GitHub provides.
+  # https://stackoverflow.com/questions/53135414/how-to-apply-one-github-branch-rule-to-multiple-branches
+  pattern                         = "stackhpc/[vwxy]*"
   require_conversation_resolution = true
   allows_deletions                = false
   allows_force_pushes             = false
@@ -131,7 +134,10 @@ resource "github_branch_protection" "openstack_branch_protection_py_3-6" {
   for_each      = toset(var.repositories["OpenStack"])
   repository_id = data.github_repository.repositories[each.key].node_id
 
-  pattern                         = "stackhpc/(victoria|wallaby|xena|yoga)"
+  # NOTE(Alex-Welsh): The pattern here is not ideal but it is difficult to
+  # achieve more precision with the matching tools that GitHub provides.
+  # https://stackoverflow.com/questions/53135414/how-to-apply-one-github-branch-rule-to-multiple-branches
+  pattern                         = "stackhpc/[vwxy]*"
   require_conversation_resolution = true
   allows_deletions                = false
   allows_force_pushes             = false
