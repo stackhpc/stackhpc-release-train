@@ -58,19 +58,51 @@ deb_package_repos:
     policy: immediate
     architectures: amd64
     components: main
-    distributions: focal-updates/yoga
+    distributions: focal-updates/yoga jammy-updates/zed
     mirror: true
     mode: verbatim
     base_path: ubuntu-cloud-archive/
     short_name: ubuntu_cloud_archive
     distribution_name: ubuntu-cloud-archive-
 
+  # Base Ubuntu Jammy 22.04 repositories
+  - name: Ubuntu jammy
+    url: http://nova.clouds.archive.ubuntu.com/ubuntu/
+    policy: immediate
+    architectures: amd64
+    components: main restricted universe multiverse
+    # NOTE: Include jammy-security here to include all dists under one mirror
+    # path. This allows us to include security updates when using
+    # DIB_DISTRIBUTION_MIRROR with the Diskimage builder ubuntu-minimal
+    # element.
+    distributions: jammy jammy-updates jammy-backports jammy-security
+    mirror: true
+    mode: verbatim
+    base_path: ubuntu/jammy/
+    short_name: ubuntu_jammy
+    distribution_name: ubuntu-jammy-
+
+  # https://wiki.ubuntu.com/SecurityTeam/FAQ suggests that security.ubuntu.com
+  # is preferable for security updates, so use this in preference to the
+  # jammy-security dist in the main Ubuntu jammy repository where possible.
+  - name: Ubuntu jammy security
+    url: http://security.ubuntu.com/ubuntu
+    policy: immediate
+    architectures: amd64
+    components: main restricted universe multiverse
+    distributions: jammy-security
+    mirror: true
+    mode: verbatim
+    base_path: ubuntu/jammy-security/
+    short_name: ubuntu_jammy_security
+    distribution_name: ubuntu-jammy-security-
+
   # Third-party repositories
   - name: Docker CE for Ubuntu
     url: https://download.docker.com/linux/ubuntu
     policy: immediate
     architectures: amd64
-    distributions: focal
+    distributions: focal jammy
     components: stable
     mirror: true
     mode: verbatim
@@ -571,6 +603,12 @@ rpm_package_repos:
     base_path: centos/9-stream/cloud/x86_64/openstack-yoga/
     short_name: centos_stream_9_openstack_yoga
     distribution_name: centos-stream-9-openstack-yoga-
+  # Openstack Zed for CentOS Stream 9
+  - name: CentOS Stream 9 - OpenStack Zed
+    url:  https://mirror.stream.centos.org/SIGs/9-stream/cloud/x86_64/openstack-zed/
+    base_path: centos/9-stream/cloud/x86_64/openstack-zed/
+    short_name: centos_stream_9_openstack_zed
+    distribution_name: centos-stream-9-openstack-zed-
 
   # Additional RHEL 9 repositories
   # TreasureData 4 for RHEL 9
@@ -597,6 +635,18 @@ rpm_package_repos:
     base_path: mlnx_ofed/5.9-0.5.6.0/rhel9.1/x86_64/
     short_name: mlnx_ofed_5_9_0_5_6_0_rhel9_1
     distribution_name: mlnx_ofed-5.9-0.5.6.0-rhel9.1-
+  # OpenSearch 2.x
+  - name: OpenSearch 2.x
+    url: https://artifacts.opensearch.org/releases/bundle/opensearch/2.x/yum
+    base_path: opensearch/2.x/yum/
+    short_name: opensearch_2_x
+    distribution_name: opensearch-2.x-yum-
+  # OpenSearch dashboards
+  - name: OpenSearch Dashboards 2.x
+    url: https://artifacts.opensearch.org/releases/bundle/opensearch-dashboards/2.x/yum
+    base_path: opensearch-dashboards/2.x/yum/
+    short_name: opensearch_dashboards_2_x
+    distribution_name: opensearch_dashboards-2.x-yum-
 
 # Default filter string for RPM package repositories.
 rpm_package_repo_filter: ""
