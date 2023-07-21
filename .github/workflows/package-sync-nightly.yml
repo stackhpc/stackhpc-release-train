@@ -1,0 +1,21 @@
+---
+name: Nightly package repository sync
+on:
+  schedule:
+    # Daily at 23:17
+    - cron: '17 23 * * *'
+env:
+  ANSIBLE_FORCE_COLOR: True
+jobs:
+  sync-matrix-run:
+    name: Matrix run package repository sync
+    strategy:
+      matrix: 
+        filter: ['(rocky|centos|rhel|epel|^docker|opensearch|grafana|rabbitmq|^treasuredata|elasticsearch)', 'jammy', 'focal', 'ubuntu_cloud_archive']
+      max-parallel: 1
+      fail-fast: False
+    uses: stackhpc/stackhpc-release-train/.github/workflows/package-sync.yml@main
+    with:
+      sync_ark: True
+      sync_test: True
+      filter: ${{ matrix.filter }}

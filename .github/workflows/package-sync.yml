@@ -1,6 +1,23 @@
 ---
 name: Sync package repositories
 on:
+  workflow_call:
+    inputs:
+      sync_ark:
+        required: false
+        description: Sync package repositories in Ark
+        default: true
+        type: boolean
+      sync_test:
+        required: false
+        description: Sync package repositories in Test Pulp
+        default: true
+        type: boolean
+      filter:
+        description: Space-separated list of regular expressions matching short_name of repositories to sync
+        type: string
+        required: false
+        default: ""
   workflow_dispatch:
     inputs:
       sync_ark:
@@ -18,11 +35,6 @@ on:
         type: string
         required: false
         default: ""
-  schedule:
-    # Daily at 2:17 and 23:17 for Ubuntu and non-Ubuntu packages respectively
-    - cron: '17 2 * * *'
-    - cron: '17 23 * * *'
-
 env:
   ANSIBLE_FORCE_COLOR: True
   ANSIBLE_VAULT_PASSWORD_FILE: ${{ github.workspace }}/vault-pass
@@ -30,15 +42,8 @@ jobs:
   package-sync-ark:
     name: Sync package repositories in Ark
     runs-on: ubuntu-latest
-    if: inputs.sync_ark || github.event_name == 'schedule'
+    if: inputs.sync_ark
     steps:
-
-    - name: Get automation filter
-      id: filter
-      run: echo "automation_filter=$CRON_FILTER" >> "$GITHUB_OUTPUT"
-      env:
-        # if running at 2:17, filter for ubuntu packages, otherwise filter against
-        CRON_FILTER: ${{ github.event.schedule == '17 2 * * *' && 'ubuntu' || '^((?!ubuntu).)*$' }}
 
     - name: Checkout
       uses: actions/checkout@v3
@@ -58,14 +63,13 @@ jobs:
         -e deb_package_repo_filter="'$FILTER'" \
         -e rpm_package_repo_filter="'$FILTER'"
       env:
-        # If scheduled, use automation filter, else use input filter
-        FILTER: ${{ github.event_name == 'schedule' && steps.filter.outputs.automation_filter || github.event.inputs.filter }}
+        FILTER: ${{ github.event.inputs.filter }}
 
   package-sync-test:
     name: Sync package repositories in test
     runs-on: [self-hosted, stackhpc-release-train]
     needs: package-sync-ark
-    if: inputs.sync_test || github.event_name == 'schedule'
+    if: inputs.sync_test
     steps:
     - name: Checkout
       uses: actions/checkout@v3
