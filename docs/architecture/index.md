@@ -203,6 +203,7 @@ Therefore, this workflow will once a week make a pull request against any of the
 * **Tox**: in order to ensure that commits to the repositories are correct and follow style guidelines we can utilise tox which can automate the unit testing and linting of the codebase. 
 This workflow will run anytime a push is made or a pull request to one of the active release branches.
 * **Tag & Release**: various software and packages depend on the repositories therefore it is important that tags are made and releases are published.
+* **Ansible collection linters**: linters and sanity tests for Ansible collections.
 
 ### Ansible
 

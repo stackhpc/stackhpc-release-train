@@ -15,6 +15,7 @@ The table below contains the different workflows with a description of each and 
 | **Upstream Sync**      | Keep our downstream fork up-to-date with the upstream counterpart                           | OpenStack            |
 | **Tag & Release**      | Generate an new tag and accompanying release whenever a commit is pushed to select branches | OpenStack            |
 | **Tox**                | Perform linting and unit testing                                                            | OpenStack            |
+| **Lint Collection**    | Perform linting and sanity checks on Ansible collections                                    | Ansible (Collection) |
 | **Publish Role**       | Publish the Ansible Role on Ansible Galaxy                                                  | Ansible (Role)       |
 | **Publish Collection** | Publish the Ansible Collection on Ansible Galaxy                                            | Ansible (Collection) |
 
@@ -59,6 +60,12 @@ This can be changed in the [workflow template within the .github repository](htt
     - cron: '15 8 * * 1'
   workflow_dispatch:
 ```
+
+### Lint Collection
+
+Ansible collections are linted using [Ansible lint](https://ansible.readthedocs.io/projects/lint/), and sanity checked using the `ansible-test sanity` command.
+These checks run against pull requests to Ansible collection repositories and use a matrix to test multiple versions of Ansible.
+The tested versions of Ansible should generally correspond to those used by supported versions of Kayobe and Kolla.
 
 ### Publish Collection/Role
 
