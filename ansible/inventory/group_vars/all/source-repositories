@@ -16,6 +16,7 @@ openstack_workflows:
     - tag-and-release
 ansible_workflows:
   collection:
+    - lint-collection
     - publish-collection
   role:
     - publish-role
