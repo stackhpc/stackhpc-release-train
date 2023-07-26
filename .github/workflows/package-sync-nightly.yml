@@ -10,7 +10,7 @@ jobs:
   sync-matrix-run:
     name: Matrix run package repository sync
     strategy:
-      matrix: 
+      matrix:
         filter: ['(rocky|centos|rhel|epel|^docker|opensearch|grafana|rabbitmq|^treasuredata|elasticsearch)', 'jammy', 'focal', 'ubuntu_cloud_archive']
       max-parallel: 1
       fail-fast: False
@@ -19,3 +19,4 @@ jobs:
       sync_ark: True
       sync_test: True
       filter: ${{ matrix.filter }}
+    secrets: inherit
