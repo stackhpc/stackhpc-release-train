@@ -4,20 +4,17 @@ on:
   workflow_call:
     inputs:
       sync_ark:
-        required: false
         description: Sync package repositories in Ark
-        default: true
         type: boolean
+        required: true
       sync_test:
-        required: false
         description: Sync package repositories in Test Pulp
-        default: true
         type: boolean
+        required: true
       filter:
         description: Space-separated list of regular expressions matching short_name of repositories to sync
         type: string
-        required: false
-        default: ""
+        required: true
   workflow_dispatch:
     inputs:
       sync_ark:
@@ -63,7 +60,7 @@ jobs:
         -e deb_package_repo_filter="'$FILTER'" \
         -e rpm_package_repo_filter="'$FILTER'"
       env:
-        FILTER: ${{ github.event.inputs.filter }}
+        FILTER: ${{ inputs.filter }}
 
   package-sync-test:
     name: Sync package repositories in test
@@ -90,4 +87,4 @@ jobs:
         -e deb_package_repo_filter="'$FILTER'" \
         -e rpm_package_repo_filter="'$FILTER'"
       env:
-        FILTER: ${{ github.event.inputs.filter }}
+        FILTER: ${{ inputs.filter }}
