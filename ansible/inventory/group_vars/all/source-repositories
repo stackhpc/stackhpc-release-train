@@ -528,6 +528,13 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.ansible }}"
           dest: ".github/CODEOWNERS"
+  ansible-collection-kayobe-workflows:
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.collection }}"
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-collection-pulp:
     repository_type: "ansible"
     workflows: "{{ ansible_workflows.collection }}"
