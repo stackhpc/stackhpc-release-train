@@ -86,6 +86,13 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.kayobe }}"
           dest: ".github/CODEOWNERS"
+  ansible-collection-kayobe-workflows:
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.collection }}"
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.kayobe }}"
+          dest: ".github/CODEOWNERS"
   bifrost:
     ignored_releases:
       - victoria
