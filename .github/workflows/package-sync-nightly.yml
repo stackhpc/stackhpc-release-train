@@ -8,7 +8,7 @@ env:
   ANSIBLE_FORCE_COLOR: True
 jobs:
   sync-matrix-run:
-    name: Matrix run package repository sync
+    name: Sync
     strategy:
       matrix:
         filter: ['(rocky|centos|rhel|epel|^docker|opensearch|grafana|rabbitmq|^treasuredata|elasticsearch)', 'jammy', 'focal', 'ubuntu_cloud_archive']
