@@ -43,5 +43,21 @@
           {%- endif -%}
           {%- endfor -%}
           {%- endfor -%}
+          {%- for base_distro in kolla_base_distros | difference(['centos']) -%}
+          {%- for image in kolla_container_images_filtered -%}
+          {%- if image not in kolla_unbuildable_images[base_distro]-%}
+          {%- set src_image_repo = "stackhpc-dev/" ~ image -%}
+          {%- set dest_image_repo = "stackhpc/" ~ image -%}
+          {%- set content = {
+            "allow_missing": True,
+            "src_repo": src_image_repo,
+            "src_is_push": true,
+            "repository": dest_image_repo,
+            "tags": [dev_pulp_repository_container_promotion_tag],
+          } -%}
+          {%- set _ = contents.append(content) -%}
+          {%- endif -%}
+          {%- endfor -%}
+          {%- endfor -%}
           {{ contents }}
         pulp_container_content_wait: false

@@ -22,6 +22,15 @@ dev_pulp_repository_container_repos_release: >-
   {%- endif -%}
   {%- endfor -%}
   {%- endfor -%}
+  {%- for base_distro in kolla_base_distros | difference(['centos']) -%}
+  {%- for image in kolla_container_images_filtered -%}
+  {%- if image not in kolla_unbuildable_images[base_distro]-%}
+  {%- set image_repo = "stackhpc/" ~ image -%}
+  {%- set repo = {"name": image_repo} -%}
+  {%- set _ = repos.append(dev_pulp_repository_container_repo_release_common | combine(repo)) -%}
+  {%- endif -%}
+  {%- endfor -%}
+  {%- endfor -%}
   {{ repos }}
 
 # Common parameters for development image distributions.
@@ -41,6 +50,15 @@ dev_pulp_distribution_container_development: >-
   {%- endif -%}
   {%- endfor -%}
   {%- endfor -%}
+  {%- for base_distro in kolla_base_distros | difference(['centos'])  -%}
+  {%- for image in kolla_container_images_filtered -%}
+  {%- if image not in kolla_unbuildable_images[base_distro]-%}
+  {%- set image_repo = "stackhpc-dev/" ~ image -%}
+  {%- set distribution = {"name": image_repo, "base_path": image_repo} -%}
+  {%- set _ = distributions.append(dev_pulp_distribution_container_development_common | combine(distribution)) -%}
+  {%- endif -%}
+  {%- endfor -%}
+  {%- endfor -%}
   {{ distributions }}
 
 # Common parameters for release image distributions.
@@ -55,6 +73,15 @@ dev_pulp_distribution_container_release: >-
   {%- for image in kolla_container_images_filtered -%}
   {%- if image not in kolla_unbuildable_images[base_distro]-%}
   {%- set image_repo = "stackhpc/" ~ base_distro ~ "-source-" ~ image -%}
+  {%- set distribution = {"name": image_repo, "repository": image_repo, "base_path": image_repo} -%}
+  {%- set _ = distributions.append(dev_pulp_distribution_container_release_common | combine(distribution)) -%}
+  {%- endif -%}
+  {%- endfor -%}
+  {%- endfor -%}
+  {%- for base_distro in kolla_base_distros | difference(['centos']) -%}
+  {%- for image in kolla_container_images_filtered -%}
+  {%- if image not in kolla_unbuildable_images[base_distro]-%}
+  {%- set image_repo = "stackhpc/" ~ image -%}
   {%- set distribution = {"name": image_repo, "repository": image_repo, "base_path": image_repo} -%}
   {%- set _ = distributions.append(dev_pulp_distribution_container_release_common | combine(distribution)) -%}
   {%- endif -%}
