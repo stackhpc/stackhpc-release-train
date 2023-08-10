@@ -29,7 +29,7 @@
           {%- set contents = [] -%}
           {%- for base_distro in kolla_base_distros -%}
           {%- for image in kolla_container_images_filtered -%}
-          {%- if image not in kolla_unbuildable_images[base_distro]-%}
+          {%- if image not in kolla_unbuildable_images.old_scheme[base_distro] -%}
           {%- set src_image_repo = "stackhpc-dev/" ~ base_distro ~ "-source-" ~ image -%}
           {%- set dest_image_repo = "stackhpc/" ~ base_distro ~ "-source-" ~ image -%}
           {%- set content = {
@@ -43,9 +43,8 @@
           {%- endif -%}
           {%- endfor -%}
           {%- endfor -%}
-          {%- for base_distro in kolla_base_distros | difference(['centos']) -%}
           {%- for image in kolla_container_images_filtered -%}
-          {%- if image not in kolla_unbuildable_images[base_distro]-%}
+          {%- if image not in kolla_unbuildable_images.new_scheme -%}
           {%- set src_image_repo = "stackhpc-dev/" ~ image -%}
           {%- set dest_image_repo = "stackhpc/" ~ image -%}
           {%- set content = {
@@ -57,7 +56,6 @@
           } -%}
           {%- set _ = contents.append(content) -%}
           {%- endif -%}
-          {%- endfor -%}
           {%- endfor -%}
           {{ contents }}
         pulp_container_content_wait: false
