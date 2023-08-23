@@ -145,8 +145,11 @@ kolla_unbuildable_images:
   new_scheme:
     - elasticsearch
     - elasticsearch-curator
+    - iscsid
     - kibana
     - logstash
+    - prometheus-server
+    - prometheus-jiralert
 
 # List of supported base container OS distributions.
 default_kolla_base_distros:
@@ -170,4 +173,4 @@ kolla_container_images_filtered: "{{ kolla_container_images | select_images(koll
 sync_old_images: true
 
 # Sync container images from the Zed cycle and newer
-sync_new_images: false
+sync_new_images: true

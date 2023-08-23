@@ -20,7 +20,7 @@ on:
       sync-new-images:
         description: Whether to sync images for Zed and newer
         type: boolean
-        default: false
+        default: true
 
 env:
   ANSIBLE_FORCE_COLOR: True
