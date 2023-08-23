@@ -27,6 +27,7 @@
         pulp_password: "{{ dev_pulp_password }}"
         pulp_container_content: >-
           {%- set contents = [] -%}
+          {%- if sync_old_images | bool -%}
           {%- for base_distro in kolla_base_distros -%}
           {%- for image in kolla_container_images_filtered -%}
           {%- if image not in kolla_unbuildable_images.old_scheme[base_distro] -%}
@@ -43,6 +44,8 @@
           {%- endif -%}
           {%- endfor -%}
           {%- endfor -%}
+          {%- endif -%}
+          {%- if sync_new_images | bool -%}
           {%- for image in kolla_container_images_filtered -%}
           {%- if image not in kolla_unbuildable_images.new_scheme -%}
           {%- set src_image_repo = "stackhpc-dev/" ~ image -%}
@@ -57,5 +60,6 @@
           {%- set _ = contents.append(content) -%}
           {%- endif -%}
           {%- endfor -%}
+          {%- endif -%}
           {{ contents }}
         pulp_container_content_wait: false

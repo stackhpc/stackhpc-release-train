@@ -165,3 +165,9 @@ kolla_container_image_filter: ""
 
 # List of names of supported Kolla container images after applying filter.
 kolla_container_images_filtered: "{{ kolla_container_images | select_images(kolla_container_image_filter) }}"
+
+# Sync container images from the Yoga cycle and older
+sync_old_images: true
+
+# Sync container images from the Zed cycle and newer
+sync_new_images: false
