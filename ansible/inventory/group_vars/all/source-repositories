@@ -3,6 +3,7 @@
 # containing a list of workflows and community files required by a given
 # repository.
 default_releases:
+  - 2023.1
   - zed
   - yoga
   - xena
@@ -98,6 +99,7 @@ source_repositories:
       - victoria
       - yoga
       - zed
+      - 2023.1
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.kayobe }}"
@@ -109,6 +111,7 @@ source_repositories:
       - xena
       - yoga
       - zed
+      - 2023.1
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
@@ -120,6 +123,7 @@ source_repositories:
       - xena
       - yoga
       - zed
+      - 2023.1
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
@@ -140,6 +144,7 @@ source_repositories:
       - wallaby
       - xena
       - zed
+      - 2023.1
     workflows:
       ignored_workflows:
         elsewhere:
@@ -155,6 +160,7 @@ source_repositories:
       - xena
       - yoga
       - zed
+      - 2023.1
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
@@ -165,6 +171,7 @@ source_repositories:
       - wallaby
       - xena
       - zed
+      - 2023.1
     workflows:
       ignored_workflows:
         elsewhere:
@@ -180,12 +187,14 @@ source_repositories:
           dest: ".github/CODEOWNERS"
     ignored_releases:
       - zed
+      - 2023.1
   ironic-ui:
     ignored_releases:
       - victoria
       - wallaby
       - xena
       - zed
+      - 2023.1
     workflows:
       ignored_workflows:
         elsewhere:
@@ -207,6 +216,7 @@ source_repositories:
       - wallaby
       - xena
       - zed
+      - 2023.1
     workflows:
       ignored_workflows:
         elsewhere:
@@ -226,6 +236,7 @@ source_repositories:
       - wallaby
       - xena
       - zed
+      - 2023.1
     workflows:
       ignored_workflows:
         elsewhere:
@@ -240,6 +251,7 @@ source_repositories:
       - xena
       - yoga
       - zed
+      - 2023.1
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
@@ -250,6 +262,7 @@ source_repositories:
       - wallaby
       - xena
       - zed
+      - 2023.1
     workflows:
       ignored_workflows:
         elsewhere:
@@ -264,6 +277,7 @@ source_repositories:
       - xena
       - yoga
       - zed
+      - 2023.1
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
