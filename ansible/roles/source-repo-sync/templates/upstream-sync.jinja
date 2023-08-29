@@ -9,7 +9,7 @@ permissions:
   pull-requests: write
 jobs:
 {% for release in repository_manifest.releases %}
-  synchronise-{{ release }}:
+  synchronise-{{ release | replace(".", "-") }}:
     name: Synchronise {{release}}
     uses: stackhpc/.github/.github/workflows/upstream-sync.yml@main
     with:
