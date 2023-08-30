@@ -101,7 +101,7 @@ resource "github_branch_protection" "kayobe_branch_protection_py_3-10" {
   for_each      = toset(var.repositories["Kayobe"])
   repository_id = data.github_repository.repositories[each.key].node_id
 
-  pattern                         = "stackhpc/zed"
+  pattern                         = "stackhpc/[z,2]*"
   require_conversation_resolution = true
   allows_deletions                = false
   allows_force_pushes             = false
@@ -169,7 +169,7 @@ resource "github_branch_protection" "openstack_branch_protection_py_3-10" {
   for_each      = toset(var.repositories["OpenStack"])
   repository_id = data.github_repository.repositories[each.key].node_id
 
-  pattern                         = "stackhpc/zed"
+  pattern                         = "stackhpc/[z,2]*"
   require_conversation_resolution = true
   allows_deletions                = false
   allows_force_pushes             = false
