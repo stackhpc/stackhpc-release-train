@@ -23,7 +23,7 @@ resource "github_branch_protection" "ansible_branch_protection" {
   ]
 
   required_status_checks {
-    contexts = lookup(var.required_status_checks, each.key, [])
+    contexts = lookup(var.required_status_checks, each.key, { "default" : [] }).default
     strict   = false
   }
 
@@ -52,7 +52,7 @@ resource "github_branch_protection" "batch_branch_protection" {
   ]
 
   required_status_checks {
-    contexts = lookup(var.required_status_checks, each.key, [])
+    contexts = lookup(var.required_status_checks, each.key, { "default" : [] }).default
     strict   = false
   }
 
@@ -84,11 +84,13 @@ resource "github_branch_protection" "kayobe_branch_protection_py_3-6" {
   ]
 
   required_status_checks {
-    contexts = lookup(var.required_status_checks, each.key, [
-      "tox / Tox pep8 with Python 3.8",
-      "tox / Tox py3 with Python 3.6",
-      "tox / Tox py3 with Python 3.8",
-    ])
+    contexts = lookup(lookup(var.required_status_checks, each.key, {}), "stackhpc/[vwxy]*", lookup(var.required_status_checks, each.key, {
+      "default" : [
+        "tox / Tox pep8 with Python 3.8",
+        "tox / Tox py3 with Python 3.8",
+        "tox / Tox py3 with Python 3.6"
+      ]
+    }).default)
     strict = false
   }
 
@@ -117,11 +119,13 @@ resource "github_branch_protection" "kayobe_branch_protection_py_3-10" {
   ]
 
   required_status_checks {
-    contexts = lookup(var.required_status_checks, each.key, [
-      "tox / Tox pep8 with Python 3.10",
-      "tox / Tox py3 with Python 3.10",
-      "tox / Tox py3 with Python 3.8",
-    ])
+    contexts = lookup(lookup(var.required_status_checks, each.key, {}), "stackhpc/[z,2]*", lookup(var.required_status_checks, each.key, {
+      "default" : [
+        "tox / Tox pep8 with Python 3.10",
+        "tox / Tox py3 with Python 3.10",
+        "tox / Tox py3 with Python 3.8"
+      ]
+    }).default)
     strict = false
   }
 
@@ -153,11 +157,13 @@ resource "github_branch_protection" "openstack_branch_protection_py_3-6" {
   }
 
   required_status_checks {
-    contexts = lookup(var.required_status_checks, each.key, [
-      "tox / Tox pep8 with Python 3.8",
-      "tox / Tox py3 with Python 3.6",
-      "tox / Tox py3 with Python 3.8",
-    ])
+    contexts = lookup(lookup(var.required_status_checks, each.key, {}), "stackhpc/[vwxy]*", lookup(var.required_status_checks, each.key, {
+      "default" : [
+        "tox / Tox pep8 with Python 3.8",
+        "tox / Tox py3 with Python 3.8",
+        "tox / Tox py3 with Python 3.6"
+      ]
+    }).default)
     strict = false
   }
   lifecycle {
@@ -185,11 +191,13 @@ resource "github_branch_protection" "openstack_branch_protection_py_3-10" {
   }
 
   required_status_checks {
-    contexts = lookup(var.required_status_checks, each.key, [
-      "tox / Tox pep8 with Python 3.10",
-      "tox / Tox py3 with Python 3.10",
-      "tox / Tox py3 with Python 3.8",
-    ])
+    contexts = lookup(lookup(var.required_status_checks, each.key, {}), "stackhpc/[z,2]*", lookup(var.required_status_checks, each.key, {
+      "default" : [
+        "tox / Tox pep8 with Python 3.10",
+        "tox / Tox py3 with Python 3.10",
+        "tox / Tox py3 with Python 3.8"
+      ]
+    }).default)
     strict = false
   }
 
@@ -218,7 +226,7 @@ resource "github_branch_protection" "platform_branch_protection" {
   ]
 
   required_status_checks {
-    contexts = lookup(var.required_status_checks, each.key, [])
+    contexts = lookup(var.required_status_checks, each.key, { "default" : [] }).default
     strict   = false
   }
 
@@ -247,7 +255,7 @@ resource "github_branch_protection" "releasetrain_branch_protection" {
   ]
 
   required_status_checks {
-    contexts = lookup(var.required_status_checks, each.key, [])
+    contexts = lookup(var.required_status_checks, each.key, { "default" : [] }).default
     strict   = false
   }
 
@@ -276,7 +284,7 @@ resource "github_branch_protection" "smslab_branch_protection" {
   ]
 
   required_status_checks {
-    contexts = lookup(var.required_status_checks, each.key, [])
+    contexts = lookup(var.required_status_checks, each.key, { "default" : [] }).default
     strict   = false
   }
 
