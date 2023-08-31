@@ -13,15 +13,26 @@ dev_pulp_repository_container_repo_release_common:
 # List of release container image repositories.
 dev_pulp_repository_container_repos_release: >-
   {%- set repos = [] -%}
+  {%- if sync_old_images | bool -%}
   {%- for base_distro in kolla_base_distros -%}
   {%- for image in kolla_container_images_filtered -%}
-  {%- if image not in kolla_unbuildable_images[base_distro]-%}
+  {%- if image not in kolla_unbuildable_images.old_scheme[base_distro] -%}
   {%- set image_repo = "stackhpc/" ~ base_distro ~ "-source-" ~ image -%}
   {%- set repo = {"name": image_repo} -%}
   {%- set _ = repos.append(dev_pulp_repository_container_repo_release_common | combine(repo)) -%}
   {%- endif -%}
   {%- endfor -%}
   {%- endfor -%}
+  {%- endif -%}
+  {%- if sync_new_images | bool -%}
+  {%- for image in kolla_container_images_filtered -%}
+  {%- if image not in kolla_unbuildable_images.new_scheme -%}
+  {%- set image_repo = "stackhpc/" ~ image -%}
+  {%- set repo = {"name": image_repo} -%}
+  {%- set _ = repos.append(dev_pulp_repository_container_repo_release_common | combine(repo)) -%}
+  {%- endif -%}
+  {%- endfor -%}
+  {%- endif -%}
   {{ repos }}
 
 # Common parameters for development image distributions.
@@ -32,15 +43,26 @@ dev_pulp_distribution_container_development_common:
 # List of development container image distributions.
 dev_pulp_distribution_container_development: >-
   {%- set distributions = [] -%}
+  {%- if sync_old_images | bool -%}
   {%- for base_distro in kolla_base_distros -%}
   {%- for image in kolla_container_images_filtered -%}
-  {%- if image not in kolla_unbuildable_images[base_distro]-%}
+  {%- if image not in kolla_unbuildable_images.old_scheme[base_distro] -%}
   {%- set image_repo = "stackhpc-dev/" ~ base_distro ~ "-source-" ~ image -%}
   {%- set distribution = {"name": image_repo, "base_path": image_repo} -%}
   {%- set _ = distributions.append(dev_pulp_distribution_container_development_common | combine(distribution)) -%}
   {%- endif -%}
   {%- endfor -%}
   {%- endfor -%}
+  {%- endif -%}   
+  {%- if sync_new_images | bool -%}
+  {%- for image in kolla_container_images_filtered -%}
+  {%- if image not in kolla_unbuildable_images.new_scheme -%}
+  {%- set image_repo = "stackhpc-dev/" ~ image -%}
+  {%- set distribution = {"name": image_repo, "base_path": image_repo} -%}
+  {%- set _ = distributions.append(dev_pulp_distribution_container_development_common | combine(distribution)) -%}
+  {%- endif -%}
+  {%- endfor -%}
+  {%- endif -%}
   {{ distributions }}
 
 # Common parameters for release image distributions.
@@ -51,13 +73,24 @@ dev_pulp_distribution_container_release_common:
 # List of release container image distributions.
 dev_pulp_distribution_container_release: >-
   {%- set distributions = [] -%}
+  {%- if sync_old_images | bool -%}
   {%- for base_distro in kolla_base_distros -%}
   {%- for image in kolla_container_images_filtered -%}
-  {%- if image not in kolla_unbuildable_images[base_distro]-%}
+  {%- if image not in kolla_unbuildable_images.old_scheme[base_distro] -%}
   {%- set image_repo = "stackhpc/" ~ base_distro ~ "-source-" ~ image -%}
   {%- set distribution = {"name": image_repo, "repository": image_repo, "base_path": image_repo} -%}
   {%- set _ = distributions.append(dev_pulp_distribution_container_release_common | combine(distribution)) -%}
   {%- endif -%}
   {%- endfor -%}
   {%- endfor -%}
+  {%- endif -%}   
+  {%- if sync_new_images | bool -%}
+  {%- for image in kolla_container_images_filtered -%}
+  {%- if image not in kolla_unbuildable_images.new_scheme -%}
+  {%- set image_repo = "stackhpc/" ~ image -%}
+  {%- set distribution = {"name": image_repo, "repository": image_repo, "base_path": image_repo} -%}
+  {%- set _ = distributions.append(dev_pulp_distribution_container_release_common | combine(distribution)) -%}
+  {%- endif -%}
+  {%- endfor -%}
+  {%- endif -%}
   {{ distributions }}

@@ -13,6 +13,14 @@ on:
         type: string
         required: false
         default: ""
+      sync-old-images:
+        description: Whether to sync images for Yoga and older
+        type: boolean
+        default: true
+      sync-new-images:
+        description: Whether to sync images for Zed and newer
+        type: boolean
+        default: true
 
 env:
   ANSIBLE_FORCE_COLOR: True
@@ -36,27 +44,39 @@ jobs:
         ansible-playbook -i ansible/inventory \
         ansible/dev-pulp-container-publish.yml \
         -e kolla_container_image_filter="'$FILTER'" \
-        -e kolla_base_distros_override="'$DISTROS'"
+        -e kolla_base_distros_override="'$DISTROS'" \
+        -e sync_old_images="'$SYNC_OLD_IMAGES'" \
+        -e sync_new_images="'$SYNC_NEW_IMAGES'"
       env:
         FILTER: ${{ github.event.inputs.filter }}
         DISTROS: ${{ github.event.inputs.distros }}
+        SYNC_OLD_IMAGES: ${{ github.event.inputs.sync-old-images }}
+        SYNC_NEW_IMAGES: ${{ github.event.inputs.sync-new-images }}
 
     - name: Sync images in test with stackhpc-dev namespace in Ark
       run: |
         ansible-playbook -i ansible/inventory \
         ansible/test-pulp-container-sync.yml \
         -e kolla_container_image_filter="'$FILTER'" \
-        -e kolla_base_distros_override="'$DISTROS'"
+        -e kolla_base_distros_override="'$DISTROS'" \
+        -e sync_old_images="'$SYNC_OLD_IMAGES'" \
+        -e sync_new_images="'$SYNC_NEW_IMAGES'"
       env:
         FILTER: ${{ github.event.inputs.filter }}
         DISTROS: ${{ github.event.inputs.distros }}
+        SYNC_OLD_IMAGES: ${{ github.event.inputs.sync-old-images }}
+        SYNC_NEW_IMAGES: ${{ github.event.inputs.sync-new-images }}
 
     - name: Publish images in test
       run: |
         ansible-playbook -i ansible/inventory \
         ansible/test-pulp-container-publish.yml \
         -e kolla_container_image_filter="'$FILTER'" \
-        -e kolla_base_distros_override="'$DISTROS'"
+        -e kolla_base_distros_override="'$DISTROS'" \
+        -e sync_old_images="'$SYNC_OLD_IMAGES'" \
+        -e sync_new_images="'$SYNC_NEW_IMAGES'"
       env:
         FILTER: ${{ github.event.inputs.filter }}
         DISTROS: ${{ github.event.inputs.distros }}
+        SYNC_OLD_IMAGES: ${{ github.event.inputs.sync-old-images }}
+        SYNC_NEW_IMAGES: ${{ github.event.inputs.sync-new-images }}
