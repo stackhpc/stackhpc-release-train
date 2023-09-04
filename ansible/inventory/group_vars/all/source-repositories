@@ -42,6 +42,7 @@ source_repositories:
   kolla:
     ignored_releases:
       - victoria
+      - wallaby
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.kayobe }}"
@@ -49,6 +50,7 @@ source_repositories:
   kayobe:
     ignored_releases:
       - victoria
+      - wallaby
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.kayobe }}"
@@ -63,6 +65,7 @@ source_repositories:
   kolla-ansible:
     ignored_releases:
       - victoria
+      - wallaby
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.kayobe }}"
