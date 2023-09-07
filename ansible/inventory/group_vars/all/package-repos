@@ -596,6 +596,13 @@ rpm_package_repos:
     base_path: epel/9/Everything/x86_64/
     short_name: epel_9
     distribution_name: extra-packages-for-enterprise-linux-9-x86_64-
+  # ELRepo 9 repository
+  - name: ELRepo.org Community Enterprise Linux Repository - el9
+    # Use an HTTPS mirror rather than http from mirrorlist
+    url: https://lon.mirror.rackspace.com/elrepo/elrepo/el9/x86_64/
+    base_path: elrepo/elrepo/el9/x86_64/
+    short_name: elrepo_9
+    distribution_name: elrepo-el9-x86_64-
   # Docker CE for CentOS Stream 9
   - name: Docker CE - CentOS Stream 9
     url: https://download.docker.com/linux/centos/9/x86_64/stable
