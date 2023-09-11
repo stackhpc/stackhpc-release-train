@@ -11,6 +11,7 @@
           Some expected Deb repositories not present in sync versions: {{ missing_repos | join(',') }}
       vars:
         missing_repos: "{{ test_pulp_repository_deb_repos | map(attribute='short_name') | list | difference(test_pulp_repository_deb_repo_versions) | list }}"
+      when: not test_pulp_sync_repo_version
 
     - name: Assert that RPM versions variable is populated
       assert:
@@ -20,6 +21,7 @@
           Some expected RPM repositories not present in sync versions: {{ missing_repos | join(',') }}
       vars:
         missing_repos: "{{ test_pulp_repository_rpm_repos | map(attribute='short_name') | list | difference(test_pulp_repository_rpm_repo_versions) | list }}"
+      when: not test_pulp_sync_repo_version
 
     - import_role:
         name: stackhpc.pulp.pulp_repository
