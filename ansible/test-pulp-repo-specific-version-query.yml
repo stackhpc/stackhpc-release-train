@@ -1,0 +1,99 @@
+---
+# This playbook queries the dev Pulp server for distributions of each
+# repository, which match a specific version string.
+# The version is extracted from the base_path, and used to set the
+# 'test_pulp_repository_deb_repo_versions' and
+# 'test_pulp_repository_rpm_repo_versions' facts which contain repository
+# versions to sync to the test Pulp server.
+
+- name: Update test repo versions
+  hosts: localhost
+  gather_facts: true
+  vars:
+    pulp_url: "{{ dev_pulp_url }}"
+    pulp_username: "{{ dev_pulp_username }}"
+    pulp_password: "{{ dev_pulp_password }}"
+
+  tasks:
+    - name: Test repo version string formatting
+      ansible.builtin.debug:
+        msg: "{{ test_pulp_sync_repo_version | to_datetime('%Y%m%dT%H%M%S') }}"
+      when: test_pulp_sync_repo_version
+      register: test_formatting
+      ignore_errors: true
+
+    - name: Fail when test_pulp_sync_repo_version is not of the correct format
+      ansible.builtin.fail:
+        msg: "test_pulp_sync_repo_version is not correctly formatted, use %Y%m%dT%H%M%S"
+      when:
+        - test_formatting.failed
+
+    - name: Query Deb distributions
+      pulp.squeezer.deb_distribution:
+        pulp_url: "{{ pulp_url }}"
+        username: "{{ pulp_username }}"
+        password: "{{ pulp_password }}"
+      register: pulp_deb_dists_list
+
+    - name: Query RPM distributions
+      pulp.squeezer.rpm_distribution:
+        pulp_url: "{{ pulp_url }}"
+        username: "{{ pulp_username }}"
+        password: "{{ pulp_password }}"
+      register: pulp_rpm_dists_list
+
+    - name: Set a fact about deb versions to sync
+      ansible.builtin.set_fact:
+        test_pulp_repository_deb_repo_versions: >-
+          {%- set searchstring = item | dirname + '/' -%}
+          {%-
+            set shortname = deb_package_repos
+            | selectattr('base_path', 'defined')
+            | selectattr('base_path', 'equalto', searchstring)
+            | map(attribute='short_name')
+          -%}
+          {{
+            (
+              test_pulp_repository_deb_repo_versions | default({})
+              | combine(
+                {shortname | first: item | basename}
+              )
+            )
+            if shortname | length > 0
+            else (
+              test_pulp_repository_deb_repo_versions | default({})
+              )
+          }}
+      loop: "{{ pulp_deb_dists_list.distributions | selectattr('base_path', 'search', test_pulp_sync_repo_version) | map(attribute='base_path') }}"
+
+    - name: Display deb versions to sync fact
+      ansible.builtin.debug:
+        var: test_pulp_repository_deb_repo_versions
+
+    - name: Set a fact about RPM versions to sync
+      ansible.builtin.set_fact:
+        test_pulp_repository_rpm_repo_versions: >-
+          {%- set searchstring = item | dirname + '/' -%}
+          {%-
+            set shortname = rpm_package_repos
+            | selectattr('base_path', 'defined')
+            | selectattr('base_path', 'equalto', searchstring)
+            | map(attribute='short_name')
+          -%}
+          {{
+            (
+              test_pulp_repository_rpm_repo_versions | default({})
+              | combine(
+                {shortname | first: item | basename}
+              )
+            )
+            if shortname | length > 0
+            else (
+              test_pulp_repository_rpm_repo_versions | default({})
+              )
+          }}
+      loop: "{{ pulp_rpm_dists_list.distributions | selectattr('base_path', 'search', test_pulp_sync_repo_version) | map(attribute='base_path') }}"
+
+    - name: Display RPM versions to sync fact
+      ansible.builtin.debug:
+        var: test_pulp_repository_rpm_repo_versions

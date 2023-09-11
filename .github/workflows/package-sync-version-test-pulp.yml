@@ -1,0 +1,47 @@
+---
+name: Sync package repository versions to Test Pulp
+on:
+  workflow_dispatch:
+    inputs:
+      repo_version:
+        description: A repository version string maching repository versions to sync from Ark to Test Pulp
+        type: string
+        required: false
+        default: ""
+      filter:
+        description: Space-separated list of regular expressions matching short_name of repositories to sync
+        type: string
+        required: false
+        default: ""
+
+env:
+  ANSIBLE_FORCE_COLOR: True
+  ANSIBLE_VAULT_PASSWORD_FILE: ${{ github.workspace }}/vault-pass
+
+jobs:
+  package-sync-version-test:
+    name: Sync specific package repository versions from Ark to Test Pulp
+    runs-on: [self-hosted, stackhpc-release-train]
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Setup Release Train & dependencies
+      uses: ./.github/actions/setup
+      with:
+        vault-password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+        vault-password-file: ${{ env.ANSIBLE_VAULT_PASSWORD_FILE }}
+
+    - name: Sync and publish package repositories in test
+      run: |
+        ansible-playbook -i ansible/inventory \
+        ansible/test-pulp-repo-specific-version-query.yml \
+        ansible/test-pulp-repo-sync.yml \
+        ansible/test-pulp-repo-publication-cleanup.yml \
+        ansible/test-pulp-repo-publish.yml \
+        -e '{test_pulp_sync_repo_version: "$REPO_VERSION"}'
+        -e deb_package_repo_filter="'$FILTER'" \
+        -e rpm_package_repo_filter="'$FILTER'"
+      env:
+        FILTER: ${{ github.event.inputs.filter }}
+        REPO_VERSION: ${{ github.event.inputs.repo_version }}

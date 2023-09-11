@@ -24,7 +24,10 @@ test_pulp_repository_deb_repo_versions: {}
 test_pulp_repository_deb_repos: >-
   {%- set test_repos = [] -%}
   {%- for repo in deb_package_repos_filtered -%}
-  {%- if repo.sync | default(true) and repo.publish | default(true) -%}
+  {%- if repo.sync | default(true) and
+        repo.publish | default(true) and
+          (not test_pulp_sync_repo_version or
+            repo.short_name in test_pulp_repository_deb_repo_versions) -%}
   {%- set version = test_pulp_repository_deb_repo_versions.get(repo.short_name, omit) -%}
   {%- set test_repo = {"name": repo.name ~ " (ark)", "url": test_dev_pulp_content_url ~ repo.base_path ~ version, "short_name": repo.short_name} -%}
   {%- if "distributions" in repo -%}
@@ -51,7 +54,10 @@ test_pulp_distribution_deb_common:
 test_pulp_distribution_deb: >-
   {%- set test_dists = [] -%}
   {%- for repo in deb_package_repos_filtered -%}
-  {%- if repo.sync | default(true) and repo.publish | default(true) -%}
+  {%- if repo.sync | default(true) and
+        repo.publish | default(true) and
+          (not test_pulp_sync_repo_version or 
+            repo.short_name in test_pulp_repository_deb_repo_versions) -%}
   {%- set version = test_pulp_repository_deb_repo_versions.get(repo.short_name, omit) -%}
   {%- set name = repo.distribution_name ~ version ~ "-ark" -%}
   {%- set repo_name = repo.name ~ " (ark)" -%}
@@ -88,7 +94,10 @@ test_pulp_repository_rpm_repo_versions: {}
 test_pulp_repository_rpm_repos: >-
   {%- set test_repos = [] -%}
   {%- for repo in rpm_package_repos_filtered -%}
-  {%- if repo.sync | default(true) and repo.publish | default(true) -%}
+  {%- if repo.sync | default(true) and
+        repo.publish | default(true) and 
+          (not test_pulp_sync_repo_version or
+            repo.short_name in test_pulp_repository_rpm_repo_versions) -%}
   {%- set version = test_pulp_repository_rpm_repo_versions.get(repo.short_name, omit) -%}
   {%- set test_repo = {"name": repo.name ~ " (ark)", "url": test_dev_pulp_content_url ~ repo.base_path ~ version, "short_name": repo.short_name} -%}
   {%- set _ = test_repos.append(test_pulp_repository_rpm_repo_common | combine(test_repo)) -%}
@@ -106,7 +115,10 @@ test_pulp_distribution_rpm_common:
 test_pulp_distribution_rpm: >-
   {%- set test_dists = [] -%}
   {%- for repo in rpm_package_repos_filtered -%}
-  {%- if repo.sync | default(true) and repo.publish | default(true) -%}
+  {%- if repo.sync | default(true) and
+        repo.publish | default(true) and
+          (not test_pulp_sync_repo_version or
+             repo.short_name in test_pulp_repository_rpm_repo_versions) -%}
   {%- set version = test_pulp_repository_rpm_repo_versions.get(repo.short_name, omit) -%}
   {%- set name = repo.distribution_name ~ version ~ "-ark" -%}
   {%- set repo_name = repo.name ~ " (ark)" -%}
@@ -116,3 +128,6 @@ test_pulp_distribution_rpm: >-
   {%- endif -%}
   {%- endfor -%}
   {{ test_dists }}
+
+# A version string (%Y%m%dT%H%M%S) to sync to test pulp
+test_pulp_sync_repo_version: ""
