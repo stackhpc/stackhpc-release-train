@@ -7,5 +7,5 @@ jobs:
     uses: stackhpc/.github/.github/workflows/lint-collection.yml@main
 {% if workflow_manifest.workflow_args.lint_pip_dependencies is defined %}
     with:
-      upstream: {{ workflow_manifest.workflow_args.lint_pip_dependencies }}
+      lint_pip_dependencies: {{ workflow_manifest.workflow_args.lint_pip_dependencies }}
 {% endif %}
