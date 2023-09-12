@@ -562,6 +562,8 @@ source_repositories:
   ansible-collection-hashicorp:
     repository_type: "ansible"
     workflows: "{{ ansible_workflows.collection }}"
+    workflow_args:
+      lint_pip_dependencies: "git+https://github.com/stackhpc/ansible-modules-hashivault@stackhpc"
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.ansible }}"
