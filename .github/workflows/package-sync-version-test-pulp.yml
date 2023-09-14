@@ -39,7 +39,7 @@ jobs:
         ansible/test-pulp-repo-sync.yml \
         ansible/test-pulp-repo-publication-cleanup.yml \
         ansible/test-pulp-repo-publish.yml \
-        -e '{test_pulp_sync_repo_version: "$REPO_VERSION"}'
+        -e test_pulp_sync_repo_version="'$REPO_VERSION'" \
         -e deb_package_repo_filter="'$FILTER'" \
         -e rpm_package_repo_filter="'$FILTER'"
       env:
