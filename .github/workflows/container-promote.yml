@@ -16,6 +16,14 @@ on:
       tag:
         description: Container image tag to promote
         required: true
+      promote-old-images:
+        description: Whether to promote images for Yoga and older
+        type: boolean
+        default: true
+      promote-new-images:
+        description: Whether to promote images for Zed and newer
+        type: boolean
+        default: true
 
 env:
   ANSIBLE_FORCE_COLOR: True
@@ -40,8 +48,12 @@ jobs:
         ansible/dev-pulp-container-promote.yml \
         -e dev_pulp_repository_container_promotion_tag="$TAG" \
         -e kolla_container_image_filter="'$FILTER'" \
-        -e kolla_base_distros_override="'$DISTROS'"
+        -e kolla_base_distros_override="'$DISTROS'" \
+        -e sync_old_images="'$PROMOTE_OLD_IMAGES'" \
+        -e sync_new_images="'$PROMOTE_NEW_IMAGES'"
       env:
         TAG: ${{ github.event.inputs.tag }}
         FILTER: ${{ github.event.inputs.filter }}
         DISTROS: ${{ github.event.inputs.distros }}
+        PROMOTE_OLD_IMAGES: ${{ github.event.inputs.promote-old-images }}
+        PROMOTE_NEW_IMAGES: ${{ github.event.inputs.promote-new-images }}
