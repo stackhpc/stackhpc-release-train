@@ -653,6 +653,12 @@ rpm_package_repos:
     base_path: mlnx_ofed/5.9-0.5.6.0/rhel9.1/x86_64/
     short_name: mlnx_ofed_5_9_0_5_6_0_rhel9_1
     distribution_name: mlnx_ofed-5.9-0.5.6.0-rhel9.1-
+  # MLNX OFED 23.07-0.5.1.2 RHEL 9.2 repository
+  - name: Mellanox Technologies mlnx_ofed 23.07-0.5.1.2
+    url: https://linux.mellanox.com/public/repo/mlnx_ofed/23.07-0.5.1.2/rhel9.2/x86_64/
+    base_path: mlnx_ofed/23.07-0.5.1.2/rhel9.2/x86_64/
+    short_name: mlnx_ofed_23_07_0_5_1_2_rhel9_2
+    distribution_name: mlnx_ofed-23.07-0.5.1.2-rhel9.2-
   # OpenSearch 2.x
   - name: OpenSearch 2.x
     url: https://artifacts.opensearch.org/releases/bundle/opensearch/2.x/yum
