@@ -268,7 +268,7 @@ resource "github_branch_protection" "smslab_branch_protection" {
   for_each      = toset(var.repositories["SMSLab"])
   repository_id = data.github_repository.repositories[each.key].node_id
 
-  pattern                         = data.github_repository.repositories[each.key].default_branch
+  pattern                         = "smslab/[y,z,2]*"
   require_conversation_resolution = true
   allows_deletions                = false
   allows_force_pushes             = false
