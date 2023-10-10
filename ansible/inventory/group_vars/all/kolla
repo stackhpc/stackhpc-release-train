@@ -130,14 +130,17 @@ kolla_container_images:
   - skydive-agent
   - skydive-analyzer
   - skydive-base
-  - skyline
+  - skyline-apiserver
+  - skyline-console
 
 kolla_unbuildable_images:
   old_scheme:
     ubuntu:
-      - skyline
+      - skyline-apiserver
+      - skyline-console
     centos:
-      - skyline
+      - skyline-apiserver
+      - skyline-console
     rocky:
       - caso
       - elasticsearch
@@ -145,7 +148,8 @@ kolla_unbuildable_images:
       - iscsid
       - kibana
       - prometheus-server
-      - skyline
+      - skyline-apiserver
+      - skyline-console
   new_scheme:
     - elasticsearch
     - elasticsearch-curator
