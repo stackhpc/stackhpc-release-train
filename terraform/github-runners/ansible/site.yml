@@ -1,0 +1,22 @@
+---
+- name: Deploy GitHub runners
+  hosts: runners
+  gather_facts: no
+  tasks:
+    - name: Wait for connection
+      ansible.builtin.wait_for_connection:
+
+    - name: Gather facts
+      ansible.builtin.setup:
+
+    - import_role:
+        name: monolithprojects.github_actions_runner
+      become: true
+
+    - name: Ensure runner service is running
+      ansible.builtin.service:
+        name: actions.runner.stackhpc-stackhpc-release-train.{{ ansible_facts.hostname }}.service
+        state: started
+        enabled: true
+      become: true
+      when: runner_state | default('started') == 'started'

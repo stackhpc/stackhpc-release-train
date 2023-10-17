@@ -1,0 +1,6 @@
+---
+collections:
+  - name: cloud.terraform
+  - name: community.general
+roles:
+  - name: monolithprojects.github_actions_runner
