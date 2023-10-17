@@ -1,0 +1,6 @@
+---
+runner_user: "{{ ansible_facts.user_id }}"
+github_account: stackhpc
+github_repo: stackhpc-release-train
+runner_labels:
+  - stackhpc-release-train
