@@ -13,6 +13,8 @@
         name: monolithprojects.github_actions_runner
       become: true
 
+    # FIXME: Sometimes the runner service is not running at the end of the role.
+    # Start the service manually.
     - name: Ensure runner service is running
       ansible.builtin.service:
         name: actions.runner.stackhpc-stackhpc-release-train.{{ ansible_facts.hostname }}.service
