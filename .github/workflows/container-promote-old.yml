@@ -1,5 +1,5 @@
 ---
-name: Promote container repositories
+name: Promote container repositories (old)
 on:
   workflow_dispatch:
     inputs:
@@ -45,7 +45,7 @@ jobs:
     - name: Promote images from stackhpc-dev to stackhpc namespace in Ark
       run: |
         ansible-playbook -i ansible/inventory \
-        ansible/dev-pulp-container-promote.yml \
+        ansible/dev-pulp-container-promote-old.yml \
         -e dev_pulp_repository_container_promotion_tag="$TAG" \
         -e kolla_container_image_filter="'$FILTER'" \
         -e kolla_base_distros_override="'$DISTROS'" \

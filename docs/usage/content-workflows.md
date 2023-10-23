@@ -243,7 +243,7 @@ skydive_analyzer_tag: wallaby-20220811T091848
 
     This should only be performed when container images are ready for release.
 
-The [Promote container repositories](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/container-promote.yml) workflow runs on demand.
+The [Promote container repositories](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/container-promote-old.yml) workflow runs on demand.
 It should be run when container images need to be released, typically after a change to [update container image tags](#updating-container-image-tags-in-kayobe-configuration) has been approved.
 It runs the following playbook:
 
@@ -253,7 +253,7 @@ Use GitHub Actions to run this workflow, or to run it manually:
 
 ```
 ansible-playbook -i ansible/inventory \
-ansible/dev-pulp-container-promote.yml
+ansible/dev-pulp-container-promote-old.yml
 ```
 
 ## Other utilities
