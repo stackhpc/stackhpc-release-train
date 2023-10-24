@@ -232,6 +232,10 @@ source_repositories:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
   networking-generic-switch:
+    ignored_releases:
+      - victoria
+      - wallaby
+      - xena
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
