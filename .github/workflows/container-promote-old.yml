@@ -1,5 +1,5 @@
 ---
-name: Promote container repositories (old)
+name: Promote container repositories (pre-Zed)
 on:
   workflow_dispatch:
     inputs:
