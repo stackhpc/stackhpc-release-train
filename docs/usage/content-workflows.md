@@ -204,11 +204,7 @@ ansible/test-pulp-container-sync.yml \
 ansible/test-pulp-container-publish.yml
 ```
 
-## Updating container image tags in Kayobe configuration
-
-!!! note
-
-    This procedure is expected to change.
+## Updating container image tags in Kayobe configuration (Yoga release and earlier)
 
 The image tag used deploy containers may be updated for all images in [etc/kayobe/kolla.yml](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/wallaby/etc/kayobe/kolla.yml), or for specific images in [etc/kayobe/kolla/globals.yml](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/wallaby/etc/kayobe/kolla/globals.yml).
 Currently this is a manual process.
@@ -235,6 +231,55 @@ Alternatively, to update the tag for a specific container, update `etc/kayobe/ko
 
 ```yaml
 skydive_analyzer_tag: wallaby-20220811T091848
+```
+
+## Updating container image tags in Kayobe configuration (Zed release onwards)
+
+The image tags used deploy containers are defined in [etc/kayobe/kolla-image-tags.yml](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/zed/etc/kayobe/kolla-image-tags.yml).
+Currently updating these is a manual process.
+
+Use the new tag from the [container image build](#building-container-images).
+
+For example, to update the default tag for all images (used where no service-specific tag has been set), update the `openstack` key, and remove all other keys:
+
+```yaml
+# Dict of Kolla image tags to deploy for each service.
+# Each key is the tag variable prefix name, and the value is another dict,
+# where the key is the OS distro and the value is the tag to deploy.
+kolla_image_tags:
+  openstack:
+    rocky-9: zed-rocky-9-20230101T000000
+    ubuntu-jammy: zed-ubuntu-jammy-20230101T000000
+```
+
+Alternatively, update the tag for all containers in a service, e.g. for all `nova` containers:
+
+```yaml
+# Dict of Kolla image tags to deploy for each service.
+# Each key is the tag variable prefix name, and the value is another dict,
+# where the key is the OS distro and the value is the tag to deploy.
+kolla_image_tags:
+  openstack:
+    rocky-9: zed-rocky-9-20230101T000000
+    ubuntu-jammy: zed-ubuntu-jammy-20230101T000000
+  nova:
+    rocky-9: zed-rocky-9-20230102T000000
+    ubuntu-jammy: zed-ubuntu-jammy-20230102T000000
+```
+
+Alternatively, update the tag for a specific container, e.g. for the `nova_compute` container:
+
+```yaml
+# Dict of Kolla image tags to deploy for each service.
+# Each key is the tag variable prefix name, and the value is another dict,
+# where the key is the OS distro and the value is the tag to deploy.
+kolla_image_tags:
+  openstack:
+    rocky-9: zed-rocky-9-20230101T000000
+    ubuntu-jammy: zed-ubuntu-jammy-20230101T000000
+  nova_compute:
+    rocky-9: zed-rocky-9-20230103T000000
+    ubuntu-jammy: zed-ubuntu-jammy-20230103T000000
 ```
 
 ## Promoting container images (Zed release onwards)
