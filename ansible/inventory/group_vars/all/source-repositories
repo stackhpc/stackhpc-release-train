@@ -212,6 +212,8 @@ source_repositories:
   magnum:
     ignored_releases:
       - victoria
+      - wallaby
+      - xena
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
