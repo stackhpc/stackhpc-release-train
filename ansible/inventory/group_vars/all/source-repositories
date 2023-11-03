@@ -261,7 +261,6 @@ source_repositories:
     ignored_releases:
       - victoria
       - xena
-      - yoga
       - zed
       - 2023.1
     community_files:
