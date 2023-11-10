@@ -4,10 +4,14 @@ name: Terraform GitHub
     branches: [main]
     paths:
       - 'terraform/github/**'
+      - '.github/workflows/terraform-github.yml'
+      - 'ansible/inventory/group_vars/all/source-repositories'
   pull_request:
     branches: [main]
     paths:
       - 'terraform/github/**'
+      - '.github/workflows/terraform-github.yml'
+      - 'ansible/inventory/group_vars/all/source-repositories'
 env:
   TF_VAR_GITHUB_APP_PEM_FILE: ${{ secrets.TF_VAR_GITHUB_APP_PEM_FILE }}
 jobs:
