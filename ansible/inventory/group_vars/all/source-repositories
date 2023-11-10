@@ -247,8 +247,6 @@ source_repositories:
       - victoria
       - wallaby
       - xena
-      - zed
-      - 2023.1
     workflows:
       ignored_workflows:
         elsewhere:
