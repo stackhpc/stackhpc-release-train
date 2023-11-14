@@ -35,6 +35,10 @@
         content_guard: "{{ item.content_guard }}"
         state: "{{ item.state }}"
       loop: "{{ dev_pulp_distribution_deb_promote | selectattr('short_name', 'in', dev_pulp_distribution_deb_promote_versions.keys()) | list }}"
+      register: pulp_rpm_promotion
+      until: "pulp_rpm_promotion is not failed"
+      retries: 3
+      delay: 1
 
     - name: Ensure RPM distributions are promoted
       pulp.squeezer.rpm_distribution:
@@ -46,3 +50,7 @@
         content_guard: "{{ item.content_guard }}"
         state: "{{ item.state }}"
       loop: "{{ dev_pulp_distribution_rpm_promote | selectattr('short_name', 'in', dev_pulp_distribution_rpm_promote_versions.keys()) | list }}"
+      register: pulp_deb_promotion
+      until: "pulp_deb_promotion is not failed"
+      retries: 3
+      delay: 1
