@@ -553,7 +553,9 @@ source_repositories:
           dest: ".github/CODEOWNERS"
   ansible-collection-cephadm:
     repository_type: "ansible"
-    workflows: "{{ ansible_workflows.collection }}"
+    workflows:
+      # Linters workflows not currently working on the Cephadm collection.
+      - publish-collection
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.ansible }}"
