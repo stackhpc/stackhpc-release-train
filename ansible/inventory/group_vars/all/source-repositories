@@ -306,7 +306,7 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.ansible }}"
           dest: ".github/CODEOWNERS"
-  ansible-role-os-networks:
+  os-networks:
     repository_type: "ansible"
     workflows: "{{ ansible_workflows.role }}"
     community_files:
@@ -502,7 +502,7 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.ansible }}"
           dest: ".github/CODEOWNERS"
-  ansible-role-dell-powerconnect-switch:
+  dell-powerconnect-switch:
     repository_type: "ansible"
     workflows: "{{ ansible_workflows.role }}"
     community_files:
@@ -523,7 +523,7 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.ansible }}"
           dest: ".github/CODEOWNERS"
-  ansible-role-mellanox-switch:
+  mellanox-switch:
     repository_type: "ansible"
     workflows: "{{ ansible_workflows.role }}"
     community_files:
