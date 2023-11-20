@@ -28,8 +28,8 @@ class Resource:
     is_dry_run: bool = False
 
     def refresh_resource(self) -> None:
+        query = query_statefile(self.resource_address)
         for ident, index_key in self.components.items():
-            query = query_statefile(self.resource_address)
             query_response = unpack_query(query, index_key)
             if query_response == QueryResponse.INSTANCE_MISSING or query_response == QueryResponse.RESOURCE_UNKNOWN:
                 import_missing_resource(
@@ -61,8 +61,8 @@ class BranchProtection(Resource):
             self, f"github_branch_protection.{team_name}_branch_protection{suffix}", patterns, is_dry_run)
 
     def refresh_resource(self) -> None:
+        query = query_statefile(self.resource_address)
         for ident, index_key in self.components.items():
-            query = query_statefile(self.resource_address)
             query_response = unpack_query(query, index_key)
             if query_response == QueryResponse.INSTANCE_MISSING or query_response == QueryResponse.RESOURCE_UNKNOWN:
                 import_missing_resource(
