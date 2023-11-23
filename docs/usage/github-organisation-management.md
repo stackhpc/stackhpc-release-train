@@ -118,3 +118,66 @@ terraform state rm 'github_branch_protection.ansible_branch_protection["ansible-
 The general form for `state rm` is `${resource_address}["resource_id"]`.
 You can found out more about the `state rm` command here [here](https://www.terraform.io/cli/commands/state/rm).
 You may also find documentation about the GitHub provider which may provide insight into how the resources are composed [here](https://registry.terraform.io/providers/integrations/github/latest/docs)
+
+### Renaming Resources
+
+To rename a resource you must first identify and rename the entry within `terraform.tfvars.json`.
+Without further intervention Terraform will see this as deletion of one resource and creation of another, and would typically return a failure when trying to create the resource that already exists.
+To resolve this issue you will need access to the Terraform Cloud GitHub workspace, if you don't have access then you may request access or have someone who does have access to perform the rename on your behalf.
+
+Prior to renaming a resource you must ensure that you have the Terraform CLI tools and have authenticated with Terraform Cloud, instructions for this can be found [here](https://www.terraform.io/cli/commands/login).
+
+In the following example we will rename the `ansible-role-os-networks` repository to `os-networks`.
+
+Clone this repository and change to the `terraform/github` directory:
+
+```sh
+git clone git@github.com:stackhpc/stackhpc-release-train.git
+cd stackhpc-release-train/terraform/github
+```
+
+Rename the `ansible-role-os-networks` entry in `terraform.tfvars.json`.
+Commit the change and push to a branch on GitHub.
+
+Create a script named `rename-repo.sh` with the following content:
+
+```sh
+#!/bin/bash -eux
+
+repo_src=${1:?Repo source}
+repo_dst=${2:?Repo destination}
+
+# e.g. -dry-run
+args=""
+
+# This resource list will vary depending on the repository.
+# In particurlar this may include the branch protection and team associations.
+resources="github_branch_protection.ansible_branch_protection \
+github_issue_label.community_files_label \
+github_issue_label.stackhpc_ci_label \
+github_issue_label.workflows_label \
+github_team_repository.admin_repositories \
+github_team_repository.ansible_repositories \
+github_team_repository.developers_repositories \
+github_repository.repositories"
+
+for resource in $resources; do
+  terraform state mv $args "$resource[\"$repo_src\"]" "$resource[\"$repo_dst\"]"
+done
+```
+
+Edit the `resources` list based on the output of `terraform state list | grep <repo>`
+
+Make the script executable:
+
+```sh
+chmod +x rename-repo.sh
+```
+
+Run the script to rename the repository. Note that this will directly update the state file in Terraform cloud:
+
+```sh
+./rename-repo.sh ansible-role-os-networks os-networks
+```
+
+Create a PR for the changes.
