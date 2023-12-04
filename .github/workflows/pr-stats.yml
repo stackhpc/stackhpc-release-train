@@ -12,7 +12,7 @@ jobs:
         uses: flowwer-dev/pull-request-stats@master
         with:
           organization: 'stackhpc'
-          period: 7
+          period: 90
           charts: true
           disableLinks: true
           sortBy: 'COMMENTS'
