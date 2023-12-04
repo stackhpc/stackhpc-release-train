@@ -8,10 +8,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run pull request stats
+        id: stats
         uses: flowwer-dev/pull-request-stats@master
         with:
           organization: 'stackhpc'
           period: 90
           charts: true
-          disableLinks: true
+          #disableLinks: true
           sortBy: 'COMMENTS'
+
+      - name: Display markdown
+        run: echo '${{ steps.stats.outputs.resultsMd }}'
