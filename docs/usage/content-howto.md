@@ -7,6 +7,7 @@ That is the aim of this page.
 
 Update one or more package repositories to a new version, then build new Kolla container images from those repositories.
 
+* Add package repositories to update at [`package-repos`](https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/package-repos)
 * [Sync package repositories](content-workflows.md#syncing-package-repositories) (optional: runs nightly as a scheduled GitHub Action)
 * [Update Kayobe repository versions](content-workflows.md#updating-package-repository-versions-in-kayobe-configuration)
 * [Build & push Kolla container images](content-workflows.md#building-container-images)
