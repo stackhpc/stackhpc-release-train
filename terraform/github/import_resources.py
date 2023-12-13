@@ -28,8 +28,8 @@ class Resource:
     is_dry_run: bool = False
 
     def refresh_resource(self) -> None:
+        query = query_statefile(self.resource_address)
         for ident, index_key in self.components.items():
-            query = query_statefile(self.resource_address)
             query_response = unpack_query(query, index_key)
             if query_response == QueryResponse.INSTANCE_MISSING or query_response == QueryResponse.RESOURCE_UNKNOWN:
                 import_missing_resource(
@@ -55,13 +55,14 @@ class OrganisationTeam(Resource):
 
 
 class BranchProtection(Resource):
-    def __init__(self, team_name: str, patterns: dict[str, str], is_dry_run: bool):
+    def __init__(self, team_name: str, patterns: dict[str, str], is_dry_run: bool, suffix: str | None=None):
+        suffix = suffix or ""
         Resource.__init__(
-            self, f"github_branch_protection.{team_name}_branch_protection", patterns, is_dry_run)
+            self, f"github_branch_protection.{team_name}_branch_protection{suffix}", patterns, is_dry_run)
 
     def refresh_resource(self) -> None:
+        query = query_statefile(self.resource_address)
         for ident, index_key in self.components.items():
-            query = query_statefile(self.resource_address)
             query_response = unpack_query(query, index_key)
             if query_response == QueryResponse.INSTANCE_MISSING or query_response == QueryResponse.RESOURCE_UNKNOWN:
                 import_missing_resource(
@@ -218,8 +219,13 @@ def main() -> None:
     default_branches = get_default_branches()
     for team_id, team_repositories in repositories.items():
         if team_id == TeamID.KAYOBE or team_id == TeamID.OPENSTACK:
+            # Pre-Zed branch protection
             branch_protection_resource = BranchProtection(team_id.name.lower(
-            ), {f"{name}:stackhpc/**": name for name in team_repositories}, parsed_args.dry_run)
+            ), {f"{name}:stackhpc/[vwxy]*": name for name in team_repositories}, parsed_args.dry_run, "_py_3-6")
+            branch_protection_resource.refresh_resource()
+            # Post-Zed branch protection
+            branch_protection_resource = BranchProtection(team_id.name.lower(
+            ), {f"{name}:stackhpc/[z,2]*": name for name in team_repositories}, parsed_args.dry_run, "_py_3-10")
             branch_protection_resource.refresh_resource()
         else:
             branch_protection_resource = BranchProtection(team_id.name.lower(

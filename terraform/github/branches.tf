@@ -68,6 +68,7 @@ resource "github_branch_protection" "kayobe_branch_protection_py_3-6" {
   # NOTE(Alex-Welsh): The pattern here is not ideal but it is difficult to
   # achieve more precision with the matching tools that GitHub provides.
   # https://stackoverflow.com/questions/53135414/how-to-apply-one-github-branch-rule-to-multiple-branches
+  # Remember to update import_resources.py!
   pattern                         = "stackhpc/[vwxy]*"
   require_conversation_resolution = true
   allows_deletions                = false
@@ -141,6 +142,7 @@ resource "github_branch_protection" "openstack_branch_protection_py_3-6" {
   # NOTE(Alex-Welsh): The pattern here is not ideal but it is difficult to
   # achieve more precision with the matching tools that GitHub provides.
   # https://stackoverflow.com/questions/53135414/how-to-apply-one-github-branch-rule-to-multiple-branches
+  # Remember to update import_resources.py!
   pattern                         = "stackhpc/[vwxy]*"
   require_conversation_resolution = true
   allows_deletions                = false
