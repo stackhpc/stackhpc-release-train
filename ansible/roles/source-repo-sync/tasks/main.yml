@@ -18,7 +18,7 @@
         name: '{{ item.key }}',
         releases:
           '{{ default_releases | difference(item.value.ignored_releases | default([])) |
-          union(item.value.additional_releases | default([])) }}',
+          union(item.value.additional_releases | default([])) | sort }}',
         workflows:
           { default_branch_only: '{{ openstack_workflows.default_branch_only  |
               difference(item.value.workflows.ignored_workflows.default_branch_only | default([])) |
