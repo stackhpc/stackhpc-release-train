@@ -2,6 +2,7 @@ name: Pull Request Stats
 
 on:
   pull_request:
+  workflow_dispatch:
 
 jobs:
   stats:
