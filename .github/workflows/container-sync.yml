@@ -28,7 +28,7 @@ env:
 jobs:
   container-sync:
     name: Sync container repositories
-    runs-on: [self-hosted, stackhpc-release-train]
+    runs-on: arc-release-train-runner #[self-hosted, stackhpc-release-train]
     steps:
     - name: Checkout
       uses: actions/checkout@v3
