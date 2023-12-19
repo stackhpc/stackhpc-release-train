@@ -29,6 +29,7 @@ jobs:
   container-sync:
     name: Sync container repositories
     runs-on: [self-hosted, stackhpc-release-train]
+    timeout-minutes: 720
     steps:
     - name: Checkout
       uses: actions/checkout@v3
