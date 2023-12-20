@@ -17,7 +17,7 @@
     # Start the service manually.
     - name: Ensure runner service is running
       ansible.builtin.service:
-        name: actions.runner.stackhpc-stackhpc-release-train.{{ ansible_facts.hostname }}.service
+        name: actions.runner.{{ github_account }}-{{ github_repo }}.{{ ansible_facts.hostname }}.service
         state: started
         enabled: true
       become: true
