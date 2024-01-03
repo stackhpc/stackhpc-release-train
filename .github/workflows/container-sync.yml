@@ -28,7 +28,7 @@ env:
 jobs:
   container-sync:
     name: Sync container repositories
-    runs-on: [self-hosted, stackhpc-release-train]
+    runs-on: arc-release-train-runner
     timeout-minutes: 720
     steps:
     - name: Checkout
