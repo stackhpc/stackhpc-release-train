@@ -21,7 +21,7 @@ env:
 jobs:
   package-sync-version-test:
     name: Sync specific package repository versions from Ark to Test Pulp
-    runs-on: [self-hosted, stackhpc-release-train]
+    runs-on: arc-release-train-runner #[self-hosted, stackhpc-release-train]
     steps:
     - name: Checkout
       uses: actions/checkout@v3
