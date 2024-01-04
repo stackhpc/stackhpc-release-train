@@ -38,6 +38,7 @@ kolla_container_images:
   - glance-base
   - grafana
   - haproxy
+  - haproxy-ssh
   - heat-api
   - heat-api-cfn
   - heat-base
@@ -58,6 +59,8 @@ kolla_container_images:
   - keystone-ssh
   - kibana
   - kolla-toolbox
+  - letsencrypt-lego
+  - letsencrypt-webserver
   - magnum-api
   - magnum-base
   - magnum-conductor
