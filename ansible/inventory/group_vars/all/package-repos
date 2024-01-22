@@ -98,17 +98,32 @@ deb_package_repos:
     distribution_name: ubuntu-jammy-security-
 
   # Third-party repositories
-  - name: Docker CE for Ubuntu
+
+  ## Separate repositories for each distribution because
+  ## https://github.com/pulp/pulp_deb/issues/921
+  - name: Docker CE for Ubuntu Focal
     url: https://download.docker.com/linux/ubuntu
     policy: immediate
     architectures: amd64
-    distributions: focal jammy
+    distributions: focal
     components: stable
     mirror: true
     mode: verbatim
-    base_path: docker-ce/ubuntu/
-    short_name: docker_ce_ubuntu
-    distribution_name: docker-ce-for-ubuntu-
+    base_path: docker-ce/ubuntu-focal/
+    short_name: docker_ce_ubuntu_focal
+    distribution_name: docker-ce-for-ubuntu-focal-
+
+  - name: Docker CE for Ubuntu Jammy
+    url: https://download.docker.com/linux/ubuntu
+    policy: immediate
+    architectures: amd64
+    distributions: jammy
+    components: stable
+    mirror: true
+    mode: verbatim
+    base_path: docker-ce/ubuntu-jammy/
+    short_name: docker_ce_ubuntu_jammy
+    distribution_name: docker-ce-for-ubuntu-jammy-
 
 # Default filter string for Deb package repositories.
 deb_package_repo_filter: ""
