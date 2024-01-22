@@ -58,18 +58,18 @@
       assert:
         that:
           - deb_package_repos_filtered | length == 1
-          - deb_package_repos_filtered[0].short_name == 'ubuntu_focal'
+          - deb_package_repos_filtered[0].short_name == 'ubuntu_jammy_security'
       vars:
-        deb_package_repo_filter: ubuntu_focal$
+        deb_package_repo_filter: ubuntu_jammy_security$
 
     - name: Assert that Deb package repository list can be filtered to multiple
       assert:
         that:
           - deb_package_repos_filtered | length == 2
-          - deb_package_repos_filtered[0].short_name == 'ubuntu_focal'
-          - deb_package_repos_filtered[1].short_name == 'docker_ce_ubuntu'
+          - deb_package_repos_filtered[0].short_name == 'ubuntu_jammy_security'
+          - deb_package_repos_filtered[1].short_name == 'docker_ce_ubuntu_jammy'
       vars:
-        deb_package_repo_filter: docker_ce_ubuntu ubuntu_focal$
+        deb_package_repo_filter: docker_ce_ubuntu_jammy ubuntu_jammy_security$
 
     - name: Assert that dev package repository list is defined
       assert:
