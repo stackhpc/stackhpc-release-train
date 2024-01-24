@@ -12,7 +12,7 @@ on:
         required: false
         description: Branch of StackHPC Kayobe configuration to use
         default: stackhpc/yoga
-      check-mode:
+      check_mode:
         description: Check mode
         type: boolean
         required: false
@@ -57,4 +57,4 @@ jobs:
         $args
       env:
         FILTER: ${{ github.event.inputs.filter }}
-        CHECK_MODE: ${{ inputs.check-mode }}
+        CHECK_MODE: ${{ inputs.check_mode }}
