@@ -148,94 +148,94 @@ deb_package_repos_filtered: "{{ deb_package_repos | select_repos(deb_package_rep
 rpm_package_repos:
   # Base CentOS 8 Stream repositories
   - name: CentOS Stream 8 - AppStream
-    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=AppStream&infra=genclo
+    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&country=NL&repo=AppStream&infra=genclo
     base_path: centos/8-stream/AppStream/x86_64/os/
     short_name: centos_stream_8_appstream
     distribution_name: centos-stream-8-appstream-
   - name: CentOS Stream 8 - BaseOS
-    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=BaseOS&infra=genclo
+    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&country=NL&repo=BaseOS&infra=genclo
     base_path: centos/8-stream/BaseOS/x86_64/os/
     short_name: centos_stream_8_baseos
     distribution_name: centos-stream-8-baseos-
   - name: CentOS Stream 8 - Extras
-    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=extras&infra=genclo
+    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&country=NL&repo=extras&infra=genclo
     base_path: centos/8-stream/extras/x86_64/os/
     short_name: centos_stream_8_extras
     distribution_name: centos-stream-8-extras-
   - name: CentOS Stream 8 - Extras common packages
-    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=extras-extras-common&infra=genclo
+    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&country=NL&repo=extras-extras-common&infra=genclo
     base_path: centos/8-stream/extras/x86_64/extras-common/
     short_name: centos_stream_8_extras_common
     distribution_name: centos-stream-8-extras-common-
 
   # Additional CentOS 8 Stream repositories
   - name: CentOS Stream 8 - Advanced Virtualization
-    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=virt-advancedvirt-common
+    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&country=NL&repo=virt-advancedvirt-common
     base_path: centos/8-stream/virt/x86_64/advancedvirt-common/
     short_name: centos_stream_8_advanced_virtualization
     distribution_name: centos-stream-8-advancedvirt-
   - name: CentOS Stream 8 - Ceph Nautilus
-    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=storage-ceph-nautilus
+    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&country=NL&repo=storage-ceph-nautilus
     base_path: centos/8-stream/storage/x86_64/ceph-nautilus/
     short_name: centos_stream_8_storage_ceph_nautilus
     distribution_name: centos-stream-8-storage-ceph-nautilus-
   - name: CentOS Stream 8 - Ceph Pacific
-    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=storage-ceph-pacific
+    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&country=NL&repo=storage-ceph-pacific
     base_path: centos/8-stream/storage/x86_64/ceph-pacific/
     short_name: centos_stream_8_storage_ceph_pacific
     distribution_name: centos-stream-8-storage-ceph-pacific-
   - name: CentOS Stream 8 - Ceph Quincy
-    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=storage-ceph-quincy
+    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&country=NL&repo=storage-ceph-quincy
     base_path: centos/8-stream/storage/x86_64/ceph-quincy/
     short_name: centos_stream_8_storage_ceph_quincy
     distribution_name: centos-stream-8-storage-ceph-quincy-
   - name: CentOS Stream 8 - NFV Extras
-    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=nfv-network-extras
+    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&country=NL&repo=nfv-network-extras
     base_path: centos/8-stream/nfv/x86_64/network-extras/
     short_name: centos_stream_8_nfv_extras
     distribution_name: centos-stream-8-nfv-extras-
   - name: CentOS Stream 8 - NFV OpenvSwitch
-    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=nfv-openvswitch-2
+    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&country=NL&repo=nfv-openvswitch-2
     base_path: centos/8-stream/nfv/x86_64/openvswitch-2/
     short_name: centos_stream_8_nfv_openvswitch
     distribution_name: centos-stream-8-nfv-openvswitch-
   - name: CentOS Stream 8 - OpenStack Wallaby
-    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=cloud-openstack-wallaby
+    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&country=NL&repo=cloud-openstack-wallaby
     base_path: centos/8-stream/cloud/x86_64/openstack-wallaby/
     short_name: centos_stream_8_openstack_wallaby
     distribution_name: centos-stream-8-openstack-wallaby-
   - name: CentOS Stream 8 - OpenStack Xena
-    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=cloud-openstack-xena
+    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&country=NL&repo=cloud-openstack-xena
     base_path: centos/8-stream/cloud/x86_64/openstack-xena/
     short_name: centos_stream_8_openstack_xena
     distribution_name: centos-stream-8-openstack-xena-
   - name: CentOS Stream 8 - OpenStack Yoga
-    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=cloud-openstack-yoga
+    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&country=NL&repo=cloud-openstack-yoga
     base_path: centos/8-stream/cloud/x86_64/openstack-yoga/
     short_name: centos_stream_8_openstack_yoga
     distribution_name: centos-stream-8-openstack-yoga-
   - name: CentOS Stream 8 - OpsTools - collectd
-    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=opstools-collectd-5
+    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&country=NL&repo=opstools-collectd-5
     base_path: centos/8-stream/opstools/x86_64/collectd-5/
     short_name: centos_stream_8_opstools
     distribution_name: centos-stream-8-opstools-
   - name: CentOS Stream 8 - PowerTools
-    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=PowerTools&infra=genclo
+    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&country=NL&repo=PowerTools&infra=genclo
     base_path: centos/8-stream/PowerTools/x86_64/os/
     short_name: centos_stream_8_powertools
     distribution_name: centos-stream-8-powertools-
   - name: CentOS Stream 8 - HighAvailability
-    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=HighAvailability&infra=genclo
+    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&country=NL&repo=HighAvailability&infra=genclo
     base_path: centos/8-stream/HighAvailability/x86_64/os/
     short_name: centos_stream_8_highavailability
     distribution_name: centos-stream-8-highavailability-
   - name: CentOS Stream 8 - Kmods Main
-    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=kmods-packages-main&infra=genclo
+    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&country=NL&repo=kmods-packages-main&infra=genclo
     base_path: centos/8-stream/kmods/x86_64/packages-main/
     short_name: centos_stream_8_kmods_main
     distribution_name: centos-stream-8-kmods-main-
   - name: CentOS Stream 8 - Kmods Rebuild
-    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=kmods-packages-rebuild&infra=genclo
+    url: http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&country=NL&repo=kmods-packages-rebuild&infra=genclo
     base_path: centos/8-stream/kmods/x86_64/packages-rebuild/
     short_name: centos_stream_8_kmods_rebuild
     distribution_name: centos-stream-8-kmods-rebuild-
@@ -286,7 +286,7 @@ rpm_package_repos:
 
   # EPEL 8 repositories
   - name: Extra Packages for Enterprise Linux 8 - x86_64
-    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-8&arch=x86_64&infra=stock&content=centos
+    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-8&arch=x86_64&country=NL&infra=stock&content=centos
     # mirror_complete fails with:
     # "This repository uses features which are incompatible with 'mirror' sync. Please sync without mirroring enabled"
     sync_policy: mirror_content_only
@@ -294,7 +294,7 @@ rpm_package_repos:
     short_name: epel
     distribution_name: extra-packages-for-enterprise-linux-8-x86_64-
   - name: Extra Packages for Enterprise Linux Modular 8 - x86_64
-    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-modular-8&arch=x86_64&infra=stock&content=centos
+    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-modular-8&arch=x86_64&country=NL&infra=stock&content=centos
     base_path: epel/8/Modular/x86_64/
     short_name: epel_modular
     distribution_name: extra-packages-for-enterprise-linux-modular-8-x86_64-
@@ -355,19 +355,19 @@ rpm_package_repos:
 
   # Base Rocky Linux 8.5 repositories
   - name: Rocky Linux 8.5 - AppStream
-    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-AppStream-8.5&arch=x86_64
+    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-AppStream-8.5&arch=x86_64&country=NL
     base_path: rocky/8.5/AppStream/x86_64/os/
     short_name: rocky_8_5_appstream
     distribution_name: rocky-8.5-appstream-
     sync: false
   - name: Rocky Linux 8.5 - BaseOS
-    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-BaseOS-8.5&arch=x86_64
+    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-BaseOS-8.5&arch=x86_64&country=NL
     base_path: rocky/8.5/BaseOS/x86_64/os/
     short_name: rocky_8_5_baseos
     distribution_name: rocky-8.5-baseos-
     sync: false
   - name: Rocky Linux 8.5 - Extras
-    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-extras-8.5&arch=x86_64
+    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-extras-8.5&arch=x86_64&country=NL
     base_path: rocky/8.5/extras/x86_64/os/
     short_name: rocky_8_5_extras
     distribution_name: rocky-8.5-extras-
@@ -376,13 +376,13 @@ rpm_package_repos:
   # Additional Rocky Linux 8.5 repositories
   # No advanced virt, Ceph or OpenStack
   - name: Rocky Linux NFV 8.5
-    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-nfv-8.5&arch=x86_64
+    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-nfv-8.5&arch=x86_64&country=NL
     base_path: rocky/8.5/nfv/x86_64/os/
     short_name: rocky_8_5_nfv
     distribution_name: rocky-8.5-nfv-
     sync: false
   - name: Rocky Linux 8.5 - PowerTools
-    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-PowerTools-8.5&arch=x86_64
+    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-PowerTools-8.5&arch=x86_64&country=NL
     base_path: rocky/8.5/PowerTools/x86_64/os/
     short_name: rocky_8_5_powertools
     distribution_name: rocky-8.5-powertools-
@@ -390,19 +390,19 @@ rpm_package_repos:
 
   # Base Rocky Linux 8.6 repositories
   - name: Rocky Linux 8.6 - AppStream
-    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-AppStream-8.6&arch=x86_64
+    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-AppStream-8.6&arch=x86_64&country=NL
     base_path: rocky/8.6/AppStream/x86_64/os/
     short_name: rocky_8_6_appstream
     distribution_name: rocky-8.6-appstream-
     sync: false
   - name: Rocky Linux 8.6 - BaseOS
-    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-BaseOS-8.6&arch=x86_64
+    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-BaseOS-8.6&arch=x86_64&country=NL
     base_path: rocky/8.6/BaseOS/x86_64/os/
     short_name: rocky_8_6_baseos
     distribution_name: rocky-8.6-baseos-
     sync: false
   - name: Rocky Linux 8.6 - Extras
-    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-extras-8.6&arch=x86_64
+    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-extras-8.6&arch=x86_64&country=NL
     base_path: rocky/8.6/extras/x86_64/os/
     short_name: rocky_8_6_extras
     distribution_name: rocky-8.6-extras-
@@ -411,19 +411,19 @@ rpm_package_repos:
   # Additional Rocky Linux 8.6 repositories
   # No advanced virt, Ceph or OpenStack
   - name: Rocky Linux NFV 8.6
-    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-NFV-8.6&arch=x86_64
+    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-NFV-8.6&arch=x86_64&country=NL
     base_path: rocky/8.6/nfv/x86_64/os/
     short_name: rocky_8_6_nfv
     distribution_name: rocky-8.6-nfv-
     sync: false
   - name: Rocky Linux 8.6 - PowerTools
-    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-PowerTools-8.6&arch=x86_64
+    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-PowerTools-8.6&arch=x86_64&country=NL
     base_path: rocky/8.6/PowerTools/x86_64/os/
     short_name: rocky_8_6_powertools
     distribution_name: rocky-8.6-powertools-
     sync: false
   - name: Rocky Linux 8.6 - HighAvailability
-    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-8.6&arch=x86_64
+    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-8.6&arch=x86_64&country=NL
     base_path: rocky/8.6/HighAvailability/x86_64/os/
     short_name: rocky_8_6_highavailability
     distribution_name: rocky-8.6-highavailability-
@@ -431,19 +431,19 @@ rpm_package_repos:
 
   # Base Rocky Linux 8.7 repositories
   - name: Rocky Linux 8.7 - AppStream
-    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-AppStream-8.7&arch=x86_64
+    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-AppStream-8.7&arch=x86_64&country=NL
     base_path: rocky/8.7/AppStream/x86_64/os/
     short_name: rocky_8_7_appstream
     distribution_name: rocky-8.7-appstream-
     sync: false
   - name: Rocky Linux 8.7 - BaseOS
-    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-BaseOS-8.7&arch=x86_64
+    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-BaseOS-8.7&arch=x86_64&country=NL
     base_path: rocky/8.7/BaseOS/x86_64/os/
     short_name: rocky_8_7_baseos
     distribution_name: rocky-8.7-baseos-
     sync: false
   - name: Rocky Linux 8.7 - Extras
-    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-extras-8.7&arch=x86_64
+    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-extras-8.7&arch=x86_64&country=NL
     base_path: rocky/8.7/extras/x86_64/os/
     short_name: rocky_8_7_extras
     distribution_name: rocky-8.7-extras-
@@ -452,19 +452,19 @@ rpm_package_repos:
   # Additional Rocky Linux 8.7 repositories
   # No advanced virt, Ceph or OpenStack
   - name: Rocky Linux NFV 8.7
-    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-NFV-8.7&arch=x86_64
+    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-NFV-8.7&arch=x86_64&country=NL
     base_path: rocky/8.7/nfv/x86_64/os/
     short_name: rocky_8_7_nfv
     distribution_name: rocky-8.7-nfv-
     sync: false
   - name: Rocky Linux 8.7 - PowerTools
-    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-PowerTools-8.7&arch=x86_64
+    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-PowerTools-8.7&arch=x86_64&country=NL
     base_path: rocky/8.7/PowerTools/x86_64/os/
     short_name: rocky_8_7_powertools
     distribution_name: rocky-8.7-powertools-
     sync: false
   - name: Rocky Linux 8.7 - HighAvailability
-    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-8.7&arch=x86_64
+    url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-8.7&arch=x86_64&country=NL
     base_path: rocky/8.7/HighAvailability/x86_64/os/
     short_name: rocky_8_7_highavailability
     distribution_name: rocky-8.7-highavailability-
@@ -472,19 +472,19 @@ rpm_package_repos:
 
   # Base Rocky Linux 8.8 repositories
   - name: Rocky Linux 8.8 - AppStream
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-8.8&arch=x86_64
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-8.8&arch=x86_64&country=NL
     base_path: rocky/8.8/AppStream/x86_64/os/
     short_name: rocky_8_8_appstream
     distribution_name: rocky-8.8-appstream-
     sync: false
   - name: Rocky Linux 8.8 - BaseOS
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-8.8&arch=x86_64
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-8.8&arch=x86_64&country=NL
     base_path: rocky/8.8/BaseOS/x86_64/os/
     short_name: rocky_8_8_baseos
     distribution_name: rocky-8.8-baseos-
     sync: false
   - name: Rocky Linux 8.8 - Extras
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-8.8&arch=x86_64
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-8.8&arch=x86_64&country=NL
     base_path: rocky/8.8/extras/x86_64/os/
     short_name: rocky_8_8_extras
     distribution_name: rocky-8.8-extras-
@@ -493,19 +493,19 @@ rpm_package_repos:
   # Additional Rocky Linux 8.8 repositories
   # No advanced virt, Ceph or OpenStack
   - name: Rocky Linux NFV 8.8
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-NFV-8.8&arch=x86_64
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-NFV-8.8&arch=x86_64&country=NL
     base_path: rocky/8.8/nfv/x86_64/os/
     short_name: rocky_8_8_nfv
     distribution_name: rocky-8.8-nfv-
     sync: false
   - name: Rocky Linux 8.8 - PowerTools
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-PowerTools-8.8&arch=x86_64
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-PowerTools-8.8&arch=x86_64&country=NL
     base_path: rocky/8.8/PowerTools/x86_64/os/
     short_name: rocky_8_8_powertools
     distribution_name: rocky-8.8-powertools-
     sync: false
   - name: Rocky Linux 8.8 - HighAvailability
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-8.8&arch=x86_64
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-8.8&arch=x86_64&country=NL
     base_path: rocky/8.8/HighAvailability/x86_64/os/
     short_name: rocky_8_8_highavailability
     distribution_name: rocky-8.8-highavailability-
@@ -529,19 +529,19 @@ rpm_package_repos:
 
   # Base Rocky Linux 9.1 repositories
   - name: Rocky Linux 9.1 - AppStream
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-9.1&arch=x86_64
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-9.1&arch=x86_64&country=NL
     base_path: rocky/9.1/AppStream/x86_64/os/
     short_name: rocky_9_1_appstream
     distribution_name: rocky-9.1-appstream-
     sync: false
   - name: Rocky Linux 9.1 - BaseOS
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-9.1&arch=x86_64
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-9.1&arch=x86_64&country=NL
     base_path: rocky/9.1/BaseOS/x86_64/os/
     short_name: rocky_9_1_baseos
     distribution_name: rocky-9.1-baseos-
     sync: false
   - name: Rocky Linux 9.1 - Extras
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-9.1&arch=x86_64
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-9.1&arch=x86_64&country=NL
     base_path: rocky/9.1/extras/x86_64/os/
     short_name: rocky_9_1_extras
     distribution_name: rocky-9.1-extras-
@@ -550,13 +550,13 @@ rpm_package_repos:
   # Additional Rocky Linux 9.1 repositories
   # No advanced virt, Ceph or OpenStack
   - name: Rocky Linux 9.1 - CRB
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-9.1&arch=x86_64
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-9.1&arch=x86_64&country=NL
     base_path: rocky/9.1/CRB/x86_64/os/
     short_name: rocky_9_1_crb
     distribution_name: rocky-9.1-crb-
     sync: false
   - name: Rocky Linux 9.1 - HighAvailability
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-9.1&arch=x86_64
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-9.1&arch=x86_64&country=NL
     base_path: rocky/9.1/highavailability/x86_64/os/
     short_name: rocky_9_1_highavailability
     distribution_name: rocky-9.1-highavailability-
@@ -564,19 +564,19 @@ rpm_package_repos:
 
   # Base Rocky Linux 9.2 repositories
   - name: Rocky Linux 9.2 - AppStream
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-9.2&arch=x86_64
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-9.2&arch=x86_64&country=NL
     base_path: rocky/9.2/AppStream/x86_64/os/
     short_name: rocky_9_2_appstream
     distribution_name: rocky-9.2-appstream-
     sync: false
   - name: Rocky Linux 9.2 - BaseOS
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-9.2&arch=x86_64
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-9.2&arch=x86_64&country=NL
     base_path: rocky/9.2/BaseOS/x86_64/os/
     short_name: rocky_9_2_baseos
     distribution_name: rocky-9.2-baseos-
     sync: false
   - name: Rocky Linux 9.2 - Extras
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-9.2&arch=x86_64
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-9.2&arch=x86_64&country=NL
     base_path: rocky/9.2/extras/x86_64/os/
     short_name: rocky_9_2_extras
     distribution_name: rocky-9.2-extras-
@@ -585,13 +585,13 @@ rpm_package_repos:
   # Additional Rocky Linux 9.2 repositories
   # No advanced virt, Ceph or OpenStack
   - name: Rocky Linux 9.2 - CRB
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-9.2&arch=x86_64
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-9.2&arch=x86_64&country=NL
     base_path: rocky/9.2/CRB/x86_64/os/
     short_name: rocky_9_2_crb
     distribution_name: rocky-9.2-crb-
     sync: false
   - name: Rocky Linux 9.2 - HighAvailability
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-9.2&arch=x86_64
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-9.2&arch=x86_64&country=NL
     base_path: rocky/9.2/highavailability/x86_64/os/
     short_name: rocky_9_2_highavailability
     distribution_name: rocky-9.2-highavailability-
@@ -599,17 +599,17 @@ rpm_package_repos:
 
   # Base Rocky Linux 9.3 repositories
   - name: Rocky Linux 9.3 - AppStream
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-9.3&arch=x86_64
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-9.3&arch=x86_64&country=NL
     base_path: rocky/9.3/AppStream/x86_64/os/
     short_name: rocky_9_3_appstream
     distribution_name: rocky-9.3-appstream-
   - name: Rocky Linux 9.3 - BaseOS
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-9.3&arch=x86_64
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-9.3&arch=x86_64&country=NL
     base_path: rocky/9.3/BaseOS/x86_64/os/
     short_name: rocky_9_3_baseos
     distribution_name: rocky-9.3-baseos-
   - name: Rocky Linux 9.3 - Extras
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-9.3&arch=x86_64
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-9.3&arch=x86_64&country=NL
     base_path: rocky/9.3/extras/x86_64/os/
     short_name: rocky_9_3_extras
     distribution_name: rocky-9.3-extras-
@@ -617,12 +617,12 @@ rpm_package_repos:
   # Additional Rocky Linux 9.3 repositories
   # No advanced virt, Ceph or OpenStack
   - name: Rocky Linux 9.3 - CRB
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-9.3&arch=x86_64
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-9.3&arch=x86_64&country=NL
     base_path: rocky/9.3/CRB/x86_64/os/
     short_name: rocky_9_3_crb
     distribution_name: rocky-9.3-crb-
   - name: Rocky Linux 9.3 - HighAvailability
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-9.3&arch=x86_64
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-9.3&arch=x86_64&country=NL
     base_path: rocky/9.3/highavailability/x86_64/os/
     short_name: rocky_9_3_highavailability
     distribution_name: rocky-9.3-highavailability-
@@ -654,7 +654,7 @@ rpm_package_repos:
     distribution_name: centos-stream-9-storage-ceph-quincy-
   # EPEL 9 repository
   - name: Extra Packages for Enterprise Linux 9
-    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-9&arch=x86_64&infra=stock&content=centos
+    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-9&arch=x86_64&country=NL&infra=stock&content=centos
     sync_policy: mirror_content_only
     base_path: epel/9/Everything/x86_64/
     short_name: epel_9
