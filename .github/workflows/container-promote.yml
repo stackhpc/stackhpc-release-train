@@ -11,7 +11,6 @@ on:
       kayobe_config_branch:
         required: false
         description: Branch of StackHPC Kayobe configuration to use
-        default: stackhpc/yoga
       check_mode:
         description: Check mode
         type: boolean
