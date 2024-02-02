@@ -48,7 +48,6 @@ jobs:
         if [[ $CHECK_MODE = true ]]; then
           args="$args --check --diff"
         fi
-        source venv/bin/activate &&
         ansible-playbook -i ansible/inventory \
         ansible/dev-pulp-repo-version-query-kayobe.yml \
         ansible/dev-pulp-repo-promote.yml \
