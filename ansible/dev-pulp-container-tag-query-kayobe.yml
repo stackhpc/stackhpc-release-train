@@ -1,0 +1,32 @@
+---
+# This playbook queries the Pulp container image tags defined in a Kayobe
+# configuration repository (in etc/kayobe/kolla-image-tags.yml). It then sets
+# the 'dev_pulp_repository_container_promotion_tags' tag map variable based
+# upon those tags, which defines the set of container image tags that
+# will be promoted when the dev-pulp-container-promote.yml playbook is run.
+
+- import_playbook: kayobe-container-tag-query.yml
+
+- name: Set dev Pulp container image tags to promote from Kayobe config tags
+  hosts: localhost
+  gather_facts: true
+  tasks:
+    - name: Set a fact about container image tags to promote
+      set_fact:
+        dev_pulp_repository_container_promotion_tags: >-
+          {{ kayobe_kolla_image_tags |
+             dict2items |
+             selectattr('key', 'in', kolla_container_images_filtered) |
+             items2dict }}
+
+    - name: Display container promotion tags facts
+      debug:
+        var: dev_pulp_repository_container_promotion_tags
+
+    - name: Assert that tags variable is populated
+      assert:
+        that:
+          - dev_pulp_repository_container_promotion_tags | length > 0
+        msg: >-
+          Distribution promotion tag variable
+          'dev_pulp_repository_container_promotion_tags' is empty

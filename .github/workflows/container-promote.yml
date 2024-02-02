@@ -8,22 +8,14 @@ on:
         type: string
         required: false
         default: ""
-      distros:
-        description: Space-separated list of base distributions to promote
-        type: string
-        required: false
-        default: ""
-      tag:
-        description: Container image tag to promote
+      kayobe_config_branch:
         required: true
-      promote-old-images:
-        description: Whether to promote images for Yoga and older
+        description: Branch of StackHPC Kayobe configuration to use
+      check_mode:
+        description: Check mode
         type: boolean
-        default: true
-      promote-new-images:
-        description: Whether to promote images for Zed and newer
-        type: boolean
-        default: true
+        required: false
+        default: false
 
 env:
   ANSIBLE_FORCE_COLOR: True
@@ -42,18 +34,25 @@ jobs:
         vault-password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
         vault-password-file: ${{ env.ANSIBLE_VAULT_PASSWORD_FILE }}
 
+    - name: Clone StackHPC Kayobe configuration repository
+      uses: actions/checkout@v3
+      with:
+        repository: stackhpc/stackhpc-kayobe-config
+        ref: refs/heads/${{ github.event.inputs.kayobe_config_branch }}
+        path: stackhpc-kayobe-config
+
     - name: Promote images from stackhpc-dev to stackhpc namespace in Ark
       run: |
+        args=""
+        if [[ $CHECK_MODE = true ]]; then
+          args="$args --check --diff"
+        fi
         ansible-playbook -i ansible/inventory \
+        ansible/dev-pulp-container-tag-query-kayobe.yml \
         ansible/dev-pulp-container-promote.yml \
-        -e dev_pulp_repository_container_promotion_tag="$TAG" \
         -e kolla_container_image_filter="'$FILTER'" \
-        -e kolla_base_distros_override="'$DISTROS'" \
-        -e sync_old_images="'$PROMOTE_OLD_IMAGES'" \
-        -e sync_new_images="'$PROMOTE_NEW_IMAGES'"
+        -e kayobe_config_repo_path=./stackhpc-kayobe-config/ \
+        $args
       env:
-        TAG: ${{ github.event.inputs.tag }}
         FILTER: ${{ github.event.inputs.filter }}
-        DISTROS: ${{ github.event.inputs.distros }}
-        PROMOTE_OLD_IMAGES: ${{ github.event.inputs.promote-old-images }}
-        PROMOTE_NEW_IMAGES: ${{ github.event.inputs.promote-new-images }}
+        CHECK_MODE: ${{ inputs.check_mode }}

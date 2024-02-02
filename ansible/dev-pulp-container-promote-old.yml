@@ -1,0 +1,65 @@
+---
+# This playbook promotes images in the development namespace (stackhpc-dev) to
+# the release namespace (stackhpc). This makes them available to clients.
+# Images with a tag defined by dev_pulp_repository_container_promotion_tag are
+# promoted.
+
+- name: Promote dev Pulp containers
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Fail if container image to promote is not defined
+      fail:
+        msg: >
+          The container image to promote must be specified via
+          'dev_pulp_repository_container_promotion_tag'
+      when: dev_pulp_repository_container_promotion_tag is not defined
+
+    - debug:
+        msg: "Promoting tag {{ dev_pulp_repository_container_promotion_tag }}"
+
+    # Copy tags from stackhpc-dev to stackhpc repositories.
+    - import_role:
+        name: stackhpc.pulp.pulp_container_content
+      vars:
+        pulp_url: "{{ dev_pulp_url }}"
+        pulp_username: "{{ dev_pulp_username }}"
+        pulp_password: "{{ dev_pulp_password }}"
+        pulp_container_content: >-
+          {%- set contents = [] -%}
+          {%- if sync_old_images | bool -%}
+          {%- for base_distro in kolla_base_distros -%}
+          {%- for image in kolla_container_images_filtered -%}
+          {%- if image not in kolla_unbuildable_images.old_scheme[base_distro] -%}
+          {%- set src_image_repo = "stackhpc-dev/" ~ base_distro ~ "-source-" ~ image -%}
+          {%- set dest_image_repo = "stackhpc/" ~ base_distro ~ "-source-" ~ image -%}
+          {%- set content = {
+            "allow_missing": True,
+            "src_repo": src_image_repo,
+            "src_is_push": true,
+            "repository": dest_image_repo,
+            "tags": [dev_pulp_repository_container_promotion_tag],
+          } -%}
+          {%- set _ = contents.append(content) -%}
+          {%- endif -%}
+          {%- endfor -%}
+          {%- endfor -%}
+          {%- endif -%}
+          {%- if sync_new_images | bool -%}
+          {%- for image in kolla_container_images_filtered -%}
+          {%- if image not in kolla_unbuildable_images.new_scheme -%}
+          {%- set src_image_repo = "stackhpc-dev/" ~ image -%}
+          {%- set dest_image_repo = "stackhpc/" ~ image -%}
+          {%- set content = {
+            "allow_missing": True,
+            "src_repo": src_image_repo,
+            "src_is_push": true,
+            "repository": dest_image_repo,
+            "tags": [dev_pulp_repository_container_promotion_tag],
+          } -%}
+          {%- set _ = contents.append(content) -%}
+          {%- endif -%}
+          {%- endfor -%}
+          {%- endif -%}
+          {{ contents }}
+        pulp_container_content_wait: false

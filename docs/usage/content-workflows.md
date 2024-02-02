@@ -204,11 +204,7 @@ ansible/test-pulp-container-sync.yml \
 ansible/test-pulp-container-publish.yml
 ```
 
-## Updating container image tags in Kayobe configuration
-
-!!! note
-
-    This procedure is expected to change.
+## Updating container image tags in Kayobe configuration (Yoga release and earlier)
 
 The image tag used deploy containers may be updated for all images in [etc/kayobe/kolla.yml](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/wallaby/etc/kayobe/kolla.yml), or for specific images in [etc/kayobe/kolla/globals.yml](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/wallaby/etc/kayobe/kolla/globals.yml).
 Currently this is a manual process.
@@ -237,23 +233,97 @@ Alternatively, to update the tag for a specific container, update `etc/kayobe/ko
 skydive_analyzer_tag: wallaby-20220811T091848
 ```
 
-## Promoting container images
+## Updating container image tags in Kayobe configuration (Zed release onwards)
+
+The image tags used deploy containers are defined in [etc/kayobe/kolla-image-tags.yml](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/zed/etc/kayobe/kolla-image-tags.yml).
+Currently updating these is a manual process.
+
+Use the new tag from the [container image build](#building-container-images).
+
+For example, to update the default tag for all images (used where no service-specific tag has been set), update the `openstack` key, and remove all other keys:
+
+```yaml
+# Dict of Kolla image tags to deploy for each service.
+# Each key is the tag variable prefix name, and the value is another dict,
+# where the key is the OS distro and the value is the tag to deploy.
+kolla_image_tags:
+  openstack:
+    rocky-9: zed-rocky-9-20230101T000000
+    ubuntu-jammy: zed-ubuntu-jammy-20230101T000000
+```
+
+Alternatively, update the tag for all containers in a service, e.g. for all `nova` containers:
+
+```yaml
+# Dict of Kolla image tags to deploy for each service.
+# Each key is the tag variable prefix name, and the value is another dict,
+# where the key is the OS distro and the value is the tag to deploy.
+kolla_image_tags:
+  openstack:
+    rocky-9: zed-rocky-9-20230101T000000
+    ubuntu-jammy: zed-ubuntu-jammy-20230101T000000
+  nova:
+    rocky-9: zed-rocky-9-20230102T000000
+    ubuntu-jammy: zed-ubuntu-jammy-20230102T000000
+```
+
+Alternatively, update the tag for a specific container, e.g. for the `nova_compute` container:
+
+```yaml
+# Dict of Kolla image tags to deploy for each service.
+# Each key is the tag variable prefix name, and the value is another dict,
+# where the key is the OS distro and the value is the tag to deploy.
+kolla_image_tags:
+  openstack:
+    rocky-9: zed-rocky-9-20230101T000000
+    ubuntu-jammy: zed-ubuntu-jammy-20230101T000000
+  nova_compute:
+    rocky-9: zed-rocky-9-20230103T000000
+    ubuntu-jammy: zed-ubuntu-jammy-20230103T000000
+```
+
+## Promoting container images (Zed release onwards)
 
 !!! note
 
     This should only be performed when container images are ready for release.
 
-The [Promote container repositories](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/container-promote.yml) workflow runs on demand.
-It should be run when container images need to be released, typically after a change to [update container image tags](#updating-container-image-tags-in-kayobe-configuration) has been approved.
-It runs the following playbook:
+The [Promote container repositories](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/container-promote.yml) workflow is triggered automatically when a change is merged to stackhpc-kayobe-config.
+It may also be run on demand.
 
-* `dev-pulp-container-promote.yml`: Promote a set of container images from `stackhpc-dev` to `stackhpc` namespace. The tag to be promoted is defined via `dev_pulp_repository_container_promotion_tag` which should be specified as an extra variable (`-e`).
+It runs the following playbooks:
+
+* `dev-pulp-container-tag-query-kayobe.yml`: Query the Pulp container image tags defined in a Kayobe configuration repository and set the tag map variable `dev_pulp_repository_container_promotion_tags` based upon those tags. A path to a Kayobe configuration repository must be specified via `kayobe_config_repo_path`.
+* `dev-pulp-container-promote.yml`: Promote a set of container images from `stackhpc-dev` to `stackhpc` namespace. The tags to be promoted are defined via `dev_pulp_repository_container_promotion_tags`.
 
 Use GitHub Actions to run this workflow, or to run it manually:
 
 ```
 ansible-playbook -i ansible/inventory \
-ansible/dev-pulp-container-promote.yml
+ansible/dev-pulp-container-tag-query-kayobe.yml \
+ansible/dev-pulp-container-promote.yml \
+-e kayobe_config_repo_path=../stackhpc-kayobe-config/
+```
+
+In this example, the Pulp container image tags defined in the `etc/kayobe/kolla-image-tags.yml` file in `../stackhpc-kayobe-config` repository (relative to the current working directory) will be promoted to releases.
+
+## Promoting container images (Yoga release and earlier)
+
+!!! note
+
+    This should only be performed when container images are ready for release.
+
+The [Promote container repositories (old)](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/container-promote-old.yml) workflow runs on demand.
+It should be run when container images need to be released, typically after a change to [update container image tags](#updating-container-image-tags-in-kayobe-configuration) has been approved.
+It runs the following playbook:
+
+* `dev-pulp-container-promote-old.yml`: Promote a set of container images from `stackhpc-dev` to `stackhpc` namespace. The tag to be promoted is defined via `dev_pulp_repository_container_promotion_tag` which should be specified as an extra variable (`-e`).
+
+Use GitHub Actions to run this workflow, or to run it manually:
+
+```
+ansible-playbook -i ansible/inventory \
+ansible/dev-pulp-container-promote-old.yml
 ```
 
 ## Other utilities
