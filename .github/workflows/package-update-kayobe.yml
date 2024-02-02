@@ -61,7 +61,7 @@ jobs:
       # For now, just create an artifact that the user can download.
       - name: Upload pulp-repo-versions.yml artifact
         if: ${{ steps.git-diff.outputs.changed == 'true' }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: pulp-repo-versions.yml
           path: stackhpc-kayobe-config/etc/kayobe/pulp-repo-versions.yml
