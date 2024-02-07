@@ -29,6 +29,5 @@ nav:
   - Operations:
       Ark: operations/ark.md
       Test Pulp: operations/test-pulp.md
-      Vault: operations/vault.md
       GitHub: operations/github.md
   - Contributing: contributing.md

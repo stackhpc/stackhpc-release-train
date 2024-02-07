@@ -1,3 +1,2 @@
 ansible<6
-ansible-modules-hashivault==4.6.4
 jmespath==0.10.0
