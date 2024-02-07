@@ -12,6 +12,10 @@ on:
         required: false
         description: Branch of StackHPC Kayobe configuration to use
         default: stackhpc/wallaby
+      skip_pulp:
+        description: Whether to skip pulp promotion
+        type: boolean
+        default: true
 
 env:
   ANSIBLE_FORCE_COLOR: True
@@ -45,6 +49,7 @@ jobs:
           -e deb_package_repo_filter="'$FILTER'" \
           -e rpm_package_repo_filter="'$FILTER'" \
           -e kayobe_config_repo_path=./stackhpc-kayobe-config/
+        if: inputs.skip_pulp == false
         env:
           FILTER: ${{ github.event.inputs.filter }}
 

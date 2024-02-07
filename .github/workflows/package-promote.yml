@@ -17,6 +17,10 @@ on:
         type: boolean
         required: false
         default: false
+      skip_pulp:
+        description: Whether to skip pulp promotion
+        type: boolean
+        default: true
 
 env:
   ANSIBLE_FORCE_COLOR: True
@@ -55,6 +59,7 @@ jobs:
         -e rpm_package_repo_filter="'$FILTER'" \
         -e kayobe_config_repo_path=./stackhpc-kayobe-config/ \
         $args
+      if: inputs.filter.skip_pulp == false
       env:
         FILTER: ${{ github.event.inputs.filter }}
         CHECK_MODE: ${{ inputs.check_mode }}

@@ -20,6 +20,11 @@ on:
         type: string
         required: false
         default: ""
+      skip_pulp:
+        description: Whether to skip pulp promotion
+        type: boolean
+        default: true
+
 
 env:
   ANSIBLE_FORCE_COLOR: True
@@ -43,6 +48,7 @@ jobs:
         ansible/dev-pulp-container-publish.yml \
         -e kolla_container_image_filter="'$FILTER'" \
         -e kolla_base_distros_override="'$DISTROS'"
+      if: inputs.skip_pulp == false
       env:
         FILTER: ${{ github.event.inputs.filter }}
         DISTROS: ${{ github.event.inputs.distros }}
