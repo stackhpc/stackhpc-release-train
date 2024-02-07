@@ -23,6 +23,9 @@ jobs:
     name: Sync specific package repository versions from Ark to Test Pulp
     runs-on: arc-release-train-runner
     steps:
+    - name: This workflow does not currently work. Test pulp does not exist.
+      run: exit 1
+
     - name: Checkout
       uses: actions/checkout@v4
 
