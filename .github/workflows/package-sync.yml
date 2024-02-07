@@ -87,6 +87,6 @@ jobs:
         ansible/test-pulp-repo-publish.yml \
         -e deb_package_repo_filter="'$FILTER'" \
         -e rpm_package_repo_filter="'$FILTER'"
-      if: inputs.sync_test == false
+      if: !inputs.sync_test
       env:
         FILTER: ${{ inputs.filter }}
