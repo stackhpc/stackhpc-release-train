@@ -25,7 +25,7 @@ on:
       sync_test:
         required: false
         description: Sync package repositories in Test Pulp
-        default: true
+        default: false
         type: boolean
       filter:
         description: Space-separated list of regular expressions matching short_name of repositories to sync
