@@ -24,10 +24,6 @@ on:
         description: Whether to promote images for Zed and newer
         type: boolean
         default: true
-      skip_pulp:
-        description: Whether to skip pulp promotion
-        type: boolean
-        default: true
 
 env:
   ANSIBLE_FORCE_COLOR: True
@@ -55,7 +51,6 @@ jobs:
         -e kolla_base_distros_override="'$DISTROS'" \
         -e sync_old_images="'$PROMOTE_OLD_IMAGES'" \
         -e sync_new_images="'$PROMOTE_NEW_IMAGES'"
-      if: inputs.filter.skip_pulp == false
       env:
         TAG: ${{ github.event.inputs.tag }}
         FILTER: ${{ github.event.inputs.filter }}

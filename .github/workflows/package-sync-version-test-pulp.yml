@@ -13,11 +13,6 @@ on:
         type: string
         required: false
         default: ""
-      skip_pulp:
-        description: Whether to skip pulp promotion
-        type: boolean
-        default: true
-
 
 env:
   ANSIBLE_FORCE_COLOR: True
@@ -50,7 +45,6 @@ jobs:
         -e test_pulp_sync_repo_version="'$REPO_VERSION'" \
         -e deb_package_repo_filter="'$FILTER'" \
         -e rpm_package_repo_filter="'$FILTER'"
-      if: inputs.skip_pulp == false
       env:
         FILTER: ${{ github.event.inputs.filter }}
         REPO_VERSION: ${{ github.event.inputs.repo_version }}
