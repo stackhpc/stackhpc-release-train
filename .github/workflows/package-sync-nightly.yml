@@ -17,6 +17,6 @@ jobs:
     uses: stackhpc/stackhpc-release-train/.github/workflows/package-sync.yml@main
     with:
       sync_ark: True
-      sync_test: True
+      sync_test: False
       filter: ${{ matrix.filter }}
     secrets: inherit
