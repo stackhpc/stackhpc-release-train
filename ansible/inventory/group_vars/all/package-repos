@@ -314,7 +314,7 @@ rpm_package_repos:
     distribution_name: elasticsearch-logstash-kibana-7.x-
   # Note(piotrp): With repository size of 16G - for now we'll want this on_demand
   - name: Grafana
-    url: https://packages.grafana.com/oss/rpm
+    url: https://rpm.grafana.com
     policy: on_demand
     base_path: grafana/oss/rpm/
     short_name: grafana
