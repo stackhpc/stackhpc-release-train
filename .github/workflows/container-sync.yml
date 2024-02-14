@@ -21,10 +21,10 @@ on:
         description: Whether to sync images for Zed and newer
         type: boolean
         default: true
-      skip_pulp:
-        description: Whether to skip test pulp promotion
+      sync-test-pulp:
+        description: Whether to sync images to Test Pulp
         type: boolean
-        default: true
+        default: false
 
 env:
   ANSIBLE_FORCE_COLOR: True
@@ -66,7 +66,7 @@ jobs:
         -e kolla_base_distros_override="'$DISTROS'" \
         -e sync_old_images="'$SYNC_OLD_IMAGES'" \
         -e sync_new_images="'$SYNC_NEW_IMAGES'"
-      if: inputs.skip_pulp == false
+      if: inputs.sync-test-pulp
       env:
         FILTER: ${{ github.event.inputs.filter }}
         DISTROS: ${{ github.event.inputs.distros }}
@@ -81,7 +81,7 @@ jobs:
         -e kolla_base_distros_override="'$DISTROS'" \
         -e sync_old_images="'$SYNC_OLD_IMAGES'" \
         -e sync_new_images="'$SYNC_NEW_IMAGES'"
-      if: inputs.skip_pulp == false
+      if: inputs.sync-test-pulp
       env:
         FILTER: ${{ github.event.inputs.filter }}
         DISTROS: ${{ github.event.inputs.distros }}

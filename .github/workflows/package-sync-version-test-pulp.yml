@@ -14,12 +14,9 @@ on:
         required: false
         default: ""
 
-
 env:
   ANSIBLE_FORCE_COLOR: True
   ANSIBLE_VAULT_PASSWORD_FILE: ${{ github.workspace }}/vault-pass
-  skip_pulp: true
-
 
 jobs:
   package-sync-version-test:
@@ -31,15 +28,12 @@ jobs:
 
     - name: Checkout
       uses: actions/checkout@v4
-      if: env.skip_pulp == false
 
     - name: Setup Release Train & dependencies
       uses: ./.github/actions/setup
       with:
         vault-password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
         vault-password-file: ${{ env.ANSIBLE_VAULT_PASSWORD_FILE }}
-      if: env.skip_pulp == false
-
 
     - name: Sync and publish package repositories in test
       run: |
@@ -51,12 +45,6 @@ jobs:
         -e test_pulp_sync_repo_version="'$REPO_VERSION'" \
         -e deb_package_repo_filter="'$FILTER'" \
         -e rpm_package_repo_filter="'$FILTER'"
-      if: env.skip_pulp == false
       env:
         FILTER: ${{ github.event.inputs.filter }}
         REPO_VERSION: ${{ github.event.inputs.repo_version }}
-
-    - name: Message if skipping Pulp
-      run: |
-          echo "PULP CURRENTLY NOT AVAILABLE -> -> -> Skipping Pulp Sync"
-      if: env.skip_pulp == true

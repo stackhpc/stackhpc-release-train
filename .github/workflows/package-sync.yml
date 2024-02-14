@@ -32,7 +32,6 @@ on:
         type: string
         required: false
         default: ""
-
 env:
   ANSIBLE_FORCE_COLOR: True
   ANSIBLE_VAULT_PASSWORD_FILE: ${{ github.workspace }}/vault-pass
