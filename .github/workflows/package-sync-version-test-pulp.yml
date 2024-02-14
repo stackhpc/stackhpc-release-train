@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       repo_version:
-        description: A repository version string maching repository versions to sync from Ark to Test Pulp
+        description: A repository version string matching repository versions to sync from Ark to Test Pulp
         type: string
         required: false
         default: ""
