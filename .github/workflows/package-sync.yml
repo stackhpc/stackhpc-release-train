@@ -52,13 +52,18 @@ jobs:
         vault-password-file: ${{ env.ANSIBLE_VAULT_PASSWORD_FILE }}
 
     - name: Sync and publish package repositories in Ark
-      run: |
-        ansible-playbook -i ansible/inventory \
-        ansible/dev-pulp-repo-sync.yml \
-        ansible/dev-pulp-repo-publication-cleanup.yml \
-        ansible/dev-pulp-repo-publish.yml \
-        -e deb_package_repo_filter="'$FILTER'" \
-        -e rpm_package_repo_filter="'$FILTER'"
+      uses: nick-fields/retry@v3
+      with:
+        timeout_minutes: 360
+        max_attempts: 2
+        command: |
+          ansible-playbook -i ansible/inventory \
+          ansible/dev-pulp-repo-sync.yml \
+          ansible/dev-pulp-repo-publication-cleanup.yml \
+          ansible/dev-pulp-repo-publish.yml \
+          -e deb_package_repo_filter="'$FILTER'" \
+          -e rpm_package_repo_filter="'$FILTER'"
+        retry_wait_seconds: 3600
       env:
         FILTER: ${{ inputs.filter }}
 
@@ -78,13 +83,18 @@ jobs:
         vault-password-file: ${{ env.ANSIBLE_VAULT_PASSWORD_FILE }}
 
     - name: Sync and publish package repositories in test
-      run: |
-        ansible-playbook -i ansible/inventory \
-        ansible/test-pulp-repo-version-query.yml \
-        ansible/test-pulp-repo-sync.yml \
-        ansible/test-pulp-repo-publication-cleanup.yml \
-        ansible/test-pulp-repo-publish.yml \
-        -e deb_package_repo_filter="'$FILTER'" \
-        -e rpm_package_repo_filter="'$FILTER'"
+      uses: nick-fields/retry@v3
+      with:
+        timeout_minutes: 360
+        max_attempts: 2
+        command: |
+          ansible-playbook -i ansible/inventory \
+          ansible/test-pulp-repo-version-query.yml \
+          ansible/test-pulp-repo-sync.yml \
+          ansible/test-pulp-repo-publication-cleanup.yml \
+          ansible/test-pulp-repo-publish.yml \
+          -e deb_package_repo_filter="'$FILTER'" \
+          -e rpm_package_repo_filter="'$FILTER'"
+        retry_wait_seconds: 3600
       env:
         FILTER: ${{ inputs.filter }}
