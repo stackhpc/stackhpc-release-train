@@ -298,6 +298,17 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
+  requirements:
+    ignored_releases:
+        - zed
+        - yoga
+        - xena
+        - wallaby
+        - victoria
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
   # Ansible team
   ansible-role-os-host-aggregates:
     repository_type: "ansible"
