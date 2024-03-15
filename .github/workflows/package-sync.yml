@@ -39,6 +39,7 @@ jobs:
   package-sync-ark:
     name: Sync package repositories in Ark
     runs-on: ubuntu-latest
+    timeout-minutes: 480
     if: inputs.sync_ark
     steps:
 
@@ -71,6 +72,7 @@ jobs:
     name: Sync package repositories in test
     runs-on: arc-release-train-runner
     needs: package-sync-ark
+    timeout-minutes: 480
     if: inputs.sync_test
     steps:
     - name: Checkout
