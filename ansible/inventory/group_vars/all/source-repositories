@@ -300,8 +300,6 @@ source_repositories:
           dest: ".github/CODEOWNERS"
   requirements:
     ignored_releases:
-        - zed
-        - yoga
         - xena
         - wallaby
         - victoria
