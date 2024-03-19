@@ -100,6 +100,13 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.kayobe }}"
           dest: ".github/CODEOWNERS"
+  terraform-kayobe-multinode:
+    repository_type: "single-branch"
+    workflows: []
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.kayobe }}"
+          dest: ".github/CODEOWNERS"
   bifrost:
     ignored_releases:
       - victoria
