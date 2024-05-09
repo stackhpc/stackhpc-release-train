@@ -193,7 +193,6 @@ source_repositories:
           dest: ".github/CODEOWNERS"
     ignored_releases:
       - zed
-      - 2023.1
   ironic-ui:
     ignored_releases:
       - victoria
