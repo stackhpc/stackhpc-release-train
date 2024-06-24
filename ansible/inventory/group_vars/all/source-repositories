@@ -130,9 +130,6 @@ source_repositories:
       - victoria
       - wallaby
       - xena
-      - yoga
-      - zed
-      - 2023.1
       - 2024.1
     community_files:
       - codeowners:
@@ -169,9 +166,6 @@ source_repositories:
       - victoria
       - wallaby
       - xena
-      - yoga
-      - zed
-      - 2023.1
       - 2024.1
     community_files:
       - codeowners:
@@ -267,8 +261,6 @@ source_repositories:
     ignored_releases:
       - victoria
       - xena
-      - zed
-      - 2023.1
       - 2024.1
     community_files:
       - codeowners:
