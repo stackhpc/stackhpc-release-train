@@ -3,6 +3,7 @@
 # containing a list of workflows and community files required by a given
 # repository.
 default_releases:
+  - "2024.1"
   - "2023.1"
   - zed
   - yoga
@@ -106,6 +107,7 @@ source_repositories:
       - yoga
       - zed
       - 2023.1
+      - 2024.1
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.kayobe }}"
@@ -118,6 +120,7 @@ source_repositories:
       - yoga
       - zed
       - 2023.1
+      - 2024.1
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
@@ -130,6 +133,7 @@ source_repositories:
       - yoga
       - zed
       - 2023.1
+      - 2024.1
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
@@ -151,6 +155,7 @@ source_repositories:
       - xena
       - zed
       - 2023.1
+      - 2024.1
     workflows:
       ignored_workflows:
         elsewhere:
@@ -167,6 +172,7 @@ source_repositories:
       - yoga
       - zed
       - 2023.1
+      - 2024.1
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
@@ -178,6 +184,7 @@ source_repositories:
       - xena
       - zed
       - 2023.1
+      - 2024.1
     workflows:
       ignored_workflows:
         elsewhere:
@@ -200,6 +207,7 @@ source_repositories:
       - xena
       - zed
       - 2023.1
+      - 2024.1
     workflows:
       ignored_workflows:
         elsewhere:
@@ -224,6 +232,7 @@ source_repositories:
       - xena
       - zed
       - 2023.1
+      - 2024.1
     workflows:
       ignored_workflows:
         elsewhere:
@@ -260,6 +269,7 @@ source_repositories:
       - xena
       - zed
       - 2023.1
+      - 2024.1
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
@@ -271,6 +281,7 @@ source_repositories:
       - xena
       - zed
       - 2023.1
+      - 2024.1
     workflows:
       ignored_workflows:
         elsewhere:
@@ -286,6 +297,7 @@ source_repositories:
       - yoga
       - zed
       - 2023.1
+      - 2024.1
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
