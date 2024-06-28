@@ -3,7 +3,7 @@
 """
 Import existing GitHub resources from the `stackhpc` organisation
 so that they maybe managed by Terraform. It shall only import resources
-that are defined within the `terraform.tfvars.json` file nd are currently
+that are defined within the `terraform.tfvars.json` file and are currently
 available on GitHub.
 """
 
@@ -223,9 +223,17 @@ def main() -> None:
             branch_protection_resource = BranchProtection(team_id.name.lower(
             ), {f"{name}:stackhpc/[vwxy]*": name for name in team_repositories}, parsed_args.dry_run, "_py_3-6")
             branch_protection_resource.refresh_resource()
-            # Post-Zed branch protection
+            # Zed branch protection
             branch_protection_resource = BranchProtection(team_id.name.lower(
-            ), {f"{name}:stackhpc/[z,2]*": name for name in team_repositories}, parsed_args.dry_run, "_py_3-10")
+            ), {f"{name}:stackhpc/zed": name for name in team_repositories}, parsed_args.dry_run, "_zed")
+            branch_protection_resource.refresh_resource()
+            # Antelope branch protection
+            branch_protection_resource = BranchProtection(team_id.name.lower(
+            ), {f"{name}:stackhpc/2023.1": name for name in team_repositories}, parsed_args.dry_run, "_antelope")
+            branch_protection_resource.refresh_resource()
+            # Caracal branch protection
+            branch_protection_resource = BranchProtection(team_id.name.lower(
+            ), {f"{name}:stackhpc/2024.1": name for name in team_repositories}, parsed_args.dry_run, "_caracal")
             branch_protection_resource.refresh_resource()
         else:
             branch_protection_resource = BranchProtection(team_id.name.lower(
