@@ -679,6 +679,11 @@ rpm_package_repos:
     base_path: rocky/9.4/highavailability/x86_64/os/
     short_name: rocky_9_4_highavailability
     distribution_name: rocky-9.4-highavailability-
+  - name: Rocky Linux 9 - SIG Security Common
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-sig-security-common-9&arch=x86_64&country=NL
+    base_path: pub/sig/9/security/x86_64/security-common/
+    short_name: rocky_9_sig_security_common
+    distribution_name: rocky-9-sig-security-common-
 
   # Additional CentOS Stream 9 repositories
   # NFV OpenvSwitch for CentOS Stream 9
