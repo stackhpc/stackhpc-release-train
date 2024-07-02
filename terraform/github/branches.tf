@@ -100,11 +100,11 @@ resource "github_branch_protection" "kayobe_branch_protection_py_3-6" {
   }
 }
 
-resource "github_branch_protection" "kayobe_branch_protection_py_3-10" {
+resource "github_branch_protection" "kayobe_branch_protection_zed" {
   for_each      = toset(var.repositories["Kayobe"])
   repository_id = data.github_repository.repositories[each.key].node_id
 
-  pattern                         = "stackhpc/[z,2]*"
+  pattern                         = "stackhpc/zed"
   require_conversation_resolution = true
   allows_deletions                = false
   allows_force_pushes             = false
@@ -120,11 +120,80 @@ resource "github_branch_protection" "kayobe_branch_protection_py_3-10" {
   ]
 
   required_status_checks {
-    contexts = lookup(lookup(var.required_status_checks, each.key, {}), "stackhpc/[z,2]*", lookup(var.required_status_checks, each.key, {
+    contexts = lookup(lookup(var.required_status_checks, each.key, {}), "stackhpc/zed", lookup(var.required_status_checks, each.key, {
       "default" : [
         "tox / Tox pep8 with Python 3.10",
         "tox / Tox py3 with Python 3.10",
         "tox / Tox py3 with Python 3.8"
+      ]
+    }).default)
+    strict = false
+  }
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
+resource "github_branch_protection" "kayobe_branch_protection_antelope" {
+  for_each      = toset(var.repositories["Kayobe"])
+  repository_id = data.github_repository.repositories[each.key].node_id
+
+  pattern                         = "stackhpc/2023.1"
+  require_conversation_resolution = true
+  allows_deletions                = false
+  allows_force_pushes             = false
+
+  required_pull_request_reviews {
+    dismiss_stale_reviews           = true
+    require_code_owner_reviews      = true
+    required_approving_review_count = 1
+  }
+
+  push_restrictions = [
+    resource.github_team.organisation_teams["Developers"].node_id
+  ]
+
+  required_status_checks {
+    contexts = lookup(lookup(var.required_status_checks, each.key, {}), "stackhpc/2023.1", lookup(var.required_status_checks, each.key, {
+      "default" : [
+        "tox / Tox pep8 with Python 3.10",
+        "tox / Tox py3 with Python 3.10",
+        "tox / Tox py3 with Python 3.8"
+      ]
+    }).default)
+    strict = false
+  }
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
+resource "github_branch_protection" "kayobe_branch_protection_caracal" {
+  for_each      = toset(var.repositories["Kayobe"])
+  repository_id = data.github_repository.repositories[each.key].node_id
+
+  pattern                         = "stackhpc/2024.1"
+  require_conversation_resolution = true
+  allows_deletions                = false
+  allows_force_pushes             = false
+
+  required_pull_request_reviews {
+    dismiss_stale_reviews           = true
+    require_code_owner_reviews      = true
+    required_approving_review_count = 1
+  }
+
+  push_restrictions = [
+    resource.github_team.organisation_teams["Developers"].node_id
+  ]
+
+  required_status_checks {
+    contexts = lookup(lookup(var.required_status_checks, each.key, {}), "stackhpc/2024.1", lookup(var.required_status_checks, each.key, {
+      "default" : [
+        "tox / Tox pep8 with Python 3.10",
+        "tox / Tox py3 with Python 3.10"
       ]
     }).default)
     strict = false
@@ -173,11 +242,11 @@ resource "github_branch_protection" "openstack_branch_protection_py_3-6" {
   }
 }
 
-resource "github_branch_protection" "openstack_branch_protection_py_3-10" {
+resource "github_branch_protection" "openstack_branch_protection_zed" {
   for_each      = toset(var.repositories["OpenStack"])
   repository_id = data.github_repository.repositories[each.key].node_id
 
-  pattern                         = "stackhpc/[z,2]*"
+  pattern                         = "stackhpc/zed"
   require_conversation_resolution = true
   allows_deletions                = false
   allows_force_pushes             = false
@@ -193,11 +262,80 @@ resource "github_branch_protection" "openstack_branch_protection_py_3-10" {
   }
 
   required_status_checks {
-    contexts = lookup(lookup(var.required_status_checks, each.key, {}), "stackhpc/[z,2]*", lookup(var.required_status_checks, each.key, {
+    contexts = lookup(lookup(var.required_status_checks, each.key, {}), "stackhpc/zed", lookup(var.required_status_checks, each.key, {
       "default" : [
         "tox / Tox pep8 with Python 3.10",
         "tox / Tox py3 with Python 3.10",
         "tox / Tox py3 with Python 3.8"
+      ]
+    }).default)
+    strict = false
+  }
+
+  lifecycle {
+    prevent_destroy = false
+  }
+}
+
+resource "github_branch_protection" "openstack_branch_protection_antelope" {
+  for_each      = toset(var.repositories["OpenStack"])
+  repository_id = data.github_repository.repositories[each.key].node_id
+
+  pattern                         = "stackhpc/2023.1"
+  require_conversation_resolution = true
+  allows_deletions                = false
+  allows_force_pushes             = false
+
+  push_restrictions = [
+    resource.github_team.organisation_teams["Developers"].node_id
+  ]
+
+  required_pull_request_reviews {
+    dismiss_stale_reviews           = true
+    require_code_owner_reviews      = true
+    required_approving_review_count = 1
+  }
+
+  required_status_checks {
+    contexts = lookup(lookup(var.required_status_checks, each.key, {}), "stackhpc/2023.1", lookup(var.required_status_checks, each.key, {
+      "default" : [
+        "tox / Tox pep8 with Python 3.10",
+        "tox / Tox py3 with Python 3.10",
+        "tox / Tox py3 with Python 3.8"
+      ]
+    }).default)
+    strict = false
+  }
+
+  lifecycle {
+    prevent_destroy = false
+  }
+}
+
+resource "github_branch_protection" "openstack_branch_protection_caracal" {
+  for_each      = toset(var.repositories["OpenStack"])
+  repository_id = data.github_repository.repositories[each.key].node_id
+
+  pattern                         = "stackhpc/2024.1"
+  require_conversation_resolution = true
+  allows_deletions                = false
+  allows_force_pushes             = false
+
+  push_restrictions = [
+    resource.github_team.organisation_teams["Developers"].node_id
+  ]
+
+  required_pull_request_reviews {
+    dismiss_stale_reviews           = true
+    require_code_owner_reviews      = true
+    required_approving_review_count = 1
+  }
+
+  required_status_checks {
+    contexts = lookup(lookup(var.required_status_checks, each.key, {}), "stackhpc/2024.1", lookup(var.required_status_checks, each.key, {
+      "default" : [
+        "tox / Tox pep8 with Python 3.10",
+        "tox / Tox py3 with Python 3.10"
       ]
     }).default)
     strict = false
