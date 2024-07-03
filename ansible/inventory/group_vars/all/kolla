@@ -77,6 +77,7 @@ kolla_container_images:
   - neutron-dhcp-agent
   - neutron-l3-agent
   - neutron-metadata-agent
+  - neutron-mlnx-agent
   - neutron-openvswitch-agent
   - neutron-server
   - neutron-sriov-agent
