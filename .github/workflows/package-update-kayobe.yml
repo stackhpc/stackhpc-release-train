@@ -11,7 +11,7 @@ on:
       kayobe_config_branch:
         required: false
         description: Branch of StackHPC Kayobe configuration to use
-        default: stackhpc/wallaby
+        default: stackhpc/2023.1
 
 env:
   ANSIBLE_FORCE_COLOR: True
