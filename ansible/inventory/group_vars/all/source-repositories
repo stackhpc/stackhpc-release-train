@@ -194,6 +194,7 @@ source_repositories:
           dest: ".github/CODEOWNERS"
     ignored_releases:
       - zed
+      - 2024.1
   ironic-ui:
     ignored_releases:
       - victoria
@@ -249,6 +250,7 @@ source_repositories:
       - victoria
       - wallaby
       - xena
+      - 2024.1
     workflows:
       ignored_workflows:
         elsewhere:
