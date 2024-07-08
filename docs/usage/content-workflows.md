@@ -6,6 +6,20 @@ The playbooks are designed to be run manually or via a GitHub Actions CI job.
 This page covers the different workflows available for content management.
 It may be necessary to combine multiple of these to achieve a desired outcome.
 
+## Add new package repositories to Release Train
+
+Configuration for package repositories is in:
+
+* [ansible/inventory/group_vars/all/package-repos](https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/package-repos)
+
+New package repositories should be added to `rpm_package_repos` or `deb_package_repos` in `ansible/inventory/group_vars/all/package-repos`.
+The format of these variables is defined in the same file.
+
+The following files contain information derived from the above variables and should not need to be modified:
+
+* [ansible/inventory/group_vars/all/dev-pulp-repos](https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/dev-pulp-repos)
+* [ansible/inventory/group_vars/all/test-pulp-repos](https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/test-pulp-repos)
+
 ## Syncing package repositories
 
 The [Sync package repositories](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/package-sync.yml) workflow runs nightly and on demand.
@@ -56,14 +70,6 @@ test_pulp_repository_rpm_repo_versions:
   centos_stream_8_baseos: 20220101T143229
   ...
 ```
-
-Configuration for package repositories is in:
-
-* [ansible/inventory/group_vars/all/package-repos](https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/package-repos).
-* [ansible/inventory/group_vars/all/dev-pulp-repos](https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/dev-pulp-repos).
-* [ansible/inventory/group_vars/all/test-pulp-repos](https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/test-pulp-repos).
-
-New package repositories should be added to `rpm_package_repos` in `ansible/inventory/group_vars/all/package-repos`.
 
 ## Promoting package repositories
 
@@ -136,6 +142,21 @@ ansible/test-kayobe-repo-version-generate.yml \
 Package repository versions are stored in StackHPC Kayobe configuration in [etc/kayobe/pulp-repo-versions.yml](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/wallaby/etc/kayobe/pulp-repo-versions.yml).
 Note that the updated versions are not necessarily released.
 The generated file may be amended as necessary (in case not all updates are required), then copied to the StackHPC Kayobe configuration.
+
+## Adding package repositories in Kayobe configuration
+
+Adding a package repository to the StackHPC Release Train configuration is not sufficient to allow StackHPC OpenStack deployments to use it.
+The repository must also be defined in StackHPC Kayobe Configuration.
+We need to define how to sync the package repository from Ark into the local Pulp, as well as how control plane hosts access the repository in the local Pulp service.
+
+In the following steps, the `short_name` of a repository is the `short_name` field of the repository in [ansible/inventory/group_vars/all/package-repos](https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/package-repos).
+
+* Add details of the repository to `stackhpc_pulp_rpm_repos` or `stackhpc_pulp_deb_repos` in `etc/kayobe/pulp.yml` to enable syncing of the repository to the local Pulp service. Use the `required` field to avoid growing sync durations by controlling when the repository needs to be synced.
+* Add a version variable to `etc/kayobe/pulp.yml`. It should have a format of `stackhpc_pulp_repo_<short_name>_version`. The version value may be specified or omitted. If omitted, it can be populated automatically using the [Update Kayobe package repository versions](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/package-update-kayobe.yml) workflow.
+* Add local Pulp URL and version variables for the repository to `etc/kayobe/stackhpc.yml`. They should have a format of `stackhpc_repo_<short_name>_url` and `stackhpc_repo_<short_name>_version`.
+* Override the repository version variable in `stackhpc-ci.yml` in the `ci-aio`, `ci-builder` and `ci-multinode` Kayobe environments to use the datestamped version.
+* If the repository needs to be accessible to the host OS of control plane hosts, add it to `etc/kayobe/dnf.yml` or `etc/kayobe/apt.yml`.
+* If the repository needs to be accessible to Kolla container images, add it to the `Kolla image build configuration` section in `etc/kayobe/kolla.yml`.
 
 ## Building container images
 
@@ -314,7 +335,7 @@ In this example, the Pulp container image tags defined in the `etc/kayobe/kolla-
     This should only be performed when container images are ready for release.
 
 The [Promote container repositories (old)](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/container-promote-old.yml) workflow runs on demand.
-It should be run when container images need to be released, typically after a change to [update container image tags](#updating-container-image-tags-in-kayobe-configuration) has been approved.
+It should be run when container images need to be released, typically after a change to [update container image tags](#updating-container-image-tags-in-kayobe-configuration-yoga-release-and-earlier) has been approved.
 It runs the following playbook:
 
 * `dev-pulp-container-promote-old.yml`: Promote a set of container images from `stackhpc-dev` to `stackhpc` namespace. The tag to be promoted is defined via `dev_pulp_repository_container_promotion_tag` which should be specified as an extra variable (`-e`).
