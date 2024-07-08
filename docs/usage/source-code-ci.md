@@ -2,7 +2,7 @@
 
 Source code continuous integration (CI) is handled by Github Workflows.
 There are currently three workflows in use, whose objective is to perform tedious tasks or to ensure that the code is correct and style guidelines are being followed.
-A brief overview of these workflows was given in the [Overview Section](../index.md#github-actions) whereas this section will provide additional insight into how these workflows function and how you can modify these workflows. 
+A brief overview of these workflows was given in the [Overview Section](../index.md#automation-continuous-integration-ci) whereas this section will provide additional insight into how these workflows function and how you can modify these workflows.
 Also discussed are the community files used by Github to improve developer experience within the respositories in addition to how we intend to synchronise all of the source code repositories with latests files.
 
 ## Github Workflows

@@ -9,7 +9,6 @@ Update one or more package repositories to a new version, then build new Kolla c
 
 If using Yoga release or earlier:
 
-* If the repository URL has changed e.g. a new minor version has been released, add new package repositories to [`package-repos`](https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/package-repos)
 * [Sync package repositories](content-workflows.md#syncing-package-repositories) (optional: runs nightly as a scheduled GitHub Action)
 * [Update Kayobe repository versions](content-workflows.md#updating-package-repository-versions-in-kayobe-configuration)
 * [Build & push Kolla container images](content-workflows.md#building-container-images)
@@ -20,14 +19,41 @@ If using Yoga release or earlier:
 
 If using Zed release onwards:
 
-* If the repository URL has changed e.g. a new minor version has been released, add new package repositories to [`package-repos`](https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/package-repos)
 * [Sync package repositories](content-workflows.md#syncing-package-repositories) (optional: runs nightly as a scheduled GitHub Action)
 * [Update Kayobe repository versions](content-workflows.md#updating-package-repository-versions-in-kayobe-configuration)
 * [Build & push Kolla container images](content-workflows.md#building-container-images)
 * [Update Kayobe container image tags](content-workflows.md#updating-container-image-tags-in-kayobe-configuration-zed-release-onwards)
 * Test
 * Review & merge Kayobe configuration changes
-* [Promote container images](content-workflows.md#promoting-container-images-zed-release-onwards)
+* [Promote container images](content-workflows.md#promoting-container-images-zed-release-onwards) (happens automatically)
+
+## Add a new package repository
+
+Add one or more new package repositories to the release train, then add them to the Kayobe configuration and build new Kolla container images from those repositories.
+
+If using Yoga release or earlier:
+
+* [Add new package repositories to Release Train](content-workflows.md#add-new-package-repositories-to-release-train)
+* [Sync package repositories](content-workflows.md#syncing-package-repositories) (optional: runs nightly as a scheduled GitHub Action)
+* [Add package repositories to StackHPC Kayobe Configuration](content-workflows.md#adding-package-repositories-in-kayobe-configuration)
+* [Update Kayobe repository versions](content-workflows.md#updating-package-repository-versions-in-kayobe-configuration)
+* [Build & push Kolla container images](content-workflows.md#building-container-images)
+* [Update Kayobe container image tags](content-workflows.md#updating-container-image-tags-in-kayobe-configuration-yoga-release-and-earlier)
+* Test
+* Review & merge Kayobe configuration changes
+* [Promote container images](content-workflows.md#promoting-container-images-yoga-release-and-earlier)
+
+If using Zed release onwards:
+
+* [Add new package repositories to Release Train](content-workflows.md#add-new-package-repositories-to-release-train)
+* [Sync package repositories](content-workflows.md#syncing-package-repositories) (optional: runs nightly as a scheduled GitHub Action)
+* [Add package repositories to StackHPC Kayobe Configuration](content-workflows.md#adding-package-repositories-in-kayobe-configuration)
+* [Update Kayobe repository versions](content-workflows.md#updating-package-repository-versions-in-kayobe-configuration)
+* [Build & push Kolla container images](content-workflows.md#building-container-images)
+* [Update Kayobe container image tags](content-workflows.md#updating-container-image-tags-in-kayobe-configuration-zed-release-onwards)
+* Test
+* Review & merge Kayobe configuration changes
+* [Promote container images](content-workflows.md#promoting-container-images-zed-release-onwards) (happens automatically)
 
 ## Update Kolla container images
 
@@ -47,7 +73,7 @@ If using Zed release onwards:
 * [Update Kayobe container image tags](content-workflows.md#updating-container-image-tags-in-kayobe-configuration-zed-release-onwards)
 * Test
 * Review & merge Kayobe configuration changes
-* [Promote container images](content-workflows.md#promoting-container-images-zed-release-onwards)
+* [Promote container images](content-workflows.md#promoting-container-images-zed-release-onwards) (happens automatically)
 
 ## Add a new Kolla container image
 
