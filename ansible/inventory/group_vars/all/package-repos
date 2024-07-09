@@ -347,7 +347,7 @@ rpm_package_repos:
     base_path: mariadb-10.6/yum/centos8-amd64/
     short_name: mariadb_10_6_centos8
     distribution_name: mariadb-10.6-centos8
-  # RabbitMQ - Erlang for Redhat family, version 8/9 agnostic
+  # RabbitMQ - Erlang for Redhat family, version 8
   - name: RabbitMQ - Erlang
     url: https://packagecloud.io/rabbitmq/erlang/el/8/x86_64
     # mirror_complete fails with:
@@ -356,7 +356,7 @@ rpm_package_repos:
     base_path: rabbitmq/erlang/el/8/x86_64/
     short_name: rabbitmq_erlang
     distribution_name: rabbitmq-erlang-
-  # RabbitMQ for Redhat family, version 8/9 agnostic
+  # RabbitMQ for Redhat family, version 8
   - name: RabbitMQ - Server
     url: https://packagecloud.io/rabbitmq/rabbitmq-server/el/8/x86_64
     # mirror_complete fails with:
@@ -762,18 +762,48 @@ rpm_package_repos:
     distribution_name: centos-stream-9-openstack-caracal-
 
   # Additional RHEL 9 repositories
+  # RabbitMQ - Erlang for Redhat family, version 9
+  - name: RabbitMQ - Erlang - RHEL 9
+    url: https://packagecloud.io/rabbitmq/erlang/el/9/x86_64
+    # mirror_complete fails with:
+    # "This repository uses features which are incompatible with 'mirror' sync. Please sync without mirroring enabled"
+    sync_policy: mirror_content_only
+    base_path: rabbitmq/erlang/el/9/x86_64/
+    short_name: rhel9_rabbitmq_erlang
+    distribution_name: rhel9-rabbitmq-erlang-
+  # RabbitMQ for Redhat family, version 9
+  - name: RabbitMQ - Server - RHEL 9
+    url: https://packagecloud.io/rabbitmq/rabbitmq-server/el/9/x86_64
+    # mirror_complete fails with:
+    # "This repository uses features which are incompatible with 'mirror' sync. Please sync without mirroring enabled"
+    sync_policy: mirror_content_only
+    base_path: rabbitmq/rabbitmq-server/el/9/x86_64/
+    short_name: rhel9_rabbitmq_server
+    distribution_name: rhel9-rabbitmq-server-
   # TreasureData 4 for RHEL 9
   - name: TreasureData 4 - RHEL 9
     url: http://packages.treasuredata.com/4/redhat/9/x86_64
     base_path: treasuredata/4/redhat/9/x86_64/
     short_name: rhel_9_treasuredata_4
     distribution_name: rhel_9_treasuredata-4-
+  # TreasureData 5 for RHEL 9
+  - name: TreasureData 5 - RHEL 9
+    url: https://packages.treasuredata.com/lts/5/redhat/9/x86_64
+    base_path: treasuredata/lts/5/redhat/9/x86_64/
+    short_name: rhel_9_treasuredata_5
+    distribution_name: rhel_9_treasuredata-5-
   # MariaDB 10.6 for RHEL 9
   - name: MariaDB 10.6 - RHEL 9
     url: https://dlm.mariadb.com/repo/mariadb-server/10.6/yum/rhel/9/x86_64
     base_path: mariadb-10.6/yum/rhel/9/x86_64/
     short_name: rhel_9_mariadb_10_6
     distribution_name: mariadb-10.6-rhel-9-
+  # MariaDB 10.11 for RHEL 9
+  - name: MariaDB 10.11 - RHEL 9
+    url: https://dlm.mariadb.com/repo/mariadb-server/10.11/yum/rhel/9/x86_64
+    base_path: mariadb-10.11/yum/rhel/9/x86_64/
+    short_name: rhel_9_mariadb_10_11
+    distribution_name: mariadb-10.11-rhel-9-
   # InfluxDB for RHEL 9
   - name: InfluxDB - RHEL 9
     url: https://repos.influxdata.com/rhel/9/x86_64/stable/
