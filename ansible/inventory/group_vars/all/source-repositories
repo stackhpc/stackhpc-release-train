@@ -284,6 +284,22 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
+  ovn-octavia-provider:
+    ignored_releases:
+      - victoria
+      - wallaby
+      - xena
+      - yoga
+      - zed
+      - 2024.1
+    workflows:
+      ignored_workflows:
+        elsewhere:
+          - tox
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
   sahara-dashboard:
     ignored_releases:
       - victoria
