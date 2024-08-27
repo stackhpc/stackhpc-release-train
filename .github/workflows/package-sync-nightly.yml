@@ -11,7 +11,7 @@ jobs:
     name: Sync
     strategy:
       matrix:
-        filter: ['(rocky|centos|rhel|epel|^docker|opensearch|grafana|rabbitmq|^treasuredata|elasticsearch)', 'jammy', 'focal', 'ubuntu_cloud_archive']
+        filter: ['rocky','(centos|rhel|epel|^docker|opensearch|grafana|rabbitmq|^treasuredata|elasticsearch)', 'jammy', 'focal', 'ubuntu_cloud_archive']
       max-parallel: 1
       fail-fast: False
     uses: stackhpc/stackhpc-release-train/.github/workflows/package-sync.yml@main
