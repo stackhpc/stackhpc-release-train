@@ -32,7 +32,7 @@ jobs:
       # actions matrix
       run: |
         groups=$(yq -o=json -I=0 \
-                   '[.rpm_package_repos[] | .sync_group | select(.) ] | unique' \
+                   '([.rpm_package_repos[] | .sync_group | select(.) ]) + ([.deb_package_repos[] | .sync_group | select(.) ]) | unique' \
                    ansible/inventory/group_vars/all/package-repos)
         echo -n "matrix={\"sync_group\": " >> $GITHUB_OUTPUT
         echo -n $groups >> $GITHUB_OUTPUT
