@@ -15,18 +15,27 @@
 import re
 
 
-def select_repos(repos, filter_string):
-    """Select repositories that match a filter string.
+def select_repos(repos, filter_string, package_sync_group):
+    """Select repositories that match a filter string and package sync group.
 
     The filter string is a whitespace-separated list of regular expressions
     matching repository short names.
+
+    The package sync group is a string matching a repository sync group.
     """
-    if not filter_string:
-        return repos
-    regexes = filter_string.split()
-    patterns = re.compile(r"|".join(regexes).join('()'))
-    return [repo for repo in repos
-            if "short_name" in repo and re.search(patterns, repo["short_name"])]
+    if filter_string:
+        regexes = filter_string.split()
+        patterns = re.compile(r"|".join(regexes).join('()'))
+        filtered_repos = [repo for repo in repos
+                if "short_name" in repo and re.search(patterns, repo["short_name"])]
+    else:
+        filtered_repos = repos
+
+    if package_sync_group:
+        return [repo for repo in filtered_repos
+            if "sync_group" in repo and repo["sync_group"] == package_sync_group]
+    else:
+        return filtered_repos
 
 
 def select_images(images, filter_string):

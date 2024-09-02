@@ -6,17 +6,54 @@ on:
     - cron: '17 23 * * *'
 env:
   ANSIBLE_FORCE_COLOR: True
+  ANSIBLE_VAULT_PASSWORD_FILE: ${{ github.workspace }}/vault-pass
 jobs:
+  sync-matrix-build:
+    name: Build package matrix of package repo sync jobs
+    runs-on: arc-release-train-runner
+    outputs:
+      matrix: ${{ steps.matrix-build.outputs.matrix }}
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt install wget 
+
+    - name: Install YQ
+      uses: dcarbone/install-yq-action@v1.1.1
+
+    - name: Create sync matrix
+      id: matrix-build
+      # Use YQ to make a list of all unique sync groups, and format as a GH
+      # actions matrix
+      run: |
+        groups=$(yq -o=json -I=0 \
+                   '[.rpm_package_repos[] | .sync_group | select(.) ] | unique' \
+                   ansible/inventory/group_vars/all/package-repos)
+        echo -n "matrix={\"sync_group\": " >> $GITHUB_OUTPUT
+        echo -n $groups >> $GITHUB_OUTPUT
+        echo "}" >> $GITHUB_OUTPUT
+        echo ""
+        echo "Package sync matrix:"
+        echo -n "matrix={\"sync_group\": "
+        echo -n $groups
+        echo "}"
+
   sync-matrix-run:
     name: Sync
+    needs:
+      - sync-matrix-build
     strategy:
-      matrix:
-        filter: ['rocky','(centos|rhel|epel|^docker|opensearch|grafana|rabbitmq|^treasuredata|elasticsearch)', 'jammy', 'focal', 'ubuntu_cloud_archive']
+      matrix: ${{ fromJson(needs.sync-matrix-build.outputs.matrix) }}
       max-parallel: 1
       fail-fast: False
     uses: stackhpc/stackhpc-release-train/.github/workflows/package-sync.yml@main
     with:
       sync_ark: True
       sync_test: False
-      filter: ${{ matrix.filter }}
+      package_sync_group: ${{ matrix.sync_group }}
     secrets: inherit
