@@ -291,7 +291,6 @@ source_repositories:
       - xena
       - yoga
       - zed
-      - 2024.1
     workflows:
       ignored_workflows:
         elsewhere:
