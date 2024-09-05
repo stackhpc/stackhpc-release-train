@@ -421,21 +421,21 @@ rpm_package_repos:
     url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-AppStream-8.5&arch=x86_64&country=NL
     base_path: rocky/8.5/AppStream/x86_64/os/
     short_name: rocky_8_5_appstream
-    sync_group: third_party
+    sync_group: rocky_8
     distribution_name: rocky-8.5-appstream-
     sync: false
   - name: Rocky Linux 8.5 - BaseOS
     url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-BaseOS-8.5&arch=x86_64&country=NL
     base_path: rocky/8.5/BaseOS/x86_64/os/
     short_name: rocky_8_5_baseos
-    sync_group: third_party
+    sync_group: rocky_8
     distribution_name: rocky-8.5-baseos-
     sync: false
   - name: Rocky Linux 8.5 - Extras
     url: https://mirror.rockylinux.org/mirrorlist?repo=rocky-extras-8.5&arch=x86_64&country=NL
     base_path: rocky/8.5/extras/x86_64/os/
     short_name: rocky_8_5_extras
-    sync_group: third_party
+    sync_group: rocky_8
     distribution_name: rocky-8.5-extras-
     sync: false
 
@@ -833,7 +833,7 @@ rpm_package_repos:
     url: https://download.docker.com/linux/centos/9/x86_64/stable
     base_path: docker-ce/centos/9/x86_64/stable/
     short_name: centos_stream_9_docker
-    sync_group: centos
+    sync_group: docker
     distribution_name: docker-ce-for-centos-9-
   # Openstack Yoga for CentOS Stream 9
   - name: CentOS Stream 9 - OpenStack Yoga
@@ -861,6 +861,7 @@ rpm_package_repos:
     url: https://mirror.stream.centos.org/SIGs/9-stream/cloud/x86_64/openstack-caracal/
     base_path: centos/9-stream/cloud/x86_64/openstack-caracal/
     short_name: centos_stream_9_openstack_caracal
+    sync_group: centos
     distribution_name: centos-stream-9-openstack-caracal-
 
   # Additional RHEL 9 repositories
@@ -872,6 +873,7 @@ rpm_package_repos:
     sync_policy: mirror_content_only
     base_path: rabbitmq/erlang/el/9/x86_64/
     short_name: rhel9_rabbitmq_erlang
+    sync_group: third_party
     distribution_name: rhel9-rabbitmq-erlang-
   # RabbitMQ for Redhat family, version 9
   - name: RabbitMQ - Server - RHEL 9
@@ -881,6 +883,7 @@ rpm_package_repos:
     sync_policy: mirror_content_only
     base_path: rabbitmq/rabbitmq-server/el/9/x86_64/
     short_name: rhel9_rabbitmq_server
+    sync_group: third_party
     distribution_name: rhel9-rabbitmq-server-
   # TreasureData 4 for RHEL 9
   - name: TreasureData 4 - RHEL 9
@@ -908,6 +911,7 @@ rpm_package_repos:
     url: https://dlm.mariadb.com/repo/mariadb-server/10.11/yum/rhel/9/x86_64
     base_path: mariadb-10.11/yum/rhel/9/x86_64/
     short_name: rhel_9_mariadb_10_11
+    sync_group: third_party
     distribution_name: mariadb-10.11-rhel-9-
   # InfluxDB for RHEL 9
   - name: InfluxDB - RHEL 9

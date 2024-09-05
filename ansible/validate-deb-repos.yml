@@ -28,6 +28,11 @@
         that:
           - synced_deb_package_repos | rejectattr('url', 'defined') | list | length == 0
 
+    - name: Assert that synced Deb package repositories have sync groups
+      assert:
+        that:
+          - synced_deb_package_repos | rejectattr('sync_group', 'defined') | list | length == 0
+
     - name: Assert that published Deb package repositories have short names
       assert:
         that:
@@ -89,6 +94,10 @@
         package_sync_group: docker
         deb_package_repo_filter: jammy
 
+    - name: Assert that dev package repository list is defined
+      assert:
+        that:
+          - dev_pulp_repository_deb_repos is defined
 
     - name: Assert that dev package publication list is defined
       assert:

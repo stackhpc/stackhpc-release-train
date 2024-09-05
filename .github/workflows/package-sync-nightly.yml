@@ -6,7 +6,6 @@ on:
     - cron: '17 23 * * *'
 env:
   ANSIBLE_FORCE_COLOR: True
-  ANSIBLE_VAULT_PASSWORD_FILE: ${{ github.workspace }}/vault-pass
 jobs:
   sync-matrix-build:
     name: Build package matrix of package repo sync jobs
