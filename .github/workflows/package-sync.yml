@@ -40,7 +40,7 @@ jobs:
   package-sync-ark:
     name: Sync package repositories in Ark
     runs-on: arc-release-train-runner
-    timeout-minutes: 720
+    timeout-minutes: 480
     if: inputs.sync_ark
     steps:
 
@@ -56,7 +56,7 @@ jobs:
     - name: Sync and publish package repositories in Ark
       uses: nick-fields/retry@v3
       with:
-        timeout_minutes: 480
+        timeout_minutes: 360
         max_attempts: 2
         command: |
           ansible-playbook -i ansible/inventory \
@@ -75,7 +75,7 @@ jobs:
     name: Sync package repositories in test
     runs-on: arc-release-train-runner
     needs: package-sync-ark
-    timeout-minutes: 720
+    timeout-minutes: 480
     if: inputs.sync_test
     steps:
     - name: Checkout
@@ -90,7 +90,7 @@ jobs:
     - name: Sync and publish package repositories in test
       uses: nick-fields/retry@v3
       with:
-        timeout_minutes: 480
+        timeout_minutes: 360
         max_attempts: 2
         command: |
           ansible-playbook -i ansible/inventory \
