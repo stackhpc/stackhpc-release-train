@@ -1,9 +1,6 @@
 ---
 name: Nightly package repository sync
-on:
-  schedule:
-    # Daily at 23:17
-    - cron: '17 23 * * *'
+on: push
 env:
   ANSIBLE_FORCE_COLOR: True
 jobs:
@@ -50,7 +47,7 @@ jobs:
       matrix: ${{ fromJson(needs.sync-matrix-build.outputs.matrix) }}
       max-parallel: 1
       fail-fast: False
-    uses: stackhpc/stackhpc-release-train/.github/workflows/package-sync.yml@main
+    uses: stackhpc/stackhpc-release-train/.github/workflows/package-sync.yml@fix-nightly
     with:
       sync_ark: True
       sync_test: False
