@@ -46,3 +46,13 @@ jobs:
       env:
         FILTER: ${{ github.event.inputs.filter }}
         DISTROS: ${{ github.event.inputs.distros }}
+
+    - name: Send message to Slack via Workflow Builder
+      uses: ./.github/actions/slack-alert
+      with:
+        inputs: >-
+          filter: ${{ inputs.filter }}\n
+          distros: ${{ inputs.distros }}\n
+        slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+        slack-channel-id: ${{ vars.SLACK_CHANNEL_ID }}
+      if: failure() && github.event_name == 'push'

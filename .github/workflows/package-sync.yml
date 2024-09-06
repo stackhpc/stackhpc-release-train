@@ -68,6 +68,17 @@ jobs:
       env:
         FILTER: ${{ inputs.filter }}
 
+    - name: Send message to Slack via Workflow Builder
+      uses: ./.github/actions/slack-alert
+      with:
+        inputs: >-
+          filter: ${{ inputs.filter }}\n
+          sync_ark: ${{ inputs.sync_ark }}\n
+          sync_test: ${{ inputs.sync_test }}\n
+        slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+        slack-channel-id: ${{ vars.SLACK_CHANNEL_ID }}
+      if: failure()
+
   package-sync-test:
     name: Sync package repositories in test
     runs-on: arc-release-train-runner
@@ -100,3 +111,14 @@ jobs:
         retry_wait_seconds: 3600
       env:
         FILTER: ${{ inputs.filter }}
+
+    - name: Send message to Slack via Workflow Builder
+      uses: ./.github/actions/slack-alert
+      with:
+        inputs: >-
+          filter: ${{ inputs.filter }}\n
+          sync_ark: ${{ inputs.sync_ark }}\n
+          sync_test: ${{ inputs.sync_test }}\n
+        slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+        slack-channel-id: ${{ vars.SLACK_CHANNEL_ID }}
+      if: failure()
