@@ -36,11 +36,11 @@ jobs:
         echo -n "matrix={\"sync_group\": " >> $GITHUB_OUTPUT
         echo -n $groups >> $GITHUB_OUTPUT
         echo "}" >> $GITHUB_OUTPUT
-        echo ""
+
+    - name: Print sync matrix
+      run: |
         echo "Package sync matrix:"
-        echo -n "matrix={\"sync_group\": "
-        echo -n $groups
-        echo "}"
+        echo -n "${{ steps.matrix-build.outputs.matrix }}"
 
   sync-matrix-run:
     name: Sync
