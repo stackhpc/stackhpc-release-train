@@ -132,7 +132,7 @@ Overcloud images are built using a manually triggered [GitHub Actions workflow](
 They are pushed to a [Pulp file repository](https://pulpproject.org/pulp_file/) in Ark, and uploaded to the SMS lab Glance image service for all-in-one and multi-node testing.
 
 Overcloud images are versioned based on the OpenStack release name, and the date/time stamp at the beginning of the build workflow, e.g. `2024.1-20240922T102435`.
-This version string is included in the Pulp distribution `base_path` of the image, e.g. https://ark.stackhpc.com/pulp/content/kayobe-images/2023.1/rocky/9/2023.1-20240325T130221/overcloud-rocky-9.qcow2
+This version string is included in the Pulp distribution `base_path` of the image, e.g. https://ark.stackhpc.com/pulp/content/kayobe-images/2024.1/rocky/9/2024.1-20240922T102435/overcloud-rocky-9.qcow2
 
 ## Testing
 

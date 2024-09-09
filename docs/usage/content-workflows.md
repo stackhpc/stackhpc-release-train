@@ -139,7 +139,7 @@ ansible/test-kayobe-repo-version-generate.yml \
 -e kayobe_config_repo_path=./stackhpc-kayobe-config/
 ```
 
-Package repository versions are stored in StackHPC Kayobe configuration in [etc/kayobe/pulp-repo-versions.yml](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/wallaby/etc/kayobe/pulp-repo-versions.yml).
+Package repository versions are stored in StackHPC Kayobe configuration in [etc/kayobe/pulp-repo-versions.yml](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/2024.1/etc/kayobe/pulp-repo-versions.yml).
 Note that the updated versions are not necessarily released.
 The generated file may be amended as necessary (in case not all updates are required), then copied to the StackHPC Kayobe configuration.
 
@@ -172,19 +172,20 @@ An `Overcloud container images` artifact will be visible on the summary page of 
 This artifact contains a list of the built images.
 After a successful container image build workflow, another workflow is triggered to [sync the images](#syncing-container-images) to the test Pulp.
 
-In the following example, the user specified a regular expression of `^skydive`, matching all of the Skydive images, and the `base` image that they depend on.
+In the following example, the user specified a regular expression of `^magnum`, matching all of the Magnum images, and the `base` image that they depend on.
 
 ```
 REPOSITORY                                       TAG                       	  IMAGE ID       CREATED         SIZE
-ark.stackhpc.com/stackhpc-dev/skydive-agent      2023.1-rocky-9-20240811T091848   32f2b9299194   6 minutes ago   1.29GB
-ark.stackhpc.com/stackhpc-dev/skydive-analyzer   2023.1-rocky-9-20240811T091848   35e4c1cda1a8   7 minutes ago   1.14GB
-ark.stackhpc.com/stackhpc-dev/skydive-base       2023.1-rocky-9-20240811T091848   3bd5f3e50aa3   7 minutes ago   1.14GB
-ark.stackhpc.com/stackhpc-dev/base               2023.1-rocky-9-20240811T091848   bd02fa0ec1d6   7 minutes ago   991MB
+ark.stackhpc.com/stackhpc-dev/magnum-api         2024.1-rocky-9-20240811T091848   32f2b9299194   6 minutes ago   1.29GB
+ark.stackhpc.com/stackhpc-dev/magnum-conductor   2024.1-rocky-9-20240811T091848   35e4c1cda1a8   7 minutes ago   1.14GB
+ark.stackhpc.com/stackhpc-dev/magnum-base        2024.1-rocky-9-20240811T091848   3bd5f3e50aa3   7 minutes ago   1.14GB
+ark.stackhpc.com/stackhpc-dev/openstack-base     2024.1-rocky-9-20240811T091848   bd02fa0ec1d6   7 minutes ago   991MB
+ark.stackhpc.com/stackhpc-dev/base               2024.1-rocky-9-20240811T091848   bd02fa0ec1d6   7 minutes ago   991MB
 ```
 
-In this example, the base and Skydive images have been tagged `2023.1-rocky-9-20240811T091848`.
+In this example, the `base`, `openstack-base` and Magnum images have been tagged `2024.1-rocky-9-20240811T091848`.
 
-Instructions for building Kolla container images manually are provided in the [StackHPC kayobe config documentation](https://stackhpc-kayobe-config.readthedocs.io/en/stackhpc-2023.1/contributor/environments/ci-builder.html).
+Instructions for building Kolla container images manually are provided in the [StackHPC kayobe config documentation](https://stackhpc-kayobe-config.readthedocs.io/en/stackhpc-2024.1/contributor/environments/ci-builder.html).
 
 ## Publishing container images
 
@@ -227,7 +228,7 @@ ansible/test-pulp-container-publish.yml
 
 ## Updating container image tags in Kayobe configuration (Yoga release and earlier)
 
-The image tag used deploy containers may be updated for all images in [etc/kayobe/kolla.yml](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/wallaby/etc/kayobe/kolla.yml), or for specific images in [etc/kayobe/kolla/globals.yml](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/wallaby/etc/kayobe/kolla/globals.yml).
+The image tag used deploy containers may be updated for all images in [etc/kayobe/kolla.yml](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/2024.1/etc/kayobe/kolla.yml), or for specific images in [etc/kayobe/kolla/globals.yml](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/2024.1/etc/kayobe/kolla/globals.yml).
 Currently this is a manual process.
 
 Use the new tag from the [container image build](#building-container-images).
@@ -256,7 +257,7 @@ skydive_analyzer_tag: wallaby-20220811T091848
 
 ## Updating container image tags in Kayobe configuration (Zed release onwards)
 
-The image tags used deploy containers are defined in [etc/kayobe/kolla-image-tags.yml](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/zed/etc/kayobe/kolla-image-tags.yml).
+The image tags used deploy containers are defined in [etc/kayobe/kolla-image-tags.yml](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/2024.1/etc/kayobe/kolla-image-tags.yml).
 Currently updating these is a manual process.
 
 Use the new tag from the [container image build](#building-container-images).
@@ -269,8 +270,8 @@ For example, to update the default tag for all images (used where no service-spe
 # where the key is the OS distro and the value is the tag to deploy.
 kolla_image_tags:
   openstack:
-    rocky-9: zed-rocky-9-20230101T000000
-    ubuntu-jammy: zed-ubuntu-jammy-20230101T000000
+    rocky-9: 2024.1-rocky-9-20240101T000000
+    ubuntu-jammy: 2024.1-ubuntu-jammy-20240101T000000
 ```
 
 Alternatively, update the tag for all containers in a service, e.g. for all `nova` containers:
@@ -281,11 +282,11 @@ Alternatively, update the tag for all containers in a service, e.g. for all `nov
 # where the key is the OS distro and the value is the tag to deploy.
 kolla_image_tags:
   openstack:
-    rocky-9: zed-rocky-9-20230101T000000
-    ubuntu-jammy: zed-ubuntu-jammy-20230101T000000
+    rocky-9: 2024.1-rocky-9-20240101T000000
+    ubuntu-jammy: 2024.1-ubuntu-jammy-20240101T000000
   nova:
-    rocky-9: zed-rocky-9-20230102T000000
-    ubuntu-jammy: zed-ubuntu-jammy-20230102T000000
+    rocky-9: 2024.1-rocky-9-20240102T000000
+    ubuntu-jammy: 2024.1-ubuntu-jammy-20240102T000000
 ```
 
 Alternatively, update the tag for a specific container, e.g. for the `nova_compute` container:
@@ -296,11 +297,11 @@ Alternatively, update the tag for a specific container, e.g. for the `nova_compu
 # where the key is the OS distro and the value is the tag to deploy.
 kolla_image_tags:
   openstack:
-    rocky-9: zed-rocky-9-20230101T000000
-    ubuntu-jammy: zed-ubuntu-jammy-20230101T000000
+    rocky-9: 2024.1-rocky-9-20240101T000000
+    ubuntu-jammy: 2024.1-ubuntu-jammy-20240101T000000
   nova_compute:
-    rocky-9: zed-rocky-9-20230103T000000
-    ubuntu-jammy: zed-ubuntu-jammy-20230103T000000
+    rocky-9: 2024.1-rocky-9-20240103T000000
+    ubuntu-jammy: 2024.1-ubuntu-jammy-20240103T000000
 ```
 
 ## Promoting container images (Zed release onwards)

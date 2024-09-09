@@ -81,7 +81,7 @@ If using Zed release onwards:
 
 The list of services supported by StackHPC Kayobe configuration is defined via
 the feature flags in the
-[ci-builder](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/wallaby/etc/kayobe/environments/ci-builder/stackhpc-ci.yml)
+[ci-builder](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/2024.1/etc/kayobe/environments/ci-builder/stackhpc-ci.yml)
 environment. To add a new service, add the relevant feature flag (see
 `etc/kayobe/kolla.yml` for supported flags). For example:
 
@@ -115,7 +115,7 @@ above](#update-kolla-container-images) to build and consume the new images.
 
 ### Set up client Pulp syncing for the image
 
-Finally, the new images must be added to the `stackhpc_pulp_images` list in [etc/kayobe/pulp.yml](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/wallaby/etc/kayobe/pulp.yml).
+Finally, the new images must be added to the `stackhpc_pulp_images` list in [etc/kayobe/pulp.yml](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/2024.1/etc/kayobe/pulp.yml).
 This updates the list of images that are synced from Ark to clients' local Pulp service.
 This step should be performed last, once the images have been pushed to Ark and promoted, otherwise client container syncs would fail.
 
