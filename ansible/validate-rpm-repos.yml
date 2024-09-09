@@ -28,6 +28,11 @@
         that:
           - synced_rpm_package_repos | rejectattr('url', 'defined') | list | length == 0
 
+    - name: Assert that synced RPM package repositories have sync groups
+      assert:
+        that:
+          - synced_rpm_package_repos | rejectattr('sync_group', 'defined') | list | length == 0
+
     - name: Assert that published RPM package repositories have short names
       assert:
         that:
@@ -71,6 +76,24 @@
           - rpm_package_repos_filtered[2].short_name == 'centos_stream_9_docker'
       vars:
         rpm_package_repo_filter: docker centos_stream_8_baseos centos_stream_9_docker
+
+    - name: Assert that RPM package repository list can be filtered to one group
+      assert:
+        that:
+          - rpm_package_repos_filtered | length == 2
+          - rpm_package_repos_filtered[0].short_name == 'docker'
+          - rpm_package_repos_filtered[1].short_name == 'centos_stream_9_docker'
+      vars:
+        package_sync_group: docker
+
+    - name: Assert that RPM package repository list can be filtered and use a sync group together
+      assert:
+        that:
+          - rpm_package_repos_filtered | length == 1
+          - rpm_package_repos_filtered[0].short_name == 'centos_stream_9_docker'
+      vars:
+        package_sync_group: docker
+        rpm_package_repo_filter: stream_9
 
     - name: Assert that dev package repository list is defined
       assert:

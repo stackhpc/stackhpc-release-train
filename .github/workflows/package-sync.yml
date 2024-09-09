@@ -11,10 +11,11 @@ on:
         description: Sync package repositories in Test Pulp
         type: boolean
         required: true
-      filter:
-        description: Space-separated list of regular expressions matching short_name of repositories to sync
+      package_sync_group:
+        description: String matching sync_group of repositories to sync
         type: string
-        required: true
+        required: false
+        default: ""
   workflow_dispatch:
     inputs:
       sync_ark:
@@ -62,11 +63,13 @@ jobs:
           ansible/dev-pulp-repo-sync.yml \
           ansible/dev-pulp-repo-publication-cleanup.yml \
           ansible/dev-pulp-repo-publish.yml \
+          -e package_sync_group="'$PACKAGE_SYNC_GROUP'" \
           -e deb_package_repo_filter="'$FILTER'" \
           -e rpm_package_repo_filter="'$FILTER'"
         retry_wait_seconds: 3600
       env:
         FILTER: ${{ inputs.filter }}
+        PACKAGE_SYNC_GROUP: ${{ inputs.package_sync_group }}
 
     - name: Send message to Slack via Workflow Builder
       uses: ./.github/actions/slack-alert
@@ -75,6 +78,7 @@ jobs:
           filter: ${{ inputs.filter }}\n
           sync_ark: ${{ inputs.sync_ark }}\n
           sync_test: ${{ inputs.sync_test }}\n
+          package_sync_group: ${{ inputs.package_sync_group }}\n
         slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
         slack-channel-id: ${{ vars.SLACK_CHANNEL_ID }}
       if: failure()
@@ -106,11 +110,13 @@ jobs:
           ansible/test-pulp-repo-sync.yml \
           ansible/test-pulp-repo-publication-cleanup.yml \
           ansible/test-pulp-repo-publish.yml \
+          -e package_sync_group="'$PACKAGE_SYNC_GROUP'" \
           -e deb_package_repo_filter="'$FILTER'" \
           -e rpm_package_repo_filter="'$FILTER'"
         retry_wait_seconds: 3600
       env:
         FILTER: ${{ inputs.filter }}
+        PACKAGE_SYNC_GROUP: ${{ inputs.package_sync_group }}
 
     - name: Send message to Slack via Workflow Builder
       uses: ./.github/actions/slack-alert
@@ -119,6 +125,7 @@ jobs:
           filter: ${{ inputs.filter }}\n
           sync_ark: ${{ inputs.sync_ark }}\n
           sync_test: ${{ inputs.sync_test }}\n
+          package_sync_group: ${{ inputs.package_sync_group }}\n
         slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
         slack-channel-id: ${{ vars.SLACK_CHANNEL_ID }}
       if: failure()
