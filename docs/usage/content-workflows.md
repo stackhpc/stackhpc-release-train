@@ -175,16 +175,16 @@ After a successful container image build workflow, another workflow is triggered
 In the following example, the user specified a regular expression of `^skydive`, matching all of the Skydive images, and the `base` image that they depend on.
 
 ```
-REPOSITORY                                                     TAG                       IMAGE ID       CREATED         SIZE
-ark.stackhpc.com/stackhpc-dev/centos-source-skydive-agent      wallaby-20220811T091848   32f2b9299194   6 minutes ago   1.29GB
-ark.stackhpc.com/stackhpc-dev/centos-source-skydive-analyzer   wallaby-20220811T091848   35e4c1cda1a8   7 minutes ago   1.14GB
-ark.stackhpc.com/stackhpc-dev/centos-source-skydive-base       wallaby-20220811T091848   3bd5f3e50aa3   7 minutes ago   1.14GB
-ark.stackhpc.com/stackhpc-dev/centos-source-base               wallaby-20220811T091848   bd02fa0ec1d6   7 minutes ago   991MB
+REPOSITORY                                       TAG                       	  IMAGE ID       CREATED         SIZE
+ark.stackhpc.com/stackhpc-dev/skydive-agent      2023.1-rocky-9-20240811T091848   32f2b9299194   6 minutes ago   1.29GB
+ark.stackhpc.com/stackhpc-dev/skydive-analyzer   2023.1-rocky-9-20240811T091848   35e4c1cda1a8   7 minutes ago   1.14GB
+ark.stackhpc.com/stackhpc-dev/skydive-base       2023.1-rocky-9-20240811T091848   3bd5f3e50aa3   7 minutes ago   1.14GB
+ark.stackhpc.com/stackhpc-dev/base               2023.1-rocky-9-20240811T091848   bd02fa0ec1d6   7 minutes ago   991MB
 ```
 
-In this example, the base and Skydive images have been tagged `wallaby-20220811T091848`.
+In this example, the base and Skydive images have been tagged `2023.1-rocky-9-20240811T091848`.
 
-Instructions for building Kolla container images manually are provided in the [StackHPC kayobe config README](https://github.com/stackhpc/stackhpc-kayobe-config/blob/bf1396b8564b79344e4b6cfb934eab865ff1ad09/README.rst#L226).
+Instructions for building Kolla container images manually are provided in the [StackHPC kayobe config documentation](https://stackhpc-kayobe-config.readthedocs.io/en/stackhpc-2023.1/contributor/environments/ci-builder.html).
 
 ## Publishing container images
 
