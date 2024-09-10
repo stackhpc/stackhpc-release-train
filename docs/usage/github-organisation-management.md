@@ -12,6 +12,8 @@ It is expected that all `plans` and `applies` are carried out within GitHub Acti
 
     Access to Terraform Cloud is limited due to team size restrictions if you need access to Terraform Cloud and don't have access already then feel free to request access in the appropriate Slack channel.
 
+GitHub authentication is handled using a GitHub app.
+
 ## Making Changes
 
 In this section we shall look at how you may modify the Terraform configuration to suit your needs and requirements.
@@ -181,3 +183,11 @@ Run the script to rename the repository. Note that this will directly update the
 ```
 
 Create a PR for the changes.
+
+## StackHPC Release Train TF bot
+
+GitHub authentication is handled using the [StackHPC Release Train TF bot App](https://github.com/organizations/stackhpc/settings/apps/stackhpc-release-train-tf-bot).
+This app has a private key that is registered as a [GitHub secret](secrets.md).
+The app is [installed](https://github.com/organizations/stackhpc/settings/installations/27194723) on the `stackhpc` organisation, with access to all repositories.
+It has only the necessary permissions, but these are rather broad.
+GitHub apps are documented [here](https://docs.github.com/en/apps/overview).
