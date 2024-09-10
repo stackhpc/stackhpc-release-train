@@ -30,3 +30,10 @@ jobs:
         env:
           ANSIBLE_FORCE_COLOR: True
           GITHUB_TOKEN: ${{secrets.repository_configuration_token}}
+
+      - name: Send message to Slack via Workflow Builder
+        uses: ./.github/actions/slack-alert
+        with:
+          slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          slack-channel-id: ${{ vars.SLACK_CHANNEL_ID }}
+        if: failure() && github.event_name == 'push'

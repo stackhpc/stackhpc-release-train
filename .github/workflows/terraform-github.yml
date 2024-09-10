@@ -115,3 +115,10 @@ jobs:
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false
+
+      - name: Send message to Slack via Workflow Builder
+        uses: ./.github/actions/slack-alert
+        with:
+          slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          slack-channel-id: ${{ vars.SLACK_CHANNEL_ID }}
+        if: failure() && github.ref == 'refs/heads/main' && github.event_name == 'push'

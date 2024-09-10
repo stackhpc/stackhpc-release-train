@@ -56,3 +56,14 @@ jobs:
       env:
         FILTER: ${{ github.event.inputs.filter }}
         CHECK_MODE: ${{ inputs.check_mode }}
+
+    - name: Send message to Slack via Workflow Builder
+      uses: ./.github/actions/slack-alert
+      with:
+        inputs: >-
+          filter: ${{ inputs.filter }}\n
+          kayobe_config_branch: ${{ inputs.kayobe_config_branch }}\n
+          check_mode: ${{ inputs.check_mode }}\n
+        slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+        slack-channel-id: ${{ vars.SLACK_CHANNEL_ID }}
+      if: failure()

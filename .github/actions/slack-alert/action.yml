@@ -1,0 +1,51 @@
+---
+# See the "workflow builder" approach in https://github.com/slackapi/slack-github-action/.
+name: Slack alert
+description: Send an alert to a Slack channel using workflow builder
+inputs:
+  inputs:
+    description: Textual representation of workflow inputs
+    required: false
+    default: "N/A"
+    type: string
+  message:
+    description: Slack alert message
+    required: false
+    default: "${{ github.workflow }}/${{ github.job }} GitHub Actions workflow failed :sob:"
+    type: string
+  results-url:
+    description: URL for workflow results
+    required: false
+    default: "N/A"
+    type: string
+  # Typically this would be a secret.
+  slack-webhook-url:
+    description: Slack workflow builder webhook URL
+    required: true
+    type: string
+  # Typically this would be a secret or variable.
+  slack-channel-id:
+    description: ID of Slack channel to send alert to
+    required: true
+    type: string
+runs:
+  using: composite
+  steps:
+    - name: Send message to Slack via Workflow Builder
+      uses: slackapi/slack-github-action@v1.26.0
+      with:
+        payload: |
+          {
+            "channel-id": "${{ env.SLACK_CHANNEL_ID }}",
+            "inputs": "${{ env.INPUTS }}",
+            "message": "${{ env.MESSAGE }}",
+            "results-url": "${{ env.RESULTS_URL }}",
+            "workflow-url": "${{ env.WORKFLOW_URL }}"
+          }
+      env:
+        SLACK_WEBHOOK_URL: ${{ inputs.slack-webhook-url }}
+        SLACK_CHANNEL_ID: ${{ inputs.slack-channel-id }}
+        INPUTS: ${{ inputs.inputs }}
+        MESSAGE: ${{ inputs.message }}
+        RESULTS_URL: ${{ inputs.results-url }}
+        WORKFLOW_URL: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
