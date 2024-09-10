@@ -19,14 +19,11 @@ This includes artifacts, metadata, and the configuration necessary to consume th
 The current scope of the release train covers OpenStack control plane deployment, and all the dependencies thereof.
 This includes:
 
-* Host Operating System (OS) repositories, e.g. CentOS Stream 8 BaseOS
+* Host Operating System (OS) repositories, e.g. Rocky Linux 9 BaseOS
 * Source code repositories
 * Kolla container images
 * Ironic Python Agent (IPA) deployment images
 * VM & bare metal disk images
-
-Initially, only CentOS Stream 8 is supported as a host and container OS.
-Ubuntu support will follow.
 
 In future, the scope may expand to cover other software, such as Kubernetes.
 

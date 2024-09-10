@@ -36,16 +36,13 @@ There are three types of Pulp service in the release train architecture.
 Various different types of content are hosted by Pulp, including:
 
 * RPM package repositories ([Pulp RPM plugin](https://docs.pulpproject.org/pulp_rpm/))
-    * CentOS distribution packages
+    * Rocky Linux distribution packages
     * Third party packages
-* Container image repositories ([Pulp container plugin](https://docs.pulpproject.org/pulp_container/))
-    * Kolla container images
-
-We also anticipate supporting the following content:
-
 * Apt package repositories ([Pulp Deb plugin](https://docs.pulpproject.org/pulp_deb/))
     * Ubuntu distribution packages
     * Third party packages
+* Container image repositories ([Pulp container plugin](https://docs.pulpproject.org/pulp_container/))
+    * Kolla container images
 * File repositories ([Pulp file plugin](https://docs.pulpproject.org/pulp_file/))
     * Disk images
 
@@ -79,7 +76,7 @@ Build and test processes are provided with credentials that are authorised to pu
 At the top of the diagram above are the upstream sources.
 Some of these may be mirrored/synced into Ark, including:
 
-* OS distribution package repositories, e.g. CentOS Stream 8 BaseOS
+* OS distribution package repositories, e.g. Rocky Linux 9 BaseOS
 * Third party package repositories, e.g. Grafana
 
 The [Sync package repositories](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/package-sync.yml) GitHub Actions workflow runs nightly and on demand, ensuring that we have regular versioned snapshots of these repositories.
@@ -95,7 +92,7 @@ There are a couple of repositories for which `mirror_complete` does not work, so
 
 Package repositories are versioned based on the date/time stamp at the beginning of the sync workflow, e.g. `20211122T102435`.
 This version string is used as the final component of the path at which the corresponding distribution is hosted.
-For example, a CentOS Stream 8 BaseOS snapshot may be hosted at https://ark.stackhpc.com/pulp/content/centos/8-stream/BaseOS/x86_64/os/20220105T044843/.
+For example, a Rocky Linux 9 BaseOS snapshot may be hosted at https://ark.stackhpc.com/pulp/content/rocky/9/BaseOS/x86_64/os/20240105T044843/.
 
 The rationale behind using a date/time stamp is that there is no sane way to version a large collection of content, such as a repository, in a way in which the version reflects changes in the content (e.g. SemVer).
 While the timestamp used is fairly arbitrary, it does at least provide a reasonable guarantee of ordering, and is easily automated.
@@ -115,36 +112,40 @@ All content in Ark that is required by the build and test processes is synced to
 
 ### Kolla container images
 
-Kolla container images are built via Kayobe, using a `builder` environment in [StackHPC Kayobe config](https://github.com/stackhpc/stackhpc-kayobe-config).
+Kolla container images are built via Kayobe, using a `ci-builder` environment in [StackHPC Kayobe config](https://github.com/stackhpc/stackhpc-kayobe-config).
 The configuration uses the package repositories in Ark when building containers.
-Currently this is run manually, but will eventually run as a CI job.
+Images are built using a manually triggered [GitHub Actions workflow](https://github.com/stackhpc/stackhpc-kayobe-config/actions/workflows/stackhpc-container-image-build.yml).
 The `stackhpc-dev` namespace in Ark contains [container push repositories](https://docs.pulpproject.org/pulp_container/workflows/push.html), which are pushed to using Kayobe.
-Currently this is rather slow due to a [Pulp bug](https://github.com/pulp/pulp_container/issues/494).
 
 The [Sync container repositories](https://github.com/stackhpc/stackhpc-release-train/actions/workflows/container-sync.yml) GitHub Actions workflow runs demand, syncing container repositories in test Pulp service with those in Ark.
 It also configures container image distributions to be private, since they are public by default.
 
-Kolla container images are versioned based on the OpenStack release name and the date/time stamp at the beginning of the build workflow, e.g. `wallaby-20211122T102435`.
+Kolla container images are versioned based on the OpenStack release name, OS distribution and the date/time stamp at the beginning of the build workflow, e.g. `2024.1-rocky-9-20240922T102435`.
 This version string is used as the image tag.
 Unlike package repositories, container image tags allow multiple versions to be present in a distribution of a container repository simultaneously.
 We therefore use separate namespaces for development (`stackhpc-dev`) and release (`stackhpc`).
 
 ### Disk images
 
-Disk images are currently not built by the release train.
+Overcloud host images are built via Kayobe, using the same ``ci-builder`` environment used to build Kolla container images.
+Overcloud images are built using a manually triggered [GitHub Actions workflow](https://github.com/stackhpc/stackhpc-kayobe-config/actions/workflows/overcloud-host-image-build.yml).
+They are pushed to a [Pulp file repository](https://pulpproject.org/pulp_file/) in Ark, and uploaded to the SMS lab Glance image service for all-in-one and multi-node testing.
+
+Overcloud images are versioned based on the OpenStack release name, and the date/time stamp at the beginning of the build workflow, e.g. `2024.1-20240922T102435`.
+This version string is included in the Pulp distribution `base_path` of the image, e.g. https://ark.stackhpc.com/pulp/content/kayobe-images/2024.1/rocky/9/2024.1-20240922T102435/overcloud-rocky-9.qcow2
 
 ## Testing
 
 Release train content is tested via a Kayobe deployment of OpenStack.
-An `aio` environment in [StackHPC Kayobe config](https://github.com/stackhpc/stackhpc-kayobe-config) provides a converged control/compute host for testing.
-Currently this is run manually, but will eventually run as a CI job.
+A `ci-aio` environment in [StackHPC Kayobe config](https://github.com/stackhpc/stackhpc-kayobe-config) provides a converged control/compute host for testing.
+Various all-in-one OpenStack test configurations are run against pull requests opened against the StackHPC Kayobe config repository.
 
 ## Promotion
 
 Whether content is mirrored from an upstream source or built locally, it is not immediately released.
 Promotion describes the process whereby release candidate content is made into a release that is available to clients.
 
-For package repositories, promotion does not affect how content is accessed, only who may access it.
+For package repositories and overcloud host images, promotion does not affect how content is accessed, only who may access it.
 Promotion involves changing the content guard for the distribution to be released from `development` to `release`.
 This makes the content accessible to clients using their client credentials.
 
@@ -177,7 +178,7 @@ This repository provides configuration and playbooks to:
 
 This configuration is in active development and is expected to evolve over the coming releases.
 
-Further documentation of this configuration is out of scope here, but is available in the [readme](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/wallaby/README.rst).
+Further documentation of this configuration is out of scope here, but is available in the [readme](https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/2024.1/README.rst).
 
 ## Continuous Integration (CI) and automation
 

@@ -1,6 +1,15 @@
 # Operations - GitHub
 
-## GitHub Actions runners
+## GitHub Actions Runner Controller (ARC)
+
+Some GitHub Actions workflows run on public runners, while others require access to specific services or benefit from data locality.
+In the latter case we use GitHub's Actions Runner Controller (ARC) (not to be confused with our Ark...) to provide dynamically scaling containerised private GitHub Actions runners.
+The [ARC-Installer](https://github.com/stackhpc/ARC-Installer) repository contains scripts and Helm `values.yaml` configuration for registering the ARC controller services and runner scale sets.
+Any project that wishes to use runners on this cluster should define its runner scale set configuration in the ARC-Installer repository.
+
+## [LEGACY] GitHub Actions runners
+
+*We are no longer using this approach, but it is retained in case it is useful in future.*
 
 This Terraform configuration deploys a GitHub Actions runner VMs on an
 OpenStack cloud for the stackhpc-release-train repository.
