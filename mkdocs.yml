@@ -26,6 +26,7 @@ nav:
       Access control: usage/access.md
       Source code CI: usage/source-code-ci.md
       GitHub Organisation Management: usage/github-organisation-management.md
+      Secrets: usage/secrets.md
       Notifications: usage/notifications.md
   - Operations:
       Ark: operations/ark.md
