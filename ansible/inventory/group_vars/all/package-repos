@@ -391,7 +391,7 @@ rpm_package_repos:
     distribution_name: mariadb-10.6-centos8
   # RabbitMQ - Erlang for Redhat family, version 8
   - name: RabbitMQ - Erlang
-    url: https://packagecloud.io/rabbitmq/erlang/el/8/x86_64
+    url: https://yum1.rabbitmq.com/erlang/el/8/x86_64
     # mirror_complete fails with:
     # "This repository uses features which are incompatible with 'mirror' sync. Please sync without mirroring enabled"
     sync_policy: mirror_content_only
@@ -401,11 +401,11 @@ rpm_package_repos:
     distribution_name: rabbitmq-erlang-
   # RabbitMQ for Redhat family, version 8
   - name: RabbitMQ - Server
-    url: https://packagecloud.io/rabbitmq/rabbitmq-server/el/8/x86_64
+    url: https://yum2.rabbitmq.com/rabbitmq/el/8/noarch
     # mirror_complete fails with:
     # "This repository uses features which are incompatible with 'mirror' sync. Please sync without mirroring enabled"
     sync_policy: mirror_content_only
-    base_path: rabbitmq/rabbitmq-server/el/8/x86_64/
+    base_path: rabbitmq/rabbitmq-server/el/8/noarch/
     short_name: rabbitmq_server
     sync_group: third_party
     distribution_name: rabbitmq-server-
@@ -867,7 +867,7 @@ rpm_package_repos:
   # Additional RHEL 9 repositories
   # RabbitMQ - Erlang for Redhat family, version 9
   - name: RabbitMQ - Erlang - RHEL 9
-    url: https://packagecloud.io/rabbitmq/erlang/el/9/x86_64
+    url: https://yum1.rabbitmq.com/erlang/el/9/x86_64
     # mirror_complete fails with:
     # "This repository uses features which are incompatible with 'mirror' sync. Please sync without mirroring enabled"
     sync_policy: mirror_content_only
@@ -877,11 +877,11 @@ rpm_package_repos:
     distribution_name: rhel9-rabbitmq-erlang-
   # RabbitMQ for Redhat family, version 9
   - name: RabbitMQ - Server - RHEL 9
-    url: https://packagecloud.io/rabbitmq/rabbitmq-server/el/9/x86_64
+    url: https://yum2.rabbitmq.com/rabbitmq/el/9/noarch
     # mirror_complete fails with:
     # "This repository uses features which are incompatible with 'mirror' sync. Please sync without mirroring enabled"
     sync_policy: mirror_content_only
-    base_path: rabbitmq/rabbitmq-server/el/9/x86_64/
+    base_path: rabbitmq/rabbitmq-server/el/9/noarch/
     short_name: rhel9_rabbitmq_server
     sync_group: third_party
     distribution_name: rhel9-rabbitmq-server-
