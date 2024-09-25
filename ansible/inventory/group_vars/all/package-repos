@@ -140,6 +140,20 @@ deb_package_repos:
     sync_group: docker
     distribution_name: docker-ce-for-ubuntu-jammy-
 
+# Standard Apt mirrors do not contain cephadm Reef, only Quincy
+  - name: Ceph Reef for Debian
+    url: https://download.ceph.com/debian-reef/
+    policy: immediate
+    architectures: amd64
+    distributions: jammy
+    components: main
+    mirror: true
+    mode: verbatim
+    base_path: ceph/debian-reef/
+    short_name: ceph_reef_ubuntu_jammy
+    sync_group: third_party
+    distribution_name: ceph-reef-debian-
+
 # Default filter string for Deb package repositories.
 deb_package_repo_filter: ""
 
