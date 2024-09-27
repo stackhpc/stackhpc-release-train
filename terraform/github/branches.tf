@@ -26,10 +26,6 @@ resource "github_branch_protection" "ansible_branch_protection" {
     contexts = lookup(var.required_status_checks, each.key, { "default" : [] }).default
     strict   = false
   }
-
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "github_branch_protection" "batch_branch_protection" {
@@ -54,10 +50,6 @@ resource "github_branch_protection" "batch_branch_protection" {
   required_status_checks {
     contexts = lookup(var.required_status_checks, each.key, { "default" : [] }).default
     strict   = false
-  }
-
-  lifecycle {
-    prevent_destroy = true
   }
 }
 
@@ -94,10 +86,6 @@ resource "github_branch_protection" "kayobe_branch_protection_py_3-6" {
     }).default)
     strict = false
   }
-
-  lifecycle {
-    prevent_destroy = false
-  }
 }
 
 resource "github_branch_protection" "kayobe_branch_protection_zed" {
@@ -128,10 +116,6 @@ resource "github_branch_protection" "kayobe_branch_protection_zed" {
       ]
     }).default)
     strict = false
-  }
-
-  lifecycle {
-    prevent_destroy = true
   }
 }
 
@@ -237,9 +221,6 @@ resource "github_branch_protection" "openstack_branch_protection_py_3-6" {
     }).default)
     strict = false
   }
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "github_branch_protection" "openstack_branch_protection_zed" {
@@ -270,10 +251,6 @@ resource "github_branch_protection" "openstack_branch_protection_zed" {
       ]
     }).default)
     strict = false
-  }
-
-  lifecycle {
-    prevent_destroy = false
   }
 }
 
@@ -369,10 +346,6 @@ resource "github_branch_protection" "platform_branch_protection" {
     contexts = lookup(var.required_status_checks, each.key, { "default" : [] }).default
     strict   = false
   }
-
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "github_branch_protection" "releasetrain_branch_protection" {
@@ -398,10 +371,6 @@ resource "github_branch_protection" "releasetrain_branch_protection" {
     contexts = lookup(var.required_status_checks, each.key, { "default" : [] }).default
     strict   = false
   }
-
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "github_branch_protection" "smslab_branch_protection" {
@@ -426,10 +395,6 @@ resource "github_branch_protection" "smslab_branch_protection" {
   required_status_checks {
     contexts = lookup(var.required_status_checks, each.key, { "default" : [] }).default
     strict   = false
-  }
-
-  lifecycle {
-    prevent_destroy = true
   }
 }
 
