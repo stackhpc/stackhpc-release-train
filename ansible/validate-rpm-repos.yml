@@ -63,20 +63,19 @@
       assert:
         that:
           - rpm_package_repos_filtered | length == 1
-          - rpm_package_repos_filtered[0].short_name == 'centos_stream_8_baseos'
+          - rpm_package_repos_filtered[0].short_name == 'centos_stream_9_openstack_caracal_aarch64'
       vars:
-        rpm_package_repo_filter: centos_stream_8_baseos
+        rpm_package_repo_filter: centos_stream_9_openstack_caracal_aarch64
 
     - name: Assert that RPM package repository list can be filtered to multiple
       assert:
         that:
-          - rpm_package_repos_filtered | length == 4
-          - rpm_package_repos_filtered[0].short_name == 'centos_stream_8_baseos'
-          - rpm_package_repos_filtered[1].short_name == 'docker'
-          - rpm_package_repos_filtered[2].short_name == 'centos_stream_9_docker'
-          - rpm_package_repos_filtered[3].short_name == 'centos_stream_9_docker_aarch64'
+          - rpm_package_repos_filtered | length == 3
+          - rpm_package_repos_filtered[0].short_name == 'grafana'
+          - rpm_package_repos_filtered[1].short_name == 'centos_stream_9_openstack_caracal'
+          - rpm_package_repos_filtered[2].short_name == 'centos_stream_9_openstack_caracal_aarch64'
       vars:
-        rpm_package_repo_filter: docker centos_stream_8_baseos centos_stream_9_docker
+        rpm_package_repo_filter: centos_stream_9_openstack_caracal grafana
 
     - name: Assert that RPM package repository list can be filtered to one group
       assert:
