@@ -57,6 +57,22 @@ resource "github_issue_label" "community_files_label" {
   description = "Community files have been modified"
 }
 
+resource "github_issue_label" "magnum_label" {
+  for_each    = toset(flatten(values(var.repositories)))
+  repository  = each.value
+  name        = "magnum"
+  color       = "6B0560"
+  description = "All things OpenStack Magnum related"
+}
+
+resource "github_issue_label" "monitoring_label" {
+  for_each    = toset(flatten(values(var.repositories)))
+  repository  = each.value
+  name        = "monitoring"
+  color       = "FBCA04"
+  description = "All things related to observability & telemetry"
+}
+
 data "github_repository" "repositories" {
   for_each  = toset(flatten(values(var.repositories)))
   full_name = format("%s/%s", var.owner, each.value)
