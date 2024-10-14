@@ -91,9 +91,7 @@ To add a repository to a team you can append the name of the repository to the d
 ```yml 
 "repositories": {
   "Ansible": [
-    "ansible-role-os-host-aggregates",
     "ansible-role-os-networks",
-    "ansible-role-os-projects",
     ...
     "ansible-collection-pulp",
     "ansible-collection-hashicorp",
