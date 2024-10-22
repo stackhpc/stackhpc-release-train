@@ -341,27 +341,6 @@ source_repositories:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
   # Ansible team
-  ansible-role-os-host-aggregates:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  os-networks:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-role-os-projects:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
   ansible-role-libvirt-host:
     repository_type: "ansible"
     workflows: "{{ ansible_workflows.role }}"
@@ -370,13 +349,6 @@ source_repositories:
           content: "{{ community_files.codeowners.ansible }}"
           dest: ".github/CODEOWNERS"
   ansible-role-libvirt-vm:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-role-os-images:
     repository_type: "ansible"
     workflows: "{{ ansible_workflows.role }}"
     community_files:
@@ -404,42 +376,7 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.ansible }}"
           dest: ".github/CODEOWNERS"
-  ansible-role-os-volumes:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-role-grubcmdline:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-role-os-flavors:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-role-os-openstacksdk:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
   ansible-role-sriov:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-role-os-openstackclient:
     repository_type: "ansible"
     workflows: "{{ ansible_workflows.role }}"
     community_files:
@@ -489,13 +426,6 @@ source_repositories:
           content: "{{ community_files.codeowners.ansible }}"
           dest: ".github/CODEOWNERS"
   ansible-role-monasca-rsyslog:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-role-os-container-clusters:
     repository_type: "ansible"
     workflows: "{{ ansible_workflows.role }}"
     community_files:
@@ -573,13 +503,6 @@ source_repositories:
           content: "{{ community_files.codeowners.ansible }}"
           dest: ".github/CODEOWNERS"
   ansible-role-os-config:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-role-os-deploy-templates:
     repository_type: "ansible"
     workflows: "{{ ansible_workflows.role }}"
     community_files:
