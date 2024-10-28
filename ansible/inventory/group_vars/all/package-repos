@@ -150,7 +150,7 @@ deb_package_repos:
     mirror: true
     mode: verbatim
     base_path: ceph/debian-reef/
-    short_name: ceph_reef_ubuntu_jammy
+    short_name: ceph_reef_debian
     sync_group: third_party
     distribution_name: ceph-reef-debian-
 
