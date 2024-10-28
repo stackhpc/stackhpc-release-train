@@ -585,6 +585,12 @@ rpm_package_repos:
     short_name: opensearch_dashboards_2_x
     sync_group: third_party
     distribution_name: opensearch_dashboards-2.x-yum-
+  # DOCA OFED for Rocky 9.4
+  - name: Mellanox Technologies doca_ofed 24.07 Rocky 9.4
+    url: "https://ark.stackhpc.com/pulp/content/doca_ofed"
+    base_path: "mlnx_ofed/24.07/rhel9.4/x86_64"
+    distribution_name: "mlnx-ofed-24.07-rocky-9-4-"
+    sync: false
 
 # Default filter string for RPM package repositories.
 rpm_package_repo_filter: ""
