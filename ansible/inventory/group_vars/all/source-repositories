@@ -179,7 +179,6 @@ source_repositories:
       - wallaby
       - xena
       - zed
-      - 2023.1
       - 2024.1
     workflows:
       ignored_workflows:
@@ -278,7 +277,6 @@ source_repositories:
       - xena
       - yoga
       - zed
-      - 2023.1
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
