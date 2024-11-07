@@ -585,6 +585,13 @@ rpm_package_repos:
     short_name: opensearch_dashboards_2_x
     sync_group: third_party
     distribution_name: opensearch_dashboards-2.x-yum-
+  # DOCA Repository 2.9.1 for RHEL 9.5
+  - name: DOCA Online Repo 2.9.1 - RHEL 9.5
+    url: https://linux.mellanox.com/public/repo/doca/2.9.1/rhel9.5/x86_64/
+    base_path: doca/2.9.1/rhel9.5/x86_64/
+    short_name: doca_2_9_1_rhel9_5
+    sync_group: third_party
+    distribution_name: doca-2.9.1-rhel9.5-
 
 # Default filter string for RPM package repositories.
 rpm_package_repo_filter: ""
