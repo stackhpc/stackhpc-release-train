@@ -253,6 +253,12 @@ rpm_package_repos:
     short_name: treasuredata_4
     sync_group: third_party
     distribution_name: treasuredata-4-
+  - name: DOCA Online Repo 2.8.0
+    url: https://linux.mellanox.com/public/repo/doca/2.8.0/rhel9.4/x86_64/
+    base_path: doca/2.8.0/rhel9.4/x86_64/
+    short_name: doca
+    sync_group: third_party
+    distribution_name: doca-
 
   # Base Rocky Linux 9.4 repositories
   - name: Rocky Linux 9.4 - AppStream
