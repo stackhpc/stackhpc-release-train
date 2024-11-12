@@ -256,7 +256,7 @@ rpm_package_repos:
   - name: DOCA Online Repo 2.8.0
     url: https://linux.mellanox.com/public/repo/doca/2.8.0/rhel9.4/x86_64/
     base_path: doca/2.8.0/rhel9.4/x86_64/
-    short_name: doca
+    short_name: doca_2_8_0_rhel9_4
     sync_group: third_party
     distribution_name: doca-
 
