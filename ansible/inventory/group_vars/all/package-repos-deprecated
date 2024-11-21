@@ -511,3 +511,68 @@ deprecated_rpm_package_repos:
     sync_group: rocky_9
     distribution_name: rocky-9.3-highavailability-
     sync: false
+
+# Base Rocky Linux 9.4 repositories
+  - name: Rocky Linux 9.4 - AppStream
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-9.4&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/9.4/AppStream/x86_64/os/
+    short_name: rocky_9_4_appstream
+    sync_group: rocky_9
+    distribution_name: rocky-9.4-appstream-
+  - name: Rocky Linux 9.4 - AppStream (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-9.4&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/9.4/AppStream/aarch64/os/
+    short_name: rocky_9_4_appstream_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: rocky-9.4-appstream-aarch64-
+  - name: Rocky Linux 9.4 - BaseOS
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-9.4&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/9.4/BaseOS/x86_64/os/
+    short_name: rocky_9_4_baseos
+    sync_group: rocky_9_baseos
+    distribution_name: rocky-9.4-baseos-
+  - name: Rocky Linux 9.4 - BaseOS (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-9.4&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/9.4/BaseOS/aarch64/os/
+    short_name: rocky_9_4_baseos_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: rocky-9.4-baseos-aarch64-
+  - name: Rocky Linux 9.4 - Extras
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-9.4&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/9.4/extras/x86_64/os/
+    short_name: rocky_9_4_extras
+    sync_group: rocky_9
+    distribution_name: rocky-9.4-extras-
+  - name: Rocky Linux 9.4 - Extras (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-9.4&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/9.4/extras/aarch64/os/
+    short_name: rocky_9_4_extras_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: rocky-9.4-extras-aarch64-
+
+  # Additional Rocky Linux 9.4 repositories
+  # No advanced virt, Ceph or OpenStack
+  - name: Rocky Linux 9.4 - CRB
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-9.4&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/9.4/CRB/x86_64/os/
+    short_name: rocky_9_4_crb
+    sync_group: rocky_9
+    distribution_name: rocky-9.4-crb-
+  - name: Rocky Linux 9.4 - CRB (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-9.4&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/9.4/CRB/aarch64/os/
+    short_name: rocky_9_4_crb_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: rocky-9.4-crb-aarch64-
+  - name: Rocky Linux 9.4 - HighAvailability
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-9.4&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/9.4/highavailability/x86_64/os/
+    short_name: rocky_9_4_highavailability
+    sync_group: rocky_9
+    distribution_name: rocky-9.4-highavailability-
+  - name: Rocky Linux 9.4 - HighAvailability (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-9.4&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/9.4/highavailability/aarch64/os/
+    short_name: rocky_9_4_highavailability_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: rocky-9.4-highavailability-aarch64-
