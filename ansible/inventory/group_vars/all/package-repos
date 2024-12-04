@@ -213,7 +213,7 @@ rpm_package_repos:
     policy: on_demand
     base_path: grafana/oss/rpm/
     short_name: grafana
-    sync_group: third_party
+    sync_group: grafana
     distribution_name: grafana-
   - name: MariaDB 10.5
     url: https://dlm.mariadb.com/repo/mariadb-server/10.5/yum/rhel/8/x86_64
