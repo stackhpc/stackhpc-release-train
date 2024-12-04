@@ -124,6 +124,21 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
+  blazar:
+    additional_releases:
+      - master
+    ignored_releases:
+      - victoria
+      - wallaby
+      - xena
+      - yoga
+      - zed
+      - 2023.1
+      - 2024.1
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
   cinder:
     ignored_releases:
       - victoria
