@@ -512,7 +512,7 @@ deprecated_rpm_package_repos:
     distribution_name: rocky-9.3-highavailability-
     sync: false
 
-# Base Rocky Linux 9.4 repositories
+  # Base Rocky Linux 9.4 repositories
   - name: Rocky Linux 9.4 - AppStream
     url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-9.4&arch=x86_64&country=NL&protocol=https
     base_path: rocky/9.4/AppStream/x86_64/os/
@@ -576,3 +576,19 @@ deprecated_rpm_package_repos:
     short_name: rocky_9_4_highavailability_aarch64
     sync_group: rocky_9_aarch64
     distribution_name: rocky-9.4-highavailability-aarch64-
+
+  # Additional RHEL 9 repositories
+  # DOCA Repository 2.8.0 for RHEL 9.4
+  - name: DOCA Online Repo 2.8.0 - RHEL 9.4
+    url: https://linux.mellanox.com/public/repo/doca/2.8.0/rhel9.4/x86_64/
+    base_path: doca/2.8.0/rhel9.4/x86_64/
+    short_name: doca_2_8_0_rhel9_4
+    sync_group: third_party
+    distribution_name: doca-2.8.0-rhel9.4-
+  # DOCA Repository 2.9.1 for RHEL 9.4
+  - name: DOCA Online Repo 2.9.1 - RHEL 9.4
+    url: https://linux.mellanox.com/public/repo/doca/2.9.1/rhel9.4/x86_64/
+    base_path: doca/2.9.1/rhel9.4/x86_64/
+    short_name: doca_2_9_1_rhel9_4
+    sync_group: third_party
+    distribution_name: doca-2.9.1-rhel9.4-
