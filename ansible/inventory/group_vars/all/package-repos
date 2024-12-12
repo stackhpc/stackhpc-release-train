@@ -255,25 +255,25 @@ rpm_package_repos:
     distribution_name: treasuredata-4-
   # OpenHPC v2 for RockyLinux 8
   - name: OpenHPC-2 - Base - x86_64
-    url: http://repos.openhpc.community/OpenHPC/2/EL_8/x86_64
+    url: http://repos.openhpc.community/OpenHPC/2/EL_8
     base_path: OpenHPC/2/EL_8/x86_64/
     short_name: openhpc_2_x86_64
     sync_group: third_party
     distribution_name: openhpc-2-x86_64-
   - name: OpenHPC-2 - Base - noarch
-    url: http://repos.openhpc.community/OpenHPC/2/EL_8/noarch
+    url: http://repos.openhpc.community/OpenHPC/2/EL_8
     base_path: OpenHPC/2/EL_8/noarch/
     short_name: openhpc_2_noarch
     sync_group: third_party
     distribution_name: openhpc-2-noarch-
   - name: OpenHPC-2 - Updates - x86_64
-    url: https://repos.openhpc.community/OpenHPC/2/updates/EL_8/x86_64
+    url: https://repos.openhpc.community/OpenHPC/2/updates/EL_8
     base_path: OpenHPC/2/updates/EL_8/x86_64/
     short_name: openhpc_2_updates_x86_64
     sync_group: third_party
     distribution_name: openhpc-2-updates-x86_64-
   - name: OpenHPC-2 - Updates - noarch
-    url: https://repos.openhpc.community/OpenHPC/2/updates/EL_8/noarch
+    url: https://repos.openhpc.community/OpenHPC/2/updates/EL_8
     base_path: OpenHPC/2/updates/EL_8/noarch/
     short_name: openhpc_2_updates_noarch
     sync_group: third_party
@@ -619,25 +619,25 @@ rpm_package_repos:
     distribution_name: doca-2.9.1-rhel9.5-
   # OpenHPC v3 for RockyLinux 9
   - name: OpenHPC-3 - Base - x86_64
-    url: http://repos.openhpc.community/OpenHPC/3/EL_9/x86_64
+    url: http://repos.openhpc.community/OpenHPC/3/EL_9
     base_path: OpenHPC/3/EL_9/x86_64/
     short_name: openhpc_3_x86_64
     sync_group: third_party
     distribution_name: openhpc-3-x86_64-
   - name: OpenHPC-3 - Base - noarch
-    url: http://repos.openhpc.community/OpenHPC/3/EL_9/noarch
+    url: http://repos.openhpc.community/OpenHPC/3/EL_9
     base_path: OpenHPC/3/EL_9/noarch/
     short_name: openhpc_3_noarch
     sync_group: third_party
     distribution_name: openhpc-2-noarch-
   - name: OpenHPC-3 - Updates - x86_64
-    url: https://repos.openhpc.community/OpenHPC/3/updates/EL_9/x86_64
+    url: https://repos.openhpc.community/OpenHPC/3/updates/EL_9
     base_path: OpenHPC/3/updates/EL_9/x86_64/
     short_name: openhpc_3_updates_x86_64
     sync_group: third_party
     distribution_name: openhpc-3-updates-x86_64-
   - name: OpenHPC-updates - noarch
-    url: https://repos.openhpc.community/OpenHPC/3/updates/EL_9/noarch
+    url: https://repos.openhpc.community/OpenHPC/3/updates/EL_9
     base_path: OpenHPC/3/updates/EL_9/noarch/
     short_name: openhpc_3_updates_noarch
     sync_group: third_party
