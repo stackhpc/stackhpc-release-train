@@ -144,6 +144,8 @@ source_repositories:
       - victoria
       - wallaby
       - xena
+      - yoga
+      - zed
       - 2023.1
       - 2024.1
     community_files:
