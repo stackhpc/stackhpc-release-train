@@ -7,6 +7,7 @@ name: Upstream Sync
 permissions:
   contents: write
   pull-requests: write
+{% if repository_manifest.releases %}
 jobs:
 {% for release in repository_manifest.releases %}
   synchronise-{{ release | replace(".", "-") }}:
@@ -15,3 +16,6 @@ jobs:
     with:
       release_series: {{ release }}
 {% endfor %}
+{% else %}
+jobs: {}
+{% endif %}
