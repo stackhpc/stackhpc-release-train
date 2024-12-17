@@ -374,6 +374,38 @@ deprecated_rpm_package_repos:
     distribution_name: rocky-8.8-highavailability-
     sync: false
 
+  # Base Rocky Linux 8.9 repositories (Slurm appliance)
+  - name: Rocky Linux 8.9 - AppStream
+    url: https://mirror-nrt.yuki.net.uk/rockylinux/8.9/AppStream/x86_64/os/
+    base_path: rocky/8.9/AppStream/x86_64/os/
+    short_name: rocky_8_9_appstream
+    sync_group: rocky_8
+    sync: false
+    distribution_name: rocky-8.9-appstream-
+  - name: Rocky Linux 8.9 - BaseOS
+    url: https://mirror-nrt.yuki.net.uk/rockylinux/8.9/BaseOS/x86_64/os/
+    base_path: rocky/8.9/BaseOS/x86_64/os/
+    short_name: rocky_8_9_baseos
+    sync_group: rocky_8
+    distribution_name: rocky-8.9-baseos-
+    sync: false
+  - name: Rocky Linux 8.9 - Extras
+    url: https://mirror-nrt.yuki.net.uk/rockylinux/8.9/extras/x86_64/os/
+    base_path: rocky/8.9/extras/x86_64/os/
+    short_name: rocky_8_9_extras
+    sync_group: rocky_8
+    distribution_name: rocky-8.9-extras-
+    sync: false
+
+  # Additional Rocky Linux 8.9 repositories (Slurm appliance)
+  - name: Rocky Linux 8.9 - PowerTools
+    url: https://mirror-nrt.yuki.net.uk/rockylinux/8.9/PowerTools/x86_64/os/
+    base_path: rocky/8.9/PowerTools/x86_64/os/
+    short_name: rocky_8_9_powertools
+    sync_group: rocky_8
+    distribution_name: rocky-8.9-powertools-
+    sync: false
+
   # MLNX OFED 5.6-1.0.3.3 RHEL 8.6 repository
   - name: Mellanox Technologies mlnx_ofed 5.6-1.0.3.3
     url: https://linux.mellanox.com/public/repo/mlnx_ofed/5.6-1.0.3.3/rhel8.6/x86_64/
