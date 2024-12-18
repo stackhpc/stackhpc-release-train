@@ -166,7 +166,7 @@ deb_package_repos_filtered: "{{ deb_package_repos | select_repos(deb_package_rep
 # List of RPM package repositories.
 # Each item is a dict with the following items:
 # name: Repository name.
-# url: URL of upstream package mirror.
+# url: URL of upstream package mirror, to the level which contains repodata/
 # policy: Policy for upstream remote. Optional.
 # sync_policy: Sync policy for upstream remote. Optional.
 # base_path: Base path prefix for distributions.
@@ -254,30 +254,18 @@ rpm_package_repos:
     sync_group: third_party
     distribution_name: treasuredata-4-
   # OpenHPC v2 for RockyLinux 8
-  - name: OpenHPC-2 - Base - x86_64
-    url: http://repos.openhpc.community/OpenHPC/2/EL_8/x86_64
-    base_path: OpenHPC/2/EL_8/x86_64/
-    short_name: openhpc_2_x86_64
+  - name: OpenHPC-2 - Base
+    url: https://repos.openhpc.community/OpenHPC/2/EL_8
+    base_path: OpenHPC/2/EL_8/
+    short_name: openhpc_2
     sync_group: third_party
-    distribution_name: openhpc-2-x86_64-
-  - name: OpenHPC-2 - Base - noarch
-    url: http://repos.openhpc.community/OpenHPC/2/EL_8/noarch
-    base_path: OpenHPC/2/EL_8/noarch/
-    short_name: openhpc_2_noarch
+    distribution_name: openhpc-2-
+  - name: OpenHPC-2 - Updates
+    url: https://repos.openhpc.community/OpenHPC/2/updates/EL_8
+    base_path: OpenHPC/2/updates/EL_8/
+    short_name: openhpc_2_updates
     sync_group: third_party
-    distribution_name: openhpc-2-noarch-
-  - name: OpenHPC-2 - Updates - x86_64
-    url: https://repos.openhpc.community/OpenHPC/2/updates/EL_8/x86_64
-    base_path: OpenHPC/2/updates/EL_8/x86_64/
-    short_name: openhpc_2_updates_x86_64
-    sync_group: third_party
-    distribution_name: openhpc-2-updates-x86_64-
-  - name: OpenHPC-2 - Updates - noarch
-    url: https://repos.openhpc.community/OpenHPC/2/updates/EL_8/noarch
-    base_path: OpenHPC/2/updates/EL_8/noarch/
-    short_name: openhpc_2_updates_noarch
-    sync_group: third_party
-    distribution_name: openhpc-2-updates-noarch-
+    distribution_name: openhpc-2-updates-
 
   # Base Rocky Linux 9.5 repositories
   - name: Rocky Linux 9.5 - AppStream
@@ -618,31 +606,18 @@ rpm_package_repos:
     sync_group: third_party
     distribution_name: doca-2.9.1-rhel9.5-
   # OpenHPC v3 for RockyLinux 9
-  - name: OpenHPC-3 - Base - x86_64
-    url: http://repos.openhpc.community/OpenHPC/3/EL_9/x86_64
-    base_path: OpenHPC/3/EL_9/x86_64/
-    short_name: openhpc_3_x86_64
+  - name: OpenHPC-3 - Base
+    url: https://repos.openhpc.community/OpenHPC/3/EL_9
+    base_path: OpenHPC/3/EL_9/
+    short_name: openhpc_3
     sync_group: third_party
-    distribution_name: openhpc-3-x86_64-
-  - name: OpenHPC-3 - Base - noarch
-    url: http://repos.openhpc.community/OpenHPC/3/EL_9/noarch
-    base_path: OpenHPC/3/EL_9/noarch/
-    short_name: openhpc_3_noarch
+    distribution_name: openhpc-3-
+  - name: OpenHPC-3 - Updates
+    url: https://repos.openhpc.community/OpenHPC/3/updates/EL_9
+    base_path: OpenHPC/3/updates/EL_9/
+    short_name: openhpc_3_updates
     sync_group: third_party
-    distribution_name: openhpc-2-noarch-
-  - name: OpenHPC-3 - Updates - x86_64
-    url: https://repos.openhpc.community/OpenHPC/3/updates/EL_9/x86_64
-    base_path: OpenHPC/3/updates/EL_9/x86_64/
-    short_name: openhpc_3_updates_x86_64
-    sync_group: third_party
-    distribution_name: openhpc-3-updates-x86_64-
-  - name: OpenHPC-updates - noarch
-    url: https://repos.openhpc.community/OpenHPC/3/updates/EL_9/noarch
-    base_path: OpenHPC/3/updates/EL_9/noarch/
-    short_name: openhpc_3_updates_noarch
-    sync_group: third_party
-    distribution_name: openhpc-3-updates-noarch-
-
+    distribution_name: openhpc-3-updates-
 
 # Default filter string for RPM package repositories.
 rpm_package_repo_filter: ""
