@@ -1,9 +1,9 @@
 ---
 - name: Sync test Pulp container repositories
   hosts: localhost
-  gather_facts: False
+  gather_facts: false
   tasks:
-    - import_role:
+    - ansible.builtin.import_role:
         name: stackhpc.pulp.pulp_repository
       vars:
         pulp_url: "{{ test_pulp_url }}"

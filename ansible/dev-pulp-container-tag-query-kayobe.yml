@@ -5,14 +5,15 @@
 # upon those tags, which defines the set of container image tags that
 # will be promoted when the dev-pulp-container-promote.yml playbook is run.
 
-- import_playbook: kayobe-container-tag-query.yml
+- name: Import kayobe-container-tag-query playbook
+  import_playbook: kayobe-container-tag-query.yml
 
 - name: Set dev Pulp container image tags to promote from Kayobe config tags
   hosts: localhost
   gather_facts: true
   tasks:
     - name: Set a fact about container image tags to promote
-      set_fact:
+      ansible.builtin.set_fact:
         dev_pulp_repository_container_promotion_tags: >-
           {{ kayobe_kolla_image_tags |
              dict2items |
@@ -20,11 +21,11 @@
              items2dict }}
 
     - name: Display container promotion tags facts
-      debug:
+      ansible.builtin.debug:
         var: dev_pulp_repository_container_promotion_tags
 
     - name: Assert that tags variable is populated
-      assert:
+      ansible.builtin.assert:
         that:
           - dev_pulp_repository_container_promotion_tags | length > 0
         msg: >-

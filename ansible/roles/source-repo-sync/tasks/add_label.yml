@@ -2,12 +2,12 @@
 - name: Check if required label exists # noqa command-instead-of-shell
   ansible.builtin.shell:
     cmd: gh label list --json name --jq 'any(.name == "{{ label_name }}")'
-    chdir: '{{ staging_path }}/{{ repository_manifest.name }}'
+    chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
   changed_when: false
   register: label_exists
 
 - name: Add missing label to repository # noqa command-instead-of-shell
   ansible.builtin.shell:
     cmd: gh label create {{ label_name | quote }}
-    chdir: '{{ staging_path }}/{{ repository_manifest.name }}'
+    chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
   when: not label_exists.stdout | bool

@@ -9,25 +9,25 @@
 
 - name: Query repository versions for Kayobe
   hosts: localhost
-  gather_facts: True
+  gather_facts: true
   vars:
     kayobe_config_repo_path: ""
     kayobe_pulp_repo_versions_path: "{{ (kayobe_config_repo_path ~ '/etc/kayobe/pulp-repo-versions.yml') | realpath }}"
   tasks:
     - name: Fail if Kayobe config repo path is not specified
-      fail:
+      ansible.builtin.fail:
         msg: >
           Kayobe config git repository path must be specified via 'kayobe_config_repo_path'.
       when: not kayobe_config_repo_path
 
     - name: Fail if Kayobe config repo path is not a directory
-      fail:
+      ansible.builtin.fail:
         msg: >
           Kayobe config git repository path {{ kayobe_config_repo_path }} is not a directory.
       when: kayobe_config_repo_path is not directory
 
     - name: Fail if Kayobe Pulp repository versions file not found
-      fail:
+      ansible.builtin.fail:
         msg: >
           Can't find Kayobe Pulp repository versions file {{ kayobe_pulp_repo_versions_path }}.
       when: kayobe_pulp_repo_versions_path is not file
@@ -37,12 +37,12 @@
       vars:
         full_kayobe_pulp_repo_versions: "{{ lookup('file', kayobe_pulp_repo_versions_path) | from_yaml }}"
         short_name: "{{ item.key | regex_replace('^stackhpc_pulp_repo_(.*)_version$', '\\1') }}"
-      set_fact:
+      ansible.builtin.set_fact:
         kayobe_pulp_repo_versions: "{{ kayobe_pulp_repo_versions | default({}) | combine({short_name: item.value}) }}"
       loop: "{{ query('dict', full_kayobe_pulp_repo_versions) }}"
       loop_control:
         label: "{{ short_name }}"
 
     - name: Display Kayobe Pulp repository versions
-      debug:
+      ansible.builtin.debug:
         var: kayobe_pulp_repo_versions

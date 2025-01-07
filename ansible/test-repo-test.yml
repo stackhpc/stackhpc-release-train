@@ -11,7 +11,7 @@
   tasks:
     - name: Install keys for test repositories
       become: true
-      rpm_key:
+      ansible.builtin.rpm_key:
         key: "{{ item }}"
       loop:
         - https://www.centos.org/keys/RPM-GPG-KEY-CentOS-SIG-Cloud
@@ -24,7 +24,7 @@
 
     - name: Install test repositories
       become: true
-      yum_repository:
+      ansible.builtin.yum_repository:
         name: "{{ item.name }}"
         description: "{{ item.repository }}"
         baseurl: "{{ test_pulp_url ~ '/pulp/content/' ~ item.base_path }}"
@@ -36,20 +36,19 @@
 
     - name: Run package update
       become: true
-      package:
+      ansible.builtin.package:
         name: "*"
-        state: latest  # noqa package-latest
+        state: latest # noqa package-latest
 
     - name: Run DNF distro-sync
       become: true
-      command:
+      ansible.builtin.command:
         cmd: dnf distro-sync
-        warn: false
       when: ansible_facts.os_family == 'RedHat'
 
     - name: Install packages
       become: true
-      package:
+      ansible.builtin.package:
         name: "{{ item.packages }}"
       loop:
         - repo: CentOS Stream 8 - BaseOS

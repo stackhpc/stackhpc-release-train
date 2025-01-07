@@ -6,22 +6,22 @@
     num_kolla_container_images: "{{ kolla_container_images | length }}"
   tasks:
     - name: Assert that Kolla container image list is defined
-      assert:
+      ansible.builtin.assert:
         that:
           - kolla_container_images is defined
 
     - name: Assert that Kolla container images are strings
-      assert:
+      ansible.builtin.assert:
         that:
           - kolla_container_images | reject('string') | list | length == 0
 
     - name: Assert that Kolla container image names are unique
-      assert:
+      ansible.builtin.assert:
         that:
           - kolla_container_images | unique | list | length == num_kolla_container_images | int
 
     - name: Assert that Kolla container image list can be filtered to single
-      assert:
+      ansible.builtin.assert:
         that:
           - kolla_container_images_filtered | length == 1
           - kolla_container_images_filtered[0] == 'horizon'
@@ -29,7 +29,7 @@
         kolla_container_image_filter: horizon
 
     - name: Assert that Kolla container image list can be filtered to multiple
-      assert:
+      ansible.builtin.assert:
         that:
           - kolla_container_images_filtered | length == 2
           - kolla_container_images_filtered[0] == 'horizon'
@@ -38,7 +38,7 @@
         kolla_container_image_filter: horizon nova-api
 
     - name: Assert that Kolla container image list can be filtered to single regexes
-      assert:
+      ansible.builtin.assert:
         that:
           - kolla_container_images_filtered | length == 2
           - kolla_container_images_filtered[0] == 'glance-api'
@@ -47,7 +47,7 @@
         kolla_container_image_filter: "ance-"
 
     - name: Assert that Kolla container image list can be filtered to multiple regexes
-      assert:
+      ansible.builtin.assert:
         that:
           - kolla_container_images_filtered | length == 4
           - kolla_container_images_filtered[0] == 'keystone'

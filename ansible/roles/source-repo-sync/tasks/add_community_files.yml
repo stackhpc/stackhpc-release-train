@@ -1,5 +1,5 @@
 ---
-- name: Check if release series exists on the remote
+- name: Check if release series exists on the remote  # noqa no-handler
   ansible.builtin.shell:
     cmd: |
       gh api \
@@ -10,6 +10,7 @@
   register: release_series_exists
 
 - name: Proceed with adding community files
+  when: release_series_exists.rc == 0
   block:
     - name: Check if working branch already exists on the remote
       ansible.builtin.shell:
@@ -35,22 +36,22 @@
         cmd: >
           git checkout -b {{ community_manifest.branch }}-community-files \
             origin/{{ community_manifest.prefix | default("") }}{{ community_manifest.branch }}
-        chdir: '{{ staging_path }}/{{ repository_manifest.name }}'
+        chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
       changed_when: true
 
     - name: Create .github directory
       ansible.builtin.file:
-        path: '{{ staging_path }}/{{ repository_manifest.name }}/.github/'
+        path: "{{ staging_path }}/{{ repository_manifest.name }}/.github/"
         state: directory
-        mode: 0755
+        mode: "0755"
 
     - name: Copy community files
       ansible.builtin.copy:
-        content: '{{ community_file.value.content }}'
-        dest: '{{ staging_path }}/{{ repository_manifest.name }}/{{ community_file.value.dest }}'
-        mode: 0644
+        content: "{{ community_file.value.content }}"
+        dest: "{{ staging_path }}/{{ repository_manifest.name }}/{{ community_file.value.dest }}"
+        mode: "0644"
       register: community_copy
-      with_dict: '{{ repository_manifest.community_files }}'
+      with_dict: "{{ repository_manifest.community_files }}"
       loop_control:
         loop_var: community_file
 
@@ -59,17 +60,17 @@
         cmd: |
           git add . --force && git commit -m \
           'feat: automatic update of community files {{ community_manifest.prefix | default("") }}{{ community_manifest.branch }}'
-        chdir: '{{ staging_path }}/{{ repository_manifest.name }}'
+        chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
       when: community_copy.changed | bool
 
     - name: Push branch to remote # noqa command-instead-of-module command-instead-of-shell no-handler
       ansible.builtin.shell:
-        cmd: 'git push -u origin {{ community_manifest.branch }}-community-files'
-        chdir: '{{ staging_path }}/{{ repository_manifest.name }}'
+        cmd: "git push -u origin {{ community_manifest.branch }}-community-files"
+        chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
       when: community_copy.changed | bool
 
-    - name: Ensure required labels exists on remote
-      ansible.builtin.include_tasks: 'tasks/add_label.yml'
+    - name: Ensure required labels exists on remote  # noqa no-handler
+      ansible.builtin.include_tasks: "tasks/add_label.yml"
       with_items:
         - stackhpc-ci
         - community-files
@@ -80,11 +81,10 @@
     - name: Open pull request # noqa command-instead-of-shell no-handler
       ansible.builtin.shell:
         cmd: 'gh pr create -f -B {{ community_manifest.prefix | default("") }}{{ community_manifest.branch }} -l stackhpc-ci --label community-files'
-        chdir: '{{ staging_path }}/{{ repository_manifest.name }}'
+        chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
       when: community_copy.changed | bool
 
     - name: Pause playbook to prevent exceeding API rate limit # noqa no-handler
       ansible.builtin.pause:
         seconds: 10
       when: community_copy.changed | bool
-  when: release_series_exists.rc == 0

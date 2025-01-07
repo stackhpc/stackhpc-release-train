@@ -1,19 +1,19 @@
 ---
 - name: Publish dev Pulp repositories
   hosts: localhost
-  gather_facts: True
+  gather_facts: true
   vars:
     pulp_url: "{{ dev_pulp_url }}"
     pulp_username: "{{ dev_pulp_username }}"
     pulp_password: "{{ dev_pulp_password }}"
   tasks:
-    - import_role:
+    - ansible.builtin.import_role:
         name: stackhpc.pulp.pulp_publication
       vars:
         pulp_publication_deb: "{{ dev_pulp_publication_deb }}"
         pulp_publication_rpm: "{{ dev_pulp_publication_rpm }}"
 
-    - import_role:
+    - ansible.builtin.import_role:
         name: stackhpc.pulp.pulp_distribution
       vars:
         pulp_distribution_deb: "{{ dev_pulp_distribution_deb }}"

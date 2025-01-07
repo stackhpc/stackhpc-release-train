@@ -1,14 +1,14 @@
 ---
 - name: Publish test Pulp repositories
   hosts: localhost
-  gather_facts: True
+  gather_facts: true
   vars:
     pulp_url: "{{ test_pulp_url }}"
     pulp_username: "{{ test_pulp_username }}"
     pulp_password: "{{ test_pulp_password }}"
   tasks:
     - name: Assert that Deb versions variable is populated
-      assert:
+      ansible.builtin.assert:
         that:
           - missing_repos | length == 0
         msg: >-
@@ -17,7 +17,7 @@
         missing_repos: "{{ test_pulp_repository_deb_repos | map(attribute='short_name') | list | difference(test_pulp_repository_deb_repo_versions) | list }}"
 
     - name: Assert that RPM versions variable is populated
-      assert:
+      ansible.builtin.assert:
         that:
           - missing_repos | length == 0
         msg: >-
@@ -25,13 +25,13 @@
       vars:
         missing_repos: "{{ test_pulp_repository_rpm_repos | map(attribute='short_name') | list | difference(test_pulp_repository_rpm_repo_versions) | list }}"
 
-    - import_role:
+    - ansible.builtin.import_role:
         name: stackhpc.pulp.pulp_publication
       vars:
         pulp_publication_deb: "{{ test_pulp_publication_deb }}"
         pulp_publication_rpm: "{{ test_pulp_publication_rpm }}"
 
-    - import_role:
+    - ansible.builtin.import_role:
         name: stackhpc.pulp.pulp_distribution
       vars:
         pulp_distribution_deb: "{{ test_pulp_distribution_deb }}"

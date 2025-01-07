@@ -1,2 +1,6 @@
+---
 skip_list:
-  - unnamed-task  # All tasks should be named
+  - no-changed-when
+  - role-name
+  - unnamed-task # All tasks should be named
+  - yaml[line-length]

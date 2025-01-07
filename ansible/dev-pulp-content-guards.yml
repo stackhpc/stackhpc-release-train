@@ -4,7 +4,7 @@
   gather_facts: true
   tasks:
     - name: Run stackhpc.pulp.pulp_content_guard role
-      import_role:
+      ansible.builtin.import_role:
         name: stackhpc.pulp.pulp_content_guard
       vars:
         pulp_url: "{{ dev_pulp_url }}"
