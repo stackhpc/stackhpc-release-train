@@ -1,7 +1,7 @@
 ---
 - name: Display Pulp distributions, publications & repositories
   hosts: localhost
-  gather_facts: True
+  gather_facts: true
   vars:
     pulp_url: "{{ test_pulp_url }}"
     pulp_username: "{{ test_pulp_username }}"
@@ -44,7 +44,7 @@
           repo: "{{ repo }}"
           pub: "{{ pub }}"
           dist: "{{ item }}"
-      debug:
+      ansible.builtin.debug:
         var: info
       loop: "{{ pulp_deb_dists_list.distributions }}"
       loop_control:
@@ -79,7 +79,7 @@
           repo: "{{ repo }}"
           pub: "{{ pub }}"
           dist: "{{ item }}"
-      debug:
+      ansible.builtin.debug:
         var: info
       loop: "{{ pulp_rpm_dists_list.distributions }}"
       loop_control:

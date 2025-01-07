@@ -8,24 +8,24 @@
 
 - name: Query container image tags for Kayobe
   hosts: localhost
-  gather_facts: True
+  gather_facts: true
   vars:
     kayobe_config_repo_path: ""
   tasks:
     - name: Fail if Kayobe config repo path is not specified
-      fail:
+      ansible.builtin.fail:
         msg: >
           Kayobe config git repository path must be specified via 'kayobe_config_repo_path'.
       when: not kayobe_config_repo_path
 
     - name: Fail if Kayobe config repo path is not a directory
-      fail:
+      ansible.builtin.fail:
         msg: >
           Kayobe config git repository path {{ kayobe_config_repo_path }} is not a directory.
       when: kayobe_config_repo_path is not directory
 
     - name: List Kayobe Kolla image tags
-      command:
+      ansible.builtin.command:
         cmd: >-
           {{ kayobe_config_repo_path | realpath }}/tools/kolla-images.py list-tags
         chdir: "{{ kayobe_config_repo_path | realpath }}"
@@ -34,9 +34,9 @@
       changed_when: false
 
     - name: Set a fact about Kayobe Kolla image tags
-      set_fact:
+      ansible.builtin.set_fact:
         kayobe_kolla_image_tags: "{{ list_tags.stdout | from_yaml }}"
 
     - name: Display Kayobe Kolla image tags
-      debug:
+      ansible.builtin.debug:
         var: kayobe_kolla_image_tags

@@ -4,10 +4,10 @@ on:
   push:
     branches: [main]
     paths:
-      - '.github/workflows/container-publish.yml'
-      - 'ansible/dev-pulp-container-publish.yml'
-      - 'ansible/inventory/group_vars/all/dev-pulp-containers'
-      - 'ansible/inventory/group_vars/all/kolla'
+      - ".github/workflows/container-publish.yml"
+      - "ansible/dev-pulp-container-publish.yml"
+      - "ansible/inventory/group_vars/all/dev-pulp-containers"
+      - "ansible/inventory/group_vars/all/kolla"
   workflow_dispatch:
     inputs:
       filter:
@@ -22,37 +22,37 @@ on:
         default: ""
 
 env:
-  ANSIBLE_FORCE_COLOR: True
+  ANSIBLE_FORCE_COLOR: true
   ANSIBLE_VAULT_PASSWORD_FILE: ${{ github.workspace }}/vault-pass
 jobs:
   container-publish:
     name: Publish container repositories
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Setup Release Train & dependencies
-      uses: ./.github/actions/setup
-      with:
-        vault-password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
-        vault-password-file: ${{ env.ANSIBLE_VAULT_PASSWORD_FILE }}
+      - name: Setup Release Train & dependencies
+        uses: ./.github/actions/setup
+        with:
+          vault-password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+          vault-password-file: ${{ env.ANSIBLE_VAULT_PASSWORD_FILE }}
 
-    - name: Publish container repositories
-      run: |
-        ansible-playbook -i ansible/inventory \
-        ansible/dev-pulp-container-publish.yml \
-        -e kolla_container_image_filter="'$FILTER'" \
-        -e kolla_base_distros_override="'$DISTROS'"
-      env:
-        FILTER: ${{ github.event.inputs.filter }}
-        DISTROS: ${{ github.event.inputs.distros }}
+      - name: Publish container repositories
+        run: |
+          ansible-playbook -i ansible/inventory \
+          ansible/dev-pulp-container-publish.yml \
+          -e kolla_container_image_filter="'$FILTER'" \
+          -e kolla_base_distros_override="'$DISTROS'"
+        env:
+          FILTER: ${{ github.event.inputs.filter }}
+          DISTROS: ${{ github.event.inputs.distros }}
 
-    - name: Send message to Slack via Workflow Builder
-      uses: ./.github/actions/slack-alert
-      with:
-        inputs: >-
-          filter: ${{ inputs.filter }}\n
-          distros: ${{ inputs.distros }}\n
-        slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
-        slack-channel-id: ${{ vars.SLACK_CHANNEL_ID }}
-      if: failure() && github.event_name == 'push'
+      - name: Send message to Slack via Workflow Builder
+        uses: ./.github/actions/slack-alert
+        with:
+          inputs: >-
+            filter: ${{ inputs.filter }}\n
+            distros: ${{ inputs.distros }}\n
+          slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          slack-channel-id: ${{ vars.SLACK_CHANNEL_ID }}
+        if: failure() && github.event_name == 'push'

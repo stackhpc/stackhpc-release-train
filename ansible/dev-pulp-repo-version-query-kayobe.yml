@@ -5,14 +5,15 @@
 # upon those versions, which defines the set of repository versions that will
 # be promoted when the dev-pulp-repo-promote.yml playbook is run.
 
-- import_playbook: kayobe-repo-version-query.yml
+- name: Import kayobe-repo-version-query playbook
+  import_playbook: kayobe-repo-version-query.yml
 
 - name: Set dev Pulp repo versions to promote from Kayobe config versions
   hosts: localhost
   gather_facts: true
   tasks:
     - name: Set a fact about rpm versions to promote
-      set_fact:
+      ansible.builtin.set_fact:
         dev_pulp_distribution_rpm_promote_versions: >-
           {{ dev_pulp_distribution_rpm_promote_versions |
              default({}) |
@@ -23,7 +24,7 @@
       when: item.short_name in kayobe_pulp_repo_versions
 
     - name: Set a fact about deb versions to promote
-      set_fact:
+      ansible.builtin.set_fact:
         dev_pulp_distribution_deb_promote_versions: >-
           {{ dev_pulp_distribution_deb_promote_versions |
              default({}) |
@@ -34,15 +35,15 @@
       when: item.short_name in kayobe_pulp_repo_versions
 
     - name: Display rpm promotion versions facts
-      debug:
+      ansible.builtin.debug:
         var: dev_pulp_distribution_rpm_promote_versions
 
     - name: Display deb promotion versions facts
-      debug:
+      ansible.builtin.debug:
         var: dev_pulp_distribution_deb_promote_versions
 
     - name: Assert that versions variable is populated
-      assert:
+      ansible.builtin.assert:
         that:
           - >-
             dev_pulp_distribution_deb_promote_versions | length > 0 or

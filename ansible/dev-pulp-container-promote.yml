@@ -15,18 +15,18 @@
   gather_facts: false
   tasks:
     - name: Fail if container images to promote are not defined
-      fail:
+      ansible.builtin.fail:
         msg: >
           The container images to promote must be specified via
           'dev_pulp_repository_container_promotion_tags'
       when: dev_pulp_repository_container_promotion_tags is not defined
 
     - name: Display which tags are being promoted
-      debug:
+      ansible.builtin.debug:
         var: "dev_pulp_repository_container_promotion_tags"
 
     # Copy tags from stackhpc-dev to stackhpc repositories.
-    - import_role:
+    - ansible.builtin.import_role:
         name: stackhpc.pulp.pulp_container_content
       vars:
         pulp_url: "{{ dev_pulp_url }}"

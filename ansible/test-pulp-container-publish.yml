@@ -1,13 +1,13 @@
 ---
 - name: Publish test Pulp container images
   hosts: localhost
-  gather_facts: True
+  gather_facts: true
   vars:
     pulp_url: "{{ test_pulp_url }}"
     pulp_username: "{{ test_pulp_username }}"
     pulp_password: "{{ test_pulp_password }}"
   tasks:
-    - import_role:
+    - ansible.builtin.import_role:
         name: stackhpc.pulp.pulp_distribution
       vars:
         pulp_distribution_container: "{{ test_pulp_distribution_container }}"

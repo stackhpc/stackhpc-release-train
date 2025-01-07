@@ -1,3 +1,4 @@
+---
 site_name: StackHPC Release Train
 site_url: https://stackhpc.github.io/stackhpc-release-train/
 repo_url: https://github.com/stackhpc/stackhpc-release-train/
@@ -13,7 +14,7 @@ markdown_extensions:
   # From mkdocs-material: allow !!! note.
   - admonition
   - toc:
-      permalink: True
+      permalink: true
   - pymdownx.details
   - pymdownx.superfences
   - tables

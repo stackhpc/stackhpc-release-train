@@ -10,6 +10,7 @@
   register: release_series_exists
 
 - name: Proceed with adding workflows
+  when: release_series_exists.rc == 0
   block:
     - name: Check if working branch already exists on the remote
       ansible.builtin.shell:
@@ -35,34 +36,34 @@
         cmd: >
           git checkout -b {{ workflow_manifest.branch }}-workflows \
             origin/{{ workflow_manifest.prefix | default("") }}{{ workflow_manifest.branch }}
-        chdir: '{{ staging_path }}/{{ repository_manifest.name }}'
+        chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
       changed_when: true
 
     - name: Create .github/workflows directory
       ansible.builtin.file:
-        path: '{{ staging_path }}/{{ repository_manifest.name }}/.github/workflows'
+        path: "{{ staging_path }}/{{ repository_manifest.name }}/.github/workflows"
         state: directory
-        mode: 0755
+        mode: "0755"
 
     - name: Copy workflow into repository
       ansible.builtin.template:
-        src: 'templates/{{ workflow }}.jinja'
-        dest: '{{ staging_path }}/{{ repository_manifest.name }}/.github/workflows/{{ workflow }}.yml'
-        mode: 0644
-      with_items: '{{ workflow_manifest.workflows }}'
+        src: "templates/{{ workflow }}.jinja"
+        dest: "{{ staging_path }}/{{ repository_manifest.name }}/.github/workflows/{{ workflow }}.yml"
+        mode: "0644"
+      with_items: "{{ workflow_manifest.workflows }}"
       loop_control:
         loop_var: workflow
       register: workflow_copy
 
     - name: Remove TravisCI file
       ansible.builtin.file:
-        path: '{{ staging_path }}/{{ repository_manifest.name }}/.travis.yml'
+        path: "{{ staging_path }}/{{ repository_manifest.name }}/.travis.yml"
         state: absent
       register: travis_rm
 
     - name: Remove publish workflow
       ansible.builtin.file:
-        path: '{{ staging_path }}/{{ repository_manifest.name }}/.github/workflows/{{ unwanted_workflow }}.yml'
+        path: "{{ staging_path }}/{{ repository_manifest.name }}/.github/workflows/{{ unwanted_workflow }}.yml"
         state: absent
       register: publish_rm
       with_items:
@@ -71,23 +72,24 @@
       loop_control:
         loop_var: unwanted_workflow
 
-    - block:
+    - when: workflow_copy.changed | bool or travis_rm.changed or publish_rm.changed | bool
+      block:
         - name: Commit changes # noqa command-instead-of-module no-handler
           ansible.builtin.shell:
             cmd: |
               git add . --force && git commit -m \
               'feat: automatic update of workflows {{ workflow_manifest.prefix | default("") }}{{ workflow_manifest.branch }}'
-            chdir: '{{ staging_path }}/{{ repository_manifest.name }}'
+            chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
           changed_when: true
 
         - name: Push branch to remote # noqa command-instead-of-module command-instead-of-shell no-handler
           ansible.builtin.shell:
-            cmd: 'git push -u origin {{ workflow_manifest.branch }}-workflows'
-            chdir: '{{ staging_path }}/{{ repository_manifest.name }}'
+            cmd: "git push -u origin {{ workflow_manifest.branch }}-workflows"
+            chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
           changed_when: true
 
         - name: Ensure required labels exists on remote
-          ansible.builtin.include_tasks: 'tasks/add_label.yml'
+          ansible.builtin.include_tasks: "tasks/add_label.yml"
           with_items:
             - stackhpc-ci
             - workflows
@@ -97,11 +99,9 @@
         - name: Open pull request # noqa command-instead-of-shell no-handler
           ansible.builtin.shell:
             cmd: 'gh pr create --fill --base {{ workflow_manifest.prefix | default("") }}{{ workflow_manifest.branch }} --label stackhpc-ci --label workflows'
-            chdir: '{{ staging_path }}/{{ repository_manifest.name }}'
+            chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
           changed_when: true
 
         - name: Pause playbook to prevent exceeding API rate limit # noqa no-handler
           ansible.builtin.pause:
             seconds: 10
-      when: workflow_copy.changed | bool or travis_rm.changed or publish_rm.changed | bool
-  when: release_series_exists.rc == 0

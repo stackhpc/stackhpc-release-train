@@ -14,7 +14,7 @@ on:
         default: stackhpc/2023.1
 
 env:
-  ANSIBLE_FORCE_COLOR: True
+  ANSIBLE_FORCE_COLOR: true
   ANSIBLE_VAULT_PASSWORD_FILE: ${{ github.workspace }}/vault-pass
 jobs:
   package-update-kayobe:

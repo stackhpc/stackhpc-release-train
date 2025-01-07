@@ -1,13 +1,13 @@
 ---
 name: Synchronise Source Repositories
-'on':
+"on":
   push:
     branches: [main]
     paths:
-      - '.github/workflows/source-repo-sync.yml'
-      - 'ansible/inventory/group_vars/all/source-repositories'
-      - 'ansible/roles/source-repo-sync/**'
-      - 'ansible/source-repo-sync.yml'
+      - ".github/workflows/source-repo-sync.yml"
+      - "ansible/inventory/group_vars/all/source-repositories"
+      - "ansible/roles/source-repo-sync/**"
+      - "ansible/source-repo-sync.yml"
   workflow_dispatch:
 permissions:
   contents: write
@@ -24,11 +24,11 @@ jobs:
       - name: Github checkout 🛎
         uses: actions/checkout@v4
         with:
-          persist-credentials: 'false'
+          persist-credentials: "false"
       - name: Run ansible playbook 📖
         run: ansible-playbook ansible/source-repo-sync.yml -i ansible/inventory
         env:
-          ANSIBLE_FORCE_COLOR: True
+          ANSIBLE_FORCE_COLOR: true
           GITHUB_TOKEN: ${{secrets.repository_configuration_token}}
 
       - name: Send message to Slack via Workflow Builder

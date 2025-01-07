@@ -13,7 +13,7 @@
   gather_facts: true
   tasks:
     - name: Assert that a versions variable is populated
-      assert:
+      ansible.builtin.assert:
         that:
           - >-
             dev_pulp_distribution_deb_promote_versions | length > 0 or

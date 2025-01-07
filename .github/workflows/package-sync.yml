@@ -34,7 +34,7 @@ on:
         required: false
         default: ""
 env:
-  ANSIBLE_FORCE_COLOR: True
+  ANSIBLE_FORCE_COLOR: true
   ANSIBLE_VAULT_PASSWORD_FILE: ${{ github.workspace }}/vault-pass
 jobs:
   package-sync-ark:
@@ -43,45 +43,44 @@ jobs:
     timeout-minutes: 480
     if: inputs.sync_ark
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Checkout
-      uses: actions/checkout@v4
+      - name: Setup Release Train & dependencies
+        uses: ./.github/actions/setup
+        with:
+          vault-password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+          vault-password-file: ${{ env.ANSIBLE_VAULT_PASSWORD_FILE }}
 
-    - name: Setup Release Train & dependencies
-      uses: ./.github/actions/setup
-      with:
-        vault-password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
-        vault-password-file: ${{ env.ANSIBLE_VAULT_PASSWORD_FILE }}
+      - name: Sync and publish package repositories in Ark
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 360
+          max_attempts: 2
+          command: |
+            ansible-playbook -i ansible/inventory \
+            ansible/dev-pulp-repo-sync.yml \
+            ansible/dev-pulp-repo-publication-cleanup.yml \
+            ansible/dev-pulp-repo-publish.yml \
+            -e package_sync_group="'$PACKAGE_SYNC_GROUP'" \
+            -e deb_package_repo_filter="'$FILTER'" \
+            -e rpm_package_repo_filter="'$FILTER'"
+          retry_wait_seconds: 3600
+        env:
+          FILTER: ${{ inputs.filter }}
+          PACKAGE_SYNC_GROUP: ${{ inputs.package_sync_group }}
 
-    - name: Sync and publish package repositories in Ark
-      uses: nick-fields/retry@v3
-      with:
-        timeout_minutes: 360
-        max_attempts: 2
-        command: |
-          ansible-playbook -i ansible/inventory \
-          ansible/dev-pulp-repo-sync.yml \
-          ansible/dev-pulp-repo-publication-cleanup.yml \
-          ansible/dev-pulp-repo-publish.yml \
-          -e package_sync_group="'$PACKAGE_SYNC_GROUP'" \
-          -e deb_package_repo_filter="'$FILTER'" \
-          -e rpm_package_repo_filter="'$FILTER'"
-        retry_wait_seconds: 3600
-      env:
-        FILTER: ${{ inputs.filter }}
-        PACKAGE_SYNC_GROUP: ${{ inputs.package_sync_group }}
-
-    - name: Send message to Slack via Workflow Builder
-      uses: ./.github/actions/slack-alert
-      with:
-        inputs: >-
-          filter: ${{ inputs.filter }}\n
-          sync_ark: ${{ inputs.sync_ark }}\n
-          sync_test: ${{ inputs.sync_test }}\n
-          package_sync_group: ${{ inputs.package_sync_group }}\n
-        slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
-        slack-channel-id: ${{ vars.SLACK_CHANNEL_ID }}
-      if: failure()
+      - name: Send message to Slack via Workflow Builder
+        uses: ./.github/actions/slack-alert
+        with:
+          inputs: >-
+            filter: ${{ inputs.filter }}\n
+            sync_ark: ${{ inputs.sync_ark }}\n
+            sync_test: ${{ inputs.sync_test }}\n
+            package_sync_group: ${{ inputs.package_sync_group }}\n
+          slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          slack-channel-id: ${{ vars.SLACK_CHANNEL_ID }}
+        if: failure()
 
   package-sync-test:
     name: Sync package repositories in test
@@ -90,42 +89,42 @@ jobs:
     timeout-minutes: 480
     if: inputs.sync_test
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Setup Release Train & dependencies
-      uses: ./.github/actions/setup
-      with:
-        vault-password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
-        vault-password-file: ${{ env.ANSIBLE_VAULT_PASSWORD_FILE }}
+      - name: Setup Release Train & dependencies
+        uses: ./.github/actions/setup
+        with:
+          vault-password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+          vault-password-file: ${{ env.ANSIBLE_VAULT_PASSWORD_FILE }}
 
-    - name: Sync and publish package repositories in test
-      uses: nick-fields/retry@v3
-      with:
-        timeout_minutes: 360
-        max_attempts: 2
-        command: |
-          ansible-playbook -i ansible/inventory \
-          ansible/test-pulp-repo-version-query.yml \
-          ansible/test-pulp-repo-sync.yml \
-          ansible/test-pulp-repo-publication-cleanup.yml \
-          ansible/test-pulp-repo-publish.yml \
-          -e package_sync_group="'$PACKAGE_SYNC_GROUP'" \
-          -e deb_package_repo_filter="'$FILTER'" \
-          -e rpm_package_repo_filter="'$FILTER'"
-        retry_wait_seconds: 3600
-      env:
-        FILTER: ${{ inputs.filter }}
-        PACKAGE_SYNC_GROUP: ${{ inputs.package_sync_group }}
+      - name: Sync and publish package repositories in test
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 360
+          max_attempts: 2
+          command: |
+            ansible-playbook -i ansible/inventory \
+            ansible/test-pulp-repo-version-query.yml \
+            ansible/test-pulp-repo-sync.yml \
+            ansible/test-pulp-repo-publication-cleanup.yml \
+            ansible/test-pulp-repo-publish.yml \
+            -e package_sync_group="'$PACKAGE_SYNC_GROUP'" \
+            -e deb_package_repo_filter="'$FILTER'" \
+            -e rpm_package_repo_filter="'$FILTER'"
+          retry_wait_seconds: 3600
+        env:
+          FILTER: ${{ inputs.filter }}
+          PACKAGE_SYNC_GROUP: ${{ inputs.package_sync_group }}
 
-    - name: Send message to Slack via Workflow Builder
-      uses: ./.github/actions/slack-alert
-      with:
-        inputs: >-
-          filter: ${{ inputs.filter }}\n
-          sync_ark: ${{ inputs.sync_ark }}\n
-          sync_test: ${{ inputs.sync_test }}\n
-          package_sync_group: ${{ inputs.package_sync_group }}\n
-        slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
-        slack-channel-id: ${{ vars.SLACK_CHANNEL_ID }}
-      if: failure()
+      - name: Send message to Slack via Workflow Builder
+        uses: ./.github/actions/slack-alert
+        with:
+          inputs: >-
+            filter: ${{ inputs.filter }}\n
+            sync_ark: ${{ inputs.sync_ark }}\n
+            sync_test: ${{ inputs.sync_test }}\n
+            package_sync_group: ${{ inputs.package_sync_group }}\n
+          slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          slack-channel-id: ${{ vars.SLACK_CHANNEL_ID }}
+        if: failure()

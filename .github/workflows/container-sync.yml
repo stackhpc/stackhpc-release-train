@@ -27,7 +27,7 @@ on:
         default: false
 
 env:
-  ANSIBLE_FORCE_COLOR: True
+  ANSIBLE_FORCE_COLOR: true
   ANSIBLE_VAULT_PASSWORD_FILE: ${{ github.workspace }}/vault-pass
 jobs:
   container-sync:
@@ -35,68 +35,68 @@ jobs:
     runs-on: arc-release-train-runner
     timeout-minutes: 720
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Setup Release Train & dependencies
-      uses: ./.github/actions/setup
-      with:
-        vault-password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
-        vault-password-file: ${{ env.ANSIBLE_VAULT_PASSWORD_FILE }}
+      - name: Setup Release Train & dependencies
+        uses: ./.github/actions/setup
+        with:
+          vault-password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+          vault-password-file: ${{ env.ANSIBLE_VAULT_PASSWORD_FILE }}
 
-    - name: Configure access control for stackhpc-dev namespace in Ark
-      run: |
-        ansible-playbook -i ansible/inventory \
-        ansible/dev-pulp-container-publish.yml \
-        -e kolla_container_image_filter="'$FILTER'" \
-        -e kolla_base_distros_override="'$DISTROS'" \
-        -e sync_old_images="'$SYNC_OLD_IMAGES'" \
-        -e sync_new_images="'$SYNC_NEW_IMAGES'"
-      env:
-        FILTER: ${{ github.event.inputs.filter }}
-        DISTROS: ${{ github.event.inputs.distros }}
-        SYNC_OLD_IMAGES: ${{ github.event.inputs.sync-old-images }}
-        SYNC_NEW_IMAGES: ${{ github.event.inputs.sync-new-images }}
+      - name: Configure access control for stackhpc-dev namespace in Ark
+        run: |
+          ansible-playbook -i ansible/inventory \
+          ansible/dev-pulp-container-publish.yml \
+          -e kolla_container_image_filter="'$FILTER'" \
+          -e kolla_base_distros_override="'$DISTROS'" \
+          -e sync_old_images="'$SYNC_OLD_IMAGES'" \
+          -e sync_new_images="'$SYNC_NEW_IMAGES'"
+        env:
+          FILTER: ${{ github.event.inputs.filter }}
+          DISTROS: ${{ github.event.inputs.distros }}
+          SYNC_OLD_IMAGES: ${{ github.event.inputs.sync-old-images }}
+          SYNC_NEW_IMAGES: ${{ github.event.inputs.sync-new-images }}
 
-    - name: Sync images in test with stackhpc-dev namespace in Ark
-      run: |
-        ansible-playbook -i ansible/inventory \
-        ansible/test-pulp-container-sync.yml \
-        -e kolla_container_image_filter="'$FILTER'" \
-        -e kolla_base_distros_override="'$DISTROS'" \
-        -e sync_old_images="'$SYNC_OLD_IMAGES'" \
-        -e sync_new_images="'$SYNC_NEW_IMAGES'"
-      if: inputs.sync-test-pulp
-      env:
-        FILTER: ${{ github.event.inputs.filter }}
-        DISTROS: ${{ github.event.inputs.distros }}
-        SYNC_OLD_IMAGES: ${{ github.event.inputs.sync-old-images }}
-        SYNC_NEW_IMAGES: ${{ github.event.inputs.sync-new-images }}
+      - name: Sync images in test with stackhpc-dev namespace in Ark
+        run: |
+          ansible-playbook -i ansible/inventory \
+          ansible/test-pulp-container-sync.yml \
+          -e kolla_container_image_filter="'$FILTER'" \
+          -e kolla_base_distros_override="'$DISTROS'" \
+          -e sync_old_images="'$SYNC_OLD_IMAGES'" \
+          -e sync_new_images="'$SYNC_NEW_IMAGES'"
+        if: inputs.sync-test-pulp
+        env:
+          FILTER: ${{ github.event.inputs.filter }}
+          DISTROS: ${{ github.event.inputs.distros }}
+          SYNC_OLD_IMAGES: ${{ github.event.inputs.sync-old-images }}
+          SYNC_NEW_IMAGES: ${{ github.event.inputs.sync-new-images }}
 
-    - name: Publish images in test
-      run: |
-        ansible-playbook -i ansible/inventory \
-        ansible/test-pulp-container-publish.yml \
-        -e kolla_container_image_filter="'$FILTER'" \
-        -e kolla_base_distros_override="'$DISTROS'" \
-        -e sync_old_images="'$SYNC_OLD_IMAGES'" \
-        -e sync_new_images="'$SYNC_NEW_IMAGES'"
-      if: inputs.sync-test-pulp
-      env:
-        FILTER: ${{ github.event.inputs.filter }}
-        DISTROS: ${{ github.event.inputs.distros }}
-        SYNC_OLD_IMAGES: ${{ github.event.inputs.sync-old-images }}
-        SYNC_NEW_IMAGES: ${{ github.event.inputs.sync-new-images }}
+      - name: Publish images in test
+        run: |
+          ansible-playbook -i ansible/inventory \
+          ansible/test-pulp-container-publish.yml \
+          -e kolla_container_image_filter="'$FILTER'" \
+          -e kolla_base_distros_override="'$DISTROS'" \
+          -e sync_old_images="'$SYNC_OLD_IMAGES'" \
+          -e sync_new_images="'$SYNC_NEW_IMAGES'"
+        if: inputs.sync-test-pulp
+        env:
+          FILTER: ${{ github.event.inputs.filter }}
+          DISTROS: ${{ github.event.inputs.distros }}
+          SYNC_OLD_IMAGES: ${{ github.event.inputs.sync-old-images }}
+          SYNC_NEW_IMAGES: ${{ github.event.inputs.sync-new-images }}
 
-    - name: Send message to Slack via Workflow Builder
-      uses: ./.github/actions/slack-alert
-      with:
-        inputs: >-
-          filter: ${{ inputs.filter }}\n
-          distros: ${{ inputs.distros }}\n
-          sync-old-images: ${{ inputs.sync-old-images }}\n
-          sync-new-images: ${{ inputs.sync-new-images }}\n
-          sync-test-pulp: ${{ inputs.sync-test-pulp }}\n
-        slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
-        slack-channel-id: ${{ vars.SLACK_CHANNEL_ID }}
-      if: failure()
+      - name: Send message to Slack via Workflow Builder
+        uses: ./.github/actions/slack-alert
+        with:
+          inputs: >-
+            filter: ${{ inputs.filter }}\n
+            distros: ${{ inputs.distros }}\n
+            sync-old-images: ${{ inputs.sync-old-images }}\n
+            sync-new-images: ${{ inputs.sync-new-images }}\n
+            sync-test-pulp: ${{ inputs.sync-test-pulp }}\n
+          slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          slack-channel-id: ${{ vars.SLACK_CHANNEL_ID }}
+        if: failure()

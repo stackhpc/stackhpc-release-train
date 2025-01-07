@@ -10,7 +10,7 @@
 
 - name: Clean up duplicate publications
   hosts: localhost
-  gather_facts: True
+  gather_facts: true
   vars:
     pulp_url: "{{ test_pulp_url }}"
     pulp_username: "{{ test_pulp_username }}"
@@ -37,9 +37,12 @@
         password: "{{ pulp_password }}"
       register: pulp_dists_list
 
-    - block:
+    - vars:
+        repo: "{{ pulp_repos_list.repositories | selectattr('name', 'equalto', item.repository) | first }}"
+        pubs: "{{ pulp_pubs_list.publications | selectattr('repository_version', 'equalto', repo.latest_version_href) }}"
+      block:
         - name: Show duplicate publications
-          debug:
+          ansible.builtin.debug:
             msg: "{{ pubs | sort(attribute='pulp_created') }}"
           loop: "{{ test_pulp_distribution_rpm }}"
           loop_control:
@@ -47,7 +50,7 @@
           when: pubs | length > 1
 
         - name: Fail if duplicate publications have distributions
-          assert:
+          ansible.builtin.assert:
             that: dists | length == 0
           loop: "{{ test_pulp_distribution_rpm }}"
           loop_control:
@@ -60,7 +63,7 @@
         # Use URI module since pulp.squeezer.rpm_publication fails if there are
         # multiple matching publications.
         - name: Destroy duplicate publications
-          uri:
+          ansible.builtin.uri:
             url: "{{ pulp_url }}{{ duplicate_pub.pulp_href }}"
             user: "{{ pulp_username }}"
             password: "{{ pulp_password }}"
@@ -73,6 +76,3 @@
           when: pubs | length > 1
           vars:
             duplicate_pub: "{{ pubs | sort(attribute='pulp_created') | last }}"
-      vars:
-        repo: "{{ pulp_repos_list.repositories | selectattr('name', 'equalto', item.repository) | first }}"
-        pubs: "{{ pulp_pubs_list.publications | selectattr('repository_version', 'equalto', repo.latest_version_href) }}"

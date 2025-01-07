@@ -6,9 +6,8 @@ on:
     branches:
       - main
   pull_request:
-
 env:
-  ANSIBLE_FORCE_COLOR: True
+  ANSIBLE_FORCE_COLOR: true
   ANSIBLE_VAULT_PASSWORD_FILE: ${{ github.workspace }}/vault-pass
 jobs:
   ansible-validations:

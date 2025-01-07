@@ -7,7 +7,7 @@
 
 - name: Update test repo versions
   hosts: localhost
-  gather_facts: True
+  gather_facts: true
   vars:
     pulp_url: "{{ dev_pulp_url }}"
     pulp_username: "{{ dev_pulp_username }}"
@@ -63,58 +63,61 @@
         password: "{{ pulp_password }}"
       register: pulp_rpm_dists_list
 
-    - block:
+    - vars:
+        repo: "{{ pulp_deb_repos_list.repositories | selectattr('name', 'equalto', item.repository) | first }}"
+        pub: "{{ (pulp_deb_pubs_list.publications + pulp_deb_verbatim_pubs_list.publications) | selectattr('repository', 'equalto', repo.pulp_href) | stackhpc.pulp.sort_publications
+          | first }}"
+        dist: "{{ pulp_deb_dists_list.distributions | selectattr('publication', 'equalto', pub.pulp_href) | first }}"
+
+      block:
         - name: Display latest Deb distributions
           vars:
             info:
               repo: "{{ repo }}"
               pub: "{{ pub }}"
               dist: "{{ dist }}"
-          debug:
+          ansible.builtin.debug:
             var: info
           loop: "{{ dev_pulp_distribution_deb }}"
           loop_control:
             label: "{{ item.repository }}"
 
         - name: Set a fact about latest Deb versions
-          set_fact:
-            test_pulp_repository_deb_repo_versions: "{{ test_pulp_repository_deb_repo_versions | default({}) | combine({item.short_name: dist.base_path | basename}) }}"
+          ansible.builtin.set_fact:
+            test_pulp_repository_deb_repo_versions: "{{ test_pulp_repository_deb_repo_versions | default({}) | combine({item.short_name: dist.base_path | basename})
+              }}"
           loop: "{{ dev_pulp_distribution_deb }}"
           loop_control:
             label: "{{ item.repository }}"
 
         - name: Display latest versions fact
-          debug:
+          ansible.builtin.debug:
             var: test_pulp_repository_deb_repo_versions
-      vars:
-        repo: "{{ pulp_deb_repos_list.repositories | selectattr('name', 'equalto', item.repository) | first }}"
-        pub: "{{ (pulp_deb_pubs_list.publications + pulp_deb_verbatim_pubs_list.publications) | selectattr('repository', 'equalto', repo.pulp_href) | stackhpc.pulp.sort_publications | first }}"
-        dist: "{{ pulp_deb_dists_list.distributions | selectattr('publication', 'equalto', pub.pulp_href) | first }}"
-
-    - block:
+    - vars:
+        repo: "{{ pulp_rpm_repos_list.repositories | selectattr('name', 'equalto', item.repository) | first }}"
+        pub: "{{ pulp_rpm_pubs_list.publications | selectattr('repository', 'equalto', repo.pulp_href) | stackhpc.pulp.sort_publications | first }}"
+        dist: "{{ pulp_rpm_dists_list.distributions | selectattr('publication', 'equalto', pub.pulp_href) | first }}"
+      block:
         - name: Display latest RPM distributions
           vars:
             info:
               repo: "{{ repo }}"
               pub: "{{ pub }}"
               dist: "{{ dist }}"
-          debug:
+          ansible.builtin.debug:
             var: info
           loop: "{{ dev_pulp_distribution_rpm }}"
           loop_control:
             label: "{{ item.repository }}"
 
         - name: Set a fact about latest RPM versions
-          set_fact:
-            test_pulp_repository_rpm_repo_versions: "{{ test_pulp_repository_rpm_repo_versions | default({}) | combine({item.short_name: dist.base_path | basename}) }}"
+          ansible.builtin.set_fact:
+            test_pulp_repository_rpm_repo_versions: "{{ test_pulp_repository_rpm_repo_versions | default({}) | combine({item.short_name: dist.base_path | basename})
+              }}"
           loop: "{{ dev_pulp_distribution_rpm }}"
           loop_control:
             label: "{{ item.repository }}"
 
         - name: Display latest versions fact
-          debug:
+          ansible.builtin.debug:
             var: test_pulp_repository_rpm_repo_versions
-      vars:
-        repo: "{{ pulp_rpm_repos_list.repositories | selectattr('name', 'equalto', item.repository) | first }}"
-        pub: "{{ pulp_rpm_pubs_list.publications | selectattr('repository', 'equalto', repo.pulp_href) | stackhpc.pulp.sort_publications | first }}"
-        dist: "{{ pulp_rpm_dists_list.distributions | selectattr('publication', 'equalto', pub.pulp_href) | first }}"

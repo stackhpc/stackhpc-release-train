@@ -1,53 +1,46 @@
 ---
 - name: Delete staging area directory
   ansible.builtin.file:
-    path: '{{ staging_path }}'
+    path: "{{ staging_path }}"
     state: absent
 
 - name: Create staging area directory
   ansible.builtin.file:
-    path: '{{ staging_path }}'
+    path: "{{ staging_path }}"
     state: directory
-    mode: 0755
+    mode: "0755"
 
 - name: Configure openstack repositories
-  include_tasks: tasks/configure_repository.yml
+  ansible.builtin.include_tasks: tasks/configure_repository.yml
   vars:
     repository_manifest:
-      {
-        name: '{{ item.key }}',
-        releases:
-          '{{ default_releases | map("string") | difference(item.value.ignored_releases | default([]) | map("string")) |
-          union(item.value.additional_releases | default([]) | map("string")) | sort }}',
-        workflows:
-          { default_branch_only: '{{ openstack_workflows.default_branch_only  |
-              difference(item.value.workflows.ignored_workflows.default_branch_only | default([])) |
-              union(item.value.workflows.additional_workflows.default_branch_only | default([])) }}',
-            elsewhere: '{{ openstack_workflows.elsewhere |
-              difference(item.value.workflows.ignored_workflows.elsewhere | default([])) |
-              union(item.value.workflows.additional_workflows.elsewhere | default([])) }}' },
-        workflow_args: '{{ item.value.workflow_args | default({}) }}',
-        copy_workflows: '{{ item.value.copy_workflows | default(true) }}',
-        community_files: '{{ item.value.community_files | default({}) }}'
-      }
-  with_dict: '{{ source_repositories }}'
+      name: "{{ item.key }}"
+      releases: '{{ default_releases | map("string") | difference(item.value.ignored_releases | default([]) | map("string")) | union(item.value.additional_releases
+        | default([]) | map("string")) | sort }}'
+      workflows:
+        default_branch_only: "{{ openstack_workflows.default_branch_only | difference(item.value.workflows.ignored_workflows.default_branch_only | default([])) |
+          union(item.value.workflows.additional_workflows.default_branch_only | default([])) }}"
+        elsewhere: "{{ openstack_workflows.elsewhere | difference(item.value.workflows.ignored_workflows.elsewhere | default([])) | union(item.value.workflows.additional_workflows.elsewhere
+          | default([])) }}"
+      workflow_args: "{{ item.value.workflow_args | default({}) }}"
+      copy_workflows: "{{ item.value.copy_workflows | default(true) }}"
+      community_files: "{{ item.value.community_files | default({}) }}"
+  with_dict: "{{ source_repositories }}"
   when: item.value.repository_type | default('openstack') == 'openstack'
 
 - name: Configure branchless repositories
-  include_tasks: tasks/configure_repository.yml
+  ansible.builtin.include_tasks: tasks/configure_repository.yml
   vars:
     repository_manifest:
-      {
-        name: '{{ item.key }}',
-        workflows: { default_branch_only: '{{ item.value.workflows }}' },
-        workflow_args: '{{ item.value.workflow_args | default({}) }}',
-        copy_workflows: '{{ item.value.copy_workflows | default(true) }}',
-        community_files: '{{ item.value.community_files | default({}) }}'
-      }
-  with_dict: '{{ source_repositories }}'
+      name: "{{ item.key }}"
+      workflows: { default_branch_only: "{{ item.value.workflows }}" }
+      workflow_args: "{{ item.value.workflow_args | default({}) }}"
+      copy_workflows: "{{ item.value.copy_workflows | default(true) }}"
+      community_files: "{{ item.value.community_files | default({}) }}"
+  with_dict: "{{ source_repositories }}"
   when: item.value.repository_type | default('openstack') != 'openstack'
 
 - name: Delete staging area directory
   ansible.builtin.file:
-    path: '{{ staging_path }}'
+    path: "{{ staging_path }}"
     state: absent

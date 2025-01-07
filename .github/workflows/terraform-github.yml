@@ -1,15 +1,16 @@
+---
 name: Terraform GitHub
-'on':
+"on":
   push:
     branches: [main]
     paths:
-      - '.github/workflows/terraform-github.yml'
-      - 'terraform/github/**'
+      - ".github/workflows/terraform-github.yml"
+      - "terraform/github/**"
   pull_request:
     branches: [main]
     paths:
-      - '.github/workflows/terraform-github.yml'
-      - 'terraform/github/**'
+      - ".github/workflows/terraform-github.yml"
+      - "terraform/github/**"
 env:
   TF_VAR_GITHUB_APP_PEM_FILE: ${{ secrets.TF_VAR_GITHUB_APP_PEM_FILE }}
 jobs:
@@ -18,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: './terraform/github/'
+        working-directory: "./terraform/github/"
     steps:
       - uses: actions/checkout@v4
       - uses: hashicorp/setup-terraform@v3
@@ -81,17 +82,17 @@ jobs:
             </details>
 
             #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
-            
+
             <details><summary>Show Plan</summary>
-            
+
             \`\`\`\n
             ${process.env.PLAN}
             \`\`\`
-            
+
             </details>
-            
+
             *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*`;
-            
+
             // 3. If we have a comment, update it, otherwise create a new one
             if (botComment) {
               github.rest.issues.updateComment({

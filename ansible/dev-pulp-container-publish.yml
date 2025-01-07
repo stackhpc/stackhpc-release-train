@@ -9,7 +9,7 @@
   hosts: localhost
   gather_facts: false
   tasks:
-    - import_role:
+    - ansible.builtin.import_role:
         name: stackhpc.pulp.pulp_distribution
       vars:
         pulp_url: "{{ dev_pulp_url }}"
@@ -21,7 +21,7 @@
   hosts: localhost
   gather_facts: false
   tasks:
-    - import_role:
+    - ansible.builtin.import_role:
         name: stackhpc.pulp.pulp_repository
       vars:
         pulp_url: "{{ dev_pulp_url }}"
@@ -29,7 +29,7 @@
         pulp_password: "{{ dev_pulp_password }}"
         pulp_repository_container_repos: "{{ dev_pulp_repository_container_repos_release }}"
 
-    - import_role:
+    - ansible.builtin.import_role:
         name: stackhpc.pulp.pulp_distribution
       vars:
         pulp_url: "{{ dev_pulp_url }}"

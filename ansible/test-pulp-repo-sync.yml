@@ -1,10 +1,10 @@
 ---
 - name: Sync test Pulp repositories
   hosts: localhost
-  gather_facts: False
+  gather_facts: false
   tasks:
     - name: Assert that Deb versions variable is populated
-      assert:
+      ansible.builtin.assert:
         that:
           - missing_repos | length == 0
         msg: >-
@@ -14,7 +14,7 @@
       when: not test_pulp_sync_repo_version
 
     - name: Assert that RPM versions variable is populated
-      assert:
+      ansible.builtin.assert:
         that:
           - missing_repos | length == 0
         msg: >-
@@ -23,7 +23,7 @@
         missing_repos: "{{ test_pulp_repository_rpm_repos | map(attribute='short_name') | list | difference(test_pulp_repository_rpm_repo_versions) | list }}"
       when: not test_pulp_sync_repo_version
 
-    - import_role:
+    - ansible.builtin.import_role:
         name: stackhpc.pulp.pulp_repository
       vars:
         pulp_url: "{{ test_pulp_url }}"

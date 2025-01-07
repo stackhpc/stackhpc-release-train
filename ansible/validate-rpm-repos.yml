@@ -3,64 +3,66 @@
   hosts: localhost
   gather_facts: true
   vars:
-    synced_rpm_package_repos: "{{ rpm_package_repos | selectattr('sync', 'defined') | selectattr('sync') | list + rpm_package_repos | rejectattr('sync', 'defined') | list }}"
-    published_rpm_package_repos: "{{ rpm_package_repos | selectattr('publish', 'defined') | selectattr('publish') | list + rpm_package_repos | rejectattr('publish', 'defined') | list }}"
+    synced_rpm_package_repos: "{{ rpm_package_repos | selectattr('sync', 'defined') | selectattr('sync') | list + rpm_package_repos | rejectattr('sync', 'defined')
+      | list }}"
+    published_rpm_package_repos: "{{ rpm_package_repos | selectattr('publish', 'defined') | selectattr('publish') | list + rpm_package_repos | rejectattr('publish',
+      'defined') | list }}"
     num_rpm_package_repos: "{{ rpm_package_repos | length }}"
     num_published_rpm_package_repos: "{{ published_rpm_package_repos | length }}"
   tasks:
     - name: Assert that RPM package repository list is defined
-      assert:
+      ansible.builtin.assert:
         that:
           - rpm_package_repos is defined
 
     - name: Assert that RPM package repositories have names
-      assert:
+      ansible.builtin.assert:
         that:
           - rpm_package_repos | rejectattr('name', 'defined') | list | length == 0
 
     - name: Assert that RPM package repository names are unique
-      assert:
+      ansible.builtin.assert:
         that:
           - rpm_package_repos | map(attribute='name') | unique | list | length == num_rpm_package_repos | int
 
     - name: Assert that synced RPM package repositories have URLs
-      assert:
+      ansible.builtin.assert:
         that:
           - synced_rpm_package_repos | rejectattr('url', 'defined') | list | length == 0
 
     - name: Assert that synced RPM package repositories have sync groups
-      assert:
+      ansible.builtin.assert:
         that:
           - synced_rpm_package_repos | rejectattr('sync_group', 'defined') | list | length == 0
 
     - name: Assert that published RPM package repositories have short names
-      assert:
+      ansible.builtin.assert:
         that:
           - published_rpm_package_repos | rejectattr('short_name', 'defined') | list | length == 0
 
     - name: Assert that published RPM package repository short names are unique
-      assert:
+      ansible.builtin.assert:
         that:
           - published_rpm_package_repos | map(attribute='short_name') | unique | list | length == num_published_rpm_package_repos | int
 
     - name: Assert that published RPM package repositories have base paths
-      assert:
+      ansible.builtin.assert:
         that:
           - published_rpm_package_repos | rejectattr('base_path', 'defined') | list | length == 0
 
     - name: Assert that published RPM package repository base_paths are unique
-      assert:
+      ansible.builtin.assert:
         that:
           - published_rpm_package_repos | map(attribute='base_path') | list | length == num_published_rpm_package_repos | int
 
     - name: Assert that published RPM package repository base_paths have a trailing slash
-      assert:
+      ansible.builtin.assert:
         that:
           - published_rpm_package_repos | map(attribute='base_path') | list | map('last') | unique == ['/']
       when: num_published_rpm_package_repos | int > 0
 
     - name: Assert that RPM package repository list can be filtered to single
-      assert:
+      ansible.builtin.assert:
         that:
           - rpm_package_repos_filtered | length == 1
           - rpm_package_repos_filtered[0].short_name == 'centos_stream_9_openstack_caracal_aarch64'
@@ -68,7 +70,7 @@
         rpm_package_repo_filter: centos_stream_9_openstack_caracal_aarch64
 
     - name: Assert that RPM package repository list can be filtered to multiple
-      assert:
+      ansible.builtin.assert:
         that:
           - rpm_package_repos_filtered | length == 3
           - rpm_package_repos_filtered[0].short_name == 'grafana'
@@ -78,7 +80,7 @@
         rpm_package_repo_filter: centos_stream_9_openstack_caracal grafana
 
     - name: Assert that RPM package repository list can be filtered to one group
-      assert:
+      ansible.builtin.assert:
         that:
           - rpm_package_repos_filtered | length == 2
           - rpm_package_repos_filtered[0].short_name == 'docker'
@@ -87,7 +89,7 @@
         package_sync_group: docker
 
     - name: Assert that RPM package repository list can be filtered and use a sync group together
-      assert:
+      ansible.builtin.assert:
         that:
           - rpm_package_repos_filtered | length == 1
           - rpm_package_repos_filtered[0].short_name == 'centos_stream_9_docker'
@@ -96,36 +98,36 @@
         rpm_package_repo_filter: stream_9
 
     - name: Assert that dev package repository list is defined
-      assert:
+      ansible.builtin.assert:
         that:
           - dev_pulp_repository_rpm_repos is defined
 
     - name: Assert that dev package publication list is defined
-      assert:
+      ansible.builtin.assert:
         that:
           - dev_pulp_publication_rpm is defined
 
     - name: Assert that dev package distribution list is defined
-      assert:
+      ansible.builtin.assert:
         that:
           - dev_pulp_distribution_rpm is defined
 
     - name: Assert that dev package distribution promote list is defined
-      assert:
+      ansible.builtin.assert:
         that:
           - dev_pulp_distribution_rpm_promote is defined
 
     - name: Assert that test package repository list is defined
-      assert:
+      ansible.builtin.assert:
         that:
           - test_pulp_repository_rpm_repos is defined
 
     - name: Assert that test package publication list is defined
-      assert:
+      ansible.builtin.assert:
         that:
           - test_pulp_publication_rpm is defined
 
     - name: Assert that test package distribution list is defined
-      assert:
+      ansible.builtin.assert:
         that:
           - test_pulp_distribution_rpm is defined
