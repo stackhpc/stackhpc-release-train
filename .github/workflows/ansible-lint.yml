@@ -23,10 +23,9 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      # FIXME: rich pinned due to https://github.com/ansible-community/ansible-lint/issues/1795.
       - name: Install ansible-lint
         run: |
-          pip install ansible-core==2.16.* 'rich<11' ansible-lint==24.*
+          pip install ansible-core==2.16.* ansible-lint==24.*
 
       - name: Lint Ansible playbooks
         run: |
