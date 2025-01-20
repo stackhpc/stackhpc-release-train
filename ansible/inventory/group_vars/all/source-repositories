@@ -280,7 +280,6 @@ source_repositories:
     ignored_releases:
       - victoria
       - xena
-      - 2023.1
       - 2024.1
     community_files:
       - codeowners:
