@@ -3,6 +3,7 @@
 # containing a list of workflows and community files required by a given
 # repository.
 default_releases:
+  - "master"
   - "2024.1"
   - "2023.1"
   - zed
@@ -120,6 +121,7 @@ source_repositories:
       - zed
       - 2023.1
       - 2024.1
+      - master
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
@@ -148,6 +150,7 @@ source_repositories:
       - zed
       - 2023.1
       - 2024.1
+      - master
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
@@ -170,6 +173,7 @@ source_repositories:
       - zed
       - 2023.1
       - 2024.1
+      - master
     workflows:
       ignored_workflows:
         elsewhere:
@@ -185,6 +189,7 @@ source_repositories:
       - xena
       - 2023.1
       - 2024.1
+      - master
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
@@ -196,6 +201,7 @@ source_repositories:
       - xena
       - zed
       - 2024.1
+      - master
     workflows:
       ignored_workflows:
         elsewhere:
@@ -212,6 +218,7 @@ source_repositories:
     ignored_releases:
       - zed
       - 2024.1
+      - master
   ironic-ui:
     ignored_releases:
       - victoria
@@ -220,6 +227,7 @@ source_repositories:
       - zed
       - 2023.1
       - 2024.1
+      - master
     workflows:
       ignored_workflows:
         elsewhere:
@@ -245,6 +253,7 @@ source_repositories:
       - zed
       - 2023.1
       - 2024.1
+      - master
     workflows:
       ignored_workflows:
         elsewhere:
@@ -268,6 +277,7 @@ source_repositories:
       - wallaby
       - xena
       - 2024.1
+      - master
     workflows:
       ignored_workflows:
         elsewhere:
@@ -281,6 +291,7 @@ source_repositories:
       - victoria
       - xena
       - 2024.1
+      - master
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
@@ -304,6 +315,7 @@ source_repositories:
       - zed
       - 2023.1
       - 2024.1
+      - master
     workflows:
       ignored_workflows:
         elsewhere:
@@ -320,6 +332,7 @@ source_repositories:
       - yoga
       - zed
       - 2024.1
+      - master
     workflows:
       ignored_workflows:
         elsewhere:
