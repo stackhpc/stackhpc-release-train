@@ -50,6 +50,7 @@ kolla_container_images:
   - ironic-conductor
   - ironic-inspector
   - ironic-neutron-agent
+  - ironic-prometheus-exporter
   - ironic-pxe
   - iscsid
   - keepalived
