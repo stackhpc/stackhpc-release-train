@@ -370,6 +370,13 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.ansible }}"
           dest: ".github/CODEOWNERS"
+  ansible-role-os-manila-mount:
+    repository_type: "ansible"
+    workflows: "{{ ansible_workflows.role }}"
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.ansible }}"
+          dest: ".github/CODEOWNERS"
   ansible-role-vxlan:
     repository_type: "ansible"
     workflows: "{{ ansible_workflows.role }}"
