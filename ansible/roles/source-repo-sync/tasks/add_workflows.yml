@@ -1,4 +1,8 @@
 ---
+- name: (DEBUG) Print workflow manifest
+  ansible.builtin.debug:
+    var: workflow_manifest
+
 - name: Check if release series exists on the remote
   ansible.builtin.shell:
     cmd: |
