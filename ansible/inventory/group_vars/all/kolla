@@ -75,6 +75,7 @@ kolla_container_images:
   - mariadb-server
   - memcached
   - neutron-base
+  - neutron-bgp-dragent
   - neutron-dhcp-agent
   - neutron-l3-agent
   - neutron-metadata-agent
