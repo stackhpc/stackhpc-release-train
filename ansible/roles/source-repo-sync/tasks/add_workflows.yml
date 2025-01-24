@@ -17,7 +17,7 @@
         cmd: |
           gh api \
           -H "Accept: application/vnd.github.v3+json" \
-          /repos/{{ owner }}/{{ repository_manifest.name }}/git/ref/heads/{{ workflow_manifest.branch }}-workflows
+          /repos/{{ owner }}/{{ repository_manifest.name }}/git/ref/heads/{{ workflow_manifest.prefix | default("") }}{{ workflow_manifest.branch }}-workflows
       changed_when: false
       failed_when: false
       register: working_branch_exists
@@ -28,13 +28,13 @@
           gh api \
           --method DELETE \
           -H "Accept: application/vnd.github.v3+json" \
-          /repos/{{ owner }}/{{ repository_manifest.name }}/git/refs/heads/{{ workflow_manifest.branch }}-workflows
+          /repos/{{ owner }}/{{ repository_manifest.name }}/git/refs/heads/{{ workflow_manifest.prefix | default("") }}{{ workflow_manifest.branch }}-workflows
       when: working_branch_exists.rc == 0
 
     - name: Create working branch # noqa command-instead-of-module
       ansible.builtin.shell:
         cmd: >
-          git checkout -b {{ workflow_manifest.branch }}-workflows \
+          git checkout -b {{ workflow_manifest.prefix | default("") }}{{ workflow_manifest.branch }}-workflows \
             origin/{{ workflow_manifest.prefix | default("") }}{{ workflow_manifest.branch }}
         chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
       changed_when: true
@@ -84,7 +84,7 @@
 
         - name: Push branch to remote # noqa command-instead-of-module command-instead-of-shell no-handler
           ansible.builtin.shell:
-            cmd: "git push -u origin {{ workflow_manifest.branch }}-workflows"
+            cmd: "git push -u origin {{ workflow_manifest.prefix | default('') }}{{ workflow_manifest.branch }}-workflows"
             chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
           changed_when: true
 
