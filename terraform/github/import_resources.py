@@ -235,6 +235,14 @@ def main() -> None:
             branch_protection_resource = BranchProtection(team_id.name.lower(
             ), {f"{name}:stackhpc/2024.1": name for name in team_repositories}, parsed_args.dry_run, "_caracal")
             branch_protection_resource.refresh_resource()
+            # Epoxy branch protection
+            branch_protection_resource = BranchProtection(team_id.name.lower(
+            ), {f"{name}:stackhpc/2025.1": name for name in team_repositories}, parsed_args.dry_run, "_epoxy")
+            branch_protection_resource.refresh_resource()
+            # Master branch protection
+            branch_protection_resource = BranchProtection(team_id.name.lower(
+            ), {f"{name}:stackhpc/master": name for name in team_repositories}, parsed_args.dry_run, "_master")
+            branch_protection_resource.refresh_resource()
         elif team_id == TeamID.SMSLAB:
             branch_protection_resource = BranchProtection(team_id.name.lower(
             ), {f"{name}:smslab/[y,z,2]*": name for name in team_repositories}, parsed_args.dry_run)
