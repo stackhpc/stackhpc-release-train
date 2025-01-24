@@ -41,15 +41,15 @@ community_files:
       * @stackhpc/smslab
 source_repositories:
   # Kayobe team
-  kolla:
-    ignored_releases:
-      - victoria
-      - wallaby
-      - xena
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.kayobe }}"
-          dest: ".github/CODEOWNERS"
+  # kolla:
+  #   ignored_releases:
+  #     - victoria
+  #     - wallaby
+  #     - xena
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.kayobe }}"
+  #         dest: ".github/CODEOWNERS"
   kayobe:
     ignored_releases:
       - victoria
@@ -59,600 +59,600 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.kayobe }}"
           dest: ".github/CODEOWNERS"
-  kayobe-automation:
-    repository_type: "single-branch"
-    workflows: []
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.kayobe }}"
-          dest: ".github/CODEOWNERS"
-  kolla-ansible:
-    ignored_releases:
-      - victoria
-      - wallaby
-      - xena
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.kayobe }}"
-          dest: ".github/CODEOWNERS"
-  openstack-admin-guide:
-    repository_type: "docs"
-    workflows: []
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.kayobe }}"
-          dest: ".github/CODEOWNERS"
-  stackhpc-kayobe-config:
-    workflows:
-      ignored_workflows:
-        default_branch_only:
-          - upstream-sync
-        elsewhere:
-          - tox
-    workflow_args:
-      upstream: "https://github.com/openstack/kayobe-config"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.kayobe }}"
-          dest: ".github/CODEOWNERS"
-  ansible-collection-kayobe-workflows:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.collection }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.kayobe }}"
-          dest: ".github/CODEOWNERS"
-  bifrost:
-    ignored_releases:
-      - victoria
-      - yoga
-      - zed
-      - 2023.1
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.kayobe }}"
-          dest: ".github/CODEOWNERS"
-  # OpenStack team
-  barbican:
-    ignored_releases:
-      - victoria
-      - xena
-      - yoga
-      - zed
-      - 2023.1
-      - 2024.1
-      - master
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.openstack }}"
-          dest: ".github/CODEOWNERS"
-  blazar:
-    ignored_releases:
-      - victoria
-      - wallaby
-      - xena
-      - yoga
-      - zed
-      - 2023.1
-      - 2024.1
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.openstack }}"
-          dest: ".github/CODEOWNERS"
-  cinder:
-    ignored_releases:
-      - victoria
-      - wallaby
-      - xena
-      - yoga
-      - zed
-      - 2023.1
-      - 2024.1
-      - master
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.openstack }}"
-          dest: ".github/CODEOWNERS"
-  cloudkitty:
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.openstack }}"
-          dest: ".github/CODEOWNERS"
-  cloudkitty-dashboard:
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.openstack }}"
-          dest: ".github/CODEOWNERS"
-  designate-dashboard:
-    ignored_releases:
-      - victoria
-      - wallaby
-      - xena
-      - zed
-      - 2023.1
-      - 2024.1
-      - master
-    workflows:
-      ignored_workflows:
-        elsewhere:
-          - tox
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.openstack }}"
-          dest: ".github/CODEOWNERS"
-  glance:
-    ignored_releases:
-      - victoria
-      - wallaby
-      - xena
-      - 2023.1
-      - 2024.1
-      - master
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.openstack }}"
-          dest: ".github/CODEOWNERS"
-  horizon:
-    ignored_releases:
-      - victoria
-      - wallaby
-      - xena
-      - zed
-      - 2024.1
-      - master
-    workflows:
-      ignored_workflows:
-        elsewhere:
-          - tox
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.openstack }}"
-          dest: ".github/CODEOWNERS"
-  ironic-python-agent:
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.openstack }}"
-          dest: ".github/CODEOWNERS"
-    ignored_releases:
-      - zed
-      - 2024.1
-      - master
-  ironic-ui:
-    ignored_releases:
-      - victoria
-      - wallaby
-      - xena
-      - zed
-      - 2023.1
-      - 2024.1
-      - master
-    workflows:
-      ignored_workflows:
-        elsewhere:
-          - tox
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.openstack }}"
-          dest: ".github/CODEOWNERS"
-  magnum:
-    ignored_releases:
-      - victoria
-      - wallaby
-      - xena
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.openstack }}"
-          dest: ".github/CODEOWNERS"
-  magnum-ui:
-    ignored_releases:
-      - victoria
-      - wallaby
-      - xena
-      - zed
-      - 2023.1
-      - 2024.1
-      - master
-    workflows:
-      ignored_workflows:
-        elsewhere:
-          - tox
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.openstack }}"
-          dest: ".github/CODEOWNERS"
-  networking-generic-switch:
-    ignored_releases:
-      - victoria
-      - wallaby
-      - xena
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.openstack }}"
-          dest: ".github/CODEOWNERS"
-  neutron:
-    ignored_releases:
-      - victoria
-      - wallaby
-      - xena
-      - 2024.1
-      - master
-    workflows:
-      ignored_workflows:
-        elsewhere:
-          - tox
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.openstack }}"
-          dest: ".github/CODEOWNERS"
-  nova:
-    ignored_releases:
-      - victoria
-      - xena
-      - 2024.1
-      - master
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.openstack }}"
-          dest: ".github/CODEOWNERS"
-  octavia:
-    ignored_releases:
-      - victoria
-      - wallaby
-      - xena
-      - yoga
-      - zed
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.openstack }}"
-          dest: ".github/CODEOWNERS"
-  octavia-dashboard:
-    ignored_releases:
-      - victoria
-      - wallaby
-      - xena
-      - zed
-      - 2023.1
-      - 2024.1
-      - master
-    workflows:
-      ignored_workflows:
-        elsewhere:
-          - tox
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.openstack }}"
-          dest: ".github/CODEOWNERS"
-  ovn-octavia-provider:
-    ignored_releases:
-      - victoria
-      - wallaby
-      - xena
-      - yoga
-      - zed
-      - 2024.1
-      - master
-    workflows:
-      ignored_workflows:
-        elsewhere:
-          - tox
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.openstack }}"
-          dest: ".github/CODEOWNERS"
-  stackhpc-inspector-plugins:
-    repository_type: "branchless"
-    workflows: "{{ openstack_workflows.elsewhere }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.openstack }}"
-          dest: ".github/CODEOWNERS"
-  requirements:
-    ignored_releases:
-        - xena
-        - wallaby
-        - victoria
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.openstack }}"
-          dest: ".github/CODEOWNERS"
-  # Ansible team
-  ansible-role-libvirt-host:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-role-libvirt-vm:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-role-os-manila-mount:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-role-vxlan:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  drac:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-role-luks:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-role-sriov:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-timezone:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-role-os-shade:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-role-grafana-conf:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-role-systemd-networkd:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  monasca-default-alarms:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  stackhpc.ssm:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-role-monasca-rsyslog:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-role-cluster-infra:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-role-os-ironic-state:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-role-openvpn:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  stackhpc.ipmi-exporter:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-role-mlnx-ufm:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-role-rundeck:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  dell-powerconnect-switch:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  drac-facts:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-role-gluster-cluster:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  mellanox-switch:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-role-os-config:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-role-mlnx-neo:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-collection-cephadm:
-    repository_type: "ansible"
-    workflows:
-      # Linters workflows not currently working on the Cephadm collection.
-      - publish-collection
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-collection-pulp:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.collection }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-collection-hashicorp:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.collection }}"
-    workflow_args:
-      lint_pip_dependencies: "git+https://github.com/stackhpc/ansible-modules-hashivault@stackhpc"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-collection-linux:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.collection }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-collection-network:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.collection }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-collection-openstack:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.collection }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  ansible-collection-openstack-ops:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.collection }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  openstack-config:
-    repository_type: "ansible"
-    workflows: []
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.ansible }}"
-          dest: ".github/CODEOWNERS"
-  # Batch team
-  ansible-role-cluster-nfs:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.batch }}"
-          dest: ".github/CODEOWNERS"
-  ansible-role-openhpc:
-    repository_type: "ansible"
-    workflows: "{{ ansible_workflows.role }}"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.batch }}"
-          dest: ".github/CODEOWNERS"
-  caas-slurm-appliance:
-    repository_type: "ansible"
-    workflows: []
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.batch }}"
-          dest: ".github/CODEOWNERS"
-  ansible-slurm-appliance:
-    repository_type: "ansible"
-    workflows: []
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.batch }}"
-          dest: ".github/CODEOWNERS"
-  # ReleaseTrain team
-  .github:
-    repository_type: "single-branch"
-    workflows: []
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.release_train }}"
-          dest: ".github/CODEOWNERS"
-  ARC-Installer:
-    repository_type: "single-branch"
-    workflows: []
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.release_train }}"
-          dest: ".github/CODEOWNERS"
-  stackhpc-release-train:
-    repository_type: "ansible"
-    workflows: []
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.release_train }}"
-          dest: ".github/CODEOWNERS"
-  stackhpc-release-train-clients:
-    repository_type: "ansible"
-    workflows: []
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.release_train }}"
-          dest: ".github/CODEOWNERS"
+  # kayobe-automation:
+  #   repository_type: "single-branch"
+  #   workflows: []
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.kayobe }}"
+  #         dest: ".github/CODEOWNERS"
+  # kolla-ansible:
+  #   ignored_releases:
+  #     - victoria
+  #     - wallaby
+  #     - xena
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.kayobe }}"
+  #         dest: ".github/CODEOWNERS"
+  # openstack-admin-guide:
+  #   repository_type: "docs"
+  #   workflows: []
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.kayobe }}"
+  #         dest: ".github/CODEOWNERS"
+  # stackhpc-kayobe-config:
+  #   workflows:
+  #     ignored_workflows:
+  #       default_branch_only:
+  #         - upstream-sync
+  #       elsewhere:
+  #         - tox
+  #   workflow_args:
+  #     upstream: "https://github.com/openstack/kayobe-config"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.kayobe }}"
+  #         dest: ".github/CODEOWNERS"
+  # ansible-collection-kayobe-workflows:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.collection }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.kayobe }}"
+  #         dest: ".github/CODEOWNERS"
+  # bifrost:
+  #   ignored_releases:
+  #     - victoria
+  #     - yoga
+  #     - zed
+  #     - 2023.1
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.kayobe }}"
+  #         dest: ".github/CODEOWNERS"
+  # # OpenStack team
+  # barbican:
+  #   ignored_releases:
+  #     - victoria
+  #     - xena
+  #     - yoga
+  #     - zed
+  #     - 2023.1
+  #     - 2024.1
+  #     - master
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.openstack }}"
+  #         dest: ".github/CODEOWNERS"
+  # blazar:
+  #   ignored_releases:
+  #     - victoria
+  #     - wallaby
+  #     - xena
+  #     - yoga
+  #     - zed
+  #     - 2023.1
+  #     - 2024.1
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.openstack }}"
+  #         dest: ".github/CODEOWNERS"
+  # cinder:
+  #   ignored_releases:
+  #     - victoria
+  #     - wallaby
+  #     - xena
+  #     - yoga
+  #     - zed
+  #     - 2023.1
+  #     - 2024.1
+  #     - master
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.openstack }}"
+  #         dest: ".github/CODEOWNERS"
+  # cloudkitty:
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.openstack }}"
+  #         dest: ".github/CODEOWNERS"
+  # cloudkitty-dashboard:
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.openstack }}"
+  #         dest: ".github/CODEOWNERS"
+  # designate-dashboard:
+  #   ignored_releases:
+  #     - victoria
+  #     - wallaby
+  #     - xena
+  #     - zed
+  #     - 2023.1
+  #     - 2024.1
+  #     - master
+  #   workflows:
+  #     ignored_workflows:
+  #       elsewhere:
+  #         - tox
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.openstack }}"
+  #         dest: ".github/CODEOWNERS"
+  # glance:
+  #   ignored_releases:
+  #     - victoria
+  #     - wallaby
+  #     - xena
+  #     - 2023.1
+  #     - 2024.1
+  #     - master
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.openstack }}"
+  #         dest: ".github/CODEOWNERS"
+  # horizon:
+  #   ignored_releases:
+  #     - victoria
+  #     - wallaby
+  #     - xena
+  #     - zed
+  #     - 2024.1
+  #     - master
+  #   workflows:
+  #     ignored_workflows:
+  #       elsewhere:
+  #         - tox
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.openstack }}"
+  #         dest: ".github/CODEOWNERS"
+  # ironic-python-agent:
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.openstack }}"
+  #         dest: ".github/CODEOWNERS"
+  #   ignored_releases:
+  #     - zed
+  #     - 2024.1
+  #     - master
+  # ironic-ui:
+  #   ignored_releases:
+  #     - victoria
+  #     - wallaby
+  #     - xena
+  #     - zed
+  #     - 2023.1
+  #     - 2024.1
+  #     - master
+  #   workflows:
+  #     ignored_workflows:
+  #       elsewhere:
+  #         - tox
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.openstack }}"
+  #         dest: ".github/CODEOWNERS"
+  # magnum:
+  #   ignored_releases:
+  #     - victoria
+  #     - wallaby
+  #     - xena
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.openstack }}"
+  #         dest: ".github/CODEOWNERS"
+  # magnum-ui:
+  #   ignored_releases:
+  #     - victoria
+  #     - wallaby
+  #     - xena
+  #     - zed
+  #     - 2023.1
+  #     - 2024.1
+  #     - master
+  #   workflows:
+  #     ignored_workflows:
+  #       elsewhere:
+  #         - tox
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.openstack }}"
+  #         dest: ".github/CODEOWNERS"
+  # networking-generic-switch:
+  #   ignored_releases:
+  #     - victoria
+  #     - wallaby
+  #     - xena
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.openstack }}"
+  #         dest: ".github/CODEOWNERS"
+  # neutron:
+  #   ignored_releases:
+  #     - victoria
+  #     - wallaby
+  #     - xena
+  #     - 2024.1
+  #     - master
+  #   workflows:
+  #     ignored_workflows:
+  #       elsewhere:
+  #         - tox
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.openstack }}"
+  #         dest: ".github/CODEOWNERS"
+  # nova:
+  #   ignored_releases:
+  #     - victoria
+  #     - xena
+  #     - 2024.1
+  #     - master
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.openstack }}"
+  #         dest: ".github/CODEOWNERS"
+  # octavia:
+  #   ignored_releases:
+  #     - victoria
+  #     - wallaby
+  #     - xena
+  #     - yoga
+  #     - zed
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.openstack }}"
+  #         dest: ".github/CODEOWNERS"
+  # octavia-dashboard:
+  #   ignored_releases:
+  #     - victoria
+  #     - wallaby
+  #     - xena
+  #     - zed
+  #     - 2023.1
+  #     - 2024.1
+  #     - master
+  #   workflows:
+  #     ignored_workflows:
+  #       elsewhere:
+  #         - tox
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.openstack }}"
+  #         dest: ".github/CODEOWNERS"
+  # ovn-octavia-provider:
+  #   ignored_releases:
+  #     - victoria
+  #     - wallaby
+  #     - xena
+  #     - yoga
+  #     - zed
+  #     - 2024.1
+  #     - master
+  #   workflows:
+  #     ignored_workflows:
+  #       elsewhere:
+  #         - tox
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.openstack }}"
+  #         dest: ".github/CODEOWNERS"
+  # stackhpc-inspector-plugins:
+  #   repository_type: "branchless"
+  #   workflows: "{{ openstack_workflows.elsewhere }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.openstack }}"
+  #         dest: ".github/CODEOWNERS"
+  # requirements:
+  #   ignored_releases:
+  #       - xena
+  #       - wallaby
+  #       - victoria
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.openstack }}"
+  #         dest: ".github/CODEOWNERS"
+  # # Ansible team
+  # ansible-role-libvirt-host:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.role }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # ansible-role-libvirt-vm:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.role }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # ansible-role-os-manila-mount:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.role }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # ansible-role-vxlan:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.role }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # drac:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.role }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # ansible-role-luks:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.role }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # ansible-role-sriov:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.role }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # ansible-timezone:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.role }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # ansible-role-os-shade:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.role }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # ansible-role-grafana-conf:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.role }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # ansible-role-systemd-networkd:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.role }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # monasca-default-alarms:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.role }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # stackhpc.ssm:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.role }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # ansible-role-monasca-rsyslog:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.role }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # ansible-role-cluster-infra:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.role }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # ansible-role-os-ironic-state:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.role }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # ansible-role-openvpn:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.role }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # stackhpc.ipmi-exporter:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.role }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # ansible-role-mlnx-ufm:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.role }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # ansible-role-rundeck:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.role }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # dell-powerconnect-switch:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.role }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # drac-facts:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.role }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # ansible-role-gluster-cluster:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.role }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # mellanox-switch:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.role }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # ansible-role-os-config:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.role }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # ansible-role-mlnx-neo:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.role }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # ansible-collection-cephadm:
+  #   repository_type: "ansible"
+  #   workflows:
+  #     # Linters workflows not currently working on the Cephadm collection.
+  #     - publish-collection
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # ansible-collection-pulp:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.collection }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # ansible-collection-hashicorp:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.collection }}"
+  #   workflow_args:
+  #     lint_pip_dependencies: "git+https://github.com/stackhpc/ansible-modules-hashivault@stackhpc"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # ansible-collection-linux:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.collection }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # ansible-collection-network:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.collection }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # ansible-collection-openstack:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.collection }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # ansible-collection-openstack-ops:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.collection }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # openstack-config:
+  #   repository_type: "ansible"
+  #   workflows: []
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.ansible }}"
+  #         dest: ".github/CODEOWNERS"
+  # # Batch team
+  # ansible-role-cluster-nfs:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.role }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.batch }}"
+  #         dest: ".github/CODEOWNERS"
+  # ansible-role-openhpc:
+  #   repository_type: "ansible"
+  #   workflows: "{{ ansible_workflows.role }}"
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.batch }}"
+  #         dest: ".github/CODEOWNERS"
+  # caas-slurm-appliance:
+  #   repository_type: "ansible"
+  #   workflows: []
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.batch }}"
+  #         dest: ".github/CODEOWNERS"
+  # ansible-slurm-appliance:
+  #   repository_type: "ansible"
+  #   workflows: []
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.batch }}"
+  #         dest: ".github/CODEOWNERS"
+  # # ReleaseTrain team
+  # .github:
+  #   repository_type: "single-branch"
+  #   workflows: []
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.release_train }}"
+  #         dest: ".github/CODEOWNERS"
+  # ARC-Installer:
+  #   repository_type: "single-branch"
+  #   workflows: []
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.release_train }}"
+  #         dest: ".github/CODEOWNERS"
+  # stackhpc-release-train:
+  #   repository_type: "ansible"
+  #   workflows: []
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.release_train }}"
+  #         dest: ".github/CODEOWNERS"
+  # stackhpc-release-train-clients:
+  #   repository_type: "ansible"
+  #   workflows: []
+  #   community_files:
+  #     - codeowners:
+  #         content: "{{ community_files.codeowners.release_train }}"
+  #         dest: ".github/CODEOWNERS"
