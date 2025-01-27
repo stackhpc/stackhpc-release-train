@@ -17,7 +17,7 @@
         cmd: |
           gh api \
           -H "Accept: application/vnd.github.v3+json" \
-          /repos/{{ owner }}/{{ repository_manifest.name }}/git/ref/heads/{{ community_manifest.branch }}-community-files
+          /repos/{{ owner }}/{{ repository_manifest.name }}/git/ref/heads/{{ community_manifest.prefix | default("") }}{{ community_manifest.branch }}-community-files
       changed_when: false
       failed_when: false
       register: branch_exists
@@ -28,13 +28,13 @@
           gh api \
           --method DELETE \
           -H "Accept: application/vnd.github.v3+json" \
-          /repos/{{ owner }}/{{ repository_manifest.name }}/git/refs/heads/{{ community_manifest.branch }}-community-files
+          /repos/{{ owner }}/{{ repository_manifest.name }}/git/refs/heads/{{ community_manifest.prefix | default("") }}{{ community_manifest.branch }}-community-files
       when: branch_exists.rc == 0
 
     - name: Create working branch # noqa command-instead-of-module
       ansible.builtin.shell:
         cmd: >
-          git checkout -b {{ community_manifest.branch }}-community-files \
+          git checkout -b {{ community_manifest.prefix | default("") }}{{ community_manifest.branch }}-community-files \
             origin/{{ community_manifest.prefix | default("") }}{{ community_manifest.branch }}
         chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
       changed_when: true
@@ -65,7 +65,7 @@
 
     - name: Push branch to remote # noqa command-instead-of-module command-instead-of-shell no-handler
       ansible.builtin.shell:
-        cmd: "git push -u origin {{ community_manifest.branch }}-community-files"
+        cmd: "git push -u origin {{ community_manifest.prefix | default('') }}{{ community_manifest.branch }}-community-files"
         chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
       when: community_copy.changed | bool
 
