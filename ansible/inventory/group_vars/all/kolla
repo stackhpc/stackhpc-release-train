@@ -111,6 +111,7 @@ kolla_container_images:
   - ovn-nb-db-server
   - ovn-northd
   - ovn-sb-db-server
+  - ovn-sb-db-relay
   - placement-api
   - placement-base
   - prometheus-alertmanager
