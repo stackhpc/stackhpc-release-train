@@ -84,7 +84,7 @@ jobs:
 
   package-sync-test:
     name: Sync package repositories in test
-    runs-on: arc-release-train-runner
+    runs-on: arc-release-train-runner-sms
     needs: package-sync-ark
     timeout-minutes: 480
     if: inputs.sync_test
