@@ -39,7 +39,7 @@ env:
 jobs:
   package-sync-ark:
     name: Sync package repositories in Ark
-    runs-on: arc-release-train-runner
+    runs-on: arc-release-train-runner-sms
     timeout-minutes: 480
     if: inputs.sync_ark
     steps:
