@@ -10,10 +10,18 @@ jobs:
   ansible-lint:
     name: Ansible Lint
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
+
+      # Python version being set because of issue with Ubuntu permissions and versions of Python < 3.11 
+      - name: Set up Python
+        # This is the version of the action for setting up Python, not the Python version.
+        uses: actions/setup-python@v5
+        with:
+          # Semantic version range syntax or exact version of a Python version
+          python-version: '3.11' 
 
       - name: Install Ansible collections
         run: |
