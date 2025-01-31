@@ -68,7 +68,7 @@ deb_package_repos:
     policy: immediate
     architectures: amd64
     components: main
-    distributions: focal-updates/yoga jammy-updates/zed jammy-updates/antelope jammy-updates/caracal
+    distributions: focal-updates/yoga jammy-updates/zed jammy-updates/antelope jammy-updates/caracal noble-updates/epoxy
     mirror: true
     mode: verbatim
     base_path: ubuntu-cloud-archive/
@@ -110,6 +110,40 @@ deb_package_repos:
     sync_group: ubuntu_jammy
     distribution_name: ubuntu-jammy-security-
 
+  # Base Ubuntu Noble 24.04 repositories
+  - name: Ubuntu Noble
+    url: http://archive.ubuntu.com/ubuntu
+    policy: immediate
+    architectures: amd64
+    components: main restricted universe multiverse
+    # NOTE: Include noble-security here to include all dists under one mirror
+    # path. This allows us to include security updates when using
+    # DIB_DISTRIBUTION_MIRROR with the Diskimage builder ubuntu-minimal
+    # element.
+    distributions: noble noble-updates noble-backports noble-security
+    mirror: true
+    mode: verbatim
+    base_path: ubuntu/noble/
+    short_name: ubuntu_noble
+    sync_group: ubuntu_noble
+    distribution_name: ubuntu-noble-
+
+  # https://wiki.ubuntu.com/SecurityTeam/FAQ suggests that security.ubuntu.com
+  # is preferable for security updates, so use this in preference to the
+  # noble-security dist in the main Ubuntu noble repository where possible.
+  - name: Ubuntu Noble security
+    url: http://security.ubuntu.com/ubuntu
+    policy: immediate
+    architectures: amd64
+    components: main restricted universe multiverse
+    distributions: noble-security
+    mirror: true
+    mode: verbatim
+    base_path: ubuntu/noble-security/
+    short_name: ubuntu_noble_security
+    sync_group: ubuntu_noble
+    distribution_name: ubuntu-noble-security-
+
   # Third-party repositories
 
   ## Separate repositories for each distribution because
@@ -139,6 +173,19 @@ deb_package_repos:
     short_name: docker_ce_ubuntu_jammy
     sync_group: docker
     distribution_name: docker-ce-for-ubuntu-jammy-
+
+  - name: Docker CE for Ubuntu Noble
+    url: https://download.docker.com/linux/ubuntu
+    policy: immediate
+    architectures: amd64
+    distributions: noble
+    components: stable
+    mirror: true
+    mode: verbatim
+    base_path: docker-ce/ubuntu-noble/
+    short_name: docker_ce_ubuntu_noble
+    sync_group: docker
+    distribution_name: docker-ce-for-ubuntu-noble-
 
 # Standard Apt mirrors do not contain cephadm Reef, only Quincy
   - name: Ceph Reef for Debian

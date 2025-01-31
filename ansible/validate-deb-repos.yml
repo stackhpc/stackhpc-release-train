@@ -81,9 +81,10 @@
     - name: Assert that Deb package repository list can be filtered to one group
       ansible.builtin.assert:
         that:
-          - deb_package_repos_filtered | length == 2
+          - deb_package_repos_filtered | length == 3
           - deb_package_repos_filtered[0].short_name == 'docker_ce_ubuntu_focal'
           - deb_package_repos_filtered[1].short_name == 'docker_ce_ubuntu_jammy'
+          - deb_package_repos_filtered[2].short_name == 'docker_ce_ubuntu_noble'
       vars:
         package_sync_group: docker
 
