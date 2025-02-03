@@ -476,6 +476,20 @@ rpm_package_repos:
     short_name: centos_stream_9_storage_ceph_reef_aarch64
     sync_group: rocky_9_aarch64
     distribution_name: centos-stream-9-storage-ceph-reef-aarch64-
+  # Ceph Squid for CentOS Stream 9
+  - name: CentOS Stream 9 - Ceph Squid
+    url: https://mirror.stream.centos.org/SIGs/9-stream/storage/x86_64/ceph-squid/
+    base_path: centos/9-stream/storage/x86_64/ceph-squid/
+    short_name: centos_stream_9_storage_ceph_squid
+    sync_group: centos
+    distribution_name: centos-stream-9-storage-ceph-squid-
+  # Ceph Squid for CentOS Stream 9 (aarch64)
+  - name: CentOS Stream 9 - Ceph Squid (aarch64)
+    url: https://mirror.stream.centos.org/SIGs/9-stream/storage/aarch64/ceph-squid/
+    base_path: centos/9-stream/storage/aarch64/ceph-squid/
+    short_name: centos_stream_9_storage_ceph_squid_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: centos-stream-9-storage-ceph-squid-aarch64-
   # EPEL 9 repository
   - name: Extra Packages for Enterprise Linux 9
     url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-9&arch=x86_64&country=NL&infra=stock&content=centos&protocol=https
