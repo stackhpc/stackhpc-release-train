@@ -186,7 +186,19 @@ source_repositories:
       - wallaby
       - xena
       - 2023.1
-      - 2024.1
+      - master
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
+  glance_store:
+    ignored_releases:
+      - victoria
+      - wallaby
+      - xena
+      - yoga
+      - zed
+      - 2023.1
       - master
     community_files:
       - codeowners:
