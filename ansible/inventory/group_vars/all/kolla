@@ -130,6 +130,7 @@ kolla_container_images:
   - prometheus-openstack-exporter
   - prometheus-server
   - prometheus-v2-server
+  - proxysql
   - rabbitmq
   - rabbitmq-3-12
   - rabbitmq-3-13
