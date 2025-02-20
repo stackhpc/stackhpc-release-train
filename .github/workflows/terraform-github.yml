@@ -11,6 +11,7 @@ name: Terraform GitHub
     paths:
       - ".github/workflows/terraform-github.yml"
       - "terraform/github/**"
+  workflow_dispatch:
 env:
   TF_VAR_GITHUB_APP_PEM_FILE: ${{ secrets.TF_VAR_GITHUB_APP_PEM_FILE }}
 jobs:
