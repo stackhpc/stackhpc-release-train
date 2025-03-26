@@ -201,6 +201,19 @@ deb_package_repos:
     sync_group: third_party
     distribution_name: ceph-reef-debian-
 
+  - name: Intel Graphics Repository
+    url: https://repositories.intel.com/gpu/ubuntu
+    policy: immediate
+    architectures: amd64
+    distributions: jammy/lts/2350
+    components: unified
+    mirror: true
+    mode: verbatim
+    base_path: intel/gpu/
+    short_name: intel_gpu
+    sync_group: third_party
+    distribution_name: intel-gpu-
+
 # Default filter string for Deb package repositories.
 deb_package_repo_filter: ""
 
