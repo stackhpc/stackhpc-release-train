@@ -33,12 +33,12 @@ resource "github_repository" "repositories" {
   }
 }
 
-resource "github_issue_label" "stackhpc_ci_label" {
+resource "github_issue_label" "automated_label" {
   for_each    = toset(flatten(values(var.repositories)))
   repository  = each.value
-  name        = "stackhpc-ci"
-  color       = "E6E2C0"
-  description = "Automated action performed by stackhpc-ci"
+  name        = "automated"
+  color       = "C4F2A5"
+  description = "Automated action performed by GitHub Actions"
 }
 
 resource "github_issue_label" "workflows_label" {
