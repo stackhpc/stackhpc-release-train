@@ -72,7 +72,7 @@
     - name: Ensure required labels exists on remote  # noqa no-handler
       ansible.builtin.include_tasks: "tasks/add_label.yml"
       with_items:
-        - stackhpc-ci
+        - automated
         - community-files
       loop_control:
         loop_var: label_name
@@ -80,7 +80,7 @@
 
     - name: Open pull request # noqa command-instead-of-shell no-handler
       ansible.builtin.shell:
-        cmd: 'gh pr create -f -B {{ community_manifest.prefix | default("") }}{{ community_manifest.branch }} -l stackhpc-ci --label community-files'
+        cmd: 'gh pr create -f -B {{ community_manifest.prefix | default("") }}{{ community_manifest.branch }} -l automated --label community-files'
         chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
       when: community_copy.changed | bool
 
