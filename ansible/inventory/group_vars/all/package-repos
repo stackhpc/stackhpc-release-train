@@ -223,8 +223,9 @@ deb_package_repos_filtered: "{{ deb_package_repos | select_repos(deb_package_rep
 # publish: Whether to publish and distribute the repository. Optional, default is true.
 rpm_package_repos:
   # EPEL 8 repositories
+  # NOTE(Alex-Welsh): NL mirrors fail to sync, so we use DE instead.
   - name: Extra Packages for Enterprise Linux 8 - x86_64
-    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-8&arch=x86_64&country=NL&infra=stock&content=centos&protocol=https
+    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-8&arch=x86_64&country=DE&infra=stock&content=centos&protocol=https
     # mirror_complete fails with:
     # "This repository uses features which are incompatible with 'mirror' sync. Please sync without mirroring enabled"
     sync_policy: mirror_content_only
@@ -233,7 +234,7 @@ rpm_package_repos:
     sync_group: epel
     distribution_name: extra-packages-for-enterprise-linux-8-x86_64-
   - name: Extra Packages for Enterprise Linux Modular 8 - x86_64
-    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-modular-8&arch=x86_64&country=NL&infra=stock&content=centos&protocol=https
+    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-modular-8&arch=x86_64&country=DE&infra=stock&content=centos&protocol=https
     base_path: epel/8/Modular/x86_64/
     short_name: epel_modular
     sync_group: epel
