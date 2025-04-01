@@ -88,8 +88,7 @@ resource "github_branch_protection" "kayobe_branch_protection_py_3-6" {
     contexts = lookup(lookup(var.required_status_checks, each.key, {}), "stackhpc/[vwxy]*", lookup(var.required_status_checks, each.key, {
       "default" : [
         "tox / Tox pep8 with Python 3.8",
-        "tox / Tox py3 with Python 3.8",
-        "tox / Tox py3 with Python 3.6"
+        "tox / Tox py3 with Python 3.8"
       ]
     }).default)
     strict = false
@@ -302,8 +301,7 @@ resource "github_branch_protection" "openstack_branch_protection_py_3-6" {
     contexts = lookup(lookup(var.required_status_checks, each.key, {}), "stackhpc/[vwxy]*", lookup(var.required_status_checks, each.key, {
       "default" : [
         "tox / Tox pep8 with Python 3.8",
-        "tox / Tox py3 with Python 3.8",
-        "tox / Tox py3 with Python 3.6"
+        "tox / Tox py3 with Python 3.8"
       ]
     }).default)
     strict = false
