@@ -1,8 +1,6 @@
 name: Pull Request Stats
 
 on:
-  pull_request:
-  workflow_dispatch:
   push:
 
 jobs:
@@ -14,10 +12,10 @@ jobs:
         uses: flowwer-dev/pull-request-stats@master
         with:
           organization: 'stackhpc'
-          period: 90
+          period: 365
           charts: true
           #disableLinks: true
-          sortBy: 'COMMENTS'
+          # sortBy: 'COMMENTS'
 
       - name: Display markdown
         run: echo '${{ steps.stats.outputs.resultsMd }}'
