@@ -27,7 +27,7 @@ The table below contains the different workflows with a description of each and 
 
 OpenStack use [Tox](https://wiki.openstack.org/wiki/Testing) to manage the unit tests and style checks for the various projects they maintain.
 Therefore, when a `pull request` is opened the tox workflow will automatically perform a series of unit tests and linting in order ensure correctness and style guidelines are being met.
-The python environment will depend on the branch pre-Zed, python 3.6 and python 3.8 will be tested. From Zed onward, python 3.8 and python 3.10 will be tested, though only python 3.10 will be required for Caracal.
+The python environment will depend on the branch. Python 3.8, 3.10, and 3.12 are tested for various releases.
 This can be controlled within the strategy matrix of the workflow.
 The Python versions should correspond to those used in the supported OS distributions for a particular release.
 The source for the workflow can be found [here](https://github.com/stackhpc/.github/blob/main/.github/workflows/tox.yml).
