@@ -9,7 +9,7 @@ env:
 jobs:
   sync-matrix-build:
     name: Build package matrix of package repo sync jobs
-    runs-on: arc-release-train-runner-sms
+    runs-on: arc-release-train-runner
     outputs:
       matrix: ${{ steps.matrix-build.outputs.matrix }}
     steps:
