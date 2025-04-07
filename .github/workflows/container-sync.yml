@@ -32,7 +32,7 @@ env:
 jobs:
   container-sync:
     name: Sync container repositories
-    runs-on: arc-release-train-runner-sms
+    runs-on: arc-release-train-runner
     timeout-minutes: 720
     steps:
       - name: Checkout
