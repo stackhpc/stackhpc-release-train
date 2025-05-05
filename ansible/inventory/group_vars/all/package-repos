@@ -255,10 +255,10 @@ rpm_package_repos:
     short_name: elasticsearch_logstash_kibana_7_x
     sync_group: third_party
     distribution_name: elasticsearch-logstash-kibana-7.x-
-  # Note(piotrp): With repository size of 16G - for now we'll want this on_demand
+  # Note(matta): Sync content immediately as it can be removed from the upstream mirrors
   - name: Grafana
     url: https://rpm.grafana.com
-    policy: on_demand
+    policy: immediate
     base_path: grafana/oss/rpm/
     short_name: grafana
     sync_group: grafana
