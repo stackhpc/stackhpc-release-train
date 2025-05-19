@@ -4,6 +4,7 @@
 # repository.
 default_releases:
   - "master"
+  - "2025.1"
   - "2024.1"
   - "2023.1"
   - zed
@@ -121,6 +122,7 @@ source_repositories:
       - zed
       - 2023.1
       - 2024.1
+      - 2025.1
       - master
     community_files:
       - codeowners:
@@ -148,6 +150,7 @@ source_repositories:
       - zed
       - 2023.1
       - 2024.1
+      - 2025.1
       - master
     community_files:
       - codeowners:
@@ -171,6 +174,7 @@ source_repositories:
       - zed
       - 2023.1
       - 2024.1
+      - 2025.1
       - master
     workflows:
       ignored_workflows:
@@ -186,6 +190,7 @@ source_repositories:
       - wallaby
       - xena
       - 2023.1
+      - 2025.1
       - master
     community_files:
       - codeowners:
@@ -199,6 +204,7 @@ source_repositories:
       - yoga
       - zed
       - 2023.1
+      - 2025.1
       - master
     community_files:
       - codeowners:
@@ -211,6 +217,7 @@ source_repositories:
       - xena
       - zed
       - 2024.1
+      - 2025.1
       - master
     workflows:
       ignored_workflows:
@@ -228,6 +235,7 @@ source_repositories:
     ignored_releases:
       - zed
       - 2024.1
+      - 2025.1
       - master
   ironic-ui:
     ignored_releases:
@@ -237,6 +245,7 @@ source_repositories:
       - zed
       - 2023.1
       - 2024.1
+      - 2025.1
       - master
     workflows:
       ignored_workflows:
@@ -263,6 +272,7 @@ source_repositories:
       - zed
       - 2023.1
       - 2024.1
+      - 2025.1
       - master
     workflows:
       ignored_workflows:
@@ -287,6 +297,7 @@ source_repositories:
       - wallaby
       - xena
       - 2024.1
+      - 2025.1
       - master
     workflows:
       ignored_workflows:
@@ -301,6 +312,7 @@ source_repositories:
       - victoria
       - xena
       - 2024.1
+      - 2025.1
       - master
     community_files:
       - codeowners:
@@ -325,6 +337,7 @@ source_repositories:
       - zed
       - 2023.1
       - 2024.1
+      - 2025.1
       - master
     workflows:
       ignored_workflows:
