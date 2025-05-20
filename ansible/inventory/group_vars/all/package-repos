@@ -572,6 +572,20 @@ rpm_package_repos:
     short_name: centos_stream_9_openstack_caracal_aarch64
     sync_group: rocky_9_aarch64
     distribution_name: centos-stream-9-openstack-caracal-aarch64-
+  # OpenStack Epoxy for CentOS Stream 9
+  - name: CentOS Stream 9 - OpenStack Epoxy
+    url: https://mirror.stream.centos.org/SIGs/9-stream/cloud/x86_64/openstack-epoxy/
+    base_path: centos/9-stream/cloud/x86_64/openstack-epoxy/
+    short_name: centos_stream_9_openstack_epoxy
+    sync_group: centos
+    distribution_name: centos-stream-9-openstack-epoxy-
+  # OpenStack Epoxy for CentOS Stream 9 (aarch64)
+  - name: CentOS Stream 9 - OpenStack Epoxy (aarch64)
+    url: https://mirror.stream.centos.org/SIGs/9-stream/cloud/aarch64/openstack-epoxy/
+    base_path: centos/9-stream/cloud/aarch64/openstack-epoxy/
+    short_name: centos_stream_9_openstack_epoxy_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: centos-stream-9-openstack-epoxy-aarch64-
 
   # Additional RHEL 9 repositories
   # RabbitMQ - Erlang for Redhat family, version 9
