@@ -1,7 +1,7 @@
 ---
 - name: Check if required label exists # noqa command-instead-of-shell
   ansible.builtin.shell:
-    cmd: gh label list --json name --jq 'any(.name == "{{ label_name }}")'
+    cmd: gh label list -L 500 --json name --jq 'any(.name == "{{ label_name }}")'
     chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
   changed_when: false
   register: label_exists
