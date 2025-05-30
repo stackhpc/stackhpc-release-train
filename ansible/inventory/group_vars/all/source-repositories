@@ -86,8 +86,6 @@ source_repositories:
   stackhpc-kayobe-config:
     workflows:
       ignored_workflows:
-        default_branch_only:
-          - upstream-sync
         elsewhere:
           - tox
     workflow_args:
