@@ -201,6 +201,68 @@ deb_package_repos:
     sync_group: third_party
     distribution_name: ceph-reef-debian-
 
+  # TreasureData 5 for Ubuntu Noble
+  - name: TreasureData5 for Ubuntu Noble
+    url: https://packages.treasuredata.com/lts/5/ubuntu/noble/
+    base_path: treasuredata/ubuntu-noble/
+    short_name: ubuntu_noble_treasuredata_5
+    sync_group: third_party
+    distribution_name: ubuntu-noble-treasuredata-5-
+  # RabbitMQ - Erlang for Ubuntu Noble
+  - name: RabbitMQ - Erlang - Ubuntu Noble
+    url: "https://ppa.launchpadcontent.net/rabbitmq/rabbitmq-erlang/ubuntu"
+    distributions: noble
+    component: "main"
+    # mirror_complete fails with:
+    # "This repository uses features which are incompatible with 'mirror' sync. Please sync without mirroring enabled"
+    sync_policy: mirror_content_only
+    base_path: rabbitmq/erlang/ubuntu/noble/x86_64/
+    short_name: ubuntu_noble_rabbitmq_erlang
+    sync_group: third_party
+    distribution_name: ubuntu-noble-rabbitmq-erlang-
+  # RabbitMQ for Ubuntu Noble
+  - name: RabbitMQ - Server - Ubuntu Noble
+    url: https://ppa1.rabbitmq.com/rabbitmq/rabbitmq-server/deb/ubuntu
+    distributions: noble
+    # mirror_complete fails with:
+    # "This repository uses features which are incompatible with 'mirror' sync. Please sync without mirroring enabled"
+    sync_policy: mirror_content_only
+    base_path: rabbitmq/rabbitmq-server/ubuntu/noble/noarch/
+    short_name: ubuntu_noble_rabbitmq_server
+    sync_group: third_party
+    distribution_name: ubuntu-noble-rabbitmq-server-
+  # InfluxDB for Ubuntu Jammy
+  - name: InfluxDB - Ubuntu Jammy
+    url: https://repos.influxdata.com/ubuntu
+    distributions: jammy
+    components: stable
+    base_path: influxdb/ubuntu/jammy/x86_64/stable/
+    short_name: ubuntu_jammy_influxdb
+    sync_group: third_party
+    distribution_name: influxdb-ubuntu-jammy-
+  # MariaDB 10.11 for Ubuntu Noble
+  - name: MariaDB 10.11 - Ubuntu Noble
+    url: https://dlm.mariadb.com/repo/mariadb-server/10.11/repo/ubuntu
+    distributions: noble
+    components: main
+    architectures: amd64
+    base_path: mariadb-10.11/apt/ubuntu/noble/x86_64/
+    short_name: ubuntu_noble_mariadb_10_11
+    sync_group: third_party
+    distribution_name: mariadb-10.11-ubuntu-noble-
+  # MariaDB 10.11.11 for Ubuntu Noble
+  - name: MariaDB 10.11.11 - Ubuntu Noble
+    url: https://dlm.mariadb.com/repo/mariadb-server/10.11.11/repo/ubuntu
+    distributions: noble
+    components: main
+    architectures: amd64
+    base_path: mariadb-10.11.11/apt/ubuntu/noble/x86_64/
+    short_name: ubuntu_noble_mariadb_10_11_11
+    sync_group: third_party
+    distribution_name: mariadb-10.11.11-ubuntu-noble-
+  # TODO: Add Opensearch, Opensearch Dashboards, Grafana, and ProxySQL
+  # repositories for Ubuntu
+
 # Default filter string for Deb package repositories.
 deb_package_repo_filter: ""
 
