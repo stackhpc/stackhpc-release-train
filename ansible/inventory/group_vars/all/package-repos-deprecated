@@ -609,6 +609,71 @@ deprecated_rpm_package_repos:
     sync_group: rocky_9_aarch64
     distribution_name: rocky-9.4-highavailability-aarch64-
 
+  # Base Rocky Linux 9.5 repositories
+  - name: Rocky Linux 9.5 - AppStream
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-9.5&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/9.5/AppStream/x86_64/os/
+    short_name: rocky_9_5_appstream
+    sync_group: rocky_9
+    distribution_name: rocky-9.5-appstream-
+  - name: Rocky Linux 9.5 - AppStream (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-9.5&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/9.5/AppStream/aarch64/os/
+    short_name: rocky_9_5_appstream_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: rocky-9.5-appstream-aarch64-
+  - name: Rocky Linux 9.5 - BaseOS
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-9.5&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/9.5/BaseOS/x86_64/os/
+    short_name: rocky_9_5_baseos
+    sync_group: rocky_9_baseos
+    distribution_name: rocky-9.5-baseos-
+  - name: Rocky Linux 9.5 - BaseOS (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-9.5&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/9.5/BaseOS/aarch64/os/
+    short_name: rocky_9_5_baseos_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: rocky-9.5-baseos-aarch64-
+  - name: Rocky Linux 9.5 - Extras
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-9.5&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/9.5/extras/x86_64/os/
+    short_name: rocky_9_5_extras
+    sync_group: rocky_9
+    distribution_name: rocky-9.5-extras-
+  - name: Rocky Linux 9.5 - Extras (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-9.5&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/9.5/extras/aarch64/os/
+    short_name: rocky_9_5_extras_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: rocky-9.5-extras-aarch64-
+
+  # Additional Rocky Linux 9.5 repositories
+  # No advanced virt, Ceph or OpenStack
+  - name: Rocky Linux 9.5 - CRB
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-9.5&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/9.5/CRB/x86_64/os/
+    short_name: rocky_9_5_crb
+    sync_group: rocky_9
+    distribution_name: rocky-9.5-crb-
+  - name: Rocky Linux 9.5 - CRB (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-9.5&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/9.5/CRB/aarch64/os/
+    short_name: rocky_9_5_crb_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: rocky-9.5-crb-aarch64-
+  - name: Rocky Linux 9.5 - HighAvailability
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-9.5&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/9.5/highavailability/x86_64/os/
+    short_name: rocky_9_5_highavailability
+    sync_group: rocky_9
+    distribution_name: rocky-9.5-highavailability-
+  - name: Rocky Linux 9.5 - HighAvailability (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-9.5&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/9.5/highavailability/aarch64/os/
+    short_name: rocky_9_5_highavailability_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: rocky-9.5-highavailability-aarch64-
+
   # Additional RHEL 9 repositories
   # DOCA Repository 2.8.0 for RHEL 9.4
   - name: DOCA Online Repo 2.8.0 - RHEL 9.4
