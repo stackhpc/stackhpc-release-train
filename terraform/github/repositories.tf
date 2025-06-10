@@ -33,6 +33,14 @@ resource "github_repository" "repositories" {
   }
 }
 
+resource "github_issue_label" "arm64_label" {
+  for_each    = toset(flatten(values(var.repositories)))
+  repository  = each.value
+  name        = "arm64"
+  color       = "0E8A16"
+  description = "Work related to ARM architecture support"
+}
+
 resource "github_issue_label" "automated_label" {
   for_each    = toset(flatten(values(var.repositories)))
   repository  = each.value
