@@ -211,6 +211,7 @@ deb_package_repos:
 # Grafana for Ubuntu
   - name: Grafana for Ubuntu
     url: https://apt.grafana.com
+    distributions: noble
     components: main
     policy: immediate
     base_path: grafana/oss/apt/
