@@ -211,8 +211,8 @@ deb_package_repos:
 # Grafana for Ubuntu
   - name: Grafana for Ubuntu
     url: https://apt.grafana.com
-    distributions: noble
-    components: main
+    distributions: main
+    components: stable
     policy: immediate
     base_path: grafana/oss/apt/
     short_name: ubuntu_grafana
@@ -255,6 +255,7 @@ deb_package_repos:
     url: https://dlm.mariadb.com/repo/mariadb-server/10.11/repo/ubuntu
     distributions: noble
     components: main
+    architectures: amd64
     base_path: mariadb-10.11/apt/ubuntu/noble/x86_64/
     short_name: ubuntu_noble_mariadb_10_11
     sync_group: third_party
@@ -264,6 +265,7 @@ deb_package_repos:
     url: https://dlm.mariadb.com/repo/mariadb-server/10.11.11/repo/ubuntu
     distributions: noble
     components: main
+    architectures: amd64
     base_path: mariadb-10.11.11/apt/ubuntu/noble/x86_64/
     short_name: ubuntu_noble_mariadb_10_11_11
     sync_group: third_party
