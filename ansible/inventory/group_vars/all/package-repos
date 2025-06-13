@@ -211,8 +211,8 @@ deb_package_repos:
 # Grafana for Ubuntu
   - name: Grafana for Ubuntu
     url: https://apt.grafana.com
-    distributions: main
-    components: stable
+    distributions: ../../
+    components: main stable
     policy: immediate
     base_path: grafana/oss/apt/
     short_name: ubuntu_grafana
@@ -273,6 +273,7 @@ deb_package_repos:
 # OpenSearch 2.x
   - name: OpenSearch 2.x for Ubuntu
     url: https://artifacts.opensearch.org/releases/bundle/opensearch/2.x/apt/
+    distributions: ../../
     components: stable main
     base_path: opensearch/2.x/apt/
     short_name: opensearch_2_x_ubuntu
@@ -281,6 +282,7 @@ deb_package_repos:
 # OpenSearch dashboards
   - name: OpenSearch Dashboards 2.x for Ubuntu
     url: https://artifacts.opensearch.org/releases/bundle/opensearch-dashboards/2.x/apt
+    distributions: ../../
     components: stable main
     base_path: opensearch-dashboards/2.x/apt/
     short_name: opensearch_dashboards_2_x_ubuntu
@@ -288,7 +290,8 @@ deb_package_repos:
     distribution_name: opensearch_dashboards-2.x-apt-
 # ProxySQL for Ubuntu Noble
   - name: ProxySQL for Ubuntu Noble
-    url: https://repo.proxysql.com/ProxySQL/proxysql-2.7.x/noble/
+    url: https://repo.proxysql.com/ProxySQL/proxysql-2.7.x/
+    distributions: ../noble
     components: ./
     base_path: proxysql/ubuntu/noble/
     short_name: proxysql_ubuntu_noble
