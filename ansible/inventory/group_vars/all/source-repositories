@@ -352,10 +352,6 @@ source_repositories:
       - xena
       - yoga
       - zed
-    workflows:
-      ignored_workflows:
-        elsewhere:
-          - tox
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
