@@ -266,7 +266,7 @@ deb_package_repos:
     policy: immediate
     distributions: stable
     components: main
-    base_path: grafana/apt/x86_64/
+    base_path: grafana/oss/apt/
     short_name: ubuntu_noble_grafana
     sync_group: alex_test
     distribution_name: ubuntu-noble-grafana-
@@ -277,7 +277,7 @@ deb_package_repos:
     architectures: amd64
     distributions: stable
     components: main
-    base_path: releases/bundle/opensearch/3.x/apt/
+    base_path: opensearch/3.x/apt/
     short_name: ubuntu_noble_opensearch
     sync_group: alex_test
     distribution_name: ubuntu-noble-opensearch-
@@ -288,7 +288,7 @@ deb_package_repos:
     architectures: amd64
     distributions: stable
     components: main
-    base_path: releases/bundle/opensearch-dashboards/3.x/apt/
+    base_path: opensearch-dashboards/3.x/apt/
     short_name: ubuntu_noble_opensearch_dashboards
     sync_group: alex_test
     distribution_name: ubuntu-noble-opensearch-dashboards-
