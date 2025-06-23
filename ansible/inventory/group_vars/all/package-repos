@@ -268,7 +268,7 @@ deb_package_repos:
     components: main
     base_path: grafana/oss/apt/
     short_name: ubuntu_noble_grafana
-    sync_group: alex_test
+    sync_group: grafana
     distribution_name: ubuntu-noble-grafana-
   # OpenSearch for Ubuntu Noble
   - name: OpenSearch - Ubuntu Noble
@@ -279,7 +279,7 @@ deb_package_repos:
     components: main
     base_path: opensearch/3.x/apt/
     short_name: ubuntu_noble_opensearch
-    sync_group: alex_test
+    sync_group: third_party
     distribution_name: ubuntu-noble-opensearch-
   # OpenSearch Dashboards for Ubuntu Noble
   - name: OpenSearch Dashboards - Ubuntu Noble
@@ -290,7 +290,7 @@ deb_package_repos:
     components: main
     base_path: opensearch-dashboards/3.x/apt/
     short_name: ubuntu_noble_opensearch_dashboards
-    sync_group: alex_test
+    sync_group: third_party
     distribution_name: ubuntu-noble-opensearch-dashboards-
   # ProxySQL for Ubuntu Noble
   - name: ProxySQL - Ubuntu Noble
@@ -301,7 +301,7 @@ deb_package_repos:
     components: main
     base_path: ProxySQL/proxysql-3.0.x/noble/
     short_name: ubuntu_noble_proxysql
-    sync_group: alex_test
+    sync_group: third_party
     distribution_name: ubuntu-noble-proxysql-
 
 # Default filter string for Deb package repositories.
