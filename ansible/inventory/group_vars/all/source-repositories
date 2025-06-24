@@ -159,6 +159,9 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
+    ignored_releases:
+      - 2025.1
+      - master
   cloudkitty-dashboard:
     community_files:
       - codeowners:
@@ -285,6 +288,8 @@ source_repositories:
       - victoria
       - wallaby
       - xena
+      - 2025.1
+      - master
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
@@ -323,6 +328,8 @@ source_repositories:
       - xena
       - yoga
       - zed
+      - 2025.1
+      - master
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
