@@ -825,13 +825,13 @@ rpm_package_repos:
     short_name: openhpc_3_updates
     sync_group: third_party
     distribution_name: openhpc-3-updates-
-  # ProxySQL for RHEL 9
-  - name: ProxySQL - RHEL 9
+  # ProxySQL for AlmaLinux 9
+  - name: ProxySQL - AlmaLinux 9
     url: https://repo.proxysql.com/ProxySQL/proxysql-2.7.x/almalinux/9/
-    base_path: ProxySQL/proxysql-2.7.x/rhel/9/
-    short_name: rhel_9_proxysql_2_7
+    base_path: ProxySQL/proxysql-2.7.x/almalinux/9/
+    short_name: almalinux_9_proxysql_2_7
     sync_group: third_party
-    distribution_name: rhel-9-proxysql-2.7-
+    distribution_name: almalinux-9-proxysql-2.7-
 
 # Default filter string for RPM package repositories.
 rpm_package_repo_filter: ""
