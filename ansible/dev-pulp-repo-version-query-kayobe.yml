@@ -12,6 +12,14 @@
   hosts: localhost
   gather_facts: true
   tasks:
+    - name: DEBUG 1
+      ansible.builtin.debug:
+        var: dev_pulp_distribution_rpm_promote
+
+    - name: DEBUG 2
+      ansible.builtin.debug:
+        var: kayobe_pulp_repo_versions
+
     - name: Set a fact about rpm versions to promote
       ansible.builtin.set_fact:
         dev_pulp_distribution_rpm_promote_versions: >-
@@ -20,7 +28,7 @@
              combine({item.short_name: kayobe_pulp_repo_versions[item.short_name]}) }}
       loop: "{{ dev_pulp_distribution_rpm_promote }}"
       loop_control:
-        label: "{{ item.short_name }}"
+        label: "{{ item }}"
       when: item.short_name in kayobe_pulp_repo_versions
 
     - name: Set a fact about deb versions to promote
@@ -31,7 +39,7 @@
              combine({item.short_name: kayobe_pulp_repo_versions[item.short_name]}) }}
       loop: "{{ dev_pulp_distribution_deb_promote }}"
       loop_control:
-        label: "{{ item.short_name }}"
+        label: "{{ item }}"
       when: item.short_name in kayobe_pulp_repo_versions
 
     - name: Display rpm promotion versions facts
