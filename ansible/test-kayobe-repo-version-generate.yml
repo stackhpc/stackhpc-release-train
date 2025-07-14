@@ -18,6 +18,14 @@
     kayobe_pulp_repo_versions_path: "{{ (kayobe_config_repo_path ~ '/etc/kayobe/pulp-repo-versions.yml') | realpath }}"
     kayobe_pulp_repo_versions_dest: "{{ kayobe_pulp_repo_versions_path }}"
   tasks:
+    - name: Debug test_pulp_repository_rpm_repo_versions
+      debug:
+        var: test_pulp_repository_rpm_repo_versions
+
+    - name: Debug kayobe_pulp_repo_versions
+      debug:
+        var: kayobe_pulp_repo_versions
+
     - name: Set a fact about updated Kayobe Pulp repository versions
       vars:
         kayobe_var_name: "{{ 'stackhpc_pulp_repo_' ~ item.key ~ '_version' }}"
