@@ -703,7 +703,7 @@ rpm_package_repos:
     distribution_name: rhel9-rabbitmq-erlang-
   # RabbitMQ - Erlang for Redhat family, version 9 (aarch64)
   - name: RabbitMQ - Erlang - RHEL 9 (aarch64)
-    url: https://download.copr.fedorainfracloud.org/results/@openstack-kolla/rabbitmq-erlang/centos-stream-9-aarch64/
+    url: https://download.copr.fedorainfracloud.org/results/@openstack-kolla/rabbitmq-erlang/rhel-9-aarch64/
     # mirror_complete fails with:
     # "This repository uses features which are incompatible with 'mirror' sync. Please sync without mirroring enabled"
     sync_policy: mirror_content_only
