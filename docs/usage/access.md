@@ -26,5 +26,5 @@ Configuration for content guards is in [ansible/inventory/group_vars/all/dev-pul
 ## Generating client credentials
 
 Clients require credentials in order to access Ark.
-See the README in the [stackhpc-release-train-clients](https://github.com/stackhpc/stackhpc-release-train-clients) repository for how to generete and update them.
+See the README in the [stackhpc-release-train-clients](https://github.com/stackhpc/stackhpc-release-train-clients) repository for how to generate and update them.
 It is also possible to use this repository to generate credentials with access to the unpromoted "development" content, but these should not be given to clients.
