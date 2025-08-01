@@ -417,6 +417,18 @@ rpm_package_repos:
     short_name: openhpc_2_updates
     sync_group: third_party
     distribution_name: openhpc-2-updates-
+  - name: CernVM-FS packages - EL8
+    url: https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs/EL/8/x86_64
+    base_path: cvmfs/EL/8/x86_64/
+    short_name: cernvmfs_el8_pkgs
+    sync_group: third_party
+    distribution_name: cernvmfs-el8-pkgs-
+  - name: CernVM-FS extra config - EL8
+    url: https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs-config/EL/8/x86_64
+    base_path: cvmfs-config/EL/8/x86_64/
+    short_name: cernvmfs_el8_cfg
+    sync_group: third_party
+    distribution_name: cernvmfs-el8-cfg-
 
   # Base Rocky Linux 8.10 repositories (Slurm appliance)
   - name: Rocky Linux 8.10 - AppStream
@@ -437,8 +449,6 @@ rpm_package_repos:
     short_name: rocky_8_10_extras
     sync_group: rocky_8
     distribution_name: rocky-8.10-extras-
-
-  # Additional Rocky Linux 8.10 repositories (Slurm appliance)
   - name: Rocky Linux 8.10 - PowerTools
     url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-PowerTools-8.10&arch=x86_64&country=NL
     base_path: rocky/8.10/PowerTools/x86_64/os/
@@ -825,6 +835,18 @@ rpm_package_repos:
     short_name: openhpc_3_updates
     sync_group: third_party
     distribution_name: openhpc-3-updates-
+  - name: CernVM-FS packages - EL9
+    url: https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs/EL/9/x86_64
+    base_path: cvmfs/EL/9/x86_64/
+    short_name: cernvmfs_el9_pkgs
+    sync_group: third_party
+    distribution_name: cernvmfs-el9-pkgs-
+  - name: CernVM-FS extra config - EL9
+    url: https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs-config/EL/9/x86_64
+    base_path: cvmfs-config/EL/9/x86_64/
+    short_name: cernvmfs_el9_cfg
+    sync_group: third_party
+    distribution_name: cernvmfs-el9-cfg-
   # ProxySQL for AlmaLinux 9
   - name: ProxySQL - AlmaLinux 9
     url: https://repo.proxysql.com/ProxySQL/proxysql-2.7.x/almalinux/9/
