@@ -342,6 +342,12 @@ rpm_package_repos:
     short_name: epel_modular
     sync_group: epel
     distribution_name: extra-packages-for-enterprise-linux-modular-8-x86_64-
+  - name: Extra Packages for Enterprise Linux 8 - source
+    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-source-8&arch=source&country=DE&infra=stock&content=centos&protocol=https
+    base_path: epel/8/Everything/source/
+    short_name: epel_source
+    sync_group: epel
+    distribution_name: extra-packages-for-enterprise-linux-8-source-
 
   # Third-party repositories
   - name: Docker CE for CentOS 8
@@ -437,18 +443,36 @@ rpm_package_repos:
     short_name: rocky_8_10_appstream
     sync_group: rocky_8
     distribution_name: rocky-8.10-appstream-
+  - name: Rocky Linux 8.10 - AppStream (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-source-8.10&arch=source&country=NL
+    base_path: rocky/8.10/AppStream/source/os/
+    short_name: rocky_8_10_appstream_source
+    sync_group: rocky_8_source
+    distribution_name: rocky-8.10-appstream-source-
   - name: Rocky Linux 8.10 - BaseOS
     url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-8.10&arch=x86_64&country=NL
     base_path: rocky/8.10/BaseOS/x86_64/os/
     short_name: rocky_8_10_baseos
     sync_group: rocky_8
     distribution_name: rocky-8.10-baseos-
+  - name: Rocky Linux 8.10 - BaseOS (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-source-8.10&arch=source&country=NL
+    base_path: rocky/8.10/BaseOS/source/os/
+    short_name: rocky_8_10_baseos_source
+    sync_group: rocky_8_source
+    distribution_name: rocky-8.10-baseos-source-
   - name: Rocky Linux 8.10 - Extras
     url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-8.10&arch=x86_64&country=NL
     base_path: rocky/8.10/extras/x86_64/os/
     short_name: rocky_8_10_extras
     sync_group: rocky_8
     distribution_name: rocky-8.10-extras-
+  - name: Rocky Linux 8.10 - Extras (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-source-8.10&arch=source&country=NL
+    base_path: rocky/8.10/extras/source/os/
+    short_name: rocky_8_10_extras_source
+    sync_group: rocky_8_source
+    distribution_name: rocky-8.10-extras-source-
   - name: Rocky Linux 8.10 - PowerTools
     url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-PowerTools-8.10&arch=x86_64&country=NL
     base_path: rocky/8.10/PowerTools/x86_64/os/
@@ -469,6 +493,12 @@ rpm_package_repos:
     short_name: rocky_9_6_appstream_aarch64
     sync_group: rocky_9_aarch64
     distribution_name: rocky-9.6-appstream-aarch64-
+  - name: Rocky Linux 9.6 - AppStream (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-source-9.6&arch=source&country=NL&protocol=https
+    base_path: rocky/9.6/AppStream/source/os/
+    short_name: rocky_9_6_appstream_source
+    sync_group: rocky_9_source
+    distribution_name: rocky-9.6-appstream-source-
   - name: Rocky Linux 9.6 - BaseOS
     url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-9.6&arch=x86_64&country=NL&protocol=https
     base_path: rocky/9.6/BaseOS/x86_64/os/
@@ -481,6 +511,12 @@ rpm_package_repos:
     short_name: rocky_9_6_baseos_aarch64
     sync_group: rocky_9_aarch64
     distribution_name: rocky-9.6-baseos-aarch64-
+  - name: Rocky Linux 9.6 - BaseOS (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-source-9.6&arch=source&country=NL&protocol=https
+    base_path: rocky/9.6/BaseOS/source/os/
+    short_name: rocky_9_6_baseos_source
+    sync_group: rocky_9_source
+    distribution_name: rocky-9.6-baseos-source-
   - name: Rocky Linux 9.6 - Extras
     url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-9.6&arch=x86_64&country=NL&protocol=https
     base_path: rocky/9.6/extras/x86_64/os/
@@ -493,6 +529,12 @@ rpm_package_repos:
     short_name: rocky_9_6_extras_aarch64
     sync_group: rocky_9_aarch64
     distribution_name: rocky-9.6-extras-aarch64-
+  - name: Rocky Linux 9.6 - Extras (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-source-9.6&arch=source&country=NL&protocol=https
+    base_path: rocky/9.6/extras/source/os/
+    short_name: rocky_9_6_extras_source
+    sync_group: rocky_9_source
+    distribution_name: rocky-9.6-extras-source-
 
   # Additional Rocky Linux 9.6 repositories
   # No advanced virt, Ceph or OpenStack
@@ -508,6 +550,12 @@ rpm_package_repos:
     short_name: rocky_9_6_crb_aarch64
     sync_group: rocky_9_aarch64
     distribution_name: rocky-9.6-crb-aarch64-
+  - name: Rocky Linux 9.6 - CRB (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-source-9.6&arch=source&country=NL&protocol=https
+    base_path: rocky/9.6/CRB/source/os/
+    short_name: rocky_9_6_crb_source
+    sync_group: rocky_9_source
+    distribution_name: rocky-9.6-crb-source-
   - name: Rocky Linux 9.6 - HighAvailability
     url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-9.6&arch=x86_64&country=NL&protocol=https
     base_path: rocky/9.6/highavailability/x86_64/os/
@@ -620,6 +668,14 @@ rpm_package_repos:
     short_name: epel_9_aarch64
     sync_group: rocky_9_aarch64
     distribution_name: extra-packages-for-enterprise-linux-9-aarch64-
+  # EPEL 9 repository (source)
+  - name: Extra Packages for Enterprise Linux 9 (source)
+    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-source-9&arch=source&country=NL&infra=stock&content=centos&protocol=https
+    sync_policy: mirror_content_only
+    base_path: epel/9/Everything/source/
+    short_name: epel_9_source
+    sync_group: epel
+    distribution_name: extra-packages-for-enterprise-linux-9-source-
   # ELRepo 9 repository
   - name: ELRepo.org Community Enterprise Linux Repository - el9
     # Use an HTTPS mirror rather than http from mirrorlist
