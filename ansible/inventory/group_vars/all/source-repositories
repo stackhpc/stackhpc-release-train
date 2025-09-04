@@ -300,7 +300,6 @@ source_repositories:
       - wallaby
       - xena
       - 2024.1
-      - 2025.1
       - master
     workflows:
       ignored_workflows:
