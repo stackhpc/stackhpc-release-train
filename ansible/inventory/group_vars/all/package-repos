@@ -767,16 +767,26 @@ rpm_package_repos:
     short_name: rhel9_rabbitmq_erlang
     sync_group: third_party
     distribution_name: rhel9-rabbitmq-erlang-
-  # RabbitMQ - Erlang for Redhat family, version 9 (aarch64)
-  - name: RabbitMQ - Erlang - RHEL 9 (aarch64)
-    url: https://download.copr.fedorainfracloud.org/results/@openstack-kolla/rabbitmq-erlang/rhel-9-aarch64/
+  # RabbitMQ - Erlang 26 for Redhat family, version 9 (aarch64)
+  - name: RabbitMQ - Erlang 26 - RHEL 9 (aarch64)
+    url: https://download.copr.fedorainfracloud.org/results/@openstack-kolla/rabbitmq-erlang-26/rhel-9-aarch64/
     # mirror_complete fails with:
     # "This repository uses features which are incompatible with 'mirror' sync. Please sync without mirroring enabled"
     sync_policy: mirror_content_only
-    base_path: rabbitmq/erlang/el/9/aarch64/
-    short_name: rhel9_rabbitmq_erlang_aarch64
+    base_path: rabbitmq/erlang-26/el/9/aarch64/
+    short_name: rhel9_rabbitmq_erlang_26_aarch64
     sync_group: rocky_9_aarch64
-    distribution_name: rhel9-rabbitmq-erlang-aarch64-
+    distribution_name: rhel9-rabbitmq-erlang-26-aarch64-
+  # RabbitMQ - Erlang 27 for Redhat family, version 9 (aarch64)
+  - name: RabbitMQ - Erlang 27 - RHEL 9 (aarch64)
+    url: https://download.copr.fedorainfracloud.org/results/@openstack-kolla/rabbitmq-erlang-27/rhel-9-aarch64/
+    # mirror_complete fails with:
+    # "This repository uses features which are incompatible with 'mirror' sync. Please sync without mirroring enabled"
+    sync_policy: mirror_content_only
+    base_path: rabbitmq/erlang-27/el/9/aarch64/
+    short_name: rhel9_rabbitmq_erlang_27_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: rhel9-rabbitmq-erlang-27-aarch64-
   # RabbitMQ for Redhat family, version 9
   - name: RabbitMQ - Server - RHEL 9
     url: https://yum2.rabbitmq.com/rabbitmq/el/9/noarch
