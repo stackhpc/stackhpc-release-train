@@ -256,6 +256,18 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
+  keystone:
+    ignored_releases:
+      - victoria
+      - wallaby
+      - xena
+      - zed
+      - 2023.1
+      - 2024.1
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
   magnum:
     ignored_releases:
       - victoria
