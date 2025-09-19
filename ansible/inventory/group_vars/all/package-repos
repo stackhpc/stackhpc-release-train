@@ -435,6 +435,13 @@ rpm_package_repos:
     short_name: cernvmfs_el8_cfg
     sync_group: third_party
     distribution_name: cernvmfs-el8-cfg-
+  # Open Ondemand
+  - name: Open OnDemand Web Repo - EL8
+    url: https://yum.osc.edu/ondemand/3.1/web/el8/x86_64
+    base_path: ondemand_web/EL/8/x86_64/
+    short_name: ondemand_web_el8
+    sync_group: third_party
+    distribution_name: ondemand-web-el8-
 
   # Base Rocky Linux 8.10 repositories (Slurm appliance)
   - name: Rocky Linux 8.10 - AppStream
@@ -926,6 +933,13 @@ rpm_package_repos:
     short_name: almalinux_9_proxysql_2_7
     sync_group: third_party
     distribution_name: almalinux-9-proxysql-2.7-
+  # Open Ondemand
+  - name: Open OnDemand Web Repo - EL9
+    url: https://yum.osc.edu/ondemand/3.1/web/el9/x86_64
+    base_path: ondemand_web/EL/9/x86_64/
+    short_name: ondemand_web_el9
+    sync_group: third_party
+    distribution_name: ondemand-web-el9-
 
 # Default filter string for RPM package repositories.
 rpm_package_repo_filter: ""
