@@ -689,6 +689,13 @@ rpm_package_repos:
     short_name: epel_9_source
     sync_group: epel
     distribution_name: extra-packages-for-enterprise-linux-9-source-
+  # EPEL 9 - Cisco OpenH264
+  - name: Extra Packages for Enterprise Linux 9 Cisco openh264
+    url: https://mirrors.fedoraproject.org/metalink?repo=epel-cisco-openh264-9&arch=x86_64
+    base_path: epel-cisco-openh264/9/Everything/x86_64/
+    short_name: epel_cisco_openh264_9
+    distribution_name: extra-packages-for-enterprise-linux-9-cisco-openh264-x86_64-
+
   # ELRepo 9 repository
   - name: ELRepo.org Community Enterprise Linux Repository - el9
     # Use an HTTPS mirror rather than http from mirrorlist
