@@ -694,6 +694,7 @@ rpm_package_repos:
     url: https://mirrors.fedoraproject.org/metalink?repo=epel-cisco-openh264-9&arch=x86_64
     base_path: epel-cisco-openh264/9/Everything/x86_64/
     short_name: epel_cisco_openh264_9
+    sync_group: epel
     distribution_name: extra-packages-for-enterprise-linux-9-cisco-openh264-x86_64-
 
   # ELRepo 9 repository
@@ -947,6 +948,21 @@ rpm_package_repos:
     short_name: ondemand_web_el9
     sync_group: third_party
     distribution_name: ondemand-web-el9-
+
+  # Non-distro-specific RPMs
+  # TurboVNC
+  - name: TurboVNC
+    url: https://packagecloud.io/dcommander/turbovnc/rpm_any/rpm_any/x86_64
+    base_path: turbovnc/x86_64/
+    short_name: turbovnc
+    sync_group: third_party
+    distribution_name: turbovnc-
+  - name: TurboVNC - source
+    url: https://packagecloud.io/dcommander/turbovnc/rpm_any/rpm_any/SRPMS
+    base_path: turbovnc/srpms/
+    short_name: turbovnc-source
+    sync_group: third_party
+    distribution_name: turbovnc-source-
 
 # Default filter string for RPM package repositories.
 rpm_package_repo_filter: ""
