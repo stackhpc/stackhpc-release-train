@@ -479,6 +479,12 @@ rpm_package_repos:
     short_name: rocky_8_10_powertools
     sync_group: rocky_8
     distribution_name: rocky-8.10-powertools-
+  - name: Rocky Linux 8.10 - PowerTools (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?arch=source&repo=PowerTools-8.10-source&country=NL
+    base_path: rocky/8.10/PowerTools/source/tree/
+    short_name: rocky_8_10_powertools_source
+    sync_group: rocky_8_source
+    distribution_name: rocky-8.10-powertools-source-
 
   # Base Rocky Linux 9.6 repositories
   - name: Rocky Linux 9.6 - AppStream
