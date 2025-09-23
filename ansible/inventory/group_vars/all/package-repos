@@ -483,7 +483,7 @@ rpm_package_repos:
     url: https://mirrors.rockylinux.org/mirrorlist?arch=source&repo=PowerTools-8.10-source&country=NL
     base_path: rocky/8.10/PowerTools/source/
     short_name: rocky_8_10_powertools_source
-    sync_group: rocky_8
+    sync_group: rocky_8_source
     distribution_name: rocky-8.10-powertools-source-
 
   # Base Rocky Linux 9.6 repositories
