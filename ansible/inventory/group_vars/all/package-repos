@@ -435,10 +435,10 @@ rpm_package_repos:
     short_name: cernvmfs_el8_cfg
     sync_group: third_party
     distribution_name: cernvmfs-el8-cfg-
-  # Open Ondemand
+  # Open OnDemand
   - name: Open OnDemand Web Repo - EL8
     url: https://yum.osc.edu/ondemand/4.0/web/el8/x86_64
-    base_path: ondemand_web/EL/8/x86_64/
+    base_path: ondemand/4.0/web/el8/x86_64/
     short_name: ondemand_web_el8
     sync_group: third_party
     distribution_name: ondemand-web-el8-
@@ -691,8 +691,8 @@ rpm_package_repos:
     distribution_name: extra-packages-for-enterprise-linux-9-source-
   # EPEL 9 - Cisco OpenH264
   - name: Extra Packages for Enterprise Linux 9 Cisco openh264
-    url: https://mirrors.fedoraproject.org/metalink?repo=epel-cisco-openh264-9&arch=x86_64
-    base_path: epel-cisco-openh264/9/Everything/x86_64/
+    url: https://codecs.fedoraproject.org/openh264/epel/9/x86_64/os/
+    base_path: openh264/epel/9/x86_64/os/
     short_name: epel_cisco_openh264_9
     sync_group: epel
     distribution_name: extra-packages-for-enterprise-linux-9-cisco-openh264-x86_64-
@@ -944,7 +944,7 @@ rpm_package_repos:
   # Open Ondemand
   - name: Open OnDemand Web Repo - EL9
     url: https://yum.osc.edu/ondemand/4.0/web/el9/x86_64
-    base_path: ondemand_web/EL/9/x86_64/
+    base_path: ondemand/4.0/web/el9/x86_64/
     short_name: ondemand_web_el9
     sync_group: third_party
     distribution_name: ondemand-web-el9-
