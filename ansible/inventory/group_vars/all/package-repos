@@ -435,6 +435,13 @@ rpm_package_repos:
     short_name: cernvmfs_el8_cfg
     sync_group: third_party
     distribution_name: cernvmfs-el8-cfg-
+  # Open OnDemand
+  - name: Open OnDemand Web Repo - EL8
+    url: https://yum.osc.edu/ondemand/4.0/web/el8/x86_64
+    base_path: ondemand/4.0/web/el8/x86_64/
+    short_name: ondemand_web_el8
+    sync_group: third_party
+    distribution_name: ondemand-web-el8-
 
   # Base Rocky Linux 8.10 repositories (Slurm appliance)
   - name: Rocky Linux 8.10 - AppStream
@@ -682,6 +689,14 @@ rpm_package_repos:
     short_name: epel_9_source
     sync_group: epel
     distribution_name: extra-packages-for-enterprise-linux-9-source-
+  # EPEL 9 - Cisco OpenH264
+  - name: Extra Packages for Enterprise Linux 9 Cisco openh264
+    url: https://codecs.fedoraproject.org/openh264/epel/9/x86_64/os/
+    base_path: openh264/epel/9/x86_64/os/
+    short_name: epel_cisco_openh264_9
+    sync_group: epel
+    distribution_name: extra-packages-for-enterprise-linux-9-cisco-openh264-x86_64-
+
   # ELRepo 9 repository
   - name: ELRepo.org Community Enterprise Linux Repository - el9
     # Use an HTTPS mirror rather than http from mirrorlist
@@ -926,6 +941,28 @@ rpm_package_repos:
     short_name: almalinux_9_proxysql_2_7
     sync_group: third_party
     distribution_name: almalinux-9-proxysql-2.7-
+  # Open OnDemand
+  - name: Open OnDemand Web Repo - EL9
+    url: https://yum.osc.edu/ondemand/4.0/web/el9/x86_64
+    base_path: ondemand/4.0/web/el9/x86_64/
+    short_name: ondemand_web_el9
+    sync_group: third_party
+    distribution_name: ondemand-web-el9-
+
+  # Non-distro-specific RPMs
+  # TurboVNC
+  - name: TurboVNC
+    url: https://packagecloud.io/dcommander/turbovnc/rpm_any/rpm_any/x86_64
+    base_path: turbovnc/x86_64/
+    short_name: turbovnc
+    sync_group: third_party
+    distribution_name: turbovnc-
+  - name: TurboVNC - source
+    url: https://packagecloud.io/dcommander/turbovnc/rpm_any/rpm_any/SRPMS
+    base_path: turbovnc/srpms/
+    short_name: turbovnc_source
+    sync_group: third_party
+    distribution_name: turbovnc-source-
 
 # Default filter string for RPM package repositories.
 rpm_package_repo_filter: ""
