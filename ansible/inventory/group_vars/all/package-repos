@@ -960,7 +960,7 @@ rpm_package_repos:
   - name: TurboVNC - source
     url: https://packagecloud.io/dcommander/turbovnc/rpm_any/rpm_any/SRPMS
     base_path: turbovnc/srpms/
-    short_name: turbovnc-source
+    short_name: turbovnc_source
     sync_group: third_party
     distribution_name: turbovnc-source-
 
