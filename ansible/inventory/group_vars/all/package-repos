@@ -941,7 +941,7 @@ rpm_package_repos:
     short_name: almalinux_9_proxysql_2_7
     sync_group: third_party
     distribution_name: almalinux-9-proxysql-2.7-
-  # Open Ondemand
+  # Open OnDemand
   - name: Open OnDemand Web Repo - EL9
     url: https://yum.osc.edu/ondemand/4.0/web/el9/x86_64
     base_path: ondemand/4.0/web/el9/x86_64/
