@@ -28,47 +28,13 @@ package_sync_group: ""
 # sync: Whether to sync the repository with a remote. Optional, default is true.
 # publish: Whether to publish and distribute the repository. Optional, default is true.
 deb_package_repos:
-  # Base Ubuntu Focal 20.04 repositories
-  - name: Ubuntu focal
-    url: http://archive.ubuntu.com/ubuntu
-    policy: immediate
-    architectures: amd64
-    components: main restricted universe multiverse
-    # NOTE: Include focal-security here to include all dists under one mirror
-    # path. This allows us to include security updates when using
-    # DIB_DISTRIBUTION_MIRROR with the Diskimage builder ubuntu-minimal
-    # element.
-    distributions: focal focal-updates focal-backports focal-security
-    mirror: true
-    mode: verbatim
-    base_path: ubuntu/focal/
-    short_name: ubuntu_focal
-    sync_group: ubuntu_focal
-    distribution_name: ubuntu-focal-
-
-  # https://wiki.ubuntu.com/SecurityTeam/FAQ suggests that security.ubuntu.com
-  # is preferable for security updates, so use this in preference to the
-  # focal-security dist in the main Ubuntu focal repository where possible.
-  - name: Ubuntu focal security
-    url: http://security.ubuntu.com/ubuntu
-    policy: immediate
-    architectures: amd64
-    components: main restricted universe multiverse
-    distributions: focal-security
-    mirror: true
-    mode: verbatim
-    base_path: ubuntu/focal-security/
-    short_name: ubuntu_focal_security
-    sync_group: ubuntu_focal
-    distribution_name: ubuntu-focal-security-
-
   # Ubuntu Cloud Archive (UCA)
   - name: Ubuntu Cloud Archive
     url: http://ubuntu-cloud.archive.canonical.com/ubuntu
     policy: immediate
     architectures: amd64
     components: main
-    distributions: focal-updates/yoga jammy-updates/zed jammy-updates/antelope jammy-updates/caracal noble-updates/epoxy
+    distributions: jammy-updates/zed jammy-updates/antelope jammy-updates/caracal noble-updates/epoxy
     mirror: true
     mode: verbatim
     base_path: ubuntu-cloud-archive/
@@ -148,19 +114,6 @@ deb_package_repos:
 
   ## Separate repositories for each distribution because
   ## https://github.com/pulp/pulp_deb/issues/921
-  - name: Docker CE for Ubuntu Focal
-    url: https://download.docker.com/linux/ubuntu
-    policy: immediate
-    architectures: amd64
-    distributions: focal
-    components: stable
-    mirror: true
-    mode: verbatim
-    base_path: docker-ce/ubuntu-focal/
-    short_name: docker_ce_ubuntu_focal
-    sync_group: docker
-    distribution_name: docker-ce-for-ubuntu-focal-
-
   - name: Docker CE for Ubuntu Jammy
     url: https://download.docker.com/linux/ubuntu
     policy: immediate
