@@ -297,7 +297,7 @@ rpm_package_repos:
     distribution_name: extra-packages-for-enterprise-linux-modular-8-x86_64-
   - name: Extra Packages for Enterprise Linux 8 - source
     url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-source-8&arch=source&country=DE&infra=stock&content=centos&protocol=https
-    base_path: epel/8/Everything/source/
+    base_path: epel/8/Everything/source/tree/
     short_name: epel_source
     sync_group: epel
     distribution_name: extra-packages-for-enterprise-linux-8-source-
@@ -405,7 +405,7 @@ rpm_package_repos:
     distribution_name: rocky-8.10-appstream-
   - name: Rocky Linux 8.10 - AppStream (source)
     url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-source-8.10&arch=source&country=NL
-    base_path: rocky/8.10/AppStream/source/os/
+    base_path: rocky/8.10/AppStream/source/tree/
     short_name: rocky_8_10_appstream_source
     sync_group: rocky_8_source
     distribution_name: rocky-8.10-appstream-source-
@@ -417,7 +417,7 @@ rpm_package_repos:
     distribution_name: rocky-8.10-baseos-
   - name: Rocky Linux 8.10 - BaseOS (source)
     url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-source-8.10&arch=source&country=NL
-    base_path: rocky/8.10/BaseOS/source/os/
+    base_path: rocky/8.10/BaseOS/source/tree/
     short_name: rocky_8_10_baseos_source
     sync_group: rocky_8_source
     distribution_name: rocky-8.10-baseos-source-
@@ -429,7 +429,7 @@ rpm_package_repos:
     distribution_name: rocky-8.10-extras-
   - name: Rocky Linux 8.10 - Extras (source)
     url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-source-8.10&arch=source&country=NL
-    base_path: rocky/8.10/extras/source/os/
+    base_path: rocky/8.10/extras/source/tree/
     short_name: rocky_8_10_extras_source
     sync_group: rocky_8_source
     distribution_name: rocky-8.10-extras-source-
@@ -461,7 +461,7 @@ rpm_package_repos:
     distribution_name: rocky-9.6-appstream-aarch64-
   - name: Rocky Linux 9.6 - AppStream (source)
     url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-source-9.6&arch=source&country=NL&protocol=https
-    base_path: rocky/9.6/AppStream/source/os/
+    base_path: rocky/9.6/AppStream/source/tree/
     short_name: rocky_9_6_appstream_source
     sync_group: rocky_9_source
     distribution_name: rocky-9.6-appstream-source-
@@ -479,7 +479,7 @@ rpm_package_repos:
     distribution_name: rocky-9.6-baseos-aarch64-
   - name: Rocky Linux 9.6 - BaseOS (source)
     url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-source-9.6&arch=source&country=NL&protocol=https
-    base_path: rocky/9.6/BaseOS/source/os/
+    base_path: rocky/9.6/BaseOS/source/tree/
     short_name: rocky_9_6_baseos_source
     sync_group: rocky_9_source
     distribution_name: rocky-9.6-baseos-source-
@@ -497,7 +497,7 @@ rpm_package_repos:
     distribution_name: rocky-9.6-extras-aarch64-
   - name: Rocky Linux 9.6 - Extras (source)
     url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-source-9.6&arch=source&country=NL&protocol=https
-    base_path: rocky/9.6/extras/source/os/
+    base_path: rocky/9.6/extras/source/tree/
     short_name: rocky_9_6_extras_source
     sync_group: rocky_9_source
     distribution_name: rocky-9.6-extras-source-
@@ -518,7 +518,7 @@ rpm_package_repos:
     distribution_name: rocky-9.6-crb-aarch64-
   - name: Rocky Linux 9.6 - CRB (source)
     url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-source-9.6&arch=source&country=NL&protocol=https
-    base_path: rocky/9.6/CRB/source/os/
+    base_path: rocky/9.6/CRB/source/tree/
     short_name: rocky_9_6_crb_source
     sync_group: rocky_9_source
     distribution_name: rocky-9.6-crb-source-
@@ -638,7 +638,7 @@ rpm_package_repos:
   - name: Extra Packages for Enterprise Linux 9 (source)
     url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-source-9&arch=source&country=NL&infra=stock&content=centos&protocol=https
     sync_policy: mirror_content_only
-    base_path: epel/9/Everything/source/
+    base_path: epel/9/Everything/source/tree/
     short_name: epel_9_source
     sync_group: epel
     distribution_name: extra-packages-for-enterprise-linux-9-source-
