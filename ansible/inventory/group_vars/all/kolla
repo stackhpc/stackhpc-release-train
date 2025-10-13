@@ -172,7 +172,6 @@ kolla_unbuildable_images:
   new_scheme:
     - elasticsearch
     - elasticsearch-curator
-    - iscsid
     - kibana
     - logstash
     - prometheus-jiralert
