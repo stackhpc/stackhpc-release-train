@@ -110,6 +110,21 @@ deb_package_repos:
     sync_group: ubuntu_noble
     distribution_name: ubuntu-noble-security-
 
+# security.ubuntu.com does not hold arm64 packages, so no dedicated repository
+# for security updates. Fetch from the main instead.
+  - name: Ubuntu Noble ARM64
+    url: http://ports.ubuntu.com/ubuntu-ports
+    policy: immediate
+    architectures: arm64
+    components: main restricted universe multiverse
+    distributions: noble noble-updates noble-backports noble-security
+    mirror: true
+    mode: verbatim
+    base_path: ubuntu-ports/noble/
+    short_name: ubuntu_noble_arm64
+    sync_group: ubuntu_noble_arm64
+    distribution_name: ubuntu-noble-arm64-
+
   # Third-party repositories
 
   ## Separate repositories for each distribution because
@@ -130,7 +145,7 @@ deb_package_repos:
   - name: Docker CE for Ubuntu Noble
     url: https://download.docker.com/linux/ubuntu
     policy: immediate
-    architectures: amd64
+    architectures: amd64 arm64
     distributions: noble
     components: stable
     mirror: true
