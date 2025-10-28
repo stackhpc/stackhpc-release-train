@@ -44,7 +44,7 @@ jobs:
           echo -n "${{ steps.matrix-build.outputs.matrix }}"
 
   sync-matrix-run:
-    name: Sync
+    name: Package repository sync
     needs:
       - sync-matrix-build
     strategy:
