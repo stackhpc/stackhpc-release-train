@@ -49,7 +49,7 @@ jobs:
       - sync-matrix-build
     strategy:
       matrix: ${{ fromJson(needs.sync-matrix-build.outputs.matrix) }}
-      max-parallel: 1
+      max-parallel: 4
       fail-fast: false
     uses: stackhpc/stackhpc-release-train/.github/workflows/package-sync.yml@main
     with:
