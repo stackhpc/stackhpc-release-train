@@ -4,6 +4,8 @@ on:
   schedule:
     # Daily at 23:17
     - cron: "17 23 * * *"
+concurrency:
+  group: nightly-package-sync
 env:
   ANSIBLE_FORCE_COLOR: true
 jobs:
