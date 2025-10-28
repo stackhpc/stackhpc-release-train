@@ -2,8 +2,8 @@
 name: Nightly package repository sync
 on:
   schedule:
-    # Daily at 23:17
-    - cron: "00 21 * * *"
+    # Daily at 20:00 UTC
+    - cron: "00 20 * * *"
 concurrency:
   group: nightly-package-sync
 env:
