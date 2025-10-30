@@ -34,7 +34,7 @@ deb_package_repos:
     policy: immediate
     architectures: amd64
     components: main
-    distributions: jammy-updates/zed jammy-updates/antelope jammy-updates/caracal noble-updates/epoxy
+    distributions: jammy-updates/caracal noble-updates/epoxy
     mirror: true
     mode: verbatim
     base_path: ubuntu-cloud-archive/
@@ -332,6 +332,7 @@ rpm_package_repos:
     short_name: elasticsearch_logstash_kibana_7_x
     sync_group: third_party
     distribution_name: elasticsearch-logstash-kibana-7.x-
+    sync: false
   # Note(matta): Sync content immediately as it can be removed from the upstream mirrors
   - name: Grafana
     url: https://rpm.grafana.com
@@ -702,6 +703,7 @@ rpm_package_repos:
     short_name: centos_stream_9_openstack_yoga
     sync_group: centos
     distribution_name: centos-stream-9-openstack-yoga-
+    sync: false
   # Openstack Zed for CentOS Stream 9
   - name: CentOS Stream 9 - OpenStack Zed
     url:  https://mirror.stream.centos.org/SIGs/9-stream/cloud/x86_64/openstack-zed/
@@ -709,6 +711,7 @@ rpm_package_repos:
     short_name: centos_stream_9_openstack_zed
     sync_group: centos
     distribution_name: centos-stream-9-openstack-zed-
+    sync: false
   # OpenStack Antelope for CentOS Stream 9
   - name: CentOS Stream 9 - OpenStack Antelope
     url: https://mirror.stream.centos.org/SIGs/9-stream/cloud/x86_64/openstack-antelope/
@@ -716,6 +719,7 @@ rpm_package_repos:
     short_name: centos_stream_9_openstack_antelope
     sync_group: centos
     distribution_name: centos-stream-9-openstack-antelope-
+    sync: false
   # OpenStack Caracal for CentOS Stream 9
   - name: CentOS Stream 9 - OpenStack Caracal
     url: https://mirror.stream.centos.org/SIGs/9-stream/cloud/x86_64/openstack-caracal/

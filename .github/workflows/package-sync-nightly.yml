@@ -2,8 +2,8 @@
 name: Nightly package repository sync
 on:
   schedule:
-    # Daily at 23:17
-    - cron: "00 21 * * *"
+    # Daily at 20:00 UTC
+    - cron: "00 20 * * *"
 concurrency:
   group: nightly-package-sync
 env:
@@ -44,12 +44,12 @@ jobs:
           echo -n "${{ steps.matrix-build.outputs.matrix }}"
 
   sync-matrix-run:
-    name: Sync
+    name: Package repository sync
     needs:
       - sync-matrix-build
     strategy:
       matrix: ${{ fromJson(needs.sync-matrix-build.outputs.matrix) }}
-      max-parallel: 1
+      max-parallel: 4
       fail-fast: false
     uses: stackhpc/stackhpc-release-train/.github/workflows/package-sync.yml@main
     with:
