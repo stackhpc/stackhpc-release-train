@@ -107,6 +107,7 @@ source_repositories:
       - yoga
       - zed
       - 2023.1
+      - master
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.kayobe }}"
