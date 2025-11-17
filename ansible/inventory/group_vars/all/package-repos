@@ -935,6 +935,13 @@ rpm_package_repos:
     short_name: turbovnc_source
     sync_group: third_party
     distribution_name: turbovnc-source-
+  # EESSI CernVM-FS config
+  - name: EESSI CVMFS config - noarch
+    url: https://github.com/EESSI/filesystem-layer/releases/download/latest/cvmfs-config-eessi-latest.noarch.rpm
+    base_path: cvmfs-config-eessi/noarch/
+    short_name: cvmfs_config_eessi
+    sync_group: third_party
+    distribution_name: cvmfs-config-eessi-
 
 # Default filter string for RPM package repositories.
 rpm_package_repo_filter: ""
