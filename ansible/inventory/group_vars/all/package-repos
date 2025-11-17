@@ -938,7 +938,7 @@ rpm_package_repos:
   # EESSI CernVM-FS config (repo url follows rhel8 as a convention but the rpms are version independent)
   - name: EESSI CVMFS config - noarch
     url: http://repo.eessi-infra.org/eessi/rhel/8/noarch/
-    base_path: cvmfs-config-eessi/noarch/
+    base_path: eessi/rhel/8/noarch/
     short_name: cvmfs_config_eessi
     sync_group: third_party
     distribution_name: cvmfs-config-eessi-
