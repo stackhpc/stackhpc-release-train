@@ -262,8 +262,7 @@ resource "github_branch_protection" "kayobe_branch_protection_master" {
     contexts = lookup(lookup(var.required_status_checks, each.key, {}), "stackhpc/master", lookup(var.required_status_checks, each.key, {
       "default" : [
         "tox / Tox pep8 with Python 3.12",
-        "tox / Tox py3 with Python 3.12",
-        "tox / Tox py3 with Python 3.10"
+        "tox / Tox py3 with Python 3.12"
       ]
     }).default)
     strict = false
