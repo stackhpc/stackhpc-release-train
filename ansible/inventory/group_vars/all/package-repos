@@ -935,13 +935,13 @@ rpm_package_repos:
     short_name: turbovnc_source
     sync_group: third_party
     distribution_name: turbovnc-source-
-  # EESSI CernVM-FS config (repo url follows rhel8 as a convention but the rpms are version independent)
+  # EESSI CernVM-FS config (NB: repo can be used for RHEL8/9 despite path)
   - name: EESSI CVMFS config - noarch
     url: http://repo.eessi-infra.org/eessi/rhel/8/noarch/
     base_path: eessi/rhel/8/noarch/
-    short_name: cvmfs_config_eessi
+    short_name: cernvmfs_eessi_cfg
     sync_group: third_party
-    distribution_name: cvmfs-config-eessi-
+    distribution_name: cernvmfs-eessi-cfg-
 
 # Default filter string for RPM package repositories.
 rpm_package_repo_filter: ""
