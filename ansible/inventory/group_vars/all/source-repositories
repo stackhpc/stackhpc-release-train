@@ -266,6 +266,7 @@ source_repositories:
       - zed
       - 2023.1
       - 2024.1
+      - 2025.1
       - master
     community_files:
       - codeowners:
