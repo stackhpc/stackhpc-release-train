@@ -181,7 +181,7 @@ resource "github_branch_protection" "kayobe_branch_protection_caracal" {
   required_pull_request_reviews {
     dismiss_stale_reviews           = true
     require_code_owner_reviews      = true
-    required_approving_review_count = 1
+    required_approving_review_count = 2
   }
 
   push_restrictions = [
@@ -215,7 +215,7 @@ resource "github_branch_protection" "kayobe_branch_protection_epoxy" {
   required_pull_request_reviews {
     dismiss_stale_reviews           = true
     require_code_owner_reviews      = true
-    required_approving_review_count = 1
+    required_approving_review_count = 2
   }
 
   push_restrictions = [
@@ -251,7 +251,7 @@ resource "github_branch_protection" "kayobe_branch_protection_master" {
   required_pull_request_reviews {
     dismiss_stale_reviews           = true
     require_code_owner_reviews      = true
-    required_approving_review_count = 1
+    required_approving_review_count = 2
   }
 
   push_restrictions = [
