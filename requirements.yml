@@ -5,4 +5,4 @@ collections:
   - name: community.crypto
     version: 2.0.2
   - name: pulp.squeezer
-    version: 0.0.13
+    version: 0.2.3
