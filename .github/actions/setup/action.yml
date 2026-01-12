@@ -27,6 +27,8 @@ runs:
     - name: Install Python dependencies
       run: |
         pip install -r requirements.txt
+        /usr/bin/python3 -m ensurepip
+        /usr/bin/python3 -m pip install -r requirements.txt
       shell: bash
 
     - name: Install Ansible collection dependencies
