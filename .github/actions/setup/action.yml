@@ -25,28 +25,9 @@ runs:
         python-version: 3.11.x
         # Cache Python dependencies
         cache: pip
-
-    - name: Install Python dependencies
-      run: |
-        pip install -r requirements.txt
-      shell: bash
+        pip-install: -r requirements.txt
 
     - name: Install Ansible collection dependencies
       run: |
         ansible-galaxy collection install -r requirements.yml -p ansible/collections
-      shell: bash
-
-    # Install python dependencies for ansible client side
-    - name: Install pip
-      run: |
-        sudo apt update
-        sudo apt -y install python3-pip
-      shell: bash
-
-    # NOTE(Alex-Welsh): This isn't the most elegant solution but there probably
-    # isn't a better way unless we start specifying ansible_python_interpreter
-    # everywhere. It's fine for CI purposes.
-    - name: Install Python dependencies
-      run: |
-        /usr/bin/python3 -m pip install setuptools --break-system-packages
       shell: bash
