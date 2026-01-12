@@ -1,7 +1,8 @@
 ---
 collections:
-  - name: stackhpc.pulp
-    version: 0.5.4
+  - name: https://github.com/stackhpc/ansible-collection-pulp.git
+    type: git
+    version: master
   - name: community.crypto
     version: 2.0.2
   - name: pulp.squeezer
