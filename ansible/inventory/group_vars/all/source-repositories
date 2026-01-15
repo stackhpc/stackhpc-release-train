@@ -304,7 +304,6 @@ source_repositories:
       - victoria
       - wallaby
       - xena
-      - 2025.1
       - master
     community_files:
       - codeowners:
