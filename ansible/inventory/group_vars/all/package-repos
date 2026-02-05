@@ -821,7 +821,7 @@ rpm_package_repos:
     url: https://packages.treasuredata.com/lts/5/redhat/9/aarch64
     base_path: treasuredata/lts/5/redhat/9/aarch64/
     short_name: rhel_9_treasuredata_5_aarch64
-    sync_group: rocky_9_aarch64
+    sync_group: third_party
     distribution_name: rhel_9_treasuredata-5-aarch64-
   # MariaDB 10.6 for RHEL 9
   - name: MariaDB 10.6 - RHEL 9
@@ -842,7 +842,7 @@ rpm_package_repos:
     url: https://dlm.mariadb.com/repo/mariadb-server/10.11/yum/rhel/9/aarch64
     base_path: mariadb-10.11/yum/rhel/9/aarch64/
     short_name: rhel_9_mariadb_10_11_aarch64
-    sync_group: rocky_9_aarch64
+    sync_group: third_party
     distribution_name: mariadb-10.11-rhel-9-aarch64-
   # InfluxDB for RHEL 9
   - name: InfluxDB - RHEL 9
@@ -856,7 +856,7 @@ rpm_package_repos:
     url: https://repos.influxdata.com/rhel/9/aarch64/stable/
     base_path: influxdb/rhel/9/aarch64/stable/
     short_name: rhel_9_influxdb_aarch64
-    sync_group: rocky_9_aarch64
+    sync_group: third_party
     distribution_name: influxdb-rhel-9-aarch64-
   # MLNX OFED 5.9-0.5.6.0 RHEL 9.1 repository
   - name: Mellanox Technologies mlnx_ofed 5.9-0.5.6.0
