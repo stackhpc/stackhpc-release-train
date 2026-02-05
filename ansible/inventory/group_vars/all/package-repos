@@ -900,6 +900,13 @@ rpm_package_repos:
     short_name: doca_3_2_1_rhel9
     sync_group: third_party
     distribution_name: doca-3.2.1-rhel9-
+  # DOCA Repository 3.2.1 for RHEL 9 (aarch64)
+  - name: DOCA Online Repo 3.2.1 - RHEL 9 (aarch64)
+    url: https://linux.mellanox.com/public/repo/doca/3.2.1/rhel9/arm64-sbsa/
+    base_path: doca/3.2.1/rhel9/aarch64/
+    short_name: doca_3_2_1_rhel9_aarch64
+    sync_group: third_party
+    distribution_name: doca-3.2.1-rhel9-aarch64-
   # OpenHPC v3 for RockyLinux 9
   - name: OpenHPC-3 - Base
     url: https://repos.openhpc.community/OpenHPC/3/EL_9
