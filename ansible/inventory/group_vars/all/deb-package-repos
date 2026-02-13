@@ -173,7 +173,7 @@ deb_package_repos:
   - name: RabbitMQ - Erlang - Ubuntu Noble
     url: "https://ppa.launchpadcontent.net/rabbitmq/rabbitmq-erlang/ubuntu"
     distributions: noble
-    component: "main"
+    components: "main"
     # mirror_complete fails with:
     # "This repository uses features which are incompatible with 'mirror' sync. Please sync without mirroring enabled"
     sync_policy: mirror_content_only
