@@ -1,0 +1,272 @@
+---
+###############################################################################
+# Deb package repository configuration.
+
+# List of Deb package repositories.
+# Each item is a dict with the following items:
+# name: Repository name.
+# url: URL of upstream package mirror.
+# policy: Policy for upstream remote. Optional.
+# architectures: Architectures to sync.
+# components: Components to sync.
+# distributions: Distributions to sync.
+# mirror: If True, synchronization will remove all content that is not present
+#         in the remote repository. If False, sync will be additive only.
+#         Optional, default is true.
+# mode: Publication mode.
+# base_path: Base path prefix for distributions.
+# short_name: Name used internally for variable names.
+# sync_group: Repos with the same group will be synced at the same time
+# distribution_name: Name prefix for distributions. Version will be appended.
+# sync: Whether to sync the repository with a remote. Optional, default is true.
+# publish: Whether to publish and distribute the repository. Optional, default is true.
+deb_package_repos:
+  # Ubuntu Cloud Archive (UCA)
+  - name: Ubuntu Cloud Archive
+    url: http://ubuntu-cloud.archive.canonical.com/ubuntu
+    policy: immediate
+    architectures: amd64
+    components: main
+    distributions: jammy-updates/caracal noble-updates/epoxy
+    mirror: true
+    mode: verbatim
+    base_path: ubuntu-cloud-archive/
+    short_name: ubuntu_cloud_archive
+    sync_group: ubuntu_cloud_archive
+    distribution_name: ubuntu-cloud-archive-
+
+  # Base Ubuntu Jammy 22.04 repositories
+  - name: Ubuntu jammy
+    url: http://archive.ubuntu.com/ubuntu
+    policy: immediate
+    architectures: amd64
+    components: main restricted universe multiverse
+    # NOTE: Include jammy-security here to include all dists under one mirror
+    # path. This allows us to include security updates when using
+    # DIB_DISTRIBUTION_MIRROR with the Diskimage builder ubuntu-minimal
+    # element.
+    distributions: jammy jammy-updates jammy-backports jammy-security
+    mirror: true
+    mode: verbatim
+    base_path: ubuntu/jammy/
+    short_name: ubuntu_jammy
+    sync_group: ubuntu_jammy
+    distribution_name: ubuntu-jammy-
+
+  # https://wiki.ubuntu.com/SecurityTeam/FAQ suggests that security.ubuntu.com
+  # is preferable for security updates, so use this in preference to the
+  # jammy-security dist in the main Ubuntu jammy repository where possible.
+  - name: Ubuntu jammy security
+    url: http://security.ubuntu.com/ubuntu
+    policy: immediate
+    architectures: amd64
+    components: main restricted universe multiverse
+    distributions: jammy-security
+    mirror: true
+    mode: verbatim
+    base_path: ubuntu/jammy-security/
+    short_name: ubuntu_jammy_security
+    sync_group: ubuntu_jammy
+    distribution_name: ubuntu-jammy-security-
+
+  # Base Ubuntu Noble 24.04 repositories
+  - name: Ubuntu Noble
+    url: http://archive.ubuntu.com/ubuntu
+    policy: immediate
+    architectures: amd64
+    components: main restricted universe multiverse
+    # NOTE: Include noble-security here to include all dists under one mirror
+    # path. This allows us to include security updates when using
+    # DIB_DISTRIBUTION_MIRROR with the Diskimage builder ubuntu-minimal
+    # element.
+    distributions: noble noble-updates noble-backports noble-security
+    mirror: true
+    mode: verbatim
+    base_path: ubuntu/noble/
+    short_name: ubuntu_noble
+    sync_group: ubuntu_noble
+    distribution_name: ubuntu-noble-
+
+  # https://wiki.ubuntu.com/SecurityTeam/FAQ suggests that security.ubuntu.com
+  # is preferable for security updates, so use this in preference to the
+  # noble-security dist in the main Ubuntu noble repository where possible.
+  - name: Ubuntu Noble security
+    url: http://security.ubuntu.com/ubuntu
+    policy: immediate
+    architectures: amd64
+    components: main restricted universe multiverse
+    distributions: noble-security
+    mirror: true
+    mode: verbatim
+    base_path: ubuntu/noble-security/
+    short_name: ubuntu_noble_security
+    sync_group: ubuntu_noble
+    distribution_name: ubuntu-noble-security-
+
+# security.ubuntu.com does not hold arm64 packages, so no dedicated repository
+# for security updates. Fetch from the main instead.
+  - name: Ubuntu Noble ARM64
+    url: http://ports.ubuntu.com/ubuntu-ports
+    policy: immediate
+    architectures: arm64
+    components: main restricted universe multiverse
+    distributions: noble noble-updates noble-backports noble-security
+    mirror: true
+    mode: verbatim
+    base_path: ubuntu-ports/noble/
+    short_name: ubuntu_noble_arm64
+    sync_group: ubuntu_noble_arm64
+    distribution_name: ubuntu-noble-arm64-
+
+  # Third-party repositories
+
+  ## Separate repositories for each distribution because
+  ## https://github.com/pulp/pulp_deb/issues/921
+  - name: Docker CE for Ubuntu Jammy
+    url: https://download.docker.com/linux/ubuntu
+    policy: immediate
+    architectures: amd64
+    distributions: jammy
+    components: stable
+    mirror: true
+    mode: verbatim
+    base_path: docker-ce/ubuntu-jammy/
+    short_name: docker_ce_ubuntu_jammy
+    sync_group: docker
+    distribution_name: docker-ce-for-ubuntu-jammy-
+
+  - name: Docker CE for Ubuntu Noble
+    url: https://download.docker.com/linux/ubuntu
+    policy: immediate
+    architectures: amd64 arm64
+    distributions: noble
+    components: stable
+    mirror: true
+    mode: verbatim
+    base_path: docker-ce/ubuntu-noble/
+    short_name: docker_ce_ubuntu_noble
+    sync_group: docker
+    distribution_name: docker-ce-for-ubuntu-noble-
+
+# Standard Apt mirrors do not contain cephadm Reef, only Quincy
+  - name: Ceph Reef for Debian
+    url: https://download.ceph.com/debian-reef/
+    policy: immediate
+    architectures: amd64
+    distributions: jammy
+    components: main
+    mirror: true
+    mode: verbatim
+    base_path: ceph/debian-reef/
+    short_name: ceph_reef_debian
+    sync_group: third_party
+    distribution_name: ceph-reef-debian-
+
+  # TreasureData 5 for Ubuntu Noble
+  - name: TreasureData5 for Ubuntu Noble
+    url: https://packages.treasuredata.com/lts/5/ubuntu/noble/
+    base_path: treasuredata/lts/5/ubuntu/noble/
+    short_name: ubuntu_noble_treasuredata_5
+    sync_group: third_party
+    distribution_name: ubuntu-noble-treasuredata-5-
+  # RabbitMQ - Erlang for Ubuntu Noble
+  - name: RabbitMQ - Erlang - Ubuntu Noble
+    url: "https://ppa.launchpadcontent.net/rabbitmq/rabbitmq-erlang/ubuntu"
+    distributions: noble
+    component: "main"
+    # mirror_complete fails with:
+    # "This repository uses features which are incompatible with 'mirror' sync. Please sync without mirroring enabled"
+    sync_policy: mirror_content_only
+    base_path: rabbitmq/erlang/ubuntu/noble/x86_64/
+    short_name: ubuntu_noble_rabbitmq_erlang
+    sync_group: third_party
+    distribution_name: ubuntu-noble-rabbitmq-erlang-
+  # RabbitMQ for Ubuntu Noble
+  - name: RabbitMQ - Server - Ubuntu Noble
+    url: https://deb1.rabbitmq.com/rabbitmq-server/ubuntu/noble
+    distributions: noble
+    # mirror_complete fails with:
+    # "This repository uses features which are incompatible with 'mirror' sync. Please sync without mirroring enabled"
+    sync_policy: mirror_content_only
+    base_path: rabbitmq/rabbitmq-server/ubuntu/noble/noarch/
+    short_name: ubuntu_noble_rabbitmq_server
+    sync_group: third_party
+    distribution_name: ubuntu-noble-rabbitmq-server-
+  # InfluxDB for Ubuntu Jammy
+  - name: InfluxDB - Ubuntu Jammy
+    url: https://repos.influxdata.com/ubuntu
+    distributions: jammy
+    components: stable
+    base_path: influxdb/ubuntu/jammy/x86_64/stable/
+    short_name: ubuntu_jammy_influxdb
+    sync_group: third_party
+    distribution_name: influxdb-ubuntu-jammy-
+  # MariaDB 10.11 for Ubuntu Noble
+  - name: MariaDB 10.11 - Ubuntu Noble
+    url: https://dlm.mariadb.com/repo/mariadb-server/10.11/repo/ubuntu
+    distributions: noble
+    components: main
+    architectures: amd64
+    base_path: mariadb-server/10.11/repo/ubuntu/
+    short_name: ubuntu_noble_mariadb_10_11
+    sync_group: third_party
+    distribution_name: mariadb-10.11-ubuntu-noble-
+  # MariaDB 10.11.11 for Ubuntu Noble
+  - name: MariaDB 10.11.11 - Ubuntu Noble
+    url: https://dlm.mariadb.com/repo/mariadb-server/10.11.11/repo/ubuntu
+    distributions: noble
+    components: main
+    architectures: amd64
+    base_path: mariadb-server/mariadb-10.11.11/repo/ubuntu/
+    short_name: ubuntu_noble_mariadb_10_11_11
+    sync_group: third_party
+    distribution_name: mariadb-10.11.11-ubuntu-noble-
+  # Grafana for Ubuntu Noble
+  - name: Grafana - Ubuntu Noble
+    url: https://apt.grafana.com
+    policy: immediate
+    distributions: stable
+    components: main
+    base_path: grafana/oss/apt/
+    short_name: ubuntu_noble_grafana
+    sync_group: grafana
+    distribution_name: ubuntu-noble-grafana-
+  # OpenSearch for Ubuntu Noble
+  - name: OpenSearch - Ubuntu Noble
+    url: https://artifacts.opensearch.org/releases/bundle/opensearch/3.x/apt
+    policy: immediate
+    architectures: amd64
+    distributions: stable
+    components: main
+    base_path: opensearch/3.x/apt/
+    short_name: ubuntu_noble_opensearch
+    sync_group: third_party
+    distribution_name: ubuntu-noble-opensearch-
+  # OpenSearch Dashboards for Ubuntu Noble
+  - name: OpenSearch Dashboards - Ubuntu Noble
+    url: https://artifacts.opensearch.org/releases/bundle/opensearch-dashboards/3.x/apt
+    policy: immediate
+    architectures: amd64
+    distributions: stable
+    components: main
+    base_path: opensearch-dashboards/3.x/apt/
+    short_name: ubuntu_noble_opensearch_dashboards
+    sync_group: third_party
+    distribution_name: ubuntu-noble-opensearch-dashboards-
+  # ProxySQL for Ubuntu Noble
+  - name: ProxySQL - Ubuntu Noble
+    url: https://repo.proxysql.com/ProxySQL
+    policy: immediate
+    architectures: amd64
+    distributions: noble
+    components: main
+    base_path: ProxySQL/proxysql-3.0.x/noble/
+    short_name: ubuntu_noble_proxysql
+    sync_group: third_party
+    distribution_name: ubuntu-noble-proxysql-
+
+# Default filter string for Deb package repositories.
+deb_package_repo_filter: ""
+
+# List of package repositories after applying filter.
+deb_package_repos_filtered: "{{ deb_package_repos | select_repos(deb_package_repo_filter, package_sync_group) }}"

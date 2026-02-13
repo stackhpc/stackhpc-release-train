@@ -1,0 +1,697 @@
+
+###############################################################################
+# RPM package repository configuration.
+
+# List of RPM package repositories.
+# Each item is a dict with the following items:
+# name: Repository name.
+# url: URL of upstream package mirror, to the level which contains repodata/
+# policy: Policy for upstream remote. Optional.
+# sync_policy: Sync policy for upstream remote. Optional.
+# base_path: Base path prefix for distributions.
+# short_name: Name used internally for variable names.
+# distribution_name: Name prefix for distributions. Version will be appended.
+# sync: Whether to sync the repository with a remote. Optional, default is true.
+# publish: Whether to publish and distribute the repository. Optional, default is true.
+rpm_package_repos:
+  # EPEL 8 repositories
+  # NOTE(Alex-Welsh): NL mirrors fail to sync, so we use DE instead.
+  - name: Extra Packages for Enterprise Linux 8 - x86_64
+    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-8&arch=x86_64&country=DE&infra=stock&content=centos&protocol=https
+    # mirror_complete fails with:
+    # "This repository uses features which are incompatible with 'mirror' sync. Please sync without mirroring enabled"
+    sync_policy: mirror_content_only
+    base_path: epel/8/Everything/x86_64/
+    short_name: epel
+    sync_group: epel
+    distribution_name: extra-packages-for-enterprise-linux-8-x86_64-
+  - name: Extra Packages for Enterprise Linux Modular 8 - x86_64
+    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-modular-8&arch=x86_64&country=DE&infra=stock&content=centos&protocol=https
+    base_path: epel/8/Modular/x86_64/
+    short_name: epel_modular
+    sync_group: epel
+    distribution_name: extra-packages-for-enterprise-linux-modular-8-x86_64-
+  - name: Extra Packages for Enterprise Linux 8 - source
+    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-source-8&arch=source&country=DE&infra=stock&content=centos&protocol=https
+    base_path: epel/8/Everything/source/tree/
+    short_name: epel_source
+    sync_group: epel
+    distribution_name: extra-packages-for-enterprise-linux-8-source-
+
+  # Third-party repositories
+  - name: Docker CE for CentOS 8
+    url: https://download.docker.com/linux/centos/8/x86_64/stable
+    base_path: docker-ce/centos/8/x86_64/stable/
+    short_name: docker
+    sync_group: docker
+    distribution_name: docker-ce-for-centos-8-
+  # Note(piotrp): With repository size of 39G - for now we'll want this on_demand
+  - name: ELK repository for 7.x packages
+    url: https://artifacts.elastic.co/packages/oss-7.x/yum
+    policy: on_demand
+    base_path: elasticsearch/oss-7.x/
+    short_name: elasticsearch_logstash_kibana_7_x
+    sync_group: third_party
+    distribution_name: elasticsearch-logstash-kibana-7.x-
+    sync: false
+  # Note(matta): Sync content immediately as it can be removed from the upstream mirrors
+  - name: Grafana
+    url: https://rpm.grafana.com
+    policy: immediate
+    base_path: grafana/oss/rpm/
+    short_name: grafana
+    sync_group: grafana
+    distribution_name: grafana-
+  - name: MariaDB 10.5
+    url: https://dlm.mariadb.com/repo/mariadb-server/10.5/yum/rhel/8/x86_64
+    base_path: mariadb-10.5/yum/centos8-amd64/
+    short_name: mariadb_10_5_centos8
+    sync_group: third_party
+    distribution_name: mariadb-10.5-centos8
+  - name: MariaDB 10.6
+    url: https://dlm.mariadb.com/repo/mariadb-server/10.6/yum/rhel/8/x86_64
+    base_path: mariadb-10.6/yum/centos8-amd64/
+    short_name: mariadb_10_6_centos8
+    sync_group: third_party
+    distribution_name: mariadb-10.6-centos8
+  # RabbitMQ - Erlang for Redhat family, version 8
+  - name: RabbitMQ - Erlang
+    url: https://yum1.rabbitmq.com/erlang/el/8/x86_64
+    # mirror_complete fails with:
+    # "This repository uses features which are incompatible with 'mirror' sync. Please sync without mirroring enabled"
+    sync_policy: mirror_content_only
+    base_path: rabbitmq/erlang/el/8/x86_64/
+    short_name: rabbitmq_erlang
+    sync_group: third_party
+    distribution_name: rabbitmq-erlang-
+  # RabbitMQ for Redhat family, version 8
+  - name: RabbitMQ - Server
+    url: https://yum2.rabbitmq.com/rabbitmq/el/8/noarch
+    # mirror_complete fails with:
+    # "This repository uses features which are incompatible with 'mirror' sync. Please sync without mirroring enabled"
+    sync_policy: mirror_content_only
+    base_path: rabbitmq/rabbitmq-server/el/8/noarch/
+    short_name: rabbitmq_server
+    sync_group: third_party
+    distribution_name: rabbitmq-server-
+  - name: TreasureData 4
+    url: http://packages.treasuredata.com/4/redhat/8/x86_64
+    base_path: treasuredata/4/redhat/8/x86_64/
+    short_name: treasuredata_4
+    sync_group: third_party
+    distribution_name: treasuredata-4-
+  # OpenHPC v2 for RockyLinux 8
+  - name: OpenHPC-2 - Base
+    url: https://repos.openhpc.community/OpenHPC/2/EL_8
+    base_path: OpenHPC/2/EL_8/
+    short_name: openhpc_2
+    sync_group: third_party
+    distribution_name: openhpc-2-
+  - name: OpenHPC-2 - Updates
+    url: https://repos.openhpc.community/OpenHPC/2/updates/EL_8
+    base_path: OpenHPC/2/updates/EL_8/
+    short_name: openhpc_2_updates
+    sync_group: third_party
+    distribution_name: openhpc-2-updates-
+  - name: CernVM-FS packages - EL8
+    url: https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs/EL/8/x86_64
+    base_path: cvmfs/EL/8/x86_64/
+    short_name: cernvmfs_el8_pkgs
+    sync_group: third_party
+    distribution_name: cernvmfs-el8-pkgs-
+  - name: CernVM-FS extra config - EL8
+    url: https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs-config/EL/8/x86_64
+    base_path: cvmfs-config/EL/8/x86_64/
+    short_name: cernvmfs_el8_cfg
+    sync_group: third_party
+    distribution_name: cernvmfs-el8-cfg-
+  # Open OnDemand
+  - name: Open OnDemand Web Repo - EL8
+    url: https://yum.osc.edu/ondemand/4.0/web/el8/x86_64
+    base_path: ondemand/4.0/web/el8/x86_64/
+    short_name: ondemand_web_el8
+    sync_group: third_party
+    distribution_name: ondemand-web-el8-
+
+  # Base Rocky Linux 8.10 repositories (Slurm appliance)
+  - name: Rocky Linux 8.10 - AppStream
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-8.10&arch=x86_64&country=NL
+    base_path: rocky/8.10/AppStream/x86_64/os/
+    short_name: rocky_8_10_appstream
+    sync_group: rocky_8
+    distribution_name: rocky-8.10-appstream-
+  - name: Rocky Linux 8.10 - AppStream (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-source-8.10&arch=source&country=NL
+    base_path: rocky/8.10/AppStream/source/tree/
+    short_name: rocky_8_10_appstream_source
+    sync_group: rocky_8_source
+    distribution_name: rocky-8.10-appstream-source-
+  - name: Rocky Linux 8.10 - BaseOS
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-8.10&arch=x86_64&country=NL
+    base_path: rocky/8.10/BaseOS/x86_64/os/
+    short_name: rocky_8_10_baseos
+    sync_group: rocky_8
+    distribution_name: rocky-8.10-baseos-
+  - name: Rocky Linux 8.10 - BaseOS (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-source-8.10&arch=source&country=NL
+    base_path: rocky/8.10/BaseOS/source/tree/
+    short_name: rocky_8_10_baseos_source
+    sync_group: rocky_8_source
+    distribution_name: rocky-8.10-baseos-source-
+  - name: Rocky Linux 8.10 - Extras
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-8.10&arch=x86_64&country=NL
+    base_path: rocky/8.10/extras/x86_64/os/
+    short_name: rocky_8_10_extras
+    sync_group: rocky_8
+    distribution_name: rocky-8.10-extras-
+  - name: Rocky Linux 8.10 - Extras (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-source-8.10&arch=source&country=NL
+    base_path: rocky/8.10/extras/source/tree/
+    short_name: rocky_8_10_extras_source
+    sync_group: rocky_8_source
+    distribution_name: rocky-8.10-extras-source-
+  - name: Rocky Linux 8.10 - PowerTools
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-PowerTools-8.10&arch=x86_64&country=NL
+    base_path: rocky/8.10/PowerTools/x86_64/os/
+    short_name: rocky_8_10_powertools
+    sync_group: rocky_8
+    distribution_name: rocky-8.10-powertools-
+  - name: Rocky Linux 8.10 - PowerTools (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?arch=source&repo=PowerTools-8.10-source&country=NL
+    base_path: rocky/8.10/PowerTools/source/tree/
+    short_name: rocky_8_10_powertools_source
+    sync_group: rocky_8_source
+    distribution_name: rocky-8.10-powertools-source-
+
+  # Base Rocky Linux 9.7 repositories
+  - name: Rocky Linux 9.7 - AppStream
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-9.7&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/9.7/AppStream/x86_64/os/
+    short_name: rocky_9_7_appstream
+    sync_group: rocky_9
+    distribution_name: rocky-9.7-appstream-
+  - name: Rocky Linux 9.7 - AppStream (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-9.7&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/9.7/AppStream/aarch64/os/
+    short_name: rocky_9_7_appstream_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: rocky-9.7-appstream-aarch64-
+  - name: Rocky Linux 9.7 - AppStream (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-source-9.7&arch=source&country=NL&protocol=https
+    base_path: rocky/9.7/AppStream/source/tree/
+    short_name: rocky_9_7_appstream_source
+    sync_group: rocky_9_source
+    distribution_name: rocky-9.7-appstream-source-
+  - name: Rocky Linux 9.7 - BaseOS
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-9.7&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/9.7/BaseOS/x86_64/os/
+    short_name: rocky_9_7_baseos
+    sync_group: rocky_9_baseos
+    distribution_name: rocky-9.7-baseos-
+  - name: Rocky Linux 9.7 - BaseOS (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-9.7&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/9.7/BaseOS/aarch64/os/
+    short_name: rocky_9_7_baseos_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: rocky-9.7-baseos-aarch64-
+  - name: Rocky Linux 9.7 - BaseOS (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-source-9.7&arch=source&country=NL&protocol=https
+    base_path: rocky/9.7/BaseOS/source/tree/
+    short_name: rocky_9_7_baseos_source
+    sync_group: rocky_9_source
+    distribution_name: rocky-9.7-baseos-source-
+  - name: Rocky Linux 9.7 - Extras
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-9.7&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/9.7/extras/x86_64/os/
+    short_name: rocky_9_7_extras
+    sync_group: rocky_9
+    distribution_name: rocky-9.7-extras-
+  - name: Rocky Linux 9.7 - Extras (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-9.7&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/9.7/extras/aarch64/os/
+    short_name: rocky_9_7_extras_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: rocky-9.7-extras-aarch64-
+  - name: Rocky Linux 9.7 - Extras (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-source-9.7&arch=source&country=NL&protocol=https
+    base_path: rocky/9.7/extras/source/tree/
+    short_name: rocky_9_7_extras_source
+    sync_group: rocky_9_source
+    distribution_name: rocky-9.7-extras-source-
+
+  # Additional Rocky Linux 9.7 repositories
+  # No advanced virt, Ceph or OpenStack
+  - name: Rocky Linux 9.7 - CRB
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-9.7&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/9.7/CRB/x86_64/os/
+    short_name: rocky_9_7_crb
+    sync_group: rocky_9
+    distribution_name: rocky-9.7-crb-
+  - name: Rocky Linux 9.7 - CRB (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-9.7&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/9.7/CRB/aarch64/os/
+    short_name: rocky_9_7_crb_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: rocky-9.7-crb-aarch64-
+  - name: Rocky Linux 9.7 - CRB (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-source-9.7&arch=source&country=NL&protocol=https
+    base_path: rocky/9.7/CRB/source/tree/
+    short_name: rocky_9_7_crb_source
+    sync_group: rocky_9_source
+    distribution_name: rocky-9.7-crb-source-
+  - name: Rocky Linux 9.7 - HighAvailability
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-9.7&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/9.7/highavailability/x86_64/os/
+    short_name: rocky_9_7_highavailability
+    sync_group: rocky_9
+    distribution_name: rocky-9.7-highavailability-
+  - name: Rocky Linux 9.7 - HighAvailability (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-9.7&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/9.7/highavailability/aarch64/os/
+    short_name: rocky_9_7_highavailability_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: rocky-9.7-highavailability-aarch64-
+  - name: Rocky Linux 9.7 - HighAvailability (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-source-9.7&arch=source&country=NL&protocol=https
+    base_path: rocky/9.7/highavailability/source/tree/
+    short_name: rocky_9_7_highavailability_source
+    sync_group: rocky_9_source
+    distribution_name: rocky-9.7-highavailability-source-
+  - name: Rocky Linux 9 - SIG Security Common
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-sig-security-common-9&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/sig/9/security/x86_64/security-common/
+    short_name: rocky_9_sig_security_common
+    sync_group: rocky_9
+    distribution_name: rocky-9-sig-security-common-
+  - name: Rocky Linux 9 - SIG Security Common (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-sig-security-common-9&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/sig/9/security/aarch64/security-common/
+    short_name: rocky_9_sig_security_common_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: rocky-9-sig-security-common-aarch64-
+  - name: Rocky Linux 9 - SIG Security Common (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-sig-security-common-source-9&arch=source&country=NL&protocol=https
+    base_path: rocky/sig/9/security/source/security-common/
+    short_name: rocky_9_sig_security_common_source
+    sync_group: rocky_9_source
+    distribution_name: rocky-9-sig-security-common-source-
+
+  # Additional CentOS Stream 9 repositories
+  # NFV OpenvSwitch for CentOS Stream 9
+  - name: CentOS Stream 9 - NFV OpenvSwitch
+    url: https://mirror.stream.centos.org/SIGs/9-stream/nfv/x86_64/openvswitch-2/
+    base_path: centos/9-stream/nfv/x86_64/openvswitch-2/
+    short_name: centos_stream_9_nfv_openvswitch
+    sync_group: centos
+    distribution_name: centos-stream-9-nfv-openvswitch-
+  # NFV OpenvSwitch for CentOS Stream 9 (aarch64)
+  - name: CentOS Stream 9 - NFV OpenvSwitch (aarch64)
+    url: https://mirror.stream.centos.org/SIGs/9-stream/nfv/aarch64/openvswitch-2/
+    base_path: centos/9-stream/nfv/aarch64/openvswitch-2/
+    short_name: centos_stream_9_nfv_openvswitch_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: centos-stream-9-nfv-openvswitch-aarch64-
+  # Opstools for CentOS Stream 9
+  - name: CentOS Stream 9 - opstools
+    url: https://mirror.stream.centos.org/SIGs/9-stream/opstools/x86_64/collectd-5/
+    base_path: centos/9-stream/opstools/x86_64/collectd-5/
+    short_name: centos_stream_9_opstools
+    sync_group: centos
+    distribution_name: centos-stream-9-opstools-
+  # Opstools for CentOS Stream 9 (aarch64)
+  - name: CentOS Stream 9 - opstools (aarch64)
+    url: https://mirror.stream.centos.org/SIGs/9-stream/opstools/aarch64/collectd-5/
+    base_path: centos/9-stream/opstools/aarch64/collectd-5/
+    short_name: centos_stream_9_opstools_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: centos-stream-9-opstools-aarch64-
+  # Ceph Pacific for CentOS Stream 9
+  - name: CentOS Stream 9 - Ceph Pacific
+    url: https://mirror.stream.centos.org/SIGs/9-stream/storage/x86_64/ceph-pacific/
+    base_path: centos/9-stream/storage/x86_64/ceph-pacific/
+    short_name: centos_stream_9_storage_ceph_pacific
+    sync_group: centos
+    distribution_name: centos-stream-9-storage-ceph-pacific-
+  # Ceph Quincy for CentOS Stream 9
+  - name: CentOS Stream 9 - Ceph Quincy
+    url: https://mirror.stream.centos.org/SIGs/9-stream/storage/x86_64/ceph-quincy/
+    base_path: centos/9-stream/storage/x86_64/ceph-quincy/
+    short_name: centos_stream_9_storage_ceph_quincy
+    sync_group: centos
+    distribution_name: centos-stream-9-storage-ceph-quincy-
+  # Ceph Reef for CentOS Stream 9
+  - name: CentOS Stream 9 - Ceph Reef
+    url: https://mirror.stream.centos.org/SIGs/9-stream/storage/x86_64/ceph-reef/
+    base_path: centos/9-stream/storage/x86_64/ceph-reef/
+    short_name: centos_stream_9_storage_ceph_reef
+    sync_group: centos
+    distribution_name: centos-stream-9-storage-ceph-reef-
+  # Ceph Reef for CentOS Stream 9 (aarch64)
+  - name: CentOS Stream 9 - Ceph Reef (aarch64)
+    url: https://mirror.stream.centos.org/SIGs/9-stream/storage/aarch64/ceph-reef/
+    base_path: centos/9-stream/storage/aarch64/ceph-reef/
+    short_name: centos_stream_9_storage_ceph_reef_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: centos-stream-9-storage-ceph-reef-aarch64-
+  # Ceph Squid for CentOS Stream 9
+  - name: CentOS Stream 9 - Ceph Squid
+    url: https://mirror.stream.centos.org/SIGs/9-stream/storage/x86_64/ceph-squid/
+    base_path: centos/9-stream/storage/x86_64/ceph-squid/
+    short_name: centos_stream_9_storage_ceph_squid
+    sync_group: centos
+    distribution_name: centos-stream-9-storage-ceph-squid-
+  # Ceph Squid for CentOS Stream 9 (aarch64)
+  - name: CentOS Stream 9 - Ceph Squid (aarch64)
+    url: https://mirror.stream.centos.org/SIGs/9-stream/storage/aarch64/ceph-squid/
+    base_path: centos/9-stream/storage/aarch64/ceph-squid/
+    short_name: centos_stream_9_storage_ceph_squid_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: centos-stream-9-storage-ceph-squid-aarch64-
+  # EPEL 9 repository
+  - name: Extra Packages for Enterprise Linux 9
+    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-9&arch=x86_64&country=NL&infra=stock&content=centos&protocol=https
+    sync_policy: mirror_content_only
+    base_path: epel/9/Everything/x86_64/
+    short_name: epel_9
+    sync_group: epel
+    distribution_name: extra-packages-for-enterprise-linux-9-x86_64-
+  # EPEL 9 repository (aarch64)
+  - name: Extra Packages for Enterprise Linux 9 (aarch64)
+    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-9&arch=aarch64&country=NL&infra=stock&content=centos&protocol=https
+    sync_policy: mirror_content_only
+    base_path: epel/9/Everything/aarch64/
+    short_name: epel_9_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: extra-packages-for-enterprise-linux-9-aarch64-
+  # EPEL 9 repository (source)
+  - name: Extra Packages for Enterprise Linux 9 (source)
+    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-source-9&arch=source&country=NL&infra=stock&content=centos&protocol=https
+    sync_policy: mirror_content_only
+    base_path: epel/9/Everything/source/tree/
+    short_name: epel_9_source
+    sync_group: epel
+    distribution_name: extra-packages-for-enterprise-linux-9-source-
+  # EPEL 9 - Cisco OpenH264
+  - name: Extra Packages for Enterprise Linux 9 Cisco openh264
+    url: https://codecs.fedoraproject.org/openh264/epel/9/x86_64/os/
+    base_path: openh264/epel/9/x86_64/os/
+    short_name: epel_cisco_openh264_9
+    sync_group: epel
+    distribution_name: extra-packages-for-enterprise-linux-9-cisco-openh264-x86_64-
+
+  # ELRepo 9 repository
+  - name: ELRepo.org Community Enterprise Linux Repository - el9
+    # Use an HTTPS mirror rather than http from mirrorlist
+    url: https://lon.mirror.rackspace.com/elrepo/elrepo/el9/x86_64/
+    base_path: elrepo/elrepo/el9/x86_64/
+    short_name: elrepo_9
+    sync_group: epel
+    distribution_name: elrepo-el9-x86_64-
+  # ELRepo 9 repository (aarch64)
+  - name: ELRepo.org Community Enterprise Linux Repository - el9 (aarch64)
+    # Use an HTTPS mirror rather than http from mirrorlist
+    url: https://lon.mirror.rackspace.com/elrepo/elrepo/el9/aarch64/
+    base_path: elrepo/elrepo/el9/aarch64/
+    short_name: elrepo_9_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: elrepo-el9-aarch64-
+  # Docker CE for CentOS Stream 9
+  - name: Docker CE - CentOS Stream 9
+    url: https://download.docker.com/linux/centos/9/x86_64/stable
+    base_path: docker-ce/centos/9/x86_64/stable/
+    short_name: centos_stream_9_docker
+    sync_group: docker
+    distribution_name: docker-ce-for-centos-9-
+  # Docker CE for CentOS Stream 9 (aarch64)
+  - name: Docker CE - CentOS Stream 9 (aarch64)
+    url: https://download.docker.com/linux/centos/9/aarch64/stable
+    base_path: docker-ce/centos/9/aarch64/stable/
+    short_name: centos_stream_9_docker_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: docker-ce-for-centos-9-aarch64-
+  # Openstack Yoga for CentOS Stream 9
+  - name: CentOS Stream 9 - OpenStack Yoga
+    url:  https://mirror.stream.centos.org/SIGs/9-stream/cloud/x86_64/openstack-yoga/
+    base_path: centos/9-stream/cloud/x86_64/openstack-yoga/
+    short_name: centos_stream_9_openstack_yoga
+    sync_group: centos
+    distribution_name: centos-stream-9-openstack-yoga-
+    sync: false
+  # Openstack Zed for CentOS Stream 9
+  - name: CentOS Stream 9 - OpenStack Zed
+    url:  https://mirror.stream.centos.org/SIGs/9-stream/cloud/x86_64/openstack-zed/
+    base_path: centos/9-stream/cloud/x86_64/openstack-zed/
+    short_name: centos_stream_9_openstack_zed
+    sync_group: centos
+    distribution_name: centos-stream-9-openstack-zed-
+    sync: false
+  # OpenStack Antelope for CentOS Stream 9
+  - name: CentOS Stream 9 - OpenStack Antelope
+    url: https://mirror.stream.centos.org/SIGs/9-stream/cloud/x86_64/openstack-antelope/
+    base_path: centos/9-stream/cloud/x86_64/openstack-antelope/
+    short_name: centos_stream_9_openstack_antelope
+    sync_group: centos
+    distribution_name: centos-stream-9-openstack-antelope-
+    sync: false
+  # OpenStack Caracal for CentOS Stream 9
+  - name: CentOS Stream 9 - OpenStack Caracal
+    url: https://mirror.stream.centos.org/SIGs/9-stream/cloud/x86_64/openstack-caracal/
+    base_path: centos/9-stream/cloud/x86_64/openstack-caracal/
+    short_name: centos_stream_9_openstack_caracal
+    sync_group: centos
+    distribution_name: centos-stream-9-openstack-caracal-
+  # OpenStack Caracal for CentOS Stream 9 (aarch64)
+  - name: CentOS Stream 9 - OpenStack Caracal (aarch64)
+    url: https://mirror.stream.centos.org/SIGs/9-stream/cloud/aarch64/openstack-caracal/
+    base_path: centos/9-stream/cloud/aarch64/openstack-caracal/
+    short_name: centos_stream_9_openstack_caracal_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: centos-stream-9-openstack-caracal-aarch64-
+  # OpenStack Epoxy for CentOS Stream 9
+  - name: CentOS Stream 9 - OpenStack Epoxy
+    url: https://mirror.stream.centos.org/SIGs/9-stream/cloud/x86_64/openstack-epoxy/
+    base_path: centos/9-stream/cloud/x86_64/openstack-epoxy/
+    short_name: centos_stream_9_openstack_epoxy
+    sync_group: centos
+    distribution_name: centos-stream-9-openstack-epoxy-
+  # OpenStack Epoxy for CentOS Stream 9 (aarch64)
+  - name: CentOS Stream 9 - OpenStack Epoxy (aarch64)
+    url: https://mirror.stream.centos.org/SIGs/9-stream/cloud/aarch64/openstack-epoxy/
+    base_path: centos/9-stream/cloud/aarch64/openstack-epoxy/
+    short_name: centos_stream_9_openstack_epoxy_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: centos-stream-9-openstack-epoxy-aarch64-
+
+  # Additional RHEL 9 repositories
+  # RabbitMQ - Erlang for Redhat family, version 9
+  - name: RabbitMQ - Erlang - RHEL 9
+    url: https://yum1.rabbitmq.com/erlang/el/9/x86_64
+    # mirror_complete fails with:
+    # "This repository uses features which are incompatible with 'mirror' sync. Please sync without mirroring enabled"
+    sync_policy: mirror_content_only
+    base_path: rabbitmq/erlang/el/9/x86_64/
+    short_name: rhel9_rabbitmq_erlang
+    sync_group: third_party
+    distribution_name: rhel9-rabbitmq-erlang-
+  # RabbitMQ - Erlang 26 for Redhat family, version 9 (aarch64)
+  - name: RabbitMQ - Erlang 26 - RHEL 9 (aarch64)
+    url: https://download.copr.fedorainfracloud.org/results/@openstack-kolla/rabbitmq-erlang-26/rhel-9-aarch64/
+    # mirror_complete fails with:
+    # "This repository uses features which are incompatible with 'mirror' sync. Please sync without mirroring enabled"
+    sync_policy: mirror_content_only
+    base_path: rabbitmq/erlang-26/el/9/aarch64/
+    short_name: rhel9_rabbitmq_erlang_26_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: rhel9-rabbitmq-erlang-26-aarch64-
+  # RabbitMQ - Erlang 27 for Redhat family, version 9 (aarch64)
+  - name: RabbitMQ - Erlang 27 - RHEL 9 (aarch64)
+    url: https://download.copr.fedorainfracloud.org/results/@openstack-kolla/rabbitmq-erlang-27/rhel-9-aarch64/
+    # mirror_complete fails with:
+    # "This repository uses features which are incompatible with 'mirror' sync. Please sync without mirroring enabled"
+    sync_policy: mirror_content_only
+    base_path: rabbitmq/erlang-27/el/9/aarch64/
+    short_name: rhel9_rabbitmq_erlang_27_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: rhel9-rabbitmq-erlang-27-aarch64-
+  # RabbitMQ for Redhat family, version 9
+  - name: RabbitMQ - Server - RHEL 9
+    url: https://yum2.rabbitmq.com/rabbitmq/el/9/noarch
+    # mirror_complete fails with:
+    # "This repository uses features which are incompatible with 'mirror' sync. Please sync without mirroring enabled"
+    sync_policy: mirror_content_only
+    base_path: rabbitmq/rabbitmq-server/el/9/noarch/
+    short_name: rhel9_rabbitmq_server
+    sync_group: third_party
+    distribution_name: rhel9-rabbitmq-server-
+  # TreasureData 4 for RHEL 9
+  - name: TreasureData 4 - RHEL 9
+    url: http://packages.treasuredata.com/4/redhat/9/x86_64
+    base_path: treasuredata/4/redhat/9/x86_64/
+    short_name: rhel_9_treasuredata_4
+    sync_group: third_party
+    distribution_name: rhel_9_treasuredata-4-
+  # TreasureData 5 for RHEL 9
+  - name: TreasureData 5 - RHEL 9
+    url: https://packages.treasuredata.com/lts/5/redhat/9/x86_64
+    base_path: treasuredata/lts/5/redhat/9/x86_64/
+    short_name: rhel_9_treasuredata_5
+    sync_group: third_party
+    distribution_name: rhel_9_treasuredata-5-
+  # TreasureData 5 for RHEL 9 (aarch64)
+  - name: TreasureData 5 - RHEL 9 (aarch64)
+    url: https://packages.treasuredata.com/lts/5/redhat/9/aarch64
+    base_path: treasuredata/lts/5/redhat/9/aarch64/
+    short_name: rhel_9_treasuredata_5_aarch64
+    sync_group: third_party
+    distribution_name: rhel_9_treasuredata-5-aarch64-
+  # MariaDB 10.6 for RHEL 9
+  - name: MariaDB 10.6 - RHEL 9
+    url: https://dlm.mariadb.com/repo/mariadb-server/10.6/yum/rhel/9/x86_64
+    base_path: mariadb-10.6/yum/rhel/9/x86_64/
+    short_name: rhel_9_mariadb_10_6
+    sync_group: third_party
+    distribution_name: mariadb-10.6-rhel-9-
+  # MariaDB 10.11 for RHEL 9
+  - name: MariaDB 10.11 - RHEL 9
+    url: https://dlm.mariadb.com/repo/mariadb-server/10.11/yum/rhel/9/x86_64
+    base_path: mariadb-10.11/yum/rhel/9/x86_64/
+    short_name: rhel_9_mariadb_10_11
+    sync_group: third_party
+    distribution_name: mariadb-10.11-rhel-9-
+  # MariaDB 10.11 for RHEL 9 (aarch64)
+  - name: MariaDB 10.11 - RHEL 9 (aarch64)
+    url: https://dlm.mariadb.com/repo/mariadb-server/10.11/yum/rhel/9/aarch64
+    base_path: mariadb-10.11/yum/rhel/9/aarch64/
+    short_name: rhel_9_mariadb_10_11_aarch64
+    sync_group: third_party
+    distribution_name: mariadb-10.11-rhel-9-aarch64-
+  # InfluxDB for RHEL 9
+  - name: InfluxDB - RHEL 9
+    url: https://repos.influxdata.com/rhel/9/x86_64/stable/
+    base_path: influxdb/rhel/9/x86_64/stable/
+    short_name: rhel_9_influxdb
+    sync_group: third_party
+    distribution_name: influxdb-rhel-9-
+  # InfluxDB for RHEL 9 (aarch64)
+  - name: InfluxDB - RHEL 9 (aarch64)
+    url: https://repos.influxdata.com/rhel/9/aarch64/stable/
+    base_path: influxdb/rhel/9/aarch64/stable/
+    short_name: rhel_9_influxdb_aarch64
+    sync_group: third_party
+    distribution_name: influxdb-rhel-9-aarch64-
+  # MLNX OFED 5.9-0.5.6.0 RHEL 9.1 repository
+  - name: Mellanox Technologies mlnx_ofed 5.9-0.5.6.0
+    url: https://linux.mellanox.com/public/repo/mlnx_ofed/5.9-0.5.6.0/rhel9.1/x86_64/
+    base_path: mlnx_ofed/5.9-0.5.6.0/rhel9.1/x86_64/
+    short_name: mlnx_ofed_5_9_0_5_6_0_rhel9_1
+    sync_group: third_party
+    distribution_name: mlnx_ofed-5.9-0.5.6.0-rhel9.1-
+  # MLNX OFED 23.07-0.5.1.2 RHEL 9.2 repository
+  - name: Mellanox Technologies mlnx_ofed 23.07-0.5.1.2
+    url: https://linux.mellanox.com/public/repo/mlnx_ofed/23.07-0.5.1.2/rhel9.2/x86_64/
+    base_path: mlnx_ofed/23.07-0.5.1.2/rhel9.2/x86_64/
+    short_name: mlnx_ofed_23_07_0_5_1_2_rhel9_2
+    sync_group: third_party
+    distribution_name: mlnx_ofed-23.07-0.5.1.2-rhel9.2-
+  # OpenSearch 2.x
+  - name: OpenSearch 2.x
+    url: https://artifacts.opensearch.org/releases/bundle/opensearch/2.x/yum
+    base_path: opensearch/2.x/yum/
+    short_name: opensearch_2_x
+    sync_group: third_party
+    distribution_name: opensearch-2.x-yum-
+  # OpenSearch dashboards
+  - name: OpenSearch Dashboards 2.x
+    url: https://artifacts.opensearch.org/releases/bundle/opensearch-dashboards/2.x/yum
+    base_path: opensearch-dashboards/2.x/yum/
+    short_name: opensearch_dashboards_2_x
+    sync_group: third_party
+    distribution_name: opensearch_dashboards-2.x-yum-
+  # DOCA Repository 2.9.3 for RHEL 9.6
+  - name: DOCA Online Repo 2.9.3 - RHEL 9.6
+    url: https://linux.mellanox.com/public/repo/doca/2.9.3/rhel9.6/x86_64/
+    base_path: doca/2.9.3/rhel9.6/x86_64/
+    short_name: doca_2_9_3_rhel9_6
+    sync_group: third_party
+    distribution_name: doca-2.9.3-rhel9.6-
+  # DOCA Repository 3.2.1 for RHEL 9.* (no mention of limitation to 9.7 in the url)
+  - name: DOCA Online Repo 3.2.1 - RHEL 9
+    url: https://linux.mellanox.com/public/repo/doca/3.2.1/rhel9/x86_64/
+    base_path: doca/3.2.1/rhel9/x86_64/
+    short_name: doca_3_2_1_rhel9
+    sync_group: third_party
+    distribution_name: doca-3.2.1-rhel9-
+  # DOCA Repository 3.2.1 for RHEL 9 (aarch64)
+  - name: DOCA Online Repo 3.2.1 - RHEL 9 (aarch64)
+    url: https://linux.mellanox.com/public/repo/doca/3.2.1/rhel9/arm64-sbsa/
+    base_path: doca/3.2.1/rhel9/aarch64/
+    short_name: doca_3_2_1_rhel9_aarch64
+    sync_group: third_party
+    distribution_name: doca-3.2.1-rhel9-aarch64-
+  # OpenHPC v3 for RockyLinux 9
+  - name: OpenHPC-3 - Base
+    url: https://repos.openhpc.community/OpenHPC/3/EL_9
+    base_path: OpenHPC/3/EL_9/
+    short_name: openhpc_3
+    sync_group: third_party
+    distribution_name: openhpc-3-
+  - name: OpenHPC-3 - Updates
+    url: https://repos.openhpc.community/OpenHPC/3/updates/EL_9
+    base_path: OpenHPC/3/updates/EL_9/
+    short_name: openhpc_3_updates
+    sync_group: third_party
+    distribution_name: openhpc-3-updates-
+  - name: CernVM-FS packages - EL9
+    url: https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs/EL/9/x86_64
+    base_path: cvmfs/EL/9/x86_64/
+    short_name: cernvmfs_el9_pkgs
+    sync_group: third_party
+    distribution_name: cernvmfs-el9-pkgs-
+  - name: CernVM-FS extra config - EL9
+    url: https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs-config/EL/9/x86_64
+    base_path: cvmfs-config/EL/9/x86_64/
+    short_name: cernvmfs_el9_cfg
+    sync_group: third_party
+    distribution_name: cernvmfs-el9-cfg-
+  # ProxySQL for AlmaLinux 9
+  - name: ProxySQL - AlmaLinux 9
+    url: https://repo.proxysql.com/ProxySQL/proxysql-2.7.x/almalinux/9/
+    base_path: ProxySQL/proxysql-2.7.x/almalinux/9/
+    short_name: almalinux_9_proxysql_2_7
+    sync_group: third_party
+    distribution_name: almalinux-9-proxysql-2.7-
+  # Open OnDemand
+  - name: Open OnDemand Web Repo - EL9
+    url: https://yum.osc.edu/ondemand/4.0/web/el9/x86_64
+    base_path: ondemand/4.0/web/el9/x86_64/
+    short_name: ondemand_web_el9
+    sync_group: third_party
+    distribution_name: ondemand-web-el9-
+
+  # Non-distro-specific RPMs
+  # TurboVNC
+  - name: TurboVNC
+    url: https://packagecloud.io/dcommander/turbovnc/rpm_any/rpm_any/x86_64
+    base_path: turbovnc/x86_64/
+    short_name: turbovnc
+    sync_group: third_party
+    distribution_name: turbovnc-
+  - name: TurboVNC - source
+    url: https://packagecloud.io/dcommander/turbovnc/rpm_any/rpm_any/SRPMS
+    base_path: turbovnc/srpms/
+    short_name: turbovnc_source
+    sync_group: third_party
+    distribution_name: turbovnc-source-
+  # EESSI CernVM-FS config (NB: repo can be used for RHEL8/9 despite path)
+  - name: EESSI CVMFS config - noarch
+    url: http://repo.eessi-infra.org/eessi/rhel/8/noarch/
+    base_path: eessi/rhel/8/noarch/
+    short_name: cernvmfs_eessi_cfg
+    sync_group: third_party
+    distribution_name: cernvmfs-eessi-cfg-
+
+# Default filter string for RPM package repositories.
+rpm_package_repo_filter: ""
+
+# List of package repositories after applying filter.
+rpm_package_repos_filtered: "{{ rpm_package_repos | select_repos(rpm_package_repo_filter, package_sync_group) }}"
