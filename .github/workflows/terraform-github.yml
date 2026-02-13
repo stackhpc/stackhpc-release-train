@@ -22,7 +22,7 @@ jobs:
       run:
         working-directory: "./terraform/github/"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: hashicorp/setup-terraform@v3
         with:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
@@ -50,7 +50,7 @@ jobs:
       - name: Install fs module
         run: npm install fs
 
-      - uses: actions/github-script@v6
+      - uses: actions/github-script@v8
         if: github.event_name == 'pull_request'
         with:
           github-token: ${{ secrets.repository_configuration_token }}

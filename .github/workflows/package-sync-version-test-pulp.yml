@@ -27,7 +27,7 @@ jobs:
         run: exit 1
 
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Release Train & dependencies
         uses: ./.github/actions/setup
