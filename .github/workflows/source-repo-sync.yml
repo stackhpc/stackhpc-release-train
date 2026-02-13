@@ -21,8 +21,8 @@ jobs:
         run: |
           git config --global user.email "22933334+stackhpc-ci@users.noreply.github.com" &&
           git config --global user.name "stackhpc-ci"
-      - name: Github checkout 🛎
-        uses: actions/checkout@v4
+      - name: GitHub checkout 🛎
+        uses: actions/checkout@v6
         with:
           persist-credentials: "false"
       - name: Run ansible playbook 📖
