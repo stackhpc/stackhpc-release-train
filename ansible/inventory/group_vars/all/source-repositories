@@ -42,6 +42,13 @@ community_files:
       * @stackhpc/smslab
 source_repositories:
   # Kayobe team
+  beokay:
+    repository_type: "single-branch"
+    workflows: []
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.kayobe }}"
+          dest: ".github/CODEOWNERS"
   kolla:
     ignored_releases:
       - victoria
