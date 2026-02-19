@@ -784,25 +784,6 @@ rpm_package_repos:
     short_name: rocky_10_1_highavailability_source
     sync_group: rocky_10_source
     distribution_name: rocky-10.1-highavailability-source-
-  # Security common doesn't seem to exist for RL10, might in the future
-  # - name: Rocky Linux 10 - SIG Security Common
-  #   url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-sig-security-common-10&arch=x86_64&country=NL&protocol=https
-  #   base_path: rocky/sig/10/security/x86_64/security-common/
-  #   short_name: rocky_10_sig_security_common
-  #   sync_group: rocky_10
-  #   distribution_name: rocky-10-sig-security-common-
-  # - name: Rocky Linux 10 - SIG Security Common (aarch64)
-  #   url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-sig-security-common-10&arch=aarch64&country=NL&protocol=https
-  #   base_path: rocky/sig/10/security/aarch64/security-common/
-  #   short_name: rocky_10_sig_security_common_aarch64
-  #   sync_group: rocky_10_aarch64
-  #   distribution_name: rocky-10-sig-security-common-aarch64-
-  # - name: Rocky Linux 10 - SIG Security Common (source)
-  #   url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-sig-security-common-source-10&arch=source&country=NL&protocol=https
-  #   base_path: rocky/sig/10/security/source/security-common/
-  #   short_name: rocky_10_sig_security_common_source
-  #   sync_group: rocky_10_source
-  #   distribution_name: rocky-10-sig-security-common-source-
 
   # Additional CentOS Stream 10 repositories
   # NFV OpenvSwitch for CentOS Stream 10
@@ -840,8 +821,8 @@ rpm_package_repos:
     short_name: centos_stream_10_storage_ceph_tentacle
     sync_group: centos
     distribution_name: centos-stream-10-storage-ceph-tentacle-
-  # Ceph tentacle for CentOS Stream 10 (aarch64)
-  - name: CentOS Stream 10 - Ceph tentacle (aarch64)
+  # Ceph Tentacle for CentOS Stream 10 (aarch64)
+  - name: CentOS Stream 10 - Ceph Tentacle (aarch64)
     url: https://mirror.stream.centos.org/SIGs/10-stream/storage/aarch64/ceph-tentacle/
     base_path: centos/10-stream/storage/aarch64/ceph-tentacle/
     short_name: centos_stream_10_storage_ceph_tentacle_aarch64
@@ -849,7 +830,7 @@ rpm_package_repos:
     distribution_name: centos-stream-10-storage-ceph-tentacle-aarch64-
   # EPEL 10 repository
   - name: Extra Packages for Enterprise Linux 10
-    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-10&arch=x86_64&country=NL&infra=stock&content=centos&protocol=https
+    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-z-10.1&arch=x86_64&country=NL&protocol=https
     sync_policy: mirror_content_only
     base_path: epel/10/Everything/x86_64/
     short_name: epel_10
@@ -857,7 +838,7 @@ rpm_package_repos:
     distribution_name: extra-packages-for-enterprise-linux-10-x86_64-
   # EPEL 10 repository (aarch64)
   - name: Extra Packages for Enterprise Linux 10 (aarch64)
-    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-10&arch=aarch64&country=NL&infra=stock&content=centos&protocol=https
+    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-z-10.1&arch=aarch64&country=NL&protocol=https
     sync_policy: mirror_content_only
     base_path: epel/10/Everything/aarch64/
     short_name: epel_10_aarch64
@@ -865,7 +846,7 @@ rpm_package_repos:
     distribution_name: extra-packages-for-enterprise-linux-10-aarch64-
   # EPEL 10 repository (source)
   - name: Extra Packages for Enterprise Linux 10 (source)
-    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-source-10&arch=source&country=NL&infra=stock&content=centos&protocol=https
+    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-z-source-10.1&arch=source&country=NL&protocol=https
     sync_policy: mirror_content_only
     base_path: epel/10/Everything/source/tree/
     short_name: epel_10_source
@@ -878,7 +859,7 @@ rpm_package_repos:
     url: https://lon.mirror.rackspace.com/elrepo/elrepo/el10/x86_64/
     base_path: elrepo/elrepo/el10/x86_64/
     short_name: elrepo_10
-    sync_group: epel
+    sync_group: rocky_10
     distribution_name: elrepo-el10-x86_64-
   # ELRepo 10 repository (aarch64)
   - name: ELRepo.org Community Enterprise Linux Repository - el10 (aarch64)
@@ -914,20 +895,20 @@ rpm_package_repos:
     short_name: rhel10_rabbitmq_erlang_27_aarch64
     sync_group: rocky_10_aarch64
     distribution_name: rhel10-rabbitmq-erlang-27-aarch64-
-  # TreasureData 6 for RHEL 10
-  - name: TreasureData 6 - RHEL 10
-    url: https://packages.treasuredata.com/lts/6/redhat/10/x86_64
-    base_path: treasuredata/lts/6/redhat/10/x86_64/
-    short_name: rhel_10_treasuredata_6
+  # Fluent Package v6 for RHEL 10
+  - name: Fluent Package v6 - RHEL 10
+    url: https://fluentd.cdn.cncf.io/lts/6/redhat/10/x86_64/
+    base_path: fluentd/lts/6/redhat/10/x86_64/
+    short_name: rhel_10_fluent_6
     sync_group: third_party
-    distribution_name: rhel_10_treasuredata-6-
-  # TreasureData 6 for RHEL 10 (aarch64)
-  - name: TreasureData 6 - RHEL 10 (aarch64)
-    url: https://packages.treasuredata.com/lts/6/redhat/10/aarch64
-    base_path: treasuredata/lts/6/redhat/10/aarch64/
-    short_name: rhel_10_treasuredata_6_aarch64
+    distribution_name: rhel_10_fluent-6-
+  # Fluent Package v6 for RHEL 10 (aarch64)
+  - name: Fluent Package v6 - RHEL 10 (aarch64)
+    url: https://fluentd.cdn.cncf.io/lts/6/redhat/10/aarch64/
+    base_path: fluentd/lts/6/redhat/10/aarch64/
+    short_name: rhel_10_fluent_6_aarch64
     sync_group: third_party
-    distribution_name: rhel_10_treasuredata-6-aarch64-
+    distribution_name: rhel_10_fluent-6-aarch64-
   # MariaDB 10.11 for RHEL 10
   - name: MariaDB 10.11 - RHEL 10
     url: https://dlm.mariadb.com/repo/mariadb-server/10.11/yum/rhel/10/x86_64
@@ -970,20 +951,6 @@ rpm_package_repos:
     short_name: rhel_10_influxdb_aarch64
     sync_group: third_party
     distribution_name: influxdb-rhel-10-aarch64-
-  # OpenSearch 2.x
-  - name: OpenSearch 2.x
-    url: https://artifacts.opensearch.org/releases/bundle/opensearch/2.x/yum
-    base_path: opensearch/2.x/yum/
-    short_name: opensearch_2_x
-    sync_group: third_party
-    distribution_name: opensearch-2.x-yum-
-  # OpenSearch dashboards 2.x
-  - name: OpenSearch Dashboards 2.x
-    url: https://artifacts.opensearch.org/releases/bundle/opensearch-dashboards/2.x/yum
-    base_path: opensearch-dashboards/2.x/yum/
-    short_name: opensearch_dashboards_2_x
-    sync_group: third_party
-    distribution_name: opensearch_dashboards-2.x-yum-
   # OpenSearch 3.x
   - name: OpenSearch 3.x
     url: https://artifacts.opensearch.org/releases/bundle/opensearch/3.x/yum
@@ -991,15 +958,15 @@ rpm_package_repos:
     short_name: opensearch_3_x
     sync_group: third_party
     distribution_name: opensearch-3.x-yum-
-  # OpenSearch dashboards 3.x
+  # OpenSearch Dashboards 3.x
   - name: OpenSearch Dashboards 3.x
     url: https://artifacts.opensearch.org/releases/bundle/opensearch-dashboards/3.x/yum
     base_path: opensearch-dashboards/3.x/yum/
     short_name: opensearch_dashboards_3_x
     sync_group: third_party
     distribution_name: opensearch_dashboards-3.x-yum-
-  # DOCA Repository 3.2.1 for RHEL 10.1
-  - name: DOCA Online Repo 3.2.1 - RHEL 10.1
+  # DOCA Repository 3.2.1 for RHEL 10
+  - name: DOCA Online Repo 3.2.1 - RHEL 10
     url: https://linux.mellanox.com/public/repo/doca/3.2.1/rhel10/x86_64/
     base_path: doca/3.2.1/rhel10/x86_64/
     short_name: doca_3_2_1_rhel10_x86_64
