@@ -332,8 +332,6 @@ source_repositories:
     ignored_releases:
       - victoria
       - xena
-      - 2024.1
-      - 2025.1
       - master
     community_files:
       - codeowners:
