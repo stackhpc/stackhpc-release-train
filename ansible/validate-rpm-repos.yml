@@ -82,9 +82,10 @@
     - name: Assert that RPM package repository list can be filtered to one group
       ansible.builtin.assert:
         that:
-          - rpm_package_repos_filtered | length == 2
+          - rpm_package_repos_filtered | length == 3
           - rpm_package_repos_filtered[0].short_name == 'docker'
           - rpm_package_repos_filtered[1].short_name == 'centos_stream_9_docker'
+          - rpm_package_repos_filtered[2].short_name == 'centos_stream_10_docker'
       vars:
         package_sync_group: docker
 
