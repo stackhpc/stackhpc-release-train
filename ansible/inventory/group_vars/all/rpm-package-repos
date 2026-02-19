@@ -690,6 +690,336 @@ rpm_package_repos:
     sync_group: third_party
     distribution_name: cernvmfs-eessi-cfg-
 
+  # Base Rocky Linux 10.1 repositories
+  - name: Rocky Linux 10.1 - AppStream
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-10.1&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/10.1/AppStream/x86_64/os/
+    short_name: rocky_10_1_appstream
+    sync_group: rocky_10
+    distribution_name: rocky-10.1-appstream-
+  - name: Rocky Linux 10.1 - AppStream (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-10.1&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/10.1/AppStream/aarch64/os/
+    short_name: rocky_10_1_appstream_aarch64
+    sync_group: rocky_10_aarch64
+    distribution_name: rocky-10.1-appstream-aarch64-
+  - name: Rocky Linux 10.1 - AppStream (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-source-10.1&arch=source&country=NL&protocol=https
+    base_path: rocky/10.1/AppStream/source/tree/
+    short_name: rocky_10_1_appstream_source
+    sync_group: rocky_10_source
+    distribution_name: rocky-10.1-appstream-source-
+  - name: Rocky Linux 10.1 - BaseOS
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-10.1&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/10.1/BaseOS/x86_64/os/
+    short_name: rocky_10_1_baseos
+    sync_group: rocky_10_baseos
+    distribution_name: rocky-10.1-baseos-
+  - name: Rocky Linux 10.1 - BaseOS (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-10.1&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/10.1/BaseOS/aarch64/os/
+    short_name: rocky_10_1_baseos_aarch64
+    sync_group: rocky_10_aarch64
+    distribution_name: rocky-10.1-baseos-aarch64-
+  - name: Rocky Linux 10.1 - BaseOS (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-source-10.1&arch=source&country=NL&protocol=https
+    base_path: rocky/10.1/BaseOS/source/tree/
+    short_name: rocky_10_1_baseos_source
+    sync_group: rocky_10_source
+    distribution_name: rocky-10.1-baseos-source-
+  - name: Rocky Linux 10.1 - Extras
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-10.1&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/10.1/extras/x86_64/os/
+    short_name: rocky_10_1_extras
+    sync_group: rocky_10
+    distribution_name: rocky-10.1-extras-
+  - name: Rocky Linux 10.1 - Extras (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-10.1&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/10.1/extras/aarch64/os/
+    short_name: rocky_10_1_extras_aarch64
+    sync_group: rocky_10_aarch64
+    distribution_name: rocky-10.1-extras-aarch64-
+  - name: Rocky Linux 10.1 - Extras (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-source-10.1&arch=source&country=NL&protocol=https
+    base_path: rocky/10.1/extras/source/tree/
+    short_name: rocky_10_1_extras_source
+    sync_group: rocky_10_source
+    distribution_name: rocky-10.1-extras-source-
+
+  # Additional Rocky Linux 10.1 repositories
+  # No advanced virt, Ceph or OpenStack
+  - name: Rocky Linux 10.1 - CRB
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-10.1&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/10.1/CRB/x86_64/os/
+    short_name: rocky_10_1_crb
+    sync_group: rocky_10
+    distribution_name: rocky-10.1-crb-
+  - name: Rocky Linux 10.1 - CRB (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-10.1&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/10.1/CRB/aarch64/os/
+    short_name: rocky_10_1_crb_aarch64
+    sync_group: rocky_10_aarch64
+    distribution_name: rocky-10.1-crb-aarch64-
+  - name: Rocky Linux 10.1 - CRB (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-source-10.1&arch=source&country=NL&protocol=https
+    base_path: rocky/10.1/CRB/source/tree/
+    short_name: rocky_10_1_crb_source
+    sync_group: rocky_10_source
+    distribution_name: rocky-10.1-crb-source-
+  - name: Rocky Linux 10.1 - HighAvailability
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-10.1&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/10.1/HighAvailability/x86_64/os/
+    short_name: rocky_10_1_highavailability
+    sync_group: rocky_10
+    distribution_name: rocky-10.1-highavailability-
+  - name: Rocky Linux 10.1 - HighAvailability (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-10.1&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/10.1/HighAvailability/aarch64/os/
+    short_name: rocky_10_1_highavailability_aarch64
+    sync_group: rocky_10_aarch64
+    distribution_name: rocky-10.1-highavailability-aarch64-
+  - name: Rocky Linux 10.1 - HighAvailability (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-source-10.1&arch=source&country=NL&protocol=https
+    base_path: rocky/10.1/HighAvailability/source/tree/
+    short_name: rocky_10_1_highavailability_source
+    sync_group: rocky_10_source
+    distribution_name: rocky-10.1-highavailability-source-
+  # Security common doesn't seem to exist for RL10, might in the future
+  # - name: Rocky Linux 10 - SIG Security Common
+  #   url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-sig-security-common-10&arch=x86_64&country=NL&protocol=https
+  #   base_path: rocky/sig/10/security/x86_64/security-common/
+  #   short_name: rocky_10_sig_security_common
+  #   sync_group: rocky_10
+  #   distribution_name: rocky-10-sig-security-common-
+  # - name: Rocky Linux 10 - SIG Security Common (aarch64)
+  #   url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-sig-security-common-10&arch=aarch64&country=NL&protocol=https
+  #   base_path: rocky/sig/10/security/aarch64/security-common/
+  #   short_name: rocky_10_sig_security_common_aarch64
+  #   sync_group: rocky_10_aarch64
+  #   distribution_name: rocky-10-sig-security-common-aarch64-
+  # - name: Rocky Linux 10 - SIG Security Common (source)
+  #   url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-sig-security-common-source-10&arch=source&country=NL&protocol=https
+  #   base_path: rocky/sig/10/security/source/security-common/
+  #   short_name: rocky_10_sig_security_common_source
+  #   sync_group: rocky_10_source
+  #   distribution_name: rocky-10-sig-security-common-source-
+
+  # Additional CentOS Stream 10 repositories
+  # NFV OpenvSwitch for CentOS Stream 10
+  - name: CentOS Stream 10 - NFV OpenvSwitch
+    url: https://mirror.stream.centos.org/SIGs/10-stream/nfv/x86_64/openvswitch-2/
+    base_path: centos/10-stream/nfv/x86_64/openvswitch-2/
+    short_name: centos_stream_10_nfv_openvswitch
+    sync_group: centos
+    distribution_name: centos-stream-10-nfv-openvswitch-
+  # NFV OpenvSwitch for CentOS Stream 10 (aarch64)
+  - name: CentOS Stream 10 - NFV OpenvSwitch (aarch64)
+    url: https://mirror.stream.centos.org/SIGs/10-stream/nfv/aarch64/openvswitch-2/
+    base_path: centos/10-stream/nfv/aarch64/openvswitch-2/
+    short_name: centos_stream_10_nfv_openvswitch_aarch64
+    sync_group: rocky_10_aarch64
+    distribution_name: centos-stream-10-nfv-openvswitch-aarch64-
+  # Ceph Squid for CentOS Stream 10
+  - name: CentOS Stream 10 - Ceph Squid
+    url: https://mirror.stream.centos.org/SIGs/10-stream/storage/x86_64/ceph-squid/
+    base_path: centos/10-stream/storage/x86_64/ceph-squid/
+    short_name: centos_stream_10_storage_ceph_squid
+    sync_group: centos
+    distribution_name: centos-stream-10-storage-ceph-squid-
+  # Ceph Squid for CentOS Stream 10 (aarch64)
+  - name: CentOS Stream 10 - Ceph Squid (aarch64)
+    url: https://mirror.stream.centos.org/SIGs/10-stream/storage/aarch64/ceph-squid/
+    base_path: centos/10-stream/storage/aarch64/ceph-squid/
+    short_name: centos_stream_10_storage_ceph_squid_aarch64
+    sync_group: rocky_10_aarch64
+    distribution_name: centos-stream-10-storage-ceph-squid-aarch64-
+  # Ceph Tentacle for CentOS Stream 10
+  - name: CentOS Stream 10 - Ceph Tentacle
+    url: https://mirror.stream.centos.org/SIGs/10-stream/storage/x86_64/ceph-tentacle/
+    base_path: centos/10-stream/storage/x86_64/ceph-tentacle/
+    short_name: centos_stream_10_storage_ceph_tentacle
+    sync_group: centos
+    distribution_name: centos-stream-10-storage-ceph-tentacle-
+  # Ceph tentacle for CentOS Stream 10 (aarch64)
+  - name: CentOS Stream 10 - Ceph tentacle (aarch64)
+    url: https://mirror.stream.centos.org/SIGs/10-stream/storage/aarch64/ceph-tentacle/
+    base_path: centos/10-stream/storage/aarch64/ceph-tentacle/
+    short_name: centos_stream_10_storage_ceph_tentacle_aarch64
+    sync_group: rocky_10_aarch64
+    distribution_name: centos-stream-10-storage-ceph-tentacle-aarch64-
+  # EPEL 10 repository
+  - name: Extra Packages for Enterprise Linux 10
+    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-10&arch=x86_64&country=NL&infra=stock&content=centos&protocol=https
+    sync_policy: mirror_content_only
+    base_path: epel/10/Everything/x86_64/
+    short_name: epel_10
+    sync_group: epel
+    distribution_name: extra-packages-for-enterprise-linux-10-x86_64-
+  # EPEL 10 repository (aarch64)
+  - name: Extra Packages for Enterprise Linux 10 (aarch64)
+    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-10&arch=aarch64&country=NL&infra=stock&content=centos&protocol=https
+    sync_policy: mirror_content_only
+    base_path: epel/10/Everything/aarch64/
+    short_name: epel_10_aarch64
+    sync_group: rocky_10_aarch64
+    distribution_name: extra-packages-for-enterprise-linux-10-aarch64-
+  # EPEL 10 repository (source)
+  - name: Extra Packages for Enterprise Linux 10 (source)
+    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-source-10&arch=source&country=NL&infra=stock&content=centos&protocol=https
+    sync_policy: mirror_content_only
+    base_path: epel/10/Everything/source/tree/
+    short_name: epel_10_source
+    sync_group: epel
+    distribution_name: extra-packages-for-enterprise-linux-10-source-
+
+  # ELRepo 10 repository
+  - name: ELRepo.org Community Enterprise Linux Repository - el10
+    # Use an HTTPS mirror rather than http from mirrorlist
+    url: https://lon.mirror.rackspace.com/elrepo/elrepo/el10/x86_64/
+    base_path: elrepo/elrepo/el10/x86_64/
+    short_name: elrepo_10
+    sync_group: epel
+    distribution_name: elrepo-el10-x86_64-
+  # ELRepo 10 repository (aarch64)
+  - name: ELRepo.org Community Enterprise Linux Repository - el10 (aarch64)
+    # Use an HTTPS mirror rather than http from mirrorlist
+    url: https://lon.mirror.rackspace.com/elrepo/elrepo/el10/aarch64/
+    base_path: elrepo/elrepo/el10/aarch64/
+    short_name: elrepo_10_aarch64
+    sync_group: rocky_10_aarch64
+    distribution_name: elrepo-el10-aarch64-
+  # Docker CE for CentOS Stream 10
+  - name: Docker CE - CentOS Stream 10
+    url: https://download.docker.com/linux/centos/10/x86_64/stable
+    base_path: docker-ce/centos/10/x86_64/stable/
+    short_name: centos_stream_10_docker
+    sync_group: docker
+    distribution_name: docker-ce-for-centos-10-
+  # Docker CE for CentOS Stream 10 (aarch64)
+  - name: Docker CE - CentOS Stream 10 (aarch64)
+    url: https://download.docker.com/linux/centos/10/aarch64/stable
+    base_path: docker-ce/centos/10/aarch64/stable/
+    short_name: centos_stream_10_docker_aarch64
+    sync_group: rocky_10_aarch64
+    distribution_name: docker-ce-for-centos-10-aarch64-
+
+  # Additional RHEL 10 repositories
+  # RabbitMQ - Erlang 27 for Redhat family, version 10 (aarch64)
+  - name: RabbitMQ - Erlang 27 - RHEL 10 (aarch64)
+    url: https://download.copr.fedorainfracloud.org/results/@openstack-kolla/rabbitmq-erlang-27/rhel-10-aarch64/
+    # mirror_complete fails with:
+    # "This repository uses features which are incompatible with 'mirror' sync. Please sync without mirroring enabled"
+    sync_policy: mirror_content_only
+    base_path: rabbitmq/erlang-27/el/10/aarch64/
+    short_name: rhel10_rabbitmq_erlang_27_aarch64
+    sync_group: rocky_10_aarch64
+    distribution_name: rhel10-rabbitmq-erlang-27-aarch64-
+  # TreasureData 6 for RHEL 10
+  - name: TreasureData 6 - RHEL 10
+    url: https://packages.treasuredata.com/lts/6/redhat/10/x86_64
+    base_path: treasuredata/lts/6/redhat/10/x86_64/
+    short_name: rhel_10_treasuredata_6
+    sync_group: third_party
+    distribution_name: rhel_10_treasuredata-6-
+  # TreasureData 6 for RHEL 10 (aarch64)
+  - name: TreasureData 6 - RHEL 10 (aarch64)
+    url: https://packages.treasuredata.com/lts/6/redhat/10/aarch64
+    base_path: treasuredata/lts/6/redhat/10/aarch64/
+    short_name: rhel_10_treasuredata_6_aarch64
+    sync_group: third_party
+    distribution_name: rhel_10_treasuredata-6-aarch64-
+  # MariaDB 10.11 for RHEL 10
+  - name: MariaDB 10.11 - RHEL 10
+    url: https://dlm.mariadb.com/repo/mariadb-server/10.11/yum/rhel/10/x86_64
+    base_path: mariadb-10.11/yum/rhel/10/x86_64/
+    short_name: rhel_10_mariadb_10_11
+    sync_group: third_party
+    distribution_name: mariadb-10.11-rhel-10-
+  # MariaDB 10.11 for RHEL 10 (aarch64)
+  - name: MariaDB 10.11 - RHEL 10 (aarch64)
+    url: https://dlm.mariadb.com/repo/mariadb-server/10.11/yum/rhel/10/aarch64
+    base_path: mariadb-10.11/yum/rhel/10/aarch64/
+    short_name: rhel_10_mariadb_10_11_aarch64
+    sync_group: third_party
+    distribution_name: mariadb-10.11-rhel-10-aarch64-
+  # MariaDB 11.4 for RHEL 10
+  - name: MariaDB 11.4 - RHEL 10
+    url: https://dlm.mariadb.com/repo/mariadb-server/11.4/yum/rhel/10/x86_64
+    base_path: mariadb-11.4/yum/rhel/10/x86_64/
+    short_name: rhel_10_mariadb_11_4
+    sync_group: third_party
+    distribution_name: mariadb-11.4-rhel-10-
+  # MariaDB 11.4 for RHEL 10 (aarch64)
+  - name: MariaDB 11.4 - RHEL 10 (aarch64)
+    url: https://dlm.mariadb.com/repo/mariadb-server/11.4/yum/rhel/10/aarch64
+    base_path: mariadb-11.4/yum/rhel/10/aarch64/
+    short_name: rhel_10_mariadb_11_4_aarch64
+    sync_group: third_party
+    distribution_name: mariadb-11.4-rhel-10-aarch64-
+  # InfluxDB for RHEL 10
+  - name: InfluxDB - RHEL 10
+    url: https://repos.influxdata.com/rhel/10/x86_64/stable/
+    base_path: influxdb/rhel/10/x86_64/stable/
+    short_name: rhel_10_influxdb
+    sync_group: third_party
+    distribution_name: influxdb-rhel-10-
+  # InfluxDB for RHEL 10 (aarch64)
+  - name: InfluxDB - RHEL 10 (aarch64)
+    url: https://repos.influxdata.com/rhel/10/aarch64/stable/
+    base_path: influxdb/rhel/10/aarch64/stable/
+    short_name: rhel_10_influxdb_aarch64
+    sync_group: third_party
+    distribution_name: influxdb-rhel-10-aarch64-
+  # OpenSearch 2.x
+  - name: OpenSearch 2.x
+    url: https://artifacts.opensearch.org/releases/bundle/opensearch/2.x/yum
+    base_path: opensearch/2.x/yum/
+    short_name: opensearch_2_x
+    sync_group: third_party
+    distribution_name: opensearch-2.x-yum-
+  # OpenSearch dashboards 2.x
+  - name: OpenSearch Dashboards 2.x
+    url: https://artifacts.opensearch.org/releases/bundle/opensearch-dashboards/2.x/yum
+    base_path: opensearch-dashboards/2.x/yum/
+    short_name: opensearch_dashboards_2_x
+    sync_group: third_party
+    distribution_name: opensearch_dashboards-2.x-yum-
+  # OpenSearch 3.x
+  - name: OpenSearch 3.x
+    url: https://artifacts.opensearch.org/releases/bundle/opensearch/3.x/yum
+    base_path: opensearch/3.x/yum/
+    short_name: opensearch_3_x
+    sync_group: third_party
+    distribution_name: opensearch-3.x-yum-
+  # OpenSearch dashboards 3.x
+  - name: OpenSearch Dashboards 3.x
+    url: https://artifacts.opensearch.org/releases/bundle/opensearch-dashboards/3.x/yum
+    base_path: opensearch-dashboards/3.x/yum/
+    short_name: opensearch_dashboards_3_x
+    sync_group: third_party
+    distribution_name: opensearch_dashboards-3.x-yum-
+  # DOCA Repository 3.2.1 for RHEL 10.1
+  - name: DOCA Online Repo 3.2.1 - RHEL 10.1
+    url: https://linux.mellanox.com/public/repo/doca/3.2.1/rhel10/x86_64/
+    base_path: doca/3.2.1/rhel10/x86_64/
+    short_name: doca_3_2_1_rhel10_x86_64
+    sync_group: third_party
+    distribution_name: doca-3.2.1-rhel10-x86_64-
+  # DOCA Repository 3.2.1 for RHEL 10 (aarch64)
+  - name: DOCA Online Repo 3.2.1 - RHEL 10 (aarch64)
+    url: https://linux.mellanox.com/public/repo/doca/3.2.1/rhel10/arm64-sbsa/
+    base_path: doca/3.2.1/rhel10/aarch64/
+    short_name: doca_3_2_1_rhel10_aarch64
+    sync_group: third_party
+    distribution_name: doca-3.2.1-rhel10-aarch64-
+  # ProxySQL for AlmaLinux 10
+  - name: ProxySQL - AlmaLinux 10
+    url: https://repo.proxysql.com/ProxySQL/proxysql-3.0.x/almalinux/10/
+    base_path: ProxySQL/proxysql-3.0.x/almalinux/10/
+    short_name: almalinux_10_proxysql_3_0
+    sync_group: third_party
+    distribution_name: almalinux-10-proxysql-3.0-
+
 # Default filter string for RPM package repositories.
 rpm_package_repo_filter: ""
 
