@@ -892,7 +892,7 @@ rpm_package_repos:
     # "This repository uses features which are incompatible with 'mirror' sync. Please sync without mirroring enabled"
     sync_policy: mirror_content_only
     base_path: rabbitmq/erlang-27/el/10/aarch64/
-    short_name: rhel10_rabbitmq_erlang_27_aarch64
+    short_name: rhel_10_rabbitmq_erlang_27_aarch64
     sync_group: rocky_10_aarch64
     distribution_name: rhel10-rabbitmq-erlang-27-aarch64-
   # Fluent Package v6 for RHEL 10
