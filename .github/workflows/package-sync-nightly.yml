@@ -30,9 +30,10 @@ jobs:
         # Use YQ to make a list of all unique sync groups, and format as a GH
         # actions matrix
         run: |
-          groups=$(yq -o=json -I=0 \
+          groups=$(yq eval-all -o=json -I=0 \
                      '([.rpm_package_repos[] | .sync_group | select(.) ]) + ([.deb_package_repos[] | .sync_group | select(.) ]) | unique' \
-                     ansible/inventory/group_vars/all/package-repos)
+                     ansible/inventory/group_vars/all/*)
+
           echo -n "matrix={\"sync_group\": " >> $GITHUB_OUTPUT
           echo -n $groups >> $GITHUB_OUTPUT
           echo "}" >> $GITHUB_OUTPUT
