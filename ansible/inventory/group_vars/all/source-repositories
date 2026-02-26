@@ -344,7 +344,6 @@ source_repositories:
       - xena
       - yoga
       - zed
-      - 2025.1
       - master
     community_files:
       - codeowners:
