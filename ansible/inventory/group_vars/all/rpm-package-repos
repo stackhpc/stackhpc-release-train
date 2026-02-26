@@ -852,6 +852,20 @@ rpm_package_repos:
     short_name: epel_10_source
     sync_group: epel
     distribution_name: extra-packages-for-enterprise-linux-10-source-
+  # OpenStack Epoxy for CentOS Stream 10
+  - name: CentOS Stream 10 - OpenStack Epoxy
+    url: https://download.copr.fedorainfracloud.org/results/@openstack-kolla/el10-missing/epel-10-x86_64/
+    base_path: centos/10-stream/cloud/x86_64/openstack-epoxy/
+    short_name: centos_stream_10_openstack_epoxy
+    sync_group: centos
+    distribution_name: centos-stream-10-openstack-epoxy-
+  # OpenStack Epoxy for CentOS Stream 10 (aarch64)
+  - name: CentOS Stream 10 - OpenStack Epoxy (aarch64)
+    url: https://download.copr.fedorainfracloud.org/results/@openstack-kolla/el10-missing/epel-10-aarch64/
+    base_path: centos/10-stream/cloud/aarch64/openstack-epoxy/
+    short_name: centos_stream_10_openstack_epoxy_aarch64
+    sync_group: rocky_10_aarch64
+    distribution_name: centos-stream-10-openstack-epoxy-aarch64-
 
   # ELRepo 10 repository
   - name: ELRepo.org Community Enterprise Linux Repository - el10
