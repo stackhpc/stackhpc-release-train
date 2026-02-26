@@ -108,6 +108,7 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.kayobe }}"
           dest: ".github/CODEOWNERS"
+  # OpenStack team
   bifrost:
     ignored_releases:
       - victoria
@@ -117,9 +118,8 @@ source_repositories:
       - master
     community_files:
       - codeowners:
-          content: "{{ community_files.codeowners.kayobe }}"
+          content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
-  # OpenStack team
   barbican:
     ignored_releases:
       - victoria
