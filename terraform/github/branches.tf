@@ -18,9 +18,12 @@ resource "github_branch_protection" "ansible_branch_protection" {
   # being able to merge. Also this should prevent outsiders from pushing to the protected branch, 
   # however, whilst they can open a pull request they shoud not be able to merge that would be 
   # upto the reviewers or codeowners.
-  push_restrictions = [
-    resource.github_team.organisation_teams["Developers"].node_id
-  ]
+  restrict_pushes {
+    blocks_creations = false
+    push_allowances = [
+      resource.github_team.organisation_teams["Developers"].node_id
+    ]
+  }
 
   required_status_checks {
     contexts = lookup(var.required_status_checks, each.key, { "default" : [] }).default
@@ -47,9 +50,12 @@ resource "github_branch_protection" "batch_branch_protection" {
     required_approving_review_count = 1
   }
 
-  push_restrictions = [
-    resource.github_team.organisation_teams["Developers"].node_id
-  ]
+  restrict_pushes {
+    blocks_creations = false
+    push_allowances = [
+      resource.github_team.organisation_teams["Developers"].node_id
+    ]
+  }
 
   required_status_checks {
     contexts = lookup(var.required_status_checks, each.key, { "default" : [] }).default
@@ -80,9 +86,12 @@ resource "github_branch_protection" "kayobe_branch_protection_py_3-6" {
     required_approving_review_count = 1
   }
 
-  push_restrictions = [
-    resource.github_team.organisation_teams["Developers"].node_id
-  ]
+  restrict_pushes {
+    blocks_creations = false
+    push_allowances = [
+      resource.github_team.organisation_teams["Developers"].node_id
+    ]
+  }
 
   required_status_checks {
     contexts = lookup(lookup(var.required_status_checks, each.key, {}), "stackhpc/[vwxy]*", lookup(var.required_status_checks, each.key, {
@@ -114,9 +123,12 @@ resource "github_branch_protection" "kayobe_branch_protection_zed" {
     required_approving_review_count = 1
   }
 
-  push_restrictions = [
-    resource.github_team.organisation_teams["Developers"].node_id
-  ]
+  restrict_pushes {
+    blocks_creations = false
+    push_allowances = [
+      resource.github_team.organisation_teams["Developers"].node_id
+    ]
+  }
 
   required_status_checks {
     contexts = lookup(lookup(var.required_status_checks, each.key, {}), "stackhpc/zed", lookup(var.required_status_checks, each.key, {
@@ -149,9 +161,12 @@ resource "github_branch_protection" "kayobe_branch_protection_antelope" {
     required_approving_review_count = 1
   }
 
-  push_restrictions = [
-    resource.github_team.organisation_teams["Developers"].node_id
-  ]
+  restrict_pushes {
+    blocks_creations = false
+    push_allowances = [
+      resource.github_team.organisation_teams["Developers"].node_id
+    ]
+  }
 
   required_status_checks {
     contexts = lookup(lookup(var.required_status_checks, each.key, {}), "stackhpc/2023.1", lookup(var.required_status_checks, each.key, {
@@ -184,9 +199,12 @@ resource "github_branch_protection" "kayobe_branch_protection_caracal" {
     required_approving_review_count = 1
   }
 
-  push_restrictions = [
-    resource.github_team.organisation_teams["Developers"].node_id
-  ]
+  restrict_pushes {
+    blocks_creations = false
+    push_allowances = [
+      resource.github_team.organisation_teams["Developers"].node_id
+    ]
+  }
 
   required_status_checks {
     contexts = lookup(lookup(var.required_status_checks, each.key, {}), "stackhpc/2024.1", lookup(var.required_status_checks, each.key, {
@@ -218,9 +236,12 @@ resource "github_branch_protection" "kayobe_branch_protection_epoxy" {
     required_approving_review_count = 1
   }
 
-  push_restrictions = [
-    resource.github_team.organisation_teams["Developers"].node_id
-  ]
+  restrict_pushes {
+    blocks_creations = false
+    push_allowances = [
+      resource.github_team.organisation_teams["Developers"].node_id
+    ]
+  }
 
   required_status_checks {
     contexts = lookup(lookup(var.required_status_checks, each.key, {}), "stackhpc/2025.1", lookup(var.required_status_checks, each.key, {
@@ -254,9 +275,12 @@ resource "github_branch_protection" "kayobe_branch_protection_master" {
     required_approving_review_count = 1
   }
 
-  push_restrictions = [
-    resource.github_team.organisation_teams["Developers"].node_id
-  ]
+  restrict_pushes {
+    blocks_creations = false
+    push_allowances = [
+      resource.github_team.organisation_teams["Developers"].node_id
+    ]
+  }
 
   required_status_checks {
     contexts = lookup(lookup(var.required_status_checks, each.key, {}), "stackhpc/master", lookup(var.required_status_checks, each.key, {
@@ -286,9 +310,12 @@ resource "github_branch_protection" "openstack_branch_protection_py_3-6" {
   allows_deletions                = false
   allows_force_pushes             = false
 
-  push_restrictions = [
-    resource.github_team.organisation_teams["Developers"].node_id
-  ]
+  restrict_pushes {
+    blocks_creations = false
+    push_allowances = [
+      resource.github_team.organisation_teams["Developers"].node_id
+    ]
+  }
 
   required_pull_request_reviews {
     dismiss_stale_reviews           = true
@@ -319,9 +346,12 @@ resource "github_branch_protection" "openstack_branch_protection_zed" {
   allows_deletions                = false
   allows_force_pushes             = false
 
-  push_restrictions = [
-    resource.github_team.organisation_teams["Developers"].node_id
-  ]
+  restrict_pushes {
+    blocks_creations = false
+    push_allowances = [
+      resource.github_team.organisation_teams["Developers"].node_id
+    ]
+  }
 
   required_pull_request_reviews {
     dismiss_stale_reviews           = true
@@ -354,9 +384,12 @@ resource "github_branch_protection" "openstack_branch_protection_antelope" {
   allows_deletions                = false
   allows_force_pushes             = false
 
-  push_restrictions = [
-    resource.github_team.organisation_teams["Developers"].node_id
-  ]
+  restrict_pushes {
+    blocks_creations = false
+    push_allowances = [
+      resource.github_team.organisation_teams["Developers"].node_id
+    ]
+  }
 
   required_pull_request_reviews {
     dismiss_stale_reviews           = true
@@ -389,9 +422,12 @@ resource "github_branch_protection" "openstack_branch_protection_caracal" {
   allows_deletions                = false
   allows_force_pushes             = false
 
-  push_restrictions = [
-    resource.github_team.organisation_teams["Developers"].node_id
-  ]
+  restrict_pushes {
+    blocks_creations = false
+    push_allowances = [
+      resource.github_team.organisation_teams["Developers"].node_id
+    ]
+  }
 
   required_pull_request_reviews {
     dismiss_stale_reviews           = true
@@ -423,9 +459,12 @@ resource "github_branch_protection" "openstack_branch_protection_epoxy" {
   allows_deletions                = false
   allows_force_pushes             = false
 
-  push_restrictions = [
-    resource.github_team.organisation_teams["Developers"].node_id
-  ]
+  restrict_pushes {
+    blocks_creations = false
+    push_allowances = [
+      resource.github_team.organisation_teams["Developers"].node_id
+    ]
+  }
 
   required_pull_request_reviews {
     dismiss_stale_reviews           = true
@@ -458,9 +497,12 @@ resource "github_branch_protection" "openstack_branch_protection_master" {
   allows_deletions                = false
   allows_force_pushes             = false
 
-  push_restrictions = [
-    resource.github_team.organisation_teams["Developers"].node_id
-  ]
+  restrict_pushes {
+    blocks_creations = false
+    push_allowances = [
+      resource.github_team.organisation_teams["Developers"].node_id
+    ]
+  }
 
   required_pull_request_reviews {
     dismiss_stale_reviews           = true
@@ -499,9 +541,12 @@ resource "github_branch_protection" "platform_branch_protection" {
     required_approving_review_count = 1
   }
 
-  push_restrictions = [
-    resource.github_team.organisation_teams["Developers"].node_id
-  ]
+  restrict_pushes {
+    blocks_creations = false
+    push_allowances = [
+      resource.github_team.organisation_teams["Developers"].node_id
+    ]
+  }
 
   required_status_checks {
     contexts = lookup(var.required_status_checks, each.key, { "default" : [] }).default
@@ -528,9 +573,12 @@ resource "github_branch_protection" "releasetrain_branch_protection" {
     required_approving_review_count = 1
   }
 
-  push_restrictions = [
-    resource.github_team.organisation_teams["Developers"].node_id
-  ]
+  restrict_pushes {
+    blocks_creations = false
+    push_allowances = [
+      resource.github_team.organisation_teams["Developers"].node_id
+    ]
+  }
 
   required_status_checks {
     contexts = lookup(var.required_status_checks, each.key, { "default" : [] }).default
@@ -557,9 +605,12 @@ resource "github_branch_protection" "smslab_branch_protection" {
     required_approving_review_count = 1
   }
 
-  push_restrictions = [
-    resource.github_team.organisation_teams["Developers"].node_id
-  ]
+  restrict_pushes {
+    blocks_creations = false
+    push_allowances = [
+      resource.github_team.organisation_teams["Developers"].node_id
+    ]
+  }
 
   required_status_checks {
     contexts = lookup(var.required_status_checks, each.key, { "default" : [] }).default
