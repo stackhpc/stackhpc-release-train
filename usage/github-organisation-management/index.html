@@ -1,0 +1,902 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://stackhpc.github.io/stackhpc-release-train/usage/github-organisation-management/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-8.5.10">
+    
+    
+      
+        <title>GitHub Organisation Management - StackHPC Release Train</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.975780f9.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ef5552">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#usage-github-organisation-management" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="StackHPC Release Train" class="md-header__button md-logo" aria-label="StackHPC Release Train" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            StackHPC Release Train
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              GitHub Organisation Management
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/stackhpc/stackhpc-release-train/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="StackHPC Release Train" class="md-nav__button md-logo" aria-label="StackHPC Release Train" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    StackHPC Release Train
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/stackhpc/stackhpc-release-train/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/" class="md-nav__link">
+        Architecture
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Usage
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Usage" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Usage
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content-howto/" class="md-nav__link">
+        Content management HOWTO
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content-workflows/" class="md-nav__link">
+        Content management workflows
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../access/" class="md-nav__link">
+        Access control
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../source-code-ci/" class="md-nav__link">
+        Source code CI
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          GitHub Organisation Management
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        GitHub Organisation Management
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#making-changes" class="md-nav__link">
+    Making Changes
+  </a>
+  
+    <nav class="md-nav" aria-label="Making Changes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-plan-apply" class="md-nav__link">
+    Import, Plan &amp; Apply
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importing-resources" class="md-nav__link">
+    Importing Resources
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-member-to-team" class="md-nav__link">
+    Adding Member to Team
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-repository-to-team" class="md-nav__link">
+    Adding Repository to Team
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removing-resources" class="md-nav__link">
+    Removing Resources
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#renaming-resources" class="md-nav__link">
+    Renaming Resources
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stackhpc-release-train-tf-bot" class="md-nav__link">
+    StackHPC Release Train TF bot
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../secrets/" class="md-nav__link">
+        Secrets
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notifications/" class="md-nav__link">
+        Notifications
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Operations
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Operations" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Operations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operations/ark/" class="md-nav__link">
+        Ark
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operations/test-pulp/" class="md-nav__link">
+        Test Pulp
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operations/github/" class="md-nav__link">
+        GitHub
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        Contributing
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#making-changes" class="md-nav__link">
+    Making Changes
+  </a>
+  
+    <nav class="md-nav" aria-label="Making Changes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-plan-apply" class="md-nav__link">
+    Import, Plan &amp; Apply
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importing-resources" class="md-nav__link">
+    Importing Resources
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-member-to-team" class="md-nav__link">
+    Adding Member to Team
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-repository-to-team" class="md-nav__link">
+    Adding Repository to Team
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removing-resources" class="md-nav__link">
+    Removing Resources
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#renaming-resources" class="md-nav__link">
+    Renaming Resources
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stackhpc-release-train-tf-bot" class="md-nav__link">
+    StackHPC Release Train TF bot
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://github.com/stackhpc/stackhpc-release-train/edit/master/docs/usage/github-organisation-management.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+<h1 id="usage-github-organisation-management">Usage - GitHub Organisation Management<a class="headerlink" href="#usage-github-organisation-management" title="Permanent link">&para;</a></h1>
+<p>With the the ever growing number of repositories related to StackHPC Release Train, it is important that we can manage all of the repositories in an automated manner.
+To achieve this we have opted to use <a href="https://www.terraform.io/">Terraform</a> and its <a href="https://registry.terraform.io/providers/integrations/github/latest/docs">GitHub Provider</a> to automate the configuration of StackHPC's <a href="https://github.com/stackhpc/">GitHub profile</a> and <a href="https://github.com/orgs/stackhpc/repositories">repositories</a>.</p>
+<p>By using Terraform's GitHub Provider we can configure various aspects of GitHub ranging from enforcing branch protection rules across repositories, creating teams and assigning members in addition to configuring how pull requests (PRs) are reviewed and merged.</p>
+<p>The Terraform configuration can be found within the <a href="https://github.com/stackhpc/stackhpc-release-train">stackhpc-release-train</a> repository under <code>terraform/github</code>.
+It is expected that all <code>plans</code> and <code>applies</code> are carried out within GitHub Actions where the <code>statefile</code> is stored within <a href="https://cloud.hashicorp.com/products/terraform">Terraform Cloud</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Access to Terraform Cloud is limited due to team size restrictions if you need access to Terraform Cloud and don't have access already then feel free to request access in the appropriate Slack channel.</p>
+</div>
+<p>GitHub authentication is handled using a GitHub app.</p>
+<h2 id="making-changes">Making Changes<a class="headerlink" href="#making-changes" title="Permanent link">&para;</a></h2>
+<p>In this section we shall look at how you may modify the Terraform configuration to suit your needs and requirements.
+This will not cover how to increase the use of the GitHub Provider to configure others elements of the organisation.
+However, if you need to use additional parts of the provider please consult the provider's <a href="https://registry.terraform.io/providers/integrations/github/latest/docs">documention</a>.</p>
+<h3 id="import-plan-apply">Import, Plan &amp; Apply<a class="headerlink" href="#import-plan-apply" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Terraform by default will attempt to delete resources that are contained within its statefile yet no longer represented in the plan.
+This is not ideal for the use case of managing repositories.
+Therefore, <code>lifecycle prevent destroy</code> has been applied to all resources within this configuration.
+This will cause any plan that attempts to delete a resource to fail.
+Therefore, if you have a reason to remove and delete something such as team member then this must be done as described in <em>Removing Resources</em></p>
+</div>
+<p>The workflow for altering the configuration is as follows; </p>
+<ol>
+<li>
+<p>Make the change to <code>terraform.tfvars.json</code> and potentially one of the <code>.tf</code> files</p>
+</li>
+<li>
+<p>Open a PR which shall trigger a GitHub workflow which shall produce a plan detailing the changes Terraform shall make</p>
+</li>
+<li>
+<p>Review the changes</p>
+</li>
+<li>
+<p>If any of the changes involve <em>adopting</em> an existing repository or team then you must run <code>terraform_github_import.yml</code>, see below for details</p>
+</li>
+<li>
+<p>If you do import existing resources then you must produce a new plan which currently can achieved by closing the PR and reopening it</p>
+</li>
+<li>
+<p>Merge once the PR has been approved this will trigger <code>terraform-github.yml</code> to perform the <code>apply</code></p>
+</li>
+</ol>
+<h3 id="importing-resources">Importing Resources<a class="headerlink" href="#importing-resources" title="Permanent link">&para;</a></h3>
+<p>Whilst Terraform is capable of creating resources it is expected that a lot of the resources already exist and therefore need to be imported before Terraform can apply the configuration rules.
+To import a resource we have made available a convenient GitHub Workflow called <code>Terrform GitHub Import</code> which will identify what resources are referenced within the <code>configuration</code> and are missing from the <code>statefile</code>.</p>
+<p>To use the workflow you will navigate to <a href="https://github.com/stackhpc/stackhpc-release-train/actions/workflows/terraform-github-import.yml"><code>Terraform GitHub Import</code></a> under the<code>Actions</code> tab for stackhpc-release-train.
+Once there you can manually dispatch a workflow where you must specify the branch for which the workflow will run from this should be the branch that has an open PR for.
+Also you can specify if the import should perform a dry run to provide reassurance before making actually changes to the statefile.
+You must run the workflow again with <code>Dry Run</code> unticked.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>As we currently use one workspace to manage the <code>statefile</code> it can lead to difficulties when attempting to make multiple changes across different PRs.
+Therefore, it is currently recommended that merges are made shortly after an import has taken place.
+Otherwise it will negatively impact the plans produced due to conflicts between statefile and the various configurations.
+Also note that if an import has been carried in error then you must make sure to remove that from the statefile which can achieved using the instructions found in <em>Removing Resources</em></p>
+</div>
+<h3 id="adding-member-to-team">Adding Member to Team<a class="headerlink" href="#adding-member-to-team" title="Permanent link">&para;</a></h3>
+<p>To add a member to a team you must add the new member's <code>username</code> to the the <code>users</code> object within the specific team within <code>teams</code> object.
+Majority of users can be placed within the <code>members</code> object however certain users such as those that are administrators of the organisation must be placed within the <code>maintainers</code> object.
+Also either the <code>maintainers</code> or <code>members</code> must contain at least one entry this is due to a limitation of the provider.
+A fix would be to include <code>stackhpc-ci</code> if there is currently no one in the team.</p>
+<p><em><sub><sup>terraform/github/terraform.tfvars.json</sup></sub></em>
+<div class="highlight"><pre><span></span><code>&quot;Batch&quot;: {
+  &quot;description&quot;: &quot;Team responsible for Batch development&quot;,
+  &quot;privacy&quot;: &quot;closed&quot;,
+  &quot;users&quot;: {
+    &quot;maintainers&quot;: [],
+    &quot;members&quot;: [
+      &quot;jackhodgkiss&quot; # New user added to team
+    ]
+  }
+}
+</code></pre></div></p>
+<h3 id="adding-repository-to-team">Adding Repository to Team<a class="headerlink" href="#adding-repository-to-team" title="Permanent link">&para;</a></h3>
+<p>To add a repository to a team you can append the name of the repository to the desired team within the <code>repositories</code> object.</p>
+<p><em><sub><sup>terraform/github/terraform.tfvars.json</sup></sub></em>
+<div class="highlight"><pre><span></span><code>&quot;repositories&quot;: {
+  &quot;Ansible&quot;: [
+    &quot;ansible-role-os-networks&quot;,
+    ...
+    &quot;ansible-collection-pulp&quot;,
+    &quot;ansible-collection-hashicorp&quot;,
+    &quot;ansible-collection-openstack-ops&quot;,
+    &quot;ansible-role-vxlan&quot; # New repository added to team
+]
+</code></pre></div></p>
+<h3 id="removing-resources">Removing Resources<a class="headerlink" href="#removing-resources" title="Permanent link">&para;</a></h3>
+<p>To remove a resource you must first identify and delete the entry from within <code>terraform.tfvars.json</code>.
+Once done you can open a PR which will trigger the <code>terrform-github</code> workflow which will most likely return an error due to the attempt to delete the resource via Terraform being block by the <code>lifecycle prevent_destroy</code> attribute.
+To resolve this issue you will need access to the Terraform Cloud GitHub workspace, if you don't have access then you may request access or have someone who does have access to perform the removal on your behalf.</p>
+<p>Prior to remove a resource you must ensure that you have the Terraform CLI tools and have authenticated with Terraform Cloud, instructions for this can be found <a href="https://www.terraform.io/cli/commands/login">here</a>.
+The steps for removing a resource such as the <code>ansible-role-vxlan</code> for the <code>Ansible</code> team are as follows;</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:stackhpc/stackhpc-release-train.git
+<span class="nb">cd</span><span class="w"> </span>stackhpc-release-train/terraform/github
+terraform<span class="w"> </span>state<span class="w"> </span>rm<span class="w"> </span><span class="s1">&#39;github_branch_protection.ansible_branch_protection[&quot;ansible-role-vxlan&quot;]&#39;</span>
+</code></pre></div>
+<p>The general form for <code>state rm</code> is <code>${resource_address}["resource_id"]</code>.
+You can found out more about the <code>state rm</code> command here <a href="https://www.terraform.io/cli/commands/state/rm">here</a>.
+You may also find documentation about the GitHub provider which may provide insight into how the resources are composed <a href="https://registry.terraform.io/providers/integrations/github/latest/docs">here</a></p>
+<h3 id="renaming-resources">Renaming Resources<a class="headerlink" href="#renaming-resources" title="Permanent link">&para;</a></h3>
+<p>To rename a resource you must first identify and rename the entry within <code>terraform.tfvars.json</code>.
+Without further intervention Terraform will see this as deletion of one resource and creation of another, and would typically return a failure when trying to create the resource that already exists.
+To resolve this issue you will need access to the Terraform Cloud GitHub workspace, if you don't have access then you may request access or have someone who does have access to perform the rename on your behalf.</p>
+<p>Prior to renaming a resource you must ensure that you have the Terraform CLI tools and have authenticated with Terraform Cloud, instructions for this can be found <a href="https://www.terraform.io/cli/commands/login">here</a>.</p>
+<p>In the following example we will rename the <code>ansible-role-os-networks</code> repository to <code>os-networks</code>.</p>
+<p>Clone this repository and change to the <code>terraform/github</code> directory:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:stackhpc/stackhpc-release-train.git
+<span class="nb">cd</span><span class="w"> </span>stackhpc-release-train/terraform/github
+</code></pre></div>
+<p>Rename the <code>ansible-role-os-networks</code> entry in <code>terraform.tfvars.json</code>.
+Commit the change and push to a branch on GitHub.</p>
+<p>Create a script named <code>rename-repo.sh</code> with the following content:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash -eux</span>
+
+<span class="nv">repo_src</span><span class="o">=</span><span class="si">${</span><span class="nv">1</span><span class="p">:?Repo source</span><span class="si">}</span>
+<span class="nv">repo_dst</span><span class="o">=</span><span class="si">${</span><span class="nv">2</span><span class="p">:?Repo destination</span><span class="si">}</span>
+
+<span class="c1"># e.g. -dry-run</span>
+<span class="nv">args</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+
+<span class="c1"># This resource list will vary depending on the repository.</span>
+<span class="c1"># In particurlar this may include the branch protection and team associations.</span>
+<span class="nv">resources</span><span class="o">=</span><span class="s2">&quot;github_branch_protection.ansible_branch_protection \</span>
+<span class="s2">github_issue_label.community_files_label \</span>
+<span class="s2">github_issue_label.stackhpc_ci_label \</span>
+<span class="s2">github_issue_label.workflows_label \</span>
+<span class="s2">github_team_repository.admin_repositories \</span>
+<span class="s2">github_team_repository.ansible_repositories \</span>
+<span class="s2">github_team_repository.developers_repositories \</span>
+<span class="s2">github_repository.repositories&quot;</span>
+
+<span class="k">for</span><span class="w"> </span>resource<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nv">$resources</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span>terraform<span class="w"> </span>state<span class="w"> </span>mv<span class="w"> </span><span class="nv">$args</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$resource</span><span class="s2">[\&quot;</span><span class="nv">$repo_src</span><span class="s2">\&quot;]&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$resource</span><span class="s2">[\&quot;</span><span class="nv">$repo_dst</span><span class="s2">\&quot;]&quot;</span>
+<span class="k">done</span>
+</code></pre></div>
+<p>Edit the <code>resources</code> list based on the output of <code>terraform state list | grep &lt;repo&gt;</code></p>
+<p>Make the script executable:</p>
+<div class="highlight"><pre><span></span><code>chmod<span class="w"> </span>+x<span class="w"> </span>rename-repo.sh
+</code></pre></div>
+<p>Run the script to rename the repository. Note that this will directly update the state file in Terraform cloud:</p>
+<div class="highlight"><pre><span></span><code>./rename-repo.sh<span class="w"> </span>ansible-role-os-networks<span class="w"> </span>os-networks
+</code></pre></div>
+<p>Create a PR for the changes.</p>
+<h2 id="stackhpc-release-train-tf-bot">StackHPC Release Train TF bot<a class="headerlink" href="#stackhpc-release-train-tf-bot" title="Permanent link">&para;</a></h2>
+<p>GitHub authentication is handled using the <a href="https://github.com/organizations/stackhpc/settings/apps/stackhpc-release-train-tf-bot">StackHPC Release Train TF bot App</a>.
+This app has a private key that is registered as a <a href="../secrets/">GitHub secret</a>.
+The app is <a href="https://github.com/organizations/stackhpc/settings/installations/27194723">installed</a> on the <code>stackhpc</code> organisation, with access to all repositories.
+It has only the necessary permissions, but these are rather broad.
+GitHub apps are documented <a href="https://docs.github.com/en/apps/overview">here</a>.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../source-code-ci/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Source code CI" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Source code CI
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../secrets/" class="md-footer__link md-footer__link--next" aria-label="Next: Secrets" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Secrets
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections"], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
+      
+    
+    
+  </body>
+</html>
