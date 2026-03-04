@@ -676,7 +676,7 @@ rpm_package_repos:
   - name: Open OnDemand Web Repo v4.1 - EL9
     url: https://yum.osc.edu/ondemand/4.1/web/el9/x86_64
     base_path: ondemand/4.1/web/el9/x86_64/
-    short_name: ondemand_web_el9_v4.1
+    short_name: ondemand_web_el9_4_1
     sync_group: third_party
     distribution_name: ondemand-web-el9-v4.1-
 
