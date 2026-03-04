@@ -678,7 +678,7 @@ rpm_package_repos:
     base_path: ondemand/4.1/web/el9/x86_64/
     short_name: ondemand_web_el9_4_1
     sync_group: third_party
-    distribution_name: ondemand-web-el9-v4.1-
+    distribution_name: ondemand-web-el9-4.1-
 
   # Non-distro-specific RPMs
   # TurboVNC
