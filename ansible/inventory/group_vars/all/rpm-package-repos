@@ -127,11 +127,17 @@ rpm_package_repos:
     distribution_name: cernvmfs-el8-cfg-
   # Open OnDemand
   - name: Open OnDemand Web Repo - EL8
-    url: https://yum.osc.edu/ondemand/4.1/web/el8/x86_64
-    base_path: ondemand/4.1/web/el8/x86_64/
+    url: https://yum.osc.edu/ondemand/4.0/web/el8/x86_64
+    base_path: ondemand/4.0/web/el8/x86_64/
     short_name: ondemand_web_el8
     sync_group: third_party
     distribution_name: ondemand-web-el8-
+  - name: Open OnDemand Web Repo v4.1 - EL8
+    url: https://yum.osc.edu/ondemand/4.1/web/el8/x86_64
+    base_path: ondemand/4.1/web/el8/x86_64/
+    short_name: ondemand_web_el8_4_1
+    sync_group: third_party
+    distribution_name: ondemand-web-el8-4.1
 
   # Base Rocky Linux 8.10 repositories (Slurm appliance)
   - name: Rocky Linux 8.10 - AppStream
@@ -662,11 +668,17 @@ rpm_package_repos:
     distribution_name: almalinux-9-proxysql-2.7-
   # Open OnDemand
   - name: Open OnDemand Web Repo - EL9
-    url: https://yum.osc.edu/ondemand/4.1/web/el9/x86_64
-    base_path: ondemand/4.1/web/el9/x86_64/
+    url: https://yum.osc.edu/ondemand/4.0/web/el9/x86_64
+    base_path: ondemand/4.0/web/el9/x86_64/
     short_name: ondemand_web_el9
     sync_group: third_party
     distribution_name: ondemand-web-el9-
+  - name: Open OnDemand Web Repo v4.1 - EL9
+    url: https://yum.osc.edu/ondemand/4.1/web/el9/x86_64
+    base_path: ondemand/4.1/web/el9/x86_64/
+    short_name: ondemand_web_el9_v4.1
+    sync_group: third_party
+    distribution_name: ondemand-web-el9-v4.1
 
   # Non-distro-specific RPMs
   # TurboVNC
