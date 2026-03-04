@@ -127,8 +127,8 @@ rpm_package_repos:
     distribution_name: cernvmfs-el8-cfg-
   # Open OnDemand
   - name: Open OnDemand Web Repo - EL8
-    url: https://yum.osc.edu/ondemand/4.0/web/el8/x86_64
-    base_path: ondemand/4.0/web/el8/x86_64/
+    url: https://yum.osc.edu/ondemand/4.1/web/el8/x86_64
+    base_path: ondemand/4.1/web/el8/x86_64/
     short_name: ondemand_web_el8
     sync_group: third_party
     distribution_name: ondemand-web-el8-
@@ -662,8 +662,8 @@ rpm_package_repos:
     distribution_name: almalinux-9-proxysql-2.7-
   # Open OnDemand
   - name: Open OnDemand Web Repo - EL9
-    url: https://yum.osc.edu/ondemand/4.0/web/el9/x86_64
-    base_path: ondemand/4.0/web/el9/x86_64/
+    url: https://yum.osc.edu/ondemand/4.1/web/el9/x86_64
+    base_path: ondemand/4.1/web/el9/x86_64/
     short_name: ondemand_web_el9
     sync_group: third_party
     distribution_name: ondemand-web-el9-
