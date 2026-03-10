@@ -921,20 +921,23 @@ rpm_package_repos:
     short_name: rhel10_rabbitmq_erlang_27_aarch64
     sync_group: rocky_10_aarch64
     distribution_name: rhel10-rabbitmq-erlang-27-aarch64-
-  # Fluent Package v6 for RHEL 10
-  - name: Fluent Package v6 - RHEL 10
-    url: https://fluentd.cdn.cncf.io/lts/6/redhat/10/x86_64/
-    base_path: fluentd/lts/6/redhat/10/x86_64/
-    short_name: rhel_10_fluent_6
-    sync_group: third_party
-    distribution_name: rhel_10_fluent-6-
-  # Fluent Package v6 for RHEL 10 (aarch64)
-  - name: Fluent Package v6 - RHEL 10 (aarch64)
-    url: https://fluentd.cdn.cncf.io/lts/6/redhat/10/aarch64/
-    base_path: fluentd/lts/6/redhat/10/aarch64/
-    short_name: rhel_10_fluent_6_aarch64
-    sync_group: third_party
-    distribution_name: rhel_10_fluent-6-aarch64-
+  # FIXME: Fluent package does not sync properly due to broken checksums, so is
+  # disabled for now. See issue
+  # https://github.com/fluent/fluent-package-builder/issues/994 for details
+  # # Fluent Package v6 for RHEL 10
+  # - name: Fluent Package v6 - RHEL 10
+  #   url: https://fluentd.cdn.cncf.io/lts/6/redhat/10/x86_64/
+  #   base_path: fluentd/lts/6/redhat/10/x86_64/
+  #   short_name: rhel_10_fluent_6
+  #   sync_group: third_party
+  #   distribution_name: rhel_10_fluent-6-
+  # # Fluent Package v6 for RHEL 10 (aarch64)
+  # - name: Fluent Package v6 - RHEL 10 (aarch64)
+  #   url: https://fluentd.cdn.cncf.io/lts/6/redhat/10/aarch64/
+  #   base_path: fluentd/lts/6/redhat/10/aarch64/
+  #   short_name: rhel_10_fluent_6_aarch64
+  #   sync_group: third_party
+  #   distribution_name: rhel_10_fluent-6-aarch64-
   # MariaDB 10.11 for RHEL 10
   - name: MariaDB 10.11 - RHEL 10
     url: https://dlm.mariadb.com/repo/mariadb-server/10.11/yum/rhel/10/x86_64
