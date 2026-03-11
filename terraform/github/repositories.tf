@@ -8,10 +8,11 @@ resource "github_repository" "repositories" {
   allow_auto_merge       = true
   lifecycle {
     ignore_changes = [
+      allow_update_branch,
       description,
       homepage_url,
-      private,
       visibility,
+      has_discussions,
       has_issues,
       has_projects,
       has_wiki,
@@ -20,14 +21,12 @@ resource "github_repository" "repositories" {
       auto_init,
       gitignore_template,
       license_template,
-      default_branch,
       archived,
       archive_on_destroy,
       pages,
       topics,
       template,
       vulnerability_alerts,
-      ignore_vulnerability_alerts_during_read
     ]
     prevent_destroy = true
   }
