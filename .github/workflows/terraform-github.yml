@@ -23,7 +23,8 @@ jobs:
         working-directory: "./terraform/github/"
     steps:
       - uses: actions/checkout@v6
-      - uses: hashicorp/setup-terraform@v3
+
+      - uses: hashicorp/setup-terraform@v4
         with:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
