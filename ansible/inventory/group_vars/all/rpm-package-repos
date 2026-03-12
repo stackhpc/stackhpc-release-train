@@ -578,13 +578,16 @@ rpm_package_repos:
     short_name: rhel_9_influxdb
     sync_group: third_party
     distribution_name: influxdb-rhel-9-
-  # InfluxDB for RHEL 9 (aarch64)
-  - name: InfluxDB - RHEL 9 (aarch64)
-    url: https://repos.influxdata.com/rhel/9/aarch64/stable/
-    base_path: influxdb/rhel/9/aarch64/stable/
-    short_name: rhel_9_influxdb_aarch64
-    sync_group: third_party
-    distribution_name: influxdb-rhel-9-aarch64-
+  # FIXME: aarch64 InfluxDB RPMs don't sync properly, some RPMs are missing, so
+  # is disabled for now. See issue
+  # https://github.com/influxdata/influxdb/issues/27277 for details
+  # # InfluxDB for RHEL 9 (aarch64)
+  # - name: InfluxDB - RHEL 9 (aarch64)
+  #   url: https://repos.influxdata.com/rhel/9/aarch64/stable/
+  #   base_path: influxdb/rhel/9/aarch64/stable/
+  #   short_name: rhel_9_influxdb_aarch64
+  #   sync_group: third_party
+  #   distribution_name: influxdb-rhel-9-aarch64-
   # MLNX OFED 5.9-0.5.6.0 RHEL 9.1 repository
   - name: Mellanox Technologies mlnx_ofed 5.9-0.5.6.0
     url: https://linux.mellanox.com/public/repo/mlnx_ofed/5.9-0.5.6.0/rhel9.1/x86_64/
@@ -973,13 +976,16 @@ rpm_package_repos:
     short_name: rhel_10_influxdb
     sync_group: third_party
     distribution_name: influxdb-rhel-10-
-  # InfluxDB for RHEL 10 (aarch64)
-  - name: InfluxDB - RHEL 10 (aarch64)
-    url: https://repos.influxdata.com/rhel/10/aarch64/stable/
-    base_path: influxdb/rhel/10/aarch64/stable/
-    short_name: rhel_10_influxdb_aarch64
-    sync_group: third_party
-    distribution_name: influxdb-rhel-10-aarch64-
+  # FIXME: aarch64 InfluxDB RPMs don't sync properly, some RPMs are missing, so
+  # is disabled for now. See issue
+  # https://github.com/influxdata/influxdb/issues/27277 for details
+  # # InfluxDB for RHEL 10 (aarch64)
+  # - name: InfluxDB - RHEL 10 (aarch64)
+  #   url: https://repos.influxdata.com/rhel/10/aarch64/stable/
+  #   base_path: influxdb/rhel/10/aarch64/stable/
+  #   short_name: rhel_10_influxdb_aarch64
+  #   sync_group: third_party
+  #   distribution_name: influxdb-rhel-10-aarch64-
   # OpenSearch 3.x
   - name: OpenSearch 3.x
     url: https://artifacts.opensearch.org/releases/bundle/opensearch/3.x/yum
