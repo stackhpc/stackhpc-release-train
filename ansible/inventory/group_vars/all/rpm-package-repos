@@ -882,6 +882,20 @@ rpm_package_repos:
     sync_group: rocky_10_aarch64
     distribution_name: centos-stream-10-openstack-epoxy-aarch64-
 
+  # LTS versions of OVN and OVS (needed for Epoxy on Rocky 10)
+  - name: CentOS Stream 10 - OVN/OVS LTS for Epoxy
+    url: https://download.copr.fedorainfracloud.org/results/@ovn-lts/ovn-lts/centos-stream-10-x86_64/
+    base_path: centos/10-stream/ovn/x86_64/ovn-lts/
+    short_name: centos_stream_10_ovn_lts
+    sync_group: centos
+    distribution_name: centos-stream-10-ovn-lts-
+  - name: CentOS Stream 10 - OVN/OVS LTS for Epoxy (aarch64)
+    url: https://download.copr.fedorainfracloud.org/results/@ovn-lts/ovn-lts/centos-stream-10-aarch64/
+    base_path: centos/10-stream/ovn/aarch64/ovn-lts/
+    short_name: centos_stream_10_ovn_lts_aarch64
+    sync_group: rocky_10_aarch64
+    distribution_name: centos-stream-10-ovn-lts-aarch64-
+
   # ELRepo 10 repository
   - name: ELRepo.org Community Enterprise Linux Repository - el10
     # Use an HTTPS mirror rather than http from mirrorlist
