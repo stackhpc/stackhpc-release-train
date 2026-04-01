@@ -23,7 +23,7 @@ jobs:
           sudo apt update
 
       - name: Install yq
-        uses: dcarbone/install-yq-action@v1.3.1
+        uses: dcarbone/install-yq-action@4075b4dca348d74bd83f2bf82d30f25d7c54539b # v1.3.1
 
       - name: Create sync matrix
         id: matrix-build
