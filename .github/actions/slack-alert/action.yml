@@ -36,6 +36,7 @@ runs:
       with:
         payload: |
           {
+            "webhook-type": "incoming-webhook",  
             "channel-id": "${{ env.SLACK_CHANNEL_ID }}",
             "inputs": "${{ env.INPUTS }}",
             "message": "${{ env.MESSAGE }}",
