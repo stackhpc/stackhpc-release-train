@@ -53,7 +53,7 @@ jobs:
           vault-password-file: ${{ env.ANSIBLE_VAULT_PASSWORD_FILE }}
 
       - name: Sync and publish package repositories in Ark
-        uses: nick-fields/retry@v3
+        uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4.0.0
         with:
           timeout_minutes: 360
           max_attempts: 2
@@ -99,7 +99,7 @@ jobs:
           vault-password-file: ${{ env.ANSIBLE_VAULT_PASSWORD_FILE }}
 
       - name: Sync and publish package repositories in test
-        uses: nick-fields/retry@v3
+        uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4.0.0
         with:
           timeout_minutes: 360
           max_attempts: 2
