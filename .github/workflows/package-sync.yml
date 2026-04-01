@@ -80,7 +80,7 @@ jobs:
             package_sync_group: ${{ inputs.package_sync_group }}\n
           slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
           slack-channel-id: ${{ vars.SLACK_CHANNEL_ID }}
-        if: failure()
+        if: failure() || success()
 
   package-sync-test:
     name: Sync package repositories in test
