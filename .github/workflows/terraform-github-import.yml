@@ -10,6 +10,8 @@ on:
         default: true
 env:
   TF_VAR_GITHUB_APP_PEM_FILE: ${{ secrets.TF_VAR_GITHUB_APP_PEM_FILE }}
+  AWS_ACCESS_KEY_ID: ${{ secrets.TF_S3_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.TF_S3_SECRET_ACCESS_KEY }}
 jobs:
   terraform-github-import:
     name: Terraform GitHub Import
@@ -27,7 +29,6 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@5e8dbf3c6d9deaf4193ca7a8fb23f2ac83bb6c85 # v4.0.0
         with:
-          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
           terraform_wrapper: false
       - name: Terraform fmt
         id: fmt
