@@ -318,30 +318,6 @@ rpm_package_repos:
     short_name: centos_stream_9_docker_aarch64
     sync_group: rocky_9_aarch64
     distribution_name: docker-ce-for-centos-9-aarch64-
-  # Openstack Yoga for CentOS Stream 9
-  - name: CentOS Stream 9 - OpenStack Yoga
-    url:  https://mirror.stream.centos.org/SIGs/9-stream/cloud/x86_64/openstack-yoga/
-    base_path: centos/9-stream/cloud/x86_64/openstack-yoga/
-    short_name: centos_stream_9_openstack_yoga
-    sync_group: centos
-    distribution_name: centos-stream-9-openstack-yoga-
-    sync: false
-  # Openstack Zed for CentOS Stream 9
-  - name: CentOS Stream 9 - OpenStack Zed
-    url:  https://mirror.stream.centos.org/SIGs/9-stream/cloud/x86_64/openstack-zed/
-    base_path: centos/9-stream/cloud/x86_64/openstack-zed/
-    short_name: centos_stream_9_openstack_zed
-    sync_group: centos
-    distribution_name: centos-stream-9-openstack-zed-
-    sync: false
-  # OpenStack Antelope for CentOS Stream 9
-  - name: CentOS Stream 9 - OpenStack Antelope
-    url: https://mirror.stream.centos.org/SIGs/9-stream/cloud/x86_64/openstack-antelope/
-    base_path: centos/9-stream/cloud/x86_64/openstack-antelope/
-    short_name: centos_stream_9_openstack_antelope
-    sync_group: centos
-    distribution_name: centos-stream-9-openstack-antelope-
-    sync: false
   # OpenStack Caracal for CentOS Stream 9
   - name: CentOS Stream 9 - OpenStack Caracal
     url: https://mirror.stream.centos.org/SIGs/9-stream/cloud/x86_64/openstack-caracal/
