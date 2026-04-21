@@ -303,6 +303,19 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
+  manila:
+    ignored_releases:
+      - victoria
+      - wallaby
+      - xena
+      - zed
+      - 2023.1
+      - 2024.1
+      - master
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
   networking-generic-switch:
     ignored_releases:
       - victoria
