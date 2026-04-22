@@ -74,6 +74,7 @@ kolla_container_images:
   - mariadb-clustercheck
   - mariadb-server
   - memcached
+  - multipathd
   - neutron-base
   - neutron-bgp-dragent
   - neutron-dhcp-agent
