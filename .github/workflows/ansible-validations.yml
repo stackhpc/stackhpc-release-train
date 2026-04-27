@@ -1,29 +1,26 @@
 ---
-name: Ansible Validations
+name: Validate source repositories
 
 on:
   push:
     branches:
       - main
   pull_request:
-env:
-  ANSIBLE_FORCE_COLOR: true
-  ANSIBLE_VAULT_PASSWORD_FILE: ${{ github.workspace }}/vault-pass
 jobs:
-  ansible-validations:
-    name: Ansible Validations
+  validate-source-repos:
+    name: Validate source repositories
+
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
-      - name: Setup Release Train & dependencies
-        uses: ./.github/actions/setup
+      # Python version must be pinned because of issue with Ubuntu permissions
+      # See https://github.com/actions/runner-images/issues/11499  
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
-          vault-password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
-          vault-password-file: ${{ env.ANSIBLE_VAULT_PASSWORD_FILE }}
+          python-version: '3.12' 
 
-      - name: Run Ansible validations
-        run: |
-          ansible-playbook -i ansible/inventory \
-          ansible/validate-*.yml
+      - name: Validate source repositories
+        script: scripts/validate-source-repos.py
