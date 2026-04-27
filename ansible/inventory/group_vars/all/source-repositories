@@ -713,3 +713,32 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.release_train }}"
           dest: ".github/CODEOWNERS"
+  # SMSLab team
+  smslab-azimuth-config:
+    repository_type: "ansible"
+    workflows: []
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.sms_lab }}"
+          dest: ".github/CODEOWNERS"
+  smslab-config:
+    repository_type: "ansible"
+    workflows: []
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.sms_lab }}"
+          dest: ".github/CODEOWNERS"
+  smslab-kayobe-config:
+    repository_type: "ansible"
+    workflows: []
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.sms_lab }}"
+          dest: ".github/CODEOWNERS"
+  terraform-bastion:
+    repository_type: "single-branch"
+    workflows: []
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.sms_lab }}"
+          dest: ".github/CODEOWNERS"
