@@ -1,3 +1,35 @@
+resource "github_branch_protection" "admins_branch_protection" {
+  for_each      = toset(var.repositories["Admins"])
+  repository_id = data.github_repository.repositories[each.key].node_id
+
+  pattern                         = "master"
+  require_conversation_resolution = true
+  allows_deletions                = false
+  allows_force_pushes             = false
+
+  required_pull_request_reviews {
+    dismiss_stale_reviews           = true
+    require_code_owner_reviews      = true
+    required_approving_review_count = 1
+  }
+
+  restrict_pushes {
+    blocks_creations = false
+    push_allowances = [
+      resource.github_team.organisation_teams["Developers"].node_id
+    ]
+  }
+
+  required_status_checks {
+    contexts = lookup(var.required_status_checks, each.key, { "default" : [] }).default
+    strict   = false
+  }
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
 resource "github_branch_protection" "ansible_branch_protection" {
   for_each      = toset(var.repositories["Ansible"])
   repository_id = data.github_repository.repositories[each.key].node_id

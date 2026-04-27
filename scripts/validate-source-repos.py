@@ -38,11 +38,11 @@ def _extract_group_from_community_files(files):
             return content.strip('{ }').replace('_', '').split('.')[-1]
 
 
-def _sort_ans_repos_by_group(ans_repos):
+def _group_ans_repos_by_group(ans_repos):
     ans_repos_by_group = {}
     for repo in ans_repos:
-        files = ans_repos[repo]['community_files']
-        group = _extract_group_from_community_files(files)
+        group = _extract_group_from_community_files(
+            ans_repos[repo]['community_files'])
         if group in ans_repos_by_group:
             ans_repos_by_group[group].append(repo)
         else:
@@ -51,7 +51,7 @@ def _sort_ans_repos_by_group(ans_repos):
 
 
 def get_mismatched_repos(tf_repos, ans_repos, repos_missing):
-    ans_repos_new = _sort_ans_repos_by_group(ans_repos)
+    ans_repos_new = _group_ans_repos_by_group(ans_repos)
     tf_repos_new = {k.lower(): v for k, v in tf_repos.items()}
 
     mismatched_repos = []
@@ -77,10 +77,11 @@ def main():
                                             repos_missing)
 
     print('The following repos are assigned to different codeowner groups in '
-         'the Ansible source-repositories and the Terraform tfvars: '
-         f'{mismatched_repos}')
+          'the Ansible source-repositories and the Terraform tfvars: '
+          f'{mismatched_repos}')
 
     return len(repos_missing) > 0 or len(mismatched_repos) > 0
+
 
 if __name__ == "__main__":
     sys.exit(main())
