@@ -1,5 +1,5 @@
 ---
-name: Ansible Lint
+name: Validate source repositories
 
 on:
   push:
@@ -7,8 +7,8 @@ on:
       - main
   pull_request:
 jobs:
-  ansible-lint:
-    name: Ansible Lint
+  validate-source-repos:
+    name: Validate source repositories
 
     runs-on: ubuntu-latest
 
@@ -22,20 +22,5 @@ jobs:
         with:
           python-version: '3.12' 
 
-      - name: Install Ansible collections
-        run: |
-          ansible-galaxy collection install -r requirements.yml
-
-      - name: Install pip dependencies
-        run: |
-          pip install -r requirements.txt
-
-      - name: Install ansible-lint
-        run: |
-          pip install ansible-core==2.16.* ansible-lint==24.*
-
-      - name: Lint Ansible playbooks
-        run: |
-          ansible-lint -v --force-color ansible/*.yml
-        env:
-          ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+      - name: Validate source repositories
+        script: scripts/validate-source-repos.py
