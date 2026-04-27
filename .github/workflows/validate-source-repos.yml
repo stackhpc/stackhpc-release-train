@@ -1,0 +1,30 @@
+---
+name: Validate source repositories
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+jobs:
+  validate-source-repos:
+    name: Validate source repositories
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      # Python version must be pinned because of issue with Ubuntu permissions
+      # See https://github.com/actions/runner-images/issues/11499
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: '3.12'
+
+      - name: Install pip dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Validate source repositories
+        run: python3 scripts/validate-source-repos.py
