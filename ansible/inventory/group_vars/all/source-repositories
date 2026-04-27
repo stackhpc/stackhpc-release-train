@@ -26,6 +26,8 @@ ansible_workflows:
     - publish-role
 community_files:
   codeowners:
+    admins: |
+      * @stackhpc/admins
     ansible: |
       * @stackhpc/ansible
     batch: |
@@ -412,6 +414,14 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
+  # Admins team
+  terraform-bastion:
+    repository_type: "single-branch"
+    workflows: []
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.admins }}"
+          dest: ".github/CODEOWNERS"
   # Ansible team
   ansible-role-libvirt-host:
     repository_type: "ansible"
@@ -730,13 +740,6 @@ source_repositories:
           dest: ".github/CODEOWNERS"
   smslab-kayobe-config:
     repository_type: "ansible"
-    workflows: []
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.sms_lab }}"
-          dest: ".github/CODEOWNERS"
-  terraform-bastion:
-    repository_type: "single-branch"
     workflows: []
     community_files:
       - codeowners:
