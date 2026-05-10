@@ -188,6 +188,18 @@ rpm_package_repos:
     short_name: rocky_8_10_powertools_source
     sync_group: rocky_8_source
     distribution_name: rocky-8.10-powertools-source-
+  - name: Rocky Linux 8.10 - Security
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-security-8.10&arch=x86_64&country=NL
+    base_path: rocky/8.10/security/x86_64/os/
+    short_name: rocky_8_10_security
+    sync_group: rocky_8
+    distribution_name: rocky-8.10-security-
+  - name: Rocky Linux 8.10 - Security (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-security-source-8.10&arch=source&country=NL
+    base_path: rocky/8.10/security/source/tree/
+    short_name: rocky_8_10_security_source
+    sync_group: rocky_8_source
+    distribution_name: rocky-8.10-security-source-
 
   # Base Rocky Linux 9.7 repositories
   - name: Rocky Linux 9.7 - AppStream
@@ -283,6 +295,24 @@ rpm_package_repos:
     short_name: rocky_9_7_highavailability_source
     sync_group: rocky_9_source
     distribution_name: rocky-9.7-highavailability-source-
+  - name: Rocky Linux 9.7 - Security
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-security-9.7&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/9.7/security/x86_64/os/
+    short_name: rocky_9_7_security
+    sync_group: rocky_9
+    distribution_name: rocky-9.7-security-
+  - name: Rocky Linux 9.7 - Security (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-security-9.7&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/9.7/security/aarch64/os/
+    short_name: rocky_9_7_security_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: rocky-9.7-security-aarch64-
+  - name: Rocky Linux 9.7 - Security (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-security-source-9.7&arch=source&country=NL&protocol=https
+    base_path: rocky/9.7/security/source/tree/
+    short_name: rocky_9_7_security_source
+    sync_group: rocky_9_source
+    distribution_name: rocky-9.7-security-source-
   - name: Rocky Linux 9 - SIG Security Common
     url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-sig-security-common-9&arch=x86_64&country=NL&protocol=https
     base_path: rocky/sig/9/security/x86_64/security-common/
@@ -805,6 +835,24 @@ rpm_package_repos:
     short_name: rocky_10_1_highavailability_source
     sync_group: rocky_10_source
     distribution_name: rocky-10.1-highavailability-source-
+  - name: Rocky Linux 10.1 - Security
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-security-10.1&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/10.1/security/x86_64/os/
+    short_name: rocky_10_1_security
+    sync_group: rocky_10
+    distribution_name: rocky-10.1-security-
+  - name: Rocky Linux 10.1 - Security (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-security-10.1&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/10.1/security/aarch64/os/
+    short_name: rocky_10_1_security_aarch64
+    sync_group: rocky_10_aarch64
+    distribution_name: rocky-10.1-security-aarch64-
+  - name: Rocky Linux 10.1 - Security (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-security-source-10.1&arch=source&country=NL&protocol=https
+    base_path: rocky/10.1/security/source/tree/
+    short_name: rocky_10_1_security_source
+    sync_group: rocky_10_source
+    distribution_name: rocky-10.1-security-source-
 
   # Additional CentOS Stream 10 repositories
   # NFV OpenvSwitch for CentOS Stream 10
