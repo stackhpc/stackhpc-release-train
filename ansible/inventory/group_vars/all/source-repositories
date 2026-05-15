@@ -10,9 +10,6 @@ default_releases:
   - "2023.1"
   - zed
   - yoga
-  - xena
-  - wallaby
-  - victoria
 openstack_workflows:
   default_branch_only:
     - upstream-sync
@@ -53,19 +50,12 @@ source_repositories:
           content: "{{ community_files.codeowners.kayobe }}"
           dest: ".github/CODEOWNERS"
   kolla:
-    ignored_releases:
-      - victoria
-      - wallaby
-      - xena
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.kayobe }}"
           dest: ".github/CODEOWNERS"
   kayobe:
     ignored_releases:
-      - victoria
-      - wallaby
-      - xena
       - "2026.1"
     community_files:
       - codeowners:
@@ -79,10 +69,6 @@ source_repositories:
           content: "{{ community_files.codeowners.kayobe }}"
           dest: ".github/CODEOWNERS"
   kolla-ansible:
-    ignored_releases:
-      - victoria
-      - wallaby
-      - xena
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.kayobe }}"
@@ -115,7 +101,6 @@ source_repositories:
   # OpenStack team
   bifrost:
     ignored_releases:
-      - victoria
       - yoga
       - zed
       - 2023.1
@@ -126,8 +111,6 @@ source_repositories:
           dest: ".github/CODEOWNERS"
   barbican:
     ignored_releases:
-      - victoria
-      - xena
       - yoga
       - zed
       - 2023.1
@@ -141,9 +124,6 @@ source_repositories:
           dest: ".github/CODEOWNERS"
   blazar:
     ignored_releases:
-      - victoria
-      - wallaby
-      - xena
       - yoga
       - zed
       - 2023.1
@@ -154,9 +134,6 @@ source_repositories:
           dest: ".github/CODEOWNERS"
   cinder:
     ignored_releases:
-      - victoria
-      - wallaby
-      - xena
       - yoga
       - zed
       - master
@@ -180,9 +157,6 @@ source_repositories:
           dest: ".github/CODEOWNERS"
   designate-dashboard:
     ignored_releases:
-      - victoria
-      - wallaby
-      - xena
       - zed
       - 2023.1
       - 2024.1
@@ -199,9 +173,6 @@ source_repositories:
           dest: ".github/CODEOWNERS"
   glance:
     ignored_releases:
-      - victoria
-      - wallaby
-      - xena
       - 2023.1
       - 2025.1
       - 2026.1
@@ -212,9 +183,6 @@ source_repositories:
           dest: ".github/CODEOWNERS"
   glance_store:
     ignored_releases:
-      - victoria
-      - wallaby
-      - xena
       - yoga
       - zed
       - 2023.1
@@ -227,9 +195,6 @@ source_repositories:
           dest: ".github/CODEOWNERS"
   horizon:
     ignored_releases:
-      - victoria
-      - wallaby
-      - xena
       - zed
       - 2024.1
       - 2025.1
@@ -256,9 +221,6 @@ source_repositories:
       - master
   ironic-ui:
     ignored_releases:
-      - victoria
-      - wallaby
-      - xena
       - zed
       - 2023.1
       - 2024.1
@@ -275,9 +237,6 @@ source_repositories:
           dest: ".github/CODEOWNERS"
   keystone:
     ignored_releases:
-      - victoria
-      - wallaby
-      - xena
       - yoga
       - zed
       - 2023.1
@@ -290,19 +249,12 @@ source_repositories:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
   magnum:
-    ignored_releases:
-      - victoria
-      - wallaby
-      - xena
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
   magnum-ui:
     ignored_releases:
-      - victoria
-      - wallaby
-      - xena
       - zed
       - 2023.1
       - 2024.1
@@ -319,9 +271,6 @@ source_repositories:
           dest: ".github/CODEOWNERS"
   manila:
     ignored_releases:
-      - victoria
-      - wallaby
-      - xena
       - yoga
       - zed
       - 2023.1
@@ -333,9 +282,6 @@ source_repositories:
           dest: ".github/CODEOWNERS"
   networking-generic-switch:
     ignored_releases:
-      - victoria
-      - wallaby
-      - xena
       - master
     community_files:
       - codeowners:
@@ -343,9 +289,6 @@ source_repositories:
           dest: ".github/CODEOWNERS"
   neutron:
     ignored_releases:
-      - victoria
-      - wallaby
-      - xena
       - 2024.1
       - master
     workflows:
@@ -358,8 +301,6 @@ source_repositories:
           dest: ".github/CODEOWNERS"
   nova:
     ignored_releases:
-      - victoria
-      - xena
       - master
     community_files:
       - codeowners:
@@ -367,9 +308,6 @@ source_repositories:
           dest: ".github/CODEOWNERS"
   octavia:
     ignored_releases:
-      - victoria
-      - wallaby
-      - xena
       - yoga
       - zed
       - master
@@ -379,9 +317,6 @@ source_repositories:
           dest: ".github/CODEOWNERS"
   octavia-dashboard:
     ignored_releases:
-      - victoria
-      - wallaby
-      - xena
       - zed
       - 2023.1
       - 2024.1
@@ -398,9 +333,6 @@ source_repositories:
           dest: ".github/CODEOWNERS"
   ovn-octavia-provider:
     ignored_releases:
-      - victoria
-      - wallaby
-      - xena
       - yoga
       - zed
       - 2023.1
@@ -420,10 +352,6 @@ source_repositories:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
   requirements:
-    ignored_releases:
-        - xena
-        - wallaby
-        - victoria
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
