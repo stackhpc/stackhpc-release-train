@@ -4,6 +4,7 @@
 # repository.
 default_releases:
   - "master"
+  - "2026.1"
   - "2025.1"
   - "2024.1"
   - "2023.1"
@@ -65,6 +66,7 @@ source_repositories:
       - victoria
       - wallaby
       - xena
+      - "2026.1"
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.kayobe }}"
@@ -131,6 +133,7 @@ source_repositories:
       - 2023.1
       - 2024.1
       - 2025.1
+      - 2026.1
       - master
     community_files:
       - codeowners:
@@ -168,6 +171,7 @@ source_repositories:
           dest: ".github/CODEOWNERS"
     ignored_releases:
       - 2025.1
+      - 2026.1
       - master
   cloudkitty-dashboard:
     community_files:
@@ -183,6 +187,7 @@ source_repositories:
       - 2023.1
       - 2024.1
       - 2025.1
+      - 2026.1
       - master
     workflows:
       ignored_workflows:
@@ -199,6 +204,7 @@ source_repositories:
       - xena
       - 2023.1
       - 2025.1
+      - 2026.1
       - master
     community_files:
       - codeowners:
@@ -213,6 +219,7 @@ source_repositories:
       - zed
       - 2023.1
       - 2025.1
+      - 2026.1
       - master
     community_files:
       - codeowners:
@@ -226,6 +233,7 @@ source_repositories:
       - zed
       - 2024.1
       - 2025.1
+      - 2026.1
       - master
     workflows:
       ignored_workflows:
@@ -244,6 +252,7 @@ source_repositories:
       - zed
       - 2024.1
       - 2025.1
+      - 2026.1
       - master
   ironic-ui:
     ignored_releases:
@@ -254,6 +263,7 @@ source_repositories:
       - 2023.1
       - 2024.1
       - 2025.1
+      - 2026.1
       - master
     workflows:
       ignored_workflows:
@@ -273,6 +283,7 @@ source_repositories:
       - 2023.1
       - 2024.1
       - 2025.1
+      - 2026.1
       - master
     community_files:
       - codeowners:
@@ -296,6 +307,7 @@ source_repositories:
       - 2023.1
       - 2024.1
       - 2025.1
+      - 2026.1
       - master
     workflows:
       ignored_workflows:
@@ -374,6 +386,7 @@ source_repositories:
       - 2023.1
       - 2024.1
       - 2025.1
+      - 2026.1
       - master
     workflows:
       ignored_workflows:
@@ -393,6 +406,7 @@ source_repositories:
       - 2023.1
       - 2024.1
       - 2025.1
+      - 2026.1
       - master
     community_files:
       - codeowners:
