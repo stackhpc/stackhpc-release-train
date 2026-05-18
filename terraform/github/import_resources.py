@@ -244,7 +244,7 @@ def main() -> None:
             branch_protection_resource.refresh_resource()
         elif team_id == TeamID.SMSLAB:
             branch_protection_resource = BranchProtection(team_id.name.lower(
-            ), {f"{name}:smslab/[y,z,2]*": name for name in team_repositories}, parsed_args.dry_run)
+            ), {f"{name}:smslab/202[0-9].[1-2]": name for name in team_repositories}, parsed_args.dry_run)
             branch_protection_resource.refresh_resource()
         else:
             branch_protection_resource = BranchProtection(team_id.name.lower(
