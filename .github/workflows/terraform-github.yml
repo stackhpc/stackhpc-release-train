@@ -1,5 +1,9 @@
 ---
 name: Terraform GitHub
+concurrency:
+  group: terraform-github
+  cancel-in-progress: false
+  queue: max
 "on":
   push:
     branches: [main]
