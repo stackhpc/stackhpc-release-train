@@ -301,7 +301,6 @@ source_repositories:
   neutron:
     ignored_releases:
       - 2024.1
-      - master
     workflows:
       ignored_workflows:
         elsewhere:
