@@ -208,6 +208,17 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
+  ironic:
+    ignored_releases:
+      - zed
+      - 2023.1
+      - 2024.1
+      - 2026.1
+      - master
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
   ironic-python-agent:
     community_files:
       - codeowners:
