@@ -15,8 +15,8 @@ def read_repos_data():
               'r') as file:
         data = yaml.safe_load(file)
         ansible_repositories = data['source_repositories']
-
-    return terraform_repositories, ansible_repositories
+        maintained_releases = data['maintained_releases']
+    return terraform_repositories, ansible_repositories, maintained_releases
 
 
 def get_repos_diff(tf_repos, ans_repos):
@@ -65,8 +65,18 @@ def get_mismatched_repos(tf_repos, ans_repos, repos_missing):
     return list(set(mismatched_repos).difference(set(repos_missing)))
 
 
+def validate_source_repositories(source_repos, maintained_releases):
+    issues = []
+    maintained_set = {str(r) for r in maintained_releases}
+    for reponame, repodata in source_repos.items():
+        synced_releases = [str(r) for r in repodata.get('synced_releases', [])]
+        invalid_releases = set(synced_releases) - maintained_set
+        if invalid_releases:
+            issues.append(f'Repo "{reponame}" is trying to sync releases that are not maintained: {sorted(invalid_releases)}')
+    return issues
+
 def main():
-    terraform_repos, ansible_repos = read_repos_data()
+    terraform_repos, ansible_repos, maintained_releases = read_repos_data()
 
     repos_missing = get_repos_diff(terraform_repos, ansible_repos)
 
@@ -80,7 +90,13 @@ def main():
           'the Ansible source-repositories and the Terraform tfvars: '
           f'{mismatched_repos}')
 
-    return len(repos_missing) > 0 or len(mismatched_repos) > 0
+    source_repos_issues = validate_source_repositories(ansible_repos, maintained_releases)
+    for issue in source_repos_issues:
+        print(issue)
+
+    if repos_missing or mismatched_repos or source_repos_issues:
+        return 1
+    return 0
 
 
 if __name__ == "__main__":
