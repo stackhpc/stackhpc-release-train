@@ -32,7 +32,7 @@ jobs:
 
       - name: Install ansible-lint
         run: |
-          pip install ansible-core==2.16.* ansible-lint==24.*
+          pip install ansible-core==2.20.* ansible-lint==26.*
 
       - name: Lint Ansible playbooks
         run: |
