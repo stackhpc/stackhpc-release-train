@@ -547,7 +547,6 @@ resource "github_branch_protection" "openstack_branch_protection_master" {
       "default" : [
         "tox / Tox pep8 with Python 3.12",
         "tox / Tox py3 with Python 3.12",
-        "tox / Tox py3 with Python 3.10"
       ]
     }).default)
     strict = false
