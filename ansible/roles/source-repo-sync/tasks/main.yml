@@ -15,7 +15,7 @@
   vars:
     repository_manifest:
       name: "{{ item.key }}"
-      releases: '{{ default_releases | map("string") | difference(item.value.ignored_releases | default([]) | map("string")) | union(item.value.additional_releases
+      releases: '{{ maintained_releases | map("string") | intersect(item.value.synced_releases | default([]) | map("string")) | union(item.value.additional_releases
         | default([]) | map("string")) | sort }}'
       workflows:
         default_branch_only: "{{ openstack_workflows.default_branch_only | difference(item.value.workflows.ignored_workflows.default_branch_only | default([])) |

@@ -2,7 +2,7 @@
 # Dictionary acting as a `manifest` of openstack and ansible repositories
 # containing a list of workflows and community files required by a given
 # repository.
-default_releases:
+maintained_releases:
   - "master"
   - "2026.1"
   - "2025.1"
@@ -50,11 +50,27 @@ source_repositories:
           content: "{{ community_files.codeowners.kayobe }}"
           dest: ".github/CODEOWNERS"
   kolla:
+    synced_releases:
+      - "master"
+      - "2026.1"
+      - "2025.1"
+      - "2024.1"
+      - "2023.1"
+      - zed
+      - yoga
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.kayobe }}"
           dest: ".github/CODEOWNERS"
   kayobe:
+    synced_releases:
+      - "master"
+      - "2026.1"
+      - "2025.1"
+      - "2024.1"
+      - "2023.1"
+      - zed
+      - yoga
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.kayobe }}"
@@ -67,6 +83,14 @@ source_repositories:
           content: "{{ community_files.codeowners.kayobe }}"
           dest: ".github/CODEOWNERS"
   kolla-ansible:
+    synced_releases:
+      - "master"
+      - "2026.1"
+      - "2025.1"
+      - "2024.1"
+      - "2023.1"
+      - zed
+      - yoga
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.kayobe }}"
@@ -79,6 +103,14 @@ source_repositories:
           content: "{{ community_files.codeowners.kayobe }}"
           dest: ".github/CODEOWNERS"
   stackhpc-kayobe-config:
+    synced_releases:
+      - "master"
+      - "2026.1"
+      - "2025.1"
+      - "2024.1"
+      - "2023.1"
+      - zed
+      - yoga
     workflows:
       ignored_workflows:
         elsewhere:
@@ -98,43 +130,35 @@ source_repositories:
           dest: ".github/CODEOWNERS"
   # OpenStack team
   bifrost:
-    ignored_releases:
-      - yoga
-      - zed
-      - 2023.1
-      - master
+    synced_releases:
+      - "2026.1"
+      - "2025.1"
+      - "2024.1"
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
   barbican:
-    ignored_releases:
-      - yoga
-      - zed
-      - 2023.1
-      - 2024.1
-      - 2025.1
-      - 2026.1
-      - master
+    synced_releases: []
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
   blazar:
-    ignored_releases:
-      - yoga
-      - zed
-      - 2023.1
-      - 2024.1
+    synced_releases:
+      - "master"
+      - "2026.1"
+      - "2025.1"
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
   cinder:
-    ignored_releases:
-      - yoga
-      - zed
-      - master
+    synced_releases:
+      - "2026.1"
+      - "2025.1"
+      - "2024.1"
+      - "2023.1"
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
@@ -144,23 +168,19 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
-    ignored_releases:
-      - 2025.1
-      - 2026.1
-      - master
+    synced_releases:
+      - "2024.1"
+      - "2023.1"
+      - zed
+      - yoga
   cloudkitty-dashboard:
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
   designate-dashboard:
-    ignored_releases:
-      - zed
-      - 2023.1
-      - 2024.1
-      - 2025.1
-      - 2026.1
-      - master
+    synced_releases:
+      - yoga
     workflows:
       ignored_workflows:
         elsewhere:
@@ -170,34 +190,25 @@ source_repositories:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
   glance:
-    ignored_releases:
-      - 2023.1
-      - 2025.1
-      - 2026.1
-      - master
+    synced_releases:
+      - "2024.1"
+      - zed
+      - yoga
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
   glance_store:
-    ignored_releases:
-      - yoga
-      - zed
-      - 2023.1
-      - 2025.1
-      - 2026.1
-      - master
+    synced_releases:
+      - "2024.1"
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
   horizon:
-    ignored_releases:
-      - zed
-      - 2024.1
-      - 2025.1
-      - 2026.1
-      - master
+    synced_releases:
+      - "2023.1"
+      - yoga
     workflows:
       ignored_workflows:
         elsewhere:
@@ -207,12 +218,9 @@ source_repositories:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
   ironic:
-    ignored_releases:
-      - zed
-      - 2023.1
-      - 2024.1
-      - 2026.1
-      - master
+    synced_releases:
+      - "2025.1"
+      - yoga
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
@@ -222,20 +230,12 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
-    ignored_releases:
-      - zed
-      - 2024.1
-      - 2025.1
-      - 2026.1
-      - master
+    synced_releases:
+      - "2023.1"
+      - yoga
   ironic-ui:
-    ignored_releases:
-      - zed
-      - 2023.1
-      - 2024.1
-      - 2025.1
-      - 2026.1
-      - master
+    synced_releases:
+      - yoga
     workflows:
       ignored_workflows:
         elsewhere:
@@ -245,11 +245,10 @@ source_repositories:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
   keystone:
-    ignored_releases:
-      - zed
-      - 2025.1
-      - 2026.1
-      - master
+    synced_releases:
+      - "2024.1"
+      - "2023.1"
+      - "yoga"
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
@@ -260,13 +259,8 @@ source_repositories:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
   magnum-ui:
-    ignored_releases:
-      - zed
-      - 2023.1
-      - 2024.1
-      - 2025.1
-      - 2026.1
-      - master
+    synced_releases:
+      - yoga
     workflows:
       ignored_workflows:
         elsewhere:
@@ -276,26 +270,33 @@ source_repositories:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
   manila:
-    ignored_releases:
-      - yoga
-      - zed
-      - 2023.1
-      - 2024.1
-      - master
+    synced_releases:
+      - "2026.1"
+      - "2025.1"
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
   networking-generic-switch:
-    ignored_releases:
-      - master
+    synced_releases:
+      - "2026.1"
+      - "2025.1"
+      - "2024.1"
+      - "2023.1"
+      - zed
+      - yoga
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
   neutron:
-    ignored_releases:
-      - 2024.1
+    synced_releases:
+      - "master"
+      - "2026.1"
+      - "2025.1"
+      - "2023.1"
+      - zed
+      - yoga
     workflows:
       ignored_workflows:
         elsewhere:
@@ -305,29 +306,30 @@ source_repositories:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
   nova:
-    ignored_releases:
-      - master
+    synced_releases:
+      - "2026.1"
+      - "2025.1"
+      - "2024.1"
+      - "2023.1"
+      - zed
+      - yoga
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
   octavia:
-    ignored_releases:
-      - yoga
-      - zed
-      - master
+    synced_releases:
+      - "2026.1"
+      - "2025.1"
+      - "2024.1"
+      - "2023.1"
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
   octavia-dashboard:
-    ignored_releases:
-      - zed
-      - 2023.1
-      - 2024.1
-      - 2025.1
-      - 2026.1
-      - master
+    synced_releases:
+      - yoga
     workflows:
       ignored_workflows:
         elsewhere:
@@ -337,14 +339,7 @@ source_repositories:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
   ovn-octavia-provider:
-    ignored_releases:
-      - yoga
-      - zed
-      - 2023.1
-      - 2024.1
-      - 2025.1
-      - 2026.1
-      - master
+    synced_releases: []
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
@@ -357,6 +352,14 @@ source_repositories:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
   requirements:
+    synced_releases:
+      - "master"
+      - "2026.1"
+      - "2025.1"
+      - "2024.1"
+      - "2023.1"
+      - zed
+      - yoga
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
