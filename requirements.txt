@@ -1,2 +1,2 @@
-ansible<10
+ansible<14
 jmespath==0.10.0
