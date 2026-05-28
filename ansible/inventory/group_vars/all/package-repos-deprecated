@@ -848,6 +848,137 @@ deprecated_rpm_package_repos:
     sync_group: rocky_9_aarch64
     distribution_name: rocky-9.6-highavailability-aarch64-
 
+  # Base Rocky Linux 9.7 repositories
+  - name: Rocky Linux 9.7 - AppStream
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-9.7&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/9.7/AppStream/x86_64/os/
+    short_name: rocky_9_7_appstream
+    sync_group: rocky_9
+    distribution_name: rocky-9.7-appstream-
+    sync: false
+  - name: Rocky Linux 9.7 - AppStream (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-9.7&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/9.7/AppStream/aarch64/os/
+    short_name: rocky_9_7_appstream_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: rocky-9.7-appstream-aarch64-
+    sync: false
+  - name: Rocky Linux 9.7 - AppStream (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-source-9.7&arch=source&country=NL&protocol=https
+    base_path: rocky/9.7/AppStream/source/tree/
+    short_name: rocky_9_7_appstream_source
+    sync_group: rocky_9_source
+    distribution_name: rocky-9.7-appstream-source-
+    sync: false
+  - name: Rocky Linux 9.7 - BaseOS
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-9.7&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/9.7/BaseOS/x86_64/os/
+    short_name: rocky_9_7_baseos
+    sync_group: rocky_9_baseos
+    distribution_name: rocky-9.7-baseos-
+    sync: false
+  - name: Rocky Linux 9.7 - BaseOS (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-9.7&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/9.7/BaseOS/aarch64/os/
+    short_name: rocky_9_7_baseos_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: rocky-9.7-baseos-aarch64-
+    sync: false
+  - name: Rocky Linux 9.7 - BaseOS (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-source-9.7&arch=source&country=NL&protocol=https
+    base_path: rocky/9.7/BaseOS/source/tree/
+    short_name: rocky_9_7_baseos_source
+    sync_group: rocky_9_source
+    distribution_name: rocky-9.7-baseos-source-
+    sync: false
+  - name: Rocky Linux 9.7 - Extras
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-9.7&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/9.7/extras/x86_64/os/
+    short_name: rocky_9_7_extras
+    sync_group: rocky_9
+    distribution_name: rocky-9.7-extras-
+    sync: false
+  - name: Rocky Linux 9.7 - Extras (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-9.7&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/9.7/extras/aarch64/os/
+    short_name: rocky_9_7_extras_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: rocky-9.7-extras-aarch64-
+    sync: false
+  - name: Rocky Linux 9.7 - Extras (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-source-9.7&arch=source&country=NL&protocol=https
+    base_path: rocky/9.7/extras/source/tree/
+    short_name: rocky_9_7_extras_source
+    sync_group: rocky_9_source
+    distribution_name: rocky-9.7-extras-source-
+    sync: false
+
+  # Additional Rocky Linux 9.7 repositories
+  # No advanced virt, Ceph or OpenStack
+  - name: Rocky Linux 9.7 - CRB
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-9.7&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/9.7/CRB/x86_64/os/
+    short_name: rocky_9_7_crb
+    sync_group: rocky_9
+    distribution_name: rocky-9.7-crb-
+    sync: false
+  - name: Rocky Linux 9.7 - CRB (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-9.7&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/9.7/CRB/aarch64/os/
+    short_name: rocky_9_7_crb_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: rocky-9.7-crb-aarch64-
+    sync: false
+  - name: Rocky Linux 9.7 - CRB (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-source-9.7&arch=source&country=NL&protocol=https
+    base_path: rocky/9.7/CRB/source/tree/
+    short_name: rocky_9_7_crb_source
+    sync_group: rocky_9_source
+    distribution_name: rocky-9.7-crb-source-
+    sync: false
+  - name: Rocky Linux 9.7 - HighAvailability
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-9.7&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/9.7/highavailability/x86_64/os/
+    short_name: rocky_9_7_highavailability
+    sync_group: rocky_9
+    distribution_name: rocky-9.7-highavailability-
+    sync: false
+  - name: Rocky Linux 9.7 - HighAvailability (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-9.7&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/9.7/highavailability/aarch64/os/
+    short_name: rocky_9_7_highavailability_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: rocky-9.7-highavailability-aarch64-
+    sync: false
+  - name: Rocky Linux 9.7 - HighAvailability (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-source-9.7&arch=source&country=NL&protocol=https
+    base_path: rocky/9.7/highavailability/source/tree/
+    short_name: rocky_9_7_highavailability_source
+    sync_group: rocky_9_source
+    distribution_name: rocky-9.7-highavailability-source-
+    sync: false
+  - name: Rocky Linux 9.7 - Security
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-security-9.7&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/9.7/security/x86_64/os/
+    short_name: rocky_9_7_security
+    sync_group: rocky_9
+    distribution_name: rocky-9.7-security-
+    sync: false
+  - name: Rocky Linux 9.7 - Security (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-security-9.7&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/9.7/security/aarch64/os/
+    short_name: rocky_9_7_security_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: rocky-9.7-security-aarch64-
+    sync: false
+  - name: Rocky Linux 9.7 - Security (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-security-source-9.7&arch=source&country=NL&protocol=https
+    base_path: rocky/9.7/security/source/tree/
+    short_name: rocky_9_7_security_source
+    sync_group: rocky_9_source
+    distribution_name: rocky-9.7-security-source-
+    sync: false
+
   # Additional RHEL 9 repositories
   # DOCA Repository 2.8.0 for RHEL 9.4
   - name: DOCA Online Repo 2.8.0 - RHEL 9.4
