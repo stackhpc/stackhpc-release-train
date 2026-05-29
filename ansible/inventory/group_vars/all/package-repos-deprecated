@@ -1023,6 +1023,137 @@ deprecated_rpm_package_repos:
     sync_group: third_party
     distribution_name: doca-3.2.1-rhel9-aarch64-
 
+  # Base Rocky Linux 10.1 repositories
+  - name: Rocky Linux 10.1 - AppStream
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-10.1&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/10.1/AppStream/x86_64/os/
+    short_name: rocky_10_1_appstream
+    sync_group: rocky_10
+    distribution_name: rocky-10.1-appstream-
+    sync: false
+  - name: Rocky Linux 10.1 - AppStream (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-10.1&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/10.1/AppStream/aarch64/os/
+    short_name: rocky_10_1_appstream_aarch64
+    sync_group: rocky_10_aarch64
+    distribution_name: rocky-10.1-appstream-aarch64-
+    sync: false
+  - name: Rocky Linux 10.1 - AppStream (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-source-10.1&arch=source&country=NL&protocol=https
+    base_path: rocky/10.1/AppStream/source/tree/
+    short_name: rocky_10_1_appstream_source
+    sync_group: rocky_10_source
+    distribution_name: rocky-10.1-appstream-source-
+    sync: false
+  - name: Rocky Linux 10.1 - BaseOS
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-10.1&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/10.1/BaseOS/x86_64/os/
+    short_name: rocky_10_1_baseos
+    sync_group: rocky_10_baseos
+    distribution_name: rocky-10.1-baseos-
+    sync: false
+  - name: Rocky Linux 10.1 - BaseOS (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-10.1&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/10.1/BaseOS/aarch64/os/
+    short_name: rocky_10_1_baseos_aarch64
+    sync_group: rocky_10_aarch64
+    distribution_name: rocky-10.1-baseos-aarch64-
+    sync: false
+  - name: Rocky Linux 10.1 - BaseOS (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-source-10.1&arch=source&country=NL&protocol=https
+    base_path: rocky/10.1/BaseOS/source/tree/
+    short_name: rocky_10_1_baseos_source
+    sync_group: rocky_10_source
+    distribution_name: rocky-10.1-baseos-source-
+    sync: false
+  - name: Rocky Linux 10.1 - Extras
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-10.1&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/10.1/extras/x86_64/os/
+    short_name: rocky_10_1_extras
+    sync_group: rocky_10
+    distribution_name: rocky-10.1-extras-
+    sync: false
+  - name: Rocky Linux 10.1 - Extras (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-10.1&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/10.1/extras/aarch64/os/
+    short_name: rocky_10_1_extras_aarch64
+    sync_group: rocky_10_aarch64
+    distribution_name: rocky-10.1-extras-aarch64-
+    sync: false
+  - name: Rocky Linux 10.1 - Extras (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-source-10.1&arch=source&country=NL&protocol=https
+    base_path: rocky/10.1/extras/source/tree/
+    short_name: rocky_10_1_extras_source
+    sync_group: rocky_10_source
+    distribution_name: rocky-10.1-extras-source-
+    sync: false
+
+  # Additional Rocky Linux 10.1 repositories
+  # No advanced virt, Ceph or OpenStack
+  - name: Rocky Linux 10.1 - CRB
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-10.1&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/10.1/CRB/x86_64/os/
+    short_name: rocky_10_1_crb
+    sync_group: rocky_10
+    distribution_name: rocky-10.1-crb-
+    sync: false
+  - name: Rocky Linux 10.1 - CRB (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-10.1&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/10.1/CRB/aarch64/os/
+    short_name: rocky_10_1_crb_aarch64
+    sync_group: rocky_10_aarch64
+    distribution_name: rocky-10.1-crb-aarch64-
+    sync: false
+  - name: Rocky Linux 10.1 - CRB (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-source-10.1&arch=source&country=NL&protocol=https
+    base_path: rocky/10.1/CRB/source/tree/
+    short_name: rocky_10_1_crb_source
+    sync_group: rocky_10_source
+    distribution_name: rocky-10.1-crb-source-
+    sync: false
+  - name: Rocky Linux 10.1 - HighAvailability
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-10.1&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/10.1/HighAvailability/x86_64/os/
+    short_name: rocky_10_1_highavailability
+    sync_group: rocky_10
+    distribution_name: rocky-10.1-highavailability-
+    sync: false
+  - name: Rocky Linux 10.1 - HighAvailability (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-10.1&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/10.1/HighAvailability/aarch64/os/
+    short_name: rocky_10_1_highavailability_aarch64
+    sync_group: rocky_10_aarch64
+    distribution_name: rocky-10.1-highavailability-aarch64-
+    sync: false
+  - name: Rocky Linux 10.1 - HighAvailability (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-source-10.1&arch=source&country=NL&protocol=https
+    base_path: rocky/10.1/HighAvailability/source/tree/
+    short_name: rocky_10_1_highavailability_source
+    sync_group: rocky_10_source
+    distribution_name: rocky-10.1-highavailability-source-
+    sync: false
+  - name: Rocky Linux 10.1 - Security
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-security-10.1&arch=x86_64&country=NL&protocol=https
+    base_path: rocky/10.1/security/x86_64/os/
+    short_name: rocky_10_1_security
+    sync_group: rocky_10
+    distribution_name: rocky-10.1-security-
+    sync: false
+  - name: Rocky Linux 10.1 - Security (aarch64)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-security-10.1&arch=aarch64&country=NL&protocol=https
+    base_path: rocky/10.1/security/aarch64/os/
+    short_name: rocky_10_1_security_aarch64
+    sync_group: rocky_10_aarch64
+    distribution_name: rocky-10.1-security-aarch64-
+    sync: false
+  - name: Rocky Linux 10.1 - Security (source)
+    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-security-source-10.1&arch=source&country=NL&protocol=https
+    base_path: rocky/10.1/security/source/tree/
+    short_name: rocky_10_1_security_source
+    sync_group: rocky_10_source
+    distribution_name: rocky-10.1-security-source-
+    sync: false
+
   # Additional RHEL 10 repositories
   # DOCA Repository 3.2.1 for RHEL 10
   - name: DOCA Online Repo 3.2.1 - RHEL 10
