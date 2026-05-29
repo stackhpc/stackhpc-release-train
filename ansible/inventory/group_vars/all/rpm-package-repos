@@ -899,7 +899,7 @@ rpm_package_repos:
     distribution_name: centos-stream-10-storage-ceph-tentacle-aarch64-
   # EPEL 10 repository
   - name: Extra Packages for Enterprise Linux 10
-    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-z-10.1&arch=x86_64&country=NL&protocol=https
+    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-z-10.2&arch=x86_64&country=NL&protocol=https
     sync_policy: mirror_content_only
     base_path: epel/10/Everything/x86_64/
     short_name: epel_10
@@ -907,7 +907,7 @@ rpm_package_repos:
     distribution_name: extra-packages-for-enterprise-linux-10-x86_64-
   # EPEL 10 repository (aarch64)
   - name: Extra Packages for Enterprise Linux 10 (aarch64)
-    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-z-10.1&arch=aarch64&country=NL&protocol=https
+    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-z-10.2&arch=aarch64&country=NL&protocol=https
     sync_policy: mirror_content_only
     base_path: epel/10/Everything/aarch64/
     short_name: epel_10_aarch64
@@ -915,7 +915,7 @@ rpm_package_repos:
     distribution_name: extra-packages-for-enterprise-linux-10-aarch64-
   # EPEL 10 repository (source)
   - name: Extra Packages for Enterprise Linux 10 (source)
-    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-z-source-10.1&arch=source&country=NL&protocol=https
+    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-z-source-10.2&arch=source&country=NL&protocol=https
     sync_policy: mirror_content_only
     base_path: epel/10/Everything/source/tree/
     short_name: epel_10_source
