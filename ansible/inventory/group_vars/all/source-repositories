@@ -55,8 +55,6 @@ source_repositories:
           content: "{{ community_files.codeowners.kayobe }}"
           dest: ".github/CODEOWNERS"
   kayobe:
-    ignored_releases:
-      - "2026.1"
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.kayobe }}"
