@@ -45,15 +45,16 @@ resource "github_branch_protection" "ansible_branch_protection" {
     required_approving_review_count = 1
   }
 
-  # Only permit members of the `Developers` team to push to the protected branch. Members 
-  # would still need to get the required approval from reviewers and pass any checks before 
-  # being able to merge. Also this should prevent outsiders from pushing to the protected branch, 
-  # however, whilst they can open a pull request they shoud not be able to merge that would be 
+  # Only permit members of the `Developers` team to push to the protected branch. Members
+  # would still need to get the required approval from reviewers and pass any checks before
+  # being able to merge. Also this should prevent outsiders from pushing to the protected branch,
+  # however, whilst they can open a pull request they shoud not be able to merge that would be
   # upto the reviewers or codeowners.
   restrict_pushes {
     blocks_creations = false
     push_allowances = [
-      resource.github_team.organisation_teams["Developers"].node_id
+      resource.github_team.organisation_teams["Developers"].node_id,
+      local.zuul_app_node_id
     ]
   }
 
@@ -121,7 +122,8 @@ resource "github_branch_protection" "kayobe_branch_protection_py_3-6" {
   restrict_pushes {
     blocks_creations = false
     push_allowances = [
-      resource.github_team.organisation_teams["Developers"].node_id
+      resource.github_team.organisation_teams["Developers"].node_id,
+      local.zuul_app_node_id
     ]
   }
 
@@ -158,7 +160,8 @@ resource "github_branch_protection" "kayobe_branch_protection_zed" {
   restrict_pushes {
     blocks_creations = false
     push_allowances = [
-      resource.github_team.organisation_teams["Developers"].node_id
+      resource.github_team.organisation_teams["Developers"].node_id,
+      local.zuul_app_node_id
     ]
   }
 
@@ -196,7 +199,8 @@ resource "github_branch_protection" "kayobe_branch_protection_antelope" {
   restrict_pushes {
     blocks_creations = false
     push_allowances = [
-      resource.github_team.organisation_teams["Developers"].node_id
+      resource.github_team.organisation_teams["Developers"].node_id,
+      local.zuul_app_node_id
     ]
   }
 
@@ -234,7 +238,8 @@ resource "github_branch_protection" "kayobe_branch_protection_caracal" {
   restrict_pushes {
     blocks_creations = false
     push_allowances = [
-      resource.github_team.organisation_teams["Developers"].node_id
+      resource.github_team.organisation_teams["Developers"].node_id,
+      local.zuul_app_node_id
     ]
   }
 
@@ -271,7 +276,8 @@ resource "github_branch_protection" "kayobe_branch_protection_epoxy" {
   restrict_pushes {
     blocks_creations = false
     push_allowances = [
-      resource.github_team.organisation_teams["Developers"].node_id
+      resource.github_team.organisation_teams["Developers"].node_id,
+      local.zuul_app_node_id
     ]
   }
 
@@ -309,7 +315,8 @@ resource "github_branch_protection" "kayobe_branch_protection_gazpacho" {
   restrict_pushes {
     blocks_creations = false
     push_allowances = [
-      resource.github_team.organisation_teams["Developers"].node_id
+      resource.github_team.organisation_teams["Developers"].node_id,
+      local.zuul_app_node_id
     ]
   }
 
@@ -346,7 +353,8 @@ resource "github_branch_protection" "kayobe_branch_protection_master" {
   restrict_pushes {
     blocks_creations = false
     push_allowances = [
-      resource.github_team.organisation_teams["Developers"].node_id
+      resource.github_team.organisation_teams["Developers"].node_id,
+      local.zuul_app_node_id
     ]
   }
 
@@ -381,7 +389,8 @@ resource "github_branch_protection" "openstack_branch_protection_py_3-6" {
   restrict_pushes {
     blocks_creations = false
     push_allowances = [
-      resource.github_team.organisation_teams["Developers"].node_id
+      resource.github_team.organisation_teams["Developers"].node_id,
+      local.zuul_app_node_id
     ]
   }
 
@@ -417,7 +426,8 @@ resource "github_branch_protection" "openstack_branch_protection_zed" {
   restrict_pushes {
     blocks_creations = false
     push_allowances = [
-      resource.github_team.organisation_teams["Developers"].node_id
+      resource.github_team.organisation_teams["Developers"].node_id,
+      local.zuul_app_node_id
     ]
   }
 
@@ -455,7 +465,8 @@ resource "github_branch_protection" "openstack_branch_protection_antelope" {
   restrict_pushes {
     blocks_creations = false
     push_allowances = [
-      resource.github_team.organisation_teams["Developers"].node_id
+      resource.github_team.organisation_teams["Developers"].node_id,
+      local.zuul_app_node_id
     ]
   }
 
@@ -493,7 +504,8 @@ resource "github_branch_protection" "openstack_branch_protection_caracal" {
   restrict_pushes {
     blocks_creations = false
     push_allowances = [
-      resource.github_team.organisation_teams["Developers"].node_id
+      resource.github_team.organisation_teams["Developers"].node_id,
+      local.zuul_app_node_id
     ]
   }
 
@@ -530,7 +542,8 @@ resource "github_branch_protection" "openstack_branch_protection_epoxy" {
   restrict_pushes {
     blocks_creations = false
     push_allowances = [
-      resource.github_team.organisation_teams["Developers"].node_id
+      resource.github_team.organisation_teams["Developers"].node_id,
+      local.zuul_app_node_id
     ]
   }
 
@@ -568,7 +581,8 @@ resource "github_branch_protection" "openstack_branch_protection_gazpacho" {
   restrict_pushes {
     blocks_creations = false
     push_allowances = [
-      resource.github_team.organisation_teams["Developers"].node_id
+      resource.github_team.organisation_teams["Developers"].node_id,
+      local.zuul_app_node_id
     ]
   }
 
@@ -605,7 +619,8 @@ resource "github_branch_protection" "openstack_branch_protection_master" {
   restrict_pushes {
     blocks_creations = false
     push_allowances = [
-      resource.github_team.organisation_teams["Developers"].node_id
+      resource.github_team.organisation_teams["Developers"].node_id,
+      local.zuul_app_node_id
     ]
   }
 
