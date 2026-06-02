@@ -80,11 +80,6 @@ resource "github_issue_label" "monitoring_label" {
   description = "All things related to observability & telemetry"
 }
 
-data "github_repository" "repositories" {
-  for_each  = toset(flatten(values(var.repositories)))
-  full_name = format("%s/%s", var.owner, each.value)
-}
-
 resource "github_issue_label" "workflows_label" {
   for_each    = toset(flatten(values(var.repositories)))
   repository  = each.value
@@ -92,3 +87,17 @@ resource "github_issue_label" "workflows_label" {
   color       = "638475"
   description = "Workflow files have been modified"
 }
+
+data "github_repository" "repositories" {
+  for_each  = toset(flatten(values(var.repositories)))
+  full_name = format("%s/%s", var.owner, each.value)
+}
+
+data "github_app" "zuul" {
+  slug = "stackhpc-zuul"
+}
+
+locals {
+  zuul_app_node_id = data.github_app.zuul.node_id
+}
+
