@@ -48,12 +48,12 @@ resource "github_issue_label" "automated_label" {
   description = "Automated action performed by GitHub Actions"
 }
 
-resource "github_issue_label" "workflows_label" {
+resource "github_issue_label" "gate_label" {
   for_each    = toset(flatten(values(var.repositories)))
   repository  = each.value
-  name        = "workflows"
-  color       = "638475"
-  description = "Workflow files have been modified"
+  name        = "gate"
+  color       = "5C55FB"
+  description = "Zuul: Gate this patch"
 }
 
 resource "github_issue_label" "community_files_label" {
@@ -83,4 +83,12 @@ resource "github_issue_label" "monitoring_label" {
 data "github_repository" "repositories" {
   for_each  = toset(flatten(values(var.repositories)))
   full_name = format("%s/%s", var.owner, each.value)
+}
+
+resource "github_issue_label" "workflows_label" {
+  for_each    = toset(flatten(values(var.repositories)))
+  repository  = each.value
+  name        = "workflows"
+  color       = "638475"
+  description = "Workflow files have been modified"
 }
