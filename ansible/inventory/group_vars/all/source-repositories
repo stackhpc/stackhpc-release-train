@@ -248,10 +248,7 @@ source_repositories:
           dest: ".github/CODEOWNERS"
   keystone:
     ignored_releases:
-      - yoga
       - zed
-      - 2023.1
-      - 2024.1
       - 2025.1
       - 2026.1
       - master
