@@ -104,11 +104,7 @@ resource "github_branch_protection" "kayobe_branch_protection_py_3-6" {
   for_each      = toset(var.repositories["Kayobe"])
   repository_id = data.github_repository.repositories[each.key].node_id
 
-  # NOTE(Alex-Welsh): The pattern here is not ideal but it is difficult to
-  # achieve more precision with the matching tools that GitHub provides.
-  # https://stackoverflow.com/questions/53135414/how-to-apply-one-github-branch-rule-to-multiple-branches
-  # Remember to update import_resources.py!
-  pattern                         = "stackhpc/[vwxy]*"
+  pattern                         = "stackhpc/yoga"
   require_conversation_resolution = true
   allows_deletions                = false
   allows_force_pushes             = false
@@ -128,7 +124,7 @@ resource "github_branch_protection" "kayobe_branch_protection_py_3-6" {
   }
 
   required_status_checks {
-    contexts = lookup(lookup(var.required_status_checks, each.key, {}), "stackhpc/[vwxy]*", lookup(var.required_status_checks, each.key, {
+    contexts = lookup(lookup(var.required_status_checks, each.key, {}), "stackhpc/yoga", lookup(var.required_status_checks, each.key, {
       "default" : [
         "tox / Tox pep8 with Python 3.8",
         "tox / Tox py3 with Python 3.8"
@@ -377,11 +373,7 @@ resource "github_branch_protection" "openstack_branch_protection_py_3-6" {
   for_each      = toset(var.repositories["OpenStack"])
   repository_id = data.github_repository.repositories[each.key].node_id
 
-  # NOTE(Alex-Welsh): The pattern here is not ideal but it is difficult to
-  # achieve more precision with the matching tools that GitHub provides.
-  # https://stackoverflow.com/questions/53135414/how-to-apply-one-github-branch-rule-to-multiple-branches
-  # Remember to update import_resources.py!
-  pattern                         = "stackhpc/[vwxy]*"
+  pattern                         = "stackhpc/yoga"
   require_conversation_resolution = true
   allows_deletions                = false
   allows_force_pushes             = false
@@ -401,7 +393,7 @@ resource "github_branch_protection" "openstack_branch_protection_py_3-6" {
   }
 
   required_status_checks {
-    contexts = lookup(lookup(var.required_status_checks, each.key, {}), "stackhpc/[vwxy]*", lookup(var.required_status_checks, each.key, {
+    contexts = lookup(lookup(var.required_status_checks, each.key, {}), "stackhpc/yoga", lookup(var.required_status_checks, each.key, {
       "default" : [
         "tox / Tox pep8 with Python 3.8",
         "tox / Tox py3 with Python 3.8"
