@@ -220,7 +220,7 @@ def main() -> None:
         if team_id == TeamID.KAYOBE or team_id == TeamID.OPENSTACK:
             # Pre-Zed branch protection
             branch_protection_resource = BranchProtection(team_id.name.lower(
-            ), {f"{name}:stackhpc/[vwxy]*": name for name in team_repositories}, parsed_args.dry_run, "_py_3-6")
+            ), {f"{name}:stackhpc/yoga": name for name in team_repositories}, parsed_args.dry_run, "_py_3-6")
             branch_protection_resource.refresh_resource()
             # Zed branch protection
             branch_protection_resource = BranchProtection(team_id.name.lower(
