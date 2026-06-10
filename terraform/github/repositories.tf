@@ -88,6 +88,14 @@ resource "github_issue_label" "workflows_label" {
   description = "Workflow files have been modified"
 }
 
+resource "github_issue_label" "ok_to_test_label" {
+  for_each    = toset(flatten(values(var.repositories)))
+  repository  = each.value
+  name        = "ok-to-test"
+  color       = "0075CA"
+  description = "Zuul: approved to run CI tests"
+}
+
 data "github_repository" "repositories" {
   for_each  = toset(flatten(values(var.repositories)))
   full_name = format("%s/%s", var.owner, each.value)
