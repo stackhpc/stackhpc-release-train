@@ -30,7 +30,7 @@ deprecated_deb_package_repos:
     url: http://archive.ubuntu.com/ubuntu
     policy: immediate
     architectures: amd64
-    components: main restricted universe multiverse
+    components: main restricted universe
     # NOTE: Include focal-security here to include all dists under one mirror
     # path. This allows us to include security updates when using
     # DIB_DISTRIBUTION_MIRROR with the Diskimage builder ubuntu-minimal
@@ -50,7 +50,7 @@ deprecated_deb_package_repos:
     url: http://security.ubuntu.com/ubuntu
     policy: immediate
     architectures: amd64
-    components: main restricted universe multiverse
+    components: main restricted universe
     distributions: focal-security
     mirror: true
     mode: verbatim
