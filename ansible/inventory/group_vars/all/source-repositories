@@ -259,6 +259,13 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
+  magnum-capi-helm:
+    repository_type: "single-branch"
+    workflows: []
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
   magnum-ui:
     ignored_releases:
       - zed
