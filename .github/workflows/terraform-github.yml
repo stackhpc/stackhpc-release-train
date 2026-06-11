@@ -50,6 +50,7 @@ jobs:
       - name: Terraform Plan
         id: plan
         run: |
+          terraform force-unlock -force 8edfdfed-cda1-e737-7988-4d5ff50ee474
           terraform plan -out=plan.tmp
           terraform show -no-color plan.tmp >${GITHUB_WORKSPACE}/plan.out
         continue-on-error: true
