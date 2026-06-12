@@ -81,10 +81,10 @@ The motivation behind this is to have single-source of truth and free up develop
 
 !!! info "Source Repositories Vars"
 
-    * **default_releases**: list of OpenStack release series currently supported by StackHPC and used within the workflows
+    * **maintained_releases**: list of OpenStack release series currently supported by StackHPC and used within the workflows
     * **openstack_workflows**: dictionary of OpenStack specific workflows as mentioned above
         * default_branch_only: list of workflows that will only exist on the `default branch` **(master/main)**
-        * elsewhere: list of workflows that will be placed on other branches such as `stackhpc/xena` see `default_releases`
+        * elsewhere: list of workflows that will be placed on other branches such as `stackhpc/xena` see `maintained_releases`
     * **ansible_workflows**: dictionary that contains either the type of Ansible `collection` or `role`
         * collection: list of workflows specific to Ansible collections
         * role: list of workflows specific to Ansible roles
@@ -97,7 +97,7 @@ The motivation behind this is to have single-source of truth and free up develop
 
     ```yaml
     ---
-    default_releases:
+    maintained_releases:
       - xena
       - wallaby
       - victoria
@@ -125,7 +125,7 @@ The motivation behind this is to have single-source of truth and free up develop
               content: '{{ community_files.codeowners.kayobe_codeowners }}'
               dest: '.github/CODEOWNERS'
       barbican:
-        ignored_releases:
+        synced_releases:
           - victoria
           - xena
       stackhpc-inspector-plugins:
@@ -151,12 +151,12 @@ Please review the `Source Repositories Vars` for a description of the variables 
 To add new repositories to be handled by this playbook you can edit [source-repositories](https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/source-repositories).
 Identify the `source_repositories` dictionary and insert your new repository.
 For example the below code snippet will add neutron to the `source repo sync` all default workflows and community files.
-Also all release series will be ignored except `yoga`.
+Also all release series will be synced except `yoga`.
 
 ```yaml
 source_repositories:
   neutron:
-    ignored_releases:
+    synced_releases:
       - xena
       - wallaby
       - victoria
@@ -172,27 +172,48 @@ source_repositories:
 
 #### Changing the release series
 
-To change the release series for all OpenStack repositories this can be achived by editing the `default_releases` variable.
-For example if you wanted to remove victoria and add support for yoga.
-Once this change has been merged into the `main` branch it shall perform a series of pull requests updating the workflows across all listed repositories.
+To add a new release series, it must be added to the `maintained_releases` variable globally, and then `synced_releases` for each required branch.
+For example if you wanted to remove victoria and add support for yoga:
 
 !!! note "ansible/inventory/group_vars/all/source-repositories"
 
     ```yaml
     ---
-    default_releases:
+    maintained_releases:
       - xena
       - wallaby
       - victoria
+    source_repositories:
+      neutron:
+        synced_releases:
+          - xena
+          - wallaby
+          - victoria
+        community_files:
+          - codeowners:
+              content: "{{ community_files.codeowners.openstack }}"
+              dest: ".github/CODEOWNERS"
     ```
 
     ```yaml
     ---
-    default_releases:
+    maintained_releases:
       - yoga
       - xena
       - wallaby
+    source_repositories:
+      neutron:
+        synced_releases:
+          - yoga
+          - xena
+          - wallaby
+        community_files:
+          - codeowners:
+              content: "{{ community_files.codeowners.openstack }}"
+              dest: ".github/CODEOWNERS"
+
     ```
+
 
 #### Adding new workflows
 

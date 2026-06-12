@@ -1,7 +1,7 @@
 ---
 owner: stackhpc
 staging_path: ~/.repo-staging
-default_releases: []
+maintained_releases: []
 openstack_workflows:
   default_branch_only: []
   elsewhere: []
