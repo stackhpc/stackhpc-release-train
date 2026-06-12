@@ -860,7 +860,7 @@ rpm_package_repos:
     url: https://mirror.stream.centos.org/SIGs/10-stream/nfv/x86_64/openvswitch-2/
     base_path: centos/10-stream/nfv/x86_64/openvswitch-2/
     short_name: centos_stream_10_nfv_openvswitch
-    sync_group: centos
+    sync_group: centos  
     distribution_name: centos-stream-10-nfv-openvswitch-
   # NFV OpenvSwitch for CentOS Stream 10 (aarch64)
   - name: CentOS Stream 10 - NFV OpenvSwitch (aarch64)
@@ -928,6 +928,14 @@ rpm_package_repos:
     short_name: centos_stream_10_openstack_epoxy
     sync_group: centos
     distribution_name: centos-stream-10-openstack-epoxy-
+  # OpenStack Gazpacho for CentOS Stream 10
+  # NOTE(Alex-Welsh): Same as above for Epoxy, just different name for clarity
+  - name: CentOS Stream 10 - OpenStack Gazpacho
+    url: https://download.copr.fedorainfracloud.org/results/@openstack-kolla/el10-missing/epel-10-x86_64/
+    base_path: centos/10-stream/cloud/x86_64/openstack-gazpacho/
+    short_name: centos_stream_10_openstack_gazpacho
+    sync_group: centos
+    distribution_name: centos-stream-10-openstack-gazpacho-
   # OpenStack Epoxy for CentOS Stream 10 (aarch64)
   - name: CentOS Stream 10 - OpenStack Epoxy (aarch64)
     url: https://download.copr.fedorainfracloud.org/results/@openstack-kolla/el10-missing/epel-10-aarch64/
@@ -935,6 +943,30 @@ rpm_package_repos:
     short_name: centos_stream_10_openstack_epoxy_aarch64
     sync_group: rocky_10_aarch64
     distribution_name: centos-stream-10-openstack-epoxy-aarch64-
+  # OpenStack Gazpacho for CentOS Stream 10 (aarch64)
+  # NOTE(Alex-Welsh): Same as above for Gazpacho, just different name for clarity
+  - name: CentOS Stream 10 - OpenStack Gazpacho (aarch64)
+    url: https://download.copr.fedorainfracloud.org/results/@openstack-kolla/el10-missing/epel-10-aarch64/
+    base_path: centos/10-stream/cloud/aarch64/openstack-gazpacho/
+    short_name: centos_stream_10_openstack_gazpacho_aarch64
+    sync_group: rocky_10_aarch64
+    distribution_name: centos-stream-10-openstack-gazpacho-aarch64-
+  #TODO: check this is valid
+  # Opstools for CentOS Stream 10
+  - name: CentOS Stream 10 - opstools
+    url: https://mirror.stream.centos.org/SIGs/10-stream/opstools/x86_64/collectd-5/
+    base_path: centos/10-stream/opstools/x86_64/collectd-5/
+    short_name: centos_stream_10_opstools
+    sync_group: centos
+    distribution_name: centos-stream-10-opstools-
+  # Opstools for CentOS Stream 10 (aarch64)
+  - name: CentOS Stream 10 - opstools (aarch64)
+    url: https://mirror.stream.centos.org/SIGs/10-stream/opstools/aarch64/collectd-5/
+    base_path: centos/10-stream/opstools/aarch64/collectd-5/
+    short_name: centos_stream_10_opstools_aarch64
+    sync_group: rocky_10_aarch64
+    distribution_name: centos-stream-10-opstools-aarch64-
+
 
   # LTS versions of OVN and OVS (needed for Epoxy on Rocky 10)
   - name: CentOS Stream 10 - OVN/OVS LTS for Epoxy
