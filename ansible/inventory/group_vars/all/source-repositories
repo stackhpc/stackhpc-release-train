@@ -155,7 +155,6 @@ source_repositories:
           dest: ".github/CODEOWNERS"
   cinder:
     synced_releases:
-      - "2026.1"
       - "2025.1"
       - "2024.1"
       - "2023.1"
@@ -174,6 +173,14 @@ source_repositories:
       - zed
       - yoga
   cloudkitty-dashboard:
+    synced_releases:
+        - "master"
+        - "2026.1"
+        - "2025.1"
+        - "2024.1"
+        - "2023.1"
+        - zed
+        - yoga
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
@@ -254,6 +261,12 @@ source_repositories:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
   magnum:
+    synced_releases:
+        - "2025.1"
+        - "2024.1"
+        - "2023.1"
+        - zed
+        - yoga
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
@@ -279,7 +292,6 @@ source_repositories:
           dest: ".github/CODEOWNERS"
   networking-generic-switch:
     synced_releases:
-      - "2026.1"
       - "2025.1"
       - "2024.1"
       - "2023.1"
@@ -319,7 +331,6 @@ source_repositories:
           dest: ".github/CODEOWNERS"
   octavia:
     synced_releases:
-      - "2026.1"
       - "2025.1"
       - "2024.1"
       - "2023.1"
