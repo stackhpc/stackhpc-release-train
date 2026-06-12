@@ -264,6 +264,28 @@ deb_package_repos:
     short_name: ubuntu_noble_proxysql
     sync_group: third_party
     distribution_name: ubuntu-noble-proxysql-
+  # Fluentd v6 for Ubuntu Noble
+  - name: Fluentd - Ubuntu Noble
+    url: https://fluentd.cdn.cncf.io/lts/6/ubuntu/noble
+    policy: immediate
+    architectures: amd64
+    distributions: noble
+    components: contrib
+    base_path: fluentd/lts/6/ubuntu/noble/
+    short_name: ubuntu_noble_fluentd
+    sync_group: third_party
+    distribution_name: ubuntu-noble-fluentd-
+  # MariaDB 11.4 for Ubuntu Noble
+  - name: MariaDB 11.4 - Ubuntu Noble
+    url: https://dlm.mariadb.com/repo/mariadb-server/11.4/repo/ubuntu
+    distributions: noble
+    components: main
+    architectures: amd64
+    base_path: mariadb-server/mariadb-11.4/repo/ubuntu/
+    short_name: ubuntu_noble_mariadb_11_4
+    sync_group: third_party
+    distribution_name: mariadb-11.4-ubuntu-noble-
+
 
 # Default filter string for Deb package repositories.
 deb_package_repo_filter: ""
