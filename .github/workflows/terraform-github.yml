@@ -50,7 +50,7 @@ jobs:
       - name: Terraform Plan
         id: plan
         run: |
-          terraform plan -out=plan.tmp
+          terraform plan -out=plan.tmp -parallelism=25
           terraform show -no-color plan.tmp >${GITHUB_WORKSPACE}/plan.out
         continue-on-error: true
 
@@ -128,7 +128,7 @@ jobs:
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -input=false
+        run: terraform apply -auto-approve -input=false -parallelism=25
 
       - name: Send message to Slack via Workflow Builder
         uses: ./.github/actions/slack-alert
