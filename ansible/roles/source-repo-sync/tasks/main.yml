@@ -22,6 +22,7 @@
           union(item.value.workflows.additional_workflows.default_branch_only | default([])) }}"
         elsewhere: "{{ openstack_workflows.elsewhere | difference(item.value.workflows.ignored_workflows.elsewhere | default([])) | union(item.value.workflows.additional_workflows.elsewhere
           | default([])) }}"
+        per_release_ignored_workflows: "{{ item.value.workflows.per_release_ignored_workflows | default({}, true) }}"
       workflow_args: "{{ item.value.workflow_args | default({}) }}"
       copy_workflows: "{{ item.value.copy_workflows | default(true) }}"
       community_files: "{{ item.value.community_files | default({}) }}"
