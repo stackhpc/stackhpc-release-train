@@ -227,6 +227,8 @@ deb_package_repos:
     policy: immediate
     distributions: stable
     components: main
+    mirror: true
+    mode: verbatim
     base_path: grafana/oss/apt/
     short_name: ubuntu_noble_grafana
     sync_group: grafana
@@ -238,6 +240,8 @@ deb_package_repos:
     architectures: amd64
     distributions: stable
     components: main
+    mirror: true
+    mode: verbatim
     base_path: opensearch/3.x/apt/
     short_name: ubuntu_noble_opensearch
     sync_group: third_party
@@ -249,6 +253,8 @@ deb_package_repos:
     architectures: amd64
     distributions: stable
     components: main
+    mirror: true
+    mode: verbatim
     base_path: opensearch-dashboards/3.x/apt/
     short_name: ubuntu_noble_opensearch_dashboards
     sync_group: third_party
@@ -260,6 +266,8 @@ deb_package_repos:
     architectures: amd64
     distributions: noble
     components: main
+    mirror: true
+    mode: verbatim
     base_path: ProxySQL/proxysql-3.0.x/noble/
     short_name: ubuntu_noble_proxysql
     sync_group: third_party
@@ -268,6 +276,8 @@ deb_package_repos:
   - name: Fluentd - Ubuntu Noble
     url: https://fluentd.cdn.cncf.io/lts/6/ubuntu/noble
     policy: immediate
+    mirror: true
+    mode: verbatim
     base_path: fluentd/lts/6/ubuntu/noble/
     short_name: ubuntu_noble_fluentd
     sync_group: third_party
@@ -278,6 +288,8 @@ deb_package_repos:
     distributions: noble
     components: main
     architectures: amd64
+    mirror: true
+    mode: verbatim
     base_path: mariadb-server/mariadb-11.4/repo/ubuntu/
     short_name: ubuntu_noble_mariadb_11_4
     sync_group: third_party
