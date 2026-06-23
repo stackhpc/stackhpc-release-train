@@ -268,9 +268,6 @@ deb_package_repos:
   - name: Fluentd - Ubuntu Noble
     url: https://fluentd.cdn.cncf.io/lts/6/ubuntu/noble
     policy: immediate
-    architectures: amd64
-    distributions: noble
-    components: contrib
     base_path: fluentd/lts/6/ubuntu/noble/
     short_name: ubuntu_noble_fluentd
     sync_group: third_party
