@@ -144,6 +144,9 @@ kolla_container_images:
   - skydive-base
   - skyline-apiserver
   - skyline-console
+  - valkey-server
+  - valkey-base
+  - valkey-sentinel
 
 kolla_unbuildable_images:
   old_scheme:
