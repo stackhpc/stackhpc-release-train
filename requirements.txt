@@ -1,2 +1,5 @@
 ansible<14
 jmespath==0.10.0
+pulp-glue==0.33.*
+pulp-glue-deb==0.3.*
+setuptools
