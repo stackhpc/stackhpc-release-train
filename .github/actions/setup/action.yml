@@ -22,14 +22,10 @@ runs:
     # Install python dependencies for ansible server side
     - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
       with:
-        python-version: 3.11.x
+        python-version: 3.12.x
         # Cache Python dependencies
         cache: pip
-
-    - name: Install Python dependencies
-      run: |
-        pip install -r requirements.txt
-      shell: bash
+        pip-install: -r requirements.txt
 
     - name: Install Ansible collection dependencies
       run: |
@@ -48,5 +44,5 @@ runs:
     # everywhere. It's fine for CI purposes.
     - name: Install Python dependencies
       run: |
-        /usr/bin/python3 -m pip install setuptools --break-system-packages
+        /usr/bin/python3 -m pip install setuptools pulp-glue==0.33.* pulp-glue-deb==0.3.* --break-system-packages
       shell: bash
