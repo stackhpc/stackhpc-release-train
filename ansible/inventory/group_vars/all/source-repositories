@@ -241,6 +241,13 @@ source_repositories:
     synced_releases:
       - "2023.1"
       - yoga
+  ironic-python-agent-builder:
+    synced_releases:
+      - "2025.1"
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
   ironic-ui:
     synced_releases:
       - yoga
