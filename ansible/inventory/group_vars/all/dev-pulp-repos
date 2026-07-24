@@ -8,7 +8,7 @@
 #        matters if we make a distribution for an earlier repository version,
 #        when later ones have already been distributed. Alternatively we could
 #        forget ordering and use a random string.
-dev_pulp_distribution_version: "{{ ansible_date_time.iso8601_basic_short }}"
+dev_pulp_distribution_version: "{{ ansible_facts.date_time.iso8601_basic_short }}"
 
 ###############################################################################
 # Deb
