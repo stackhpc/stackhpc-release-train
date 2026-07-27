@@ -113,6 +113,8 @@ source_repositories:
       - yoga
     workflows:
       ignored_workflows:
+        default_branch_only:
+          - upstream-sync
         elsewhere:
           - tox
     workflow_args:
