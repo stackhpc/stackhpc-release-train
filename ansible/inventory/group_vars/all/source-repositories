@@ -241,15 +241,6 @@ source_repositories:
     synced_releases:
       - "2023.1"
       - yoga
-  # We can drop the IPA builder fork when this is merged:
-  # https://review.opendev.org/c/openstack/ironic-python-agent-builder/+/998333
-  ironic-python-agent-builder:
-    synced_releases:
-      - "2025.1"
-    community_files:
-      - codeowners:
-          content: "{{ community_files.codeowners.openstack }}"
-          dest: ".github/CODEOWNERS"
   ironic-ui:
     synced_releases:
       - yoga
