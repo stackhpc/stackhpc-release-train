@@ -145,10 +145,7 @@ source_repositories:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
   blazar:
-    synced_releases:
-      - "master"
-      - "2026.1"
-      - "2025.1"
+    synced_releases: []
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
