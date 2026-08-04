@@ -2,6 +2,6 @@
 collections:
   - name: https://github.com/stackhpc/ansible-collection-pulp.git
     type: git
-    version: pub-for-dist
+    version: pub-for-dist-2
   - name: pulp.squeezer
     version: 0.3.0
