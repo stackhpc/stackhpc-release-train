@@ -64,14 +64,22 @@
       register: pulp_rpm_dists_list
 
     - vars:
-        repo: "{{ pulp_deb_repos_list.repositories | selectattr('name', 'equalto', item.repository) | first }}"
-        pub: >-
+        repo_list: >-
+          {{ pulp_deb_repos_list.repositories
+             | selectattr('name', 'equalto', item.repository)
+             | list }}
+        repo: "{{ repo_list[0] if (repo_list | length > 0) else {} }}"
+        pubs: >-
           {{ (pulp_deb_pubs_list.publications + pulp_deb_verbatim_pubs_list.publications)
-             | selectattr('repository', 'equalto', repo.pulp_href)
-             | stackhpc.pulp.sort_publications | first }}
+             | selectattr('repository', 'equalto', repo.get('pulp_href', ''))
+             | stackhpc.pulp.sort_publications | list }}
+        pub: "{{ pubs[0] if (pubs | length > 0) else {} }}"
+        base_name: "{{ item.name | regex_replace('-[0-9]{8}T[0-9]{6}$', '') }}"
+        safe_pattern: "^{{ base_name | regex_escape }}(-[0-9]{8}T[0-9]{6})?$"
         existing_dists: >-
           {{ pulp_deb_dists_list.distributions
-             | selectattr('publication', 'equalto', pub.pulp_href)
+             | selectattr('publication', 'equalto', pub.get('pulp_href', ''))
+             | selectattr('name', 'match', safe_pattern)
              | list }}
         dist: "{{ existing_dists[0] if (existing_dists | length > 0) else {} }}"
 
@@ -83,12 +91,13 @@
             password: "{{ pulp_password }}"
             name: "{{ item.name }}"
             base_path: "{{ item.base_path }}"
-            publication: "{{ pub.pulp_href }}"
+            publication: "{{ pub.get('pulp_href') }}"
+            content_guard: "{{ item.content_guard | default(omit) }}"
             state: present
           loop: "{{ dev_pulp_distribution_deb }}"
           loop_control:
             label: "{{ item.repository }}"
-          when: existing_dists | length == 0
+          when: (pub | length > 0) and (existing_dists | length == 0)
 
         - name: Re-query Deb distributions (to capture newly created ones)
           pulp.squeezer.deb_distribution:
@@ -108,6 +117,7 @@
           loop: "{{ dev_pulp_distribution_deb }}"
           loop_control:
             label: "{{ item.repository }}"
+          when: pub | length > 0
 
         - name: Set a fact about latest Deb versions
           ansible.builtin.set_fact:
@@ -118,21 +128,29 @@
           loop: "{{ dev_pulp_distribution_deb }}"
           loop_control:
             label: "{{ item.repository }}"
+          when: dist | length > 0
 
         - name: Display latest versions fact
           ansible.builtin.debug:
             var: test_pulp_repository_deb_repo_versions
 
     - vars:
-        repo: "{{ pulp_rpm_repos_list.repositories | selectattr('name', 'equalto', item.repository) | first }}"
-        pub: >-
+        repo_list: >-
+          {{ pulp_rpm_repos_list.repositories
+             | selectattr('name', 'equalto', item.repository)
+             | list }}
+        repo: "{{ repo_list[0] if (repo_list | length > 0) else {} }}"
+        pubs: >-
           {{ pulp_rpm_pubs_list.publications
-             | selectattr('repository', 'equalto', repo.pulp_href)
-             | stackhpc.pulp.sort_publications | first }}
+             | selectattr('repository', 'equalto', repo.get('pulp_href', ''))
+             | stackhpc.pulp.sort_publications | list }}
+        pub: "{{ pubs[0] if (pubs | length > 0) else {} }}"
+        base_name: "{{ item.name | regex_replace('-[0-9]{8}T[0-9]{6}$', '') }}"
+        safe_pattern: "^{{ base_name | regex_escape }}(-[0-9]{8}T[0-9]{6})?$"
         existing_dists: >-
           {{ pulp_rpm_dists_list.distributions
-             | selectattr('name', 'match', item.short_name | replace('_', '-'))
-             | selectattr('publication', 'equalto', pub.pulp_href)
+             | selectattr('publication', 'equalto', pub.get('pulp_href', ''))
+             | selectattr('name', 'match', safe_pattern)
              | list }}
         dist: "{{ existing_dists[0] if (existing_dists | length > 0) else {} }}"
 
@@ -144,12 +162,13 @@
             password: "{{ pulp_password }}"
             name: "{{ item.name }}"
             base_path: "{{ item.base_path }}"
-            publication: "{{ pub.pulp_href }}"
+            publication: "{{ pub.get('pulp_href') }}"
+            content_guard: "{{ item.content_guard | default(omit) }}"
             state: present
           loop: "{{ dev_pulp_distribution_rpm }}"
           loop_control:
             label: "{{ item.repository }}"
-          when: existing_dists | length == 0
+          when: (pub | length > 0) and (existing_dists | length == 0)
 
         - name: Re-query RPM distributions (to capture newly created ones)
           pulp.squeezer.rpm_distribution:
@@ -169,6 +188,7 @@
           loop: "{{ dev_pulp_distribution_rpm }}"
           loop_control:
             label: "{{ item.repository }}"
+          when: pub | length > 0
 
         - name: Set a fact about latest RPM versions
           ansible.builtin.set_fact:
@@ -179,6 +199,7 @@
           loop: "{{ dev_pulp_distribution_rpm }}"
           loop_control:
             label: "{{ item.repository }}"
+          when: dist | length > 0
 
         - name: Display latest versions fact
           ansible.builtin.debug:
