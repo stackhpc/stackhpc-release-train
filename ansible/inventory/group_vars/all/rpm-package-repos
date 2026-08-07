@@ -1114,6 +1114,13 @@ rpm_package_repos:
     short_name: almalinux_10_proxysql_3_0
     sync_group: third_party
     distribution_name: almalinux-10-proxysql-3.0-
+  # slurm-quota repositories
+  - name: Rackslab - RHEL 9 (x86_64)
+    url: https://pkgs.rackslab.io/rpm/el9/main/x86_64/
+    base_path: rackslab/rpm/el9/main/x86_64/
+    short_name: rackslab_el9_x86_64
+    sync_group: third_party
+    distribution_name: rackslab-el9-x86_64-
 
 # Default filter string for RPM package repositories.
 rpm_package_repo_filter: ""
