@@ -44,6 +44,7 @@ kolla_container_images:
   - heat-base
   - heat-engine
   - horizon
+  - httpd
   - influxdb
   - ironic-api
   - ironic-base
