@@ -53,6 +53,7 @@ kolla_container_images:
   - ironic-neutron-agent
   - ironic-prometheus-exporter
   - ironic-pxe
+  - ironic-pxe-filter
   - iscsid
   - keepalived
   - keystone
@@ -83,6 +84,7 @@ kolla_container_images:
   - neutron-metadata-agent
   - neutron-mlnx-agent
   - neutron-openvswitch-agent
+  - neutron-ovn-agent
   - neutron-server
   - neutron-sriov-agent
   - nova-api
@@ -94,6 +96,7 @@ kolla_container_images:
   - nova-novncproxy
   - nova-scheduler
   - nova-serialproxy
+  - nova-spicehtml5proxy
   - nova-ssh
   - octavia-api
   - octavia-base
@@ -130,8 +133,10 @@ kolla_container_images:
   - prometheus-mysqld-exporter
   - prometheus-node-exporter
   - prometheus-openstack-exporter
+  - prometheus-openstack-network-exporter
   - prometheus-server
   - prometheus-v2-server
+  - prometheus-valkey-exporter
   - proxysql
   - rabbitmq
   - rabbitmq-3-12
@@ -145,6 +150,7 @@ kolla_container_images:
   - skydive-base
   - skyline-apiserver
   - skyline-console
+  - tgtd
   - valkey-server
   - valkey-base
   - valkey-sentinel
