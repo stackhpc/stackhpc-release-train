@@ -117,7 +117,9 @@
           loop: "{{ dev_pulp_distribution_deb }}"
           loop_control:
             label: "{{ item.repository }}"
-          when: pub | length > 0
+          when:
+            - release_train_debug | bool
+            - pub | length > 0
 
         - name: Set a fact about latest Deb versions
           ansible.builtin.set_fact:
@@ -133,6 +135,8 @@
         - name: Display latest versions fact
           ansible.builtin.debug:
             var: test_pulp_repository_deb_repo_versions
+          when:
+            - release_train_debug | bool
 
     - vars:
         repo_list: >-
@@ -188,7 +192,9 @@
           loop: "{{ dev_pulp_distribution_rpm }}"
           loop_control:
             label: "{{ item.repository }}"
-          when: pub | length > 0
+          when:
+            - release_train_debug | bool
+            - pub | length > 0
 
         - name: Set a fact about latest RPM versions
           ansible.builtin.set_fact:
@@ -204,3 +210,5 @@
         - name: Display latest versions fact
           ansible.builtin.debug:
             var: test_pulp_repository_rpm_repo_versions
+          when:
+            - release_train_debug | bool
