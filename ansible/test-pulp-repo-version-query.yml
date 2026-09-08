@@ -63,144 +63,102 @@
         password: "{{ pulp_password }}"
       register: pulp_rpm_dists_list
 
-    - vars:
-        repo_list: >-
-          {{ pulp_deb_repos_list.repositories
-             | selectattr('name', 'equalto', item.repository)
-             | list }}
-        repo: "{{ repo_list[0] if (repo_list | length > 0) else {} }}"
-        pubs: >-
-          {{ (pulp_deb_pubs_list.publications + pulp_deb_verbatim_pubs_list.publications)
-             | selectattr('repository', 'equalto', repo.get('pulp_href', ''))
-             | stackhpc.pulp.sort_publications | list }}
-        pub: "{{ pubs[0] if (pubs | length > 0) else {} }}"
-        base_name: "{{ item.name | regex_replace('-[0-9]{8}T[0-9]{6}$', '') }}"
-        safe_pattern: "^{{ base_name | regex_escape }}(-[0-9]{8}T[0-9]{6})?$"
-        existing_dists: >-
-          {{ pulp_deb_dists_list.distributions
-             | selectattr('publication', 'equalto', pub.get('pulp_href', ''))
-             | selectattr('name', 'match', safe_pattern)
-             | list }}
-        dist: "{{ existing_dists[0] if (existing_dists | length > 0) else {} }}"
+    - name: Create missing Deb distributions for the latest publication
+      pulp.squeezer.deb_distribution:
+        pulp_url: "{{ pulp_url }}"
+        username: "{{ pulp_username }}"
+        password: "{{ pulp_password }}"
+        name: "{{ item.name }}"
+        base_path: "{{ item.base_path }}"
+        publication: "{{ item.publication }}"
+        content_guard: "{{ item.content_guard | default(omit) }}"
+        state: present
+      loop: >-
+        {{ dev_pulp_distribution_deb
+           | distributions_to_create(
+               pulp_deb_repos_list.repositories,
+               pulp_deb_pubs_list.publications
+               + pulp_deb_verbatim_pubs_list.publications,
+               pulp_deb_dists_list.distributions) }}
+      loop_control:
+        label: "{{ item.repository }}"
+      register: deb_dists_created
 
-      block:
-        - name: Ensure Deb distributions exist for latest publication
-          pulp.squeezer.deb_distribution:
-            pulp_url: "{{ pulp_url }}"
-            username: "{{ pulp_username }}"
-            password: "{{ pulp_password }}"
-            name: "{{ item.name }}"
-            base_path: "{{ item.base_path }}"
-            publication: "{{ pub.get('pulp_href') }}"
-            content_guard: "{{ item.content_guard | default(omit) }}"
-            state: present
-          loop: "{{ dev_pulp_distribution_deb }}"
-          loop_control:
-            label: "{{ item.repository }}"
-          when: (pub | length > 0) and (existing_dists | length == 0)
+    - name: Re-query Deb distributions (to capture newly created ones)
+      pulp.squeezer.deb_distribution:
+        pulp_url: "{{ pulp_url }}"
+        username: "{{ pulp_username }}"
+        password: "{{ pulp_password }}"
+      register: pulp_deb_dists_requery
+      when: deb_dists_created is changed  # noqa: no-handler
 
-        - name: Re-query Deb distributions (to capture newly created ones)
-          pulp.squeezer.deb_distribution:
-            pulp_url: "{{ pulp_url }}"
-            username: "{{ pulp_username }}"
-            password: "{{ pulp_password }}"
-          register: pulp_deb_dists_list
+    - name: Set a fact about latest Deb versions
+      ansible.builtin.set_fact:
+        test_pulp_repository_deb_repo_versions: >-
+          {{ dev_pulp_distribution_deb
+             | latest_repo_versions(
+                 pulp_deb_repos_list.repositories,
+                 pulp_deb_pubs_list.publications
+                 + pulp_deb_verbatim_pubs_list.publications,
+                 pulp_deb_dists_requery.distributions
+                 | default(pulp_deb_dists_list.distributions, true)) }}
 
-        - name: Display latest Deb distributions
-          vars:
-            info:
-              repo: "{{ repo }}"
-              pub: "{{ pub }}"
-              dist: "{{ dist }}"
-          ansible.builtin.debug:
-            var: info
-          loop: "{{ dev_pulp_distribution_deb }}"
-          loop_control:
-            label: "{{ item.repository }}"
-          when: pub | length > 0
+    - name: Display latest Deb versions
+      ansible.builtin.debug:
+        var: test_pulp_repository_deb_repo_versions
+      when: release_train_debug | bool
 
-        - name: Set a fact about latest Deb versions
-          ansible.builtin.set_fact:
-            test_pulp_repository_deb_repo_versions: >-
-              {{ test_pulp_repository_deb_repo_versions
-                 | default({})
-                 | combine({item.short_name: dist.base_path | basename}) }}
-          loop: "{{ dev_pulp_distribution_deb }}"
-          loop_control:
-            label: "{{ item.repository }}"
-          when: dist | length > 0
+    - name: Create missing RPM distributions for the latest publication
+      pulp.squeezer.rpm_distribution:
+        pulp_url: "{{ pulp_url }}"
+        username: "{{ pulp_username }}"
+        password: "{{ pulp_password }}"
+        name: "{{ item.name }}"
+        base_path: "{{ item.base_path }}"
+        publication: "{{ item.publication }}"
+        content_guard: "{{ item.content_guard | default(omit) }}"
+        state: present
+      loop: >-
+        {{ dev_pulp_distribution_rpm
+           | distributions_to_create(
+               pulp_rpm_repos_list.repositories,
+               pulp_rpm_pubs_list.publications,
+               pulp_rpm_dists_list.distributions) }}
+      loop_control:
+        label: "{{ item.repository }}"
+      register: rpm_dists_created
 
-        - name: Display latest versions fact
-          ansible.builtin.debug:
-            var: test_pulp_repository_deb_repo_versions
+    - name: Re-query RPM distributions (to capture newly created ones)
+      pulp.squeezer.rpm_distribution:
+        pulp_url: "{{ pulp_url }}"
+        username: "{{ pulp_username }}"
+        password: "{{ pulp_password }}"
+      register: pulp_rpm_dists_requery
+      when: rpm_dists_created is changed  # noqa: no-handler
 
-    - vars:
-        repo_list: >-
-          {{ pulp_rpm_repos_list.repositories
-             | selectattr('name', 'equalto', item.repository)
-             | list }}
-        repo: "{{ repo_list[0] if (repo_list | length > 0) else {} }}"
-        pubs: >-
-          {{ pulp_rpm_pubs_list.publications
-             | selectattr('repository', 'equalto', repo.get('pulp_href', ''))
-             | stackhpc.pulp.sort_publications | list }}
-        pub: "{{ pubs[0] if (pubs | length > 0) else {} }}"
-        base_name: "{{ item.name | regex_replace('-[0-9]{8}T[0-9]{6}$', '') }}"
-        safe_pattern: "^{{ base_name | regex_escape }}(-[0-9]{8}T[0-9]{6})?$"
-        existing_dists: >-
-          {{ pulp_rpm_dists_list.distributions
-             | selectattr('publication', 'equalto', pub.get('pulp_href', ''))
-             | selectattr('name', 'match', safe_pattern)
-             | list }}
-        dist: "{{ existing_dists[0] if (existing_dists | length > 0) else {} }}"
+    - name: Set a fact about latest RPM versions
+      ansible.builtin.set_fact:
+        test_pulp_repository_rpm_repo_versions: >-
+          {{ dev_pulp_distribution_rpm
+             | latest_repo_versions(
+                 pulp_rpm_repos_list.repositories,
+                 pulp_rpm_pubs_list.publications,
+                 pulp_rpm_dists_requery.distributions
+                 | default(pulp_rpm_dists_list.distributions, true)) }}
 
-      block:
-        - name: Ensure RPM distributions exist for latest publication
-          pulp.squeezer.rpm_distribution:
-            pulp_url: "{{ pulp_url }}"
-            username: "{{ pulp_username }}"
-            password: "{{ pulp_password }}"
-            name: "{{ item.name }}"
-            base_path: "{{ item.base_path }}"
-            publication: "{{ pub.get('pulp_href') }}"
-            content_guard: "{{ item.content_guard | default(omit) }}"
-            state: present
-          loop: "{{ dev_pulp_distribution_rpm }}"
-          loop_control:
-            label: "{{ item.repository }}"
-          when: (pub | length > 0) and (existing_dists | length == 0)
+    - name: Display latest RPM versions
+      ansible.builtin.debug:
+        var: test_pulp_repository_rpm_repo_versions
+      when: release_train_debug | bool
 
-        - name: Re-query RPM distributions (to capture newly created ones)
-          pulp.squeezer.rpm_distribution:
-            pulp_url: "{{ pulp_url }}"
-            username: "{{ pulp_username }}"
-            password: "{{ pulp_password }}"
-          register: pulp_rpm_dists_list
+    - name: Fail if no RPM repository versions were resolved
+      ansible.builtin.assert:
+        that: test_pulp_repository_rpm_repo_versions | length > 0
+        fail_msg: "No RPM repository versions resolved from {{ pulp_url }}"
+      when: dev_pulp_distribution_rpm | length > 0
 
-        - name: Display latest RPM distributions
-          vars:
-            info:
-              repo: "{{ repo }}"
-              pub: "{{ pub }}"
-              dist: "{{ dist }}"
-          ansible.builtin.debug:
-            var: info
-          loop: "{{ dev_pulp_distribution_rpm }}"
-          loop_control:
-            label: "{{ item.repository }}"
-          when: pub | length > 0
-
-        - name: Set a fact about latest RPM versions
-          ansible.builtin.set_fact:
-            test_pulp_repository_rpm_repo_versions: >-
-              {{ test_pulp_repository_rpm_repo_versions
-                 | default({})
-                 | combine({item.short_name: dist.base_path | basename}) }}
-          loop: "{{ dev_pulp_distribution_rpm }}"
-          loop_control:
-            label: "{{ item.repository }}"
-          when: dist | length > 0
-
-        - name: Display latest versions fact
-          ansible.builtin.debug:
-            var: test_pulp_repository_rpm_repo_versions
+    - name: Fail if no Deb repository versions were resolved
+      ansible.builtin.assert:
+        that: test_pulp_repository_deb_repo_versions | length > 0
+        fail_msg: "No Deb repository versions resolved from {{ pulp_url }}"
+      when: dev_pulp_distribution_deb | length > 0

@@ -1,0 +1,3 @@
+---
+# Enable to print debug logs in release train workflows
+release_train_debug: false

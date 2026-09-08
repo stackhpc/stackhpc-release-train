@@ -46,3 +46,5 @@
     - name: Display Kayobe Pulp repository versions
       ansible.builtin.debug:
         var: kayobe_pulp_repo_versions
+      when:
+        - release_train_debug | bool

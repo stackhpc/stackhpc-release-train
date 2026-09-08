@@ -12,6 +12,10 @@ on:
         required: false
         description: Branch of StackHPC Kayobe configuration to use
         default: stackhpc/2026.1
+      debug:
+        description: "Enable debug logging"
+        type: boolean
+        default: false
 
 env:
   ANSIBLE_FORCE_COLOR: true
@@ -44,7 +48,8 @@ jobs:
           ansible/test-kayobe-repo-version-generate.yml \
           -e deb_package_repo_filter="'$FILTER'" \
           -e rpm_package_repo_filter="'$FILTER'" \
-          -e kayobe_config_repo_path=./stackhpc-kayobe-config/
+          -e kayobe_config_repo_path=./stackhpc-kayobe-config/ \
+          -e release_train_debug=${{ github.event.inputs.debug }}
         env:
           FILTER: ${{ github.event.inputs.filter }}
 
