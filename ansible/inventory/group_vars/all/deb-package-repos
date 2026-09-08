@@ -79,7 +79,9 @@ deb_package_repos:
     # path. This allows us to include security updates when using
     # DIB_DISTRIBUTION_MIRROR with the Diskimage builder ubuntu-minimal
     # element.
-    distributions: noble noble-updates noble-backports noble-security
+    # TODO(bbezak): Remove noble-proposed once Ceph 19.2.6 reaches
+    # noble-updates: https://bugs.launchpad.net/bugs/2161000
+    distributions: noble noble-updates noble-backports noble-security noble-proposed
     mirror: true
     mode: verbatim
     base_path: ubuntu/noble/
