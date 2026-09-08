@@ -1,0 +1,1078 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://stackhpc.github.io/stackhpc-release-train/usage/content-workflows/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-8.5.10">
+    
+    
+      
+        <title>Content management workflows - StackHPC Release Train</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.975780f9.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ef5552">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#usage-content-management-workflows" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="StackHPC Release Train" class="md-header__button md-logo" aria-label="StackHPC Release Train" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            StackHPC Release Train
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Content management workflows
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/stackhpc/stackhpc-release-train/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="StackHPC Release Train" class="md-nav__button md-logo" aria-label="StackHPC Release Train" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    StackHPC Release Train
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/stackhpc/stackhpc-release-train/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/" class="md-nav__link">
+        Architecture
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Usage
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Usage" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Usage
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content-howto/" class="md-nav__link">
+        Content management HOWTO
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Content management workflows
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Content management workflows
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#add-new-package-repositories-to-release-train" class="md-nav__link">
+    Add new package repositories to Release Train
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#syncing-package-repositories" class="md-nav__link">
+    Syncing package repositories
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#promoting-package-repositories" class="md-nav__link">
+    Promoting package repositories
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating-package-repository-versions-in-kayobe-configuration" class="md-nav__link">
+    Updating package repository versions in Kayobe configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-package-repositories-in-kayobe-configuration" class="md-nav__link">
+    Adding package repositories in Kayobe configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-container-images" class="md-nav__link">
+    Building container images
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#publishing-container-images" class="md-nav__link">
+    Publishing container images
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#syncing-container-images" class="md-nav__link">
+    Syncing container images
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating-container-image-tags-in-kayobe-configuration-yoga-release-and-earlier" class="md-nav__link">
+    Updating container image tags in Kayobe configuration (Yoga release and earlier)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating-container-image-tags-in-kayobe-configuration-zed-release-onwards" class="md-nav__link">
+    Updating container image tags in Kayobe configuration (Zed release onwards)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#promoting-container-images-zed-release-onwards" class="md-nav__link">
+    Promoting container images (Zed release onwards)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#promoting-container-images-yoga-release-and-earlier" class="md-nav__link">
+    Promoting container images (Yoga release and earlier)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-utilities" class="md-nav__link">
+    Other utilities
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../access/" class="md-nav__link">
+        Access control
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../source-code-ci/" class="md-nav__link">
+        Source code CI
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github-organisation-management/" class="md-nav__link">
+        GitHub Organisation Management
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../secrets/" class="md-nav__link">
+        Secrets
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notifications/" class="md-nav__link">
+        Notifications
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Operations
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Operations" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Operations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operations/ark/" class="md-nav__link">
+        Ark
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operations/test-pulp/" class="md-nav__link">
+        Test Pulp
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operations/github/" class="md-nav__link">
+        GitHub
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        Contributing
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#add-new-package-repositories-to-release-train" class="md-nav__link">
+    Add new package repositories to Release Train
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#syncing-package-repositories" class="md-nav__link">
+    Syncing package repositories
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#promoting-package-repositories" class="md-nav__link">
+    Promoting package repositories
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating-package-repository-versions-in-kayobe-configuration" class="md-nav__link">
+    Updating package repository versions in Kayobe configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-package-repositories-in-kayobe-configuration" class="md-nav__link">
+    Adding package repositories in Kayobe configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-container-images" class="md-nav__link">
+    Building container images
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#publishing-container-images" class="md-nav__link">
+    Publishing container images
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#syncing-container-images" class="md-nav__link">
+    Syncing container images
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating-container-image-tags-in-kayobe-configuration-yoga-release-and-earlier" class="md-nav__link">
+    Updating container image tags in Kayobe configuration (Yoga release and earlier)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating-container-image-tags-in-kayobe-configuration-zed-release-onwards" class="md-nav__link">
+    Updating container image tags in Kayobe configuration (Zed release onwards)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#promoting-container-images-zed-release-onwards" class="md-nav__link">
+    Promoting container images (Zed release onwards)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#promoting-container-images-yoga-release-and-earlier" class="md-nav__link">
+    Promoting container images (Yoga release and earlier)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-utilities" class="md-nav__link">
+    Other utilities
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://github.com/stackhpc/stackhpc-release-train/edit/master/docs/usage/content-workflows.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+<h1 id="usage-content-management-workflows">Usage - content management workflows<a class="headerlink" href="#usage-content-management-workflows" title="Permanent link">&para;</a></h1>
+<p>Content is primarily managed using the Ansible playbooks and configuration in the <a href="https://github.com/stackhpc/stackhpc-release-train">stackhpc-release-train</a> repository.
+The <a href="https://github.com/stackhpc/stackhpc-release-train/blob/main/README.md">readme</a> provides information on how to install dependencies and run playbooks.
+The playbooks are designed to be run manually or via a GitHub Actions CI job.
+This page covers the different workflows available for content management.
+It may be necessary to combine multiple of these to achieve a desired outcome.</p>
+<h2 id="add-new-package-repositories-to-release-train">Add new package repositories to Release Train<a class="headerlink" href="#add-new-package-repositories-to-release-train" title="Permanent link">&para;</a></h2>
+<p>Configuration for package repositories is in:</p>
+<ul>
+<li><a href="https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/package-repos">ansible/inventory/group_vars/all/package-repos</a></li>
+</ul>
+<p>New package repositories should be added to <code>rpm_package_repos</code> or <code>deb_package_repos</code> in <code>ansible/inventory/group_vars/all/package-repos</code>.
+The format of these variables is defined in the same file.</p>
+<p>The following files contain information derived from the above variables and should not need to be modified:</p>
+<ul>
+<li><a href="https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/dev-pulp-repos">ansible/inventory/group_vars/all/dev-pulp-repos</a></li>
+<li><a href="https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/test-pulp-repos">ansible/inventory/group_vars/all/test-pulp-repos</a></li>
+</ul>
+<h2 id="syncing-package-repositories">Syncing package repositories<a class="headerlink" href="#syncing-package-repositories" title="Permanent link">&para;</a></h2>
+<p>The <a href="https://github.com/stackhpc/stackhpc-release-train/actions/workflows/package-sync.yml">Sync package repositories</a> workflow runs nightly and on demand.
+It syncs package repositories in Ark with their upstream sources, then creates publications and distributions for any new content:</p>
+<ul>
+<li><code>dev-pulp-repo-sync.yml</code>: Synchronise <code>ark</code> with upstream package repositories.</li>
+<li><code>dev-pulp-repo-publication-cleanup.yml</code>: Work around an issue with Pulp syncing where multiple publications may exist for a single repository version, breaking the Ansible Squeezer <code>rpm_publication</code> module.</li>
+<li><code>dev-pulp-repo-publish.yml</code>: Create development distributions on <code>ark</code> for any new package repository snapshots.</li>
+</ul>
+<p>Next, it syncs new content in Ark to the test Pulp service:</p>
+<ul>
+<li><code>test-pulp-repo-version-query.yml</code>: Query <code>ark</code> for the latest distribution versions and set the version map variable <code>test_pulp_repository_rpm_repo_versions</code>.</li>
+<li><code>test-pulp-repo-sync.yml</code>: Synchronise <code>test</code> with <code>ark</code>'s package repositories using the version map variable <code>test_pulp_repository_rpm_repo_versions</code>.</li>
+<li><code>test-pulp-repo-publish.yml</code>: Create distributions on <code>test</code> for any new package repository snapshots.</li>
+</ul>
+<p>It may be necessary to run this workflow on demand if the nightly workflow fails, or if an upstream package has been updated since the last run, or if the repository configuration has been updated.
+Use GitHub Actions to run this workflow, or to run it manually:</p>
+<div class="highlight"><pre><span></span><code>ansible-playbook -i ansible/inventory \
+ansible/dev-pulp-repo-sync.yml \
+ansible/dev-pulp-repo-publication-cleanup.yml \
+ansible/dev-pulp-repo-publish.yml
+
+ansible-playbook -i ansible/inventory \
+ansible/test-pulp-repo-version-query.yml \
+ansible/test-pulp-repo-sync.yml \
+ansible/test-pulp-repo-publish.yml
+</code></pre></div>
+<p>If a set of versions other than the latest need to be synced from Ark to test, then it is possible to specify <code>test_pulp_repository_rpm_repo_versions</code> via an extra variables file. In this case, it is not necessary to run <code>test-pulp-repo-version-query.yml</code>.
+For example:</p>
+<div class="highlight"><pre><span></span><code>ansible-playbook -i ansible/inventory \
+ansible/test-pulp-repo-sync.yml \
+ansible/test-pulp-repo-publish.yml
+-e @test_pulp_repository_rpm_repo_versions.yml
+</code></pre></div>
+<p>Here, <code>test_pulp_repository_rpm_repo_versions.yml</code> contains the repository version map variable <code>test_pulp_repository_rpm_repo_versions</code>.
+It maps package repository short names (in <a href="https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/package-repos">ansible/inventory/group_vars/all/package-repos</a>) to the version of that repository to sync and publish.
+For example:</p>
+<div class="highlight"><pre><span></span><code>test_pulp_repository_rpm_repo_versions:
+  centos_stream_8_appstream: 20211122T102435
+  centos_stream_8_baseos: 20220101T143229
+  ...
+</code></pre></div>
+<h2 id="promoting-package-repositories">Promoting package repositories<a class="headerlink" href="#promoting-package-repositories" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This should only be performed when package repositories are ready for release.</p>
+</div>
+<p>The <a href="https://github.com/stackhpc/stackhpc-release-train/actions/workflows/package-promote.yml">Promote package repositories</a> workflow is triggered automatically when a change is merged to stackhpc-kayobe-config.
+It may also be run on demand.</p>
+<p>It runs the following playbooks:</p>
+<ul>
+<li><code>dev-pulp-repo-version-query-kayobe.yml</code>: Query the Pulp repository versions defined in a Kayobe configuration repository and sets the version map variable <code>dev_pulp_distribution_rpm_promote_versions</code> based upon those versions. A path to a Kayobe configuration repository must be specified via <code>kayobe_config_repo_path</code>.</li>
+<li><code>dev-pulp-repo-promote.yml</code>: Promote the set of <code>ark</code> distributions defined in the version map variable <code>dev_pulp_distribution_rpm_promote_versions</code> to releases.</li>
+</ul>
+<p>Use GitHub Actions to run this workflow, or to run it manually:</p>
+<div class="highlight"><pre><span></span><code>ansible-playbook -i ansible/inventory \
+ansible/dev-pulp-repo-version-query-kayobe.yml \
+ansible/dev-pulp-repo-promote.yml \
+-e kayobe_config_repo_path=../stackhpc-kayobe-config/
+</code></pre></div>
+<p>In this example, the Pulp repository versions defined in the <code>etc/kayobe/pulp-repo-versions.yml</code> file in <code>../stackhpc-kayobe-config</code> repository (relative to the current working directory) will be promoted to releases.</p>
+<p>Alternatively, the set of versions to promote may be specified as an extra variables file:</p>
+<div class="highlight"><pre><span></span><code>ansible-playbook -i ansible/inventory \
+ansible/dev-pulp-repo-promote.yml \
+-e @dev_pulp_distribution_rpm_promote_versions.yml
+</code></pre></div>
+<p>Here, <code>dev_pulp_distribution_rpm_promote_versions.yml</code> contains the repository version map variable <code>dev_pulp_distribution_rpm_promote_versions</code>.
+It maps package repository short names (in <a href="https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/package-repos">ansible/inventory/group_vars/all/package-repos</a>) to the version of that repository to promote.
+For example:</p>
+<div class="highlight"><pre><span></span><code>dev_pulp_distribution_rpm_promote_versions:
+  centos_stream_8_appstream: 20211122T102435
+  centos_stream_8_baseos: 20220101T143229
+  ...
+</code></pre></div>
+<h2 id="updating-package-repository-versions-in-kayobe-configuration">Updating package repository versions in Kayobe configuration<a class="headerlink" href="#updating-package-repository-versions-in-kayobe-configuration" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This procedure is expected to change.</p>
+</div>
+<p>The <a href="https://github.com/stackhpc/stackhpc-release-train/actions/workflows/package-update-kayobe.yml">Update Kayobe package repository versions</a> workflow runs on demand.
+It should be run when package repository versions in Kayobe need to be updated.
+It runs the following playbooks:</p>
+<ul>
+<li><code>test-pulp-repo-version-query.yml</code>: Query <code>ark</code> for the latest distribution versions and set the version map variable <code>test_pulp_repository_rpm_repo_versions</code>.</li>
+<li><code>test-kayobe-repo-version-generate.yml</code>: Query stackhpc-kayobe-config for the current repository versions, then update them to the previously queried versions in <code>ark</code>.</li>
+</ul>
+<p>It then stores the new versions YAML file as an artifact, which may be downloaded and manually applied to stackhpc-kayobe-config.
+In future the workflow will be extended to create a PR.</p>
+<p>Use GitHub Actions to run this workflow, or to run it manually:</p>
+<div class="highlight"><pre><span></span><code>ansible/test-pulp-repo-version-query.yml \
+ansible/test-kayobe-repo-version-generate.yml \
+-e kayobe_config_repo_path=./stackhpc-kayobe-config/
+</code></pre></div>
+<p>Package repository versions are stored in StackHPC Kayobe configuration in <a href="https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/2024.1/etc/kayobe/pulp-repo-versions.yml">etc/kayobe/pulp-repo-versions.yml</a>.
+Note that the updated versions are not necessarily released.
+The generated file may be amended as necessary (in case not all updates are required), then copied to the StackHPC Kayobe configuration.</p>
+<h2 id="adding-package-repositories-in-kayobe-configuration">Adding package repositories in Kayobe configuration<a class="headerlink" href="#adding-package-repositories-in-kayobe-configuration" title="Permanent link">&para;</a></h2>
+<p>Adding a package repository to the StackHPC Release Train configuration is not sufficient to allow StackHPC OpenStack deployments to use it.
+The repository must also be defined in StackHPC Kayobe Configuration.
+We need to define how to sync the package repository from Ark into the local Pulp, as well as how control plane hosts access the repository in the local Pulp service.</p>
+<p>In the following steps, the <code>short_name</code> of a repository is the <code>short_name</code> field of the repository in <a href="https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/package-repos">ansible/inventory/group_vars/all/package-repos</a>.</p>
+<ul>
+<li>Add details of the repository to <code>stackhpc_pulp_rpm_repos</code> or <code>stackhpc_pulp_deb_repos</code> in <code>etc/kayobe/pulp.yml</code> to enable syncing of the repository to the local Pulp service. Use the <code>required</code> field to avoid growing sync durations by controlling when the repository needs to be synced.</li>
+<li>Add a version variable to <code>etc/kayobe/pulp.yml</code>. It should have a format of <code>stackhpc_pulp_repo_&lt;short_name&gt;_version</code>. The version value may be specified or omitted. If omitted, it can be populated automatically using the <a href="https://github.com/stackhpc/stackhpc-release-train/actions/workflows/package-update-kayobe.yml">Update Kayobe package repository versions</a> workflow.</li>
+<li>Add local Pulp URL and version variables for the repository to <code>etc/kayobe/stackhpc.yml</code>. They should have a format of <code>stackhpc_repo_&lt;short_name&gt;_url</code> and <code>stackhpc_repo_&lt;short_name&gt;_version</code>.</li>
+<li>Override the repository version variable in <code>stackhpc-ci.yml</code> in the <code>ci-aio</code>, <code>ci-builder</code> and <code>ci-multinode</code> Kayobe environments to use the datestamped version.</li>
+<li>If the repository needs to be accessible to the host OS of control plane hosts, add it to <code>etc/kayobe/dnf.yml</code> or <code>etc/kayobe/apt.yml</code>.</li>
+<li>If the repository needs to be accessible to Kolla container images, add it to the <code>Kolla image build configuration</code> section in <code>etc/kayobe/kolla.yml</code>.</li>
+</ul>
+<h2 id="building-container-images">Building container images<a class="headerlink" href="#building-container-images" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This procedure is expected to change.</p>
+</div>
+<p>The <a href="https://github.com/stackhpc/stackhpc-kayobe-config/actions/workflows/stackhpc-container-image-build.yml">Build Kolla container images</a> workflow in the <a href="https://github.com/stackhpc/stackhpc-kayobe-config">stackhpc-kayobe-config</a> repository runs on demand.
+It should be run when new Kolla container images are required.
+All images may be built, or a specific set of images.
+All successfully built images will be pushed to Ark, in the <code>stackhpc-dev</code> namespace.
+An <code>Overcloud container images</code> artifact will be visible on the summary page of a completed successful workflow run.
+This artifact contains a list of the built images.
+After a successful container image build workflow, another workflow is triggered to <a href="#syncing-container-images">sync the images</a> to the test Pulp.</p>
+<p>In the following example, the user specified a regular expression of <code>^magnum</code>, matching all of the Magnum images, and the <code>base</code> image that they depend on.</p>
+<div class="highlight"><pre><span></span><code>REPOSITORY                                       TAG                          IMAGE ID       CREATED         SIZE
+ark.stackhpc.com/stackhpc-dev/magnum-api         2024.1-rocky-9-20240811T091848   32f2b9299194   6 minutes ago   1.29GB
+ark.stackhpc.com/stackhpc-dev/magnum-conductor   2024.1-rocky-9-20240811T091848   35e4c1cda1a8   7 minutes ago   1.14GB
+ark.stackhpc.com/stackhpc-dev/magnum-base        2024.1-rocky-9-20240811T091848   3bd5f3e50aa3   7 minutes ago   1.14GB
+ark.stackhpc.com/stackhpc-dev/openstack-base     2024.1-rocky-9-20240811T091848   bd02fa0ec1d6   7 minutes ago   991MB
+ark.stackhpc.com/stackhpc-dev/base               2024.1-rocky-9-20240811T091848   bd02fa0ec1d6   7 minutes ago   991MB
+</code></pre></div>
+<p>In this example, the <code>base</code>, <code>openstack-base</code> and Magnum images have been tagged <code>2024.1-rocky-9-20240811T091848</code>.</p>
+<p>Instructions for building Kolla container images manually are provided in the <a href="https://stackhpc-kayobe-config.readthedocs.io/en/stackhpc-2024.1/contributor/environments/ci-builder.html">StackHPC kayobe config documentation</a>.</p>
+<h2 id="publishing-container-images">Publishing container images<a class="headerlink" href="#publishing-container-images" title="Permanent link">&para;</a></h2>
+<p>The <a href="https://github.com/stackhpc/stackhpc-release-train/actions/workflows/container-publish.yml">Publish container repositories</a> workflow runs after a push to the <code>main</code> branch of the <code>stackhpc-release-train</code> repository, when relevant files have changed.</p>
+<p>It runs the following playbooks:</p>
+<ul>
+<li><code>dev-pulp-container-publish.yml</code>: Configure access control for development and release container repositories and distributions on <code>ark</code>.</li>
+</ul>
+<p>Use GitHub Actions to run this workflow, or to run it manually:</p>
+<div class="highlight"><pre><span></span><code>ansible-playbook -i ansible/inventory \
+ansible/dev-pulp-container-publish.yml
+</code></pre></div>
+<p>Configuration for container images is in:</p>
+<ul>
+<li><a href="https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/kolla">ansible/inventory/group_vars/all/kolla</a>.</li>
+<li><a href="https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/dev-pulp-containers">ansible/inventory/group_vars/all/dev-pulp-containers</a>.</li>
+<li><a href="https://github.com/stackhpc/stackhpc-release-train/blob/main/ansible/inventory/group_vars/all/test-pulp-containers">ansible/inventory/group_vars/all/test-pulp-containers</a>.</li>
+</ul>
+<p>New images should be added to <code>kolla_container_images</code> in <code>ansible/inventory/group_vars/all/kolla</code>.</p>
+<h2 id="syncing-container-images">Syncing container images<a class="headerlink" href="#syncing-container-images" title="Permanent link">&para;</a></h2>
+<p>The <a href="https://github.com/stackhpc/stackhpc-release-train/actions/workflows/container-sync.yml">Sync container repositories</a> workflow runs after a successful <a href="#building-container-images">container image build</a> workflow run, or on demand.
+It runs the following playbooks:</p>
+<ul>
+<li><code>test-pulp-container-sync.yml</code>: Synchronise <code>test</code> with container images from <code>stackhpc-dev</code> namespace on <code>ark</code>.</li>
+<li><code>test-pulp-container-publish.yml</code>: Create distributions on <code>test</code> Pulp server for any new container images.</li>
+</ul>
+<p>Use GitHub Actions to run this workflow, or to run it manually:</p>
+<div class="highlight"><pre><span></span><code>ansible-playbook -i ansible/inventory \
+ansible/test-pulp-container-sync.yml \
+ansible/test-pulp-container-publish.yml
+</code></pre></div>
+<h2 id="updating-container-image-tags-in-kayobe-configuration-yoga-release-and-earlier">Updating container image tags in Kayobe configuration (Yoga release and earlier)<a class="headerlink" href="#updating-container-image-tags-in-kayobe-configuration-yoga-release-and-earlier" title="Permanent link">&para;</a></h2>
+<p>The image tag used deploy containers may be updated for all images in <a href="https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/2024.1/etc/kayobe/kolla.yml">etc/kayobe/kolla.yml</a>, or for specific images in <a href="https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/2024.1/etc/kayobe/kolla/globals.yml">etc/kayobe/kolla/globals.yml</a>.
+Currently this is a manual process.</p>
+<p>Use the new tag from the <a href="#building-container-images">container image build</a>.</p>
+<p>For example, to update the default tag for all images (used where no service-specific tag has been set), update <code>etc/kayobe/kolla.yml</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Kolla OpenStack release version. This should be a Docker image tag.</span>
+<span class="c1"># Default is {{ openstack_release }}.</span>
+<span class="nt">kolla_openstack_release</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wallaby-20220811T091848</span>
+</code></pre></div>
+<p>Some or all per-service tags in <code>etc/kayobe/kolla/globals.yml</code> may need to be removed in order to use the new default tag.</p>
+<p>Alternatively, to update the tag for all containers in a service, update <code>etc/kayobe/kolla/globals.yml</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">skydive_tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wallaby-20220811T091848</span>
+</code></pre></div>
+<p>Alternatively, to update the tag for a specific container, update <code>etc/kayobe/kolla/globals.yml</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">skydive_analyzer_tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wallaby-20220811T091848</span>
+</code></pre></div>
+<h2 id="updating-container-image-tags-in-kayobe-configuration-zed-release-onwards">Updating container image tags in Kayobe configuration (Zed release onwards)<a class="headerlink" href="#updating-container-image-tags-in-kayobe-configuration-zed-release-onwards" title="Permanent link">&para;</a></h2>
+<p>The image tags used deploy containers are defined in <a href="https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/2024.1/etc/kayobe/kolla-image-tags.yml">etc/kayobe/kolla-image-tags.yml</a>.
+Currently updating these is a manual process.</p>
+<p>Use the new tag from the <a href="#building-container-images">container image build</a>.</p>
+<p>For example, to update the default tag for all images (used where no service-specific tag has been set), update the <code>openstack</code> key, and remove all other keys:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Dict of Kolla image tags to deploy for each service.</span>
+<span class="c1"># Each key is the tag variable prefix name, and the value is another dict,</span>
+<span class="c1"># where the key is the OS distro and the value is the tag to deploy.</span>
+<span class="nt">kolla_image_tags</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">openstack</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">rocky-9</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2024.1-rocky-9-20240101T000000</span>
+<span class="w">    </span><span class="nt">ubuntu-jammy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2024.1-ubuntu-jammy-20240101T000000</span>
+</code></pre></div>
+<p>Alternatively, update the tag for all containers in a service, e.g. for all <code>nova</code> containers:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Dict of Kolla image tags to deploy for each service.</span>
+<span class="c1"># Each key is the tag variable prefix name, and the value is another dict,</span>
+<span class="c1"># where the key is the OS distro and the value is the tag to deploy.</span>
+<span class="nt">kolla_image_tags</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">openstack</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">rocky-9</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2024.1-rocky-9-20240101T000000</span>
+<span class="w">    </span><span class="nt">ubuntu-jammy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2024.1-ubuntu-jammy-20240101T000000</span>
+<span class="w">  </span><span class="nt">nova</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">rocky-9</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2024.1-rocky-9-20240102T000000</span>
+<span class="w">    </span><span class="nt">ubuntu-jammy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2024.1-ubuntu-jammy-20240102T000000</span>
+</code></pre></div>
+<p>Alternatively, update the tag for a specific container, e.g. for the <code>nova_compute</code> container:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Dict of Kolla image tags to deploy for each service.</span>
+<span class="c1"># Each key is the tag variable prefix name, and the value is another dict,</span>
+<span class="c1"># where the key is the OS distro and the value is the tag to deploy.</span>
+<span class="nt">kolla_image_tags</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">openstack</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">rocky-9</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2024.1-rocky-9-20240101T000000</span>
+<span class="w">    </span><span class="nt">ubuntu-jammy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2024.1-ubuntu-jammy-20240101T000000</span>
+<span class="w">  </span><span class="nt">nova_compute</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">rocky-9</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2024.1-rocky-9-20240103T000000</span>
+<span class="w">    </span><span class="nt">ubuntu-jammy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2024.1-ubuntu-jammy-20240103T000000</span>
+</code></pre></div>
+<h2 id="promoting-container-images-zed-release-onwards">Promoting container images (Zed release onwards)<a class="headerlink" href="#promoting-container-images-zed-release-onwards" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This should only be performed when container images are ready for release.</p>
+</div>
+<p>The <a href="https://github.com/stackhpc/stackhpc-release-train/actions/workflows/container-promote.yml">Promote container repositories</a> workflow is triggered automatically when a change is merged to stackhpc-kayobe-config.
+It may also be run on demand.</p>
+<p>It runs the following playbooks:</p>
+<ul>
+<li><code>dev-pulp-container-tag-query-kayobe.yml</code>: Query the Pulp container image tags defined in a Kayobe configuration repository and set the tag map variable <code>dev_pulp_repository_container_promotion_tags</code> based upon those tags. A path to a Kayobe configuration repository must be specified via <code>kayobe_config_repo_path</code>.</li>
+<li><code>dev-pulp-container-promote.yml</code>: Promote a set of container images from <code>stackhpc-dev</code> to <code>stackhpc</code> namespace. The tags to be promoted are defined via <code>dev_pulp_repository_container_promotion_tags</code>.</li>
+</ul>
+<p>Use GitHub Actions to run this workflow, or to run it manually:</p>
+<div class="highlight"><pre><span></span><code>ansible-playbook -i ansible/inventory \
+ansible/dev-pulp-container-tag-query-kayobe.yml \
+ansible/dev-pulp-container-promote.yml \
+-e kayobe_config_repo_path=../stackhpc-kayobe-config/
+</code></pre></div>
+<p>In this example, the Pulp container image tags defined in the <code>etc/kayobe/kolla-image-tags.yml</code> file in <code>../stackhpc-kayobe-config</code> repository (relative to the current working directory) will be promoted to releases.</p>
+<h2 id="promoting-container-images-yoga-release-and-earlier">Promoting container images (Yoga release and earlier)<a class="headerlink" href="#promoting-container-images-yoga-release-and-earlier" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This should only be performed when container images are ready for release.</p>
+</div>
+<p>The <a href="https://github.com/stackhpc/stackhpc-release-train/actions/workflows/container-promote-old.yml">Promote container repositories (old)</a> workflow runs on demand.
+It should be run when container images need to be released, typically after a change to <a href="#updating-container-image-tags-in-kayobe-configuration-yoga-release-and-earlier">update container image tags</a> has been approved.
+It runs the following playbook:</p>
+<ul>
+<li><code>dev-pulp-container-promote-old.yml</code>: Promote a set of container images from <code>stackhpc-dev</code> to <code>stackhpc</code> namespace. The tag to be promoted is defined via <code>dev_pulp_repository_container_promotion_tag</code> which should be specified as an extra variable (<code>-e</code>).</li>
+</ul>
+<p>Use GitHub Actions to run this workflow, or to run it manually:</p>
+<div class="highlight"><pre><span></span><code>ansible-playbook -i ansible/inventory \
+ansible/dev-pulp-container-promote-old.yml
+</code></pre></div>
+<h2 id="other-utilities">Other utilities<a class="headerlink" href="#other-utilities" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>dev-pulp-distribution-list.yml</code>: List available distributions in <code>ark</code>.</li>
+<li><code>test-pulp-distribution-list.yml</code>: List available distributions in <code>test</code>.</li>
+<li><code>test-repo-test.yml</code>: Install package repositories on the local machine and install some packages.</li>
+</ul>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../content-howto/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Content management HOWTO" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Content management HOWTO
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../access/" class="md-footer__link md-footer__link--next" aria-label="Next: Access control" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Access control
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections"], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
+      
+    
+    
+  </body>
+</html>
