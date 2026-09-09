@@ -1,0 +1,23 @@
+name: Test the staging GHA runner scale set
+
+on:
+  push:
+
+jobs:
+  runner:
+    name: Check the os info of the runner
+    runs-on: self-hosted-staging
+    steps:
+      - name: Dump os-release
+        shell: bash
+        run: |
+          cat /etc/os-release
+
+  dind:
+    name: Check dind works
+    runs-on: self-hosted-staging
+    steps:
+      - name: Run Docker hello-world
+        shell: bash
+        run: |
+          docker run --rm hello-world
