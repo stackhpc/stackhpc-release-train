@@ -27,6 +27,7 @@ variable "repositories" {
     "Platform"     = [],
     "ReleaseTrain" = [],
     "SMSLab"       = [],
+    "ZuulOnly"     = [],
   }
 }
 

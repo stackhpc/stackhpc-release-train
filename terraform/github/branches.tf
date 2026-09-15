@@ -523,7 +523,7 @@ resource "github_branch_protection" "openstack_branch_protection_caracal" {
 }
 
 resource "github_branch_protection" "openstack_branch_protection_epoxy" {
-  for_each      = toset(var.repositories["OpenStack"])
+  for_each      = toset([for r in var.repositories["OpenStack"] : r if !contains(var.repositories["ZuulOnly"], r)])
   repository_id = data.github_repository.repositories[each.key].node_id
 
   pattern                         = "stackhpc/2025.1"
@@ -562,7 +562,7 @@ resource "github_branch_protection" "openstack_branch_protection_epoxy" {
 }
 
 resource "github_branch_protection" "openstack_branch_protection_gazpacho" {
-  for_each      = toset(var.repositories["OpenStack"])
+  for_each      = toset([for r in var.repositories["OpenStack"] : r if !contains(var.repositories["ZuulOnly"], r)])
   repository_id = data.github_repository.repositories[each.key].node_id
 
   pattern                         = "stackhpc/2026.1"
@@ -634,6 +634,75 @@ resource "github_branch_protection" "openstack_branch_protection_master" {
 
   lifecycle {
     prevent_destroy = false
+  }
+}
+
+# ZuulOnly: push_allowances contains only the Zuul GitHub App, so PRs can only be
+# merged by Zuul (typically after the "gate" label enqueues the change into its gate
+# pipeline). Neither the Developers team nor the owning team can merge directly.
+# Only the stackhpc/2025.1 and stackhpc/2026.1 branches are gated this way for now;
+# neutron's other branches keep normal OpenStack-group protection (see openstack_branch_protection_*).
+resource "github_branch_protection" "zuulonly_branch_protection_epoxy" {
+  for_each      = toset(var.repositories["ZuulOnly"])
+  repository_id = data.github_repository.repositories[each.key].node_id
+
+  pattern                         = "stackhpc/2025.1"
+  require_conversation_resolution = true
+  allows_deletions                = false
+  allows_force_pushes             = false
+
+  restrict_pushes {
+    blocks_creations = false
+    push_allowances = [
+      local.zuul_app_node_id
+    ]
+  }
+
+  required_pull_request_reviews {
+    dismiss_stale_reviews           = true
+    require_code_owner_reviews      = true
+    required_approving_review_count = 1
+  }
+
+  required_status_checks {
+    contexts = ["stackhpc/check"]
+    strict   = false
+  }
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
+resource "github_branch_protection" "zuulonly_branch_protection_gazpacho" {
+  for_each      = toset(var.repositories["ZuulOnly"])
+  repository_id = data.github_repository.repositories[each.key].node_id
+
+  pattern                         = "stackhpc/2026.1"
+  require_conversation_resolution = true
+  allows_deletions                = false
+  allows_force_pushes             = false
+
+  restrict_pushes {
+    blocks_creations = false
+    push_allowances = [
+      local.zuul_app_node_id
+    ]
+  }
+
+  required_pull_request_reviews {
+    dismiss_stale_reviews           = true
+    require_code_owner_reviews      = true
+    required_approving_review_count = 1
+  }
+
+  required_status_checks {
+    contexts = ["stackhpc/check"]
+    strict   = false
+  }
+
+  lifecycle {
+    prevent_destroy = true
   }
 }
 
