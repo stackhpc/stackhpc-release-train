@@ -523,7 +523,7 @@ resource "github_branch_protection" "openstack_branch_protection_caracal" {
 }
 
 resource "github_branch_protection" "openstack_branch_protection_epoxy" {
-  for_each      = toset([for r in var.repositories["OpenStack"] : r if !contains(var.repositories["ZuulOnly"], r)])
+  for_each      = setsubtract(toset(var.repositories["OpenStack"]), toset(var.repositories["ZuulOnly"]))
   repository_id = data.github_repository.repositories[each.key].node_id
 
   pattern                         = "stackhpc/2025.1"
