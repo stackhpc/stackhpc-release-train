@@ -21,3 +21,11 @@ jobs:
         shell: bash
         run: |
           docker run --rm hello-world
+  dind:
+    name: Check dind works
+    runs-on: self-hosted-staging
+    steps:
+      - name: Run Docker hello-world
+        shell: bash
+        run: |
+          docker run ubuntu:latest sleep 600
