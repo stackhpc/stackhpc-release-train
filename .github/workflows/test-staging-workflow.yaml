@@ -21,7 +21,7 @@ jobs:
         shell: bash
         run: |
           docker run --rm hello-world
-  dind:
+  sleep:
     name: Check dind works
     runs-on: self-hosted-staging
     steps:
