@@ -346,6 +346,13 @@ source_repositories:
       - codeowners:
           content: "{{ community_files.codeowners.openstack }}"
           dest: ".github/CODEOWNERS"
+  stackhpc-image-elements:
+    repository_type: "single-branch"
+    workflows: []
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.openstack }}"
+          dest: ".github/CODEOWNERS"
   stackhpc-inspector-plugins:
     repository_type: "branchless"
     workflows: "{{ openstack_workflows.elsewhere }}"
