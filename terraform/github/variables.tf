@@ -27,6 +27,7 @@ variable "repositories" {
     "Platform"     = [],
     "ReleaseTrain" = [],
     "SMSLab"       = [],
+    "SRE"          = [],
   }
 }
 
@@ -98,6 +99,14 @@ variable "teams" {
     },
     "SMSLab" = {
       description = "Team responsible for SMS Lab development"
+      privacy     = "closed"
+      users = {
+        maintainers = [],
+        members     = [],
+      }
+    },
+    "SRE" = {
+      description = "Team responsible for internal infrastructure"
       privacy     = "closed"
       users = {
         maintainers = [],
