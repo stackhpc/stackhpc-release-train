@@ -40,6 +40,8 @@ community_files:
       * @stackhpc/releasetrain
     sms_lab: |
       * @stackhpc/smslab
+    sre: |
+      * @stackhpc/sre
 source_repositories:
   # Kayobe team
   beokay:
@@ -380,6 +382,21 @@ source_repositories:
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.admins }}"
+          dest: ".github/CODEOWNERS"
+  # SRE team
+  terraform-cloudflare-dns:
+    repository_type: "single-branch"
+    workflows: []
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.sre }}"
+          dest: ".github/CODEOWNERS"
+  terraform-cloudflare-iam:
+    repository_type: "single-branch"
+    workflows: []
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.sre }}"
           dest: ".github/CODEOWNERS"
   # Ansible team
   ansible-role-libvirt-host:

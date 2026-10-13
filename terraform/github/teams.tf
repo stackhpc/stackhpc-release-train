@@ -74,6 +74,13 @@ resource "github_team_repository" "smslab_repositories" {
   permission = "push"
 }
 
+resource "github_team_repository" "sre_repositories" {
+  for_each   = toset(var.repositories["SRE"])
+  team_id    = resource.github_team.organisation_teams["SRE"].id
+  repository = each.value
+  permission = "push"
+}
+
 resource "github_team_membership" "team_membership" {
   for_each = { for element in flatten([
     for team in resource.github_team.organisation_teams : [
