@@ -15,9 +15,8 @@
 # publish: Whether to publish and distribute the repository. Optional, default is true.
 rpm_package_repos:
   # EPEL 8 repositories
-  # NOTE(Alex-Welsh): NL mirrors fail to sync, so we use DE instead.
   - name: Extra Packages for Enterprise Linux 8 - x86_64
-    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-8&arch=x86_64&country=DE&infra=stock&content=centos&protocol=https
+    url: https://dl.fedoraproject.org/pub/epel/8/Everything/x86_64/
     # mirror_complete fails with:
     # "This repository uses features which are incompatible with 'mirror' sync. Please sync without mirroring enabled"
     sync_policy: mirror_content_only
@@ -26,13 +25,13 @@ rpm_package_repos:
     sync_group: epel
     distribution_name: extra-packages-for-enterprise-linux-8-x86_64-
   - name: Extra Packages for Enterprise Linux Modular 8 - x86_64
-    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-modular-8&arch=x86_64&country=DE&infra=stock&content=centos&protocol=https
+    url: https://dl.fedoraproject.org/pub/archive/epel/8/Modular/x86_64/
     base_path: epel/8/Modular/x86_64/
     short_name: epel_modular
     sync_group: epel
     distribution_name: extra-packages-for-enterprise-linux-modular-8-x86_64-
   - name: Extra Packages for Enterprise Linux 8 - source
-    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-source-8&arch=source&country=DE&infra=stock&content=centos&protocol=https
+    url: https://dl.fedoraproject.org/pub/epel/8/Everything/source/tree/
     base_path: epel/8/Everything/source/tree/
     short_name: epel_source
     sync_group: epel
@@ -141,61 +140,61 @@ rpm_package_repos:
 
   # Base Rocky Linux 8.10 repositories (Slurm appliance)
   - name: Rocky Linux 8.10 - AppStream
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-8.10&arch=x86_64&country=NL
+    url: https://dl.rockylinux.org/pub/rocky/8.10/AppStream/x86_64/os/
     base_path: rocky/8.10/AppStream/x86_64/os/
     short_name: rocky_8_10_appstream
     sync_group: rocky_8
     distribution_name: rocky-8.10-appstream-
   - name: Rocky Linux 8.10 - AppStream (source)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-source-8.10&arch=source&country=NL
+    url: https://dl.rockylinux.org/pub/rocky/8.10/AppStream/source/tree/
     base_path: rocky/8.10/AppStream/source/tree/
     short_name: rocky_8_10_appstream_source
     sync_group: rocky_8_source
     distribution_name: rocky-8.10-appstream-source-
   - name: Rocky Linux 8.10 - BaseOS
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-8.10&arch=x86_64&country=NL
+    url: https://dl.rockylinux.org/pub/rocky/8.10/BaseOS/x86_64/os/
     base_path: rocky/8.10/BaseOS/x86_64/os/
     short_name: rocky_8_10_baseos
     sync_group: rocky_8
     distribution_name: rocky-8.10-baseos-
   - name: Rocky Linux 8.10 - BaseOS (source)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-source-8.10&arch=source&country=NL
+    url: https://dl.rockylinux.org/pub/rocky/8.10/BaseOS/source/tree/
     base_path: rocky/8.10/BaseOS/source/tree/
     short_name: rocky_8_10_baseos_source
     sync_group: rocky_8_source
     distribution_name: rocky-8.10-baseos-source-
   - name: Rocky Linux 8.10 - Extras
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-8.10&arch=x86_64&country=NL
+    url: https://dl.rockylinux.org/pub/rocky/8.10/extras/x86_64/os/
     base_path: rocky/8.10/extras/x86_64/os/
     short_name: rocky_8_10_extras
     sync_group: rocky_8
     distribution_name: rocky-8.10-extras-
   - name: Rocky Linux 8.10 - Extras (source)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-source-8.10&arch=source&country=NL
+    url: https://dl.rockylinux.org/pub/rocky/8.10/extras/source/tree/
     base_path: rocky/8.10/extras/source/tree/
     short_name: rocky_8_10_extras_source
     sync_group: rocky_8_source
     distribution_name: rocky-8.10-extras-source-
   - name: Rocky Linux 8.10 - PowerTools
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-PowerTools-8.10&arch=x86_64&country=NL
+    url: https://dl.rockylinux.org/pub/rocky/8.10/PowerTools/x86_64/os/
     base_path: rocky/8.10/PowerTools/x86_64/os/
     short_name: rocky_8_10_powertools
     sync_group: rocky_8
     distribution_name: rocky-8.10-powertools-
   - name: Rocky Linux 8.10 - PowerTools (source)
-    url: https://mirrors.rockylinux.org/mirrorlist?arch=source&repo=PowerTools-8.10-source&country=NL
+    url: https://dl.rockylinux.org/pub/rocky/8.10/PowerTools/source/tree/
     base_path: rocky/8.10/PowerTools/source/tree/
     short_name: rocky_8_10_powertools_source
     sync_group: rocky_8_source
     distribution_name: rocky-8.10-powertools-source-
   - name: Rocky Linux 8.10 - Security
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-security-8.10&arch=x86_64&country=NL
+    url: https://dl.rockylinux.org/pub/rocky/8.10/security/x86_64/os/
     base_path: rocky/8.10/security/x86_64/os/
     short_name: rocky_8_10_security
     sync_group: rocky_8
     distribution_name: rocky-8.10-security-
   - name: Rocky Linux 8.10 - Security (source)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-security-source-8.10&arch=source&country=NL
+    url: https://dl.rockylinux.org/pub/rocky/8.10/security/source/tree/
     base_path: rocky/8.10/security/source/tree/
     short_name: rocky_8_10_security_source
     sync_group: rocky_8_source
@@ -203,55 +202,55 @@ rpm_package_repos:
 
   # Base Rocky Linux 9.8 repositories
   - name: Rocky Linux 9.8 - AppStream
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-9.8&arch=x86_64&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/9.8/AppStream/x86_64/os/
     base_path: rocky/9.8/AppStream/x86_64/os/
     short_name: rocky_9_8_appstream
     sync_group: rocky_9
     distribution_name: rocky-9.8-appstream-
   - name: Rocky Linux 9.8 - AppStream (aarch64)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-9.8&arch=aarch64&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/9.8/AppStream/aarch64/os/
     base_path: rocky/9.8/AppStream/aarch64/os/
     short_name: rocky_9_8_appstream_aarch64
     sync_group: rocky_9_aarch64
     distribution_name: rocky-9.8-appstream-aarch64-
   - name: Rocky Linux 9.8 - AppStream (source)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-source-9.8&arch=source&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/9.8/AppStream/source/tree/
     base_path: rocky/9.8/AppStream/source/tree/
     short_name: rocky_9_8_appstream_source
     sync_group: rocky_9_source
     distribution_name: rocky-9.8-appstream-source-
   - name: Rocky Linux 9.8 - BaseOS
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-9.8&arch=x86_64&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/9.8/BaseOS/x86_64/os/
     base_path: rocky/9.8/BaseOS/x86_64/os/
     short_name: rocky_9_8_baseos
     sync_group: rocky_9_baseos
     distribution_name: rocky-9.8-baseos-
   - name: Rocky Linux 9.8 - BaseOS (aarch64)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-9.8&arch=aarch64&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/9.8/BaseOS/aarch64/os/
     base_path: rocky/9.8/BaseOS/aarch64/os/
     short_name: rocky_9_8_baseos_aarch64
     sync_group: rocky_9_aarch64
     distribution_name: rocky-9.8-baseos-aarch64-
   - name: Rocky Linux 9.8 - BaseOS (source)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-source-9.8&arch=source&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/9.8/BaseOS/source/tree/
     base_path: rocky/9.8/BaseOS/source/tree/
     short_name: rocky_9_8_baseos_source
     sync_group: rocky_9_source
     distribution_name: rocky-9.8-baseos-source-
   - name: Rocky Linux 9.8 - Extras
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-9.8&arch=x86_64&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/9.8/extras/x86_64/os/
     base_path: rocky/9.8/extras/x86_64/os/
     short_name: rocky_9_8_extras
     sync_group: rocky_9
     distribution_name: rocky-9.8-extras-
   - name: Rocky Linux 9.8 - Extras (aarch64)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-9.8&arch=aarch64&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/9.8/extras/aarch64/os/
     base_path: rocky/9.8/extras/aarch64/os/
     short_name: rocky_9_8_extras_aarch64
     sync_group: rocky_9_aarch64
     distribution_name: rocky-9.8-extras-aarch64-
   - name: Rocky Linux 9.8 - Extras (source)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-source-9.8&arch=source&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/9.8/extras/source/tree/
     base_path: rocky/9.8/extras/source/tree/
     short_name: rocky_9_8_extras_source
     sync_group: rocky_9_source
@@ -260,73 +259,73 @@ rpm_package_repos:
   # Additional Rocky Linux 9.8 repositories
   # No advanced virt, Ceph or OpenStack
   - name: Rocky Linux 9.8 - CRB
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-9.8&arch=x86_64&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/9.8/CRB/x86_64/os/
     base_path: rocky/9.8/CRB/x86_64/os/
     short_name: rocky_9_8_crb
     sync_group: rocky_9
     distribution_name: rocky-9.8-crb-
   - name: Rocky Linux 9.8 - CRB (aarch64)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-9.8&arch=aarch64&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/9.8/CRB/aarch64/os/
     base_path: rocky/9.8/CRB/aarch64/os/
     short_name: rocky_9_8_crb_aarch64
     sync_group: rocky_9_aarch64
     distribution_name: rocky-9.8-crb-aarch64-
   - name: Rocky Linux 9.8 - CRB (source)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-source-9.8&arch=source&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/9.8/CRB/source/tree/
     base_path: rocky/9.8/CRB/source/tree/
     short_name: rocky_9_8_crb_source
     sync_group: rocky_9_source
     distribution_name: rocky-9.8-crb-source-
   - name: Rocky Linux 9.8 - HighAvailability
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-9.8&arch=x86_64&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/9.8/HighAvailability/x86_64/os/
     base_path: rocky/9.8/highavailability/x86_64/os/
     short_name: rocky_9_8_highavailability
     sync_group: rocky_9
     distribution_name: rocky-9.8-highavailability-
   - name: Rocky Linux 9.8 - HighAvailability (aarch64)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-9.8&arch=aarch64&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/9.8/HighAvailability/aarch64/os/
     base_path: rocky/9.8/highavailability/aarch64/os/
     short_name: rocky_9_8_highavailability_aarch64
     sync_group: rocky_9_aarch64
     distribution_name: rocky-9.8-highavailability-aarch64-
   - name: Rocky Linux 9.8 - HighAvailability (source)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-source-9.8&arch=source&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/9.8/HighAvailability/source/tree/
     base_path: rocky/9.8/highavailability/source/tree/
     short_name: rocky_9_8_highavailability_source
     sync_group: rocky_9_source
     distribution_name: rocky-9.8-highavailability-source-
   - name: Rocky Linux 9.8 - Security
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-security-9.8&arch=x86_64&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/9.8/security/x86_64/os/
     base_path: rocky/9.8/security/x86_64/os/
     short_name: rocky_9_8_security
     sync_group: rocky_9
     distribution_name: rocky-9.8-security-
   - name: Rocky Linux 9.8 - Security (aarch64)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-security-9.8&arch=aarch64&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/9.8/security/aarch64/os/
     base_path: rocky/9.8/security/aarch64/os/
     short_name: rocky_9_8_security_aarch64
     sync_group: rocky_9_aarch64
     distribution_name: rocky-9.8-security-aarch64-
   - name: Rocky Linux 9.8 - Security (source)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-security-source-9.8&arch=source&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/9.8/security/source/tree/
     base_path: rocky/9.8/security/source/tree/
     short_name: rocky_9_8_security_source
     sync_group: rocky_9_source
     distribution_name: rocky-9.8-security-source-
   - name: Rocky Linux 9 - SIG Security Common
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-sig-security-common-9&arch=x86_64&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/sig/9/security/x86_64/security-common/
     base_path: rocky/sig/9/security/x86_64/security-common/
     short_name: rocky_9_sig_security_common
     sync_group: rocky_9
     distribution_name: rocky-9-sig-security-common-
   - name: Rocky Linux 9 - SIG Security Common (aarch64)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-sig-security-common-9&arch=aarch64&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/sig/9/security/aarch64/security-common/
     base_path: rocky/sig/9/security/aarch64/security-common/
     short_name: rocky_9_sig_security_common_aarch64
     sync_group: rocky_9_aarch64
     distribution_name: rocky-9-sig-security-common-aarch64-
   - name: Rocky Linux 9 - SIG Security Common (source)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-sig-security-common-source-9&arch=source&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/sig/9/security/source/security-common/
     base_path: rocky/sig/9/security/source/security-common/
     short_name: rocky_9_sig_security_common_source
     sync_group: rocky_9_source
@@ -421,7 +420,7 @@ rpm_package_repos:
     distribution_name: ceph-squid-el9-aarch64-
   # EPEL 9 repository
   - name: Extra Packages for Enterprise Linux 9
-    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-9&arch=x86_64&country=NL&infra=stock&content=centos&protocol=https
+    url: https://dl.fedoraproject.org/pub/epel/9/Everything/x86_64/
     sync_policy: mirror_content_only
     base_path: epel/9/Everything/x86_64/
     short_name: epel_9
@@ -429,7 +428,7 @@ rpm_package_repos:
     distribution_name: extra-packages-for-enterprise-linux-9-x86_64-
   # EPEL 9 repository (aarch64)
   - name: Extra Packages for Enterprise Linux 9 (aarch64)
-    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-9&arch=aarch64&country=NL&infra=stock&content=centos&protocol=https
+    url: https://dl.fedoraproject.org/pub/epel/9/Everything/aarch64/
     sync_policy: mirror_content_only
     base_path: epel/9/Everything/aarch64/
     short_name: epel_9_aarch64
@@ -437,7 +436,7 @@ rpm_package_repos:
     distribution_name: extra-packages-for-enterprise-linux-9-aarch64-
   # EPEL 9 repository (source)
   - name: Extra Packages for Enterprise Linux 9 (source)
-    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-source-9&arch=source&country=NL&infra=stock&content=centos&protocol=https
+    url: https://dl.fedoraproject.org/pub/epel/9/Everything/source/tree/
     sync_policy: mirror_content_only
     base_path: epel/9/Everything/source/tree/
     short_name: epel_9_source
@@ -773,55 +772,55 @@ rpm_package_repos:
 
   # Base Rocky Linux 10.2 repositories
   - name: Rocky Linux 10.2 - AppStream
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-10.2&arch=x86_64&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/10.2/AppStream/x86_64/os/
     base_path: rocky/10.2/AppStream/x86_64/os/
     short_name: rocky_10_2_appstream
     sync_group: rocky_10
     distribution_name: rocky-10.2-appstream-
   - name: Rocky Linux 10.2 - AppStream (aarch64)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-10.2&arch=aarch64&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/10.2/AppStream/aarch64/os/
     base_path: rocky/10.2/AppStream/aarch64/os/
     short_name: rocky_10_2_appstream_aarch64
     sync_group: rocky_10_aarch64
     distribution_name: rocky-10.2-appstream-aarch64-
   - name: Rocky Linux 10.2 - AppStream (source)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-AppStream-source-10.2&arch=source&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/10.2/AppStream/source/tree/
     base_path: rocky/10.2/AppStream/source/tree/
     short_name: rocky_10_2_appstream_source
     sync_group: rocky_10_source
     distribution_name: rocky-10.2-appstream-source-
   - name: Rocky Linux 10.2 - BaseOS
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-10.2&arch=x86_64&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/10.2/BaseOS/x86_64/os/
     base_path: rocky/10.2/BaseOS/x86_64/os/
     short_name: rocky_10_2_baseos
     sync_group: rocky_10_baseos
     distribution_name: rocky-10.2-baseos-
   - name: Rocky Linux 10.2 - BaseOS (aarch64)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-10.2&arch=aarch64&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/10.2/BaseOS/aarch64/os/
     base_path: rocky/10.2/BaseOS/aarch64/os/
     short_name: rocky_10_2_baseos_aarch64
     sync_group: rocky_10_aarch64
     distribution_name: rocky-10.2-baseos-aarch64-
   - name: Rocky Linux 10.2 - BaseOS (source)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-source-10.2&arch=source&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/10.2/BaseOS/source/tree/
     base_path: rocky/10.2/BaseOS/source/tree/
     short_name: rocky_10_2_baseos_source
     sync_group: rocky_10_source
     distribution_name: rocky-10.2-baseos-source-
   - name: Rocky Linux 10.2 - Extras
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-10.2&arch=x86_64&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/10.2/extras/x86_64/os/
     base_path: rocky/10.2/extras/x86_64/os/
     short_name: rocky_10_2_extras
     sync_group: rocky_10
     distribution_name: rocky-10.2-extras-
   - name: Rocky Linux 10.2 - Extras (aarch64)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-10.2&arch=aarch64&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/10.2/extras/aarch64/os/
     base_path: rocky/10.2/extras/aarch64/os/
     short_name: rocky_10_2_extras_aarch64
     sync_group: rocky_10_aarch64
     distribution_name: rocky-10.2-extras-aarch64-
   - name: Rocky Linux 10.2 - Extras (source)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-extras-source-10.2&arch=source&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/10.2/extras/source/tree/
     base_path: rocky/10.2/extras/source/tree/
     short_name: rocky_10_2_extras_source
     sync_group: rocky_10_source
@@ -830,55 +829,55 @@ rpm_package_repos:
   # Additional Rocky Linux 10.2 repositories
   # No advanced virt, Ceph or OpenStack
   - name: Rocky Linux 10.2 - CRB
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-10.2&arch=x86_64&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/10.2/CRB/x86_64/os/
     base_path: rocky/10.2/CRB/x86_64/os/
     short_name: rocky_10_2_crb
     sync_group: rocky_10
     distribution_name: rocky-10.2-crb-
   - name: Rocky Linux 10.2 - CRB (aarch64)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-10.2&arch=aarch64&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/10.2/CRB/aarch64/os/
     base_path: rocky/10.2/CRB/aarch64/os/
     short_name: rocky_10_2_crb_aarch64
     sync_group: rocky_10_aarch64
     distribution_name: rocky-10.2-crb-aarch64-
   - name: Rocky Linux 10.2 - CRB (source)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-CRB-source-10.2&arch=source&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/10.2/CRB/source/tree/
     base_path: rocky/10.2/CRB/source/tree/
     short_name: rocky_10_2_crb_source
     sync_group: rocky_10_source
     distribution_name: rocky-10.2-crb-source-
   - name: Rocky Linux 10.2 - HighAvailability
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-10.2&arch=x86_64&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/10.2/HighAvailability/x86_64/os/
     base_path: rocky/10.2/HighAvailability/x86_64/os/
     short_name: rocky_10_2_highavailability
     sync_group: rocky_10
     distribution_name: rocky-10.2-highavailability-
   - name: Rocky Linux 10.2 - HighAvailability (aarch64)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-10.2&arch=aarch64&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/10.2/HighAvailability/aarch64/os/
     base_path: rocky/10.2/HighAvailability/aarch64/os/
     short_name: rocky_10_2_highavailability_aarch64
     sync_group: rocky_10_aarch64
     distribution_name: rocky-10.2-highavailability-aarch64-
   - name: Rocky Linux 10.2 - HighAvailability (source)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-HighAvailability-source-10.2&arch=source&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/10.2/HighAvailability/source/tree/
     base_path: rocky/10.2/HighAvailability/source/tree/
     short_name: rocky_10_2_highavailability_source
     sync_group: rocky_10_source
     distribution_name: rocky-10.2-highavailability-source-
   - name: Rocky Linux 10.2 - Security
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-security-10.2&arch=x86_64&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/10.2/security/x86_64/os/
     base_path: rocky/10.2/security/x86_64/os/
     short_name: rocky_10_2_security
     sync_group: rocky_10
     distribution_name: rocky-10.2-security-
   - name: Rocky Linux 10.2 - Security (aarch64)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-security-10.2&arch=aarch64&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/10.2/security/aarch64/os/
     base_path: rocky/10.2/security/aarch64/os/
     short_name: rocky_10_2_security_aarch64
     sync_group: rocky_10_aarch64
     distribution_name: rocky-10.2-security-aarch64-
   - name: Rocky Linux 10.2 - Security (source)
-    url: https://mirrors.rockylinux.org/mirrorlist?repo=rocky-security-source-10.2&arch=source&country=NL&protocol=https
+    url: https://dl.rockylinux.org/pub/rocky/10.2/security/source/tree/
     base_path: rocky/10.2/security/source/tree/
     short_name: rocky_10_2_security_source
     sync_group: rocky_10_source
@@ -929,7 +928,7 @@ rpm_package_repos:
     distribution_name: centos-stream-10-storage-ceph-tentacle-aarch64-
   # EPEL 10 repository
   - name: Extra Packages for Enterprise Linux 10
-    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-z-10.2&arch=x86_64&country=NL&protocol=https
+    url: https://dl.fedoraproject.org/pub/epel/10.2/Everything/x86_64/
     sync_policy: mirror_content_only
     base_path: epel/10/Everything/x86_64/
     short_name: epel_10
@@ -937,7 +936,7 @@ rpm_package_repos:
     distribution_name: extra-packages-for-enterprise-linux-10-x86_64-
   # EPEL 10 repository (aarch64)
   - name: Extra Packages for Enterprise Linux 10 (aarch64)
-    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-z-10.2&arch=aarch64&country=NL&protocol=https
+    url: https://dl.fedoraproject.org/pub/epel/10.2/Everything/aarch64/
     sync_policy: mirror_content_only
     base_path: epel/10/Everything/aarch64/
     short_name: epel_10_aarch64
@@ -945,7 +944,7 @@ rpm_package_repos:
     distribution_name: extra-packages-for-enterprise-linux-10-aarch64-
   # EPEL 10 repository (source)
   - name: Extra Packages for Enterprise Linux 10 (source)
-    url: https://mirrors.fedoraproject.org/mirrorlist?repo=epel-z-source-10.2&arch=source&country=NL&protocol=https
+    url: https://dl.fedoraproject.org/pub/epel/10.2/Everything/source/tree/
     sync_policy: mirror_content_only
     base_path: epel/10/Everything/source/tree/
     short_name: epel_10_source
