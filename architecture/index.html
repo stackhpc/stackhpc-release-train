@@ -1,0 +1,1115 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://stackhpc.github.io/stackhpc-release-train/architecture/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-8.5.10">
+    
+    
+      
+        <title>Architecture - StackHPC Release Train</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.975780f9.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ef5552">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#architecture" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="StackHPC Release Train" class="md-header__button md-logo" aria-label="StackHPC Release Train" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            StackHPC Release Train
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Architecture
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/stackhpc/stackhpc-release-train/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="StackHPC Release Train" class="md-nav__button md-logo" aria-label="StackHPC Release Train" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    StackHPC Release Train
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/stackhpc/stackhpc-release-train/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Architecture
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Architecture
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#components" class="md-nav__link">
+    Components
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pulps" class="md-nav__link">
+    Pulps
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#content" class="md-nav__link">
+    Content
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#access-control" class="md-nav__link">
+    Access control
+  </a>
+  
+    <nav class="md-nav" aria-label="Access control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#package-repositories" class="md-nav__link">
+    Package repositories
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#containers" class="md-nav__link">
+    Containers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#syncing-package-repositories" class="md-nav__link">
+    Syncing package repositories
+  </a>
+  
+    <nav class="md-nav" aria-label="Syncing package repositories">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#versioning" class="md-nav__link">
+    Versioning
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building" class="md-nav__link">
+    Building
+  </a>
+  
+    <nav class="md-nav" aria-label="Building">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kolla-container-images" class="md-nav__link">
+    Kolla container images
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disk-images" class="md-nav__link">
+    Disk images
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing" class="md-nav__link">
+    Testing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#promotion" class="md-nav__link">
+    Promotion
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#client-pulp-service" class="md-nav__link">
+    Client Pulp service
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#client-configuration" class="md-nav__link">
+    Client configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#continuous-integration-ci-and-automation" class="md-nav__link">
+    Continuous Integration (CI) and automation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code-repositories" class="md-nav__link">
+    Source Code Repositories
+  </a>
+  
+    <nav class="md-nav" aria-label="Source Code Repositories">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#github-workflows" class="md-nav__link">
+    Github Workflows
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ansible" class="md-nav__link">
+    Ansible
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Usage
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Usage" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Usage
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/content-howto/" class="md-nav__link">
+        Content management HOWTO
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/content-workflows/" class="md-nav__link">
+        Content management workflows
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/access/" class="md-nav__link">
+        Access control
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/source-code-ci/" class="md-nav__link">
+        Source code CI
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/github-organisation-management/" class="md-nav__link">
+        GitHub Organisation Management
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/secrets/" class="md-nav__link">
+        Secrets
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/notifications/" class="md-nav__link">
+        Notifications
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Operations
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Operations" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Operations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../operations/ark/" class="md-nav__link">
+        Ark
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../operations/test-pulp/" class="md-nav__link">
+        Test Pulp
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../operations/github/" class="md-nav__link">
+        GitHub
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        Contributing
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#components" class="md-nav__link">
+    Components
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pulps" class="md-nav__link">
+    Pulps
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#content" class="md-nav__link">
+    Content
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#access-control" class="md-nav__link">
+    Access control
+  </a>
+  
+    <nav class="md-nav" aria-label="Access control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#package-repositories" class="md-nav__link">
+    Package repositories
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#containers" class="md-nav__link">
+    Containers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#syncing-package-repositories" class="md-nav__link">
+    Syncing package repositories
+  </a>
+  
+    <nav class="md-nav" aria-label="Syncing package repositories">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#versioning" class="md-nav__link">
+    Versioning
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building" class="md-nav__link">
+    Building
+  </a>
+  
+    <nav class="md-nav" aria-label="Building">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kolla-container-images" class="md-nav__link">
+    Kolla container images
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disk-images" class="md-nav__link">
+    Disk images
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing" class="md-nav__link">
+    Testing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#promotion" class="md-nav__link">
+    Promotion
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#client-pulp-service" class="md-nav__link">
+    Client Pulp service
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#client-configuration" class="md-nav__link">
+    Client configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#continuous-integration-ci-and-automation" class="md-nav__link">
+    Continuous Integration (CI) and automation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code-repositories" class="md-nav__link">
+    Source Code Repositories
+  </a>
+  
+    <nav class="md-nav" aria-label="Source Code Repositories">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#github-workflows" class="md-nav__link">
+    Github Workflows
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ansible" class="md-nav__link">
+    Ansible
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://github.com/stackhpc/stackhpc-release-train/edit/master/docs/architecture/index.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+<h1 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h1>
+<p>This page covers architecture of the StackHPC release train.
+It assumes familiarity with the <a href="../">overview</a>.</p>
+<p>See the original <a href="https://docs.google.com/document/d/1cESuaJg1Zfnj8ZohH8ObeEfF8ay14wWe1YFGer3k10Q/edit">release train design document</a> for design &amp; requirements.</p>
+<h2 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h2>
+<p>The following diagram shows the major components of the release train.</p>
+<p><img alt="Release train components" src="../img/components.png" /></p>
+<p>This diagram was created using <a href="https://docs.google.com/drawings/d/1gVssWRoFJPapv7K819zfceSobW4PABFJO4PT7IufGSQ/edit">Google Drawings</a>.</p>
+<h2 id="pulps">Pulps<a class="headerlink" href="#pulps" title="Permanent link">&para;</a></h2>
+<p><a href="https://pulpproject.org">Pulp</a> is a content server that manages repositories of software packages and facilitates their distribution to content consumers.
+The core functionality of Pulp is to provide versioned collections of software packages for onward distribution to consumers.
+Pulp's ability to host multiple snapshots of a repository make it a good choice for hosting the release train content.</p>
+<p>There are three types of Pulp service in the release train architecture.</p>
+<ul>
+<li>
+<p><a href="https://ark.stackhpc.com">Ark</a> is a public-facing production Pulp service hosted on a public cloud provider, <a href="https://www.leaf.cloud/">leaf.cloud</a>.
+  It is the master copy of development and released content, and makes the content available to clients.</p>
+</li>
+<li>
+<p>Clients access Ark via a Pulp service deployed on their local infrastructure.
+  Content is synced from Ark to the local Pulp service, and control plane hosts acquire the content from there.</p>
+</li>
+<li>
+<p><a href="http://pulp-server.internal.sms-cloud">Test</a> is an internal service running on the SMS lab cloud.
+  Content is synced from Ark to <code>test</code>, providing a local content mirror for testing in SMS lab.
+  In some respects, the test Pulp service may be considered a client.</p>
+</li>
+</ul>
+<h2 id="content">Content<a class="headerlink" href="#content" title="Permanent link">&para;</a></h2>
+<p>Various different types of content are hosted by Pulp, including:</p>
+<ul>
+<li>RPM package repositories (<a href="https://docs.pulpproject.org/pulp_rpm/">Pulp RPM plugin</a>)<ul>
+<li>Rocky Linux distribution packages</li>
+<li>Third party packages</li>
+</ul>
+</li>
+<li>Apt package repositories (<a href="https://docs.pulpproject.org/pulp_deb/">Pulp Deb plugin</a>)<ul>
+<li>Ubuntu distribution packages</li>
+<li>Third party packages</li>
+</ul>
+</li>
+<li>Container image repositories (<a href="https://docs.pulpproject.org/pulp_container/">Pulp container plugin</a>)<ul>
+<li>Kolla container images</li>
+</ul>
+</li>
+<li>File repositories (<a href="https://docs.pulpproject.org/pulp_file/">Pulp file plugin</a>)<ul>
+<li>Disk images</li>
+</ul>
+</li>
+</ul>
+<p>Some of this content may be mirrored from upstream sources, while others are the result of release train build processes.</p>
+<h2 id="access-control">Access control<a class="headerlink" href="#access-control" title="Permanent link">&para;</a></h2>
+<p>Access to released Pulp content is restricted to clients with a support agreement.
+Build and test processes also need access to content.</p>
+<h3 id="package-repositories">Package repositories<a class="headerlink" href="#package-repositories" title="Permanent link">&para;</a></h3>
+<p>Access to package repositories is controlled via Pulp RBAC content guards.
+Two content guards are in use - <code>development</code> and <code>release</code>.
+The <code>development</code> content guard is assigned to unreleased content, while the <code>release</code> content guard is assigned to released content.
+Clients are provided with a username and password which they use when syncing package repositories in their local Pulp service with Ark.
+Clients' credentials are authorised to access content protected by the <code>release</code> content guard.
+Build and test processes are provided with a user account that is authorised to access the <code>development</code> and <code>release</code> content guard.</p>
+<h3 id="containers">Containers<a class="headerlink" href="#containers" title="Permanent link">&para;</a></h3>
+<p>Access to container images is controlled by token authentication, which uses Django users in the backend.
+Two container namespaces are in use - <code>stackhpc-dev</code> and <code>stackhpc</code>.
+The <code>stackhpc-dev</code> namespace is used for unreleased content, while the <code>stackhpc</code> namespace is used for released content.
+Clients are provided with a set of credentials, which they use when syncing container image repositories in their local Pulp service with Ark.
+Clients' credentials are authorised to pull from the <code>stackhpc</code> namespace.
+Build and test processes are provided with credentials that are authorised to push to the <code>stackhpc-dev</code> namespace.</p>
+<h2 id="syncing-package-repositories">Syncing package repositories<a class="headerlink" href="#syncing-package-repositories" title="Permanent link">&para;</a></h2>
+<p>At the top of the diagram above are the upstream sources.
+Some of these may be mirrored/synced into Ark, including:</p>
+<ul>
+<li>OS distribution package repositories, e.g. Rocky Linux 9 BaseOS</li>
+<li>Third party package repositories, e.g. Grafana</li>
+</ul>
+<p>The <a href="https://github.com/stackhpc/stackhpc-release-train/actions/workflows/package-sync.yml">Sync package repositories</a> GitHub Actions workflow runs nightly and on demand, ensuring that we have regular versioned snapshots of these repositories.
+Synced content is immediately published and distributed, such that it is available to build &amp; test processes.
+After a successful sync in Ark, the content is synced to the test Pulp service.</p>
+<p>Mirrored content typically uses a <a href="https://docs.pulpproject.org/pulpcore/workflows/on-demand-downloading.html">policy</a> of <code>immediate</code>, meaning that all content is downloaded from the upstream source during the sync.
+This avoids issues seen with the <code>on_demand</code> policy where content that is removed from the upstream source becomes inaccessible if it has not been previously requested by a client.
+For RPM content, we also use a <a href="https://docs.pulpproject.org/pulp_rpm/workflows/create_sync_publish.html#sync-repository-foo-using-remote-bar">sync_policy</a> of <code>mirror_complete</code>, which removes content from the snapshots in line with upstream repositories (in contrast with the default <code>additive</code> <code>sync_policy</code>, which does not).
+There are a couple of repositories for which <code>mirror_complete</code> does not work, so we use <code>mirror_content_only</code> instead.</p>
+<h3 id="versioning">Versioning<a class="headerlink" href="#versioning" title="Permanent link">&para;</a></h3>
+<p>Package repositories are versioned based on the date/time stamp at the beginning of the sync workflow, e.g. <code>20211122T102435</code>.
+This version string is used as the final component of the path at which the corresponding distribution is hosted.
+For example, a Rocky Linux 9 BaseOS snapshot may be hosted at https://ark.stackhpc.com/pulp/content/rocky/9/BaseOS/x86_64/os/20240105T044843/.</p>
+<p>The rationale behind using a date/time stamp is that there is no sane way to version a large collection of content, such as a repository, in a way in which the version reflects changes in the content (e.g. SemVer).
+While the timestamp used is fairly arbitrary, it does at least provide a reasonable guarantee of ordering, and is easily automated.</p>
+<h2 id="building">Building<a class="headerlink" href="#building" title="Permanent link">&para;</a></h2>
+<p>Build processes may take as input the synced repository mirrors and other external sources, including:</p>
+<ul>
+<li>Python Package Index (PyPI)</li>
+<li>StackHPC source code repositories</li>
+<li>Other source code repositories e.g. GitHub, OpenDev</li>
+</ul>
+<p>The outputs of these build processes are pushed to Ark.</p>
+<p>Build and test processes run on SMS cloud, to avoid excessive running costs.
+All content in Ark that is required by the build and test processes is synced to the test Pulp service running in SMS cloud, minimising data egress from Ark.</p>
+<h3 id="kolla-container-images">Kolla container images<a class="headerlink" href="#kolla-container-images" title="Permanent link">&para;</a></h3>
+<p>Kolla container images are built via Kayobe, using a <code>ci-builder</code> environment in <a href="https://github.com/stackhpc/stackhpc-kayobe-config">StackHPC Kayobe config</a>.
+The configuration uses the package repositories in Ark when building containers.
+Images are built using a manually triggered <a href="https://github.com/stackhpc/stackhpc-kayobe-config/actions/workflows/stackhpc-container-image-build.yml">GitHub Actions workflow</a>.
+The <code>stackhpc-dev</code> namespace in Ark contains <a href="https://docs.pulpproject.org/pulp_container/workflows/push.html">container push repositories</a>, which are pushed to using Kayobe.</p>
+<p>The <a href="https://github.com/stackhpc/stackhpc-release-train/actions/workflows/container-sync.yml">Sync container repositories</a> GitHub Actions workflow runs demand, syncing container repositories in test Pulp service with those in Ark.
+It also configures container image distributions to be private, since they are public by default.</p>
+<p>Kolla container images are versioned based on the OpenStack release name, OS distribution and the date/time stamp at the beginning of the build workflow, e.g. <code>2024.1-rocky-9-20240922T102435</code>.
+This version string is used as the image tag.
+Unlike package repositories, container image tags allow multiple versions to be present in a distribution of a container repository simultaneously.
+We therefore use separate namespaces for development (<code>stackhpc-dev</code>) and release (<code>stackhpc</code>).</p>
+<h3 id="disk-images">Disk images<a class="headerlink" href="#disk-images" title="Permanent link">&para;</a></h3>
+<p>Overcloud host images are built via Kayobe, using the same <code>ci-builder</code> environment used to build Kolla container images.
+Overcloud images are built using a manually triggered <a href="https://github.com/stackhpc/stackhpc-kayobe-config/actions/workflows/overcloud-host-image-build.yml">GitHub Actions workflow</a>.
+They are pushed to a <a href="https://pulpproject.org/pulp_file/">Pulp file repository</a> in Ark, and uploaded to the SMS lab Glance image service for all-in-one and multi-node testing.</p>
+<p>Overcloud images are versioned based on the OpenStack release name, and the date/time stamp at the beginning of the build workflow, e.g. <code>2024.1-20240922T102435</code>.
+This version string is included in the Pulp distribution <code>base_path</code> of the image, e.g. https://ark.stackhpc.com/pulp/content/kayobe-images/2024.1/rocky/9/2024.1-20240922T102435/overcloud-rocky-9.qcow2</p>
+<h2 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
+<p>Release train content is tested via a Kayobe deployment of OpenStack.
+A <code>ci-aio</code> environment in <a href="https://github.com/stackhpc/stackhpc-kayobe-config">StackHPC Kayobe config</a> provides a converged control/compute host for testing.
+Various all-in-one OpenStack test configurations are run against pull requests opened against the StackHPC Kayobe config repository.</p>
+<h2 id="promotion">Promotion<a class="headerlink" href="#promotion" title="Permanent link">&para;</a></h2>
+<p>Whether content is mirrored from an upstream source or built locally, it is not immediately released.
+Promotion describes the process whereby release candidate content is made into a release that is available to clients.</p>
+<p>For package repositories and overcloud host images, promotion does not affect how content is accessed, only who may access it.
+Promotion involves changing the content guard for the distribution to be released from <code>development</code> to <code>release</code>.
+This makes the content accessible to clients using their client credentials.</p>
+<p>The <code>stackhpc</code> container namespace contains regular container repositories, which cannot be pushed to via <code>docker push</code>.
+Instead, we use the Pulp API to sync specific tags from <code>stackhpc-dev</code> to <code>stackhpc</code>.</p>
+<h2 id="client-pulp-service">Client Pulp service<a class="headerlink" href="#client-pulp-service" title="Permanent link">&para;</a></h2>
+<p>Clients access Ark via a Pulp service deployed on their local infrastructure.
+Typically the Pulp service is deployed as a <a href="https://pulpproject.org/pulp-in-one-container/">Pulp in one</a> container running on the seed host.
+Content is synced from Ark to the local Pulp service, and control plane hosts acquire the content from there.
+This avoids excessive Internet bandwidth usage, both for the client and Ark.</p>
+<p>Content in the client Pulp service is synced using the <code>on_demand</code> policy.
+This avoids unnecessarily large storage requirements on the seed, and speeds up syncing.
+There should be no risk of content becoming permanently unavailable, so long as Ark continues to host sufficiently old versions.
+This approach does have a downside of requiring Ark to be available to provide any content which has not previously been downloaded.</p>
+<h2 id="client-configuration">Client configuration<a class="headerlink" href="#client-configuration" title="Permanent link">&para;</a></h2>
+<p>In order to consume the release train, clients should migrate to <a href="https://github.com/stackhpc/stackhpc-kayobe-config">StackHPC Kayobe config</a>.
+This repository provides configuration and playbooks to:</p>
+<ul>
+<li>deploy a local Pulp service as a container on the seed</li>
+<li>package repository versions to use</li>
+<li>container image tags to use</li>
+<li>sync all necessary content from Ark into the local Pulp service</li>
+<li>use the local Pulp repository mirrors on control plane hosts</li>
+<li>use the local Pulp container registry on control plane hosts</li>
+</ul>
+<p>This configuration is in active development and is expected to evolve over the coming releases.</p>
+<p>Further documentation of this configuration is out of scope here, but is available in the <a href="https://github.com/stackhpc/stackhpc-kayobe-config/blob/stackhpc/2024.1/README.rst">readme</a>.</p>
+<h2 id="continuous-integration-ci-and-automation">Continuous Integration (CI) and automation<a class="headerlink" href="#continuous-integration-ci-and-automation" title="Permanent link">&para;</a></h2>
+<p>The intention is to have as much as possible of the release train automated and run via CI.
+Typically, workflows may go through the following stages as they evolve:</p>
+<ol>
+<li>automated via Ansible, manually executed</li>
+<li>executed by GitHub Actions workflows, manually triggered by <a href="https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#workflow_dispatch">workflow dispatch</a> or <a href="https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#schedule">schedule</a></li>
+<li>executed by GitHub Actions workflows, automatically triggered by an event e.g. pull request or another workflow</li>
+</ol>
+<p>This sequence discourages putting too much automation into the GitHub Actions workflows, ensuring it is possible to run them manually.</p>
+<p>The release train Ansible playbooks make heavy use of the <a href="https://github.com/stackhpc/ansible-collection-pulp">stackhpc.pulp</a> collection, which in turn uses modules from the <a href="https://github.com/pulp/squeezer/">pulp.squeezer</a> collection.</p>
+<h2 id="source-code-repositories">Source Code Repositories<a class="headerlink" href="#source-code-repositories" title="Permanent link">&para;</a></h2>
+<p>To maintain the various source code repositories used within the Release Train there exists a number of automated processes. A mixture of Github workflows and Ansible playbooks are used to achieve this</p>
+<h3 id="github-workflows">Github Workflows<a class="headerlink" href="#github-workflows" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Upstream Sync</strong>: a number of repositories that are used by StackHPC are forks and therefore need to be synchronised with upstream to remain up-to-date.
+Therefore, this workflow will once a week make a pull request against any of the active openstack releases branches that are ahead of our downstream branch.  </li>
+<li><strong>Tox</strong>: in order to ensure that commits to the repositories are correct and follow style guidelines we can utilise tox which can automate the unit testing and linting of the codebase. 
+This workflow will run anytime a push is made or a pull request to one of the active release branches.</li>
+<li><strong>Tag &amp; Release</strong>: various software and packages depend on the repositories therefore it is important that tags are made and releases are published.</li>
+<li><strong>Ansible collection linters</strong>: linters and sanity tests for Ansible collections.</li>
+</ul>
+<h3 id="ansible">Ansible<a class="headerlink" href="#ansible" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Repository Synchronisation</strong>: as the workflows need to be located within each repository and branch that we wish to run them on.
+Therefore, the deployment and future updates are achieve through automation via Ansible.
+This allows for changes and new workflows to be automatically propagated out across the StackHPC organisation.
+This also manages the deployment of community files such as <code>CODEOWNERS</code> which can be used to automatically assign the relevant individuals to a newly opened pull request.</li>
+</ul>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Overview" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Overview
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../usage/content-howto/" class="md-footer__link md-footer__link--next" aria-label="Next: Content management HOWTO" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Content management HOWTO
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.sections"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
+      
+    
+    
+  </body>
+</html>
