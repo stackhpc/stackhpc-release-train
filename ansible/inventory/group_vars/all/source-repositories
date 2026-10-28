@@ -107,6 +107,9 @@ source_repositories:
           - upstream-sync
         elsewhere:
           - tox
+      per_release_ignored_workflows:
+        "2026.1":
+          - tag-and-release
     workflow_args:
       upstream: "https://github.com/openstack/kayobe-config"
     community_files:
