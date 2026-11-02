@@ -219,6 +219,7 @@ source_repositories:
           dest: ".github/CODEOWNERS"
   ironic:
     synced_releases:
+      - "2026.1"
       - "2025.1"
       - yoga
     community_files:
