@@ -9,3 +9,7 @@ ansible_workflows:
   collection: []
   role: []
 repositories: {}
+managed_workflow_disclaimer: |-
+  # THIS WORKFLOW IS MANAGED BY STACKHPC RELEASE TRAIN
+  # https://github.com/stackhpc/stackhpc-release-train
+  # Do not make changes to it manually
