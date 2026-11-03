@@ -102,6 +102,7 @@ class TeamID(Enum):
     PLATFORM = 8139842
     RELEASETRAIN = 6372895
     SMSLAB = 6372896
+    SRE = 20069965
 
     def __str__(self) -> str:
         result: str = self.name.capitalize()
@@ -111,6 +112,8 @@ class TeamID(Enum):
             result = "ReleaseTrain"
         elif self == TeamID.SMSLAB:
             result = "SMSLab"
+        elif self == TeamID.SRE:
+            result = "SRE"
         return result
 
 
