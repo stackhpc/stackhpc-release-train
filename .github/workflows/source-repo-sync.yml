@@ -8,6 +8,8 @@ name: Synchronise Source Repositories
       - "ansible/inventory/group_vars/all/source-repositories"
       - "ansible/roles/source-repo-sync/**"
       - "ansible/source-repo-sync.yml"
+  schedule:
+    - cron: "0 3 * * *"
   workflow_dispatch:
 permissions:
   contents: write
@@ -36,4 +38,4 @@ jobs:
         with:
           slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
           slack-channel-id: ${{ vars.SLACK_CHANNEL_ID }}
-        if: failure() && github.event_name == 'push'
+        if: failure() && (github.event_name == 'push' || github.event_name == 'schedule')
