@@ -17,6 +17,12 @@
         chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
       changed_when: false
 
+    - name: Remove untracked files from working tree # noqa command-instead-of-module
+      ansible.builtin.command:
+        cmd: git clean -fd
+        chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
+      changed_when: false
+
     - name: Create .github/workflows directory
       ansible.builtin.file:
         path: "{{ staging_path }}/{{ repository_manifest.name }}/.github/workflows"

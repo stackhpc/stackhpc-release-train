@@ -8,7 +8,7 @@
 
 - name: Add missing labels to repository # noqa command-instead-of-shell
   ansible.builtin.shell:
-    cmd: gh label create {{ label_name | quote }} --force
+    cmd: gh label create {{ label_name | quote }}
     chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
   changed_when: true
   loop: "{{ required_labels | difference(existing_labels.stdout_lines) }}"

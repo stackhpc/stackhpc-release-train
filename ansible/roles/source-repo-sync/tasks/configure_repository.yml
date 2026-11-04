@@ -22,7 +22,7 @@
       register: default_branch_name
       changed_when: false
 
-    - name: List remote branches
+    - name: List remote branches # noqa command-instead-of-module
       ansible.builtin.command:
         cmd: git ls-remote --heads origin
         chdir: "{{ staging_path }}/{{ repository_manifest.name }}"

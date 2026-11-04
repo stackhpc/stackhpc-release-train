@@ -17,6 +17,12 @@
         chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
       changed_when: false
 
+    - name: Remove untracked files from working tree # noqa command-instead-of-module
+      ansible.builtin.command:
+        cmd: git clean -fd
+        chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
+      changed_when: false
+
     - name: Create .github directory
       ansible.builtin.file:
         path: "{{ staging_path }}/{{ repository_manifest.name }}/.github/"
@@ -33,7 +39,7 @@
       loop_control:
         loop_var: community_file
 
-    - name: Propose changes
+    - name: Propose changes # noqa no-handler
       when: community_copy.changed | bool
       block:
         - name: Commit changes # noqa command-instead-of-module
