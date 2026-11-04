@@ -97,6 +97,11 @@
                 cmd: 'gh pr create --fill --head {{ work_branch }} --base {{ target_branch }} -l automated --label community-files'
                 chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
               changed_when: true
+              register: pr_create
+
+            - name: Record opened pull request
+              ansible.builtin.set_fact:
+                opened_prs: "{{ opened_prs | default([]) + [pr_create.stdout_lines | last] }}"
 
             - name: Pause playbook to prevent exceeding API rate limit
               ansible.builtin.pause:

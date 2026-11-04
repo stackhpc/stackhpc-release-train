@@ -2,6 +2,7 @@
 - name: Reset failure list
   ansible.builtin.set_fact:
     failed_repos: []
+    opened_prs: []
 
 - name: Delete staging area directory
   ansible.builtin.file:
@@ -56,6 +57,29 @@
           {% endfor %}
       when: failed_repos | length > 0
   always:
+    - name: Write job summary # noqa command-instead-of-shell
+      ansible.builtin.shell:
+        cmd: cat >> "$GITHUB_STEP_SUMMARY"
+        stdin: |
+          ## Source repository synchronisation
+
+          {% if failed_repos | length > 0 %}
+          ### Failures ({{ failed_repos | length }})
+
+          {% for f in failed_repos %}
+          * {{ f }}
+          {% endfor %}
+          {% else %}
+          No failures.
+          {% endif %}
+
+          ### Pull requests opened ({{ opened_prs | length }})
+
+          {% for pr in opened_prs %}
+          * {{ pr }}
+          {% endfor %}
+      changed_when: false
+      when: lookup('ansible.builtin.env', 'GITHUB_STEP_SUMMARY') | length > 0
     - name: Delete staging area directory
       ansible.builtin.file:
         path: "{{ staging_path }}"
