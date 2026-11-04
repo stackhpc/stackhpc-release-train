@@ -1,0 +1,8 @@
+---
+- name: Record failure
+  ansible.builtin.set_fact:
+    failed_repos: "{{ failed_repos | default([]) + [failure_scope ~ ' - failed task: ' ~ failure_task] }}"
+
+- name: Report failure
+  ansible.builtin.debug:
+    msg: "Continuing after failure in {{ failure_scope }} (task: {{ failure_task }})"
