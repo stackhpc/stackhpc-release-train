@@ -1,43 +1,27 @@
 ---
-- name: Check if release series exists on the remote  # noqa no-handler
-  ansible.builtin.shell:
-    cmd: |
-      gh api \
-      -H "Accept: application/vnd.github.v3+json" \
-      /repos/{{ owner }}/{{ repository_manifest.name }}/git/ref/heads/{{ community_manifest.prefix | default("") }}{{ community_manifest.branch }}
-  changed_when: false
-  failed_when: false
-  register: release_series_exists
-
 - name: Proceed with adding community files
-  when: release_series_exists.rc == 0
+  when: target_branch in remote_branches
+  vars:
+    target_branch: "{{ community_manifest.prefix | default('') }}{{ community_manifest.branch }}"
+    work_branch: "{{ community_manifest.prefix | default('') }}{{ community_manifest.branch }}-community-files"
   block:
-    - name: Check if working branch already exists on the remote
-      ansible.builtin.shell:
-        cmd: |
-          gh api \
-          -H "Accept: application/vnd.github.v3+json" \
-          /repos/{{ owner }}/{{ repository_manifest.name }}/git/ref/heads/{{ community_manifest.prefix | default("") }}{{ community_manifest.branch }}-community-files
-      changed_when: false
-      failed_when: false
-      register: branch_exists
-
-    - name: Delete working branch from the remote
-      ansible.builtin.shell:
-        cmd: |
-          gh api \
-          --method DELETE \
-          -H "Accept: application/vnd.github.v3+json" \
-          /repos/{{ owner }}/{{ repository_manifest.name }}/git/refs/heads/{{ community_manifest.prefix | default("") }}{{ community_manifest.branch }}-community-files
-      when: branch_exists.rc == 0
-
-    - name: Create working branch # noqa command-instead-of-module
-      ansible.builtin.shell:
-        cmd: >
-          git checkout -b {{ community_manifest.prefix | default("") }}{{ community_manifest.branch }}-community-files \
-            origin/{{ community_manifest.prefix | default("") }}{{ community_manifest.branch }}
+    - name: Fetch target branch # noqa command-instead-of-module
+      ansible.builtin.command:
+        cmd: git fetch --depth 1 origin +refs/heads/{{ target_branch }}:refs/remotes/origin/{{ target_branch }}
         chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
-      changed_when: true
+      changed_when: false
+
+    - name: Create working branch locally # noqa command-instead-of-module
+      ansible.builtin.command:
+        cmd: git checkout -f -B {{ work_branch }} origin/{{ target_branch }}
+        chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
+      changed_when: false
+
+    - name: Remove untracked files from working tree # noqa command-instead-of-module
+      ansible.builtin.command:
+        cmd: git clean -fd
+        chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
+      changed_when: false
 
     - name: Create .github directory
       ansible.builtin.file:
@@ -55,36 +39,82 @@
       loop_control:
         loop_var: community_file
 
-    - name: Commit changes # noqa command-instead-of-module no-handler
-      ansible.builtin.shell:
-        cmd: |
-          git add . --force && git commit -m \
-          'feat: automatic update of community files {{ community_manifest.prefix | default("") }}{{ community_manifest.branch }}'
-        chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
+    - name: Propose changes # noqa no-handler
       when: community_copy.changed | bool
+      block:
+        - name: Commit changes # noqa command-instead-of-module
+          ansible.builtin.shell:
+            cmd: |
+              git add . --force && git commit -m \
+              'feat: automatic update of community files {{ target_branch }}'
+            chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
+          changed_when: true
 
-    - name: Push branch to remote # noqa command-instead-of-module command-instead-of-shell no-handler
-      ansible.builtin.shell:
-        cmd: "git push -u origin {{ community_manifest.prefix | default('') }}{{ community_manifest.branch }}-community-files"
-        chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
-      when: community_copy.changed | bool
+        - name: Check existing working branch
+          when: work_branch in remote_branches
+          block:
+            - name: Fetch remote working branch # noqa command-instead-of-module
+              ansible.builtin.command:
+                cmd: git fetch --depth 1 origin +refs/heads/{{ work_branch }}:refs/remotes/origin/{{ work_branch }}
+                chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
+              changed_when: false
 
-    - name: Ensure required labels exists on remote  # noqa no-handler
-      ansible.builtin.include_tasks: "tasks/add_label.yml"
-      with_items:
-        - automated
-        - community-files
-      loop_control:
-        loop_var: label_name
-      when: community_copy.changed | bool
+            - name: Compare with remote working branch # noqa command-instead-of-module
+              ansible.builtin.command:
+                cmd: git diff --quiet origin/{{ work_branch }} HEAD
+                chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
+              changed_when: false
+              failed_when: false
+              register: remote_diff
 
-    - name: Open pull request # noqa command-instead-of-shell no-handler
-      ansible.builtin.shell:
-        cmd: 'gh pr create -f -B {{ community_manifest.prefix | default("") }}{{ community_manifest.branch }} -l automated --label community-files'
-        chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
-      when: community_copy.changed | bool
+            - name: Check for open pull request # noqa command-instead-of-shell
+              ansible.builtin.shell:
+                cmd: gh pr list --head {{ work_branch }} --base {{ target_branch }} --state open --json number --jq length
+                chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
+              changed_when: false
+              register: open_pr
 
-    - name: Pause playbook to prevent exceeding API rate limit # noqa no-handler
-      ansible.builtin.pause:
-        seconds: 10
-      when: community_copy.changed | bool
+        - name: Determine required actions
+          ansible.builtin.set_fact:
+            push_required: "{{ work_branch not in remote_branches or remote_diff.rc != 0 }}"
+            pr_required: "{{ work_branch not in remote_branches or open_pr.stdout | int == 0 }}"
+
+        # The working branch is owned by this automation, so overwrite it in
+        # place. This updates any open pull request rather than closing it, and
+        # never leaves a window where the branch has been deleted but not
+        # re-pushed. If a later step fails, the next run will resume from here.
+        - name: Push branch to remote # noqa command-instead-of-module command-instead-of-shell
+          ansible.builtin.shell:
+            cmd: "git push --force -u origin {{ work_branch }}"
+            chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
+          changed_when: true
+          when: push_required | bool
+
+        - name: Open pull request
+          when: pr_required | bool
+          block:
+            - name: Ensure required labels exist on remote
+              ansible.builtin.include_tasks: "tasks/add_label.yml"
+              vars:
+                required_labels: [automated, community-files]
+
+            - name: Open pull request # noqa command-instead-of-shell
+              ansible.builtin.shell:
+                cmd: 'gh pr create --fill --head {{ work_branch }} --base {{ target_branch }} -l automated --label community-files'
+                chdir: "{{ staging_path }}/{{ repository_manifest.name }}"
+              changed_when: true
+              register: pr_create
+
+            - name: Record opened pull request
+              ansible.builtin.set_fact:
+                opened_prs: "{{ opened_prs | default([]) + [pr_create.stdout_lines | last] }}"
+
+            - name: Pause playbook to prevent exceeding API rate limit
+              ansible.builtin.pause:
+                seconds: 10
+  rescue:
+    - name: Record branch failure
+      ansible.builtin.include_tasks: tasks/record_failure.yml
+      vars:
+        failure_scope: "{{ repository_manifest.name }}@{{ target_branch }} (community files)"
+        failure_task: "{{ ansible_failed_task.name | default('unknown') }}"
