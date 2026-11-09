@@ -125,7 +125,9 @@ source_repositories:
           dest: ".github/CODEOWNERS"
   hardware:
     repository_type: "single-branch"
-    workflows: "{{ ansible_workflows.collection }}"
+    workflows:
+      default_branch_only:
+        - tox
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.kayobe }}"
