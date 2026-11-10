@@ -126,8 +126,7 @@ source_repositories:
   hardware:
     repository_type: "single-branch"
     workflows:
-      default_branch_only:
-        - tox
+      - tox
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.kayobe }}"
