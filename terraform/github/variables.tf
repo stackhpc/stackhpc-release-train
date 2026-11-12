@@ -23,6 +23,7 @@ variable "repositories" {
     "Ansible"      = [],
     "Batch"        = [],
     "Kayobe"       = [],
+    "Monitoring"   = [],
     "OpenStack"    = [],
     "Platform"     = [],
     "ReleaseTrain" = [],
@@ -67,6 +68,14 @@ variable "teams" {
     },
     "Kayobe" = {
       description = "Team responsible for Kayobe development"
+      privacy     = "closed"
+      users = {
+        maintainers = [],
+        members     = [],
+      }
+    },
+    "Monitoring" = {
+      description = "Team responsible for monitoring development"
       privacy     = "closed"
       users = {
         maintainers = [],

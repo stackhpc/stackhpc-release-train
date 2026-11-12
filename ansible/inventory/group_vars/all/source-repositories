@@ -32,6 +32,8 @@ community_files:
       * @stackhpc/batch
     kayobe: |
       * @stackhpc/kayobe
+    monitoring: |
+      * @stackhpc/monitoring
     openstack: |
       * @stackhpc/openstack
     platform: |
@@ -130,6 +132,13 @@ source_repositories:
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.kayobe }}"
+  # Monitoring team
+  redfish_exporter:
+    repository_type: "single-branch"
+    workflows: []
+    community_files:
+      - codeowners:
+          content: "{{ community_files.codeowners.monitoring }}"
           dest: ".github/CODEOWNERS"
   # OpenStack team
   bifrost:
