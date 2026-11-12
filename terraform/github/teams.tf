@@ -46,6 +46,13 @@ resource "github_team_repository" "kayobe_repositories" {
   permission = "push"
 }
 
+resource "github_team_repository" "monitoring_repositories" {
+  for_each   = toset(var.repositories["Monitoring"])
+  team_id    = resource.github_team.organisation_teams["Monitoring"].id
+  repository = each.value
+  permission = "push"
+}
+
 resource "github_team_repository" "openstack_repositories" {
   for_each   = toset(var.repositories["OpenStack"])
   team_id    = resource.github_team.organisation_teams["OpenStack"].id
