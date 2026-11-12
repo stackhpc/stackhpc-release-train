@@ -132,6 +132,7 @@ source_repositories:
     community_files:
       - codeowners:
           content: "{{ community_files.codeowners.kayobe }}"
+          dest: ".github/CODEOWNERS"
   # Monitoring team
   redfish_exporter:
     repository_type: "single-branch"
