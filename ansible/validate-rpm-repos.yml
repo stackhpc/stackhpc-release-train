@@ -82,10 +82,9 @@
     - name: Assert that RPM package repository list can be filtered to one group
       ansible.builtin.assert:
         that:
-          - rpm_package_repos_filtered | length == 3
-          - rpm_package_repos_filtered[0].short_name == 'docker'
-          - rpm_package_repos_filtered[1].short_name == 'centos_stream_9_docker'
-          - rpm_package_repos_filtered[2].short_name == 'centos_stream_10_docker'
+          - rpm_package_repos_filtered | length == 2
+          - rpm_package_repos_filtered[0].short_name == 'rocky_9_docker'
+          - rpm_package_repos_filtered[1].short_name == 'rocky_10_docker'
       vars:
         package_sync_group: docker
 
@@ -93,10 +92,10 @@
       ansible.builtin.assert:
         that:
           - rpm_package_repos_filtered | length == 1
-          - rpm_package_repos_filtered[0].short_name == 'centos_stream_9_docker'
+          - rpm_package_repos_filtered[0].short_name == 'rocky_9_docker'
       vars:
         package_sync_group: docker
-        rpm_package_repo_filter: stream_9
+        rpm_package_repo_filter: rocky_9
 
     - name: Assert that dev package repository list is defined
       ansible.builtin.assert:

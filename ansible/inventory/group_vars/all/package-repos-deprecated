@@ -1458,3 +1458,49 @@ deprecated_rpm_package_repos:
     short_name: epel_10_source
     sync_group: epel
     distribution_name: extra-packages-for-enterprise-linux-10-source-
+
+  # Docker CE for CentOS 8
+  # Deprecated in favour of the Rocky Linux Docker CE repositories
+  - name: Docker CE for CentOS 8
+    url: https://download.docker.com/linux/centos/8/x86_64/stable
+    base_path: docker-ce/centos/8/x86_64/stable/
+    short_name: docker
+    sync_group: docker
+    distribution_name: docker-ce-for-centos-8-
+    sync: false
+  # Docker CE for CentOS Stream 9
+  # Deprecated in favour of the Rocky Linux Docker CE repositories
+  - name: Docker CE - CentOS Stream 9
+    url: https://download.docker.com/linux/centos/9/x86_64/stable
+    base_path: docker-ce/centos/9/x86_64/stable/
+    short_name: centos_stream_9_docker
+    sync_group: docker
+    distribution_name: docker-ce-for-centos-9-
+    sync: false
+  # Docker CE for CentOS Stream 9 (aarch64)
+  # Deprecated in favour of the Rocky Linux Docker CE repositories
+  - name: Docker CE - CentOS Stream 9 (aarch64)
+    url: https://download.docker.com/linux/centos/9/aarch64/stable
+    base_path: docker-ce/centos/9/aarch64/stable/
+    short_name: centos_stream_9_docker_aarch64
+    sync_group: rocky_9_aarch64
+    distribution_name: docker-ce-for-centos-9-aarch64-
+    sync: false
+  # Docker CE for CentOS Stream 10
+  # Deprecated in favour of the Rocky Linux Docker CE repositories
+  - name: Docker CE - CentOS Stream 10
+    url: https://download.docker.com/linux/centos/10/x86_64/stable
+    base_path: docker-ce/centos/10/x86_64/stable/
+    short_name: centos_stream_10_docker
+    sync_group: docker
+    distribution_name: docker-ce-for-centos-10-
+    sync: false
+  # Docker CE for CentOS Stream 10 (aarch64)
+  # Deprecated in favour of the Rocky Linux Docker CE repositories
+  - name: Docker CE - CentOS Stream 10 (aarch64)
+    url: https://download.docker.com/linux/centos/10/aarch64/stable
+    base_path: docker-ce/centos/10/aarch64/stable/
+    short_name: centos_stream_10_docker_aarch64
+    sync_group: rocky_10_aarch64
+    distribution_name: docker-ce-for-centos-10-aarch64-
+    sync: false
