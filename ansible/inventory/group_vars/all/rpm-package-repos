@@ -927,30 +927,6 @@ rpm_package_repos:
     sync_group: rocky_10_aarch64
     distribution_name: centos-stream-10-storage-ceph-tentacle-aarch64-
 
-  # EPEL 10.1 repositories (moved to the EPEL archive by upstream)
-  - name: Extra Packages for Enterprise Linux 10.1
-    url: https://dl.fedoraproject.org/pub/archive/epel/10.1/Everything/x86_64/
-    sync_policy: mirror_content_only
-    base_path: epel/10.1/Everything/x86_64/
-    short_name: epel_10_1
-    sync_group: epel
-    distribution_name: extra-packages-for-enterprise-linux-10.1-x86_64-
-  # EPEL 10.1 repository (aarch64)
-  - name: Extra Packages for Enterprise Linux 10.1 (aarch64)
-    url: https://dl.fedoraproject.org/pub/archive/epel/10.1/Everything/aarch64/
-    sync_policy: mirror_content_only
-    base_path: epel/10.1/Everything/aarch64/
-    short_name: epel_10_1_aarch64
-    sync_group: rocky_10_aarch64
-    distribution_name: extra-packages-for-enterprise-linux-10.1-aarch64-
-  # EPEL 10.1 repository (source)
-  - name: Extra Packages for Enterprise Linux 10.1 (source)
-    url: https://dl.fedoraproject.org/pub/archive/epel/10.1/Everything/source/tree/
-    sync_policy: mirror_content_only
-    base_path: epel/10.1/Everything/source/tree/
-    short_name: epel_10_1_source
-    sync_group: epel
-    distribution_name: extra-packages-for-enterprise-linux-10.1-source-
   # EPEL 10.2 repository
   - name: Extra Packages for Enterprise Linux 10.2
     url: https://dl.fedoraproject.org/pub/epel/10.2/Everything/x86_64/
