@@ -1431,3 +1431,30 @@ deprecated_rpm_package_repos:
     short_name: doca_3_2_1_rhel10_aarch64
     sync_group: third_party
     distribution_name: doca-3.2.1-rhel10-aarch64-
+
+  # EPEL 10 repository
+  # Please note `epel_10` is frozen at 10.2 to avoid breaking consumers of
+  # release train.
+  - name: Extra Packages for Enterprise Linux 10
+    url: https://dl.fedoraproject.org/pub/epel/10.2/Everything/x86_64/
+    sync_policy: mirror_content_only
+    base_path: epel/10/Everything/x86_64/
+    short_name: epel_10
+    sync_group: epel
+    distribution_name: extra-packages-for-enterprise-linux-10-x86_64-
+  # EPEL 10 repository (aarch64)
+  - name: Extra Packages for Enterprise Linux 10 (aarch64)
+    url: https://dl.fedoraproject.org/pub/epel/10.2/Everything/aarch64/
+    sync_policy: mirror_content_only
+    base_path: epel/10/Everything/aarch64/
+    short_name: epel_10_aarch64
+    sync_group: rocky_10_aarch64
+    distribution_name: extra-packages-for-enterprise-linux-10-aarch64-
+  # EPEL 10 repository (source)
+  - name: Extra Packages for Enterprise Linux 10 (source)
+    url: https://dl.fedoraproject.org/pub/epel/10.2/Everything/source/tree/
+    sync_policy: mirror_content_only
+    base_path: epel/10/Everything/source/tree/
+    short_name: epel_10_source
+    sync_group: epel
+    distribution_name: extra-packages-for-enterprise-linux-10-source-
