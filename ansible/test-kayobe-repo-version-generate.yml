@@ -5,6 +5,10 @@
 # test_pulp_repository_deb_repo_versions and
 # test_pulp_repository_rpm_repo_versions variables, which are populated in
 # test-pulp-repo-version-query.yml).
+#
+# Existing entries in the file are always retained, including those of
+# deprecated repositories, and entries are added for all active (i.e. not
+# deprecated) Deb and RPM package repositories that do not have one.
 
 # Query existing Kayobe config repo versions.
 - name: Import kayobe-repo-version-query playbook
@@ -17,16 +21,33 @@
     kayobe_config_repo_path: ""
     kayobe_pulp_repo_versions_path: "{{ (kayobe_config_repo_path ~ '/etc/kayobe/pulp-repo-versions.yml') | realpath }}"
     kayobe_pulp_repo_versions_dest: "{{ kayobe_pulp_repo_versions_path }}"
+    # Short names of the repositories to include in the updated file: the
+    # repositories already present in the file (so that existing entries,
+    # including those of deprecated repositories, are retained), followed by
+    # the short names of all active (non-deprecated) Deb and RPM package
+    # repositories that are not already present in the file.
+    kayobe_repo_short_names: >-
+      {{ (kayobe_pulp_repo_versions | default({})
+          | dict2items | map(attribute='key') | list)
+         + (deb_package_repos_filtered
+            | map(attribute='short_name') | list)
+         + (rpm_package_repos_filtered
+            | map(attribute='short_name') | list)
+         | unique }}
   tasks:
     - name: Set a fact about updated Kayobe Pulp repository versions
       vars:
-        kayobe_var_name: "{{ 'stackhpc_pulp_repo_' ~ item.key ~ '_version' }}"
-        version: "{{ test_pulp_repository_rpm_repo_versions.get(item.key, test_pulp_repository_deb_repo_versions.get(item.key, item.value)) }}"
+        kayobe_var_name: "{{ 'stackhpc_pulp_repo_' ~ item ~ '_version' }}"
+        version: "{{ test_pulp_repository_rpm_repo_versions.get(item, test_pulp_repository_deb_repo_versions.get(item, kayobe_pulp_repo_versions.get(item, ''))) }}"
       ansible.builtin.set_fact:
         updated_kayobe_pulp_repo_versions: "{{ updated_kayobe_pulp_repo_versions | default({}) | combine({kayobe_var_name: version}) }}"
-      loop: "{{ query('dict', kayobe_pulp_repo_versions) }}"
+      loop: "{{ kayobe_repo_short_names }}"
       loop_control:
-        label: "{{ item.key }}"
+        label: "{{ item }}"
+      # Omit active repositories that are not present in the file and for
+      # which no version could be resolved (e.g. repositories that are not
+      # published in dev Pulp).
+      when: version | length > 0
 
     - name: "Write updated versions to {{ kayobe_pulp_repo_versions_dest }}"
       ansible.builtin.copy:
