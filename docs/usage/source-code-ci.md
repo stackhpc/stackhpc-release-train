@@ -74,7 +74,7 @@ These two workflow automate the publication of a Ansible Collection or Role to A
 ## Synchronise Repositories Playbook
 
 Whilst the workflows can be imported manually this is **NOT** the intended approach, rather we will use an Ansible Playbook responsible for identifying repositories that are out of sync or missing the required files and perform pull requests to bring them inline.
-The playbook and role called `source-repo-sync` is located within [this repository](https://github.com/stackhpc/stackhpc-release-train/tree/main/ansible/roles/source-repo-sync) and will run inside of a Github Workflow, whenever a change is made to the configuration or variables.
+The playbook and role called `source-repo-sync` is located within [this repository](https://github.com/stackhpc/stackhpc-release-train/tree/main/ansible/roles/source-repo-sync) and will run inside of a Github Workflow, whenever a change is made to the configuration or variables, and nightly to correct any drift or retry earlier failures.
 The motivation behind this is to have single-source of truth and free up developer time as creating dozens of branches and pull requests can be quite monotonous.
 
 ### Making modifications to the playbook
@@ -299,9 +299,15 @@ source_repositories:
 
 * All `commits` and `pull requests` are authored by the [stackhpc-ci](https://github.com/stackhpc-ci) bot. The bots personal access token has been added to the secrets of this repository.
 
-* If a `branch` or `pull request` originating from the `source repositories playbook` is not closed or deleted, prior to running further additonal changes then the bot will automatically delete the `branch` and `pull request` making room for the new changes.
+* If a `branch` or `pull request` originating from the `source repositories playbook` is not closed or deleted, prior to running further additonal changes then the bot will force-push the new changes to the existing `branch`, updating the open `pull request` in place. If the `branch` already matches the desired content and has an open `pull request`, nothing is done. A new `pull request` is only opened if none is open for the `branch`.
 
 * The `source repositories playbook` will **NOT** delete unmanaged files or branches. For example when we drop support for `stackhpc/victoria` the playbook will **NOT** delete the workflows from that branch.
 
-* Due to the extensive use of the Github API the playbook will pause after every `pull request` for 10 seconds.
+* Due to the extensive use of the Github API the playbook will pause after every `pull request` is opened for 10 seconds. Repositories and branches that are already in sync are skipped without any pause.
+
+* The workflow runs nightly as well as when the configuration changes, so a failed run is retried automatically the next night. Runs are queued using a concurrency group so that they never overlap, and the job times out after 120 minutes.
+
+* A failure in one repository or branch does not stop the playbook. The remaining repositories are still processed, and the playbook fails at the end listing every repository and branch that failed. Failures on `push` and nightly runs are reported to Slack.
+
+* Each run writes a job summary listing the failures and the `pull requests` opened.
 
