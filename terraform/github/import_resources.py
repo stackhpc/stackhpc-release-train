@@ -217,8 +217,10 @@ def main() -> None:
     team_roster = {TeamID[team[0].upper()]:
                    [*itertools.chain.from_iterable(team[1]["users"].values())]
                    for team in terraform_vars["teams"].items()}
+    # "ZuulOnly" is a repository category, not a GitHub team
     repositories = {TeamID[team[0].upper()]: team[1]
-                    for team in terraform_vars["repositories"].items()}
+                    for team in terraform_vars["repositories"].items()
+                    if team[0] != "ZuulOnly"}
     default_branches = get_default_branches()
     for team_id, team_repositories in repositories.items():
         if team_id == TeamID.KAYOBE or team_id == TeamID.OPENSTACK:
