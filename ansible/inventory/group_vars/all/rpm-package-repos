@@ -93,7 +93,7 @@ rpm_package_repos:
     short_name: treasuredata_4
     sync_group: third_party
     distribution_name: treasuredata-4-
-  # OpenHPC v2 for RockyLinux 8
+  # OpenHPC v2 for Rocky Linux 8
   - name: OpenHPC-2 - Base
     url: https://repos.openhpc.community/OpenHPC/2/EL_8
     base_path: OpenHPC/2/EL_8/
@@ -193,6 +193,12 @@ rpm_package_repos:
     short_name: rocky_8_10_security_source
     sync_group: rocky_8_source
     distribution_name: rocky-8.10-security-source-
+  - name: Rocky Linux 8.10 - Security - debug
+    url: https://dl.rockylinux.org/pub/rocky/8.10/security/x86_64/debug/tree/
+    base_path: rocky/8.10/security/x86_64/debug/tree/
+    short_name: rocky_8_10_security_debug
+    sync_group: rocky_8
+    distribution_name: rocky-8.10-security-debug-
 
   # Base Rocky Linux 9.9 repositories
   - name: Rocky Linux 9.9 - AppStream
@@ -306,6 +312,12 @@ rpm_package_repos:
     short_name: rocky_9_9_security_source
     sync_group: rocky_9_source
     distribution_name: rocky-9.9-security-source-
+  - name: Rocky Linux 9.9 - Security - debug
+    url: https://dl.rockylinux.org/pub/rocky/9.9/security/x86_64/debug/tree/
+    base_path: rocky/9.9/security/x86_64/debug/tree/
+    short_name: rocky_9_9_security_debug
+    sync_group: rocky_9
+    distribution_name: rocky-9.9-security-debug-
   - name: Rocky Linux 9 - SIG Security Common
     url: https://dl.rockylinux.org/pub/sig/9/security/x86_64/security-common/
     base_path: rocky/sig/9/security/x86_64/security-common/
@@ -690,7 +702,7 @@ rpm_package_repos:
     short_name: doca_3_2_3_rhel9_aarch64
     sync_group: third_party
     distribution_name: doca-3.2.3-rhel9-aarch64-
-  # OpenHPC v3 for RockyLinux 9
+  # OpenHPC v3 for Rocky Linux 9
   - name: OpenHPC-3 - Base
     url: https://repos.openhpc.community/OpenHPC/3/EL_9
     base_path: OpenHPC/3/EL_9/
