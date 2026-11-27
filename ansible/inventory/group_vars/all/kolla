@@ -159,12 +159,14 @@ kolla_unbuildable_images:
   old_scheme:
     ubuntu:
       - haproxy-ssh
+      - httpd
       - letsencrypt-lego
       - letsencrypt-webserver
       - skyline-apiserver
       - skyline-console
     centos:
       - haproxy-ssh
+      - httpd
       - letsencrypt-lego
       - letsencrypt-webserver
       - skyline-apiserver
@@ -173,6 +175,7 @@ kolla_unbuildable_images:
       - elasticsearch
       - elasticsearch-curator
       - haproxy-ssh
+      - httpd
       - iscsid
       - kibana
       - letsencrypt-lego
