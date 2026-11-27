@@ -160,6 +160,7 @@ kolla_unbuildable_images:
     ubuntu:
       - haproxy-ssh
       - httpd
+      - ironic-prometheus-exporter
       - letsencrypt-lego
       - letsencrypt-webserver
       - skyline-apiserver
@@ -167,6 +168,7 @@ kolla_unbuildable_images:
     centos:
       - haproxy-ssh
       - httpd
+      - ironic-prometheus-exporter
       - letsencrypt-lego
       - letsencrypt-webserver
       - skyline-apiserver
@@ -176,6 +178,7 @@ kolla_unbuildable_images:
       - elasticsearch-curator
       - haproxy-ssh
       - httpd
+      - ironic-prometheus-exporter
       - iscsid
       - kibana
       - letsencrypt-lego
