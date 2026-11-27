@@ -331,6 +331,82 @@ resource "github_branch_protection" "kayobe_branch_protection_gazpacho" {
   }
 }
 
+resource "github_branch_protection" "kayobe_branch_protection_gazpacho_dev" {
+  for_each      = toset(var.repositories["Kayobe"])
+  repository_id = data.github_repository.repositories[each.key].node_id
+
+  pattern                         = "stackhpc-dev/2026.1"
+  require_conversation_resolution = true
+  allows_deletions                = false
+  allows_force_pushes             = false
+
+  required_pull_request_reviews {
+    dismiss_stale_reviews           = true
+    require_code_owner_reviews      = true
+    required_approving_review_count = 1
+  }
+
+  restrict_pushes {
+    blocks_creations = false
+    push_allowances = [
+      resource.github_team.organisation_teams["Developers"].node_id,
+      local.zuul_app_node_id
+    ]
+  }
+
+  required_status_checks {
+    contexts = lookup(lookup(var.required_status_checks, each.key, {}), "stackhpc/2026.1", lookup(var.required_status_checks, each.key, {
+      "default" : [
+        "tox / Tox pep8 with Python 3.12",
+        "tox / Tox py3 with Python 3.12",
+      ]
+    }).default)
+    strict = false
+  }
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
+resource "github_branch_protection" "kayobe_branch_protection_gazpacho_release_candidate" {
+  for_each      = toset(var.repositories["Kayobe"])
+  repository_id = data.github_repository.repositories[each.key].node_id
+
+  pattern                         = "stackhpc-rc/2026.1"
+  require_conversation_resolution = true
+  allows_deletions                = false
+  allows_force_pushes             = false
+
+  required_pull_request_reviews {
+    dismiss_stale_reviews           = true
+    require_code_owner_reviews      = true
+    required_approving_review_count = 1
+  }
+
+  restrict_pushes {
+    blocks_creations = false
+    push_allowances = [
+      resource.github_team.organisation_teams["Developers"].node_id,
+      local.zuul_app_node_id
+    ]
+  }
+
+  required_status_checks {
+    contexts = lookup(lookup(var.required_status_checks, each.key, {}), "stackhpc/2026.1", lookup(var.required_status_checks, each.key, {
+      "default" : [
+        "tox / Tox pep8 with Python 3.12",
+        "tox / Tox py3 with Python 3.12",
+      ]
+    }).default)
+    strict = false
+  }
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
 resource "github_branch_protection" "kayobe_branch_protection_master" {
   for_each      = toset(var.repositories["Kayobe"])
   repository_id = data.github_repository.repositories[each.key].node_id
